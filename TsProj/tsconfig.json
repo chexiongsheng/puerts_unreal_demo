@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    "sourceMap": true,
+    "typeRoots": [
+      "../Content/Typing",
+      "./node_modules/@types"
+    ],
+    "outDir": "../Content/Javascript"
+  }
+}
