@@ -53,22 +53,6 @@ declare module "ue" {
     }
     
     enum EActorUpdateOverlapsMethod { UseConfigDefault, AlwaysUpdate, OnlyUpdateMovable, NeverUpdate, EActorUpdateOverlapsMethod_MAX}
-    class Vector {
-        constructor(X: number, Y: number, Z: number);
-        X: number;
-        Y: number;
-        Z: number;
-        ToString(): string;
-        Set(InX: number, InY: number, InZ: number): void;
-    }
-    
-    class Rotator {
-        constructor(Pitch: number, Yaw: number, Roll: number);
-        Pitch: number;
-        Yaw: number;
-        Roll: number;
-    }
-    
     enum EVectorQuantization { RoundWholeNumber, RoundOneDecimal, RoundTwoDecimals, EVectorQuantization_MAX}
     enum ERotatorQuantization { ByteComponents, ShortComponents, ERotatorQuantization_MAX}
     class RepMovement {
@@ -100,14 +84,6 @@ declare module "ue" {
     }
     
     enum EComponentCreationMethod { Native, SimpleConstructionScript, UserConstructionScript, Instance, EComponentCreationMethod_MAX}
-    class Guid {
-        constructor(A: number, B: number, C: number, D: number);
-        A: number;
-        B: number;
-        C: number;
-        D: number;
-    }
-    
     class SimpleMemberReference {
         constructor(MemberParent: Object, MemberName: string, MemberGuid: Guid);
         MemberParent: Object;
@@ -162,14 +138,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ActorComponent;
         static Load(InName: string): ActorComponent;
-    }
-    
-    class Color {
-        constructor(B: number, G: number, R: number, A: number);
-        B: number;
-        G: number;
-        R: number;
-        A: number;
     }
     
     class Model extends Object {
@@ -257,14 +225,6 @@ declare module "ue" {
         static Load(InName: string): AssetImportData;
     }
     
-    class Vector4 {
-        constructor(X: number, Y: number, Z: number, W: number);
-        X: number;
-        Y: number;
-        Z: number;
-        W: number;
-    }
-    
     class TextureFormatSettings {
         constructor(CompressionSettings: number, CompressionNoAlpha: boolean, CompressionNone: boolean, CompressionYCoCg: boolean, SRGB: boolean);
         CompressionSettings: number;
@@ -325,12 +285,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): Texture;
         static Load(InName: string): Texture;
-    }
-    
-    class IntPoint {
-        constructor(X: number, Y: number);
-        X: number;
-        Y: number;
     }
     
     class Texture2D extends Texture {
@@ -574,14 +528,6 @@ declare module "ue" {
     class Key {
         constructor(KeyName: string);
         KeyName: string;
-    }
-    
-    class LinearColor {
-        constructor(R: number, G: number, B: number, A: number);
-        R: number;
-        G: number;
-        B: number;
-        A: number;
     }
     
     class SubsurfaceProfileStruct {
@@ -1071,12 +1017,6 @@ declare module "ue" {
         static Load(InName: string): MaterialInterface;
     }
     
-    class Vector2D {
-        constructor(X: number, Y: number);
-        X: number;
-        Y: number;
-    }
-    
     class Box {
         constructor(Min: Vector, Max: Vector, IsValid: number);
         Min: Vector;
@@ -1558,21 +1498,6 @@ declare module "ue" {
         Name: string;
         ParentIndex: number;
         TranslationRetargetingMode: number;
-    }
-    
-    class Quat {
-        constructor(X: number, Y: number, Z: number, W: number);
-        X: number;
-        Y: number;
-        Z: number;
-        W: number;
-    }
-    
-    class Transform {
-        constructor(Rotation: Quat, Translation: Vector, Scale3D: Vector);
-        Rotation: Quat;
-        Translation: Vector;
-        Scale3D: Vector;
     }
     
     class VirtualBone {
@@ -6595,13 +6520,6 @@ declare module "ue" {
         Bottom: number;
     }
     
-    class Box2D {
-        constructor(Min: Vector2D, Max: Vector2D, bIsValid: number);
-        Min: Vector2D;
-        Max: Vector2D;
-        bIsValid: number;
-    }
-    
     class SlateBrush {
         constructor(ImageSize: Vector2D, Margin: Margin, Tint: LinearColor, TintColor: SlateColor, ResourceObject: Object, ResourceName: string, UVRegion: Box2D, DrawAs: number, Tiling: number, Mirroring: number, ImageType: number, bIsDynamicallyLoaded: boolean, bHasUObject: boolean);
         ImageSize: Vector2D;
@@ -9041,13 +8959,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): LevelScriptBlueprint;
         static Load(InName: string): LevelScriptBlueprint;
-    }
-    
-    class IntVector {
-        constructor(X: number, Y: number, Z: number);
-        X: number;
-        Y: number;
-        Z: number;
     }
     
     class LevelScriptActor extends Actor {
@@ -47261,6 +47172,13 @@ declare module "ue" {
         static Load(InName: string): ObjectExtensionMethods;
     }
     
+    class puerts_unreal_demoGameModeBase extends GameModeBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): puerts_unreal_demoGameModeBase;
+        static Load(InName: string): puerts_unreal_demoGameModeBase;
+    }
+    
     class TextureImage extends Image {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bMatchSize: boolean;
@@ -47286,13 +47204,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TsGameInstance;
         static Load(InName: string): TsGameInstance;
-    }
-    
-    class unrealdemoGameModeBase extends GameModeBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): unrealdemoGameModeBase;
-        static Load(InName: string): unrealdemoGameModeBase;
     }
     
     class VectorExtensionMethods extends ExtensionMethods {
@@ -51316,21 +51227,6 @@ declare module "ue" {
         static Load(InName: string): SKEL_StandardMacros_C;
     }
     
-    class Minimal_Default_C extends LevelScriptActor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Minimal_Default_C;
-        static Load(InName: string): Minimal_Default_C;
-    }
-    
-    class SKEL_Minimal_Default_C extends LevelScriptActor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Minimal_Default_C;
-        static Load(InName: string): SKEL_Minimal_Default_C;
-    }
-    
     class BP_Sky_Sphere_C extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SkySphereMesh: StaticMeshComponent;
@@ -51405,511 +51301,6 @@ declare module "ue" {
         static Load(InName: string): SKEL_LevelEditorOverview_C;
     }
     
-    class Blueprint_CeilingLight_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SM_Lamp_Ceiling: StaticMeshComponent;
-        PointLight1: PointLightComponent;
-        Scene1: SceneComponent;
-        Brightness: number;
-        Color: LinearColor;
-        SourceRadius: number;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Blueprint_CeilingLight_C;
-        static Load(InName: string): Blueprint_CeilingLight_C;
-    }
-    
-    class SKEL_Blueprint_CeilingLight_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        SM_Lamp_Ceiling: StaticMeshComponent;
-        PointLight1: PointLightComponent;
-        Scene1: SceneComponent;
-        Brightness: number;
-        Color: LinearColor;
-        SourceRadius: number;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Blueprint_CeilingLight_C;
-        static Load(InName: string): SKEL_Blueprint_CeilingLight_C;
-    }
-    
-    class REINST_Blueprint_CeilingLight_C_5 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SM_Lamp_Ceiling: StaticMeshComponent;
-        PointLight1: PointLightComponent;
-        Scene1: SceneComponent;
-        Brightness: number;
-        Color: LinearColor;
-        SourceRadius: number;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_Blueprint_CeilingLight_C_5;
-        static Load(InName: string): REINST_Blueprint_CeilingLight_C_5;
-    }
-    
-    class TRASHCLASS_Blueprint_CeilingLight_6 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_Blueprint_CeilingLight_6;
-        static Load(InName: string): TRASHCLASS_Blueprint_CeilingLight_6;
-    }
-    
-    class Blueprint_Effect_Explosion_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ExplosionAudio: AudioComponent;
-        P_Explosion: ParticleSystemComponent;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Blueprint_Effect_Explosion_C;
-        static Load(InName: string): Blueprint_Effect_Explosion_C;
-    }
-    
-    class SKEL_Blueprint_Effect_Explosion_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        ExplosionAudio: AudioComponent;
-        P_Explosion: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Blueprint_Effect_Explosion_C;
-        static Load(InName: string): SKEL_Blueprint_Effect_Explosion_C;
-    }
-    
-    class REINST_Blueprint_Effect_Explosion_C_7 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ExplosionAudio: AudioComponent;
-        P_Explosion: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_Blueprint_Effect_Explosion_C_7;
-        static Load(InName: string): REINST_Blueprint_Effect_Explosion_C_7;
-    }
-    
-    class TRASHCLASS_Blueprint_Effect_Explosion_8 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_Blueprint_Effect_Explosion_8;
-        static Load(InName: string): TRASHCLASS_Blueprint_Effect_Explosion_8;
-    }
-    
-    class Blueprint_Effect_Fire_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        FireAudio: AudioComponent;
-        P_Fire: ParticleSystemComponent;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Blueprint_Effect_Fire_C;
-        static Load(InName: string): Blueprint_Effect_Fire_C;
-    }
-    
-    class SKEL_Blueprint_Effect_Fire_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        FireAudio: AudioComponent;
-        P_Fire: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Blueprint_Effect_Fire_C;
-        static Load(InName: string): SKEL_Blueprint_Effect_Fire_C;
-    }
-    
-    class REINST_Blueprint_Effect_Fire_C_9 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        FireAudio: AudioComponent;
-        P_Fire: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_Blueprint_Effect_Fire_C_9;
-        static Load(InName: string): REINST_Blueprint_Effect_Fire_C_9;
-    }
-    
-    class TRASHCLASS_Blueprint_Effect_Fire_10 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_Blueprint_Effect_Fire_10;
-        static Load(InName: string): TRASHCLASS_Blueprint_Effect_Fire_10;
-    }
-    
-    class Blueprint_Effect_Smoke_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SmokeAudio: AudioComponent;
-        P_Smoke: ParticleSystemComponent;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Blueprint_Effect_Smoke_C;
-        static Load(InName: string): Blueprint_Effect_Smoke_C;
-    }
-    
-    class SKEL_Blueprint_Effect_Smoke_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        SmokeAudio: AudioComponent;
-        P_Smoke: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Blueprint_Effect_Smoke_C;
-        static Load(InName: string): SKEL_Blueprint_Effect_Smoke_C;
-    }
-    
-    class REINST_Blueprint_Effect_Smoke_C_11 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SmokeAudio: AudioComponent;
-        P_Smoke: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_Blueprint_Effect_Smoke_C_11;
-        static Load(InName: string): REINST_Blueprint_Effect_Smoke_C_11;
-    }
-    
-    class TRASHCLASS_Blueprint_Effect_Smoke_12 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_Blueprint_Effect_Smoke_12;
-        static Load(InName: string): TRASHCLASS_Blueprint_Effect_Smoke_12;
-    }
-    
-    class Blueprint_Effect_Sparks_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SparksAudio: AudioComponent;
-        Sparks: ParticleSystemComponent;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Blueprint_Effect_Sparks_C;
-        static Load(InName: string): Blueprint_Effect_Sparks_C;
-    }
-    
-    class SKEL_Blueprint_Effect_Sparks_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        SparksAudio: AudioComponent;
-        Sparks: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Blueprint_Effect_Sparks_C;
-        static Load(InName: string): SKEL_Blueprint_Effect_Sparks_C;
-    }
-    
-    class REINST_Blueprint_Effect_Sparks_C_13 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Sparks: ParticleSystemComponent;
-        SparksAudio: AudioComponent;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_Blueprint_Effect_Sparks_C_13;
-        static Load(InName: string): REINST_Blueprint_Effect_Sparks_C_13;
-    }
-    
-    class TRASHCLASS_Blueprint_Effect_Sparks_14 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_Blueprint_Effect_Sparks_14;
-        static Load(InName: string): TRASHCLASS_Blueprint_Effect_Sparks_14;
-    }
-    
-    class Blueprint_Effect_Steam_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SteamAUdio: AudioComponent;
-        P_Steam_Lit: ParticleSystemComponent;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Blueprint_Effect_Steam_C;
-        static Load(InName: string): Blueprint_Effect_Steam_C;
-    }
-    
-    class SKEL_Blueprint_Effect_Steam_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        SteamAUdio: AudioComponent;
-        P_Steam_Lit: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Blueprint_Effect_Steam_C;
-        static Load(InName: string): SKEL_Blueprint_Effect_Steam_C;
-    }
-    
-    class REINST_Blueprint_Effect_Steam_C_15 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SteamAUdio: AudioComponent;
-        P_Steam_Lit: ParticleSystemComponent;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_Blueprint_Effect_Steam_C_15;
-        static Load(InName: string): REINST_Blueprint_Effect_Steam_C_15;
-    }
-    
-    class TRASHCLASS_Blueprint_Effect_Steam_16 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_Blueprint_Effect_Steam_16;
-        static Load(InName: string): TRASHCLASS_Blueprint_Effect_Steam_16;
-    }
-    
-    class Blueprint_WallSconce_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SM_Lamp_Wall: StaticMeshComponent;
-        PointLight2: SpotLightComponent;
-        Scene1: SceneComponent;
-        Brightness: number;
-        Color: LinearColor;
-        InnerConeAngle: number;
-        OuterConeAngle: number;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Blueprint_WallSconce_C;
-        static Load(InName: string): Blueprint_WallSconce_C;
-    }
-    
-    class SKEL_Blueprint_WallSconce_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        SM_Lamp_Wall: StaticMeshComponent;
-        PointLight2: SpotLightComponent;
-        Scene1: SceneComponent;
-        Brightness: number;
-        Color: LinearColor;
-        InnerConeAngle: number;
-        OuterConeAngle: number;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_Blueprint_WallSconce_C;
-        static Load(InName: string): SKEL_Blueprint_WallSconce_C;
-    }
-    
-    class REINST_Blueprint_WallSconce_C_17 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SM_Lamp_Wall: StaticMeshComponent;
-        PointLight2: SpotLightComponent;
-        Scene1: SceneComponent;
-        Brightness: number;
-        Color: LinearColor;
-        InnerConeAngle: number;
-        OuterConeAngle: number;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_Blueprint_WallSconce_C_17;
-        static Load(InName: string): REINST_Blueprint_WallSconce_C_17;
-    }
-    
-    class TRASHCLASS_Blueprint_WallSconce_18 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_Blueprint_WallSconce_18;
-        static Load(InName: string): TRASHCLASS_Blueprint_WallSconce_18;
-    }
-    
-    class BP_LightStudio_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SkyLight1: SkyLightComponent;
-        ExponentialHeightFog1: ExponentialHeightFogComponent;
-        PrevisArrow: StaticMeshComponent;
-        Skybox: StaticMeshComponent;
-        Scene1: SceneComponent;
-        GlobalBrightness: number;
-        Use_HDRI: boolean;
-        UseSunLight: boolean;
-        SunBrightness: number;
-        SunTint: LinearColor;
-        StationaryLightForSun: boolean;
-        SunDirectionalLight: DirectionalLightComponent;
-        UseAtmosphere: boolean;
-        AtmosphereBrightness: number;
-        AtmosphereTint: LinearColor;
-        PrevisArrowMaterial: MaterialInstanceDynamic;
-        LightColor: LinearColor;
-        SunColorCurve: CurveLinearColor;
-        OverrideSunColor: boolean;
-        AtmosphereDensityMultiplier: number;
-        AtmosphereAltitude: number;
-        DisableSunDisk: boolean;
-        UseFog: boolean;
-        FogBrightness: number;
-        FogTint: LinearColor;
-        FogAltitude: number;
-        FogMaxOpacity: number;
-        FogHeightFalloff: number;
-        FogDensity: number;
-        FogBrightnessCurve: CurveFloat;
-        FogStartDistance: number;
-        DisableGroundScattering: boolean;
-        AtmosphereDistanceScale: number;
-        SkyboxMaterial: MaterialInstanceDynamic;
-        HDRI_Brightness: number;
-        HDRI_Contrast: number;
-        HDRI_Tint: LinearColor;
-        HDRI_Cubemap: Texture;
-        HDRI_Rotation: number;
-        AtmosphereOpacityHorizon: number;
-        AtmosphereOpacityZenith: number;
-        HighDensityAtmosphere: boolean;
-        AtmosphericFog: AtmosphericFogComponent;
-        UseSkylight: boolean;
-        Shadowdistance: number;
-        LightShaftBloom: boolean;
-        LightShaftOcclusion: boolean;
-        OcclusionMaskDarkness: number;
-        BloomScale: number;
-        BloomThreshold: number;
-        BloomTint: Color;
-        AtmosphereFogMultiplier: number;
-        AtmosphereDensityHeight: number;
-        AtmosphereMaxScatteringOrder: number;
-        AtmosphereAltitudeSampleNumber: number;
-        LightFunctionMaterial: MaterialInterface;
-        MIC_Black: MaterialInstance;
-        MIC_HDRI: MaterialInstance;
-        AtmosphereDensity(): void;
-        NormalizedSunAngle(Angle: $Ref<number>): void;
-        SunMobility(): void;
-        CalculateSunColor(): void;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): BP_LightStudio_C;
-        static Load(InName: string): BP_LightStudio_C;
-    }
-    
-    class SKEL_BP_LightStudio_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        SkyLight1: SkyLightComponent;
-        ExponentialHeightFog1: ExponentialHeightFogComponent;
-        PrevisArrow: StaticMeshComponent;
-        Skybox: StaticMeshComponent;
-        Scene1: SceneComponent;
-        GlobalBrightness: number;
-        Use_HDRI: boolean;
-        UseSunLight: boolean;
-        SunBrightness: number;
-        SunTint: LinearColor;
-        StationaryLightForSun: boolean;
-        SunDirectionalLight: DirectionalLightComponent;
-        UseAtmosphere: boolean;
-        AtmosphereBrightness: number;
-        AtmosphereTint: LinearColor;
-        PrevisArrowMaterial: MaterialInstanceDynamic;
-        LightColor: LinearColor;
-        SunColorCurve: CurveLinearColor;
-        OverrideSunColor: boolean;
-        AtmosphereDensityMultiplier: number;
-        AtmosphereAltitude: number;
-        DisableSunDisk: boolean;
-        UseFog: boolean;
-        FogBrightness: number;
-        FogTint: LinearColor;
-        FogAltitude: number;
-        FogMaxOpacity: number;
-        FogHeightFalloff: number;
-        FogDensity: number;
-        FogBrightnessCurve: CurveFloat;
-        FogStartDistance: number;
-        DisableGroundScattering: boolean;
-        AtmosphereDistanceScale: number;
-        SkyboxMaterial: MaterialInstanceDynamic;
-        HDRI_Brightness: number;
-        HDRI_Contrast: number;
-        HDRI_Tint: LinearColor;
-        HDRI_Cubemap: Texture;
-        HDRI_Rotation: number;
-        AtmosphereOpacityHorizon: number;
-        AtmosphereOpacityZenith: number;
-        HighDensityAtmosphere: boolean;
-        AtmosphericFog: AtmosphericFogComponent;
-        UseSkylight: boolean;
-        Shadowdistance: number;
-        LightShaftBloom: boolean;
-        LightShaftOcclusion: boolean;
-        OcclusionMaskDarkness: number;
-        BloomScale: number;
-        BloomThreshold: number;
-        BloomTint: Color;
-        AtmosphereFogMultiplier: number;
-        AtmosphereDensityHeight: number;
-        AtmosphereMaxScatteringOrder: number;
-        AtmosphereAltitudeSampleNumber: number;
-        LightFunctionMaterial: MaterialInterface;
-        MIC_Black: MaterialInstance;
-        MIC_HDRI: MaterialInstance;
-        UserConstructionScript(): void;
-        CalculateSunColor(): void;
-        SunMobility(): void;
-        NormalizedSunAngle(Angle: $Ref<number>): void;
-        AtmosphereDensity(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_BP_LightStudio_C;
-        static Load(InName: string): SKEL_BP_LightStudio_C;
-    }
-    
-    class REINST_BP_LightStudio_C_19 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SkyLight1: SkyLightComponent;
-        ExponentialHeightFog1: ExponentialHeightFogComponent;
-        PrevisArrow: StaticMeshComponent;
-        Skybox: StaticMeshComponent;
-        Scene1: SceneComponent;
-        GlobalBrightness: number;
-        Use_HDRI: boolean;
-        UseSunLight: boolean;
-        SunBrightness: number;
-        SunTint: LinearColor;
-        StationaryLightForSun: boolean;
-        SunDirectionalLight: DirectionalLightComponent;
-        UseAtmosphere: boolean;
-        AtmosphereBrightness: number;
-        AtmosphereTint: LinearColor;
-        PrevisArrowMaterial: MaterialInstanceDynamic;
-        LightColor: LinearColor;
-        SunColorCurve: CurveLinearColor;
-        OverrideSunColor: boolean;
-        AtmosphereDensityMultiplier: number;
-        AtmosphereAltitude: number;
-        DisableSunDisk: boolean;
-        UseFog: boolean;
-        FogBrightness: number;
-        FogTint: LinearColor;
-        FogAltitude: number;
-        FogMaxOpacity: number;
-        FogHeightFalloff: number;
-        FogDensity: number;
-        FogBrightnessCurve: CurveFloat;
-        FogStartDistance: number;
-        DisableGroundScattering: boolean;
-        AtmosphereDistanceScale: number;
-        SkyboxMaterial: MaterialInstanceDynamic;
-        HDRI_Brightness: number;
-        HDRI_Contrast: number;
-        HDRI_Tint: LinearColor;
-        HDRI_Cubemap: Texture;
-        HDRI_Rotation: number;
-        AtmosphereOpacityHorizon: number;
-        AtmosphereOpacityZenith: number;
-        HighDensityAtmosphere: boolean;
-        AtmosphericFog: AtmosphericFogComponent;
-        UseSkylight: boolean;
-        Shadowdistance: number;
-        LightShaftBloom: boolean;
-        LightShaftOcclusion: boolean;
-        OcclusionMaskDarkness: number;
-        BloomScale: number;
-        BloomThreshold: number;
-        BloomTint: Color;
-        AtmosphereFogMultiplier: number;
-        AtmosphereDensityHeight: number;
-        AtmosphereMaxScatteringOrder: number;
-        AtmosphereAltitudeSampleNumber: number;
-        LightFunctionMaterial: MaterialInterface;
-        MIC_Black: MaterialInstance;
-        MIC_HDRI: MaterialInstance;
-        AtmosphereDensity(): void;
-        NormalizedSunAngle(Angle: $Ref<number>): void;
-        SunMobility(): void;
-        CalculateSunColor(): void;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_BP_LightStudio_C_19;
-        static Load(InName: string): REINST_BP_LightStudio_C_19;
-    }
-    
-    class TRASHCLASS_BP_LightStudio_20 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_BP_LightStudio_20;
-        static Load(InName: string): TRASHCLASS_BP_LightStudio_20;
-    }
-    
     class TestBlueprint_C extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
@@ -51942,7 +51333,7 @@ declare module "ue" {
         static Load(InName: string): SKEL_TestBlueprint_C;
     }
     
-    class REINST_TestBlueprint_C_21 extends Actor {
+    class REINST_TestBlueprint_C_5 extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
         DefaultSceneRoot: SceneComponent;
@@ -51954,15 +51345,32 @@ declare module "ue" {
         ReceiveBeginPlay(): void;
         ExecuteUbergraph_TestBlueprint(EntryPoint: number): void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_21;
-        static Load(InName: string): REINST_TestBlueprint_C_21;
+        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_5;
+        static Load(InName: string): REINST_TestBlueprint_C_5;
     }
     
-    class TRASHCLASS_TestBlueprint_22 {
+    class TRASHCLASS_TestBlueprint_6 {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_22;
-        static Load(InName: string): TRASHCLASS_TestBlueprint_22;
+        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_6;
+        static Load(InName: string): TRASHCLASS_TestBlueprint_6;
+    }
+    
+    class MyActor_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ReceiveBeginPlay(): void;
+        ReceiveTick(DeltaSeconds: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MyActor_C;
+        static Load(InName: string): MyActor_C;
+    }
+    
+    class MyBPActor_C extends TestBlueprint_C {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Foo(P1: boolean, P2: number, P3: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MyBPActor_C;
+        static Load(InName: string): MyBPActor_C;
     }
     
 }

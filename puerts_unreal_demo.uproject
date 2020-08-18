@@ -8,15 +8,15 @@
 			"Name": "puerts_unreal_demo",
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
-            "AdditionalDependencies": [
-                "CoreUObject",
-                "UMG",
-                "JsEnv",
-                "Engine"
-            ]
+			"AdditionalDependencies": [
+				"CoreUObject",
+				"UMG",
+				"JsEnv",
+				"Engine"
+			]
 		}
 	],
-    "Plugins": [
+	"Plugins": [
 		{
 			"Name": "Puerts",
 			"Enabled": true

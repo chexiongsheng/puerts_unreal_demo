@@ -40,6 +40,18 @@ console.log(v.ToString());
 v.Set(8, 88, 888)
 console.log(v.ToString());
 
+//静态wrap
+console.log("----------------------------------------------------");
+let vec = new UE.Vector(1, 2, 3)
+console.log('vec', vec.ToString())
+vec.X = 3
+vec.Y = 2
+vec.Z = 1
+vec.Normalize(1)
+console.log('vec', vec.ToString())
+console.log(vec.Projection().ToString())
+console.log('vec', vec.ToString())
+
 //枚举
 console.log("----------------------------------------------------");
 obj.EnumTest(UE.EToTest.V1);
