@@ -10,7 +10,7 @@
 
 ## Demo说明
 
-* [TsProj](TsProj)是一个Typescript工程，可以用vscode（建议安装vscode，nodejs，typescript）打开这个目录。
+* [本demo目录](.)是一个Typescript工程，可以用vscode（建议安装vscode，nodejs，typescript）打开这个目录。
 
 * [TsGameInstance.cpp](Source/puerts_unreal_demo/TsGameInstance.cpp)是程序逻辑的入口，里头关键语句是JsEnv->Start("QuickStart")，其执行了启动脚本QuickStart.js。
 
