@@ -81,6 +81,21 @@ console.log(obj.MyMap.Get("Che"));
 console.log(obj.MyMap.Get("Hello"));
 obj.MyMap.Add("Che", 10);
 console.log(obj.MyMap.Get("Che"));
+//ArrayBuffer
+console.log("----------------------------------------------------");
+let ab = obj.ArrayBuffer;
+let u8a1 = new Uint8Array(ab);
+for (var i = 0; i < u8a1.length; i++) {
+    console.log(i, u8a1[i]);
+}
+obj.ArrayBufferTest(ab);
+obj.ArrayBufferTest(new Uint8Array(ab));
+let ab2 = obj.ArrayBufferTest(new Uint8Array(ab, 5));
+let u8a2 = new Uint8Array(ab2);
+console.log(u8a2.length);
+for (var i = 0; i < u8a2.length; i++) {
+    console.log(i, u8a2[i]);
+}
 //引擎方法
 console.log("----------------------------------------------------");
 let world = puerts_1.argv.getByName("World");

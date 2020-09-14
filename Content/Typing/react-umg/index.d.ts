@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {TArray, TWeakObjectPtr}  from 'ue';
+import {TArray}  from 'ue';
 
 export interface PanelSlot {
 }
@@ -246,7 +246,6 @@ export interface UserWidgetProps extends WidgetProps {
 export class UserWidget extends React.Component<UserWidgetProps> {}
 
 export interface VREditorBaseUserWidgetProps extends UserWidgetProps {
-    //Owner?: TWeakObjectPtr<VREditorFloatingUI>;
 }
 
 export class VREditorBaseUserWidget extends React.Component<VREditorBaseUserWidgetProps> {}
@@ -1136,7 +1135,6 @@ export interface LevelSequencePlayerSnapshot {
     CurrentShotLocalTime?: QualifiedFrameTime;
     CurrentShotSourceTime?: QualifiedFrameTime;
     SourceTimecode?: string;
-    //CameraComponent?: TSoftObjectPtr<CameraComponent>;
     Settings?: LevelSequenceSnapshotSettings;
     ShotID?: MovieSceneSequenceID;
 }
@@ -1153,7 +1151,6 @@ export interface SoftObjectPath {
 }
 
 export interface PropertyViewBaseProps extends WidgetProps {
-    //LazyObject?: TLazyObjectPtr<Object>;
     SoftObjectPath?: SoftObjectPath;
     bAutoLoadAsset?: boolean;
     OnPropertyChanged?: (PropertyName: string) => void;

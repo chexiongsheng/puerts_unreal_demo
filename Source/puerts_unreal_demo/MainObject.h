@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "ExtensionMethods.h"
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "MainObject.generated.h"
@@ -65,8 +66,11 @@ public:
     UFUNCTION(BlueprintCallable, meta = (DisplayName = "GetInts", ScriptName = "GetInts", Keywords = "test"), Category = "Test")
     TArray<int32> GetInts();
 
-    UFUNCTION(BlueprintCallable, meta = (DisplayName = "GetInts", ScriptName = "GetInts", Keywords = "test"), Category = "Test")
+    UFUNCTION(BlueprintCallable, meta = (DisplayName = "EnumTest", ScriptName = "GetInts", Keywords = "test"), Category = "Test")
     void EnumTest(EToTest E);
+
+    UFUNCTION(BlueprintCallable, meta = (DisplayName = "Bar3", ScriptName = "Bar3", Keywords = "test"), Category = "Test")
+    FArrayBuffer ArrayBufferTest(const FArrayBuffer& Ab) const;
 
     UPROPERTY()
     FSomeData SomeData;
@@ -89,6 +93,11 @@ public:
     UPROPERTY()
     FString MyString;
 
+    UPROPERTY()
+    FArrayBuffer ArrayBuffer;
+
     UFUNCTION(BlueprintCallable, meta = (DisplayName = "PrintState", ScriptName = "PrintState", Keywords = "test"), Category = "Test")
     void PrintState() const;
+
+    ~UMainObject();
 };

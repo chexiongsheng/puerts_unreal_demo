@@ -23,6 +23,18 @@ UMainObject::UMainObject()
     {
         MyFixSizeArray[i] = 99 - i;
     }
+
+    ArrayBuffer.Length = 10;
+    ArrayBuffer.Data = ::malloc(10);
+
+    int8 * Data = static_cast<int8 *>(ArrayBuffer.Data);
+
+    for (int i = 0; i < ArrayBuffer.Length; i++)
+    {
+        Data[i] = 2 * (i + 1);
+    }
+
+    UE_LOG(LogTemp, Warning, TEXT("Data(%p, %d)"), ArrayBuffer.Data, ArrayBuffer.Length);
 }
 
 int32 UMainObject::Add(int32 a, int32 b) const
@@ -37,26 +49,26 @@ FString UMainObject::Foo() const
 }
 
 
-FString UMainObject::Bar(FVector V) const
+FString UMainObject::Bar(FVector VV) const
 {
-    FString Result = FString::Printf(TEXT("UMyObject::Bar(%s)"), *V.ToString());
+    FString Result = FString::Printf(TEXT("UMyObject::Bar(%s)"), *VV.ToString());
     UE_LOG(LogTemp, Warning, TEXT("%s"), *Result);
     return Result;
 }
 
-FString UMainObject::Bar2(FVector& V) const
+FString UMainObject::Bar2(FVector& VV) const
 {
-    FString Result = FString::Printf(TEXT("UMyObject::Bar2(%s)"), *V.ToString());
+    FString Result = FString::Printf(TEXT("UMyObject::Bar2(%s)"), *VV.ToString());
     UE_LOG(LogTemp, Warning, TEXT("%s"), *Result);
-    V.X = 1024;
+    VV.X = 1024;
     return Result;
 }
 
-FVector UMainObject::Bar3(FVector& V) const
+FVector UMainObject::Bar3(FVector& VV) const
 {
-    UE_LOG(LogTemp, Warning, TEXT("UMyObject::Bar3(%s)"), *V.ToString());
-    V.X = 1024;
-    return V + 1;
+    UE_LOG(LogTemp, Warning, TEXT("UMyObject::Bar3(%s)"), *VV.ToString());
+    VV.X = 1024;
+    return VV + 1;
 }
 
 TArray<uint8> UMainObject::GetData()
@@ -88,10 +100,28 @@ void UMainObject::EnumTest(EToTest E)
     UE_LOG(LogTemp, Warning, TEXT("UMyObject::EnumTest(%d)"), (int32)E);
 }
 
+FArrayBuffer UMainObject::ArrayBufferTest(const FArrayBuffer& Ab) const
+{
+    UE_LOG(LogTemp, Warning, TEXT("Ab(%p, %d)"), Ab.Data, Ab.Length);
+    if (Ab.Length > 0)
+    {
+        return FArrayBuffer{ static_cast<char*>(Ab.Data) + 1, Ab.Length - 1};
+    }
+    else
+    {
+        return Ab;
+    }
+}
+
 void  UMainObject::PrintState() const
 {
     UE_LOG(LogTemp, Warning, TEXT("V = %s"), *(V.ToString()));
     UE_LOG(LogTemp, Warning, TEXT("SomeData.Alignment = %s"), *(SomeData.Alignment.ToString()));
     UE_LOG(LogTemp, Warning, TEXT("SomeData.DoNoSerialize = %d"), SomeData.DoNoSerialize);
     UE_LOG(LogTemp, Warning, TEXT("SomeData.WillSerialize = %d"), SomeData.WillSerialize);
+}
+
+UMainObject::~UMainObject()
+{
+    ::free(ArrayBuffer.Data);
 }
