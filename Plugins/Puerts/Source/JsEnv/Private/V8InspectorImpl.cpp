@@ -11,6 +11,7 @@
 #define USING_UE 0
 #endif
 
+#if !USING_UE
 #if !defined(PLATFORM_WINDOWS) || defined(PLATFORM_MAC)
 #if defined(_WIN32)
 #define PLATFORM_WINDOWS 1
@@ -18,9 +19,14 @@
 #define PLATFORM_WINDOWS 0
 #if defined(__APPLE__)
 #include "TargetConditionals.h"
-#define PLATFORM_MAC TARGET_OS_MAC
+#if TARGET_OS_IPHONE
+#define PLATFORM_MAC 0
+#else 
+#define PLATFORM_MAC 1
+#endif
 #else
 #define PLATFORM_MAC 0
+#endif
 #endif
 #endif
 #endif
@@ -161,7 +167,7 @@ public:
     bool Tick(float DeltaTime);
 #endif
 
-    void Tick() override;
+    bool Tick() override;
 
 private:
     void OnHTTP(wspp_connection_hdl Handle);
@@ -179,6 +185,10 @@ private:
     void runMessageLoopOnPause(int ContextGroupId) override;
 
     void quitMessageLoopOnPause() override;
+
+    void runIfWaitingForDebugger(int ContextGroupId) override {
+        Connected = true;
+    }
 
     v8::Isolate* Isolate;
 
@@ -201,6 +211,8 @@ private:
     bool IsAlive;
 
     bool IsPaused;
+
+    bool Connected;
 };
 
 V8InspectorClientImpl::V8InspectorClientImpl(int32_t InPort, v8::Local<v8::Context> InContext)
@@ -212,6 +224,7 @@ V8InspectorClientImpl::V8InspectorClientImpl(int32_t InPort, v8::Local<v8::Conte
     Context.Reset(Isolate, InContext);
     Port = InPort;
     IsAlive = false;
+    Connected = false;
 
     CtxGroupID = 1;
     const uint8_t CtxNameConst[] = "V8InspectorContext";
@@ -310,9 +323,10 @@ bool V8InspectorClientImpl::Tick(float /* DeltaTime */)
     return true;
 }
 
-void V8InspectorClientImpl::Tick()
+bool V8InspectorClientImpl::Tick()
 {
     Tick(0);
+    return IsAlive && Connected;
 }
 
 void V8InspectorClientImpl::OnHTTP(wspp_connection_hdl Handle)
@@ -369,11 +383,23 @@ void V8InspectorClientImpl::OnOpen(wspp_connection_hdl Handle)
 
 void V8InspectorClientImpl::OnReceiveMessage(wspp_connection_hdl Handle, wspp_message_ptr Message)
 {
+//#if USING_UE
+//    UE_LOG(LogV8Inspector, Display, TEXT("<---: %s"), ANSI_TO_TCHAR(Message->get_payload().c_str()));
+//#else
+//    PLog(Log, "<---: %s", Message->get_payload().c_str());
+//#endif
+
     V8InspectorChannel->ReceiveMessage(Message->get_payload());
 }
     
 void V8InspectorClientImpl::OnSendMessage(wspp_connection_hdl Handle, const std::string& Message)
 {
+//#if USING_UE
+//    UE_LOG(LogV8Inspector, Display, TEXT("--->: %s"), ANSI_TO_TCHAR(Message.c_str()));
+//#else
+//    PLog(Log, "--->: %s", Message.c_str());
+//#endif
+
     try
     {
         Server.send(Handle, Message, websocketpp::frame::opcode::TEXT);

@@ -275,7 +275,10 @@ bool FTypeScriptDeclarationGenerator::GenTypeDecl(FStringBuffer& StringBuffer, P
     }
     else if (auto StructProperty = CastFieldMacro<StructPropertyMacro>(Property))
     {
-        AddToGen.Add(StructProperty->Struct);
+        if (StructProperty->Struct->GetName() != "ArrayBuffer")
+        {
+            AddToGen.Add(StructProperty->Struct);
+        }
         StringBuffer << SafeName(StructProperty->Struct->GetName());
     }
     else if (auto ArrayProperty = CastFieldMacro<ArrayPropertyMacro>(Property))
@@ -652,13 +655,17 @@ interface TReactUMG {
 export var ReactUMG : TReactUMG;
 )";
 
-    FFileHelper::SaveStringToFile(ToString(), *(FPaths::ProjectContentDir() / TEXT("TypeScript/react-umg/index.d.ts")));
+    FFileHelper::SaveStringToFile(ToString(), *(FPaths::ProjectContentDir() / TEXT("Typing/react-umg/index.d.ts")));
     FFileHelper::SaveStringToFile(Components, *(FPaths::ProjectContentDir() / TEXT("JavaScript/react-umg/components.js")));
 }
 
 static bool IsReactSupportProperty(PropertyMacro *Property) 
 {
-    if (CastFieldMacro<ObjectPropertyMacro>(Property) || CastFieldMacro<ClassPropertyMacro>(Property)) return false;
+    if (CastFieldMacro<ObjectPropertyMacro>(Property)
+        || CastFieldMacro<ClassPropertyMacro>(Property)
+        || CastFieldMacro<WeakObjectPropertyMacro>(Property)
+        || CastFieldMacro<SoftObjectPropertyMacro>(Property)
+        || CastFieldMacro<LazyObjectPropertyMacro>(Property)) return false;
     if (auto ArrayProperty = CastFieldMacro<ArrayPropertyMacro>(Property))
     {
         return IsReactSupportProperty(ArrayProperty->Inner);
@@ -814,7 +821,7 @@ private:
     {
         LoadAllWidgetBlueprint();
         GenTypeScriptDeclaration();
-        //GenReactDeclaration();
+        GenReactDeclaration();
         FText DialogText = FText::Format(
             LOCTEXT("PluginButtonDialogText", "genertate finish, {0} store in {1}"),
             FText::FromString(TEXT("ue.d.ts")),

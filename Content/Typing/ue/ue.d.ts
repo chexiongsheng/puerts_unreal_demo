@@ -47145,6 +47145,7 @@ declare module "ue" {
         MySet: TSet<string>;
         MyMap: TMap<string, number>;
         MyString: string;
+        ArrayBuffer: ArrayBuffer;
         PrintState(): void;
         GetStrings(): TArray<string>;
         GetInts(): TArray<number>;
@@ -47154,6 +47155,7 @@ declare module "ue" {
         Bar3(V: $Ref<Vector>): Vector;
         Bar2(V: $Ref<Vector>): string;
         Bar(V: Vector): string;
+        ArrayBufferTest(Ab: ArrayBuffer): ArrayBuffer;
         Add(a: number, b: number): number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MainObject;
