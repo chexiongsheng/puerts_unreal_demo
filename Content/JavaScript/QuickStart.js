@@ -189,4 +189,11 @@ class MyBPActor extends TestBlueprint {
 let clsBP = puerts_1.makeUClass(MyBPActor);
 let bpActor2 = world.SpawnActor(clsBP, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
 bpActor2.Foo(false, 8000, 9000);
+//unhandledRejection
+puerts_1.on('unhandledRejection', function (reason) {
+    console.warn('unhandledRejection~~~', reason.stack);
+});
+new Promise(() => {
+    throw new Error('unhandled rejection');
+});
 //# sourceMappingURL=QuickStart.js.map

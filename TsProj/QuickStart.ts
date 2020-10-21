@@ -1,5 +1,5 @@
 import * as UE from 'ue'
-import {$ref, $unref, $set, argv, requestJitModuleMethod, makeUClass, blueprint} from 'puerts';
+import {$ref, $unref, $set, argv, requestJitModuleMethod, makeUClass, blueprint, on} from 'puerts';
 import {ReactUMG} from './react-umg';
 import * as UI from './main-ui';
 import * as JitTest from './JitTest'
@@ -223,3 +223,12 @@ class MyBPActor extends TestBlueprint {
 let clsBP = makeUClass(MyBPActor);
 let bpActor2 =  world.SpawnActor(clsBP, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.TestBlueprint_C;
 bpActor2.Foo(false, 8000, 9000);
+
+//unhandledRejection
+on('unhandledRejection', function(reason: any) {
+    console.warn('unhandledRejection~~~', reason.stack)
+});
+
+new Promise(()=>{
+    throw new Error('unhandled rejection');
+});
