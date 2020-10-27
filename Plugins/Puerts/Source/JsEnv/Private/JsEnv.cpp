@@ -38,17 +38,17 @@
 #include "Blob/Win64/SnapshotBlob.h"
 #elif PLATFORM_ANDROID_ARM
 #if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION == 25
-#include "Blob/Android/armv7a/8.4.371.19/SnapshotBlob.h"
+#include "Blob/Android/armv7a/SnapshotBlob.h"
 #elif ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION < 25
-#include "Blob/Android/armv7a/7.4.288/NativesBlob.h"
-#include "Blob/Android/armv7a/7.4.288/SnapshotBlob.h"
+#include "Blob/Android/armv7a/NativesBlob.h"
+#include "Blob/Android/armv7a/SnapshotBlob.h"
 #endif
 #elif PLATFORM_ANDROID_ARM64
 #if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION == 25
-#include "Blob/Android/arm64/8.4.371.19/SnapshotBlob.h"
+#include "Blob/Android/arm64/SnapshotBlob.h"
 #elif ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION < 25
-#include "Blob/Android/arm64/7.4.288/NativesBlob.h"
-#include "Blob/Android/arm64/7.4.288/SnapshotBlob.h"
+#include "Blob/Android/arm64/NativesBlob.h"
+#include "Blob/Android/arm64/SnapshotBlob.h"
 #endif
 #elif PLATFORM_MAC
 #include "Blob/macOS/NativesBlob.h"
