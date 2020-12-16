@@ -161,19 +161,6 @@ let retStr = actor.NotifyWithStringRet.Execute("console.log('hello world')");
 console.log("ret str:" + retStr);
 console.log("waiting native call script...........");
 
-//请求托管到Jit环境的方法，只有iOS下会有很大的性能差距。注：由于毕竟耗时，先注释，想试下的可以打开。
-/*
-console.log("----------------------------------------------------");
-requestJitModuleMethod("JitTest", "Fib", function(err: Error, result: string) {
-    if(err) {
-        console.log("call JitTest.Fib fail! " + err.stack);
-    } else{
-        console.log("jit env: " + result); //jit open in iOS, Android, Window, Mac
-    }
-}, 40);
-console.log("default env:" + JitTest.Fib(40));//jit open in Android, Window, Mac, but not iOS
-*/
-
 /*
 //用React来写UI
 ReactUMG.init(world);
