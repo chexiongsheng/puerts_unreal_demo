@@ -47057,6 +47057,14 @@ declare module "ue" {
         static Load(InName: string): JSWidgetGeneratedClass;
     }
     
+    class TypeScriptObject extends Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        BindTo(): string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TypeScriptObject;
+        static Load(InName: string): TypeScriptObject;
+    }
+    
     class ReactWidget extends UserWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RemoveChild(Content: Widget): boolean;
@@ -49707,6 +49715,33 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): OculusPlatformToolSettings;
         static Load(InName: string): OculusPlatformToolSettings;
+    }
+    
+    class FileSystemOperation extends BlueprintFunctionLibrary {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static WriteFile(Path: string, Data: string): void;
+        static ResolvePath(Path: string): string;
+        static ReadFile(Path: string, Data: $Ref<string>): boolean;
+        static GetFiles(Path: string): TArray<string>;
+        static GetDirectories(Path: string): TArray<string>;
+        static GetCurrentDirectory(): string;
+        static FileExists(Path: string): boolean;
+        static DirectoryExists(Path: string): boolean;
+        static CreateDirectory(Path: string): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FileSystemOperation;
+        static Load(InName: string): FileSystemOperation;
+    }
+    
+    class PEDirectoryWatcher extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnChanged: $MulticastDelegate<(Added: TArray<string>, Modified: TArray<string>, Removed: TArray<string>) => void>;
+        MD5Map: TMap<string, string>;
+        Watch(InDirectory: string): boolean;
+        UnWatch(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PEDirectoryWatcher;
+        static Load(InName: string): PEDirectoryWatcher;
     }
     
     class MockAI extends Object {
