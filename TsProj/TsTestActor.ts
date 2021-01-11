@@ -64,7 +64,7 @@ class TsTestActor extends UE.Actor {
     //override 2
     ReceiveTick(DeltaSeconds: number): void {
         if (this.tickCount % 100 == 0) {
-            console.warn("TsTestActor.ReceiveTick1", DeltaSeconds, this.tickCount);
+            console.warn("TsTestActor.ReceiveTick", DeltaSeconds, this.tickCount);
         }
         ++this.tickCount;
     }

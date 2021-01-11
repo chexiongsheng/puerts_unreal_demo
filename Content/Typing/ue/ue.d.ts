@@ -47059,7 +47059,6 @@ declare module "ue" {
     
     class TypeScriptObject extends Interface {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BindTo(): string;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TypeScriptObject;
         static Load(InName: string): TypeScriptObject;
@@ -49722,6 +49721,7 @@ declare module "ue" {
         static WriteFile(Path: string, Data: string): void;
         static ResolvePath(Path: string): string;
         static ReadFile(Path: string, Data: $Ref<string>): boolean;
+        static PuertsNotifyChange(Path: string): void;
         static GetFiles(Path: string): TArray<string>;
         static GetDirectories(Path: string): TArray<string>;
         static GetCurrentDirectory(): string;
@@ -51260,12 +51260,16 @@ declare module "ue" {
         constructor();
     }
     
-    class SKEL_LevelEditorAttract_C extends EditorTutorial {
+    class SKEL_AnotherActor_C extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        ReceiveBeginPlay(): void;
+        ReceiveActorBeginOverlap(OtherActor: Actor): void;
+        ReceiveTick(DeltaSeconds: number): void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_LevelEditorAttract_C;
-        static Load(InName: string): SKEL_LevelEditorAttract_C;
+        static Find(OrigInName: string, Outer?: Object): SKEL_AnotherActor_C;
+        static Load(InName: string): SKEL_AnotherActor_C;
     }
     
     class SKEL_DmgTypeBP_Environmental_C extends DamageType {
@@ -51283,6 +51287,43 @@ declare module "ue" {
         static Load(InName: string): LevelEditorAttract_C;
     }
     
+    class SKEL_LevelEditorAttract_C extends EditorTutorial {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SKEL_LevelEditorAttract_C;
+        static Load(InName: string): SKEL_LevelEditorAttract_C;
+    }
+    
+    class SKEL_TsTestActor_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        tickCount: number;
+        actor: Actor;
+        cls: Class;
+        b: boolean;
+        int64_1: bigint;
+        int64_2: bigint;
+        str: string;
+        v: Vector;
+        map: TMap<string, number>;
+        arr: TArray<Object>;
+        set: TSet<string>;
+        ReceiveBeginPlay(): void;
+        ReceiveActorBeginOverlap(OtherActor: Actor): void;
+        ReceiveTick(DeltaSeconds: number): void;
+        Add(a: number, b: number): number;
+        GetActor(): Actor;
+        SetActor(p: Actor): void;
+        GetArray(): TArray<Object>;
+        SetArray(p: $Ref<TArray<Object>>): void;
+        GetMap(): TMap<string, number>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestActor_C;
+        static Load(InName: string): SKEL_TsTestActor_C;
+    }
+    
     class StandardMacros_C extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -51295,35 +51336,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SKEL_StandardMacros_C;
         static Load(InName: string): SKEL_StandardMacros_C;
-    }
-    
-    class BP_Sky_Sphere_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SkySphereMesh: StaticMeshComponent;
-        Base: SceneComponent;
-        Skymaterial: MaterialInstanceDynamic;
-        Refreshmaterial: boolean;
-        Directionallightactor: DirectionalLight;
-        Colorsdeterminedbysunposition: boolean;
-        Sunheight: number;
-        Sunbrightness: number;
-        HorizonFalloff: number;
-        ZenithColor: LinearColor;
-        Horizoncolor: LinearColor;
-        Cloudcolor: LinearColor;
-        OverallColor: LinearColor;
-        Cloudspeed: number;
-        Cloudopacity: number;
-        Starsbrightness: number;
-        Horizoncolorcurve: CurveLinearColor;
-        Zenithcolorcurve: CurveLinearColor;
-        Cloudcolorcurve: CurveLinearColor;
-        RefreshMaterial(): void;
-        UpdateSunDirection(): void;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): BP_Sky_Sphere_C;
-        static Load(InName: string): BP_Sky_Sphere_C;
     }
     
     class SKEL_BP_Sky_Sphere_C extends Actor {
@@ -51354,6 +51366,35 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SKEL_BP_Sky_Sphere_C;
         static Load(InName: string): SKEL_BP_Sky_Sphere_C;
+    }
+    
+    class BP_Sky_Sphere_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SkySphereMesh: StaticMeshComponent;
+        Base: SceneComponent;
+        Skymaterial: MaterialInstanceDynamic;
+        Refreshmaterial: boolean;
+        Directionallightactor: DirectionalLight;
+        Colorsdeterminedbysunposition: boolean;
+        Sunheight: number;
+        Sunbrightness: number;
+        HorizonFalloff: number;
+        ZenithColor: LinearColor;
+        Horizoncolor: LinearColor;
+        Cloudcolor: LinearColor;
+        OverallColor: LinearColor;
+        Cloudspeed: number;
+        Cloudopacity: number;
+        Starsbrightness: number;
+        Horizoncolorcurve: CurveLinearColor;
+        Zenithcolorcurve: CurveLinearColor;
+        Cloudcolorcurve: CurveLinearColor;
+        RefreshMaterial(): void;
+        UpdateSunDirection(): void;
+        UserConstructionScript(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BP_Sky_Sphere_C;
+        static Load(InName: string): BP_Sky_Sphere_C;
     }
     
     class LevelEditorOverview_C extends EditorTutorial {
@@ -51403,7 +51444,7 @@ declare module "ue" {
         static Load(InName: string): SKEL_TestBlueprint_C;
     }
     
-    class REINST_TestBlueprint_C_5 extends Actor {
+    class REINST_TestBlueprint_C_41 extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
         DefaultSceneRoot: SceneComponent;
@@ -51415,32 +51456,15 @@ declare module "ue" {
         ReceiveBeginPlay(): void;
         ExecuteUbergraph_TestBlueprint(EntryPoint: number): void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_5;
-        static Load(InName: string): REINST_TestBlueprint_C_5;
+        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_41;
+        static Load(InName: string): REINST_TestBlueprint_C_41;
     }
     
-    class TRASHCLASS_TestBlueprint_6 {
+    class TRASHCLASS_TestBlueprint_42 {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_6;
-        static Load(InName: string): TRASHCLASS_TestBlueprint_6;
-    }
-    
-    class MyActor_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ReceiveBeginPlay(): void;
-        ReceiveTick(DeltaSeconds: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MyActor_C;
-        static Load(InName: string): MyActor_C;
-    }
-    
-    class MyBPActor_C extends TestBlueprint_C {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Foo(P1: boolean, P2: number, P3: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MyBPActor_C;
-        static Load(InName: string): MyBPActor_C;
+        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_42;
+        static Load(InName: string): TRASHCLASS_TestBlueprint_42;
     }
     
 }

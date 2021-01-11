@@ -1237,7 +1237,7 @@ function watch(configFilePath:string) {
         logErrors(diagnostics);
     } else {
         fileNames.forEach(fileName => {
-            onSourceFileAddOrChange(fileName, program);
+            onSourceFileAddOrChange(fileName, false, program);
         });
     }
 
@@ -1258,7 +1258,7 @@ function watch(configFilePath:string) {
                     } else {
                         console.log(`${fileName} md5 from ${fileVersions[fileName].version} to ${md5}`);
                         fileVersions[fileName].version = md5;
-                        onSourceFileAddOrChange(fileName);
+                        onSourceFileAddOrChange(fileName, true);
                     }
                 }
             }
@@ -1283,11 +1283,11 @@ function watch(configFilePath:string) {
             options = cmdLine.options;
             program = services.getProgram();
 
-            newFiles.forEach(fileName => onSourceFileAddOrChange(fileName, program));
+            newFiles.forEach(fileName => onSourceFileAddOrChange(fileName, true, program));
         }
     }
 
-    function onSourceFileAddOrChange(sourceFilePath: string, program?: ts.Program) {
+    function onSourceFileAddOrChange(sourceFilePath: string, reload: boolean, program?: ts.Program) {
         if (!program) {
             let beginTime = new Date().getTime();
             program = services.getProgram();
@@ -1312,20 +1312,22 @@ function watch(configFilePath:string) {
                     
                     if (!emitOutput.emitSkipped) {
                         let modulePath:string = undefined;
+                        let moduleFileName:string = undefined;
                         emitOutput.outputFiles.forEach(output => {
                             console.log(`write ${output.name} ...` )
                             UE.FileSystemOperation.WriteFile(output.name, output.text);
                             
                             if (output.name.endsWith(".js")) {
-                                modulePath = getDirectoryPath(output.name);
-                                if (options.outDir && modulePath.startsWith(options.outDir)) {
-                                    modulePath = modulePath.substr(options.outDir.length);
-                                    if (modulePath.startsWith('/')) {
-                                        modulePath  = modulePath.substr(1);
-                                    }
+                                if (options.outDir && output.name.startsWith(options.outDir)) {
+                                    moduleFileName = output.name.substr(options.outDir.length + 1);
+                                    modulePath = getDirectoryPath(moduleFileName);
+                                    moduleFileName = removeExtension(moduleFileName, ".js");
                                 }
                             }
                         });
+                        if (moduleFileName && reload) {
+                            UE.FileSystemOperation.PuertsNotifyChange(moduleFileName);
+                        }
 
                         let foundType: ts.Type = undefined;
                         let foundBaseType: ts.Type  = undefined;
