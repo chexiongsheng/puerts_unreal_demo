@@ -49733,6 +49733,39 @@ declare module "ue" {
         static Load(InName: string): FileSystemOperation;
     }
     
+    class PEGraphPinType {
+        constructor(PinCategory: string, PinSubCategoryObject: Object, PinContainerType: number, bIsReference: boolean);
+        PinCategory: string;
+        PinSubCategoryObject: Object;
+        PinContainerType: number;
+        bIsReference: boolean;
+    }
+    
+    class PEGraphTerminalType {
+        constructor(PinCategory: string, PinSubCategoryObject: Object);
+        PinCategory: string;
+        PinSubCategoryObject: Object;
+    }
+    
+    class PEBlueprintAsset extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        GeneratedClass: Class;
+        Blueprint: Blueprint;
+        Package: Package;
+        Save(): void;
+        RemoveNotExistedMemberVariable(): void;
+        RemoveNotExistedFunction(): void;
+        Load(InParentClassName: string, InName: string, InPath: string): boolean;
+        IsExisted(InName: string, InPath: string): boolean;
+        ClearParameter(): void;
+        AddParameter(InParameterName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
+        AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
+        AddFunction(InName: string, IsVoid: boolean, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PEBlueprintAsset;
+        static Load(InName: string): PEBlueprintAsset;
+    }
+    
     class PEDirectoryWatcher extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnChanged: $MulticastDelegate<(Added: TArray<string>, Modified: TArray<string>, Removed: TArray<string>) => void>;

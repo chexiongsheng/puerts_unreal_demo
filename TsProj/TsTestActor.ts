@@ -5,6 +5,26 @@ console.warn("Script init of TsTestActor ");
 class TsTestActor extends UE.Actor {
     tickCount: number;
 
+    actor: UE.Actor; 
+
+    cls: UE.Class;
+
+    b: boolean;
+
+    int64_1: BigInt;
+
+    int64_2: bigint;
+
+    str : string;
+
+    v : UE.Vector;
+
+    map: UE.TMap<string, number>;
+
+    arr: UE.TArray<UE.Object>;
+
+    set: UE.TSet<string>;
+
     //注意，继承UE类的js类，构造函数必须大写开头
     Constructor() {
         this.PrimaryActorTick.bCanEverTick = true;
@@ -21,13 +41,34 @@ class TsTestActor extends UE.Actor {
         return a + b;
     }
 
+    GetActor() : UE.Actor {
+        return this.actor;
+    }
+
+    SetActor(p: UE.Actor) : void {
+        this.actor = p;
+    }
+
+    GetArray() : UE.TArray<UE.Object> {
+        return this.arr;
+    }
+
+    SetArray(p: UE.TArray<UE.Object>): void {
+        this.arr = p;
+    }
+
+    GetMap() :UE.TMap<string, number> {
+        return this.map;
+    }
+
     //override 2
     ReceiveTick(DeltaSeconds: number): void {
         if (this.tickCount % 100 == 0) {
-            console.warn("TsTestActor.ReceiveTick", DeltaSeconds, this.tickCount);
+            console.warn("TsTestActor.ReceiveTick1", DeltaSeconds, this.tickCount);
         }
         ++this.tickCount;
     }
 }
 
 export default TsTestActor;
+

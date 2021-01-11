@@ -1,0 +1,1 @@
+{"version":3,"file":"AnotherActor.js","sourceRoot":"","sources":["../../../TsProj/Modules/AnotherActor.ts"],"names":[],"mappings":";;AAAA,yBAAwB;AAExB,MAAM,YAAa,SAAQ,EAAE,CAAC,KAAK;IAC/B,yBAAyB;IACzB,WAAW;QACP,OAAO,CAAC,IAAI,CAAC,0BAA0B,CAAC,CAAC;IAC7C,CAAC;IAED,YAAY;IACZ,gBAAgB;QACZ,OAAO,CAAC,IAAI,CAAC,+BAA+B,CAAC,CAAC;IAClD,CAAC;CACJ;AAED,kBAAe,YAAY,CAAC"}

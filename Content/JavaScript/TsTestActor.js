@@ -16,10 +16,25 @@ class TsTestActor extends UE.Actor {
     Add(a, b) {
         return a + b;
     }
+    GetActor() {
+        return this.actor;
+    }
+    SetActor(p) {
+        this.actor = p;
+    }
+    GetArray() {
+        return this.arr;
+    }
+    SetArray(p) {
+        this.arr = p;
+    }
+    GetMap() {
+        return this.map;
+    }
     //override 2
     ReceiveTick(DeltaSeconds) {
         if (this.tickCount % 100 == 0) {
-            console.warn("TsTestActor.ReceiveTick", DeltaSeconds, this.tickCount);
+            console.warn("TsTestActor.ReceiveTick1", DeltaSeconds, this.tickCount);
         }
         ++this.tickCount;
     }
