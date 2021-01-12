@@ -8,7 +8,7 @@
       "Content/Typing",
       "./node_modules/@types"
     ],
-    "outDir": "Content/Javascript"
+    "outDir": "Content/JavaScript"
   },
   "include": [
     "TsProj/**/*"

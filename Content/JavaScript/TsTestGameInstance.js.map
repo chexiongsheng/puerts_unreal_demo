@@ -1,0 +1,1 @@
+{"version":3,"file":"TsTestGameInstance.js","sourceRoot":"","sources":["../../TsProj/TsTestGameInstance.ts"],"names":[],"mappings":";;AAAA,yBAAwB;AAGxB,MAAM,kBAAmB,SAAQ,EAAE,CAAC,YAAY;IAC5C,WAAW;QACP,OAAO,CAAC,IAAI,CAAC,gCAAgC,CAAC,CAAC;IACnD,CAAC;IAED,eAAe;QACX,OAAO,CAAC,IAAI,CAAC,oCAAoC,CAAC,CAAC;IACvD,CAAC;CACJ;AAED,kBAAe,kBAAkB,CAAC"}
