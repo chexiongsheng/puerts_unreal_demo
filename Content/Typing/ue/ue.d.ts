@@ -47084,6 +47084,17 @@ declare module "ue" {
         static Load(InName: string): UMGManager;
     }
     
+    class PuertsSetting extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Enable: boolean;
+        DebugEnable: boolean;
+        DebugPort: number;
+        WaitDebugger: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PuertsSetting;
+        static Load(InName: string): PuertsSetting;
+    }
+    
     enum EnumInt32 { VM1, V0, V1, V2, V3, EnumInt32_MAX}
     enum EnumInt8Min { VINT8_MIN, VINT8_MAX}
     enum EnumInt8Max { VINT8_MAX}
@@ -49725,6 +49736,7 @@ declare module "ue" {
         static GetFiles(Path: string): TArray<string>;
         static GetDirectories(Path: string): TArray<string>;
         static GetCurrentDirectory(): string;
+        static FileMD5Hash(Path: string): string;
         static FileExists(Path: string): boolean;
         static DirectoryExists(Path: string): boolean;
         static CreateDirectory(Path: string): void;
@@ -49769,7 +49781,6 @@ declare module "ue" {
     class PEDirectoryWatcher extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnChanged: $MulticastDelegate<(Added: TArray<string>, Modified: TArray<string>, Removed: TArray<string>) => void>;
-        MD5Map: TMap<string, string>;
         Watch(InDirectory: string): boolean;
         UnWatch(): void;
         static StaticClass(): Class;
@@ -51324,6 +51335,27 @@ declare module "ue" {
         static Load(InName: string): SKEL_TsTestActor_C;
     }
     
+    class SKEL_TsTestGameInstance_C extends GameInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        ReceiveShutdown(): void;
+        ReceiveInit(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestGameInstance_C;
+        static Load(InName: string): SKEL_TsTestGameInstance_C;
+    }
+    
+    class SKEL_TsTestGameMode_C extends GameModeBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        ReceiveBeginPlay(): void;
+        ReceiveTick(DeltaSeconds: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestGameMode_C;
+        static Load(InName: string): SKEL_TsTestGameMode_C;
+    }
+    
     class StandardMacros_C extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -51444,7 +51476,7 @@ declare module "ue" {
         static Load(InName: string): SKEL_TestBlueprint_C;
     }
     
-    class REINST_TestBlueprint_C_41 extends Actor {
+    class REINST_TestBlueprint_C_53 extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
         DefaultSceneRoot: SceneComponent;
@@ -51456,15 +51488,15 @@ declare module "ue" {
         ReceiveBeginPlay(): void;
         ExecuteUbergraph_TestBlueprint(EntryPoint: number): void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_41;
-        static Load(InName: string): REINST_TestBlueprint_C_41;
+        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_53;
+        static Load(InName: string): REINST_TestBlueprint_C_53;
     }
     
-    class TRASHCLASS_TestBlueprint_42 {
+    class TRASHCLASS_TestBlueprint_54 {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_42;
-        static Load(InName: string): TRASHCLASS_TestBlueprint_42;
+        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_54;
+        static Load(InName: string): TRASHCLASS_TestBlueprint_54;
     }
     
 }
