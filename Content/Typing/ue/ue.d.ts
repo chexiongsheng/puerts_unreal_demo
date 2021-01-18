@@ -9845,6 +9845,7 @@ declare module "ue" {
     class Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ExecuteUbergraph(EntryPoint: number): void;
+        CreateDefaultSubobject(SubobjectFName: string, ReturnType: Class, ClassToCreateByDefault: Class, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
         IsValid(): boolean;
         GetWorld(): World;
         GetOuter(): Object;
@@ -47057,6 +47058,13 @@ declare module "ue" {
         static Load(InName: string): JSWidgetGeneratedClass;
     }
     
+    class TypeScriptGeneratedClass extends BlueprintGeneratedClass {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TypeScriptGeneratedClass;
+        static Load(InName: string): TypeScriptGeneratedClass;
+    }
+    
     class TypeScriptObject extends Interface {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -47082,6 +47090,14 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): UMGManager;
         static Load(InName: string): UMGManager;
+    }
+    
+    class ObjectExtension extends ExtensionMethods {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static CreateDefaultSubobject(Object: Object, SubobjectFName: string, ReturnType: Class, ClassToCreateByDefault: Class, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ObjectExtension;
+        static Load(InName: string): ObjectExtension;
     }
     
     class PuertsSetting extends Object {
@@ -49764,11 +49780,12 @@ declare module "ue" {
         GeneratedClass: Class;
         Blueprint: Blueprint;
         Package: Package;
+        NeedSave: boolean;
         Save(): void;
         RemoveNotExistedMemberVariable(): void;
         RemoveNotExistedFunction(): void;
+        LoadOrCreate(InName: string, InPath: string, ParentClass: Class): boolean;
         Load(InParentClassName: string, InName: string, InPath: string): boolean;
-        IsExisted(InName: string, InPath: string): boolean;
         ClearParameter(): void;
         AddParameter(InParameterName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
         AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
@@ -51271,16 +51288,37 @@ declare module "ue" {
         constructor();
     }
     
-    class SKEL_AnotherActor_C extends Actor {
+    class SKEL_TsTestActor_C extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
         DefaultSceneRoot: SceneComponent;
+        tickCount: number;
+        actor: Actor;
+        cls: Class;
+        b: boolean;
+        int64_1: bigint;
+        int64_2: bigint;
+        str: string;
+        v: Vector;
+        map: TMap<string, number>;
+        arr: TArray<Object>;
+        set: TSet<string>;
+        Classmap: TMap<string, Class>;
+        Objectmap: TMap<string, Actor>;
         ReceiveBeginPlay(): void;
         ReceiveActorBeginOverlap(OtherActor: Actor): void;
         ReceiveTick(DeltaSeconds: number): void;
+        InpAxisEvt_MoveForward1_K2Node_InputAxisEvent_0(AxisValue: number): void;
+        UserConstructionScript(): void;
+        Add(a: number, b: number): number;
+        GetActor(): Actor;
+        SetActor(p: Actor): void;
+        GetArray(): TArray<Object>;
+        SetArray(p: $Ref<TArray<Object>>): void;
+        GetMap(): TMap<string, number>;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_AnotherActor_C;
-        static Load(InName: string): SKEL_AnotherActor_C;
+        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestActor_C;
+        static Load(InName: string): SKEL_TsTestActor_C;
     }
     
     class SKEL_DmgTypeBP_Environmental_C extends DamageType {
@@ -51306,40 +51344,22 @@ declare module "ue" {
         static Load(InName: string): SKEL_LevelEditorAttract_C;
     }
     
-    class SKEL_TsTestActor_C extends Actor {
+    class TsTestGameInstance_C extends GameInstance {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        tickCount: number;
-        actor: Actor;
-        cls: Class;
-        b: boolean;
-        int64_1: bigint;
-        int64_2: bigint;
-        str: string;
-        v: Vector;
-        map: TMap<string, number>;
-        arr: TArray<Object>;
-        set: TSet<string>;
-        ReceiveBeginPlay(): void;
-        ReceiveActorBeginOverlap(OtherActor: Actor): void;
-        ReceiveTick(DeltaSeconds: number): void;
-        Add(a: number, b: number): number;
-        GetActor(): Actor;
-        SetActor(p: Actor): void;
-        GetArray(): TArray<Object>;
-        SetArray(p: $Ref<TArray<Object>>): void;
-        GetMap(): TMap<string, number>;
+        ReceiveInit(): void;
+        ReceiveShutdown(): void;
+        ExecuteUbergraph_TsTestGameInstance(EntryPoint: number): void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestActor_C;
-        static Load(InName: string): SKEL_TsTestActor_C;
+        static Find(OrigInName: string, Outer?: Object): TsTestGameInstance_C;
+        static Load(InName: string): TsTestGameInstance_C;
     }
     
     class SKEL_TsTestGameInstance_C extends GameInstance {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
-        ReceiveShutdown(): void;
         ReceiveInit(): void;
+        ReceiveShutdown(): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SKEL_TsTestGameInstance_C;
         static Load(InName: string): SKEL_TsTestGameInstance_C;
@@ -51351,9 +51371,23 @@ declare module "ue" {
         DefaultSceneRoot: SceneComponent;
         ReceiveBeginPlay(): void;
         ReceiveTick(DeltaSeconds: number): void;
+        UserConstructionScript(): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SKEL_TsTestGameMode_C;
         static Load(InName: string): SKEL_TsTestGameMode_C;
+    }
+    
+    class SKEL_AnotherActor_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        ReceiveBeginPlay(): void;
+        ReceiveActorBeginOverlap(OtherActor: Actor): void;
+        ReceiveTick(DeltaSeconds: number): void;
+        UserConstructionScript(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SKEL_AnotherActor_C;
+        static Load(InName: string): SKEL_AnotherActor_C;
     }
     
     class StandardMacros_C extends Object {
@@ -51476,7 +51510,7 @@ declare module "ue" {
         static Load(InName: string): SKEL_TestBlueprint_C;
     }
     
-    class REINST_TestBlueprint_C_53 extends Actor {
+    class REINST_TestBlueprint_C_47 extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
         DefaultSceneRoot: SceneComponent;
@@ -51488,15 +51522,69 @@ declare module "ue" {
         ReceiveBeginPlay(): void;
         ExecuteUbergraph_TestBlueprint(EntryPoint: number): void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_53;
-        static Load(InName: string): REINST_TestBlueprint_C_53;
+        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_47;
+        static Load(InName: string): REINST_TestBlueprint_C_47;
     }
     
-    class TRASHCLASS_TestBlueprint_54 {
+    class TRASHCLASS_TestBlueprint_48 {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_54;
-        static Load(InName: string): TRASHCLASS_TestBlueprint_54;
+        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_48;
+        static Load(InName: string): TRASHCLASS_TestBlueprint_48;
+    }
+    
+    class TsTestActor_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        tickCount: number;
+        actor: Actor;
+        cls: Class;
+        b: boolean;
+        int64_1: bigint;
+        int64_2: bigint;
+        str: string;
+        v: Vector;
+        map: TMap<string, number>;
+        arr: TArray<Object>;
+        set: TSet<string>;
+        Classmap: TMap<string, Class>;
+        Objectmap: TMap<string, Actor>;
+        GetMap(): TMap<string, number>;
+        SetArray(p: $Ref<TArray<Object>>): void;
+        GetArray(): TArray<Object>;
+        SetActor(p: Actor): void;
+        GetActor(): Actor;
+        Add(a: number, b: number): number;
+        ReceiveBeginPlay(): void;
+        ReceiveTick(DeltaSeconds: number): void;
+        InpAxisEvt_MoveForward1_K2Node_InputAxisEvent_0(AxisValue: number): void;
+        ExecuteUbergraph_TsTestActor(EntryPoint: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TsTestActor_C;
+        static Load(InName: string): TsTestActor_C;
+    }
+    
+    class TsTestGameMode_C extends GameModeBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        ReceiveBeginPlay(): void;
+        ExecuteUbergraph_TsTestGameMode(EntryPoint: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TsTestGameMode_C;
+        static Load(InName: string): TsTestGameMode_C;
+    }
+    
+    class AnotherActor_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        ReceiveBeginPlay(): void;
+        ExecuteUbergraph_AnotherActor(EntryPoint: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AnotherActor_C;
+        static Load(InName: string): AnotherActor_C;
     }
     
 }
