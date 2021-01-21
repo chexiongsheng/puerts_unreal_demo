@@ -38,6 +38,13 @@ class TsTestActor extends UE.Actor {
         }
         ++this.tickCount;
     }
+    //@cpp:text
+    TestCppType(p1 /*@cpp:int*/, p2 /*@cpp:byte */) {
+        return p1 + ":" + p2;
+    }
+    //@no-blueprint
+    TsOnlyMethod() {
+    }
 }
 exports.default = TsTestActor;
 //# sourceMappingURL=TsTestActor.js.map

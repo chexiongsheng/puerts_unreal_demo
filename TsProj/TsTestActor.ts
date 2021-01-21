@@ -68,7 +68,22 @@ class TsTestActor extends UE.Actor {
         }
         ++this.tickCount;
     }
+
+    //@cpp:text
+    TestCppType(p1:number/*@cpp:int*/, p2:number/*@cpp:byte */): string {
+        return p1 + ":" + p2;
+    }
+
+    //@cpp:name
+    fname: string;
+
+    //@no-blueprint
+    TsOnlyMethod():void {
+
+    }
+
+    //@no-blueprint
+    TsOnlyField: number;
 }
 
 export default TsTestActor;
-
