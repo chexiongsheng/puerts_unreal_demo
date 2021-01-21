@@ -8578,6 +8578,7 @@ declare module "ue" {
         GetAllSocketNames(): TArray<string>;
         DoesSocketExist(InSocketName: string): boolean;
         DetachFromParent(bMaintainWorldPosition: boolean, bCallModify: boolean): void;
+        SetupAttachment(InParent: SceneComponent, InSocketName: string): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SceneComponent;
         static Load(InName: string): SceneComponent;
@@ -9845,12 +9846,12 @@ declare module "ue" {
     class Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ExecuteUbergraph(EntryPoint: number): void;
-        CreateDefaultSubobject(SubobjectFName: string, ReturnType: Class, ClassToCreateByDefault: Class, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
         IsValid(): boolean;
         GetWorld(): World;
         GetOuter(): Object;
         GetName(): string;
         GetClass(): Class;
+        CreateDefaultSubobject(SubobjectFName: string, ReturnType: Class, ClassToCreateByDefault: Class, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): Object;
         static Load(InName: string): Object;
@@ -47094,6 +47095,11 @@ declare module "ue" {
     
     class ObjectExtension extends ExtensionMethods {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static IsValid(Object: Object): boolean;
+        static GetWorld(Object: Object): World;
+        static GetOuter(Object: Object): Object;
+        static GetName(Object: Object): string;
+        static GetClass(Object: Object): Class;
         static CreateDefaultSubobject(Object: Object, SubobjectFName: string, ReturnType: Class, ClassToCreateByDefault: Class, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ObjectExtension;
@@ -47109,6 +47115,14 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PuertsSetting;
         static Load(InName: string): PuertsSetting;
+    }
+    
+    class SceneComponentExtension extends ExtensionMethods {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static SetupAttachment(InSelf: SceneComponent, InParent: SceneComponent, InSocketName: string): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SceneComponentExtension;
+        static Load(InName: string): SceneComponentExtension;
     }
     
     enum EnumInt32 { VM1, V0, V1, V2, V3, EnumInt32_MAX}
@@ -47194,18 +47208,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MainObject;
         static Load(InName: string): MainObject;
-    }
-    
-    class ObjectExtensionMethods extends ExtensionMethods {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static IsValid(Object: Object): boolean;
-        static GetWorld(Object: Object): World;
-        static GetOuter(Object: Object): Object;
-        static GetName(Object: Object): string;
-        static GetClass(Object: Object): Class;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ObjectExtensionMethods;
-        static Load(InName: string): ObjectExtensionMethods;
     }
     
     class puerts_unreal_demoGameModeBase extends GameModeBase {
@@ -49785,7 +49787,6 @@ declare module "ue" {
         RemoveNotExistedMemberVariable(): void;
         RemoveNotExistedFunction(): void;
         LoadOrCreate(InName: string, InPath: string, ParentClass: Class): boolean;
-        Load(InParentClassName: string, InName: string, InPath: string): boolean;
         ClearParameter(): void;
         AddParameter(InParameterName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
         AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
