@@ -40,6 +40,9 @@ declare module "ue" {
         {%- endif %}
         {%- endfor %}
         {%- endfor %}
+        {% if not type.is_cdata %}
+        static StaticClass(): Class;
+        {% endif %}
     }
     {%- for namespace in type.namespaces %}
     }
