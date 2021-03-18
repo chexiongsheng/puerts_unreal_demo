@@ -25,6 +25,7 @@ declare module "ue" {
         constructor(Type: Class, Total: number);
         Type: Class;
         Total: number;
+        static StaticClass(): Class;
     }
     
     class Layer extends Object {
@@ -46,10 +47,12 @@ declare module "ue" {
         bStartWithTickEnabled: boolean;
         bAllowTickOnDedicatedServer: boolean;
         TickInterval: number;
+        static StaticClass(): Class;
     }
     
     class ActorTickFunction extends TickFunction {
         constructor();
+        static StaticClass(): Class;
     }
     
     enum EActorUpdateOverlapsMethod { UseConfigDefault, AlwaysUpdate, OnlyUpdateMovable, NeverUpdate, EActorUpdateOverlapsMethod_MAX}
@@ -66,14 +69,17 @@ declare module "ue" {
         LocationQuantizationLevel: EVectorQuantization;
         VelocityQuantizationLevel: EVectorQuantization;
         RotationQuantizationLevel: ERotatorQuantization;
+        static StaticClass(): Class;
     }
     
     class Vector_NetQuantize100 extends Vector {
         constructor();
+        static StaticClass(): Class;
     }
     
     class ActorComponentTickFunction extends TickFunction {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AssetUserData extends Object {
@@ -89,6 +95,7 @@ declare module "ue" {
         MemberParent: Object;
         MemberName: string;
         MemberGuid: Guid;
+        static StaticClass(): Class;
     }
     
     class ActorComponent extends Object {
@@ -153,12 +160,14 @@ declare module "ue" {
         bChannel0: boolean;
         bChannel1: boolean;
         bChannel2: boolean;
+        static StaticClass(): Class;
     }
     
     enum ERendererStencilMask { ERSM_Default, ERSM_255, ERSM_1, ERSM_2, ERSM_4, ERSM_8, ERSM_16, ERSM_32, ERSM_64, ERSM_128, ERSM_MAX}
     class CustomPrimitiveData {
         constructor(Data: TArray<number>);
         Data: TArray<number>;
+        static StaticClass(): Class;
     }
     
     enum ERuntimeVirtualTextureMaterialType { BaseColor, BaseColor_Normal_DEPRECATED, BaseColor_Normal_Specular, BaseColor_Normal_Specular_YCoCg, WorldHeight, Count, ERuntimeVirtualTextureMaterialType_MAX}
@@ -190,6 +199,7 @@ declare module "ue" {
         SizeY: number;
         NumSlices: number;
         NumMips: number;
+        static StaticClass(): Class;
     }
     
     class TextureSource {
@@ -207,10 +217,12 @@ declare module "ue" {
         Format: number;
         LayerFormat: TArray<number>;
         Blocks: TArray<TextureSourceBlock>;
+        static StaticClass(): Class;
     }
     
     class AssetImportInfo {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AssetImportData extends Object {
@@ -232,6 +244,7 @@ declare module "ue" {
         CompressionNone: boolean;
         CompressionYCoCg: boolean;
         SRGB: boolean;
+        static StaticClass(): Class;
     }
     
     enum ETextureMipLoadOptions { Default, AllMips, OnlyFirstMip, ETextureMipLoadOptions_MAX}
@@ -309,6 +322,7 @@ declare module "ue" {
         TileBorderSize: number;
         bEnableCompressCrunch: boolean;
         bEnableCompressZlib: boolean;
+        static StaticClass(): Class;
     }
     
     class RuntimeVirtualTextureStreamingProxy extends Texture2D {
@@ -378,24 +392,28 @@ declare module "ue" {
         GameTraceChannel16: number;
         GameTraceChannel17: number;
         GameTraceChannel18: number;
+        static StaticClass(): Class;
     }
     
     class ResponseChannel {
         constructor(Channel: string, Response: number);
         Channel: string;
         Response: number;
+        static StaticClass(): Class;
     }
     
     class CollisionResponse {
         constructor(ResponseToChannels: CollisionResponseContainer, ResponseArray: TArray<ResponseChannel>);
         ResponseToChannels: CollisionResponseContainer;
         ResponseArray: TArray<ResponseChannel>;
+        static StaticClass(): Class;
     }
     
     class WalkableSlopeOverride {
         constructor(WalkableSlopeBehavior: number, WalkableSlopeAngle: number);
         WalkableSlopeBehavior: number;
         WalkableSlopeAngle: number;
+        static StaticClass(): Class;
     }
     
     class PhysicalMaterialPropertyBase extends Object {
@@ -425,6 +443,7 @@ declare module "ue" {
         constructor(TireType: TireType, FrictionScale: number);
         TireType: TireType;
         FrictionScale: number;
+        static StaticClass(): Class;
     }
     
     class PhysicalMaterial extends Object {
@@ -493,14 +512,17 @@ declare module "ue" {
         CustomSleepThresholdMultiplier: number;
         StabilizationThresholdMultiplier: number;
         PhysicsBlendWeight: number;
+        static StaticClass(): Class;
     }
     
     class Vector_NetQuantize extends Vector {
         constructor();
+        static StaticClass(): Class;
     }
     
     class Vector_NetQuantizeNormal extends Vector {
         constructor();
+        static StaticClass(): Class;
     }
     
     class HitResult {
@@ -523,11 +545,13 @@ declare module "ue" {
         Component: TWeakObjectPtr<PrimitiveComponent>;
         BoneName: string;
         MyBoneName: string;
+        static StaticClass(): Class;
     }
     
     class Key {
         constructor(KeyName: string);
         KeyName: string;
+        static StaticClass(): Class;
     }
     
     class SubsurfaceProfileStruct {
@@ -549,6 +573,7 @@ declare module "ue" {
         Roughness1: number;
         LobeMix: number;
         TransmissionTintColor: LinearColor;
+        static StaticClass(): Class;
     }
     
     class SubsurfaceProfile extends Object {
@@ -569,12 +594,14 @@ declare module "ue" {
         bOverrideEmissiveBoost: boolean;
         bOverrideDiffuseBoost: boolean;
         bOverrideExportResolutionScale: boolean;
+        static StaticClass(): Class;
     }
     
     class SoftObjectPath {
         constructor(AssetPathName: string, SubPathString: string);
         AssetPathName: string;
         SubPathString: string;
+        static StaticClass(): Class;
     }
     
     class MaterialTextureInfo {
@@ -584,6 +611,7 @@ declare module "ue" {
         TextureName: string;
         TextureReference: SoftObjectPath;
         TextureIndex: number;
+        static StaticClass(): Class;
     }
     
     class ThumbnailInfo extends Object {
@@ -600,6 +628,7 @@ declare module "ue" {
         TerminalSubCategoryObject: TWeakObjectPtr<Object>;
         bTerminalIsConst: boolean;
         bTerminalIsWeakPointer: boolean;
+        static StaticClass(): Class;
     }
     
     enum EPinContainerType { None, Array, Set, Map, EPinContainerType_MAX}
@@ -615,6 +644,7 @@ declare module "ue" {
         bIsReference: boolean;
         bIsConst: boolean;
         bIsWeakPointer: boolean;
+        static StaticClass(): Class;
     }
     
     class EdGraphPin_Deprecated extends Object {
@@ -724,6 +754,7 @@ declare module "ue" {
         MaskG: number;
         MaskB: number;
         MaskA: number;
+        static StaticClass(): Class;
     }
     
     class MaterialExpression extends Object {
@@ -764,29 +795,34 @@ declare module "ue" {
         MaskB: number;
         MaskA: number;
         ExpressionName: string;
+        static StaticClass(): Class;
     }
     
     class ColorMaterialInput extends MaterialInput {
         constructor(UseConstant: boolean, Constant: Color);
         UseConstant: boolean;
         Constant: Color;
+        static StaticClass(): Class;
     }
     
     class ScalarMaterialInput extends MaterialInput {
         constructor(UseConstant: boolean, Constant: number);
         UseConstant: boolean;
         Constant: number;
+        static StaticClass(): Class;
     }
     
     class VectorMaterialInput extends MaterialInput {
         constructor(UseConstant: boolean, Constant: Vector);
         UseConstant: boolean;
         Constant: Vector;
+        static StaticClass(): Class;
     }
     
     class MaterialShadingModelField {
         constructor(ShadingModelField: number);
         ShadingModelField: number;
+        static StaticClass(): Class;
     }
     
     class Vector2MaterialInput extends MaterialInput {
@@ -794,6 +830,7 @@ declare module "ue" {
         UseConstant: boolean;
         ConstantX: number;
         ConstantY: number;
+        static StaticClass(): Class;
     }
     
     class ExpressionInput {
@@ -807,43 +844,51 @@ declare module "ue" {
         MaskB: number;
         MaskA: number;
         ExpressionName: string;
+        static StaticClass(): Class;
     }
     
     class MaterialAttributesInput extends ExpressionInput {
         constructor(PropertyConnectedBitmask: number);
         PropertyConnectedBitmask: number;
+        static StaticClass(): Class;
     }
     
     class ShadingModelMaterialInput extends MaterialInput {
         constructor();
+        static StaticClass(): Class;
     }
     
     class ParameterGroupData {
         constructor(GroupName: string, GroupSortPriority: number);
         GroupName: string;
         GroupSortPriority: number;
+        static StaticClass(): Class;
     }
     
     class MaterialFunctionInfo {
         constructor(StateId: Guid, Function: MaterialFunctionInterface);
         StateId: Guid;
         Function: MaterialFunctionInterface;
+        static StaticClass(): Class;
     }
     
     class CollectionParameterBase {
         constructor(ParameterName: string, Id: Guid);
         ParameterName: string;
         Id: Guid;
+        static StaticClass(): Class;
     }
     
     class CollectionScalarParameter extends CollectionParameterBase {
         constructor(DefaultValue: number);
         DefaultValue: number;
+        static StaticClass(): Class;
     }
     
     class CollectionVectorParameter extends CollectionParameterBase {
         constructor(DefaultValue: LinearColor);
         DefaultValue: LinearColor;
+        static StaticClass(): Class;
     }
     
     class MaterialParameterCollection extends Object {
@@ -860,6 +905,7 @@ declare module "ue" {
         constructor(StateId: Guid, ParameterCollection: MaterialParameterCollection);
         StateId: Guid;
         ParameterCollection: MaterialParameterCollection;
+        static StaticClass(): Class;
     }
     
     class Material extends MaterialInterface {
@@ -1022,6 +1068,7 @@ declare module "ue" {
         Min: Vector;
         Max: Vector;
         IsValid: number;
+        static StaticClass(): Class;
     }
     
     class CurveBase extends Object {
@@ -1037,11 +1084,13 @@ declare module "ue" {
     
     class KeyHandleMap {
         constructor();
+        static StaticClass(): Class;
     }
     
     class IndexedCurve {
         constructor(KeyHandlesToIndices: KeyHandleMap);
         KeyHandlesToIndices: KeyHandleMap;
+        static StaticClass(): Class;
     }
     
     class RealCurve extends IndexedCurve {
@@ -1049,6 +1098,7 @@ declare module "ue" {
         DefaultValue: number;
         PreInfinityExtrap: number;
         PostInfinityExtrap: number;
+        static StaticClass(): Class;
     }
     
     class RichCurveKey {
@@ -1062,11 +1112,13 @@ declare module "ue" {
         ArriveTangentWeight: number;
         LeaveTangent: number;
         LeaveTangentWeight: number;
+        static StaticClass(): Class;
     }
     
     class RichCurve extends RealCurve {
         constructor(Keys: TArray<RichCurveKey>);
         Keys: TArray<RichCurveKey>;
+        static StaticClass(): Class;
     }
     
     class CurveLinearColor extends CurveBase {
@@ -1102,6 +1154,7 @@ declare module "ue" {
         bIsUsedAsAtlasPosition: boolean;
         Curve: TSoftObjectPtr<CurveLinearColor>;
         Atlas: TSoftObjectPtr<CurveLinearColorAtlas>;
+        static StaticClass(): Class;
     }
     
     class MaterialParameterInfo {
@@ -1110,6 +1163,7 @@ declare module "ue" {
         Association: number;
         Index: number;
         ParameterLocation: SoftObjectPath;
+        static StaticClass(): Class;
     }
     
     class ScalarParameterValue {
@@ -1119,6 +1173,7 @@ declare module "ue" {
         ParameterInfo: MaterialParameterInfo;
         ParameterValue: number;
         ExpressionGUID: Guid;
+        static StaticClass(): Class;
     }
     
     class VectorParameterValue {
@@ -1127,6 +1182,7 @@ declare module "ue" {
         ParameterInfo: MaterialParameterInfo;
         ParameterValue: LinearColor;
         ExpressionGUID: Guid;
+        static StaticClass(): Class;
     }
     
     class TextureParameterValue {
@@ -1135,6 +1191,7 @@ declare module "ue" {
         ParameterInfo: MaterialParameterInfo;
         ParameterValue: Texture;
         ExpressionGUID: Guid;
+        static StaticClass(): Class;
     }
     
     class RuntimeVirtualTextureParameterValue {
@@ -1142,6 +1199,7 @@ declare module "ue" {
         ParameterInfo: MaterialParameterInfo;
         ParameterValue: RuntimeVirtualTexture;
         ExpressionGUID: Guid;
+        static StaticClass(): Class;
     }
     
     enum EFontCacheType { Offline, Runtime, EFontCacheType_MAX}
@@ -1153,6 +1211,7 @@ declare module "ue" {
         VSize: number;
         TextureIndex: number;
         VerticalOffset: number;
+        static StaticClass(): Class;
     }
     
     class FontImportOptionsData {
@@ -1186,6 +1245,7 @@ declare module "ue" {
         bUseDistanceFieldAlpha: boolean;
         DistanceFieldScaleFactor: number;
         DistanceFieldScanRadiusScale: number;
+        static StaticClass(): Class;
     }
     
     enum EFontHinting { Default, Auto, AutoLight, Monochrome, None, EFontHinting_MAX}
@@ -1206,35 +1266,41 @@ declare module "ue" {
         FontFaceAsset: Object;
         BulkDataPtr: FontBulkData;
         FontData: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class TypefaceEntry {
         constructor(Name: string, Font: FontData);
         Name: string;
         Font: FontData;
+        static StaticClass(): Class;
     }
     
     class Typeface {
         constructor(Fonts: TArray<TypefaceEntry>);
         Fonts: TArray<TypefaceEntry>;
+        static StaticClass(): Class;
     }
     
     class CompositeFallbackFont {
         constructor(Typeface: Typeface, ScalingFactor: number);
         Typeface: Typeface;
         ScalingFactor: number;
+        static StaticClass(): Class;
     }
     
     class Int32RangeBound {
         constructor(Type: number, Value: number);
         Type: number;
         Value: number;
+        static StaticClass(): Class;
     }
     
     class Int32Range {
         constructor(LowerBound: Int32RangeBound, UpperBound: Int32RangeBound);
         LowerBound: Int32RangeBound;
         UpperBound: Int32RangeBound;
+        static StaticClass(): Class;
     }
     
     class CompositeSubFont extends CompositeFallbackFont {
@@ -1242,6 +1308,7 @@ declare module "ue" {
         CharacterRanges: TArray<Int32Range>;
         Cultures: string;
         EditorName: string;
+        static StaticClass(): Class;
     }
     
     class CompositeFont {
@@ -1249,6 +1316,7 @@ declare module "ue" {
         DefaultTypeface: Typeface;
         FallbackTypeface: CompositeFallbackFont;
         SubTypefaces: TArray<CompositeSubFont>;
+        static StaticClass(): Class;
     }
     
     class Font extends Object {
@@ -1281,6 +1349,7 @@ declare module "ue" {
         FontValue: Font;
         FontPage: number;
         ExpressionGUID: Guid;
+        static StaticClass(): Class;
     }
     
     class MaterialInstanceBasePropertyOverrides {
@@ -1297,6 +1366,7 @@ declare module "ue" {
         BlendMode: number;
         ShadingModel: number;
         OpacityMaskClipValue: number;
+        static StaticClass(): Class;
     }
     
     class StaticParameterBase {
@@ -1304,11 +1374,13 @@ declare module "ue" {
         ParameterInfo: MaterialParameterInfo;
         bOverride: boolean;
         ExpressionGUID: Guid;
+        static StaticClass(): Class;
     }
     
     class StaticSwitchParameter extends StaticParameterBase {
         constructor(Value: boolean);
         Value: boolean;
+        static StaticClass(): Class;
     }
     
     class StaticComponentMaskParameter extends StaticParameterBase {
@@ -1317,12 +1389,14 @@ declare module "ue" {
         G: boolean;
         B: boolean;
         A: boolean;
+        static StaticClass(): Class;
     }
     
     class StaticTerrainLayerWeightParameter extends StaticParameterBase {
         constructor(WeightmapIndex: number, bWeightBasedBlend: boolean);
         WeightmapIndex: number;
         bWeightBasedBlend: boolean;
+        static StaticClass(): Class;
     }
     
     class MaterialLayersFunctions {
@@ -1334,11 +1408,13 @@ declare module "ue" {
         RestrictToBlendRelatives: TArray<boolean>;
         LayerStates: TArray<boolean>;
         KeyString: string;
+        static StaticClass(): Class;
     }
     
     class StaticMaterialLayersParameter extends StaticParameterBase {
         constructor(Value: MaterialLayersFunctions);
         Value: MaterialLayersFunctions;
+        static StaticClass(): Class;
     }
     
     class StaticParameterSet {
@@ -1347,6 +1423,7 @@ declare module "ue" {
         StaticComponentMaskParameters: TArray<StaticComponentMaskParameter>;
         TerrainLayerWeightParameters: TArray<StaticTerrainLayerWeightParameter>;
         MaterialLayersParameters: TArray<StaticMaterialLayersParameter>;
+        static StaticClass(): Class;
     }
     
     class MaterialInstance extends MaterialInterface {
@@ -1393,6 +1470,7 @@ declare module "ue" {
         Category: string;
         DisplayName: string;
         Description: string;
+        static StaticClass(): Class;
     }
     
     class BillboardComponent extends PrimitiveComponent {
@@ -1425,11 +1503,13 @@ declare module "ue" {
     
     class UniqueNetIdWrapper {
         constructor();
+        static StaticClass(): Class;
     }
     
     class UniqueNetIdRepl extends UniqueNetIdWrapper {
         constructor(ReplicationBytes: TArray<number>);
         ReplicationBytes: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class PlayerState extends Info {
@@ -1498,6 +1578,7 @@ declare module "ue" {
         Name: string;
         ParentIndex: number;
         TranslationRetargetingMode: number;
+        static StaticClass(): Class;
     }
     
     class VirtualBone {
@@ -1505,6 +1586,7 @@ declare module "ue" {
         SourceBoneName: string;
         TargetBoneName: string;
         VirtualBoneName: string;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshSocket extends Object {
@@ -1524,17 +1606,20 @@ declare module "ue" {
     
     class SmartNameContainer {
         constructor();
+        static StaticClass(): Class;
     }
     
     class BoneReference {
         constructor(BoneName: string);
         BoneName: string;
+        static StaticClass(): Class;
     }
     
     class BlendProfileBoneEntry {
         constructor(BoneReference: BoneReference, BlendScale: number);
         BoneReference: BoneReference;
         BlendScale: number;
+        static StaticClass(): Class;
     }
     
     class BlendProfile extends Object {
@@ -1550,6 +1635,7 @@ declare module "ue" {
         constructor(GroupName: string, SlotNames: TArray<string>);
         GroupName: string;
         SlotNames: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class RigTransformConstraint {
@@ -1557,17 +1643,20 @@ declare module "ue" {
         TranformType: number;
         ParentSpace: string;
         Weight: number;
+        static StaticClass(): Class;
     }
     
     class TransformBaseConstraint {
         constructor(TransformConstraints: TArray<RigTransformConstraint>);
         TransformConstraints: TArray<RigTransformConstraint>;
+        static StaticClass(): Class;
     }
     
     class TransformBase {
         constructor(Node: string, Constraints: FixSizeArray<TransformBaseConstraint>);
         Node: string;
         Constraints: FixSizeArray<TransformBaseConstraint>;
+        static StaticClass(): Class;
     }
     
     class Node {
@@ -1577,6 +1666,7 @@ declare module "ue" {
         Transform: Transform;
         DisplayName: string;
         bAdvanced: boolean;
+        static StaticClass(): Class;
     }
     
     class Rig extends Object {
@@ -1592,12 +1682,14 @@ declare module "ue" {
         constructor(NodeName: string, BoneName: string);
         NodeName: string;
         BoneName: string;
+        static StaticClass(): Class;
     }
     
     class RigConfiguration {
         constructor(Rig: Rig, BoneMappingTable: TArray<NameMapping>);
         Rig: Rig;
         BoneMappingTable: TArray<NameMapping>;
+        static StaticClass(): Class;
     }
     
     class PreviewAttachedObjectPair {
@@ -1605,11 +1697,13 @@ declare module "ue" {
         AttachedObject: TSoftObjectPtr<Object>;
         Object: Object;
         AttachedTo: string;
+        static StaticClass(): Class;
     }
     
     class PreviewAssetAttachContainer {
         constructor(AttachedObjects: TArray<PreviewAttachedObjectPair>);
         AttachedObjects: TArray<PreviewAttachedObjectPair>;
+        static StaticClass(): Class;
     }
     
     class Skeleton extends Object {
@@ -1638,6 +1732,7 @@ declare module "ue" {
         Origin: Vector;
         BoxExtent: Vector;
         SphereRadius: number;
+        static StaticClass(): Class;
     }
     
     class MeshUVChannelInfo {
@@ -1645,6 +1740,7 @@ declare module "ue" {
         bInitialized: boolean;
         bOverrideDensities: boolean;
         LocalUVDensities: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class SkeletalMaterial {
@@ -1655,18 +1751,21 @@ declare module "ue" {
         bRecomputeTangent: boolean;
         ImportedMaterialSlotName: string;
         UVChannelData: MeshUVChannelInfo;
+        static StaticClass(): Class;
     }
     
     class BoneMirrorInfo {
         constructor(SourceIndex: number, BoneFlipAxis: number);
         SourceIndex: number;
         BoneFlipAxis: number;
+        static StaticClass(): Class;
     }
     
     class PerPlatformFloat {
         constructor(Default: number, PerPlatform: TMap<string, number>);
         Default: number;
         PerPlatform: TMap<string, number>;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshBuildSettings {
@@ -1682,6 +1781,7 @@ declare module "ue" {
         ThresholdPosition: number;
         ThresholdTangentNormal: number;
         ThresholdUV: number;
+        static StaticClass(): Class;
     }
     
     class AnimMetaData extends Object {
@@ -1695,6 +1795,7 @@ declare module "ue" {
         constructor(SourceAsset: AnimationAsset, TargetAsset: AnimationAsset);
         SourceAsset: AnimationAsset;
         TargetAsset: AnimationAsset;
+        static StaticClass(): Class;
     }
     
     class AssetMappingTable extends Object {
@@ -1708,6 +1809,7 @@ declare module "ue" {
     class SmartName {
         constructor(DisplayName: string);
         DisplayName: string;
+        static StaticClass(): Class;
     }
     
     class PoseData {
@@ -1717,6 +1819,7 @@ declare module "ue" {
         LocalSpacePose: TArray<Transform>;
         TrackToBufferIndex: TMap<number, number>;
         CurveData: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class AnimCurveBase {
@@ -1724,6 +1827,7 @@ declare module "ue" {
         LastObservedName: string;
         Name: SmartName;
         CurveTypeFlags: number;
+        static StaticClass(): Class;
     }
     
     class PoseDataContainer {
@@ -1733,6 +1837,7 @@ declare module "ue" {
         TrackMap: TMap<string, number>;
         Poses: TArray<PoseData>;
         Curves: TArray<AnimCurveBase>;
+        static StaticClass(): Class;
     }
     
     class PoseAsset extends AnimationAsset {
@@ -1786,6 +1891,7 @@ declare module "ue" {
         CustomCurve: CurveFloat;
         BlendTime: number;
         BlendOption: EAlphaBlendOption;
+        static StaticClass(): Class;
     }
     
     class AnimSyncMarker {
@@ -1793,11 +1899,13 @@ declare module "ue" {
         MarkerName: string;
         Time: number;
         TrackIndex: number;
+        static StaticClass(): Class;
     }
     
     class MarkerSyncData {
         constructor(AuthoredSyncMarkers: TArray<AnimSyncMarker>);
         AuthoredSyncMarkers: TArray<AnimSyncMarker>;
+        static StaticClass(): Class;
     }
     
     class CompositeSection extends AnimLinkableElement {
@@ -1806,6 +1914,7 @@ declare module "ue" {
         StartTime: number;
         NextSectionName: string;
         MetaData: TArray<AnimMetaData>;
+        static StaticClass(): Class;
     }
     
     class AnimSegment {
@@ -1816,17 +1925,20 @@ declare module "ue" {
         AnimEndTime: number;
         AnimPlayRate: number;
         LoopingCount: number;
+        static StaticClass(): Class;
     }
     
     class AnimTrack {
         constructor(AnimSegments: TArray<AnimSegment>);
         AnimSegments: TArray<AnimSegment>;
+        static StaticClass(): Class;
     }
     
     class SlotAnimationTrack {
         constructor(SlotName: string, AnimTrack: AnimTrack);
         SlotName: string;
         AnimTrack: AnimTrack;
+        static StaticClass(): Class;
     }
     
     class BranchingPoint extends AnimLinkableElement {
@@ -1834,6 +1946,7 @@ declare module "ue" {
         EventName: string;
         DisplayTime: number;
         TriggerTimeOffset: number;
+        static StaticClass(): Class;
     }
     
     class BranchingPointMarker {
@@ -1841,12 +1954,14 @@ declare module "ue" {
         NotifyIndex: number;
         TriggerTime: number;
         NotifyEventType: number;
+        static StaticClass(): Class;
     }
     
     class TimeStretchCurveMarker {
         constructor(Time: FixSizeArray<number>, Alpha: number);
         Time: FixSizeArray<number>;
         Alpha: number;
+        static StaticClass(): Class;
     }
     
     class TimeStretchCurve {
@@ -1855,6 +1970,7 @@ declare module "ue" {
         CurveValueMinPrecision: number;
         Markers: TArray<TimeStretchCurveMarker>;
         Sum_dT_i_by_C_i: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class AnimMontage extends AnimCompositeBase {
@@ -1896,6 +2012,7 @@ declare module "ue" {
         SegmentLength: number;
         LinkValue: number;
         LinkedSequence: AnimSequenceBase;
+        static StaticClass(): Class;
     }
     
     class AnimNotify extends Object {
@@ -1940,16 +2057,19 @@ declare module "ue" {
         bTriggerOnFollower: boolean;
         NotifyColor: Color;
         TrackIndex: number;
+        static StaticClass(): Class;
     }
     
     class FloatCurve extends AnimCurveBase {
         constructor(FloatCurve: RichCurve);
         FloatCurve: RichCurve;
+        static StaticClass(): Class;
     }
     
     class VectorCurve extends AnimCurveBase {
         constructor(FloatCurves: FixSizeArray<RichCurve>);
         FloatCurves: FixSizeArray<RichCurve>;
+        static StaticClass(): Class;
     }
     
     class TransformCurve extends AnimCurveBase {
@@ -1957,6 +2077,7 @@ declare module "ue" {
         TranslationCurve: VectorCurve;
         RotationCurve: VectorCurve;
         ScaleCurve: VectorCurve;
+        static StaticClass(): Class;
     }
     
     class RawCurveTracks {
@@ -1964,12 +2085,14 @@ declare module "ue" {
         FloatCurves: TArray<FloatCurve>;
         VectorCurves: TArray<VectorCurve>;
         TransformCurves: TArray<TransformCurve>;
+        static StaticClass(): Class;
     }
     
     class AnimNotifyTrack {
         constructor(TrackName: string, TrackColor: LinearColor);
         TrackName: string;
         TrackColor: LinearColor;
+        static StaticClass(): Class;
     }
     
     class AnimSequenceBase extends AnimationAsset {
@@ -1988,6 +2111,7 @@ declare module "ue" {
     class TrackToSkeletonMap {
         constructor(BoneTreeIndex: number);
         BoneTreeIndex: number;
+        static StaticClass(): Class;
     }
     
     class AnimCompress extends Object {
@@ -2081,6 +2205,7 @@ declare module "ue" {
         BaseLOD: number;
         BonesToRemove: TArray<BoneReference>;
         BakePose: AnimSequence;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshLODInfo {
@@ -2103,18 +2228,21 @@ declare module "ue" {
         bAllowCPUAccess: boolean;
         bSupportUniformlyDistributedSampling: boolean;
         bImportWithBaseMesh: boolean;
+        static StaticClass(): Class;
     }
     
     class PerPlatformInt {
         constructor(Default: number, PerPlatform: TMap<string, number>);
         Default: number;
         PerPlatform: TMap<string, number>;
+        static StaticClass(): Class;
     }
     
     class PerPlatformBool {
         constructor(Default: boolean, PerPlatform: TMap<string, boolean>);
         Default: boolean;
         PerPlatform: TMap<string, boolean>;
+        static StaticClass(): Class;
     }
     
     enum EBoneFilterActionOption { Remove, Keep, Invalid, EBoneFilterActionOption_MAX}
@@ -2122,6 +2250,7 @@ declare module "ue" {
         constructor(bExcludeSelf: boolean, BoneName: string);
         bExcludeSelf: boolean;
         BoneName: string;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshLODGroupSettings {
@@ -2134,6 +2263,7 @@ declare module "ue" {
         WeightOfPrioritization: number;
         BakePose: AnimSequence;
         ReductionSettings: SkeletalMeshOptimizationSettings;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshLODSettings extends DataAsset {
@@ -2154,11 +2284,13 @@ declare module "ue" {
         RestOffset: number;
         Name: string;
         bContributeToMass: boolean;
+        static StaticClass(): Class;
     }
     
     class Plane extends Vector {
         constructor(W: number);
         W: number;
+        static StaticClass(): Class;
     }
     
     class Matrix {
@@ -2167,6 +2299,7 @@ declare module "ue" {
         YPlane: Plane;
         ZPlane: Plane;
         WPlane: Plane;
+        static StaticClass(): Class;
     }
     
     class KSphereElem extends KShapeElem {
@@ -2174,6 +2307,7 @@ declare module "ue" {
         TM: Matrix;
         Center: Vector;
         Radius: number;
+        static StaticClass(): Class;
     }
     
     class KBoxElem extends KShapeElem {
@@ -2185,6 +2319,7 @@ declare module "ue" {
         X: number;
         Y: number;
         Z: number;
+        static StaticClass(): Class;
     }
     
     class KSphylElem extends KShapeElem {
@@ -2195,6 +2330,7 @@ declare module "ue" {
         Rotation: Rotator;
         Radius: number;
         Length: number;
+        static StaticClass(): Class;
     }
     
     class KConvexElem extends KShapeElem {
@@ -2202,6 +2338,7 @@ declare module "ue" {
         VertexData: TArray<Vector>;
         ElemBox: Box;
         Transform: Transform;
+        static StaticClass(): Class;
     }
     
     class KTaperedCapsuleElem extends KShapeElem {
@@ -2211,6 +2348,7 @@ declare module "ue" {
         Radius0: number;
         Radius1: number;
         Length: number;
+        static StaticClass(): Class;
     }
     
     class KAggregateGeom {
@@ -2220,6 +2358,7 @@ declare module "ue" {
         SphylElems: TArray<KSphylElem>;
         ConvexElems: TArray<KConvexElem>;
         TaperedCapsuleElems: TArray<KTaperedCapsuleElem>;
+        static StaticClass(): Class;
     }
     
     class BodySetup extends Object {
@@ -2256,12 +2395,14 @@ declare module "ue" {
         VelocityStrength: number;
         MaxLinearForce: number;
         MaxAngularForce: number;
+        static StaticClass(): Class;
     }
     
     class PhysicalAnimationProfile {
         constructor(ProfileName: string, PhysicalAnimationData: PhysicalAnimationData);
         ProfileName: string;
         PhysicalAnimationData: PhysicalAnimationData;
+        static StaticClass(): Class;
     }
     
     class SkeletalBodySetup extends BodySetup {
@@ -2281,6 +2422,7 @@ declare module "ue" {
         Restitution: number;
         ContactDistance: number;
         bSoftConstraint: boolean;
+        static StaticClass(): Class;
     }
     
     class LinearConstraint extends ConstraintBaseParams {
@@ -2289,6 +2431,7 @@ declare module "ue" {
         XMotion: number;
         YMotion: number;
         ZMotion: number;
+        static StaticClass(): Class;
     }
     
     class ConeConstraint extends ConstraintBaseParams {
@@ -2297,12 +2440,14 @@ declare module "ue" {
         Swing2LimitDegrees: number;
         Swing1Motion: number;
         Swing2Motion: number;
+        static StaticClass(): Class;
     }
     
     class TwistConstraint extends ConstraintBaseParams {
         constructor(TwistLimitDegrees: number, TwistMotion: number);
         TwistLimitDegrees: number;
         TwistMotion: number;
+        static StaticClass(): Class;
     }
     
     class ConstraintDrive {
@@ -2312,6 +2457,7 @@ declare module "ue" {
         MaxForce: number;
         bEnablePositionDrive: boolean;
         bEnableVelocityDrive: boolean;
+        static StaticClass(): Class;
     }
     
     class LinearDriveConstraint {
@@ -2322,6 +2468,7 @@ declare module "ue" {
         YDrive: ConstraintDrive;
         ZDrive: ConstraintDrive;
         bEnablePositionDrive: boolean;
+        static StaticClass(): Class;
     }
     
     class AngularDriveConstraint {
@@ -2332,6 +2479,7 @@ declare module "ue" {
         OrientationTarget: Rotator;
         AngularVelocityTarget: Vector;
         AngularDriveMode: number;
+        static StaticClass(): Class;
     }
     
     class ConstraintProfileProperties {
@@ -2350,6 +2498,7 @@ declare module "ue" {
         bEnableProjection: boolean;
         bAngularBreakable: boolean;
         bLinearBreakable: boolean;
+        static StaticClass(): Class;
     }
     
     class ConstraintInstance {
@@ -2422,12 +2571,14 @@ declare module "ue" {
         AngularDriveSpring: number;
         AngularDriveDamping: number;
         AngularDriveForceLimit: number;
+        static StaticClass(): Class;
     }
     
     class PhysicsConstraintProfileHandle {
         constructor(ProfileProperties: ConstraintProfileProperties, ProfileName: string);
         ProfileProperties: ConstraintProfileProperties;
         ProfileName: string;
+        static StaticClass(): Class;
     }
     
     class PhysicsConstraintTemplate extends Object {
@@ -2498,6 +2649,7 @@ declare module "ue" {
         constructor(ParentName: string, Transform: Transform);
         ParentName: string;
         Transform: Transform;
+        static StaticClass(): Class;
     }
     
     class NodeMappingContainer extends Object {
@@ -2542,6 +2694,7 @@ declare module "ue" {
         FiberCompression: number;
         FiberExpansion: number;
         FiberResistance: number;
+        static StaticClass(): Class;
     }
     
     class ClothingAssetData_Legacy {
@@ -2550,6 +2703,7 @@ declare module "ue" {
         ApexFileName: string;
         bClothPropertiesChanged: boolean;
         PhysicsProperties: ClothPhysicsProperties_Legacy;
+        static StaticClass(): Class;
     }
     
     class ClothingAssetBase extends Object {
@@ -2564,6 +2718,7 @@ declare module "ue" {
     class SkeletalMeshSamplingRegionMaterialFilter {
         constructor(MaterialName: string);
         MaterialName: string;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshSamplingRegionBoneFilter {
@@ -2571,6 +2726,7 @@ declare module "ue" {
         BoneName: string;
         bIncludeOrExclude: boolean;
         bApplyToChildren: boolean;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshSamplingRegion {
@@ -2580,26 +2736,31 @@ declare module "ue" {
         bSupportUniformlyDistributedSampling: boolean;
         MaterialFilters: TArray<SkeletalMeshSamplingRegionMaterialFilter>;
         BoneFilters: TArray<SkeletalMeshSamplingRegionBoneFilter>;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshSamplingLODBuiltData {
         constructor();
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshSamplingRegionBuiltData {
         constructor();
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshSamplingBuiltData {
         constructor(WholeMeshBuiltData: TArray<SkeletalMeshSamplingLODBuiltData>, RegionBuiltData: TArray<SkeletalMeshSamplingRegionBuiltData>);
         WholeMeshBuiltData: TArray<SkeletalMeshSamplingLODBuiltData>;
         RegionBuiltData: TArray<SkeletalMeshSamplingRegionBuiltData>;
+        static StaticClass(): Class;
     }
     
     class SkeletalMeshSamplingInfo {
         constructor(Regions: TArray<SkeletalMeshSamplingRegion>, BuiltData: SkeletalMeshSamplingBuiltData);
         Regions: TArray<SkeletalMeshSamplingRegion>;
         BuiltData: SkeletalMeshSamplingBuiltData;
+        static StaticClass(): Class;
     }
     
     class SkinWeightProfileInfo {
@@ -2608,6 +2769,7 @@ declare module "ue" {
         DefaultProfile: PerPlatformBool;
         DefaultProfileFromLODIndex: PerPlatformInt;
         PerLODSourceFiles: TMap<number, string>;
+        static StaticClass(): Class;
     }
     
     class BlueprintCore extends Object {
@@ -2628,18 +2790,21 @@ declare module "ue" {
         PropertyName: string;
         ArrayIndex: number;
         PropertyScope: Struct;
+        static StaticClass(): Class;
     }
     
     class BlueprintCookedComponentInstancingData {
         constructor(ChangedPropertyList: TArray<BlueprintComponentChangedPropertyInfo>, bHasValidCookedData: boolean);
         ChangedPropertyList: TArray<BlueprintComponentChangedPropertyInfo>;
         bHasValidCookedData: boolean;
+        static StaticClass(): Class;
     }
     
     class BPVariableMetaDataEntry {
         constructor(DataKey: string, DataValue: string);
         DataKey: string;
         DataValue: string;
+        static StaticClass(): Class;
     }
     
     class SCS_Node extends Object {
@@ -2693,28 +2858,33 @@ declare module "ue" {
     
     class BlueprintMacroCosmeticInfo {
         constructor();
+        static StaticClass(): Class;
     }
     
     class TTTrackBase {
         constructor(TrackName: string, bIsExternalCurve: boolean);
         TrackName: string;
         bIsExternalCurve: boolean;
+        static StaticClass(): Class;
     }
     
     class TTEventTrack extends TTTrackBase {
         constructor(FunctionName: string, CurveKeys: CurveFloat);
         FunctionName: string;
         CurveKeys: CurveFloat;
+        static StaticClass(): Class;
     }
     
     class TTPropertyTrack extends TTTrackBase {
         constructor(PropertyName: string);
         PropertyName: string;
+        static StaticClass(): Class;
     }
     
     class TTFloatTrack extends TTPropertyTrack {
         constructor(CurveFloat: CurveFloat);
         CurveFloat: CurveFloat;
+        static StaticClass(): Class;
     }
     
     class CurveVector extends CurveBase {
@@ -2729,11 +2899,13 @@ declare module "ue" {
     class TTVectorTrack extends TTPropertyTrack {
         constructor(CurveVector: CurveVector);
         CurveVector: CurveVector;
+        static StaticClass(): Class;
     }
     
     class TTLinearColorTrack extends TTPropertyTrack {
         constructor(CurveLinearColor: CurveLinearColor);
         CurveLinearColor: CurveLinearColor;
+        static StaticClass(): Class;
     }
     
     class TimelineTemplate extends Object {
@@ -2763,6 +2935,7 @@ declare module "ue" {
         constructor(ComponentName: string, ComponentClass: Class);
         ComponentName: string;
         ComponentClass: Class;
+        static StaticClass(): Class;
     }
     
     class ComponentKey {
@@ -2770,6 +2943,7 @@ declare module "ue" {
         OwnerClass: Class;
         SCSVariableName: string;
         AssociatedGuid: Guid;
+        static StaticClass(): Class;
     }
     
     class ComponentOverrideRecord {
@@ -2778,6 +2952,7 @@ declare module "ue" {
         ComponentTemplate: ActorComponent;
         ComponentKey: ComponentKey;
         CookedComponentInstancingData: BlueprintCookedComponentInstancingData;
+        static StaticClass(): Class;
     }
     
     class InheritableComponentHandler extends Object {
@@ -2801,12 +2976,14 @@ declare module "ue" {
         ReplicationCondition: number;
         MetaDataArray: TArray<BPVariableMetaDataEntry>;
         DefaultValue: string;
+        static StaticClass(): Class;
     }
     
     class BPInterfaceDescription {
         constructor(Interface: Class, Graphs: TArray<EdGraph>);
         Interface: Class;
         Graphs: TArray<EdGraph>;
+        static StaticClass(): Class;
     }
     
     class EditedDocumentInfo {
@@ -2815,6 +2992,7 @@ declare module "ue" {
         SavedViewOffset: Vector2D;
         SavedZoomAmount: number;
         EditedObject: Object;
+        static StaticClass(): Class;
     }
     
     class BPEditorBookmarkNode {
@@ -2822,6 +3000,7 @@ declare module "ue" {
         NodeGuid: Guid;
         ParentGuid: Guid;
         DisplayName: string;
+        static StaticClass(): Class;
     }
     
     class Breakpoint extends Object {
@@ -2840,6 +3019,7 @@ declare module "ue" {
         constructor(OwningNode: TWeakObjectPtr<EdGraphNode>, PinId: Guid);
         OwningNode: TWeakObjectPtr<EdGraphNode>;
         PinId: Guid;
+        static StaticClass(): Class;
     }
     
     class BlueprintExtension extends Object {
@@ -2977,6 +3157,7 @@ declare module "ue" {
     class SkelMeshComponentLODInfo {
         constructor(HiddenMaterials: TArray<boolean>);
         HiddenMaterials: TArray<boolean>;
+        static StaticClass(): Class;
     }
     
     enum EVisibilityBasedAnimTickOption { AlwaysTickPoseAndRefreshBones, AlwaysTickPose, OnlyTickMontagesWhenNotRendered, OnlyTickPoseWhenRendered, EVisibilityBasedAnimTickOption_MAX}
@@ -2984,6 +3165,7 @@ declare module "ue" {
         constructor(Bones: FixSizeArray<number>, Weights: FixSizeArray<number>);
         Bones: FixSizeArray<number>;
         Weights: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class SkinnedMeshComponent extends MeshComponent {
@@ -3068,12 +3250,14 @@ declare module "ue" {
         constructor(Name: string, Color: LinearColor);
         Name: string;
         Color: LinearColor;
+        static StaticClass(): Class;
     }
     
     class AnimParentNodeAssetOverride {
         constructor(NewAsset: AnimationAsset, ParentNodeGuid: Guid);
         NewAsset: AnimationAsset;
         ParentNodeGuid: Guid;
+        static StaticClass(): Class;
     }
     
     class PoseWatch extends Object {
@@ -3135,6 +3319,7 @@ declare module "ue" {
         constructor(FunctionToPatch: Function, EventGraphCallOffset: number);
         FunctionToPatch: Function;
         EventGraphCallOffset: number;
+        static StaticClass(): Class;
     }
     
     class BlueprintGeneratedClass extends Class {
@@ -3169,6 +3354,7 @@ declare module "ue" {
         bDesiredTransitionReturnValue: boolean;
         bAutomaticRemainingTimeRule: boolean;
         PoseEvaluatorLinks: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class BakedAnimationState {
@@ -3184,11 +3370,13 @@ declare module "ue" {
         PlayerNodeIndices: TArray<number>;
         LayerNodeIndices: TArray<number>;
         bAlwaysResetOnEntry: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimationStateBase {
         constructor(StateName: string);
         StateName: string;
+        static StaticClass(): Class;
     }
     
     class AnimationTransitionBetweenStates extends AnimationStateBase {
@@ -3203,6 +3391,7 @@ declare module "ue" {
         CustomCurve: CurveFloat;
         BlendProfile: BlendProfile;
         LogicType: number;
+        static StaticClass(): Class;
     }
     
     class BakedAnimationStateMachine {
@@ -3211,11 +3400,13 @@ declare module "ue" {
         InitialState: number;
         States: TArray<BakedAnimationState>;
         Transitions: TArray<AnimationTransitionBetweenStates>;
+        static StaticClass(): Class;
     }
     
     class CachedPoseIndices {
         constructor(OrderedSavedPoseNodeIndices: TArray<number>);
         OrderedSavedPoseNodeIndices: TArray<number>;
+        static StaticClass(): Class;
     }
     
     enum EPostCopyOperation { None, LogicalNegateBool, EPostCopyOperation_MAX}
@@ -3234,6 +3425,7 @@ declare module "ue" {
         Size: number;
         CachedSourceProperty: Property;
         CachedSourceStructSubProperty: Property;
+        static StaticClass(): Class;
     }
     
     class ExposedValueHandler {
@@ -3242,17 +3434,20 @@ declare module "ue" {
         CopyRecords: TArray<ExposedValueCopyRecord>;
         Function: Function;
         ValueHandlerNodeProperty: StructProperty;
+        static StaticClass(): Class;
     }
     
     class GraphAssetPlayerInformation {
         constructor(PlayerNodeIndices: TArray<number>);
         PlayerNodeIndices: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class AnimGraphBlendOptions {
         constructor(BlendInTime: number, BlendOutTime: number);
         BlendInTime: number;
         BlendOutTime: number;
+        static StaticClass(): Class;
     }
     
     class AnimBlueprintGeneratedClass extends BlueprintGeneratedClass {
@@ -3272,22 +3467,26 @@ declare module "ue" {
     
     class SoftClassPath extends SoftObjectPath {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AnimNotifyEventReference {
         constructor(NotifySource: Object);
         NotifySource: Object;
+        static StaticClass(): Class;
     }
     
     class AnimNotifyArray {
         constructor(Notifies: TArray<AnimNotifyEventReference>);
         Notifies: TArray<AnimNotifyEventReference>;
+        static StaticClass(): Class;
     }
     
     class AnimNotifyQueue {
         constructor(AnimNotifies: TArray<AnimNotifyEventReference>, UnfilteredMontageAnimNotifies: TMap<string, AnimNotifyArray>);
         AnimNotifies: TArray<AnimNotifyEventReference>;
         UnfilteredMontageAnimNotifies: TMap<string, AnimNotifyArray>;
+        static StaticClass(): Class;
     }
     
     class PoseSnapshot {
@@ -3297,6 +3496,7 @@ declare module "ue" {
         SkeletalMeshName: string;
         SnapshotName: string;
         bIsValid: boolean;
+        static StaticClass(): Class;
     }
     
     enum ETeleportType { None, TeleportPhysics, ResetPhysics, ETeleportType_MAX}
@@ -3306,6 +3506,7 @@ declare module "ue" {
         PreviousMarkerName: string;
         NextMarkerName: string;
         PositionBetweenMarkers: number;
+        static StaticClass(): Class;
     }
     
     enum EAnimCurveType { AttributeCurve, MaterialCurve, MorphTargetCurve, MaxAnimCurveType, EAnimCurveType_MAX}
@@ -3408,6 +3609,7 @@ declare module "ue" {
         bSavedPlaying: boolean;
         SavedPosition: number;
         SavedPlayRate: number;
+        static StaticClass(): Class;
     }
     
     enum EClothMassMode { UniformMass, TotalMass, Density, MaxClothMassMode, EClothMassMode_MAX}
@@ -3642,6 +3844,7 @@ declare module "ue" {
         bCanWalk: boolean;
         bCanSwim: boolean;
         bCanFly: boolean;
+        static StaticClass(): Class;
     }
     
     class NavAgentProperties extends MovementProperties {
@@ -3651,6 +3854,7 @@ declare module "ue" {
         AgentStepHeight: number;
         NavWalkingSearchHeightScale: number;
         PreferredNavData: SoftClassPath;
+        static StaticClass(): Class;
     }
     
     class NavMovementComponent extends MovementComponent {
@@ -3698,6 +3902,7 @@ declare module "ue" {
         FloorDist: number;
         LineDist: number;
         HitResult: HitResult;
+        static StaticClass(): Class;
     }
     
     class NavAvoidanceMask {
@@ -3734,19 +3939,23 @@ declare module "ue" {
         bGroup29: boolean;
         bGroup30: boolean;
         bGroup31: boolean;
+        static StaticClass(): Class;
     }
     
     class CharacterMovementComponentPostPhysicsTickFunction extends TickFunction {
         constructor();
+        static StaticClass(): Class;
     }
     
     class RootMotionSourceSettings {
         constructor(Flags: number);
         Flags: number;
+        static StaticClass(): Class;
     }
     
     class Vector_NetQuantize10 extends Vector {
         constructor();
+        static StaticClass(): Class;
     }
     
     class RootMotionSourceGroup {
@@ -3756,6 +3965,7 @@ declare module "ue" {
         bIsAdditiveVelocityApplied: boolean;
         LastAccumulatedSettings: RootMotionSourceSettings;
         LastPreAdditiveVelocity: Vector_NetQuantize10;
+        static StaticClass(): Class;
     }
     
     class RootMotionMovementParams {
@@ -3763,6 +3973,7 @@ declare module "ue" {
         bHasRootMotion: boolean;
         BlendWeight: number;
         RootMotionTransform: Transform;
+        static StaticClass(): Class;
     }
     
     class CharacterMovementComponent extends PawnMovementComponent {
@@ -4027,6 +4238,7 @@ declare module "ue" {
         bServerHasBaseComponent: boolean;
         bRelativeRotation: boolean;
         bServerHasVelocity: boolean;
+        static StaticClass(): Class;
     }
     
     class RepRootMotionMontage {
@@ -4043,12 +4255,14 @@ declare module "ue" {
         AuthoritativeRootMotion: RootMotionSourceGroup;
         Acceleration: Vector_NetQuantize10;
         LinearVelocity: Vector_NetQuantize10;
+        static StaticClass(): Class;
     }
     
     class SimulatedRootMotionReplicatedMove {
         constructor(Time: number, RootMotion: RepRootMotionMontage);
         Time: number;
         RootMotion: RepRootMotionMontage;
+        static StaticClass(): Class;
     }
     
     class Character extends Pawn {
@@ -4193,6 +4407,7 @@ declare module "ue" {
         V2_Pos: Vector2D;
         V2_UV: Vector2D;
         V2_Color: LinearColor;
+        static StaticClass(): Class;
     }
     
     class Canvas extends Object {
@@ -4244,6 +4459,7 @@ declare module "ue" {
         OrigActorLocation: Vector;
         Font: Font;
         FontScale: number;
+        static StaticClass(): Class;
     }
     
     class HUD extends Actor {
@@ -4313,11 +4529,13 @@ declare module "ue" {
         constructor(Weight: number, Object: Object);
         Weight: number;
         Object: Object;
+        static StaticClass(): Class;
     }
     
     class WeightedBlendables {
         constructor(Array: TArray<WeightedBlendable>);
         Array: TArray<WeightedBlendable>;
+        static StaticClass(): Class;
     }
     
     class PostProcessSettings {
@@ -4676,6 +4894,7 @@ declare module "ue" {
         ScreenPercentage: number;
         WeightedBlendables: WeightedBlendables;
         Blendables: TArray<Object>;
+        static StaticClass(): Class;
     }
     
     class MinimalViewInfo {
@@ -4694,12 +4913,14 @@ declare module "ue" {
         PostProcessBlendWeight: number;
         PostProcessSettings: PostProcessSettings;
         OffCenterProjectionOffset: Vector2D;
+        static StaticClass(): Class;
     }
     
     class CameraCacheEntry {
         constructor(TimeStamp: number, POV: MinimalViewInfo);
         TimeStamp: number;
         POV: MinimalViewInfo;
+        static StaticClass(): Class;
     }
     
     class TViewTarget {
@@ -4707,6 +4928,7 @@ declare module "ue" {
         Target: Actor;
         POV: MinimalViewInfo;
         PlayerState: PlayerState;
+        static StaticClass(): Class;
     }
     
     class CameraModifier extends Object {
@@ -4786,11 +5008,13 @@ declare module "ue" {
         EntryStride: number;
         SubEntryStride: number;
         LockFlag: number;
+        static StaticClass(): Class;
     }
     
     class RawDistribution {
         constructor(Table: DistributionLookupTable);
         Table: DistributionLookupTable;
+        static StaticClass(): Class;
     }
     
     class Distribution extends Object {
@@ -4814,6 +5038,7 @@ declare module "ue" {
         MinValue: number;
         MaxValue: number;
         Distribution: DistributionFloat;
+        static StaticClass(): Class;
     }
     
     class ParticleBurst {
@@ -4821,6 +5046,7 @@ declare module "ue" {
         Count: number;
         CountLow: number;
         Time: number;
+        static StaticClass(): Class;
     }
     
     enum EParticleUVFlipMode { None, FlipUV, FlipUOnly, FlipVOnly, RandomFlipUV, RandomFlipUOnly, RandomFlipVOnly, RandomFlipUVIndependent, EParticleUVFlipMode_MAX}
@@ -4930,6 +5156,7 @@ declare module "ue" {
         bUseOrbitOffset: boolean;
         CustomName: string;
         ParticleModuleEventsToSendToGame: TArray<ParticleModuleEventSendToGame>;
+        static StaticClass(): Class;
     }
     
     class ParticleModuleEventGenerator extends ParticleModuleEventBase {
@@ -4965,6 +5192,7 @@ declare module "ue" {
         MinValueVec: Vector;
         MaxValueVec: Vector;
         Distribution: DistributionVector;
+        static StaticClass(): Class;
     }
     
     class OrbitOptions {
@@ -4972,6 +5200,7 @@ declare module "ue" {
         bProcessDuringSpawn: boolean;
         bProcessDuringUpdate: boolean;
         bUseEmitterTime: boolean;
+        static StaticClass(): Class;
     }
     
     class ParticleModuleOrbit extends ParticleModuleOrbitBase {
@@ -5055,6 +5284,7 @@ declare module "ue" {
         bClamp: number;
         ClampLow: number;
         ClampHigh: number;
+        static StaticClass(): Class;
     }
     
     class CurveEdTab {
@@ -5065,6 +5295,7 @@ declare module "ue" {
         ViewEndInput: number;
         ViewStartOutput: number;
         ViewEndOutput: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurveEdSetup extends Object {
@@ -5078,18 +5309,21 @@ declare module "ue" {
     
     class ParticleSystemLOD {
         constructor();
+        static StaticClass(): Class;
     }
     
     enum EParticleSystemInsignificanceReaction { Auto, Complete, DisableTick, DisableTickAndKill, Num, EParticleSystemInsignificanceReaction_MAX}
     class LODSoloTrack {
         constructor(SoloEnableSetting: TArray<number>);
         SoloEnableSetting: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class NamedEmitterMaterial {
         constructor(Name: string, Material: MaterialInterface);
         Name: string;
         Material: MaterialInterface;
+        static StaticClass(): Class;
     }
     
     class ParticleSystem extends FXSystemAsset {
@@ -5158,6 +5392,7 @@ declare module "ue" {
         Color: Color;
         Actor: Actor;
         Material: MaterialInterface;
+        static StaticClass(): Class;
     }
     
     class ParticleSystemReplay extends Object {
@@ -5285,6 +5520,7 @@ declare module "ue" {
         Frequency: number;
         InitialOffset: number;
         Waveform: EOscillatorWaveform;
+        static StaticClass(): Class;
     }
     
     class ROscillator {
@@ -5292,6 +5528,7 @@ declare module "ue" {
         Pitch: FOscillator;
         Yaw: FOscillator;
         Roll: FOscillator;
+        static StaticClass(): Class;
     }
     
     class VOscillator {
@@ -5299,6 +5536,7 @@ declare module "ue" {
         X: FOscillator;
         Y: FOscillator;
         Z: FOscillator;
+        static StaticClass(): Class;
     }
     
     class SubTrackGroup {
@@ -5307,6 +5545,7 @@ declare module "ue" {
         TrackIndices: TArray<number>;
         bIsCollapsed: boolean;
         bIsSelected: boolean;
+        static StaticClass(): Class;
     }
     
     class SupportedSubTrackInfo {
@@ -5314,6 +5553,7 @@ declare module "ue" {
         SupportedClass: Class;
         SubTrackName: string;
         GroupIndex: number;
+        static StaticClass(): Class;
     }
     
     class InterpTrack extends Object {
@@ -5387,6 +5627,7 @@ declare module "ue" {
         ArriveTangent: Vector;
         LeaveTangent: Vector;
         InterpMode: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurveVector {
@@ -5394,17 +5635,20 @@ declare module "ue" {
         Points: TArray<InterpCurvePointVector>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
+        static StaticClass(): Class;
     }
     
     class InterpLookupPoint {
         constructor(GroupName: string, Time: number);
         GroupName: string;
         Time: number;
+        static StaticClass(): Class;
     }
     
     class InterpLookupTrack {
         constructor(Points: TArray<InterpLookupPoint>);
         Points: TArray<InterpLookupPoint>;
+        static StaticClass(): Class;
     }
     
     class InterpTrackMove extends InterpTrack {
@@ -5484,6 +5728,7 @@ declare module "ue" {
     class PooledCameraShakes {
         constructor(PooledShakes: TArray<CameraShake>);
         PooledShakes: TArray<CameraShake>;
+        static StaticClass(): Class;
     }
     
     class CameraModifier_CameraShake extends CameraModifier {
@@ -5517,6 +5762,7 @@ declare module "ue" {
         DistanceFieldResolutionScale: number;
         DistanceFieldBias: number;
         DistanceFieldReplacementMesh: StaticMesh;
+        static StaticClass(): Class;
     }
     
     enum EStaticMeshReductionTerimationCriterion { Triangles, Vertices, Any, EStaticMeshReductionTerimationCriterion_MAX}
@@ -5540,6 +5786,7 @@ declare module "ue" {
         TerminationCriterion: EStaticMeshReductionTerimationCriterion;
         VisibilityAggressiveness: number;
         VertexColorImportance: number;
+        static StaticClass(): Class;
     }
     
     class StaticMeshSourceModel {
@@ -5550,6 +5797,7 @@ declare module "ue" {
         ScreenSize: PerPlatformFloat;
         SourceImportFilename: string;
         bImportWithBaseMesh: boolean;
+        static StaticClass(): Class;
     }
     
     class MeshSectionInfo {
@@ -5557,17 +5805,20 @@ declare module "ue" {
         MaterialIndex: number;
         bEnableCollision: boolean;
         bCastShadow: boolean;
+        static StaticClass(): Class;
     }
     
     class MeshSectionInfoMap {
         constructor(Map: TMap<number, MeshSectionInfo>);
         Map: TMap<number, MeshSectionInfo>;
+        static StaticClass(): Class;
     }
     
     class MaterialRemapIndex {
         constructor(ImportVersionKey: number, MaterialRemap: TArray<number>);
         ImportVersionKey: number;
         MaterialRemap: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class StaticMaterial {
@@ -5576,6 +5827,7 @@ declare module "ue" {
         MaterialSlotName: string;
         ImportedMaterialSlotName: string;
         UVChannelData: MeshUVChannelInfo;
+        static StaticClass(): Class;
     }
     
     class AssetEditorOrbitCameraPosition {
@@ -5584,6 +5836,7 @@ declare module "ue" {
         CamOrbitPoint: Vector;
         CamOrbitZoom: Vector;
         CamOrbitRotation: Rotator;
+        static StaticClass(): Class;
     }
     
     class StaticMeshSocket extends Object {
@@ -5611,30 +5864,37 @@ declare module "ue" {
     class ElementID {
         constructor(IDValue: number);
         IDValue: number;
+        static StaticClass(): Class;
     }
     
     class VertexID extends ElementID {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PolygonID extends ElementID {
         constructor();
+        static StaticClass(): Class;
     }
     
     class VertexInstanceID extends ElementID {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PolygonGroupID extends ElementID {
         constructor();
+        static StaticClass(): Class;
     }
     
     class TriangleID extends ElementID {
         constructor();
+        static StaticClass(): Class;
     }
     
     class EdgeID extends ElementID {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MeshDescriptionBase extends Object {
@@ -6063,6 +6323,7 @@ declare module "ue" {
         bIgnoreAlt: boolean;
         bIgnoreCmd: boolean;
         bDisabled: boolean;
+        static StaticClass(): Class;
     }
     
     class PlayerInput extends Object {
@@ -6083,6 +6344,7 @@ declare module "ue" {
         constructor(EditorCurveData: RichCurve, ExternalCurve: CurveFloat);
         EditorCurveData: RichCurve;
         ExternalCurve: CurveFloat;
+        static StaticClass(): Class;
     }
     
     class ForceFeedbackChannelDetails {
@@ -6092,6 +6354,7 @@ declare module "ue" {
         bAffectsRightLarge: boolean;
         bAffectsRightSmall: boolean;
         Curve: RuntimeFloatCurve;
+        static StaticClass(): Class;
     }
     
     class ForceFeedbackEffect extends Object {
@@ -6106,6 +6369,7 @@ declare module "ue" {
     class ActiveForceFeedbackEffect {
         constructor(ForceFeedbackEffect: ForceFeedbackEffect);
         ForceFeedbackEffect: ForceFeedbackEffect;
+        static StaticClass(): Class;
     }
     
     class ChildConnection extends NetConnection {
@@ -6134,6 +6398,7 @@ declare module "ue" {
         bClientOpen: boolean;
         bInitialServer: boolean;
         bInitialClient: boolean;
+        static StaticClass(): Class;
     }
     
     class Channel extends Object {
@@ -6220,6 +6485,7 @@ declare module "ue" {
     class CachedKeyToActionInfo {
         constructor(PlayerInput: PlayerInput);
         PlayerInput: PlayerInput;
+        static StaticClass(): Class;
     }
     
     class InputComponent extends ActorComponent {
@@ -6250,6 +6516,7 @@ declare module "ue" {
         InputScale: Vector2D;
         MainInputKey: Key;
         AltInputKey: Key;
+        static StaticClass(): Class;
     }
     
     class TouchInterface extends Object {
@@ -6281,6 +6548,7 @@ declare module "ue" {
     
     class StaticMeshComponentLODInfo {
         constructor();
+        static StaticClass(): Class;
     }
     
     class StreamingTextureBuildInfo {
@@ -6288,6 +6556,7 @@ declare module "ue" {
         PackedRelativeBox: number;
         TextureLevelIndex: number;
         TexelFactor: number;
+        static StaticClass(): Class;
     }
     
     class LightmassPrimitiveSettings {
@@ -6301,6 +6570,7 @@ declare module "ue" {
         EmissiveBoost: number;
         DiffuseBoost: number;
         FullyOccludedSamplesFraction: number;
+        static StaticClass(): Class;
     }
     
     class StaticMeshComponent extends MeshComponent {
@@ -6419,6 +6689,7 @@ declare module "ue" {
         Scale: Vector2D;
         Shear: Vector2D;
         Angle: number;
+        static StaticClass(): Class;
     }
     
     enum ESlateAccessibleBehavior { NotAccessible, Auto, Summary, Custom, ToolTip, ESlateAccessibleBehavior_MAX}
@@ -6446,6 +6717,7 @@ declare module "ue" {
         WidgetToFocus: string;
         Widget: TWeakObjectPtr<Widget>;
         CustomDelegate: $Delegate<(Navigation: EUINavigation) => Widget>;
+        static StaticClass(): Class;
     }
     
     class WidgetNavigation extends Object {
@@ -6468,16 +6740,19 @@ declare module "ue" {
         ArrayIndex: number;
         Struct: Struct;
         Field: Field;
+        static StaticClass(): Class;
     }
     
     class CachedPropertyPath {
         constructor(Segments: TArray<PropertyPathSegment>, CachedFunction: Function);
         Segments: TArray<PropertyPathSegment>;
         CachedFunction: Function;
+        static StaticClass(): Class;
     }
     
     class DynamicPropertyPath extends CachedPropertyPath {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PropertyBinding extends Object {
@@ -6492,24 +6767,29 @@ declare module "ue" {
     
     class EventReply {
         constructor();
+        static StaticClass(): Class;
     }
     
     class Geometry {
         constructor();
+        static StaticClass(): Class;
     }
     
     class InputEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PointerEvent extends InputEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     class SlateColor {
         constructor(SpecifiedColor: LinearColor, ColorUseRule: number);
         SpecifiedColor: LinearColor;
         ColorUseRule: number;
+        static StaticClass(): Class;
     }
     
     class Margin {
@@ -6518,6 +6798,7 @@ declare module "ue" {
         Top: number;
         Right: number;
         Bottom: number;
+        static StaticClass(): Class;
     }
     
     class SlateBrush {
@@ -6535,6 +6816,7 @@ declare module "ue" {
         ImageType: number;
         bIsDynamicallyLoaded: boolean;
         bHasUObject: boolean;
+        static StaticClass(): Class;
     }
     
     class ScriptViewportClient extends Object {
@@ -6559,6 +6841,7 @@ declare module "ue" {
         constructor(Obj: Object, WithinClass: Class);
         Obj: Object;
         WithinClass: Class;
+        static StaticClass(): Class;
     }
     
     class OnlineSession extends Object {
@@ -6729,17 +7012,20 @@ declare module "ue" {
     class MovieSceneTrackIdentifier {
         constructor(Value: number);
         Value: number;
+        static StaticClass(): Class;
     }
     
     enum EEvaluationMethod { Static, Swept, EEvaluationMethod_MAX}
     class MovieSceneSegment {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationTrackSegments {
         constructor(SegmentIdentifierToIndex: TArray<number>, SortedSegments: TArray<MovieSceneSegment>);
         SegmentIdentifierToIndex: TArray<number>;
         SortedSegments: TArray<MovieSceneSegment>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneTrackEvalOptions {
@@ -6749,11 +7035,13 @@ declare module "ue" {
         bEvaluateInPreroll: boolean;
         bEvaluateInPostroll: boolean;
         bEvaluateNearestSection: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneTrackDisplayOptions {
         constructor(bShowVerticalFrames: boolean);
         bShowVerticalFrames: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneTrack extends MovieSceneSignedObject {
@@ -6771,14 +7059,17 @@ declare module "ue" {
     
     class SectionEvaluationDataTree {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvalTemplatePtr {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneTrackImplementationPtr {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationTrack {
@@ -6795,10 +7086,12 @@ declare module "ue" {
         bEvaluateInPreroll: boolean;
         bEvaluateInPostroll: boolean;
         bTearDownPriority: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneFrameRange {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationGroupLUTIndex {
@@ -6806,33 +7099,39 @@ declare module "ue" {
         LUTOffset: number;
         NumInitPtrs: number;
         NumEvalPtrs: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequenceID {
         constructor(Value: number);
         Value: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationFieldTrackPtr {
         constructor(SequenceID: MovieSceneSequenceID, TrackIdentifier: MovieSceneTrackIdentifier);
         SequenceID: MovieSceneSequenceID;
         TrackIdentifier: MovieSceneTrackIdentifier;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSegmentIdentifier {
         constructor(IdentifierIndex: number);
         IdentifierIndex: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationFieldSegmentPtr extends MovieSceneEvaluationFieldTrackPtr {
         constructor(SegmentID: MovieSceneSegmentIdentifier);
         SegmentID: MovieSceneSegmentIdentifier;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationGroup {
         constructor(LUTIndices: TArray<MovieSceneEvaluationGroupLUTIndex>, SegmentPtrLUT: TArray<MovieSceneEvaluationFieldSegmentPtr>);
         LUTIndices: TArray<MovieSceneEvaluationGroupLUTIndex>;
         SegmentPtrLUT: TArray<MovieSceneEvaluationFieldSegmentPtr>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationKey {
@@ -6840,6 +7139,7 @@ declare module "ue" {
         SequenceID: MovieSceneSequenceID;
         TrackIdentifier: MovieSceneTrackIdentifier;
         SectionIndex: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneOrderedEvaluationKey {
@@ -6847,6 +7147,7 @@ declare module "ue" {
         Key: MovieSceneEvaluationKey;
         SetupIndex: number;
         TearDownIndex: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationMetaData {
@@ -6854,6 +7155,7 @@ declare module "ue" {
         ActiveSequences: TArray<MovieSceneSequenceID>;
         ActiveEntities: TArray<MovieSceneOrderedEvaluationKey>;
         SubTemplateSerialNumbers: TMap<MovieSceneSequenceID, number>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationField {
@@ -6862,33 +7164,39 @@ declare module "ue" {
         Ranges: TArray<MovieSceneFrameRange>;
         Groups: TArray<MovieSceneEvaluationGroup>;
         MetaData: TArray<MovieSceneEvaluationMetaData>;
+        static StaticClass(): Class;
     }
     
     class FrameNumber {
         constructor(Value: number);
         Value: number;
+        static StaticClass(): Class;
     }
     
     class FrameTime {
         constructor(FrameNumber: FrameNumber, SubFrame: number);
         FrameNumber: FrameNumber;
         SubFrame: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequenceTransform {
         constructor(TimeScale: number, Offset: FrameTime);
         TimeScale: number;
         Offset: FrameTime;
+        static StaticClass(): Class;
     }
     
     class FrameRate {
         constructor(Numerator: number, Denominator: number);
         Numerator: number;
         Denominator: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequenceInstanceDataPtr {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneSubSequenceData {
@@ -6905,23 +7213,27 @@ declare module "ue" {
         SectionPath: string;
         SubSectionSignature: Guid;
         OuterToInnerTransform: MovieSceneSequenceTransform;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequenceHierarchyNode {
         constructor(ParentID: MovieSceneSequenceID, Children: TArray<MovieSceneSequenceID>);
         ParentID: MovieSceneSequenceID;
         Children: TArray<MovieSceneSequenceID>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequenceHierarchy {
         constructor(SubSequences: TMap<MovieSceneSequenceID, MovieSceneSubSequenceData>, Hierarchy: TMap<MovieSceneSequenceID, MovieSceneSequenceHierarchyNode>);
         SubSequences: TMap<MovieSceneSequenceID, MovieSceneSubSequenceData>;
         Hierarchy: TMap<MovieSceneSequenceID, MovieSceneSequenceHierarchyNode>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationTemplateSerialNumber {
         constructor(Value: number);
         Value: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneTemplateGenerationLedger {
@@ -6929,14 +7241,17 @@ declare module "ue" {
         LastTrackIdentifier: MovieSceneTrackIdentifier;
         TrackSignatureToTrackIdentifier: TMap<Guid, MovieSceneTrackIdentifier>;
         SubSectionRanges: TMap<Guid, MovieSceneFrameRange>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneTrackFieldData {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneSubSectionFieldData {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvaluationTemplate {
@@ -6949,6 +7264,7 @@ declare module "ue" {
         TemplateLedger: MovieSceneTemplateGenerationLedger;
         TrackFieldData: MovieSceneTrackFieldData;
         SubSectionFieldData: MovieSceneSubSectionFieldData;
+        static StaticClass(): Class;
     }
     
     enum EMovieSceneCompletionMode { KeepState, RestoreState, ProjectDefault, EMovieSceneCompletionMode_MAX}
@@ -6958,6 +7274,7 @@ declare module "ue" {
         SequenceID: number;
         Space: EMovieSceneObjectBindingSpace;
         Guid: Guid;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequence extends MovieSceneSignedObject {
@@ -6980,12 +7297,14 @@ declare module "ue" {
         Seconds: number;
         Frames: number;
         bDropFrameFormat: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneTimecodeSource {
         constructor(Timecode: Timecode, DeltaFrame: FrameNumber);
         Timecode: Timecode;
         DeltaFrame: FrameNumber;
+        static StaticClass(): Class;
     }
     
     enum ESpawnOwnership { InnerSequence, MasterSequence, External, ESpawnOwnership_MAX}
@@ -7001,6 +7320,7 @@ declare module "ue" {
         Ownership: ESpawnOwnership;
         GeneratedClass: Class;
         LevelName: string;
+        static StaticClass(): Class;
     }
     
     class MovieScenePossessable {
@@ -7010,6 +7330,7 @@ declare module "ue" {
         Name: string;
         PossessedObjectClass: Class;
         ParentGuid: Guid;
+        static StaticClass(): Class;
     }
     
     class MovieSceneBinding {
@@ -7018,11 +7339,13 @@ declare module "ue" {
         BindingName: string;
         Tracks: TArray<MovieSceneTrack>;
         SortingOrder: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneObjectBindingIDs {
         constructor(IDs: TArray<MovieSceneObjectBindingID>);
         IDs: TArray<MovieSceneObjectBindingID>;
+        static StaticClass(): Class;
     }
     
     enum EMovieSceneEvaluationType { FrameLocked, WithSubFrames, EMovieSceneEvaluationType_MAX}
@@ -7032,28 +7355,33 @@ declare module "ue" {
         FrameNumber: FrameNumber;
         Label: string;
         Color: LinearColor;
+        static StaticClass(): Class;
     }
     
     class MovieSceneTrackLabels {
         constructor(Strings: TArray<string>);
         Strings: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneExpansionState {
         constructor(bExpanded: boolean);
         bExpanded: boolean;
+        static StaticClass(): Class;
     }
     
     class FloatRangeBound {
         constructor(Type: number, Value: number);
         Type: number;
         Value: number;
+        static StaticClass(): Class;
     }
     
     class FloatRange {
         constructor(LowerBound: FloatRangeBound, UpperBound: FloatRangeBound);
         LowerBound: FloatRangeBound;
         UpperBound: FloatRangeBound;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEditorData {
@@ -7067,6 +7395,7 @@ declare module "ue" {
         MarkedFrames: TSet<FrameNumber>;
         WorkingRange: FloatRange;
         ViewRange: FloatRange;
+        static StaticClass(): Class;
     }
     
     class MovieSceneFolder extends Object {
@@ -7086,6 +7415,7 @@ declare module "ue" {
         constructor(bCanEditCompletionMode: boolean, CompletionMode: EMovieSceneCompletionMode);
         bCanEditCompletionMode: boolean;
         CompletionMode: EMovieSceneCompletionMode;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEasingFunction extends Interface {
@@ -7110,6 +7440,7 @@ declare module "ue" {
         AutoEaseOutTime: number;
         ManualEaseInTime: number;
         ManualEaseOutTime: number;
+        static StaticClass(): Class;
     }
     
     enum EMovieSceneBlendType { Invalid, Absolute, Additive, Relative, EMovieSceneBlendType_MAX}
@@ -7117,6 +7448,7 @@ declare module "ue" {
         constructor(BlendType: EMovieSceneBlendType, bIsValid: boolean);
         BlendType: EMovieSceneBlendType;
         bIsValid: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSection extends MovieSceneSignedObject {
@@ -7162,6 +7494,7 @@ declare module "ue" {
     class MovieSceneSectionGroup {
         constructor(Sections: TArray<TWeakObjectPtr<MovieSceneSection>>);
         Sections: TArray<TWeakObjectPtr<MovieSceneSection>>;
+        static StaticClass(): Class;
     }
     
     class MovieScene extends MovieSceneSignedObject {
@@ -7206,6 +7539,7 @@ declare module "ue" {
         SlotWidgetName: string;
         AnimationGuid: Guid;
         bIsRootWidget: boolean;
+        static StaticClass(): Class;
     }
     
     class WidgetAnimation extends MovieSceneSequence {
@@ -7243,6 +7577,7 @@ declare module "ue" {
         constructor(Name: string, Content: Widget);
         Name: string;
         Content: Widget;
+        static StaticClass(): Class;
     }
     
     class WidgetTree extends Object {
@@ -7263,12 +7598,14 @@ declare module "ue" {
         Delegate: $Delegate<() => void>;
         AnimationEvent: EWidgetAnimationEvent;
         UserTag: string;
+        static StaticClass(): Class;
     }
     
     class Anchors {
         constructor(Minimum: Vector2D, Maximum: Vector2D);
         Minimum: Vector2D;
         Maximum: Vector2D;
+        static StaticClass(): Class;
     }
     
     enum ESoundWaveLoadingBehavior { Inherited, RetainOnLoad, PrimeOnLoad, LoadOnDemand, ForceInline, Uninitialized, ESoundWaveLoadingBehavior_MAX}
@@ -7292,6 +7629,7 @@ declare module "ue" {
         bApplyAmbientVolumes: boolean;
         OutputTarget: number;
         LoadingBehavior: ESoundWaveLoadingBehavior;
+        static StaticClass(): Class;
     }
     
     class AudioEQEffect {
@@ -7308,6 +7646,7 @@ declare module "ue" {
         FrequencyCenter3: number;
         Gain3: number;
         Bandwidth3: number;
+        static StaticClass(): Class;
     }
     
     class SoundClassAdjuster {
@@ -7318,6 +7657,7 @@ declare module "ue" {
         LowPassFilterFrequency: number;
         bApplyToChildren: boolean;
         VoiceCenterChannelVolumeAdjuster: number;
+        static StaticClass(): Class;
     }
     
     class SoundMix extends Object {
@@ -7341,6 +7681,7 @@ declare module "ue" {
         SoundMix: SoundMix;
         MinVolumeThreshold: number;
         MaxVolumeThreshold: number;
+        static StaticClass(): Class;
     }
     
     class SoundModulationPluginSourceSettingsBase extends Object {
@@ -7353,6 +7694,7 @@ declare module "ue" {
     class SoundModulation {
         constructor(Settings: TArray<SoundModulationPluginSourceSettingsBase>);
         Settings: TArray<SoundModulationPluginSourceSettingsBase>;
+        static StaticClass(): Class;
     }
     
     class SoundClass extends Object {
@@ -7378,6 +7720,7 @@ declare module "ue" {
         bVolumeScaleCanRelease: boolean;
         VolumeScaleReleaseTime: number;
         VoiceStealReleaseTime: number;
+        static StaticClass(): Class;
     }
     
     class SoundConcurrency extends Object {
@@ -7398,6 +7741,7 @@ declare module "ue" {
         ConeOffset: number;
         FalloffDistance: number;
         CustomAttenuationCurve: RuntimeFloatCurve;
+        static StaticClass(): Class;
     }
     
     enum EAirAbsorptionMethod { Linear, CustomCurve, EAirAbsorptionMethod_MAX}
@@ -7428,6 +7772,7 @@ declare module "ue" {
         SpatializationPluginSettingsArray: TArray<SpatializationPluginSourceSettingsBase>;
         OcclusionPluginSettingsArray: TArray<OcclusionPluginSourceSettingsBase>;
         ReverbPluginSettingsArray: TArray<ReverbPluginSourceSettingsBase>;
+        static StaticClass(): Class;
     }
     
     class SoundAttenuationSettings extends BaseAttenuationSettings {
@@ -7483,6 +7828,7 @@ declare module "ue" {
         ManualReverbSendLevel: number;
         CustomReverbSendCurve: RuntimeFloatCurve;
         PluginSettings: SoundAttenuationPluginSettings;
+        static StaticClass(): Class;
     }
     
     class SoundAttenuation extends Object {
@@ -7521,24 +7867,28 @@ declare module "ue" {
         constructor(Magnitude: number, NormalizedMagnitude: number);
         Magnitude: number;
         NormalizedMagnitude: number;
+        static StaticClass(): Class;
     }
     
     class SoundWaveSpectralTimeData {
         constructor(Data: TArray<SoundWaveSpectralDataEntry>, TimeSec: number);
         Data: TArray<SoundWaveSpectralDataEntry>;
         TimeSec: number;
+        static StaticClass(): Class;
     }
     
     class SoundWaveEnvelopeTimeData {
         constructor(Amplitude: number, TimeSec: number);
         Amplitude: number;
         TimeSec: number;
+        static StaticClass(): Class;
     }
     
     class SubtitleCue {
         constructor(Text: string, Time: number);
         Text: string;
         Time: number;
+        static StaticClass(): Class;
     }
     
     class CurveTable extends Object {
@@ -7635,6 +7985,7 @@ declare module "ue" {
         MinSendDistance: number;
         MaxSendDistance: number;
         CustomSendLevelCurve: RuntimeFloatCurve;
+        static StaticClass(): Class;
     }
     
     class SoundEffectSourcePreset extends SoundEffectPreset {
@@ -7648,6 +7999,7 @@ declare module "ue" {
         constructor(Preset: SoundEffectSourcePreset, bBypass: boolean);
         Preset: SoundEffectSourcePreset;
         bBypass: boolean;
+        static StaticClass(): Class;
     }
     
     class SoundEffectSourcePresetChain extends Object {
@@ -7681,6 +8033,7 @@ declare module "ue" {
         MinSendDistance: number;
         MaxSendDistance: number;
         CustomSendLevelCurve: RuntimeFloatCurve;
+        static StaticClass(): Class;
     }
     
     class SoundBase extends Object {
@@ -7717,22 +8070,27 @@ declare module "ue" {
     
     class FocusEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     class KeyEvent extends InputEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PaintContext {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MotionEvent extends InputEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     class CharacterEvent extends InputEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     enum EDragPivot { MouseDown, TopLeft, TopCenter, TopRight, CenterLeft, CenterCenter, CenterRight, BottomLeft, BottomCenter, BottomRight, EDragPivot_MAX}
@@ -7756,6 +8114,7 @@ declare module "ue" {
     
     class AnalogInputEvent extends KeyEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     class UserWidget extends Widget {
@@ -7882,6 +8241,7 @@ declare module "ue" {
         BlendFunction: number;
         BlendExp: number;
         bLockOutgoing: boolean;
+        static StaticClass(): Class;
     }
     
     class UpdateLevelVisibilityLevelInfo {
@@ -7889,6 +8249,7 @@ declare module "ue" {
         PackageName: string;
         FileName: string;
         bIsVisible: boolean;
+        static StaticClass(): Class;
     }
     
     class HapticFeedbackEffect_Base extends Object {
@@ -7904,6 +8265,7 @@ declare module "ue" {
         UUID: number;
         ExecutionFunction: string;
         CallbackTarget: Object;
+        static StaticClass(): Class;
     }
     
     class UpdateLevelStreamingLevelStatus {
@@ -7913,6 +8275,7 @@ declare module "ue" {
         bNewShouldBeLoaded: boolean;
         bNewShouldBeVisible: boolean;
         bNewShouldBlockOnLoad: boolean;
+        static StaticClass(): Class;
     }
     
     class ForceFeedbackParameters {
@@ -7921,6 +8284,7 @@ declare module "ue" {
         bLooping: boolean;
         bIgnoreTimeDilation: boolean;
         bPlayWhilePaused: boolean;
+        static StaticClass(): Class;
     }
     
     class PlayerController extends Controller {
@@ -8428,6 +8792,7 @@ declare module "ue" {
         Direction: number;
         ItemName: string;
         PolyFlags: number;
+        static StaticClass(): Class;
     }
     
     class BrushBuilder extends Object {
@@ -8449,6 +8814,7 @@ declare module "ue" {
         Type: number;
         Index: number;
         SelectionIndex: number;
+        static StaticClass(): Class;
     }
     
     class Brush extends Actor {
@@ -8592,6 +8958,7 @@ declare module "ue" {
         RotationOffset: Rotator;
         AttachSocket: string;
         AttachComponent: SceneComponent;
+        static StaticClass(): Class;
     }
     
     enum ESpawnActorCollisionHandlingMethod { Undefined, AlwaysSpawn, AdjustIfPossibleButAlwaysSpawn, AdjustIfPossibleButDontSpawnIfColliding, DontSpawnIfColliding, ESpawnActorCollisionHandlingMethod_MAX}
@@ -8633,12 +9000,14 @@ declare module "ue" {
         constructor(ObjectName: string, Actors: TArray<Actor>);
         ObjectName: string;
         Actors: TArray<Actor>;
+        static StaticClass(): Class;
     }
     
     class CameraCutInfo {
         constructor(Location: Vector, TimeStamp: number);
         Location: Vector;
         TimeStamp: number;
+        static StaticClass(): Class;
     }
     
     class MatineeActor extends Actor {
@@ -9032,6 +9401,7 @@ declare module "ue" {
         OpacityTextureSize: IntPoint;
         OpacityMaskTextureSize: IntPoint;
         AmbientOcclusionTextureSize: IntPoint;
+        static StaticClass(): Class;
     }
     
     class LevelSimplificationDetails {
@@ -9052,6 +9422,7 @@ declare module "ue" {
         bGenerateLandscapeMetallicMap: boolean;
         bGenerateLandscapeRoughnessMap: boolean;
         bGenerateLandscapeSpecularMap: boolean;
+        static StaticClass(): Class;
     }
     
     class NavAgentSelector {
@@ -9072,6 +9443,7 @@ declare module "ue" {
         bSupportsAgent13: boolean;
         bSupportsAgent14: boolean;
         bSupportsAgent15: boolean;
+        static StaticClass(): Class;
     }
     
     class NavigationSystemConfig extends Object {
@@ -9111,6 +9483,7 @@ declare module "ue" {
         OcclusionExponent: number;
         FullyOccludedSamplesFraction: number;
         MaxOcclusionDistance: number;
+        static StaticClass(): Class;
     }
     
     class ReverbEffect extends Object {
@@ -9141,6 +9514,7 @@ declare module "ue" {
         ReverbPluginEffect: SoundEffectSubmixPreset;
         Volume: number;
         FadeTime: number;
+        static StaticClass(): Class;
     }
     
     class InteriorSettings {
@@ -9154,6 +9528,7 @@ declare module "ue" {
         InteriorTime: number;
         InteriorLPF: number;
         InteriorLPFTime: number;
+        static StaticClass(): Class;
     }
     
     class MeshProxySettings {
@@ -9188,6 +9563,7 @@ declare module "ue" {
         bCreateCollision: boolean;
         bAllowVertexColors: boolean;
         bGenerateLightmapUVs: boolean;
+        static StaticClass(): Class;
     }
     
     enum EUVOutput { DoNotOutputChannel, OutputChannel, EUVOutput_MAX}
@@ -9222,6 +9598,7 @@ declare module "ue" {
         bExportSpecularMap: boolean;
         MergedMaterialAtlasResolution: number;
         ExportSpecificLOD: number;
+        static StaticClass(): Class;
     }
     
     class HierarchicalSimplification {
@@ -9238,6 +9615,7 @@ declare module "ue" {
         DesiredBoundRadius: number;
         DesiredFillingPercentage: number;
         MinNumberOfActorsToBuild: number;
+        static StaticClass(): Class;
     }
     
     class BookmarkBase extends Object {
@@ -9265,6 +9643,7 @@ declare module "ue" {
         MBPBounds: Box;
         MBPOuterBounds: Box;
         MBPNumSubdivs: number;
+        static StaticClass(): Class;
     }
     
     class NetViewer {
@@ -9274,6 +9653,7 @@ declare module "ue" {
         ViewTarget: Actor;
         ViewLocation: Vector;
         ViewDir: Vector;
+        static StaticClass(): Class;
     }
     
     class WorldSettings extends Info {
@@ -9348,6 +9728,7 @@ declare module "ue" {
     class ReplicatedStaticActorDestructionInfo {
         constructor(ObjClass: Class);
         ObjClass: Class;
+        static StaticClass(): Class;
     }
     
     class Level extends Object {
@@ -9517,11 +9898,13 @@ declare module "ue" {
     class LevelStreamingWrapper {
         constructor(StreamingLevel: LevelStreaming);
         StreamingLevel: LevelStreaming;
+        static StaticClass(): Class;
     }
     
     class StreamingLevelsToConsider {
         constructor(StreamingLevels: TArray<LevelStreamingWrapper>);
         StreamingLevels: TArray<LevelStreamingWrapper>;
+        static StaticClass(): Class;
     }
     
     class RollbackNetStartupActorInfo {
@@ -9529,6 +9912,7 @@ declare module "ue" {
         Archetype: Object;
         Level: Level;
         ObjReferences: TArray<Object>;
+        static StaticClass(): Class;
     }
     
     class MulticastRecordOptions {
@@ -9536,6 +9920,7 @@ declare module "ue" {
         FuncPathName: string;
         bServerSkip: boolean;
         bClientSkip: boolean;
+        static StaticClass(): Class;
     }
     
     class DemoNetDriver extends NetDriver {
@@ -9745,6 +10130,7 @@ declare module "ue" {
         DemoNetDriver: DemoNetDriver;
         PersistentLevel: Level;
         Levels: TSet<Level>;
+        static StaticClass(): Class;
     }
     
     class MaterialParameterCollectionInstance extends Object {
@@ -9761,6 +10147,7 @@ declare module "ue" {
         CamRotation: Rotator;
         CamOrthoZoom: number;
         CamUpdated: boolean;
+        static StaticClass(): Class;
     }
     
     class WorldComposition extends Object {
@@ -9779,6 +10166,7 @@ declare module "ue" {
     class PSCPoolElem {
         constructor(PSC: ParticleSystemComponent);
         PSC: ParticleSystemComponent;
+        static StaticClass(): Class;
     }
     
     class PSCPool {
@@ -9786,11 +10174,13 @@ declare module "ue" {
         FreeElements: TArray<PSCPoolElem>;
         InUseComponents_Auto: TArray<ParticleSystemComponent>;
         InUseComponents_Manual: TArray<ParticleSystemComponent>;
+        static StaticClass(): Class;
     }
     
     class WorldPSCPool {
         constructor(WorldParticleSystemPools: TMap<ParticleSystem, PSCPool>);
         WorldParticleSystemPools: TMap<ParticleSystem, PSCPool>;
+        static StaticClass(): Class;
     }
     
     class World extends Object {
@@ -10210,11 +10600,13 @@ declare module "ue" {
     
     class SlateWidgetStyle {
         constructor();
+        static StaticClass(): Class;
     }
     
     class SlateSound {
         constructor(ResourceObject: Object);
         ResourceObject: Object;
+        static StaticClass(): Class;
     }
     
     class ButtonStyle extends SlateWidgetStyle {
@@ -10229,6 +10621,7 @@ declare module "ue" {
         HoveredSlateSound: SlateSound;
         PressedSound: string;
         HoveredSound: string;
+        static StaticClass(): Class;
     }
     
     class ButtonWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10260,6 +10653,7 @@ declare module "ue" {
         CheckedSound: string;
         UncheckedSound: string;
         HoveredSound: string;
+        static StaticClass(): Class;
     }
     
     class CheckBoxWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10276,6 +10670,7 @@ declare module "ue" {
         DownArrowImage: SlateBrush;
         MenuBorderBrush: SlateBrush;
         MenuBorderPadding: Margin;
+        static StaticClass(): Class;
     }
     
     class ComboBoxStyle extends SlateWidgetStyle {
@@ -10285,6 +10680,7 @@ declare module "ue" {
         SelectionChangeSlateSound: SlateSound;
         PressedSound: string;
         SelectionChangeSound: string;
+        static StaticClass(): Class;
     }
     
     class ComboBoxWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10310,6 +10706,7 @@ declare module "ue" {
         bApplyOutlineToDropShadows: boolean;
         OutlineMaterial: Object;
         OutlineColor: LinearColor;
+        static StaticClass(): Class;
     }
     
     class SlateFontInfo {
@@ -10321,6 +10718,7 @@ declare module "ue" {
         Size: number;
         FontName: string;
         Hinting: EFontHinting;
+        static StaticClass(): Class;
     }
     
     class ScrollBarStyle extends SlateWidgetStyle {
@@ -10334,6 +10732,7 @@ declare module "ue" {
         NormalThumbImage: SlateBrush;
         HoveredThumbImage: SlateBrush;
         DraggedThumbImage: SlateBrush;
+        static StaticClass(): Class;
     }
     
     class EditableTextBoxStyle extends SlateWidgetStyle {
@@ -10350,6 +10749,7 @@ declare module "ue" {
         HScrollBarPadding: Margin;
         VScrollBarPadding: Margin;
         ScrollBarStyle: ScrollBarStyle;
+        static StaticClass(): Class;
     }
     
     class EditableTextBoxWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10367,6 +10767,7 @@ declare module "ue" {
         BackgroundImageSelected: SlateBrush;
         BackgroundImageComposing: SlateBrush;
         CaretImage: SlateBrush;
+        static StaticClass(): Class;
     }
     
     class EditableTextWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10382,6 +10783,7 @@ declare module "ue" {
         BackgroundImage: SlateBrush;
         FillImage: SlateBrush;
         MarqueeImage: SlateBrush;
+        static StaticClass(): Class;
     }
     
     class ProgressWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10406,6 +10808,7 @@ declare module "ue" {
         BottomShadowBrush: SlateBrush;
         LeftShadowBrush: SlateBrush;
         RightShadowBrush: SlateBrush;
+        static StaticClass(): Class;
     }
     
     class ScrollBoxWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10433,6 +10836,7 @@ declare module "ue" {
         ArrowsImage: SlateBrush;
         ForegroundColor: SlateColor;
         TextPadding: Margin;
+        static StaticClass(): Class;
     }
     
     class SpinBoxWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10454,6 +10858,7 @@ declare module "ue" {
         HighlightShape: SlateBrush;
         StrikeBrush: SlateBrush;
         UnderlineBrush: SlateBrush;
+        static StaticClass(): Class;
     }
     
     class TextBlockWidgetStyle extends SlateWidgetStyleContainerBase {
@@ -10529,6 +10934,7 @@ declare module "ue" {
         bForceLQReflections: boolean;
         bDisableMaterialNormalCalculation: boolean;
         MobileCSMQuality: EMobileCSMQuality;
+        static StaticClass(): Class;
     }
     
     class ShaderPlatformQualitySettings extends Object {
@@ -10565,6 +10971,7 @@ declare module "ue" {
         constructor(DataName: string, bEnabled: boolean);
         DataName: string;
         bEnabled: boolean;
+        static StaticClass(): Class;
     }
     
     class NetAnalyticsAggregatorConfig extends Object {
@@ -10589,6 +10996,7 @@ declare module "ue" {
         PackagePath: string;
         AssetName: string;
         AssetClass: string;
+        static StaticClass(): Class;
     }
     
     class ARFilter {
@@ -10601,12 +11009,14 @@ declare module "ue" {
         bRecursivePaths: boolean;
         bRecursiveClasses: boolean;
         bIncludeOnlyOnDiskAssets: boolean;
+        static StaticClass(): Class;
     }
     
     class TagAndValue {
         constructor(Tag: string, Value: string);
         Tag: string;
         Value: string;
+        static StaticClass(): Class;
     }
     
     class AssetRegistryDependencyOptions {
@@ -10616,6 +11026,7 @@ declare module "ue" {
         bIncludeSearchableNames: boolean;
         bIncludeSoftManagementReferences: boolean;
         bIncludeHardManagementReferences: boolean;
+        static StaticClass(): Class;
     }
     
     class AssetRegistry extends Interface {
@@ -10668,6 +11079,7 @@ declare module "ue" {
         constructor(Command: string, Desc: string);
         Command: string;
         Desc: string;
+        static StaticClass(): Class;
     }
     
     class ConsoleSettings extends Object {
@@ -10693,6 +11105,7 @@ declare module "ue" {
         constructor(Name: string, GameMode: SoftClassPath);
         Name: string;
         GameMode: SoftClassPath;
+        static StaticClass(): Class;
     }
     
     class GameMapsSettings extends Object {
@@ -10827,6 +11240,7 @@ declare module "ue" {
         NumInfluences: number;
         BoneIndices: FixSizeArray<number>;
         BoneWeights: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class ClothPhysicalMeshDataBase extends Object {
@@ -10855,11 +11269,13 @@ declare module "ue" {
     enum EMultiBoxType { MenuBar, ToolBar, VerticalToolBar, Menu, ButtonRow, ToolMenuBar, EMultiBoxType_MAX}
     class ToolMenuOwner {
         constructor();
+        static StaticClass(): Class;
     }
     
     class ToolMenuContext {
         constructor(ContextObjects: TArray<Object>);
         ContextObjects: TArray<Object>;
+        static StaticClass(): Class;
     }
     
     enum EMultiBlockType { None, ButtonRow, EditableText, Heading, MenuEntry, MenuSeparator, ToolBarButton, ToolBarComboButton, ToolBarSeparator, Widget, EMultiBlockType_MAX}
@@ -10869,6 +11285,7 @@ declare module "ue" {
         constructor(Name: string, Position: EToolMenuInsertType);
         Name: string;
         Position: EToolMenuInsertType;
+        static StaticClass(): Class;
     }
     
     class ScriptSlateIcon {
@@ -10876,6 +11293,7 @@ declare module "ue" {
         StyleSetName: string;
         StyleName: string;
         SmallStyleName: string;
+        static StaticClass(): Class;
     }
     
     class ToolMenuEntryScriptDataAdvanced {
@@ -10887,6 +11305,7 @@ declare module "ue" {
         bOpenSubMenuOnClick: boolean;
         bShouldCloseWindowAfterMenuSelection: boolean;
         bSimpleComboBox: boolean;
+        static StaticClass(): Class;
     }
     
     class ToolMenuEntryScriptData {
@@ -10900,6 +11319,7 @@ declare module "ue" {
         OwnerName: string;
         InsertPosition: ToolMenuInsert;
         Advanced: ToolMenuEntryScriptDataAdvanced;
+        static StaticClass(): Class;
     }
     
     class ToolMenuEntryScript extends Object {
@@ -10930,6 +11350,7 @@ declare module "ue" {
         InsertPosition: ToolMenuInsert;
         bShouldCloseWindowAfterMenuSelection: boolean;
         ScriptObject: ToolMenuEntryScript;
+        static StaticClass(): Class;
     }
     
     class ToolMenuSectionDynamic extends Object {
@@ -10947,6 +11368,7 @@ declare module "ue" {
         InsertPosition: ToolMenuInsert;
         Context: ToolMenuContext;
         ToolMenuSectionDynamic: ToolMenuSectionDynamic;
+        static StaticClass(): Class;
     }
     
     class ToolMenu extends ToolMenuBase {
@@ -10996,16 +11418,19 @@ declare module "ue" {
     class CustomizedToolMenuEntry {
         constructor(Visibility: ECustomizedToolMenuVisibility);
         Visibility: ECustomizedToolMenuVisibility;
+        static StaticClass(): Class;
     }
     
     class CustomizedToolMenuSection {
         constructor(Visibility: ECustomizedToolMenuVisibility);
         Visibility: ECustomizedToolMenuVisibility;
+        static StaticClass(): Class;
     }
     
     class CustomizedToolMenuNameArray {
         constructor(Names: TArray<string>);
         Names: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class CustomizedToolMenu {
@@ -11015,6 +11440,7 @@ declare module "ue" {
         Sections: TMap<string, CustomizedToolMenuSection>;
         EntryOrder: TMap<string, CustomizedToolMenuNameArray>;
         SectionOrder: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class ToolMenus extends Object {
@@ -11055,6 +11481,7 @@ declare module "ue" {
         Type: EToolMenuStringCommandType;
         CustomType: string;
         String: string;
+        static StaticClass(): Class;
     }
     
     class ToolMenuEntryExtensions extends Object {
@@ -11117,12 +11544,14 @@ declare module "ue" {
     class GameplayTag {
         constructor(TagName: string);
         TagName: string;
+        static StaticClass(): Class;
     }
     
     class GameplayTagContainer {
         constructor(GameplayTags: TArray<GameplayTag>, ParentTags: TArray<GameplayTag>);
         GameplayTags: TArray<GameplayTag>;
         ParentTags: TArray<GameplayTag>;
+        static StaticClass(): Class;
     }
     
     class GameplayTagQuery {
@@ -11132,6 +11561,7 @@ declare module "ue" {
         QueryTokenStream: TArray<number>;
         UserDescription: string;
         AutoDescription: string;
+        static StaticClass(): Class;
     }
     
     class GameplayTagAssetInterface extends Interface {
@@ -11250,12 +11680,14 @@ declare module "ue" {
     enum EGameplayTagSourceType { Native, DefaultTagList, TagList, RestrictedTagList, DataTable, Invalid, EGameplayTagSourceType_MAX}
     class TableRowBase {
         constructor();
+        static StaticClass(): Class;
     }
     
     class GameplayTagTableRow extends TableRowBase {
         constructor(Tag: string, DevComment: string);
         Tag: string;
         DevComment: string;
+        static StaticClass(): Class;
     }
     
     class GameplayTagsList extends Object {
@@ -11270,6 +11702,7 @@ declare module "ue" {
     class RestrictedGameplayTagTableRow extends GameplayTagTableRow {
         constructor(bAllowNonRestrictedChildren: boolean);
         bAllowNonRestrictedChildren: boolean;
+        static StaticClass(): Class;
     }
     
     class RestrictedGameplayTagsList extends Object {
@@ -11287,6 +11720,7 @@ declare module "ue" {
         SourceType: EGameplayTagSourceType;
         SourceTagList: GameplayTagsList;
         SourceRestrictedTagList: RestrictedGameplayTagsList;
+        static StaticClass(): Class;
     }
     
     class DataTable extends Object {
@@ -11319,18 +11753,21 @@ declare module "ue" {
         constructor(BaseCategory: string, RemapCategories: TArray<string>);
         BaseCategory: string;
         RemapCategories: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class GameplayTagRedirect {
         constructor(OldTagName: string, NewTagName: string);
         OldTagName: string;
         NewTagName: string;
+        static StaticClass(): Class;
     }
     
     class RestrictedConfigInfo {
         constructor(RestrictedConfigName: string, Owners: TArray<string>);
         RestrictedConfigName: string;
         Owners: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class GameplayTagsSettings extends GameplayTagsList {
@@ -11392,6 +11829,7 @@ declare module "ue" {
     class BehaviorInfo {
         constructor(Behavior: InputBehavior);
         Behavior: InputBehavior;
+        static StaticClass(): Class;
     }
     
     class InputBehaviorSet extends Object {
@@ -11677,6 +12115,7 @@ declare module "ue" {
     
     class ActiveGizmo {
         constructor();
+        static StaticClass(): Class;
     }
     
     class InteractiveGizmoManager extends Object {
@@ -11797,6 +12236,7 @@ declare module "ue" {
         constructor(InitialValue: number, CurrentValue: number);
         InitialValue: number;
         CurrentValue: number;
+        static StaticClass(): Class;
     }
     
     class GizmoLocalFloatParameterSource extends GizmoBaseFloatParameterSource {
@@ -11819,6 +12259,7 @@ declare module "ue" {
         constructor(InitialValue: Vector2D, CurrentValue: Vector2D);
         InitialValue: Vector2D;
         CurrentValue: Vector2D;
+        static StaticClass(): Class;
     }
     
     class GizmoLocalVec2ParameterSource extends GizmoBaseVec2ParameterSource {
@@ -12049,6 +12490,7 @@ declare module "ue" {
         DefaultQueryExtent: Vector;
         NavigationDataClass: Class;
         NavDataClass: TSoftObjectPtr<Class>;
+        static StaticClass(): Class;
     }
     
     enum ERuntimeGenerationType { Static, DynamicModifiersOnly, Dynamic, LegacyGeneration, ERuntimeGenerationType_MAX}
@@ -12057,6 +12499,7 @@ declare module "ue" {
         AreaClassName: string;
         AreaID: number;
         AreaClass: Class;
+        static StaticClass(): Class;
     }
     
     class NavigationData extends Actor {
@@ -12189,12 +12632,14 @@ declare module "ue" {
         Offset: Vector;
         Radius: number;
         Height: number;
+        static StaticClass(): Class;
     }
     
     class NavCollisionBox {
         constructor(Offset: Vector, Extent: Vector);
         Offset: Vector;
         Extent: Vector;
+        static StaticClass(): Class;
     }
     
     class NavCollision extends NavCollisionBase {
@@ -12226,6 +12671,7 @@ declare module "ue" {
     class NavGraphNode {
         constructor(Owner: Object);
         Owner: Object;
+        static StaticClass(): Class;
     }
     
     class NavigationGraphNodeComponent extends SceneComponent {
@@ -12280,6 +12726,7 @@ declare module "ue" {
         bIsExcluded: boolean;
         bOverrideTravelCost: boolean;
         bOverrideEnteringCost: boolean;
+        static StaticClass(): Class;
     }
     
     class NavigationFilterFlags {
@@ -12300,6 +12747,7 @@ declare module "ue" {
         bNavFlag13: boolean;
         bNavFlag14: boolean;
         bNavFlag15: boolean;
+        static StaticClass(): Class;
     }
     
     class NavigationQueryFilter extends Object {
@@ -12467,12 +12915,14 @@ declare module "ue" {
         bCustomFlag6: boolean;
         bCustomFlag7: boolean;
         AreaClass: Class;
+        static StaticClass(): Class;
     }
     
     class NavigationLink extends NavigationLinkBase {
         constructor(Left: Vector, Right: Vector);
         Left: Vector;
         Right: Vector;
+        static StaticClass(): Class;
     }
     
     class NavLinkComponent extends PrimitiveComponent {
@@ -12544,6 +12994,7 @@ declare module "ue" {
         LeftEnd: Vector;
         RightStart: Vector;
         RightEnd: Vector;
+        static StaticClass(): Class;
     }
     
     class NavLinkDefinition extends Object {
@@ -12707,6 +13158,7 @@ declare module "ue" {
         StiffnessMultiplier: number;
         StretchLimit: number;
         CompressionLimit: number;
+        static StaticClass(): Class;
     }
     
     class ClothConfigNv extends ClothConfigBase {
@@ -12748,17 +13200,20 @@ declare module "ue" {
         BoneIndex: number;
         Radius: number;
         LocalPosition: Vector;
+        static StaticClass(): Class;
     }
     
     class ClothCollisionPrim_SphereConnection {
         constructor(SphereIndices: FixSizeArray<number>);
         SphereIndices: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class ClothCollisionPrim_Convex {
         constructor(Planes: TArray<Plane>, BoneIndex: number);
         Planes: TArray<Plane>;
         BoneIndex: number;
+        static StaticClass(): Class;
     }
     
     class ClothCollisionPrim_Box {
@@ -12766,6 +13221,7 @@ declare module "ue" {
         BoneIndex: number;
         LocalMin: Vector;
         LocalMax: Vector;
+        static StaticClass(): Class;
     }
     
     class ClothCollisionData {
@@ -12774,6 +13230,7 @@ declare module "ue" {
         SphereConnections: TArray<ClothCollisionPrim_SphereConnection>;
         Convexes: TArray<ClothCollisionPrim_Convex>;
         Boxes: TArray<ClothCollisionPrim_Box>;
+        static StaticClass(): Class;
     }
     
     class PointWeightMap {
@@ -12782,6 +13239,7 @@ declare module "ue" {
         CurrentTarget: number;
         Values: TArray<number>;
         bEnabled: boolean;
+        static StaticClass(): Class;
     }
     
     class ClothLODDataBase extends Object {
@@ -12845,6 +13303,7 @@ declare module "ue" {
         CollisionThickness: number;
         AnimDriveSpringStiffness: number;
         AnimDriveDamperStiffness: number;
+        static StaticClass(): Class;
     }
     
     class ClothPhysicalMeshData {
@@ -12862,6 +13321,7 @@ declare module "ue" {
         MaxBoneWeights: number;
         NumFixedVerts: number;
         SelfCollisionIndices: TArray<number>;
+        static StaticClass(): Class;
     }
     
     enum MaskTarget_PhysMesh { None, MaxDistance, BackstopDistance, BackstopRadius, AnimDriveMultiplier, MaskTarget_MAX}
@@ -12873,6 +13333,7 @@ declare module "ue" {
         MinValue: number;
         Values: TArray<number>;
         bEnabled: boolean;
+        static StaticClass(): Class;
     }
     
     class ClothLODData {
@@ -12880,6 +13341,7 @@ declare module "ue" {
         PhysicalMeshData: ClothPhysicalMeshData;
         CollisionData: ClothCollisionData;
         ParameterMasks: TArray<ClothParameterMask_PhysMesh>;
+        static StaticClass(): Class;
     }
     
     class ClothingAssetNv extends ClothingAssetCommon {
@@ -12977,6 +13439,7 @@ declare module "ue" {
     class CompositionGraphCapturePasses {
         constructor(Value: TArray<string>);
         Value: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class CompositionGraphCaptureProtocol extends MovieSceneImageCaptureProtocolBase {
@@ -13055,12 +13518,14 @@ declare module "ue" {
     class DirectoryPath {
         constructor(Path: string);
         Path: string;
+        static StaticClass(): Class;
     }
     
     class CaptureResolution {
         constructor(ResX: number, ResY: number);
         ResX: number;
         ResY: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneCaptureSettings {
@@ -13086,6 +13551,7 @@ declare module "ue" {
         bShowHUD: boolean;
         bUsePathTracer: boolean;
         PathTracerSamplePerPixel: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneCapture extends Object {
@@ -13132,10 +13598,12 @@ declare module "ue" {
     class CapturedPixelsID {
         constructor(Identifiers: TMap<string, string>);
         Identifiers: TMap<string, string>;
+        static StaticClass(): Class;
     }
     
     class CapturedPixels {
         constructor();
+        static StaticClass(): Class;
     }
     
     class FrameMetrics {
@@ -13144,6 +13612,7 @@ declare module "ue" {
         FrameDelta: number;
         FrameNumber: number;
         NumDroppedFrames: number;
+        static StaticClass(): Class;
     }
     
     class UserDefinedCaptureProtocol extends MovieSceneImageCaptureProtocolBase {
@@ -13214,6 +13683,7 @@ declare module "ue" {
     class MovieSceneSequenceLoopCount {
         constructor(Value: number);
         Value: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequencePlaybackSettings {
@@ -13230,11 +13700,13 @@ declare module "ue" {
         bHideHud: boolean;
         bDisableCameraCuts: boolean;
         bPauseAtEnd: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneRootEvaluationTemplateInstance {
         constructor(DirectorInstances: TMap<MovieSceneSequenceID, Object>);
         DirectorInstances: TMap<MovieSceneSequenceID, Object>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequenceReplProperties {
@@ -13242,6 +13714,7 @@ declare module "ue" {
         LastKnownPosition: FrameTime;
         LastKnownStatus: number;
         LastKnownNumLoops: number;
+        static StaticClass(): Class;
     }
     
     class MovieScenePlaybackClient extends Interface {
@@ -13256,6 +13729,7 @@ declare module "ue" {
         constructor(Time: FrameTime, Rate: FrameRate);
         Time: FrameTime;
         Rate: FrameRate;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSequencePlayer extends Object {
@@ -13327,6 +13801,7 @@ declare module "ue" {
     
     class LevelSequenceObjectReferenceMap {
         constructor();
+        static StaticClass(): Class;
     }
     
     class LevelSequenceBindingReference {
@@ -13334,17 +13809,20 @@ declare module "ue" {
         PackageName: string;
         ExternalObjectPath: SoftObjectPath;
         ObjectPath: string;
+        static StaticClass(): Class;
     }
     
     class LevelSequenceBindingReferenceArray {
         constructor(References: TArray<LevelSequenceBindingReference>);
         References: TArray<LevelSequenceBindingReference>;
+        static StaticClass(): Class;
     }
     
     class LevelSequenceBindingReferences {
         constructor(BindingIdToReferences: TMap<Guid, LevelSequenceBindingReferenceArray>, AnimSequenceInstances: TSet<Guid>);
         BindingIdToReferences: TMap<Guid, LevelSequenceBindingReferenceArray>;
         AnimSequenceInstances: TSet<Guid>;
+        static StaticClass(): Class;
     }
     
     class LevelSequenceObject {
@@ -13352,6 +13830,7 @@ declare module "ue" {
         ObjectOrOwner: TLazyObjectPtr<Object>;
         ComponentName: string;
         CachedComponent: TWeakObjectPtr<Object>;
+        static StaticClass(): Class;
     }
     
     class LevelSequence extends MovieSceneSequence {
@@ -13386,6 +13865,7 @@ declare module "ue" {
         constructor(bOverrideAspectRatioAxisConstraint: boolean, AspectRatioAxisConstraint: number);
         bOverrideAspectRatioAxisConstraint: boolean;
         AspectRatioAxisConstraint: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneBindingOverrideData {
@@ -13393,6 +13873,7 @@ declare module "ue" {
         ObjectBindingId: MovieSceneObjectBindingID;
         Object: TWeakObjectPtr<Object>;
         bOverridesDefault: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneBindingOverrides extends Object {
@@ -13407,6 +13888,7 @@ declare module "ue" {
         constructor(ZeroPadAmount: number, FrameRate: FrameRate);
         ZeroPadAmount: number;
         FrameRate: FrameRate;
+        static StaticClass(): Class;
     }
     
     class LevelSequencePlayerSnapshot {
@@ -13422,6 +13904,7 @@ declare module "ue" {
         Settings: LevelSequenceSnapshotSettings;
         ActiveShot: LevelSequence;
         ShotID: MovieSceneSequenceID;
+        static StaticClass(): Class;
     }
     
     class LevelSequenceBurnIn extends UserWidget {
@@ -13502,6 +13985,7 @@ declare module "ue" {
         TangentWeightMode: number;
         ArriveTangentWeight: number;
         LeaveTangentWeight: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneFloatValue {
@@ -13510,6 +13994,7 @@ declare module "ue" {
         InterpMode: number;
         TangentMode: number;
         Tangent: MovieSceneTangentData;
+        static StaticClass(): Class;
     }
     
     class FloatChannelKeyProxy extends Object {
@@ -13557,12 +14042,14 @@ declare module "ue" {
         constructor(ComponentName: string, PropertyName: string);
         ComponentName: string;
         PropertyName: string;
+        static StaticClass(): Class;
     }
     
     class MovieSceneToolsFbxSettings {
         constructor(FbxPropertyName: string, PropertyPath: MovieSceneToolsPropertyTrackSettings);
         FbxPropertyName: string;
         PropertyPath: MovieSceneToolsPropertyTrackSettings;
+        static StaticClass(): Class;
     }
     
     class MovieSceneToolsProjectSettings extends Object {
@@ -13696,18 +14183,22 @@ declare module "ue" {
     class MovieSceneTransformMask {
         constructor(Mask: number);
         Mask: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneChannel {
         constructor();
+        static StaticClass(): Class;
     }
     
     class KeyHandleLookupTable {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneKeyHandleMap extends KeyHandleLookupTable {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneFloatChannel extends MovieSceneChannel {
@@ -13720,6 +14211,7 @@ declare module "ue" {
         bHasDefaultValue: boolean;
         KeyHandles: MovieSceneKeyHandleMap;
         TickResolution: FrameRate;
+        static StaticClass(): Class;
     }
     
     enum EShow3DTrajectory { EST_OnlyWhenSelected, EST_Always, EST_Never, EST_MAX}
@@ -13919,6 +14411,7 @@ declare module "ue" {
         constructor(Actor: Actor, bValidForPIE: boolean);
         Actor: Actor;
         bValidForPIE: boolean;
+        static StaticClass(): Class;
     }
     
     class EditorWorldExtension extends Object {
@@ -14019,6 +14512,7 @@ declare module "ue" {
         bHideWindowHandles: boolean;
         bMaskOutWidgetBackground: boolean;
         bNoCloseButton: boolean;
+        static StaticClass(): Class;
     }
     
     enum EWidgetSpace { World, Screen, EWidgetSpace_MAX}
@@ -14204,6 +14698,7 @@ declare module "ue" {
         ActionType: string;
         Event: number;
         bIsInputCaptured: boolean;
+        static StaticClass(): Class;
     }
     
     class ViewportTransformer extends Object {
@@ -14222,6 +14717,7 @@ declare module "ue" {
     
     class GizmoHandle {
         constructor();
+        static StaticClass(): Class;
     }
     
     class GizmoHandleGroup extends SceneComponent {
@@ -14378,6 +14874,7 @@ declare module "ue" {
         ArriveTangent: Quat;
         LeaveTangent: Quat;
         InterpMode: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurveQuat {
@@ -14385,6 +14882,7 @@ declare module "ue" {
         Points: TArray<InterpCurvePointQuat>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurvePointFloat {
@@ -14394,6 +14892,7 @@ declare module "ue" {
         ArriveTangent: number;
         LeaveTangent: number;
         InterpMode: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurveFloat {
@@ -14401,6 +14900,7 @@ declare module "ue" {
         Points: TArray<InterpCurvePointFloat>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
+        static StaticClass(): Class;
     }
     
     class SplineMetadata extends Object {
@@ -14417,6 +14917,7 @@ declare module "ue" {
         Scale: InterpCurveVector;
         ReparamTable: InterpCurveFloat;
         Metadata: SplineMetadata;
+        static StaticClass(): Class;
     }
     
     class SplinePoint {
@@ -14428,6 +14929,7 @@ declare module "ue" {
         Rotation: Rotator;
         Scale: Vector;
         Type: number;
+        static StaticClass(): Class;
     }
     
     class SplineComponent extends PrimitiveComponent {
@@ -14565,6 +15067,7 @@ declare module "ue" {
         EndTangent: Vector;
         EndRoll: number;
         EndOffset: Vector2D;
+        static StaticClass(): Class;
     }
     
     class SplineMeshComponent extends StaticMeshComponent {
@@ -14732,10 +15235,12 @@ declare module "ue" {
         IndirectLightingSaturation: number;
         ShadowExponent: number;
         bUseAreaShadowsForStationaryLight: boolean;
+        static StaticClass(): Class;
     }
     
     class LightmassPointLightSettings extends LightmassLightSettings {
         constructor();
+        static StaticClass(): Class;
     }
     
     class LocalLightComponent extends LightComponent {
@@ -14844,6 +15349,7 @@ declare module "ue" {
     class VRButton {
         constructor(ButtonWidget: VREditorWidgetComponent);
         ButtonWidget: VREditorWidgetComponent;
+        static StaticClass(): Class;
     }
     
     class VRRadialMenuHandler extends Object {
@@ -15153,6 +15659,7 @@ declare module "ue" {
     class FilePath {
         constructor(FilePath: string);
         FilePath: string;
+        static StaticClass(): Class;
     }
     
     enum ELocalizationGatherPathRoot { Auto, Engine, Project, ELocalizationGatherPathRoot_MAX}
@@ -15160,17 +15667,20 @@ declare module "ue" {
         constructor(PathRoot: ELocalizationGatherPathRoot, Path: string);
         PathRoot: ELocalizationGatherPathRoot;
         Path: string;
+        static StaticClass(): Class;
     }
     
     class GatherTextExcludePath {
         constructor(PathRoot: ELocalizationGatherPathRoot, Pattern: string);
         PathRoot: ELocalizationGatherPathRoot;
         Pattern: string;
+        static StaticClass(): Class;
     }
     
     class GatherTextFileExtension {
         constructor(Pattern: string);
         Pattern: string;
+        static StaticClass(): Class;
     }
     
     class GatherTextFromTextFilesConfiguration {
@@ -15180,12 +15690,14 @@ declare module "ue" {
         ExcludePathWildcards: TArray<GatherTextExcludePath>;
         FileExtensions: TArray<GatherTextFileExtension>;
         ShouldGatherFromEditorOnlyData: boolean;
+        static StaticClass(): Class;
     }
     
     class GatherTextIncludePath {
         constructor(PathRoot: ELocalizationGatherPathRoot, Pattern: string);
         PathRoot: ELocalizationGatherPathRoot;
         Pattern: string;
+        static StaticClass(): Class;
     }
     
     class GatherTextFromPackagesConfiguration {
@@ -15197,16 +15709,19 @@ declare module "ue" {
         Collections: TArray<string>;
         ShouldGatherFromEditorOnlyData: boolean;
         SkipGatherCache: boolean;
+        static StaticClass(): Class;
     }
     
     class MetaDataKeyName {
         constructor(Name: string);
         Name: string;
+        static StaticClass(): Class;
     }
     
     class MetaDataTextKeyPattern {
         constructor(Pattern: string);
         Pattern: string;
+        static StaticClass(): Class;
     }
     
     class MetaDataKeyGatherSpecification {
@@ -15214,6 +15729,7 @@ declare module "ue" {
         MetaDataKey: MetaDataKeyName;
         TextNamespace: string;
         TextKeyPattern: MetaDataTextKeyPattern;
+        static StaticClass(): Class;
     }
     
     class GatherTextFromMetaDataConfiguration {
@@ -15223,6 +15739,7 @@ declare module "ue" {
         ExcludePathWildcards: TArray<GatherTextExcludePath>;
         KeySpecifications: TArray<MetaDataKeyGatherSpecification>;
         ShouldGatherFromEditorOnlyData: boolean;
+        static StaticClass(): Class;
     }
     
     enum ELocalizedTextCollapseMode { IdenticalTextIdAndSource, IdenticalPackageIdTextIdAndSource, IdenticalNamespaceAndSource, ELocalizedTextCollapseMode_MAX}
@@ -15231,6 +15748,7 @@ declare module "ue" {
         CollapseMode: ELocalizedTextCollapseMode;
         ShouldPersistCommentsOnExport: boolean;
         ShouldAddSourceLocationsAsComments: boolean;
+        static StaticClass(): Class;
     }
     
     class LocalizationCompilationSettings {
@@ -15238,6 +15756,7 @@ declare module "ue" {
         SkipSourceCheck: boolean;
         ValidateFormatPatterns: boolean;
         ValidateSafeWhitespace: boolean;
+        static StaticClass(): Class;
     }
     
     class LocalizationImportDialogueSettings {
@@ -15245,12 +15764,14 @@ declare module "ue" {
         RawAudioPath: DirectoryPath;
         ImportedDialogueFolder: string;
         bImportNativeAsSource: boolean;
+        static StaticClass(): Class;
     }
     
     class CultureStatistics {
         constructor(CultureName: string, WordCount: number);
         CultureName: string;
         WordCount: number;
+        static StaticClass(): Class;
     }
     
     class LocalizationTargetSettings {
@@ -15269,6 +15790,7 @@ declare module "ue" {
         ImportDialogueSettings: LocalizationImportDialogueSettings;
         NativeCultureIndex: number;
         SupportedCulturesStatistics: TArray<CultureStatistics>;
+        static StaticClass(): Class;
     }
     
     class LocalizationTarget extends Object {
@@ -15395,6 +15917,7 @@ declare module "ue" {
         FPS: number;
         Width: number;
         Height: number;
+        static StaticClass(): Class;
     }
     
     enum EARFaceTrackingDirection { FaceRelative, FaceMirrored, EARFaceTrackingDirection_MAX}
@@ -15520,6 +16043,7 @@ declare module "ue" {
         TraceChannel: EARLineTraceChannels;
         LocalToTrackingTransform: Transform;
         TrackedGeometry: ARTrackedGeometry;
+        static StaticClass(): Class;
     }
     
     enum EARWorldMappingState { NotAvailable, StillMappingNotRelocalizable, StillMappingRelocalizable, Mapped, EARWorldMappingState_MAX}
@@ -15568,6 +16092,7 @@ declare module "ue" {
         constructor(AdditionalInfo: string, Status: EARSessionStatus);
         AdditionalInfo: string;
         Status: EARSessionStatus;
+        static StaticClass(): Class;
     }
     
     class ARSkeletonDefinition {
@@ -15575,6 +16100,7 @@ declare module "ue" {
         NumJoints: number;
         JointNames: TArray<string>;
         ParentIndices: TArray<number>;
+        static StaticClass(): Class;
     }
     
     enum EARJointTransformSpace { Model, ParentJoint, EARJointTransformSpace_MAX}
@@ -15584,6 +16110,7 @@ declare module "ue" {
         JointTransforms: TArray<Transform>;
         IsJointTracked: TArray<boolean>;
         JointTransformSpace: EARJointTransformSpace;
+        static StaticClass(): Class;
     }
     
     class ARTrackedPose extends ARTrackedGeometry {
@@ -15655,6 +16182,7 @@ declare module "ue" {
         SkeletonDefinition: ARSkeletonDefinition;
         JointLocations: TArray<Vector2D>;
         IsJointTracked: TArray<boolean>;
+        static StaticClass(): Class;
     }
     
     class ARBlueprintLibrary extends BlueprintFunctionLibrary {
@@ -15982,6 +16510,7 @@ declare module "ue" {
         constructor(SystemName: string, DeviceId: number);
         SystemName: string;
         DeviceId: number;
+        static StaticClass(): Class;
     }
     
     enum EXRTrackedDeviceType { HeadMountedDisplay, Controller, TrackingReference, Other, Invalid, Any, EXRTrackedDeviceType_MAX}
@@ -16211,6 +16740,7 @@ declare module "ue" {
         LightingRigRotation: number;
         RotationSpeed: number;
         DirectionalLightRotation: Rotator;
+        static StaticClass(): Class;
     }
     
     class LocalProfiles extends Object {
@@ -16244,6 +16774,7 @@ declare module "ue" {
         CustomSize: IntPoint;
         bUseConstantValue: boolean;
         ConstantValue: number;
+        static StaticClass(): Class;
     }
     
     class MaterialOptions extends Object {
@@ -16450,6 +16981,7 @@ declare module "ue" {
         ActorToTrack: TSoftObjectPtr<Actor>;
         RelativeOffset: Vector;
         bAllowRoll: boolean;
+        static StaticClass(): Class;
     }
     
     class CameraFilmbackSettings {
@@ -16457,6 +16989,7 @@ declare module "ue" {
         SensorWidth: number;
         SensorHeight: number;
         SensorAspectRatio: number;
+        static StaticClass(): Class;
     }
     
     class CameraLensSettings {
@@ -16467,6 +17000,7 @@ declare module "ue" {
         MaxFStop: number;
         MinimumFocusDistance: number;
         DiaphragmBladeCount: number;
+        static StaticClass(): Class;
     }
     
     enum ECameraFocusMethod { None, Manual, Tracking, ECameraFocusMethod_MAX}
@@ -16475,6 +17009,7 @@ declare module "ue" {
         ActorToTrack: TSoftObjectPtr<Actor>;
         RelativeOffset: Vector;
         bDrawDebugTrackingFocusPoint: boolean;
+        static StaticClass(): Class;
     }
     
     class CameraFocusSettings {
@@ -16487,18 +17022,21 @@ declare module "ue" {
         bSmoothFocusChanges: boolean;
         FocusSmoothingInterpSpeed: number;
         FocusOffset: number;
+        static StaticClass(): Class;
     }
     
     class NamedFilmbackPreset {
         constructor(Name: string, FilmbackSettings: CameraFilmbackSettings);
         Name: string;
         FilmbackSettings: CameraFilmbackSettings;
+        static StaticClass(): Class;
     }
     
     class NamedLensPreset {
         constructor(Name: string, LensSettings: CameraLensSettings);
         Name: string;
         LensSettings: CameraLensSettings;
+        static StaticClass(): Class;
     }
     
     class CineCameraComponent extends CameraComponent {
@@ -16617,6 +17155,7 @@ declare module "ue" {
         OutputGainDb: number;
         bChannelLinked: boolean;
         bAnalogMode: boolean;
+        static StaticClass(): Class;
     }
     
     class SubmixEffectDynamicsProcessorPreset extends SoundEffectSubmixPreset {
@@ -16634,11 +17173,13 @@ declare module "ue" {
         Bandwidth: number;
         GainDb: number;
         bEnabled: boolean;
+        static StaticClass(): Class;
     }
     
     class SubmixEffectSubmixEQSettings {
         constructor(EQBands: TArray<SubmixEffectEQBand>);
         EQBands: TArray<SubmixEffectEQBand>;
+        static StaticClass(): Class;
     }
     
     class SubmixEffectSubmixEQPreset extends SoundEffectSubmixPreset {
@@ -16665,6 +17206,7 @@ declare module "ue" {
         AirAbsorptionGainHF: number;
         WetLevel: number;
         DryLevel: number;
+        static StaticClass(): Class;
     }
     
     class SubmixEffectReverbPreset extends SoundEffectSubmixPreset {
@@ -16692,6 +17234,7 @@ declare module "ue" {
         AirAbsorptionGainHF: number;
         WetLevel: number;
         DryLevel: number;
+        static StaticClass(): Class;
     }
     
     class SubmixEffectReverbFastPreset extends SoundEffectSubmixPreset {
@@ -16718,6 +17261,7 @@ declare module "ue" {
         BoolParam: boolean;
         IntParam: number;
         SoundWaveParam: SoundWave;
+        static StaticClass(): Class;
     }
     
     enum EAudioComponentPlayState { Playing, Stopped, Paused, FadingIn, FadingOut, Count, EAudioComponentPlayState_MAX}
@@ -16726,6 +17270,7 @@ declare module "ue" {
         FrequencyHz: number;
         Magnitude: number;
         NormalizedMagnitude: number;
+        static StaticClass(): Class;
     }
     
     class SoundWaveSpectralDataPerSound {
@@ -16733,6 +17278,7 @@ declare module "ue" {
         SpectralData: TArray<SoundWaveSpectralData>;
         PlaybackTime: number;
         SoundWave: SoundWave;
+        static StaticClass(): Class;
     }
     
     class SoundWaveEnvelopeDataPerSound {
@@ -16740,6 +17286,7 @@ declare module "ue" {
         Envelope: number;
         PlaybackTime: number;
         SoundWave: SoundWave;
+        static StaticClass(): Class;
     }
     
     enum EAudioFaderCurve { Linear, Logarithmic, SCurve, Sin, Count, EAudioFaderCurve_MAX}
@@ -16891,12 +17438,14 @@ declare module "ue" {
         constructor(Language: string, Text: string);
         Language: string;
         Text: string;
+        static StaticClass(): Class;
     }
     
     class TemplateFolderRename {
         constructor(From: string, To: string);
         From: string;
         To: string;
+        static StaticClass(): Class;
     }
     
     class TemplateReplacement {
@@ -16905,6 +17454,7 @@ declare module "ue" {
         From: string;
         To: string;
         bCaseSensitive: boolean;
+        static StaticClass(): Class;
     }
     
     enum ETemplateSetting { Languages, HardwareTarget, GraphicsPreset, StarterContent, XR, Raytracing, All, ETemplateSetting_MAX}
@@ -16913,6 +17463,7 @@ declare module "ue" {
         constructor(DetailLevels: TArray<EFeaturePackDetailLevel>, MountName: string);
         DetailLevels: TArray<EFeaturePackDetailLevel>;
         MountName: string;
+        static StaticClass(): Class;
     }
     
     class TemplateProjectDefs extends Object {
@@ -16954,6 +17505,7 @@ declare module "ue" {
         LocalizedDescriptions: TArray<LocalizedTemplateString>;
         Icon: string;
         IsMajorCategory: boolean;
+        static StaticClass(): Class;
     }
     
     class TemplateCategories extends Object {
@@ -16985,6 +17537,7 @@ declare module "ue" {
         bCanRevert: boolean;
         bIsCheckedOutOther: boolean;
         CheckedOutOther: string;
+        static StaticClass(): Class;
     }
     
     class SourceControlHelpers extends Object {
@@ -17035,6 +17588,7 @@ declare module "ue" {
     
     class FavoritedBlueprintPaletteItem {
         constructor();
+        static StaticClass(): Class;
     }
     
     class BlueprintPaletteFavorites extends Object {
@@ -17199,6 +17753,7 @@ declare module "ue" {
         NewFunctionName: string;
         BlueprintParamName: string;
         ClassParamName: string;
+        static StaticClass(): Class;
     }
     
     class EdGraphSchema_K2 extends EdGraphSchema {
@@ -17225,6 +17780,7 @@ declare module "ue" {
         MemberGuid: Guid;
         bSelfContext: boolean;
         bWasDeprecated: boolean;
+        static StaticClass(): Class;
     }
     
     class K2Node_Event extends K2Node_EditablePinBase {
@@ -17355,6 +17911,7 @@ declare module "ue" {
         bIsOverrideEnabled: boolean;
         bIsSetValuePinVisible: boolean;
         bIsOverridePinVisible: boolean;
+        static StaticClass(): Class;
     }
     
     class K2Node_StructMemberGet extends K2Node_StructOperation {
@@ -17478,6 +18035,7 @@ declare module "ue" {
         bIsDeprecated: boolean;
         bCallInEditor: boolean;
         HasLatentFunctions: number;
+        static StaticClass(): Class;
     }
     
     class K2Node_Tunnel extends K2Node_EditablePinBase {
@@ -17849,6 +18407,7 @@ declare module "ue" {
         bCtrl: boolean;
         bAlt: boolean;
         bCmd: boolean;
+        static StaticClass(): Class;
     }
     
     class K2Node_InputKeyEvent extends K2Node_Event {
@@ -17934,6 +18493,7 @@ declare module "ue" {
         MacroGraph: EdGraph;
         GraphBlueprint: Blueprint;
         GraphGuid: Guid;
+        static StaticClass(): Class;
     }
     
     class K2Node_MacroInstance extends K2Node_Tunnel {
@@ -18290,16 +18850,19 @@ declare module "ue" {
     
     class AnimNode_Base {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PoseLinkBase {
         constructor(LinkID: number, SourceLinkID: number);
         LinkID: number;
         SourceLinkID: number;
+        static StaticClass(): Class;
     }
     
     class PoseLink extends PoseLinkBase {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AnimNode_Root extends AnimNode_Base {
@@ -18307,10 +18870,12 @@ declare module "ue" {
         Result: PoseLink;
         Name: string;
         Group: string;
+        static StaticClass(): Class;
     }
     
     class AnimNode_StateResult extends AnimNode_Root {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_StateResult extends AnimGraphNode_Base {
@@ -18407,6 +18972,7 @@ declare module "ue" {
     class AnimNode_TransitionResult extends AnimNode_Base {
         constructor(bCanEnterTransition: boolean);
         bCanEnterTransition: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_TransitionResult extends AnimGraphNode_Base {
@@ -18443,6 +19009,7 @@ declare module "ue" {
         constructor(GroupName: string, GroupRole: number);
         GroupName: string;
         GroupRole: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_AssetPlayerBase extends AnimGraphNode_Base {
@@ -18467,18 +19034,21 @@ declare module "ue" {
         bIgnoreForRelevancyTest: boolean;
         BlendWeight: number;
         InternalTimeAccumulator: number;
+        static StaticClass(): Class;
     }
     
     class InterpolationParameter {
         constructor(InterpolationTime: number, InterpolationType: number);
         InterpolationTime: number;
         InterpolationType: number;
+        static StaticClass(): Class;
     }
     
     class PerBoneInterpolation {
         constructor(BoneReference: BoneReference, InterpolationSpeedPerSec: number);
         BoneReference: BoneReference;
         InterpolationSpeedPerSec: number;
+        static StaticClass(): Class;
     }
     
     class BlendSample {
@@ -18488,12 +19058,14 @@ declare module "ue" {
         RateScale: number;
         bSnapToGrid: boolean;
         bIsValid: boolean;
+        static StaticClass(): Class;
     }
     
     class EditorElement {
         constructor(Indices: FixSizeArray<number>, Weights: FixSizeArray<number>);
         Indices: FixSizeArray<number>;
         Weights: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class BlendParameter {
@@ -18502,6 +19074,7 @@ declare module "ue" {
         Min: number;
         Max: number;
         GridNum: number;
+        static StaticClass(): Class;
     }
     
     class BlendSpaceBase extends AnimationAsset {
@@ -18533,6 +19106,7 @@ declare module "ue" {
         StartPosition: number;
         BlendSpace: BlendSpaceBase;
         PreviousBlendSpace: BlendSpaceBase;
+        static StaticClass(): Class;
     }
     
     class AnimNode_AimOffsetLookAt extends AnimNode_BlendSpacePlayer {
@@ -18544,6 +19118,7 @@ declare module "ue" {
         LookAtLocation: Vector;
         SocketAxis: Vector;
         Alpha: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_AimOffsetLookAt extends AnimGraphNode_BlendSpaceBase {
@@ -18563,6 +19138,7 @@ declare module "ue" {
     
     class ComponentSpacePoseLink extends PoseLinkBase {
         constructor();
+        static StaticClass(): Class;
     }
     
     enum EAnimAlphaInputType { Float, Bool, Curve, EAnimAlphaInputType_MAX}
@@ -18570,6 +19146,7 @@ declare module "ue" {
         constructor(Scale: number, Bias: number);
         Scale: number;
         Bias: number;
+        static StaticClass(): Class;
     }
     
     class InputAlphaBoolBlend {
@@ -18580,12 +19157,14 @@ declare module "ue" {
         bInitialized: boolean;
         CustomCurve: CurveFloat;
         AlphaBlend: AlphaBlend;
+        static StaticClass(): Class;
     }
     
     class InputRange {
         constructor(Min: number, Max: number);
         Min: number;
         Max: number;
+        static StaticClass(): Class;
     }
     
     class InputScaleBiasClamp {
@@ -18601,6 +19180,7 @@ declare module "ue" {
         ClampMax: number;
         InterpSpeedIncreasing: number;
         InterpSpeedDecreasing: number;
+        static StaticClass(): Class;
     }
     
     class AnimNode_SkeletalControlBase extends AnimNode_Base {
@@ -18615,6 +19195,7 @@ declare module "ue" {
         AlphaBoolBlend: InputAlphaBoolBlend;
         AlphaCurveName: string;
         AlphaScaleBiasClamp: InputScaleBiasClamp;
+        static StaticClass(): Class;
     }
     
     enum AnimPhysLinearConstraintType { Free, Limited, AnimPhysLinearConstraintType_MAX}
@@ -18637,6 +19218,7 @@ declare module "ue" {
         AngularLimitsMin: Vector;
         AngularLimitsMax: Vector;
         AngularTarget: Vector;
+        static StaticClass(): Class;
     }
     
     enum ESphericalLimitType { Inner, Outer, ESphericalLimitType_MAX}
@@ -18646,12 +19228,14 @@ declare module "ue" {
         SphereLocalOffset: Vector;
         LimitRadius: number;
         LimitType: ESphericalLimitType;
+        static StaticClass(): Class;
     }
     
     class AnimPhysPlanarLimit {
         constructor(DrivingBone: BoneReference, PlaneTransform: Transform);
         DrivingBone: BoneReference;
         PlaneTransform: Transform;
+        static StaticClass(): Class;
     }
     
     enum AnimPhysCollisionType { CoM, CustomSphere, InnerSphere, OuterSphere, AnimPhysCollisionType_MAX}
@@ -18675,6 +19259,7 @@ declare module "ue" {
         bFlipEasing: boolean;
         EasingWeight: number;
         bClamp: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimNode_AnimDynamics extends AnimNode_SkeletalControlBase {
@@ -18717,6 +19302,7 @@ declare module "ue" {
         bAngularSpring: boolean;
         bChain: boolean;
         RetargetingSettings: RotationRetargetingInfo;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_AnimDynamics extends AnimGraphNode_SkeletalControlBase {
@@ -18746,6 +19332,7 @@ declare module "ue" {
         AlphaScaleBiasClamp: InputScaleBiasClamp;
         AlphaInputType: EAnimAlphaInputType;
         bAlphaBoolEnabled: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ApplyAdditive extends AnimGraphNode_Base {
@@ -18761,12 +19348,14 @@ declare module "ue" {
         LimitMin: Vector;
         LimitMax: Vector;
         Bone: BoneReference;
+        static StaticClass(): Class;
     }
     
     class AnimNode_ApplyLimits extends AnimNode_SkeletalControlBase {
         constructor(AngularRangeLimits: TArray<AngularRangeLimit>, AngularOffsets: TArray<Vector>);
         AngularRangeLimits: TArray<AngularRangeLimit>;
         AngularOffsets: TArray<Vector>;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ApplyLimits extends AnimGraphNode_SkeletalControlBase {
@@ -18784,6 +19373,7 @@ declare module "ue" {
         Alpha: number;
         AlphaScaleBias: InputScaleBias;
         LODThreshold: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ApplyMeshSpaceAdditive extends AnimGraphNode_Base {
@@ -18801,6 +19391,7 @@ declare module "ue" {
         bBlendTranslation: boolean;
         bBlendRotation: boolean;
         bBlendScale: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimNode_BlendBoneByChannel extends AnimNode_Base {
@@ -18811,6 +19402,7 @@ declare module "ue" {
         Alpha: number;
         AlphaScaleBias: InputScaleBias;
         TransformsSpace: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_BlendBoneByChannel extends AnimGraphNode_Base {
@@ -18838,11 +19430,13 @@ declare module "ue" {
         bResetChildOnActivation: boolean;
         CustomBlendCurve: CurveFloat;
         BlendProfile: BlendProfile;
+        static StaticClass(): Class;
     }
     
     class AnimNode_BlendListByBool extends AnimNode_BlendListBase {
         constructor(bActiveValue: boolean);
         bActiveValue: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_BlendListByBool extends AnimGraphNode_BlendListBase {
@@ -18857,6 +19451,7 @@ declare module "ue" {
         constructor(EnumToPoseIndex: TArray<number>, ActiveEnumValue: number);
         EnumToPoseIndex: TArray<number>;
         ActiveEnumValue: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_BlendListByEnum extends AnimGraphNode_BlendListBase {
@@ -18872,6 +19467,7 @@ declare module "ue" {
     class AnimNode_BlendListByInt extends AnimNode_BlendListBase {
         constructor(ActiveChildIndex: number);
         ActiveChildIndex: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_BlendListByInt extends AnimGraphNode_BlendListBase {
@@ -18885,6 +19481,7 @@ declare module "ue" {
     class AnimNode_BlendSpaceEvaluator extends AnimNode_BlendSpacePlayer {
         constructor(NormalizedTime: number);
         NormalizedTime: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_BlendSpaceEvaluator extends AnimGraphNode_BlendSpaceBase {
@@ -18930,6 +19527,7 @@ declare module "ue" {
         bAffectTargetScaleX: boolean;
         bAffectTargetScaleY: boolean;
         bAffectTargetScaleZ: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_BoneDrivenController extends AnimGraphNode_SkeletalControlBase {
@@ -18943,6 +19541,7 @@ declare module "ue" {
     class SocketReference {
         constructor(SocketName: string);
         SocketName: string;
+        static StaticClass(): Class;
     }
     
     class BoneSocketTarget {
@@ -18950,6 +19549,7 @@ declare module "ue" {
         bUseSocket: boolean;
         BoneReference: BoneReference;
         SocketReference: SocketReference;
+        static StaticClass(): Class;
     }
     
     class AnimNode_CCDIK extends AnimNode_SkeletalControlBase {
@@ -18964,6 +19564,7 @@ declare module "ue" {
         bStartFromTail: boolean;
         bEnableRotationLimit: boolean;
         RotationLimitPerJoints: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_CCDIK extends AnimGraphNode_SkeletalControlBase {
@@ -18977,6 +19578,7 @@ declare module "ue" {
     class AnimNode_ConvertComponentToLocalSpace extends AnimNode_Base {
         constructor(ComponentPose: ComponentSpacePoseLink);
         ComponentPose: ComponentSpacePoseLink;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ComponentToLocalSpace extends AnimGraphNode_Base {
@@ -18994,6 +19596,7 @@ declare module "ue" {
         bX: boolean;
         bY: boolean;
         bZ: boolean;
+        static StaticClass(): Class;
     }
     
     class Constraint {
@@ -19002,6 +19605,7 @@ declare module "ue" {
         OffsetOption: EConstraintOffsetOption;
         TransformType: ETransformConstraintType;
         PerAxis: FilterOptionPerAxis;
+        static StaticClass(): Class;
     }
     
     class AnimNode_Constraint extends AnimNode_SkeletalControlBase {
@@ -19009,6 +19613,7 @@ declare module "ue" {
         BoneToModify: BoneReference;
         ConstraintSetup: TArray<Constraint>;
         ConstraintWeights: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_Constraint extends AnimGraphNode_SkeletalControlBase {
@@ -19027,6 +19632,7 @@ declare module "ue" {
         bCopyRotation: boolean;
         bCopyScale: boolean;
         ControlSpace: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_CopyBone extends AnimGraphNode_SkeletalControlBase {
@@ -19049,6 +19655,7 @@ declare module "ue" {
         TranslationMultiplier: number;
         RotationMultiplier: number;
         ScaleMultiplier: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_CopyBoneDelta extends AnimGraphNode_SkeletalControlBase {
@@ -19064,6 +19671,7 @@ declare module "ue" {
         SourceMeshComponent: TWeakObjectPtr<SkeletalMeshComponent>;
         bUseAttachedParent: boolean;
         bCopyCurves: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_CopyPoseFromMesh extends AnimGraphNode_Base {
@@ -19078,6 +19686,7 @@ declare module "ue" {
         constructor(Name: string, Value: number);
         Name: string;
         Value: number;
+        static StaticClass(): Class;
     }
     
     class CurveSourceInterface extends Interface {
@@ -19096,6 +19705,7 @@ declare module "ue" {
         SourceBinding: string;
         Alpha: number;
         CurveSource: CurveSourceInterface;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_CurveSource extends AnimGraphNode_Base {
@@ -19127,6 +19737,7 @@ declare module "ue" {
         EffectorRotationSource: number;
         bEnableDebugDraw: boolean;
         EffectorTransformBone: BoneReference;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_Fabrik extends AnimGraphNode_SkeletalControlBase {
@@ -19145,6 +19756,7 @@ declare module "ue" {
         LeftHandIK: BoneReference;
         IKBonesToMove: TArray<BoneReference>;
         HandFKWeight: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_HandIKRetargeting extends AnimGraphNode_SkeletalControlBase {
@@ -19158,6 +19770,7 @@ declare module "ue" {
     class AnimNode_RefPose extends AnimNode_Base {
         constructor(RefPoseType: number);
         RefPoseType: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_RefPoseBase extends AnimGraphNode_Base {
@@ -19178,6 +19791,7 @@ declare module "ue" {
     class AnimNode_Inertialization extends AnimNode_Base {
         constructor(Source: PoseLink);
         Source: PoseLink;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_Inertialization extends AnimGraphNode_Base {
@@ -19192,17 +19806,20 @@ declare module "ue" {
         constructor(BoneName: string, BlendDepth: number);
         BoneName: string;
         BlendDepth: number;
+        static StaticClass(): Class;
     }
     
     class InputBlendPose {
         constructor(BranchFilters: TArray<BranchFilter>);
         BranchFilters: TArray<BranchFilter>;
+        static StaticClass(): Class;
     }
     
     class PerBoneBlendWeight {
         constructor(SourceIndex: number, BlendWeight: number);
         SourceIndex: number;
         BlendWeight: number;
+        static StaticClass(): Class;
     }
     
     class AnimNode_LayeredBoneBlend extends AnimNode_Base {
@@ -19219,6 +19836,7 @@ declare module "ue" {
         PerBoneBlendWeights: TArray<PerBoneBlendWeight>;
         SkeletonGuid: Guid;
         VirtualBoneGuid: Guid;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_LayeredBoneBlend extends AnimGraphNode_BlendListBase {
@@ -19239,6 +19857,7 @@ declare module "ue" {
         HingeRotationAxis: number;
         bEnableRotationLimit: boolean;
         bEnableKneeTwistCorrection: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimNode_LegIK extends AnimNode_SkeletalControlBase {
@@ -19246,6 +19865,7 @@ declare module "ue" {
         ReachPrecision: number;
         MaxIterations: number;
         LegsDefinition: TArray<AnimLegIKDefinition>;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_LegIK extends AnimGraphNode_SkeletalControlBase {
@@ -19270,6 +19890,7 @@ declare module "ue" {
         TargetInstance: Object;
         SourceProperties: TArray<Property>;
         DestProperties: TArray<Property>;
+        static StaticClass(): Class;
     }
     
     class AnimNode_LinkedAnimGraph extends AnimNode_CustomProperty {
@@ -19278,6 +19899,7 @@ declare module "ue" {
         InputPoseNames: TArray<string>;
         InstanceClass: Class;
         Tag: string;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_LinkedAnimGraph extends AnimGraphNode_LinkedAnimGraphBase {
@@ -19292,6 +19914,7 @@ declare module "ue" {
         constructor(Interface: Class, Layer: string);
         Interface: Class;
         Layer: string;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_LinkedAnimLayer extends AnimGraphNode_LinkedAnimGraphBase {
@@ -19308,12 +19931,14 @@ declare module "ue" {
         Name: string;
         Graph: string;
         InputPose: PoseLink;
+        static StaticClass(): Class;
     }
     
     class AnimBlueprintFunctionPinInfo {
         constructor(Name: string, Type: EdGraphPinType);
         Name: string;
         Type: EdGraphPinType;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_LinkedInputPose extends AnimGraphNode_Base {
@@ -19337,6 +19962,7 @@ declare module "ue" {
     class AnimNode_ConvertLocalToComponentSpace extends AnimNode_Base {
         constructor(LocalPose: PoseLink);
         LocalPose: PoseLink;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_LocalToComponentSpace extends AnimGraphNode_Base {
@@ -19351,6 +19977,7 @@ declare module "ue" {
         constructor(Axis: Vector, bInLocalSpace: boolean);
         Axis: Vector;
         bInLocalSpace: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimNode_LookAt extends AnimNode_SkeletalControlBase {
@@ -19371,6 +19998,7 @@ declare module "ue" {
         CustomLookAtAxis: Vector;
         LookUpAxis: number;
         CustomLookUpAxis: Vector;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_LookAt extends AnimGraphNode_SkeletalControlBase {
@@ -19386,6 +20014,7 @@ declare module "ue" {
         Base: PoseLink;
         Additive: PoseLink;
         bMeshSpaceAdditive: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_MakeDynamicAdditive extends AnimGraphNode_Base {
@@ -19398,6 +20027,7 @@ declare module "ue" {
     
     class AnimNode_MeshSpaceRefPose extends AnimNode_Base {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_MeshRefPose extends AnimGraphNode_Base {
@@ -19420,6 +20050,7 @@ declare module "ue" {
         TranslationSpace: number;
         RotationSpace: number;
         ScaleSpace: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ModifyBone extends AnimGraphNode_SkeletalControlBase {
@@ -19438,6 +20069,7 @@ declare module "ue" {
         CurveNames: TArray<string>;
         Alpha: number;
         ApplyMode: EModifyCurveApplyMode;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ModifyCurve extends AnimGraphNode_Base {
@@ -19455,6 +20087,7 @@ declare module "ue" {
         AlphaScaleBias: InputScaleBias;
         bAdditiveNode: boolean;
         bNormalizeAlpha: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_MultiWayBlend extends AnimGraphNode_Base {
@@ -19473,6 +20106,7 @@ declare module "ue" {
         Translation: Vector;
         Rotation: Rotator;
         Scale: Vector;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ObserveBone extends AnimGraphNode_SkeletalControlBase {
@@ -19493,6 +20127,7 @@ declare module "ue" {
     class AnimNode_PoseHandler extends AnimNode_AssetPlayerBase {
         constructor(PoseAsset: PoseAsset);
         PoseAsset: PoseAsset;
+        static StaticClass(): Class;
     }
     
     class AnimNode_PoseBlendNode extends AnimNode_PoseHandler {
@@ -19500,6 +20135,7 @@ declare module "ue" {
         SourcePose: PoseLink;
         BlendOption: EAlphaBlendOption;
         CustomCurve: CurveFloat;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_PoseBlendNode extends AnimGraphNode_PoseHandler {
@@ -19514,6 +20150,7 @@ declare module "ue" {
         constructor(PoseName: string, PoseWeight: number);
         PoseName: string;
         PoseWeight: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_PoseByName extends AnimGraphNode_AssetPlayerBase {
@@ -19528,6 +20165,7 @@ declare module "ue" {
         constructor(TargetTranslation: Vector, TargetRotation: Rotator);
         TargetTranslation: Vector;
         TargetRotation: Rotator;
+        static StaticClass(): Class;
     }
     
     enum ERBFDistanceMethod { Euclidean, Quaternion, SwingAngle, DefaultMethod, ERBFDistanceMethod_MAX}
@@ -19543,6 +20181,7 @@ declare module "ue" {
         CustomCurve: RichCurve;
         DrivenName: string;
         bIsHidden: boolean;
+        static StaticClass(): Class;
     }
     
     enum ERBFNormalizeMethod { OnlyNormalizeAboveOne, AlwaysNormalize, NormalizeWithinMedian, ERBFNormalizeMethod_MAX}
@@ -19558,6 +20197,7 @@ declare module "ue" {
         MedianReference: Vector;
         MedianMin: number;
         MedianMax: number;
+        static StaticClass(): Class;
     }
     
     enum EPoseDriverType { SwingAndTwist, SwingOnly, Translation, EPoseDriverType_MAX}
@@ -19578,6 +20218,7 @@ declare module "ue" {
         DriveSource: EPoseDriverSource;
         DriveOutput: EPoseDriverOutput;
         bOnlyDriveSelectedBones: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_PoseDriver extends AnimGraphNode_PoseHandler {
@@ -19598,6 +20239,7 @@ declare module "ue" {
         SnapshotName: string;
         Snapshot: PoseSnapshot;
         Mode: ESnapshotSourceMode;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_PoseSnapshot extends AnimGraphNode_Base {
@@ -19617,12 +20259,14 @@ declare module "ue" {
         MinPlayRate: number;
         MaxPlayRate: number;
         BlendIn: AlphaBlend;
+        static StaticClass(): Class;
     }
     
     class AnimNode_RandomPlayer extends AnimNode_Base {
         constructor(Entries: TArray<RandomPlayerSequenceEntry>, bShuffleMode: boolean);
         Entries: TArray<RandomPlayerSequenceEntry>;
         bShuffleMode: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_RandomPlayer extends AnimGraphNode_Base {
@@ -19635,6 +20279,7 @@ declare module "ue" {
     
     class AnimNode_ResetRoot extends AnimNode_SkeletalControlBase {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ResetRoot extends AnimGraphNode_SkeletalControlBase {
@@ -19665,6 +20310,7 @@ declare module "ue" {
         bFreezeIncomingPoseOnStart: boolean;
         bClampLinearTranslationLimitToRefPose: boolean;
         bComponentSpaceSimulation: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_RigidBody extends AnimGraphNode_SkeletalControlBase {
@@ -19694,6 +20340,7 @@ declare module "ue" {
         bFreezeIncomingPoseOnStart: boolean;
         bClampLinearTranslationLimitToRefPose: boolean;
         bComponentSpaceSimulation: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_RigidBody_Chaos extends AnimGraphNode_SkeletalControlBase {
@@ -19720,6 +20367,7 @@ declare module "ue" {
         PitchScaleBiasClamp: InputScaleBiasClamp;
         YawScaleBiasClamp: InputScaleBiasClamp;
         MeshToComponent: Rotator;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_RotateRootBone extends AnimGraphNode_Base {
@@ -19737,6 +20385,7 @@ declare module "ue" {
         Multiplier: number;
         RotationAxisToRefer: number;
         bIsAdditive: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_RotationMultiplier extends AnimGraphNode_SkeletalControlBase {
@@ -19758,6 +20407,7 @@ declare module "ue" {
         AlphaScaleBiasClamp: InputScaleBiasClamp;
         AlphaInputType: EAnimAlphaInputType;
         bAlphaBoolEnabled: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_RotationOffsetBlendSpace extends AnimGraphNode_BlendSpaceBase {
@@ -19772,6 +20422,7 @@ declare module "ue" {
         constructor(Pose: PoseLink, CachePoseName: string);
         Pose: PoseLink;
         CachePoseName: string;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_SaveCachedPose extends AnimGraphNode_Base {
@@ -19794,6 +20445,7 @@ declare module "ue" {
         Alpha: number;
         AlphaScaleBias: InputScaleBias;
         ChainInitialLength: EScaleChainInitialLength;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_ScaleChainLength extends AnimGraphNode_Base {
@@ -19812,6 +20464,7 @@ declare module "ue" {
         bTeleportToExplicitTime: boolean;
         ReinitializationBehavior: number;
         StartPosition: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_SequenceEvaluator extends AnimGraphNode_AssetPlayerBase {
@@ -19830,6 +20483,7 @@ declare module "ue" {
         PlayRateScaleBiasClamp: InputScaleBiasClamp;
         StartPosition: number;
         bLoopAnimation: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_SequencePlayer extends AnimGraphNode_AssetPlayerBase {
@@ -19845,6 +20499,7 @@ declare module "ue" {
         Source: PoseLink;
         SlotName: string;
         bAlwaysUpdateSourcePose: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_Slot extends AnimGraphNode_Base {
@@ -19870,6 +20525,7 @@ declare module "ue" {
         TwistBlend: AlphaBlend;
         Stretch: number;
         Offset: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_SplineIK extends AnimGraphNode_SkeletalControlBase {
@@ -19895,6 +20551,7 @@ declare module "ue" {
         bRotateX: boolean;
         bRotateY: boolean;
         bRotateZ: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_SpringBone extends AnimGraphNode_SkeletalControlBase {
@@ -19911,6 +20568,7 @@ declare module "ue" {
         MaxTransitionsPerFrame: number;
         bSkipFirstUpdateTransition: boolean;
         bReinitializeOnBecomingRelevant: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_StateMachine extends AnimGraphNode_StateMachineBase {
@@ -19925,6 +20583,7 @@ declare module "ue" {
         constructor(LimitMin: Vector, LimitMax: Vector);
         LimitMin: Vector;
         LimitMax: Vector;
+        static StaticClass(): Class;
     }
     
     class AnimNode_Trail extends AnimNode_SkeletalControlBase {
@@ -19956,6 +20615,7 @@ declare module "ue" {
         BaseJoint: BoneReference;
         TrailBoneRotationBlendAlpha: number;
         LastBoneRotationAnimAlphaBlend: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_Trail extends AnimGraphNode_SkeletalControlBase {
@@ -19971,6 +20631,7 @@ declare module "ue" {
         FramesToCachePose: number;
         DataSource: number;
         EvaluatorMode: number;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_TransitionPoseEvaluator extends AnimGraphNode_Base {
@@ -19985,11 +20646,13 @@ declare module "ue" {
         constructor(Bone: BoneReference, Axis: Axis);
         Bone: BoneReference;
         Axis: Axis;
+        static StaticClass(): Class;
     }
     
     class AnimCurveParam {
         constructor(Name: string);
         Name: string;
+        static StaticClass(): Class;
     }
     
     class AnimNode_TwistCorrectiveNode extends AnimNode_SkeletalControlBase {
@@ -20001,6 +20664,7 @@ declare module "ue" {
         RemappedMin: number;
         RemappedMax: number;
         Curve: AnimCurveParam;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_TwistCorrectiveNode extends AnimGraphNode_SkeletalControlBase {
@@ -20031,6 +20695,7 @@ declare module "ue" {
         bTakeRotationFromEffectorSpace: boolean;
         bMaintainEffectorRelRot: boolean;
         bAllowTwist: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_TwoBoneIK extends AnimGraphNode_SkeletalControlBase {
@@ -20054,6 +20719,7 @@ declare module "ue" {
         AlphaBoolBlend: InputAlphaBoolBlend;
         AlphaCurveName: string;
         AlphaScaleBiasClamp: InputScaleBiasClamp;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_TwoWayBlend extends AnimGraphNode_Base {
@@ -20068,6 +20734,7 @@ declare module "ue" {
         constructor(LinkToCachingNode: PoseLink, CachePoseName: string);
         LinkToCachingNode: PoseLink;
         CachePoseName: string;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_UseCachedPose extends AnimGraphNode_Base {
@@ -20392,6 +21059,7 @@ declare module "ue" {
         Offsets: Margin;
         Anchors: Anchors;
         Alignment: Vector2D;
+        static StaticClass(): Class;
     }
     
     class CanvasPanelSlot extends PanelSlot {
@@ -20521,6 +21189,7 @@ declare module "ue" {
         DropIndicator_Below: SlateBrush;
         ActiveHighlightedBrush: SlateBrush;
         InactiveHighlightedBrush: SlateBrush;
+        static StaticClass(): Class;
     }
     
     class ComboBoxString extends Widget {
@@ -20564,12 +21233,14 @@ declare module "ue" {
         constructor(Value: number, SizeRule: number);
         Value: number;
         SizeRule: number;
+        static StaticClass(): Class;
     }
     
     class UserWidgetPool {
         constructor(ActiveWidgets: TArray<UserWidget>, InactiveWidgets: TArray<UserWidget>);
         ActiveWidgets: TArray<UserWidget>;
         InactiveWidgets: TArray<UserWidget>;
+        static StaticClass(): Class;
     }
     
     class DynamicEntryBoxBase extends Widget {
@@ -20606,6 +21277,7 @@ declare module "ue" {
     class VirtualKeyboardOptions {
         constructor(bEnableAutocorrect: boolean);
         bEnableAutocorrect: boolean;
+        static StaticClass(): Class;
     }
     
     enum EVirtualKeyboardDismissAction { TextChangeOnDismiss, TextCommitOnAccept, TextCommitOnDismiss, EVirtualKeyboardDismissAction_MAX}
@@ -20617,6 +21289,7 @@ declare module "ue" {
         bOverride_TextFlowDirection: boolean;
         TextShapingMethod: ETextShapingMethod;
         TextFlowDirection: ETextFlowDirection;
+        static StaticClass(): Class;
     }
     
     class EditableText extends Widget {
@@ -20711,6 +21384,7 @@ declare module "ue" {
         CollapsedImage: SlateBrush;
         ExpandedImage: SlateBrush;
         RolloutAnimationSeconds: number;
+        static StaticClass(): Class;
     }
     
     class ExpandableArea extends Widget {
@@ -21032,6 +21706,7 @@ declare module "ue" {
     class MovieScene2DTransformMask {
         constructor(Mask: number);
         Mask: number;
+        static StaticClass(): Class;
     }
     
     class MovieScene2DTransformSection extends MovieSceneSection {
@@ -21518,6 +22193,7 @@ declare module "ue" {
         UV3: Vector2D;
         UV4: Vector2D;
         UV5: Vector2D;
+        static StaticClass(): Class;
     }
     
     class SlateVectorArtData extends Object {
@@ -21543,6 +22219,7 @@ declare module "ue" {
         HoveredThumbImage: SlateBrush;
         DisabledThumbImage: SlateBrush;
         BarThickness: number;
+        static StaticClass(): Class;
     }
     
     class Slider extends Widget {
@@ -21803,6 +22480,7 @@ declare module "ue" {
         AnimationToBind: string;
         FunctionNameToBind: string;
         UserTag: string;
+        static StaticClass(): Class;
     }
     
     class WidgetAnimationDelegateBinding extends DynamicBlueprintBinding {
@@ -21839,6 +22517,7 @@ declare module "ue" {
         FunctionName: string;
         SourcePath: DynamicPropertyPath;
         Kind: EBindingKind;
+        static StaticClass(): Class;
     }
     
     class WidgetBlueprintGeneratedClass extends BlueprintGeneratedClass {
@@ -21867,6 +22546,7 @@ declare module "ue" {
     enum EMouseLockMode { DoNotLock, LockOnCapture, LockAlways, LockInFullscreen, EMouseLockMode_MAX}
     class NavigationEvent extends InputEvent {
         constructor();
+        static StaticClass(): Class;
     }
     
     class WidgetBlueprintLibrary extends BlueprintFunctionLibrary {
@@ -22118,6 +22798,7 @@ declare module "ue" {
         constructor(Positions: TArray<Vector>, Range: number);
         Positions: TArray<Vector>;
         Range: number;
+        static StaticClass(): Class;
     }
     
     class KismetAnimationLibrary extends BlueprintFunctionLibrary {
@@ -22139,6 +22820,7 @@ declare module "ue" {
     
     class BranchingPointNotifyPayload {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PlayMontageCallbackProxy extends Object {
@@ -22240,18 +22922,21 @@ declare module "ue" {
     class MovieSceneActorReferenceKey {
         constructor(Object: MovieSceneObjectBindingID);
         Object: MovieSceneObjectBindingID;
+        static StaticClass(): Class;
     }
     
     class MovieSceneActorReferenceData extends MovieSceneChannel {
         constructor(KeyTimes: TArray<FrameNumber>, KeyValues: TArray<MovieSceneActorReferenceKey>);
         KeyTimes: TArray<FrameNumber>;
         KeyValues: TArray<MovieSceneActorReferenceKey>;
+        static StaticClass(): Class;
     }
     
     class IntegralKey {
         constructor(Time: number, Value: number);
         Time: number;
         Value: number;
+        static StaticClass(): Class;
     }
     
     class IntegralCurve extends IndexedCurve {
@@ -22259,6 +22944,7 @@ declare module "ue" {
         Keys: TArray<IntegralKey>;
         DefaultValue: number;
         bUseDefaultValueBeforeFirstKey: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneActorReferenceSection extends MovieSceneSection {
@@ -22318,6 +23004,7 @@ declare module "ue" {
         DefaultValue: boolean;
         bHasDefaultValue: boolean;
         Values: TArray<boolean>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneBoolSection extends MovieSceneSection {
@@ -22344,6 +23031,7 @@ declare module "ue" {
         bHasDefaultValue: boolean;
         Values: TArray<number>;
         Enum: Enum;
+        static StaticClass(): Class;
     }
     
     class MovieSceneByteSection extends MovieSceneSection {
@@ -22370,6 +23058,7 @@ declare module "ue" {
         BlendInTime: number;
         BlendOutTime: number;
         bLooping: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneCameraAnimSection extends MovieSceneSection {
@@ -22420,6 +23109,7 @@ declare module "ue" {
         PlayScale: number;
         PlaySpace: number;
         UserDefinedPlaySpace: Rotator;
+        static StaticClass(): Class;
     }
     
     class MovieSceneCameraShakeSection extends MovieSceneSection {
@@ -22450,6 +23140,7 @@ declare module "ue" {
         StartOffset: number;
         PrerollTime: number;
         PostrollTime: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSubSection extends MovieSceneSection {
@@ -22542,11 +23233,13 @@ declare module "ue" {
         constructor(Function: Function, BoundObjectProperty: Property);
         Function: Function;
         BoundObjectProperty: Property;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEventPayloadVariable {
         constructor(Value: string);
         Value: string;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEvent {
@@ -22559,6 +23252,7 @@ declare module "ue" {
         NodeGuid: Guid;
         WeakCachedEndpoint: TWeakObjectPtr<Object>;
         FunctionEntry: TWeakObjectPtr<Object>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEventRepeaterSection extends MovieSceneEventSectionBase {
@@ -22573,21 +23267,25 @@ declare module "ue" {
         constructor(Time: number, Value: string);
         Time: number;
         Value: string;
+        static StaticClass(): Class;
     }
     
     class NameCurve extends IndexedCurve {
         constructor(Keys: TArray<NameCurveKey>);
         Keys: TArray<NameCurveKey>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEventParameters {
         constructor();
+        static StaticClass(): Class;
     }
     
     class EventPayload {
         constructor(EventName: string, Parameters: MovieSceneEventParameters);
         EventName: string;
         Parameters: MovieSceneEventParameters;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEventSectionData extends MovieSceneChannel {
@@ -22595,6 +23293,7 @@ declare module "ue" {
         Times: TArray<FrameNumber>;
         KeyValues: TArray<EventPayload>;
         KeyTimes: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEventSection extends MovieSceneSection {
@@ -22623,6 +23322,7 @@ declare module "ue" {
         constructor(KeyTimes: TArray<FrameNumber>, KeyValues: TArray<MovieSceneEvent>);
         KeyTimes: TArray<FrameNumber>;
         KeyValues: TArray<MovieSceneEvent>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneEventTriggerSection extends MovieSceneEventSectionBase {
@@ -22670,6 +23370,7 @@ declare module "ue" {
         DefaultValue: number;
         bHasDefaultValue: boolean;
         Values: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneIntegerSection extends MovieSceneSection {
@@ -22729,6 +23430,7 @@ declare module "ue" {
         constructor(SoftPtr: TSoftObjectPtr<Object>, HardPtr: Object);
         SoftPtr: TSoftObjectPtr<Object>;
         HardPtr: Object;
+        static StaticClass(): Class;
     }
     
     class MovieSceneObjectPathChannel extends MovieSceneChannel {
@@ -22737,6 +23439,7 @@ declare module "ue" {
         Times: TArray<FrameNumber>;
         Values: TArray<MovieSceneObjectPathChannelKeyValue>;
         DefaultValue: MovieSceneObjectPathChannelKeyValue;
+        static StaticClass(): Class;
     }
     
     class MovieSceneObjectPropertySection extends MovieSceneSection {
@@ -22759,6 +23462,7 @@ declare module "ue" {
         constructor(ParameterName: string, ParameterCurve: MovieSceneFloatChannel);
         ParameterName: string;
         ParameterCurve: MovieSceneFloatChannel;
+        static StaticClass(): Class;
     }
     
     class VectorParameterNameAndCurves {
@@ -22767,6 +23471,7 @@ declare module "ue" {
         XCurve: MovieSceneFloatChannel;
         YCurve: MovieSceneFloatChannel;
         ZCurve: MovieSceneFloatChannel;
+        static StaticClass(): Class;
     }
     
     class ColorParameterNameAndCurves {
@@ -22776,6 +23481,7 @@ declare module "ue" {
         GreenCurve: MovieSceneFloatChannel;
         BlueCurve: MovieSceneFloatChannel;
         AlphaCurve: MovieSceneFloatChannel;
+        static StaticClass(): Class;
     }
     
     class TransformParameterNameAndCurves {
@@ -22784,6 +23490,7 @@ declare module "ue" {
         Translation: FixSizeArray<MovieSceneFloatChannel>;
         Rotation: FixSizeArray<MovieSceneFloatChannel>;
         Scale: FixSizeArray<MovieSceneFloatChannel>;
+        static StaticClass(): Class;
     }
     
     class MovieSceneParameterSection extends MovieSceneSection {
@@ -22807,6 +23514,7 @@ declare module "ue" {
     
     class MovieSceneParticleChannel extends MovieSceneByteChannel {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MovieSceneParticleSection extends MovieSceneSection {
@@ -22855,6 +23563,7 @@ declare module "ue" {
         bForceCustomMode: boolean;
         StartOffset: number;
         EndOffset: number;
+        static StaticClass(): Class;
     }
     
     class MovieSceneSkeletalAnimationSection extends MovieSceneSection {
@@ -22917,6 +23626,7 @@ declare module "ue" {
         Values: TArray<string>;
         DefaultValue: string;
         bHasDefaultValue: boolean;
+        static StaticClass(): Class;
     }
     
     class MovieSceneStringSection extends MovieSceneSection {
@@ -23847,6 +24557,7 @@ declare module "ue" {
         constructor(ChunkID: number, ParentChunkID: number);
         ChunkID: number;
         ParentChunkID: number;
+        static StaticClass(): Class;
     }
     
     class ChunkDependencyInfo extends Object {
@@ -24031,6 +24742,7 @@ declare module "ue" {
         ImportRowStruct: ScriptStruct;
         ImportType: ECSVImportType;
         ImportCurveInterpMode: number;
+        static StaticClass(): Class;
     }
     
     class CSVImportFactory extends Factory {
@@ -24225,6 +24937,7 @@ declare module "ue" {
         constructor(FontValue: Font, FontPage: number);
         FontValue: Font;
         FontPage: number;
+        static StaticClass(): Class;
     }
     
     class DEditorFontParameterValue extends DEditorParameterValue {
@@ -24256,6 +24969,7 @@ declare module "ue" {
         bIsUsedAsAtlasPosition: boolean;
         Curve: TSoftObjectPtr<CurveLinearColor>;
         Atlas: TSoftObjectPtr<CurveLinearColorAtlas>;
+        static StaticClass(): Class;
     }
     
     class DEditorScalarParameterValue extends DEditorParameterValue {
@@ -24273,6 +24987,7 @@ declare module "ue" {
         G: boolean;
         B: boolean;
         A: boolean;
+        static StaticClass(): Class;
     }
     
     class DEditorStaticComponentMaskParameterValue extends DEditorParameterValue {
@@ -24297,6 +25012,7 @@ declare module "ue" {
         G: string;
         B: string;
         A: string;
+        static StaticClass(): Class;
     }
     
     class DEditorTextureParameterValue extends DEditorParameterValue {
@@ -24566,6 +25282,7 @@ declare module "ue" {
         constructor(In: number, Out: Color);
         In: number;
         Out: Color;
+        static StaticClass(): Class;
     }
     
     class StatColorMapping {
@@ -24573,12 +25290,14 @@ declare module "ue" {
         StatName: string;
         ColorMap: TArray<StatColorMapEntry>;
         DisableBlend: boolean;
+        static StaticClass(): Class;
     }
     
     class GameNameRedirect {
         constructor(OldGameName: string, NewGameName: string);
         OldGameName: string;
         NewGameName: string;
+        static StaticClass(): Class;
     }
     
     class ClassRedirect {
@@ -24591,18 +25310,21 @@ declare module "ue" {
         NewClassClass: string;
         NewClassPackage: string;
         InstanceOnly: boolean;
+        static StaticClass(): Class;
     }
     
     class PluginRedirect {
         constructor(OldPluginName: string, NewPluginName: string);
         OldPluginName: string;
         NewPluginName: string;
+        static StaticClass(): Class;
     }
     
     class StructRedirect {
         constructor(OldStructName: string, NewStructName: string);
         OldStructName: string;
         NewStructName: string;
+        static StaticClass(): Class;
     }
     
     enum ETimecodeProviderSynchronizationState { Closed, Error, Synchronized, Synchronizing, ETimecodeProviderSynchronizationState_MAX}
@@ -24624,6 +25346,7 @@ declare module "ue" {
         Location: Vector;
         Rotation: Rotator;
         Comment: string;
+        static StaticClass(): Class;
     }
     
     class NetDriverDefinition {
@@ -24631,6 +25354,7 @@ declare module "ue" {
         DefName: string;
         DriverClassName: string;
         DriverClassNameFallback: string;
+        static StaticClass(): Class;
     }
     
     class Engine extends Object {
@@ -25025,6 +25749,7 @@ declare module "ue" {
         constructor(Wildcard: string, bInclude: boolean);
         Wildcard: string;
         bInclude: boolean;
+        static StaticClass(): Class;
     }
     
     class AutoReimportDirectoryConfig {
@@ -25032,6 +25757,7 @@ declare module "ue" {
         SourceDirectory: string;
         MountPoint: string;
         Wildcards: TArray<AutoReimportWildcard>;
+        static StaticClass(): Class;
     }
     
     class EditorLoadingSavingSettings extends Object {
@@ -25172,6 +25898,7 @@ declare module "ue" {
         constructor(Name: string, Depth: number);
         Name: string;
         Depth: number;
+        static StaticClass(): Class;
     }
     
     class LevelEditor2DSettings extends DeveloperSettings {
@@ -25292,6 +26019,7 @@ declare module "ue" {
         constructor(Min: number, Max: number);
         Min: number;
         Max: number;
+        static StaticClass(): Class;
     }
     
     class FbxAnimSequenceImportData extends FbxAssetImportData {
@@ -25325,11 +26053,13 @@ declare module "ue" {
         ExpectedPresetsDataFloat: TArray<number>;
         ExpectedPresetsDataDouble: TArray<number>;
         ExpectedPresetsDataString: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class ImportMeshLodSectionsData {
         constructor(SectionOriginalMaterialName: TArray<string>);
         SectionOriginalMaterialName: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class FbxMeshImportData extends FbxAssetImportData {
@@ -25933,6 +26663,7 @@ declare module "ue" {
         MinLatency: number;
         MaxLatency: number;
         PacketLossPercentage: number;
+        static StaticClass(): Class;
     }
     
     class LevelEditorPlayNetworkEmulationSettings {
@@ -25942,6 +26673,7 @@ declare module "ue" {
         CurrentProfile: string;
         OutPackets: NetworkEmulationPacketSettings;
         InPackets: NetworkEmulationPacketSettings;
+        static StaticClass(): Class;
     }
     
     class PlayScreenResolution {
@@ -25952,6 +26684,7 @@ declare module "ue" {
         AspectRatio: string;
         bCanSwapAspectRatio: boolean;
         ProfileName: string;
+        static StaticClass(): Class;
     }
     
     class LevelEditorPlaySettings extends Object {
@@ -26024,12 +26757,14 @@ declare module "ue" {
         bEnabled: boolean;
         SnapOffsetExtent: number;
         bSnapRotation: boolean;
+        static StaticClass(): Class;
     }
     
     class ExposureSettings {
         constructor(FixedEV100: number, bFixed: boolean);
         FixedEV100: number;
         bFixed: boolean;
+        static StaticClass(): Class;
     }
     
     class LevelEditorViewportInstanceSettings {
@@ -26049,12 +26784,14 @@ declare module "ue" {
         bShowOnScreenStats: boolean;
         EnabledStats: TArray<string>;
         bShowFullToolbar: boolean;
+        static StaticClass(): Class;
     }
     
     class LevelEditorViewportInstanceSettingsKeyValuePair {
         constructor(ConfigName: string, ConfigSettings: LevelEditorViewportInstanceSettings);
         ConfigName: string;
         ConfigSettings: LevelEditorViewportInstanceSettings;
+        static StaticClass(): Class;
     }
     
     class LevelEditorViewportSettings extends Object {
@@ -26200,6 +26937,7 @@ declare module "ue" {
         bColorBordersGreen: boolean;
         bColorByExecutionTime: boolean;
         ExecutionTimeDivisor: number;
+        static StaticClass(): Class;
     }
     
     class SwarmDebugOptions {
@@ -26207,6 +26945,7 @@ declare module "ue" {
         bDistributionEnabled: boolean;
         bForceContentExport: boolean;
         bInitialized: boolean;
+        static StaticClass(): Class;
     }
     
     class LightmassOptionsObject extends Object {
@@ -26258,6 +26997,7 @@ declare module "ue" {
         GroupAssociation: number;
         Parameters: TArray<DEditorParameterValue>;
         GroupSortPriority: number;
+        static StaticClass(): Class;
     }
     
     class MaterialFunctionInstance extends MaterialFunctionInterface {
@@ -26280,16 +27020,19 @@ declare module "ue" {
     class LightmassParameterValue {
         constructor(bOverride: boolean);
         bOverride: boolean;
+        static StaticClass(): Class;
     }
     
     class LightmassBooleanParameterValue extends LightmassParameterValue {
         constructor(ParameterValue: boolean);
         ParameterValue: boolean;
+        static StaticClass(): Class;
     }
     
     class LightmassScalarParameterValue extends LightmassParameterValue {
         constructor(ParameterValue: number);
         ParameterValue: number;
+        static StaticClass(): Class;
     }
     
     class LightmassParameterizedMaterialSettings {
@@ -26298,6 +27041,7 @@ declare module "ue" {
         EmissiveBoost: LightmassScalarParameterValue;
         DiffuseBoost: LightmassScalarParameterValue;
         ExportResolutionScale: LightmassScalarParameterValue;
+        static StaticClass(): Class;
     }
     
     class MaterialEditorInstanceConstant extends Object {
@@ -26608,12 +27352,14 @@ declare module "ue" {
         ViewFOV: number;
         CameraFollowMode: EAnimationViewportCameraFollowMode;
         CameraFollowBoneName: string;
+        static StaticClass(): Class;
     }
     
     class AssetEditorOptions {
         constructor(Context: string, ViewportConfigs: FixSizeArray<ViewportConfigOptions>);
         Context: string;
         ViewportConfigs: FixSizeArray<ViewportConfigOptions>;
+        static StaticClass(): Class;
     }
     
     class PersonaOptions extends Object {
@@ -26708,6 +27454,7 @@ declare module "ue" {
         AngularConstraintMode: number;
         HullCount: number;
         MaxHullVerts: number;
+        static StaticClass(): Class;
     }
     
     class PhysicsAssetGenerationSettings extends Object {
@@ -26856,6 +27603,7 @@ declare module "ue" {
         SecondProperty: number;
         CustomizedStructInsideUncustomizedStruct: LinearColor;
         CustomizedStructInsideUncustomizedStruct2: SoftObjectPath;
+        static StaticClass(): Class;
     }
     
     class PropertyEditorTestBasicStruct {
@@ -26864,11 +27612,13 @@ declare module "ue" {
         FloatPropertyInsideAStruct: number;
         ObjectPropertyInsideAStruct: Object;
         InnerStruct: PropertyEditorTestSubStruct;
+        static StaticClass(): Class;
     }
     
     class PropertyEditTestTextStruct {
         constructor(NormalProperty: string);
         NormalProperty: string;
+        static StaticClass(): Class;
     }
     
     class AnimClassInterface extends Interface {
@@ -26880,6 +27630,7 @@ declare module "ue" {
     
     class DateTime {
         constructor();
+        static StaticClass(): Class;
     }
     
     class PropertyEditorTestObject extends Object {
@@ -27583,6 +28334,7 @@ declare module "ue" {
         ClassNeedingThumbnail: Class;
         RendererClassName: string;
         Renderer: ThumbnailRenderer;
+        static StaticClass(): Class;
     }
     
     class ThumbnailManager extends Object {
@@ -27647,6 +28399,7 @@ declare module "ue" {
         constructor(Parent: string, Name: string);
         Parent: string;
         Name: string;
+        static StaticClass(): Class;
     }
     
     class EditorCommand {
@@ -27655,6 +28408,7 @@ declare module "ue" {
         CommandName: string;
         ExecCommand: string;
         Description: string;
+        static StaticClass(): Class;
     }
     
     class EditorKeyBinding {
@@ -27664,6 +28418,7 @@ declare module "ue" {
         bShiftDown: boolean;
         Key: Key;
         CommandName: string;
+        static StaticClass(): Class;
     }
     
     class UnrealEdKeyBindings extends Object {
@@ -27678,6 +28433,7 @@ declare module "ue" {
         constructor(ClassName: string, AssetClass: string);
         ClassName: string;
         AssetClass: string;
+        static StaticClass(): Class;
     }
     
     class UnrealEdOptions extends Object {
@@ -27696,6 +28452,7 @@ declare module "ue" {
         constructor(ThumbnailTexture: Texture2D, Map: string);
         ThumbnailTexture: Texture2D;
         Map: string;
+        static StaticClass(): Class;
     }
     
     class UnrealEdEngine extends EditorEngine {
@@ -27760,6 +28517,7 @@ declare module "ue" {
         bEnable3dWidget: boolean;
         CurrentDefaultValue: string;
         ToolTip: string;
+        static StaticClass(): Class;
     }
     
     class UserDefinedStructEditorData extends Object {
@@ -27836,10 +28594,12 @@ declare module "ue" {
     class InstancedStaticMeshInstanceData {
         constructor(Transform: Matrix);
         Transform: Matrix;
+        static StaticClass(): Class;
     }
     
     class InstancedStaticMeshMappingInfo {
         constructor();
+        static StaticClass(): Class;
     }
     
     class InstancedStaticMeshComponent extends StaticMeshComponent {
@@ -27910,6 +28670,7 @@ declare module "ue" {
         constructor(Min: number, Max: number);
         Min: number;
         Max: number;
+        static StaticClass(): Class;
     }
     
     class FoliageVertexColorChannelMask {
@@ -27917,6 +28678,7 @@ declare module "ue" {
         UseMask: boolean;
         MaskThreshold: number;
         InvertMask: boolean;
+        static StaticClass(): Class;
     }
     
     class FoliageType extends Object {
@@ -28107,6 +28869,7 @@ declare module "ue" {
         TypeInstance: FoliageType;
         bIsAsset: boolean;
         Type: Class;
+        static StaticClass(): Class;
     }
     
     class ProceduralFoliageSpawner extends Object {
@@ -28164,6 +28927,7 @@ declare module "ue" {
         Age: number;
         Scale: number;
         Type: FoliageType;
+        static StaticClass(): Class;
     }
     
     class ProceduralFoliageTile extends Object {
@@ -28182,6 +28946,7 @@ declare module "ue" {
         CompressionQuality: number;
         bOverwriteFile: boolean;
         bAsync: boolean;
+        static StaticClass(): Class;
     }
     
     class ImageWriteBlueprintLibrary extends BlueprintFunctionLibrary {
@@ -28214,6 +28979,7 @@ declare module "ue" {
         ControlPoint: LandscapeSplineControlPoint;
         TangentLen: number;
         SocketName: string;
+        static StaticClass(): Class;
     }
     
     class LandscapeSplineMeshEntry {
@@ -28227,6 +28993,7 @@ declare module "ue" {
         Orientation: number;
         ForwardAxis: number;
         UpAxis: number;
+        static StaticClass(): Class;
     }
     
     class LandscapeSplineInterpPoint {
@@ -28241,6 +29008,7 @@ declare module "ue" {
         LayerFalloffLeft: Vector;
         LayerFalloffRight: Vector;
         StartEndFalloff: number;
+        static StaticClass(): Class;
     }
     
     class LandscapeSplineSegment extends Object {
@@ -28281,6 +29049,7 @@ declare module "ue" {
         constructor(Segment: LandscapeSplineSegment, End: boolean);
         Segment: LandscapeSplineSegment;
         End: boolean;
+        static StaticClass(): Class;
     }
     
     class LandscapeSplineControlPoint extends Object {
@@ -28333,6 +29102,7 @@ declare module "ue" {
         ModificationKey: Guid;
         MeshComponent: ControlPointMeshComponent;
         Identifier: TLazyObjectPtr<LandscapeSplineControlPoint>;
+        static StaticClass(): Class;
     }
     
     class ForeignSplineSegmentData {
@@ -28340,6 +29110,7 @@ declare module "ue" {
         ModificationKey: Guid;
         MeshComponents: TArray<SplineMeshComponent>;
         Identifier: TLazyObjectPtr<LandscapeSplineSegment>;
+        static StaticClass(): Class;
     }
     
     class ForeignWorldSplineData {
@@ -28348,6 +29119,7 @@ declare module "ue" {
         ForeignControlPointData: TArray<ForeignControlPointData>;
         ForeignSplineSegmentDataMap: TMap<TLazyObjectPtr<LandscapeSplineSegment>, ForeignSplineSegmentData>;
         ForeignSplineSegmentData: TArray<ForeignSplineSegmentData>;
+        static StaticClass(): Class;
     }
     
     class LandscapeSplinesComponent extends PrimitiveComponent {
@@ -28372,12 +29144,14 @@ declare module "ue" {
         constructor(LODIndex: PerPlatformInt, Material: MaterialInterface);
         LODIndex: PerPlatformInt;
         Material: MaterialInterface;
+        static StaticClass(): Class;
     }
     
     class LandscapeComponentMaterialOverride {
         constructor(LODIndex: PerPlatformInt, Material: MaterialInterface);
         LODIndex: PerPlatformInt;
         Material: MaterialInterface;
+        static StaticClass(): Class;
     }
     
     enum ESplineModulationColorMask { Red, Green, Blue, Alpha, ESplineModulationColorMask_MAX}
@@ -28421,6 +29195,7 @@ declare module "ue" {
     class HeightmapData {
         constructor(Texture: Texture2D);
         Texture: Texture2D;
+        static StaticClass(): Class;
     }
     
     class WeightmapLayerAllocationInfo {
@@ -28428,6 +29203,7 @@ declare module "ue" {
         LayerInfo: LandscapeLayerInfoObject;
         WeightmapTextureIndex: number;
         WeightmapTextureChannel: number;
+        static StaticClass(): Class;
     }
     
     class LandscapeWeightmapUsage extends Object {
@@ -28444,12 +29220,14 @@ declare module "ue" {
         Textures: TArray<Texture2D>;
         LayerAllocations: TArray<WeightmapLayerAllocationInfo>;
         TextureUsages: TArray<LandscapeWeightmapUsage>;
+        static StaticClass(): Class;
     }
     
     class LandscapeLayerComponentData {
         constructor(HeightmapData: HeightmapData, WeightmapData: WeightmapData);
         HeightmapData: HeightmapData;
         WeightmapData: WeightmapData;
+        static StaticClass(): Class;
     }
     
     class LandscapeEditToolRenderData {
@@ -28463,6 +29241,7 @@ declare module "ue" {
         DataTexture: Texture2D;
         LayerContributionTexture: Texture2D;
         DirtyTexture: Texture2D;
+        static StaticClass(): Class;
     }
     
     class LandscapeComponent extends PrimitiveComponent {
@@ -28529,6 +29308,7 @@ declare module "ue" {
         constructor(LayerInfoObj: LandscapeLayerInfoObject, ReimportLayerFilePath: string);
         LayerInfoObj: LandscapeLayerInfoObject;
         ReimportLayerFilePath: string;
+        static StaticClass(): Class;
     }
     
     class LandscapeProxy extends Actor {
@@ -28639,6 +29419,7 @@ declare module "ue" {
     class LandscapeLayerBrush {
         constructor(BlueprintBrush: LandscapeBlueprintBrushBase);
         BlueprintBrush: LandscapeBlueprintBrushBase;
+        static StaticClass(): Class;
     }
     
     class LandscapeLayer {
@@ -28652,6 +29433,7 @@ declare module "ue" {
         BlendMode: number;
         Brushes: TArray<LandscapeLayerBrush>;
         WeightmapLayerAllocationBlend: TMap<LandscapeLayerInfoObject, boolean>;
+        static StaticClass(): Class;
     }
     
     class Landscape extends LandscapeProxy {
@@ -28679,6 +29461,7 @@ declare module "ue" {
         Owner: LandscapeProxy;
         DebugColorChannel: number;
         bValid: boolean;
+        static StaticClass(): Class;
     }
     
     class LandscapeStreamingProxy extends LandscapeProxy {
@@ -28771,6 +29554,7 @@ declare module "ue" {
         bReceivesDecals: boolean;
         bCastDynamicShadow: boolean;
         bKeepInstanceBufferCPUCopy: boolean;
+        static StaticClass(): Class;
     }
     
     class LandscapeGrassType extends Object {
@@ -28853,6 +29637,7 @@ declare module "ue" {
         Name: string;
         GrassType: LandscapeGrassType;
         Input: ExpressionInput;
+        static StaticClass(): Class;
     }
     
     class MaterialExpressionLandscapeGrassOutput extends MaterialExpressionCustomOutput {
@@ -28872,6 +29657,7 @@ declare module "ue" {
         PreviewWeight: number;
         ConstLayerInput: Vector;
         ConstHeightInput: number;
+        static StaticClass(): Class;
     }
     
     class MaterialExpressionLandscapeLayerBlend extends MaterialExpression {
@@ -29027,6 +29813,7 @@ declare module "ue" {
         InputPoseNodeProperties: TArray<StructProperty>;
         InputProperties: TArray<Property>;
         bImplemented: boolean;
+        static StaticClass(): Class;
     }
     
     class AnimClassData extends Object {
@@ -29281,6 +30068,7 @@ declare module "ue" {
     class AnimSetMeshLinkup {
         constructor(BoneToTrackTable: TArray<number>);
         BoneToTrackTable: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class AnimSet extends Object {
@@ -29312,6 +30100,7 @@ declare module "ue" {
         PosKeys: TArray<Vector>;
         RotKeys: TArray<Quat>;
         ScaleKeys: TArray<Vector>;
+        static StaticClass(): Class;
     }
     
     class AnimStreamable extends AnimSequenceBase {
@@ -29363,6 +30152,7 @@ declare module "ue" {
         ChunkId: number;
         bApplyRecursively: boolean;
         CookRule: EPrimaryAssetCookRule;
+        static StaticClass(): Class;
     }
     
     class PrimaryAssetTypeInfo {
@@ -29378,23 +30168,27 @@ declare module "ue" {
         AssetScanPaths: TArray<string>;
         bIsDynamicAsset: boolean;
         NumberOfAssets: number;
+        static StaticClass(): Class;
     }
     
     class PrimaryAssetType {
         constructor(Name: string);
         Name: string;
+        static StaticClass(): Class;
     }
     
     class PrimaryAssetId {
         constructor(PrimaryAssetType: PrimaryAssetType, PrimaryAssetName: string);
         PrimaryAssetType: PrimaryAssetType;
         PrimaryAssetName: string;
+        static StaticClass(): Class;
     }
     
     class PrimaryAssetRulesOverride {
         constructor(PrimaryAssetId: PrimaryAssetId, Rules: PrimaryAssetRules);
         PrimaryAssetId: PrimaryAssetId;
         Rules: PrimaryAssetRules;
+        static StaticClass(): Class;
     }
     
     class PrimaryAssetRulesCustomOverride {
@@ -29403,12 +30197,14 @@ declare module "ue" {
         FilterDirectory: DirectoryPath;
         FilterString: string;
         Rules: PrimaryAssetRules;
+        static StaticClass(): Class;
     }
     
     class AssetManagerRedirect {
         constructor(Old: string, New: string);
         Old: string;
         New: string;
+        static StaticClass(): Class;
     }
     
     class AssetManagerSettings extends DeveloperSettings {
@@ -29514,6 +30310,7 @@ declare module "ue" {
         InscatterMuNum: number;
         InscatterMuSNum: number;
         InscatterNuNum: number;
+        static StaticClass(): Class;
     }
     
     class AtmosphericFogComponent extends SceneComponent {
@@ -29569,6 +30366,7 @@ declare module "ue" {
         constructor(DisplayName: string, MaxChannels: number);
         DisplayName: string;
         MaxChannels: number;
+        static StaticClass(): Class;
     }
     
     enum EPanningMethod { Linear, EqualPower, EPanningMethod_MAX}
@@ -29620,18 +30418,21 @@ declare module "ue" {
         constructor(PerformanceTestmap: SoftObjectPath, TestTimer: number);
         PerformanceTestmap: SoftObjectPath;
         TestTimer: number;
+        static StaticClass(): Class;
     }
     
     class ImportFactorySettingValues {
         constructor(SettingName: string, Value: string);
         SettingName: string;
         Value: string;
+        static StaticClass(): Class;
     }
     
     class EditorImportWorkflowDefinition {
         constructor(ImportFilePath: FilePath, FactorySettings: TArray<ImportFactorySettingValues>);
         ImportFilePath: FilePath;
         FactorySettings: TArray<ImportFactorySettingValues>;
+        static StaticClass(): Class;
     }
     
     class BuildPromotionImportWorkflowSettings {
@@ -29647,6 +30448,7 @@ declare module "ue" {
         Sound: EditorImportWorkflowDefinition;
         SurroundSound: EditorImportWorkflowDefinition;
         OtherAssetsToImport: TArray<EditorImportWorkflowDefinition>;
+        static StaticClass(): Class;
     }
     
     class BuildPromotionOpenAssetSettings {
@@ -29657,12 +30459,14 @@ declare module "ue" {
         SkeletalMeshAsset: FilePath;
         StaticMeshAsset: FilePath;
         TextureAsset: FilePath;
+        static StaticClass(): Class;
     }
     
     class BuildPromotionNewProjectSettings {
         constructor(NewProjectFolderOverride: DirectoryPath, NewProjectNameOverride: string);
         NewProjectFolderOverride: DirectoryPath;
         NewProjectNameOverride: string;
+        static StaticClass(): Class;
     }
     
     class BuildPromotionTestSettings {
@@ -29672,6 +30476,7 @@ declare module "ue" {
         OpenAssets: BuildPromotionOpenAssetSettings;
         NewProjectSettings: BuildPromotionNewProjectSettings;
         SourceControlMaterial: FilePath;
+        static StaticClass(): Class;
     }
     
     class MaterialEditorPromotionSettings {
@@ -29679,11 +30484,13 @@ declare module "ue" {
         DefaultMaterialAsset: FilePath;
         DefaultDiffuseTexture: FilePath;
         DefaultNormalTexture: FilePath;
+        static StaticClass(): Class;
     }
     
     class ParticleEditorPromotionSettings {
         constructor(DefaultParticleAsset: FilePath);
         DefaultParticleAsset: FilePath;
+        static StaticClass(): Class;
     }
     
     class BlueprintEditorPromotionSettings {
@@ -29691,6 +30498,7 @@ declare module "ue" {
         FirstMeshPath: FilePath;
         SecondMeshPath: FilePath;
         DefaultParticleAsset: FilePath;
+        static StaticClass(): Class;
     }
     
     class ExternalToolDefinition {
@@ -29701,6 +30509,7 @@ declare module "ue" {
         WorkingDirectory: DirectoryPath;
         ScriptExtension: string;
         ScriptDirectory: DirectoryPath;
+        static StaticClass(): Class;
     }
     
     class EditorImportExportTestDefinition {
@@ -29709,12 +30518,14 @@ declare module "ue" {
         ExportFileExtension: string;
         bSkipExport: boolean;
         FactorySettings: TArray<ImportFactorySettingValues>;
+        static StaticClass(): Class;
     }
     
     class LaunchOnTestSettings {
         constructor(LaunchOnTestmap: FilePath, DeviceID: string);
         LaunchOnTestmap: FilePath;
         DeviceID: string;
+        static StaticClass(): Class;
     }
     
     class AutomationTestSettings extends Object {
@@ -29741,11 +30552,13 @@ declare module "ue" {
     class BandwidthTestItem {
         constructor(Kilobyte: TArray<number>);
         Kilobyte: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class BandwidthTestGenerator {
         constructor(ReplicatedBuffers: TArray<BandwidthTestItem>);
         ReplicatedBuffers: TArray<BandwidthTestItem>;
+        static StaticClass(): Class;
     }
     
     class BandwidthTestActor extends Actor {
@@ -30065,17 +30878,20 @@ declare module "ue" {
         FloatValue: number;
         StringValue: string;
         ObjectValue: Object;
+        static StaticClass(): Class;
     }
     
     class PlatformInterfaceDelegateResult {
         constructor(bSuccessful: boolean, Data: PlatformInterfaceData);
         bSuccessful: boolean;
         Data: PlatformInterfaceData;
+        static StaticClass(): Class;
     }
     
     class DelegateArray {
         constructor(Delegates: TArray<$Delegate<(Result: PlatformInterfaceDelegateResult) => void>>);
         Delegates: TArray<$Delegate<(Result: PlatformInterfaceDelegateResult) => void>>;
+        static StaticClass(): Class;
     }
     
     class PlatformInterfaceBase extends Object {
@@ -30103,6 +30919,7 @@ declare module "ue" {
         ObjectTypeName: string;
         CustomResponses: TArray<ResponseChannel>;
         HelpMessage: string;
+        static StaticClass(): Class;
     }
     
     class CustomChannelSetup {
@@ -30112,18 +30929,21 @@ declare module "ue" {
         bTraceType: boolean;
         bStaticObject: boolean;
         Name: string;
+        static StaticClass(): Class;
     }
     
     class CustomProfile {
         constructor(Name: string, CustomResponses: TArray<ResponseChannel>);
         Name: string;
         CustomResponses: TArray<ResponseChannel>;
+        static StaticClass(): Class;
     }
     
     class Redirector {
         constructor(OldName: string, NewName: string);
         OldName: string;
         NewName: string;
+        static StaticClass(): Class;
     }
     
     class CollisionProfile extends DeveloperSettings {
@@ -30143,6 +30963,7 @@ declare module "ue" {
         ComponentPropertyName: string;
         DelegatePropertyName: string;
         FunctionNameToBind: string;
+        static StaticClass(): Class;
     }
     
     class ComponentDelegateBinding extends DynamicBlueprintBinding {
@@ -30227,6 +31048,7 @@ declare module "ue" {
         constructor(Size: number, CullDistance: number);
         Size: number;
         CullDistance: number;
+        static StaticClass(): Class;
     }
     
     class CullDistanceVolume extends Volume {
@@ -30250,11 +31072,13 @@ declare module "ue" {
         BundleScope: PrimaryAssetId;
         BundleName: string;
         BundleAssets: TArray<SoftObjectPath>;
+        static StaticClass(): Class;
     }
     
     class AssetBundleData {
         constructor(Bundles: TArray<AssetBundleEntry>);
         Bundles: TArray<AssetBundleEntry>;
+        static StaticClass(): Class;
     }
     
     class PrimaryDataAsset extends DataAsset {
@@ -30284,6 +31108,7 @@ declare module "ue" {
     class DebugCameraControllerSettingsViewModeIndex {
         constructor(ViewModeIndex: number);
         ViewModeIndex: number;
+        static StaticClass(): Class;
     }
     
     class DebugCameraControllerSettings extends DeveloperSettings {
@@ -30404,6 +31229,7 @@ declare module "ue" {
         MipFilter: string;
         MipLoadOptions: ETextureMipLoadOptions;
         DuplicateNonOptionalMips: boolean;
+        static StaticClass(): Class;
     }
     
     class TextureLODSettings extends Object {
@@ -30454,6 +31280,7 @@ declare module "ue" {
         constructor(Speaker: DialogueVoice, Targets: TArray<DialogueVoice>);
         Speaker: DialogueVoice;
         Targets: TArray<DialogueVoice>;
+        static StaticClass(): Class;
     }
     
     class DialogueContextMapping {
@@ -30462,6 +31289,7 @@ declare module "ue" {
         SoundWave: SoundWave;
         LocalizationKeyFormat: string;
         Proxy: DialogueSoundWaveProxy;
+        static StaticClass(): Class;
     }
     
     class DialogueWave extends Object {
@@ -30503,6 +31331,7 @@ declare module "ue" {
     class LightmassDirectionalLightSettings extends LightmassLightSettings {
         constructor(LightSourceAngle: number);
         LightSourceAngle: number;
+        static StaticClass(): Class;
     }
     
     class DirectionalLightComponent extends LightComponent {
@@ -30608,6 +31437,7 @@ declare module "ue" {
         ArriveTangent: Vector2D;
         LeaveTangent: Vector2D;
         InterpMode: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurveVector2D {
@@ -30615,6 +31445,7 @@ declare module "ue" {
         Points: TArray<InterpCurvePointVector2D>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
+        static StaticClass(): Class;
     }
     
     class DistributionFloatUniformCurve extends DistributionFloat {
@@ -30682,6 +31513,7 @@ declare module "ue" {
         constructor(v1: Vector, v2: Vector);
         v1: Vector;
         v2: Vector;
+        static StaticClass(): Class;
     }
     
     class InterpCurvePointTwoVectors {
@@ -30691,6 +31523,7 @@ declare module "ue" {
         ArriveTangent: TwoVectors;
         LeaveTangent: TwoVectors;
         InterpMode: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurveTwoVectors {
@@ -30698,6 +31531,7 @@ declare module "ue" {
         Points: TArray<InterpCurvePointTwoVectors>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
+        static StaticClass(): Class;
     }
     
     class DistributionVectorUniformCurve extends DistributionVector {
@@ -30721,6 +31555,7 @@ declare module "ue" {
         BaseSizeX: number;
         BaseSizeY: number;
         DistanceToSizeCurve: CurveFloat;
+        static StaticClass(): Class;
     }
     
     class MaterialBillboardComponent extends PrimitiveComponent {
@@ -30831,6 +31666,7 @@ declare module "ue" {
         FogDensity: number;
         FogHeightFalloff: number;
         FogHeightOffset: number;
+        static StaticClass(): Class;
     }
     
     class ExponentialHeightFogComponent extends SceneComponent {
@@ -30921,6 +31757,7 @@ declare module "ue" {
     
     class ForceFeedbackAttenuationSettings extends BaseAttenuationSettings {
         constructor();
+        static StaticClass(): Class;
     }
     
     class ForceFeedbackAttenuation extends Object {
@@ -30989,6 +31826,7 @@ declare module "ue" {
         DrawDebugType: number;
         DrawDebugTime: number;
         bTraceComplex: boolean;
+        static StaticClass(): Class;
     }
     
     class PredictProjectilePathPointData {
@@ -30996,6 +31834,7 @@ declare module "ue" {
         Location: Vector;
         Velocity: Vector;
         Time: number;
+        static StaticClass(): Class;
     }
     
     class PredictProjectilePathResult {
@@ -31003,6 +31842,7 @@ declare module "ue" {
         PathData: TArray<PredictProjectilePathPointData>;
         LastTraceDestination: PredictProjectilePathPointData;
         HitResult: HitResult;
+        static StaticClass(): Class;
     }
     
     class GameplayStatics extends BlueprintFunctionLibrary {
@@ -31171,6 +32011,7 @@ declare module "ue" {
         constructor(Frequency: RuntimeFloatCurve, Amplitude: RuntimeFloatCurve);
         Frequency: RuntimeFloatCurve;
         Amplitude: RuntimeFloatCurve;
+        static StaticClass(): Class;
     }
     
     class HapticFeedbackEffect_Curve extends HapticFeedbackEffect_Base {
@@ -31227,6 +32068,7 @@ declare module "ue" {
         LODActor: TLazyObjectPtr<LODActor>;
         StaticMesh: StaticMesh;
         Key: string;
+        static StaticClass(): Class;
     }
     
     class HLODProxy extends Object {
@@ -31247,6 +32089,7 @@ declare module "ue" {
         TextureData: TArray<Color>;
         Texture: TWeakObjectPtr<Texture2D>;
         Weighting: number;
+        static StaticClass(): Class;
     }
     
     class ImportanceSamplingLibrary extends BlueprintFunctionLibrary {
@@ -31294,6 +32137,7 @@ declare module "ue" {
         bConsumeInput: boolean;
         bExecuteWhenPaused: boolean;
         bOverrideParentBinding: boolean;
+        static StaticClass(): Class;
     }
     
     class BlueprintInputActionDelegateBinding extends BlueprintInputDelegateBinding {
@@ -31301,6 +32145,7 @@ declare module "ue" {
         InputActionName: string;
         InputKeyEvent: number;
         FunctionNameToBind: string;
+        static StaticClass(): Class;
     }
     
     class InputActionDelegateBinding extends InputDelegateBinding {
@@ -31315,6 +32160,7 @@ declare module "ue" {
         constructor(InputAxisName: string, FunctionNameToBind: string);
         InputAxisName: string;
         FunctionNameToBind: string;
+        static StaticClass(): Class;
     }
     
     class InputAxisDelegateBinding extends InputDelegateBinding {
@@ -31329,6 +32175,7 @@ declare module "ue" {
         constructor(AxisKey: Key, FunctionNameToBind: string);
         AxisKey: Key;
         FunctionNameToBind: string;
+        static StaticClass(): Class;
     }
     
     class InputAxisKeyDelegateBinding extends InputDelegateBinding {
@@ -31344,6 +32191,7 @@ declare module "ue" {
         InputChord: InputChord;
         InputKeyEvent: number;
         FunctionNameToBind: string;
+        static StaticClass(): Class;
     }
     
     class InputKeyDelegateBinding extends InputDelegateBinding {
@@ -31360,12 +32208,14 @@ declare module "ue" {
         Sensitivity: number;
         Exponent: number;
         bInvert: boolean;
+        static StaticClass(): Class;
     }
     
     class InputAxisConfigEntry {
         constructor(AxisKeyName: string, AxisProperties: InputAxisProperties);
         AxisKeyName: string;
         AxisProperties: InputAxisProperties;
+        static StaticClass(): Class;
     }
     
     class InputActionKeyMapping {
@@ -31376,6 +32226,7 @@ declare module "ue" {
         bAlt: boolean;
         bCmd: boolean;
         Key: Key;
+        static StaticClass(): Class;
     }
     
     class InputAxisKeyMapping {
@@ -31383,12 +32234,14 @@ declare module "ue" {
         AxisName: string;
         Scale: number;
         Key: Key;
+        static StaticClass(): Class;
     }
     
     class InputActionSpeechMapping {
         constructor(ActionName: string, SpeechKeyword: string);
         ActionName: string;
         SpeechKeyword: string;
+        static StaticClass(): Class;
     }
     
     class InputSettings extends Object {
@@ -31438,6 +32291,7 @@ declare module "ue" {
         constructor(InputKeyEvent: number, FunctionNameToBind: string);
         InputKeyEvent: number;
         FunctionNameToBind: string;
+        static StaticClass(): Class;
     }
     
     class InputTouchDelegateBinding extends InputDelegateBinding {
@@ -31507,6 +32361,7 @@ declare module "ue" {
         Location: Vector;
         Rotation: Rotator;
         PawnInst: Pawn;
+        static StaticClass(): Class;
     }
     
     class InterpGroupCamera extends InterpGroup {
@@ -31538,6 +32393,7 @@ declare module "ue" {
         constructor(PositionControlPoint: Vector, bPositionIsRelative: boolean);
         PositionControlPoint: Vector;
         bPositionIsRelative: boolean;
+        static StaticClass(): Class;
     }
     
     class InterpToMovementComponent extends MovementComponent {
@@ -31588,6 +32444,7 @@ declare module "ue" {
         AnimPlayRate: number;
         bLooping: boolean;
         bReverse: boolean;
+        static StaticClass(): Class;
     }
     
     class InterpTrackAnimControl extends InterpTrackFloatBase {
@@ -31620,6 +32477,7 @@ declare module "ue" {
         constructor(Time: number, Value: boolean);
         Time: number;
         Value: boolean;
+        static StaticClass(): Class;
     }
     
     class InterpTrackBoolProp extends InterpTrack {
@@ -31652,6 +32510,7 @@ declare module "ue" {
         TransitionTime: number;
         TargetCamGroup: string;
         ShotNumber: number;
+        static StaticClass(): Class;
     }
     
     class InterpTrackDirector extends InterpTrack {
@@ -31668,6 +32527,7 @@ declare module "ue" {
         constructor(Time: number, EventName: string);
         Time: number;
         EventName: string;
+        static StaticClass(): Class;
     }
     
     class InterpTrackEvent extends InterpTrack {
@@ -31806,6 +32666,7 @@ declare module "ue" {
         Primitive: PrimitiveComponent;
         Decal: DecalComponent;
         ElementIndex: number;
+        static StaticClass(): Class;
     }
     
     class InterpTrackInstFloatMaterialParam extends InterpTrackInst {
@@ -31922,6 +32783,7 @@ declare module "ue" {
         ArriveTangent: LinearColor;
         LeaveTangent: LinearColor;
         InterpMode: number;
+        static StaticClass(): Class;
     }
     
     class InterpCurveLinearColor {
@@ -31929,6 +32791,7 @@ declare module "ue" {
         Points: TArray<InterpCurvePointLinearColor>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
+        static StaticClass(): Class;
     }
     
     class InterpTrackLinearColorBase extends InterpTrack {
@@ -31962,6 +32825,7 @@ declare module "ue" {
         Time: number;
         Duration: number;
         ClipIDNumber: number;
+        static StaticClass(): Class;
     }
     
     class InterpTrackParticleReplay extends InterpTrack {
@@ -31987,6 +32851,7 @@ declare module "ue" {
         Volume: number;
         Pitch: number;
         Sound: SoundBase;
+        static StaticClass(): Class;
     }
     
     class InterpTrackSound extends InterpTrackVectorBase {
@@ -32006,6 +32871,7 @@ declare module "ue" {
         constructor(Time: number, ToggleAction: number);
         Time: number;
         ToggleAction: number;
+        static StaticClass(): Class;
     }
     
     class InterpTrackToggle extends InterpTrack {
@@ -32034,6 +32900,7 @@ declare module "ue" {
         Time: number;
         Action: number;
         ActiveCondition: number;
+        static StaticClass(): Class;
     }
     
     class InterpTrackVisibility extends InterpTrack {
@@ -32199,20 +33066,24 @@ declare module "ue" {
     
     class VectorSpringState {
         constructor();
+        static StaticClass(): Class;
     }
     
     class Timespan {
         constructor();
+        static StaticClass(): Class;
     }
     
     class RandomStream {
         constructor(InitialSeed: number, Seed: number);
         InitialSeed: number;
         Seed: number;
+        static StaticClass(): Class;
     }
     
     class FloatSpringState {
         constructor();
+        static StaticClass(): Class;
     }
     
     class KismetMathLibrary extends BlueprintFunctionLibrary {
@@ -32895,6 +33766,7 @@ declare module "ue" {
     class DrawToRenderTargetContext {
         constructor(RenderTarget: TextureRenderTarget2D);
         RenderTarget: TextureRenderTarget2D;
+        static StaticClass(): Class;
     }
     
     class KismetRenderingLibrary extends BlueprintFunctionLibrary {
@@ -33012,21 +33884,25 @@ declare module "ue" {
     class UserActivity {
         constructor(ActionName: string);
         ActionName: string;
+        static StaticClass(): Class;
     }
     
     class GenericStruct {
         constructor(Data: number);
         Data: number;
+        static StaticClass(): Class;
     }
     
     class CollisionProfileName {
         constructor(Name: string);
         Name: string;
+        static StaticClass(): Class;
     }
     
     class TimerHandle {
         constructor(Handle: bigint);
         Handle: bigint;
+        static StaticClass(): Class;
     }
     
     class DebugFloatHistory {
@@ -33036,6 +33912,7 @@ declare module "ue" {
         MinValue: number;
         MaxValue: number;
         bAutoAdjustMinMax: boolean;
+        static StaticClass(): Class;
     }
     
     class KismetSystemLibrary extends BlueprintFunctionLibrary {
@@ -33296,6 +34173,7 @@ declare module "ue" {
         LocalizedStrings: TMap<string, string>;
         bIsMinimalPatch: boolean;
         CachedText: string;
+        static StaticClass(): Class;
     }
     
     enum ETextGender { Masculine, Feminine, Neuter, ETextGender_MAX}
@@ -33307,6 +34185,7 @@ declare module "ue" {
         ArgumentValueInt: number;
         ArgumentValueFloat: number;
         ArgumentValueGender: ETextGender;
+        static StaticClass(): Class;
     }
     
     class KismetTextLibrary extends BlueprintFunctionLibrary {
@@ -33867,6 +34746,7 @@ declare module "ue" {
         constructor(InputName: string, Input: ExpressionInput);
         InputName: string;
         Input: ExpressionInput;
+        static StaticClass(): Class;
     }
     
     class MaterialExpressionCustom extends MaterialExpression {
@@ -34261,6 +35141,7 @@ declare module "ue" {
         ExpressionInput: MaterialExpressionFunctionInput;
         ExpressionInputId: Guid;
         Input: ExpressionInput;
+        static StaticClass(): Class;
     }
     
     class FunctionExpressionOutput {
@@ -34268,6 +35149,7 @@ declare module "ue" {
         ExpressionOutput: MaterialExpressionFunctionOutput;
         ExpressionOutputId: Guid;
         Output: ExpressionOutput;
+        static StaticClass(): Class;
     }
     
     class MaterialExpressionMaterialFunctionCall extends MaterialExpression {
@@ -35280,6 +36162,7 @@ declare module "ue" {
         DisplayName: string;
         DisplayDescription: string;
         DisplayPrice: string;
+        static StaticClass(): Class;
     }
     
     class MicroTransactionBase extends PlatformInterfaceBase {
@@ -35352,6 +36235,7 @@ declare module "ue" {
         constructor(ProfileName: string, ToolTip: string);
         ProfileName: string;
         ToolTip: string;
+        static StaticClass(): Class;
     }
     
     class NetworkSettings extends DeveloperSettings {
@@ -35568,6 +36452,7 @@ declare module "ue" {
         bModify: boolean;
         bScale: boolean;
         bLock: boolean;
+        static StaticClass(): Class;
     }
     
     class ParticleModuleBeamModifier extends ParticleModuleBeamBase {
@@ -35736,6 +36621,7 @@ declare module "ue" {
         bResetSeedOnEmitterLooping: boolean;
         bRandomlySelectSeedArray: boolean;
         RandomSeeds: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class ParticleModuleColor_Seeded extends ParticleModuleColor {
@@ -35904,6 +36790,7 @@ declare module "ue" {
         constructor(BoneSocketName: string, Offset: Vector);
         BoneSocketName: string;
         Offset: Vector;
+        static StaticClass(): Class;
     }
     
     class ParticleModuleLocationBoneSocket extends ParticleModuleLocationBase {
@@ -36167,6 +37054,7 @@ declare module "ue" {
         ValueMethod: number;
         bScaleVelocityByParamValue: boolean;
         ParamValue: RawDistributionFloat;
+        static StaticClass(): Class;
     }
     
     class ParticleModuleParameterDynamic extends ParticleModuleParameterBase {
@@ -36445,11 +37333,13 @@ declare module "ue" {
         bTileY: boolean;
         bTileZ: boolean;
         bUseFixDT: boolean;
+        static StaticClass(): Class;
     }
     
     class FloatDistribution {
         constructor(Table: DistributionLookupTable);
         Table: DistributionLookupTable;
+        static StaticClass(): Class;
     }
     
     class GPUSpriteEmitterInfo {
@@ -36483,6 +37373,7 @@ declare module "ue" {
         DynamicAlpha: RawDistributionFloat;
         DynamicColorScale: RawDistributionVector;
         DynamicAlphaScale: RawDistributionFloat;
+        static StaticClass(): Class;
     }
     
     class GPUSpriteResourceData {
@@ -36527,6 +37418,7 @@ declare module "ue" {
         bRemoveHMDRoll: boolean;
         MinFacingCameraBlendDistance: number;
         MaxFacingCameraBlendDistance: number;
+        static StaticClass(): Class;
     }
     
     class ParticleModuleTypeDataGpu extends ParticleModuleTypeDataBase {
@@ -36768,6 +37660,7 @@ declare module "ue" {
     class ConstrainComponentPropName {
         constructor(ComponentName: string);
         ComponentName: string;
+        static StaticClass(): Class;
     }
     
     class PhysicsConstraintComponent extends SceneComponent {
@@ -36874,12 +37767,14 @@ declare module "ue" {
         ErrorAccumulationSeconds: number;
         ErrorAccumulationDistanceSq: number;
         ErrorAccumulationSimilarity: number;
+        static StaticClass(): Class;
     }
     
     class PhysicalSurfaceName {
         constructor(Type: number, Name: string);
         Type: number;
         Name: string;
+        static StaticClass(): Class;
     }
     
     enum EChaosThreadingMode { DedicatedThread, TaskGraph, SingleThread, Num, Invalid, EChaosThreadingMode_MAX}
@@ -36890,6 +37785,7 @@ declare module "ue" {
         DefaultThreadingModel: EChaosThreadingMode;
         DedicatedThreadTickMode: EChaosSolverTickMode;
         DedicatedThreadBufferMode: EChaosBufferMode;
+        static StaticClass(): Class;
     }
     
     class PhysicsSettings extends DeveloperSettings {
@@ -36993,6 +37889,7 @@ declare module "ue" {
         constructor(ShowFlagName: string, Enabled: boolean);
         ShowFlagName: string;
         Enabled: boolean;
+        static StaticClass(): Class;
     }
     
     class SceneCaptureComponent extends SceneComponent {
@@ -37202,6 +38099,7 @@ declare module "ue" {
     class PreviewMeshCollectionEntry {
         constructor(SkeletalMesh: TSoftObjectPtr<SkeletalMesh>);
         SkeletalMesh: TSoftObjectPtr<SkeletalMesh>;
+        static StaticClass(): Class;
     }
     
     class PreviewMeshCollection extends DataAsset {
@@ -37216,6 +38114,7 @@ declare module "ue" {
     class CollectionReference {
         constructor(CollectionName: string);
         CollectionName: string;
+        static StaticClass(): Class;
     }
     
     class PrimaryAssetLabel extends PrimaryDataAsset {
@@ -37615,6 +38514,7 @@ declare module "ue" {
         TipAltitude: number;
         TipValue: number;
         Width: number;
+        static StaticClass(): Class;
     }
     
     class SkyAtmosphereComponent extends SceneComponent {
@@ -37689,6 +38589,7 @@ declare module "ue" {
         DisplayName: string;
         bAlwaysDecompressOnLoad: boolean;
         DecompressedDuration: number;
+        static StaticClass(): Class;
     }
     
     class SoundGroups extends Object {
@@ -37745,6 +38646,7 @@ declare module "ue" {
         constructor(DialogueWave: DialogueWave, Context: DialogueContext);
         DialogueWave: DialogueWave;
         Context: DialogueContext;
+        static StaticClass(): Class;
     }
     
     class SoundNodeDialoguePlayer extends SoundNode {
@@ -37763,6 +38665,7 @@ declare module "ue" {
         FadeOutDistanceStart: number;
         FadeOutDistanceEnd: number;
         Volume: number;
+        static StaticClass(): Class;
     }
     
     class SoundNodeDistanceCrossFade extends SoundNode {
@@ -37856,6 +38759,7 @@ declare module "ue" {
         MinOutput: number;
         MaxOutput: number;
         ParamMode: number;
+        static StaticClass(): Class;
     }
     
     class SoundNodeModulatorContinuous extends SoundNode {
@@ -38018,6 +38922,7 @@ declare module "ue" {
         RightScale: Vector2D;
         LeftBias: Vector2D;
         RightBias: Vector2D;
+        static StaticClass(): Class;
     }
     
     class StereoLayerComponent extends SceneComponent {
@@ -38143,6 +39048,7 @@ declare module "ue" {
         constructor(Time: number, EventFunc: $Delegate<() => void>);
         Time: number;
         EventFunc: $Delegate<() => void>;
+        static StaticClass(): Class;
     }
     
     class TimelineVectorTrack {
@@ -38152,6 +39058,7 @@ declare module "ue" {
         TrackName: string;
         VectorPropertyName: string;
         VectorProperty: StructProperty;
+        static StaticClass(): Class;
     }
     
     class TimelineFloatTrack {
@@ -38161,6 +39068,7 @@ declare module "ue" {
         TrackName: string;
         FloatPropertyName: string;
         FloatProperty: FloatProperty;
+        static StaticClass(): Class;
     }
     
     class TimelineLinearColorTrack {
@@ -38170,6 +39078,7 @@ declare module "ue" {
         TrackName: string;
         LinearColorPropertyName: string;
         LinearColorProperty: StructProperty;
+        static StaticClass(): Class;
     }
     
     class Timeline {
@@ -38190,6 +39099,7 @@ declare module "ue" {
         PropertySetObject: TWeakObjectPtr<Object>;
         DirectionPropertyName: string;
         DirectionProperty: Property;
+        static StaticClass(): Class;
     }
     
     class TimelineComponent extends ActorComponent {
@@ -38302,6 +39212,7 @@ declare module "ue" {
         constructor(CursorPath: string, HotSpot: Vector2D);
         CursorPath: string;
         HotSpot: Vector2D;
+        static StaticClass(): Class;
     }
     
     enum EUIScalingRule { ShortestSide, LongestSide, Horizontal, Vertical, Custom, EUIScalingRule_MAX}
@@ -38415,6 +39326,7 @@ declare module "ue" {
         Formats: TArray<number>;
         SizeInMegabyte: number;
         bAllowSizeScale: boolean;
+        static StaticClass(): Class;
     }
     
     class VirtualTexturePoolConfig extends Object {
@@ -38465,6 +39377,7 @@ declare module "ue" {
         ComponentToAttachTo: SceneComponent;
         AttenuationSettings: SoundAttenuation;
         SourceEffectChain: SoundEffectSourcePresetChain;
+        static StaticClass(): Class;
     }
     
     class VOIPTalker extends ActorComponent {
@@ -38558,6 +39471,7 @@ declare module "ue" {
     class SHAHashData {
         constructor(Hash: FixSizeArray<number>);
         Hash: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class ChunkPartData {
@@ -38565,6 +39479,7 @@ declare module "ue" {
         Guid: Guid;
         Offset: number;
         Size: number;
+        static StaticClass(): Class;
     }
     
     class FileManifestData {
@@ -38577,6 +39492,7 @@ declare module "ue" {
         SymlinkTarget: string;
         bIsReadOnly: boolean;
         bIsCompressed: boolean;
+        static StaticClass(): Class;
     }
     
     class ChunkInfoData {
@@ -38586,12 +39502,14 @@ declare module "ue" {
         ShaHash: SHAHashData;
         FileSize: bigint;
         GroupNumber: number;
+        static StaticClass(): Class;
     }
     
     class CustomFieldData {
         constructor(Key: string, Value: string);
         Key: string;
         Value: string;
+        static StaticClass(): Class;
     }
     
     class BuildPatchManifest extends Object {
@@ -38963,6 +39881,7 @@ declare module "ue" {
     
     class GameplayDebuggerNetPack {
         constructor();
+        static StaticClass(): Class;
     }
     
     class GameplayDebuggerDebugActor {
@@ -38970,11 +39889,13 @@ declare module "ue" {
         Actor: Actor;
         ActorName: string;
         SyncCounter: number;
+        static StaticClass(): Class;
     }
     
     class GameplayDebuggerVisLogSync {
         constructor(DeviceIDs: string);
         DeviceIDs: string;
+        static StaticClass(): Class;
     }
     
     class GameplayDebuggerRenderingComponent extends PrimitiveComponent {
@@ -39011,6 +39932,7 @@ declare module "ue" {
         bModCtrl: boolean;
         bModAlt: boolean;
         bModCmd: boolean;
+        static StaticClass(): Class;
     }
     
     class GameplayDebuggerCategoryConfig {
@@ -39022,6 +39944,7 @@ declare module "ue" {
         Hidden: EGameplayDebuggerOverrideMode;
         bOverrideSlotIdx: boolean;
         InputHandlers: TArray<GameplayDebuggerInputConfig>;
+        static StaticClass(): Class;
     }
     
     class GameplayDebuggerExtensionConfig {
@@ -39029,6 +39952,7 @@ declare module "ue" {
         ExtensionName: string;
         UseExtension: EGameplayDebuggerOverrideMode;
         InputHandlers: TArray<GameplayDebuggerInputConfig>;
+        static StaticClass(): Class;
     }
     
     class GameplayDebuggerConfig extends Object {
@@ -39062,6 +39986,7 @@ declare module "ue" {
         Controller: GameplayDebuggerLocalController;
         InputComponent: InputComponent;
         Replicator: GameplayDebuggerCategoryReplicator;
+        static StaticClass(): Class;
     }
     
     class GameplayDebuggerPlayerManager extends Actor {
@@ -39158,6 +40083,7 @@ declare module "ue" {
     
     class GameplayResourceSet {
         constructor();
+        static StaticClass(): Class;
     }
     
     enum EGameplayTaskRunResult { Error, Failed, Success_Paused, Success_Active, Success_Finished, EGameplayTaskRunResult_MAX}
@@ -39179,6 +40105,7 @@ declare module "ue" {
     class AIRequestID {
         constructor(RequestID: number);
         RequestID: number;
+        static StaticClass(): Class;
     }
     
     class AIAsyncTaskBlueprintProxy extends Object {
@@ -39241,6 +40168,7 @@ declare module "ue" {
         constructor(Operation: number, Number: number);
         Operation: number;
         Number: number;
+        static StaticClass(): Class;
     }
     
     class BTCompositeChild {
@@ -39249,6 +40177,7 @@ declare module "ue" {
         ChildTask: BTTaskNode;
         Decorators: TArray<BTDecorator>;
         DecoratorOps: TArray<BTDecoratorLogic>;
+        static StaticClass(): Class;
     }
     
     class BTCompositeNode extends BTNode {
@@ -39274,6 +40203,7 @@ declare module "ue" {
         EntryDescription: string;
         KeyType: BlackboardKeyType;
         bInstanceSynced: boolean;
+        static StaticClass(): Class;
     }
     
     class BlackboardData extends DataAsset {
@@ -39332,6 +40262,7 @@ declare module "ue" {
         ReceiverLocation: Vector;
         Tag: string;
         bSuccessfullySensed: boolean;
+        static StaticClass(): Class;
     }
     
     class ActorPerceptionBlueprintInfo {
@@ -39339,6 +40270,7 @@ declare module "ue" {
         Target: Actor;
         LastSensedStimuli: TArray<AIStimulus>;
         bIsHostile: boolean;
+        static StaticClass(): Class;
     }
     
     class AIPerceptionComponent extends ActorComponent {
@@ -39383,11 +40315,13 @@ declare module "ue" {
     class PawnActionStack {
         constructor(TopAction: PawnAction);
         TopAction: PawnAction;
+        static StaticClass(): Class;
     }
     
     class PawnActionEvent {
         constructor(Action: PawnAction);
         Action: PawnAction;
+        static StaticClass(): Class;
     }
     
     class PawnActionsComponent extends ActorComponent {
@@ -39573,6 +40507,7 @@ declare module "ue" {
         constructor(Asset: BehaviorTree, Template: BTCompositeNode);
         Asset: BehaviorTree;
         Template: BTCompositeNode;
+        static StaticClass(): Class;
     }
     
     class BehaviorTreeComponent extends BrainComponent {
@@ -39619,21 +40554,25 @@ declare module "ue" {
         CachedProperty: Property;
         DataBinding: AIDataProvider;
         DataField: string;
+        static StaticClass(): Class;
     }
     
     class AIDataProviderTypedValue extends AIDataProviderValue {
         constructor(PropertyType: Class);
         PropertyType: Class;
+        static StaticClass(): Class;
     }
     
     class AIDataProviderBoolValue extends AIDataProviderTypedValue {
         constructor(DefaultValue: boolean);
         DefaultValue: boolean;
+        static StaticClass(): Class;
     }
     
     class AIDataProviderFloatValue extends AIDataProviderTypedValue {
         constructor(DefaultValue: number);
         DefaultValue: number;
+        static StaticClass(): Class;
     }
     
     enum EEQSNormalizationType { Absolute, RelativeToScores, EEQSNormalizationType_MAX}
@@ -39685,6 +40624,7 @@ declare module "ue" {
     class EnvQueryInstanceCache {
         constructor(Template: EnvQuery);
         Template: EnvQuery;
+        static StaticClass(): Class;
     }
     
     class EnvQueryContext extends Object {
@@ -39855,6 +40795,7 @@ declare module "ue" {
         HitLocation: Vector;
         DamagedActor: Actor;
         Instigator: Actor;
+        static StaticClass(): Class;
     }
     
     class AISense_Damage extends AISense {
@@ -39873,6 +40814,7 @@ declare module "ue" {
         MaxRange: number;
         Instigator: Actor;
         Tag: string;
+        static StaticClass(): Class;
     }
     
     class AISense_Hearing extends AISense {
@@ -39889,6 +40831,7 @@ declare module "ue" {
         constructor(Requestor: Actor, PredictedActor: Actor);
         Requestor: Actor;
         PredictedActor: Actor;
+        static StaticClass(): Class;
     }
     
     class AISense_Prediction extends AISense {
@@ -39918,6 +40861,7 @@ declare module "ue" {
         constructor(Broadcaster: Actor, Enemy: Actor);
         Broadcaster: Actor;
         Enemy: Actor;
+        static StaticClass(): Class;
     }
     
     class AISense_Team extends AISense {
@@ -39932,6 +40876,7 @@ declare module "ue" {
         constructor(TouchReceiver: Actor, OtherActor: Actor);
         TouchReceiver: Actor;
         OtherActor: Actor;
+        static StaticClass(): Class;
     }
     
     class AISense_Touch extends AISense {
@@ -39970,6 +40915,7 @@ declare module "ue" {
         bDetectEnemies: boolean;
         bDetectNeutrals: boolean;
         bDetectFriendlies: boolean;
+        static StaticClass(): Class;
     }
     
     class AISenseConfig_Hearing extends AISenseConfig {
@@ -40059,6 +41005,7 @@ declare module "ue" {
     class AIMoveRequest {
         constructor(GoalActor: Actor);
         GoalActor: Actor;
+        static StaticClass(): Class;
     }
     
     class AITask_MoveTo extends AITask {
@@ -40201,6 +41148,7 @@ declare module "ue" {
         SelectedKeyType: Class;
         SelectedKeyID: number;
         bNoneIsAllowedValue: boolean;
+        static StaticClass(): Class;
     }
     
     class BTDecorator_BlackboardBase extends BTDecorator {
@@ -40478,6 +41426,7 @@ declare module "ue" {
         ParamType: EAIParamType;
         Value: number;
         BBKey: BlackboardKeySelector;
+        static StaticClass(): Class;
     }
     
     class EQSParametrizedQueryExecutionRequest {
@@ -40487,6 +41436,7 @@ declare module "ue" {
         EQSQueryBlackboardKey: BlackboardKeySelector;
         RunMode: number;
         bUseBBKeyForQueryTemplate: boolean;
+        static StaticClass(): Class;
     }
     
     class BTService_RunEQS extends BTService_BlackboardBase {
@@ -40508,6 +41458,7 @@ declare module "ue" {
     class IntervalCountdown {
         constructor(Interval: number);
         Interval: number;
+        static StaticClass(): Class;
     }
     
     class BTTask_BlueprintBase extends BTTaskNode {
@@ -40652,6 +41603,7 @@ declare module "ue" {
         ParamName: string;
         ParamType: EAIParamType;
         Value: number;
+        static StaticClass(): Class;
     }
     
     class BTTask_RunEQSQuery extends BTTask_BlackboardBase {
@@ -40727,12 +41679,14 @@ declare module "ue" {
         AdaptiveDivisions: number;
         AdaptiveRings: number;
         AdaptiveDepth: number;
+        static StaticClass(): Class;
     }
     
     class CrowdAvoidanceSamplingPattern {
         constructor(Angles: TArray<number>, Radii: TArray<number>);
         Angles: TArray<number>;
         Radii: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class CrowdManager extends CrowdManagerBase {
@@ -40849,6 +41803,7 @@ declare module "ue" {
         bCanTraceOnGeometry: boolean;
         bCanDisableTrace: boolean;
         bCanProjectDown: boolean;
+        static StaticClass(): Class;
     }
     
     class EnvQueryGenerator_ProjectedPoints extends EnvQueryGenerator {
@@ -40883,6 +41838,7 @@ declare module "ue" {
     class AIDataProviderIntValue extends AIDataProviderTypedValue {
         constructor(DefaultValue: number);
         DefaultValue: number;
+        static StaticClass(): Class;
     }
     
     class EnvDirection {
@@ -40891,6 +41847,7 @@ declare module "ue" {
         LineTo: Class;
         Rotation: Class;
         DirMode: number;
+        static StaticClass(): Class;
     }
     
     class EnvQueryGenerator_Donut extends EnvQueryGenerator_ProjectedPoints {
@@ -41034,6 +41991,7 @@ declare module "ue" {
         bOnlyBlockingHits: boolean;
         bOverlapComplex: boolean;
         bSkipOverlapQuerier: boolean;
+        static StaticClass(): Class;
     }
     
     class EnvQueryTest_Overlap extends EnvQueryTest {
@@ -41296,6 +42254,7 @@ declare module "ue" {
         PropertyName: string;
         PropertyIndex: number;
         ComponentName: string;
+        static StaticClass(): Class;
     }
     
     enum EPropertyValueCategory { Undefined, Generic, RelativeLocation, RelativeRotation, RelativeScale3D, Visibility, Material, Color, Option, EPropertyValueCategory_MAX}
@@ -41323,6 +42282,7 @@ declare module "ue" {
         constructor(FunctionName: string, FunctionEntry: TWeakObjectPtr<Object>);
         FunctionName: string;
         FunctionEntry: TWeakObjectPtr<Object>;
+        static StaticClass(): Class;
     }
     
     class VariantObjectBinding extends Object {
@@ -41515,6 +42475,7 @@ declare module "ue" {
     class DatasmithAssetImportOptions {
         constructor(PackagePath: string);
         PackagePath: string;
+        static StaticClass(): Class;
     }
     
     class DatasmithAssetImportData extends AssetImportData {
@@ -41534,6 +42495,7 @@ declare module "ue" {
         MaxLightmapResolution: EDatasmithImportLightmapMax;
         bGenerateLightmapUVs: boolean;
         bRemoveDegenerates: boolean;
+        static StaticClass(): Class;
     }
     
     class DatasmithStaticMeshImportData extends DatasmithAssetImportData {
@@ -41551,6 +42513,7 @@ declare module "ue" {
         MaxEdgeLength: number;
         NormalTolerance: number;
         StitchingTechnique: EDatasmithCADStitchingTechnique;
+        static StaticClass(): Class;
     }
     
     class DatasmithStaticMeshCADImportData extends DatasmithStaticMeshImportData {
@@ -41577,6 +42540,7 @@ declare module "ue" {
         bIncludeAnimation: boolean;
         AssetOptions: DatasmithAssetImportOptions;
         StaticMeshOptions: DatasmithStaticMeshImportOptions;
+        static StaticClass(): Class;
     }
     
     class DatasmithSceneImportData extends AssetImportData {
@@ -41719,6 +42683,7 @@ declare module "ue" {
         bEnableLookAtTracking: boolean;
         bAllowRoll: boolean;
         ActorToTrack: TSoftObjectPtr<Actor>;
+        static StaticClass(): Class;
     }
     
     class DatasmithCineCameraActorTemplate extends DatasmithObjectTemplate {
@@ -41733,17 +42698,20 @@ declare module "ue" {
         constructor(SensorWidth: number, SensorHeight: number);
         SensorWidth: number;
         SensorHeight: number;
+        static StaticClass(): Class;
     }
     
     class DatasmithCameraLensSettingsTemplate {
         constructor(MaxFStop: number);
         MaxFStop: number;
+        static StaticClass(): Class;
     }
     
     class DatasmithCameraFocusSettingsTemplate {
         constructor(FocusMethod: ECameraFocusMethod, ManualFocusDistance: number);
         FocusMethod: ECameraFocusMethod;
         ManualFocusDistance: number;
+        static StaticClass(): Class;
     }
     
     class DatasmithPostProcessSettingsTemplate {
@@ -41764,6 +42732,7 @@ declare module "ue" {
         CameraISO: number;
         CameraShutterSpeed: number;
         DepthOfFieldFstop: number;
+        static StaticClass(): Class;
     }
     
     class DatasmithCineCameraComponentTemplate extends DatasmithObjectTemplate {
@@ -41823,6 +42792,7 @@ declare module "ue" {
         constructor(bUpdateActors: boolean, bRespawnDeletedActors: boolean);
         bUpdateActors: boolean;
         bRespawnDeletedActors: boolean;
+        static StaticClass(): Class;
     }
     
     class DatasmithImportOptions extends Object {
@@ -41873,6 +42843,7 @@ declare module "ue" {
     class DatasmithStaticParameterSetTemplate {
         constructor(StaticSwitchParameters: TMap<string, boolean>);
         StaticSwitchParameters: TMap<string, boolean>;
+        static StaticClass(): Class;
     }
     
     class DatasmithMaterialInstanceTemplate extends DatasmithObjectTemplate {
@@ -41974,11 +42945,13 @@ declare module "ue" {
     class DatasmithMeshSectionInfoTemplate {
         constructor(MaterialIndex: number);
         MaterialIndex: number;
+        static StaticClass(): Class;
     }
     
     class DatasmithMeshSectionInfoMapTemplate {
         constructor(Map: TMap<number, DatasmithMeshSectionInfoTemplate>);
         Map: TMap<number, DatasmithMeshSectionInfoTemplate>;
+        static StaticClass(): Class;
     }
     
     class DatasmithMeshBuildSettingsTemplate {
@@ -41994,12 +42967,14 @@ declare module "ue" {
         MinLightmapResolution: number;
         SrcLightmapIndex: number;
         DstLightmapIndex: number;
+        static StaticClass(): Class;
     }
     
     class DatasmithStaticMaterialTemplate {
         constructor(MaterialSlotName: string, MaterialInterface: MaterialInterface);
         MaterialSlotName: string;
         MaterialInterface: MaterialInterface;
+        static StaticClass(): Class;
     }
     
     class DatasmithStaticMeshTemplate extends DatasmithObjectTemplate {
@@ -42031,12 +43006,14 @@ declare module "ue" {
         Price: string;
         Name: string;
         Type: PurchaseType;
+        static StaticClass(): Class;
     }
     
     class PurchaseConfirmation {
         constructor(PackageName: string, Type: PurchaseType);
         PackageName: string;
         Type: PurchaseType;
+        static StaticClass(): Class;
     }
     
     class InAppPurchaseComponent extends ActorComponent {
@@ -42092,6 +43069,7 @@ declare module "ue" {
         Mode: EMagicLeapHeadTrackingMode;
         Error: EMagicLeapHeadTrackingError;
         Confidence: number;
+        static StaticClass(): Class;
     }
     
     enum EMagicLeapHeadTrackingMapEvent { Lost, Recovered, RecoveryFailed, NewSession, EMagicLeapHeadTrackingMapEvent_MAX}
@@ -42134,12 +43112,14 @@ declare module "ue" {
         BlockDimensions: Vector;
         Timestamp: Timespan;
         BlockState: EMagicLeapMeshState;
+        static StaticClass(): Class;
     }
     
     class MagicLeapTrackingMeshInfo {
         constructor(Timestamp: Timespan, BlockData: TArray<MagicLeapMeshBlockInfo>);
         Timestamp: Timespan;
         BlockData: TArray<MagicLeapMeshBlockInfo>;
+        static StaticClass(): Class;
     }
     
     enum EMagicLeapMeshLOD { Minimum, Medium, Maximum, EMagicLeapMeshLOD_MAX}
@@ -42147,6 +43127,7 @@ declare module "ue" {
         constructor(BlockID: Guid, LevelOfDetail: EMagicLeapMeshLOD);
         BlockID: Guid;
         LevelOfDetail: EMagicLeapMeshLOD;
+        static StaticClass(): Class;
     }
     
     class MagicLeapMeshBlockSelectorInterface extends Interface {
@@ -42198,6 +43179,7 @@ declare module "ue" {
         Normal: Vector;
         Confidence: number;
         UserData: number;
+        static StaticClass(): Class;
     }
     
     class MagicLeapRaycastQueryParams {
@@ -42210,6 +43192,7 @@ declare module "ue" {
         HorizontalFovDegrees: number;
         CollideWithUnobserved: boolean;
         UserData: number;
+        static StaticClass(): Class;
     }
     
     class MagicLeapRaycastComponent extends ActorComponent {
@@ -42244,12 +43227,14 @@ declare module "ue" {
         constructor(InterfaceName: string, InterfaceObject: Object);
         InterfaceName: string;
         InterfaceObject: Object;
+        static StaticClass(): Class;
     }
     
     class NamedInterfaceDef {
         constructor(InterfaceName: string, InterfaceClassName: string);
         InterfaceName: string;
         InterfaceClassName: string;
+        static StaticClass(): Class;
     }
     
     class NamedInterfaces extends Object {
@@ -42352,6 +43337,7 @@ declare module "ue" {
     
     class BlueprintSessionResult {
         constructor();
+        static StaticClass(): Class;
     }
     
     class FindSessionsCallbackProxy extends OnlineBlueprintCallProxyBase {
@@ -42391,12 +43377,14 @@ declare module "ue" {
         DecimalSeparator: string;
         GroupingSeparator: string;
         ReceiptData: string;
+        static StaticClass(): Class;
     }
     
     class InAppPurchaseProductRequest {
         constructor(ProductIdentifier: string, bIsConsumable: boolean);
         ProductIdentifier: string;
         bIsConsumable: boolean;
+        static StaticClass(): Class;
     }
     
     class InAppPurchaseCallbackProxy extends Object {
@@ -42424,6 +43412,7 @@ declare module "ue" {
         Identifier: string;
         ReceiptData: string;
         TransactionIdentifier: string;
+        static StaticClass(): Class;
     }
     
     class InAppPurchaseRestoreCallbackProxy extends Object {
@@ -42563,6 +43552,7 @@ declare module "ue" {
         Token: string;
         Type: string;
         TokenBytes: TArray<number>;
+        static StaticClass(): Class;
     }
     
     class OnlinePIESettings extends DeveloperSettings {
@@ -42590,6 +43580,7 @@ declare module "ue" {
         Platform: string;
         bAllowCrossplay: boolean;
         ElapsedTime: number;
+        static StaticClass(): Class;
     }
     
     class PartyReservation {
@@ -42598,6 +43589,7 @@ declare module "ue" {
         PartyLeader: UniqueNetIdRepl;
         PartyMembers: TArray<PlayerReservation>;
         RemovedPartyMembers: TArray<PlayerReservation>;
+        static StaticClass(): Class;
     }
     
     enum EClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ReservationRemoveMembers, EClientRequestType_MAX}
@@ -42674,6 +43666,7 @@ declare module "ue" {
         constructor(SpectatorId: UniqueNetIdRepl, Spectator: PlayerReservation);
         SpectatorId: UniqueNetIdRepl;
         Spectator: PlayerReservation;
+        static StaticClass(): Class;
     }
     
     enum ESpectatorClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ESpectatorClientRequestType_MAX}
@@ -42801,6 +43794,7 @@ declare module "ue" {
         constructor(FieldName: string, FieldValue: string);
         FieldName: string;
         FieldValue: string;
+        static StaticClass(): Class;
     }
     
     class HmdUserProfile {
@@ -42812,6 +43806,7 @@ declare module "ue" {
         IPD: number;
         NeckToEyeDistance: Vector2D;
         ExtraFields: TArray<HmdUserProfileField>;
+        static StaticClass(): Class;
     }
     
     enum EBoundaryType { Boundary_Outer, Boundary_PlayArea, Boundary_MAX}
@@ -42822,6 +43817,7 @@ declare module "ue" {
         ClosestDistance: number;
         ClosestPoint: Vector;
         ClosestPointNormal: Vector;
+        static StaticClass(): Class;
     }
     
     class OculusFunctionLibrary extends BlueprintFunctionLibrary {
@@ -42883,6 +43879,7 @@ declare module "ue" {
         TextureOffset: Vector2D;
         TextureScale: Vector2D;
         bNoAlphaChannel: boolean;
+        static StaticClass(): Class;
     }
     
     class OculusHMDRuntimeSettings extends Object {
@@ -42916,6 +43913,7 @@ declare module "ue" {
         constructor(TangentX: Vector, bFlipTangentY: boolean);
         TangentX: Vector;
         bFlipTangentY: boolean;
+        static StaticClass(): Class;
     }
     
     class ProcMeshVertex {
@@ -42928,6 +43926,7 @@ declare module "ue" {
         UV1: Vector2D;
         UV2: Vector2D;
         UV3: Vector2D;
+        static StaticClass(): Class;
     }
     
     class ProcMeshSection {
@@ -42937,6 +43936,7 @@ declare module "ue" {
         SectionLocalBox: Box;
         bEnableCollision: boolean;
         bSectionVisible: boolean;
+        static StaticClass(): Class;
     }
     
     class ProceduralMeshComponent extends MeshComponent {
@@ -43008,11 +44008,13 @@ declare module "ue" {
         constructor(Name: string, Path: string);
         Name: string;
         Path: string;
+        static StaticClass(): Class;
     }
     
     class SteamVRActionSet {
         constructor(Path: string);
         Path: string;
+        static StaticClass(): Class;
     }
     
     enum ESteamVRHand { VR_Left, VR_Right, VR_MAX}
@@ -43021,6 +44023,7 @@ declare module "ue" {
         TrackedDeviceIndex: number;
         RenderModelComponentName: string;
         TrackedDeviceModel: string;
+        static StaticClass(): Class;
     }
     
     enum ESteamVRInputStringBits { VR_InputString_Hand, VR_InputString_ControllerType, VR_InputString_InputSource, VR_InputString_All, VR_InputString_MAX}
@@ -43030,6 +44033,7 @@ declare module "ue" {
         InputPathName: string;
         ModeName: string;
         SlotName: string;
+        static StaticClass(): Class;
     }
     
     class SteamVRSkeletonTransform {
@@ -43065,6 +44069,7 @@ declare module "ue" {
         Aux_Middle: Transform;
         Aux_Ring: Transform;
         Aux_Pinky: Transform;
+        static StaticClass(): Class;
     }
     
     enum EHand { VR_LeftHand, VR_RightHand, VR_MAX}
@@ -43075,6 +44080,7 @@ declare module "ue" {
         Middle: number;
         Ring: number;
         Pinky: number;
+        static StaticClass(): Class;
     }
     
     class SteamVRFingerSplays {
@@ -43083,6 +44089,7 @@ declare module "ue" {
         Index_Middle: number;
         Middle_Ring: number;
         Ring_Pinky: number;
+        static StaticClass(): Class;
     }
     
     enum ESkeletalSummaryDataType { VR_SummaryType_FromAnimation, VR_SummaryType_FromDevice, VR_SummaryType_MAX}
@@ -43152,10 +44159,12 @@ declare module "ue" {
     class ChaosHandlerSet {
         constructor(ChaosHandlers: TSet<Object>);
         ChaosHandlers: TSet<Object>;
+        static StaticClass(): Class;
     }
     
     class BreakEventCallbackWrapper {
         constructor();
+        static StaticClass(): Class;
     }
     
     class ChaosGameplayEventDispatcher extends ChaosEventListenerComponent {
@@ -43187,6 +44196,7 @@ declare module "ue" {
         OtherAngularVelocity: Vector;
         Mass: number;
         OtherMass: number;
+        static StaticClass(): Class;
     }
     
     class ChaosSolverEngineBlueprintLibrary extends BlueprintFunctionLibrary {
@@ -43211,6 +44221,7 @@ declare module "ue" {
         MinMass: number;
         MinSpeed: number;
         MinImpulse: number;
+        static StaticClass(): Class;
     }
     
     class SolverBreakingFilterSettings {
@@ -43219,6 +44230,7 @@ declare module "ue" {
         MinMass: number;
         MinSpeed: number;
         MinVolume: number;
+        static StaticClass(): Class;
     }
     
     class SolverTrailingFilterSettings {
@@ -43227,6 +44239,7 @@ declare module "ue" {
         MinMass: number;
         MinSpeed: number;
         MinVolume: number;
+        static StaticClass(): Class;
     }
     
     class ChaosDebugSubstepControl {
@@ -43234,6 +44247,7 @@ declare module "ue" {
         bPause: boolean;
         bSubstep: boolean;
         bStep: boolean;
+        static StaticClass(): Class;
     }
     
     class ChaosSolverActor extends Actor {
@@ -43531,6 +44545,7 @@ declare module "ue" {
         DurationThreshold: number;
         MaxNumRandomBranches: number;
         SoundCueQualityIndex: number;
+        static StaticClass(): Class;
     }
     
     class WindowsTargetSettings extends Object {
@@ -43614,12 +44629,14 @@ declare module "ue" {
         Name: string;
         Binding: string;
         Type: EPinnedCommandListType;
+        static StaticClass(): Class;
     }
     
     class PinnedCommandListContext {
         constructor(Name: string, Commands: TArray<PinnedCommandListCommand>);
         Name: string;
         Commands: TArray<PinnedCommandListCommand>;
+        static StaticClass(): Class;
     }
     
     class PinnedCommandListSettings extends Object {
@@ -43860,11 +44877,13 @@ declare module "ue" {
         MemberName: string;
         MemberGuid: Guid;
         IsProperty: boolean;
+        static StaticClass(): Class;
     }
     
     class EditorPropertyPath {
         constructor(Segments: TArray<EditorPropertyPathSegment>);
         Segments: TArray<EditorPropertyPathSegment>;
+        static StaticClass(): Class;
     }
     
     class DelegateEditorBinding {
@@ -43876,12 +44895,14 @@ declare module "ue" {
         SourcePath: EditorPropertyPath;
         MemberGuid: Guid;
         Kind: EBindingKind;
+        static StaticClass(): Class;
     }
     
     class WidgetAnimation_DEPRECATED {
         constructor(MovieScene: MovieScene, AnimationBindings: TArray<WidgetAnimationBinding>);
         MovieScene: MovieScene;
         AnimationBindings: TArray<WidgetAnimationBinding>;
+        static StaticClass(): Class;
     }
     
     enum EWidgetSupportsDynamicCreation { Default, Yes, No, EWidgetSupportsDynamicCreation_MAX}
@@ -43943,6 +44964,7 @@ declare module "ue" {
         bAllowBlueprintPaint: boolean;
         PropertyBindingRule: EPropertyBindingPermissionLevel;
         Rules: TArray<TSoftObjectPtr<Class>>;
+        static StaticClass(): Class;
     }
     
     class DirectoryWidgetCompilerOptions {
@@ -43950,6 +44972,7 @@ declare module "ue" {
         Directory: DirectoryPath;
         IgnoredWidgets: TArray<TSoftObjectPtr<WidgetBlueprint>>;
         Options: WidgetCompilerOptions;
+        static StaticClass(): Class;
     }
     
     class DebugResolution {
@@ -43958,6 +44981,7 @@ declare module "ue" {
         Height: number;
         Description: string;
         Color: LinearColor;
+        static StaticClass(): Class;
     }
     
     class UMGEditorProjectSettings extends DeveloperSettings {
@@ -44052,6 +45076,7 @@ declare module "ue" {
         constructor(ClassToCopy: SoftClassPath, AdvancedCopyCustomization: SoftClassPath);
         ClassToCopy: SoftClassPath;
         AdvancedCopyCustomization: SoftClassPath;
+        static StaticClass(): Class;
     }
     
     class AssetToolsSettings extends DeveloperSettings {
@@ -44070,6 +45095,7 @@ declare module "ue" {
         OldObjectPath: SoftObjectPath;
         NewObjectPath: SoftObjectPath;
         bOnlyFixSoftReferences: boolean;
+        static StaticClass(): Class;
     }
     
     class AssetTools extends Interface {
@@ -44106,12 +45132,14 @@ declare module "ue" {
         constructor(Contains: string, MatchFromStart: boolean);
         Contains: string;
         MatchFromStart: boolean;
+        static StaticClass(): Class;
     }
     
     class AutomatedTestGroup {
         constructor(Name: string, Filters: TArray<AutomatedTestFilter>);
         Name: string;
         Filters: TArray<AutomatedTestFilter>;
+        static StaticClass(): Class;
     }
     
     class AutomationControllerSettings extends Object {
@@ -44158,6 +45186,7 @@ declare module "ue" {
         Alpha: number;
         MinBrightness: number;
         MaxBrightness: number;
+        static StaticClass(): Class;
     }
     
     class AutomationScreenshotOptions {
@@ -44176,6 +45205,7 @@ declare module "ue" {
         MaximumGlobalError: number;
         bIgnoreAntiAliasing: boolean;
         bIgnoreColors: boolean;
+        static StaticClass(): Class;
     }
     
     class AutomationBlueprintFunctionLibrary extends BlueprintFunctionLibrary {
@@ -44219,6 +45249,7 @@ declare module "ue" {
         ComponentName: string;
         PhysicalMaterialName: string;
         ActorName: string;
+        static StaticClass(): Class;
     }
     
     class TraceQueryTestResultsInnerMost {
@@ -44229,6 +45260,7 @@ declare module "ue" {
         MultiHits: TArray<HitResult>;
         MultiNames: TArray<TraceQueryTestNames>;
         bMultiResult: boolean;
+        static StaticClass(): Class;
     }
     
     class TraceQueryTestResultsInner {
@@ -44237,6 +45269,7 @@ declare module "ue" {
         SphereResults: TraceQueryTestResultsInnerMost;
         CapsuleResults: TraceQueryTestResultsInnerMost;
         BoxResults: TraceQueryTestResultsInnerMost;
+        static StaticClass(): Class;
     }
     
     class TraceChannelTestBatchOptions {
@@ -44248,6 +45281,7 @@ declare module "ue" {
         bChannelTrace: boolean;
         bObjectsTrace: boolean;
         bProfileTrace: boolean;
+        static StaticClass(): Class;
     }
     
     class TraceQueryTestResults extends Object {
@@ -44328,6 +45362,7 @@ declare module "ue" {
     class GenericTeamId {
         constructor(TeamID: number);
         TeamID: number;
+        static StaticClass(): Class;
     }
     
     class AITestSpawnInfo {
@@ -44340,6 +45375,7 @@ declare module "ue" {
         NumberToSpawn: number;
         SpawnDelay: number;
         PreSpawnDelay: number;
+        static StaticClass(): Class;
     }
     
     class AITestSpawnSet {
@@ -44348,10 +45384,12 @@ declare module "ue" {
         Name: string;
         bEnabled: boolean;
         FallbackSpawnLocation: Actor;
+        static StaticClass(): Class;
     }
     
     class PendingDelayedSpawn extends AITestSpawnInfo {
         constructor();
+        static StaticClass(): Class;
     }
     
     class FunctionalAITest extends FunctionalTest {
@@ -44506,6 +45544,7 @@ declare module "ue" {
         GeneratedClassPackage: string;
         ClassName: string;
         Category: string;
+        static StaticClass(): Class;
     }
     
     class AIGraphNode extends EdGraphNode {
@@ -44707,6 +45746,7 @@ declare module "ue" {
         EndTime: Timespan;
         Text: string;
         Position: Vector2D;
+        static StaticClass(): Class;
     }
     
     class BasicOverlays extends Overlays {
@@ -44792,6 +45832,7 @@ declare module "ue" {
         constructor(DisplayName: string, Url: string);
         DisplayName: string;
         Url: string;
+        static StaticClass(): Class;
     }
     
     class MediaBlueprintFunctionLibrary extends BlueprintFunctionLibrary {
@@ -44834,6 +45875,7 @@ declare module "ue" {
         Subtitle: number;
         Text: number;
         Video: number;
+        static StaticClass(): Class;
     }
     
     enum EMediaPlayerOptionBooleanOverride { UseMediaPlayerSetting, Enabled, Disabled, EMediaPlayerOptionBooleanOverride_MAX}
@@ -44843,6 +45885,7 @@ declare module "ue" {
         SeekTime: Timespan;
         PlayOnOpen: EMediaPlayerOptionBooleanOverride;
         Loop: EMediaPlayerOptionBooleanOverride;
+        static StaticClass(): Class;
     }
     
     class MediaPlayer extends Object {
@@ -44953,6 +45996,7 @@ declare module "ue" {
         constructor(FrequencyHz: number, Magnitude: number);
         FrequencyHz: number;
         Magnitude: number;
+        static StaticClass(): Class;
     }
     
     class MediaSoundComponent extends SynthComponent {
@@ -45034,6 +46078,7 @@ declare module "ue" {
         constructor(LocalTransform: Transform, SocketName: string);
         LocalTransform: Transform;
         SocketName: string;
+        static StaticClass(): Class;
     }
     
     enum ESpriteShapeType { Box, Circle, Polygon, ESpriteShapeType_MAX}
@@ -45045,6 +46090,7 @@ declare module "ue" {
         BoxPosition: Vector2D;
         Rotation: number;
         bNegativeWinding: boolean;
+        static StaticClass(): Class;
     }
     
     class SpriteGeometryCollection {
@@ -45057,6 +46103,7 @@ declare module "ue" {
         AlphaThreshold: number;
         DetailAmount: number;
         SimplifyEpsilon: number;
+        static StaticClass(): Class;
     }
     
     enum EPaperSpriteAtlasPadding { DilateBorder, PadWithZero, EPaperSpriteAtlasPadding_MAX}
@@ -45068,6 +46115,7 @@ declare module "ue" {
         Y: number;
         Width: number;
         Height: number;
+        static StaticClass(): Class;
     }
     
     class PaperSpriteAtlas extends Object {
@@ -45132,6 +46180,7 @@ declare module "ue" {
         constructor(Sprite: PaperSprite, FrameRun: number);
         Sprite: PaperSprite;
         FrameRun: number;
+        static StaticClass(): Class;
     }
     
     class PaperFlipbook extends Object {
@@ -45215,6 +46264,7 @@ declare module "ue" {
         SourceSprite: PaperSprite;
         VertexColor: Color;
         MaterialIndex: number;
+        static StaticClass(): Class;
     }
     
     class PaperGroupedSpriteComponent extends MeshComponent {
@@ -45299,6 +46349,7 @@ declare module "ue" {
         CollisionOffset: number;
         DrawOrder: number;
         Description: string;
+        static StaticClass(): Class;
     }
     
     class PaperTerrainMaterial extends DataAsset {
@@ -45345,6 +46396,7 @@ declare module "ue" {
         Top: number;
         Right: number;
         Bottom: number;
+        static StaticClass(): Class;
     }
     
     class PaperTileMetadata {
@@ -45352,12 +46404,14 @@ declare module "ue" {
         UserDataName: string;
         CollisionData: SpriteGeometryCollection;
         TerrainMembership: FixSizeArray<number>;
+        static StaticClass(): Class;
     }
     
     class PaperTileSetTerrain {
         constructor(TerrainName: string, CenterTileIndex: number);
         TerrainName: string;
         CenterTileIndex: number;
+        static StaticClass(): Class;
     }
     
     class PaperTileSet extends Object {
@@ -45388,6 +46442,7 @@ declare module "ue" {
         constructor(TileSet: PaperTileSet, PackedTileIndex: number);
         TileSet: PaperTileSet;
         PackedTileIndex: number;
+        static StaticClass(): Class;
     }
     
     class PaperTileLayer extends Object {
@@ -45538,6 +46593,7 @@ declare module "ue" {
         LPVSpecularOcclusionIntensity: number;
         LPVFadeRange: number;
         LPVDirectionalOcclusionFadeRange: number;
+        static StaticClass(): Class;
     }
     
     class LightPropagationVolumeBlendable extends Object {
@@ -45620,6 +46676,7 @@ declare module "ue" {
         AnimBlueprint: Class;
         NumRandomizedInstances: PerPlatformInt;
         Enabled: PerPlatformBool;
+        static StaticClass(): Class;
     }
     
     class AnimationStateEntry {
@@ -45635,6 +46692,7 @@ declare module "ue" {
         MaximumNumberOfConcurrentInstances: PerPlatformInt;
         WiggleTimePercentage: number;
         bRequiresCurves: boolean;
+        static StaticClass(): Class;
     }
     
     class PerSkeletonAnimationSharingSetup {
@@ -45645,6 +46703,7 @@ declare module "ue" {
         AdditiveAnimBlueprint: Class;
         StateProcessorClass: Class;
         AnimationStates: TArray<AnimationStateEntry>;
+        static StaticClass(): Class;
     }
     
     class AnimationSharingScalability {
@@ -45653,6 +46712,7 @@ declare module "ue" {
         BlendSignificanceValue: PerPlatformFloat;
         MaximumNumberConcurrentBlends: PerPlatformInt;
         TickSignificanceValue: PerPlatformFloat;
+        static StaticClass(): Class;
     }
     
     class AnimationSharingSetup extends Object {
@@ -45729,6 +46789,7 @@ declare module "ue" {
         DateAndTime: DateTime;
         Source: string;
         Translation: string;
+        static StaticClass(): Class;
     }
     
     class TranslationContextInfo {
@@ -45736,6 +46797,7 @@ declare module "ue" {
         Key: string;
         Context: string;
         Changes: TArray<TranslationChange>;
+        static StaticClass(): Class;
     }
     
     class TranslationUnit extends Object {
@@ -46093,23 +47155,27 @@ declare module "ue" {
         PlaneDimensions: Vector2D;
         PlaneFlags: TArray<EMagicLeapPlaneQueryFlags>;
         ID: Guid;
+        static StaticClass(): Class;
     }
     
     class MagicLeapPolygon {
         constructor(Vertices: TArray<Vector>);
         Vertices: TArray<Vector>;
+        static StaticClass(): Class;
     }
     
     class MagicLeapPlaneBoundary {
         constructor(Polygon: MagicLeapPolygon, Holes: TArray<MagicLeapPolygon>);
         Polygon: MagicLeapPolygon;
         Holes: TArray<MagicLeapPolygon>;
+        static StaticClass(): Class;
     }
     
     class MagicLeapPlaneBoundaries {
         constructor(ID: Guid, Boundaries: TArray<MagicLeapPlaneBoundary>);
         ID: Guid;
         Boundaries: TArray<MagicLeapPlaneBoundary>;
+        static StaticClass(): Class;
     }
     
     class MagicLeapPlanesComponent extends SceneComponent {
@@ -46136,6 +47202,7 @@ declare module "ue" {
         SearchVolumePosition: Vector;
         SearchVolumeOrientation: Quat;
         SearchVolumeExtents: Vector;
+        static StaticClass(): Class;
     }
     
     class MagicLeapPlanesFunctionLibrary extends BlueprintFunctionLibrary {
@@ -46188,6 +47255,7 @@ declare module "ue" {
         bIsValid: boolean;
         PixelIntensity: number;
         RGBScaleFactor: Vector;
+        static StaticClass(): Class;
     }
     
     class LuminARFrameFunctionLibrary extends BlueprintFunctionLibrary {
@@ -46298,6 +47366,7 @@ declare module "ue" {
         FingerGap: number;
         Radius: number;
         Angle: number;
+        static StaticClass(): Class;
     }
     
     class MagicLeapTouchpadGesturesComponent extends ActorComponent {
@@ -46319,6 +47388,7 @@ declare module "ue" {
         RightEyeDirection: Vector;
         FixationPoint: Vector;
         ConfidenceValue: number;
+        static StaticClass(): Class;
     }
     
     class EyeTrackerGazeData {
@@ -46327,6 +47397,7 @@ declare module "ue" {
         GazeDirection: Vector;
         FixationPoint: Vector;
         ConfidenceValue: number;
+        static StaticClass(): Class;
     }
     
     class EyeTrackerFunctionLibrary extends BlueprintFunctionLibrary {
@@ -46346,12 +47417,14 @@ declare module "ue" {
         FixationDepthIsUncomfortable: boolean;
         FixationDepthViolationHasOccurred: boolean;
         RemainingTimeAtUncomfortableDepth: number;
+        static StaticClass(): Class;
     }
     
     class MagicLeapEyeBlinkState {
         constructor(LeftEyeBlinked: boolean, RightEyeBlinked: boolean);
         LeftEyeBlinked: boolean;
         RightEyeBlinked: boolean;
+        static StaticClass(): Class;
     }
     
     enum EMagicLeapEyeTrackingCalibrationStatus { None, Bad, Good, EMagicLeapEyeTrackingCalibrationStatus_MAX}
@@ -46440,11 +47513,13 @@ declare module "ue" {
         LatestOffset: number;
         MaxNumberOfFrameToBuffered: number;
         bKeepAtLeastOneFrame: boolean;
+        static StaticClass(): Class;
     }
     
     class LiveLinkSubjectName {
         constructor(Name: string);
         Name: string;
+        static StaticClass(): Class;
     }
     
     class LiveLinkSourceDebugInfo {
@@ -46452,6 +47527,7 @@ declare module "ue" {
         SubjectName: LiveLinkSubjectName;
         SnapshotIndex: number;
         NumberOfBufferAtSnapshot: number;
+        static StaticClass(): Class;
     }
     
     class LiveLinkSourceSettings extends Object {
@@ -46469,6 +47545,7 @@ declare module "ue" {
     class LiveLinkCurveConversionSettings {
         constructor(CurveConversionAssetMap: TMap<string, SoftObjectPath>);
         CurveConversionAssetMap: TMap<string, SoftObjectPath>;
+        static StaticClass(): Class;
     }
     
     class LiveLinkCurveRemapSettings extends LiveLinkSourceSettings {
@@ -46547,6 +47624,7 @@ declare module "ue" {
     enum EMagicLeapHandTrackingGestureFilterLevel { NoFilter, SlightRobustnessToFlicker, MoreRobustnessToFlicker, EMagicLeapHandTrackingGestureFilterLevel_MAX}
     class LiveLinkSourceHandle {
         constructor();
+        static StaticClass(): Class;
     }
     
     enum EMagicLeapGestureTransformSpace { World, Hand, Tracking, EMagicLeapGestureTransformSpace_MAX}
@@ -46637,6 +47715,7 @@ declare module "ue" {
         constructor(Attribute: EMagicLeapIdentityKey, Value: string);
         Attribute: EMagicLeapIdentityKey;
         Value: string;
+        static StaticClass(): Class;
     }
     
     class MagicLeapIdentity extends Object {
@@ -46687,17 +47766,20 @@ declare module "ue" {
         Type: EActorSequenceObjectReferenceType;
         ActorId: Guid;
         PathToComponent: string;
+        static StaticClass(): Class;
     }
     
     class ActorSequenceObjectReferences {
         constructor(Array: TArray<ActorSequenceObjectReference>);
         Array: TArray<ActorSequenceObjectReference>;
+        static StaticClass(): Class;
     }
     
     class ActorSequenceObjectReferenceMap {
         constructor(BindingIds: TArray<Guid>, References: TArray<ActorSequenceObjectReferences>);
         BindingIds: TArray<Guid>;
         References: TArray<ActorSequenceObjectReferences>;
+        static StaticClass(): Class;
     }
     
     class ActorSequence extends MovieSceneSequence {
@@ -46736,6 +47818,7 @@ declare module "ue" {
         HorizontalAccuracy: number;
         VerticalAccuracy: number;
         Altitude: number;
+        static StaticClass(): Class;
     }
     
     class LocationServicesImpl extends Object {
@@ -46766,12 +47849,14 @@ declare module "ue" {
         BoneName: string;
         AdditionalOffset: Vector;
         bDisableSteering: boolean;
+        static StaticClass(): Class;
     }
     
     class TireConfigMaterialFriction {
         constructor(PhysicalMaterial: PhysicalMaterial, FrictionScale: number);
         PhysicalMaterial: PhysicalMaterial;
         FrictionScale: number;
+        static StaticClass(): Class;
     }
     
     class TireConfig extends DataAsset {
@@ -46835,12 +47920,14 @@ declare module "ue" {
         BrakeInput: number;
         HandbrakeInput: number;
         CurrentGear: number;
+        static StaticClass(): Class;
     }
     
     class VehicleInputRate {
         constructor(RiseRate: number, FallRate: number);
         RiseRate: number;
         FallRate: number;
+        static StaticClass(): Class;
     }
     
     class WheeledVehicleMovementComponent extends PawnMovementComponent {
@@ -46960,6 +48047,7 @@ declare module "ue" {
         DampingRateFullThrottle: number;
         DampingRateZeroThrottleClutchEngaged: number;
         DampingRateZeroThrottleClutchDisengaged: number;
+        static StaticClass(): Class;
     }
     
     class VehicleDifferential4WData {
@@ -46971,6 +48059,7 @@ declare module "ue" {
         CentreBias: number;
         FrontBias: number;
         RearBias: number;
+        static StaticClass(): Class;
     }
     
     class VehicleGearData {
@@ -46978,6 +48067,7 @@ declare module "ue" {
         Ratio: number;
         DownRatio: number;
         UpRatio: number;
+        static StaticClass(): Class;
     }
     
     class VehicleTransmissionData {
@@ -46990,6 +48080,7 @@ declare module "ue" {
         ReverseGearRatio: number;
         NeutralGearUpRatio: number;
         ClutchStrength: number;
+        static StaticClass(): Class;
     }
     
     class WheeledVehicleMovementComponent4W extends WheeledVehicleMovementComponent {
@@ -47006,6 +48097,7 @@ declare module "ue" {
     
     class AnimNode_WheelHandler extends AnimNode_SkeletalControlBase {
         constructor();
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_WheelHandler extends AnimGraphNode_SkeletalControlBase {
@@ -47181,6 +48273,7 @@ declare module "ue" {
         constructor(Alignment: Vector2D, WillSerialize: number);
         Alignment: Vector2D;
         WillSerialize: number;
+        static StaticClass(): Class;
     }
     
     enum EToTest { V0, V1, V13, EToTest_MAX}
@@ -47195,6 +48288,7 @@ declare module "ue" {
         MyString: string;
         ArrayBuffer: ArrayBuffer;
         PrintState(): void;
+        NameTest(Name: string): void;
         GetStrings(): TArray<string>;
         GetInts(): TArray<number>;
         GetData(): TArray<number>;
@@ -47464,6 +48558,7 @@ declare module "ue" {
         SourceName: string;
         ImportedTileSet: TWeakObjectPtr<PaperTileSet>;
         ImportedTexture: TWeakObjectPtr<Texture>;
+        static StaticClass(): Class;
     }
     
     class TileMapAssetImportData extends AssetImportData {
@@ -47558,6 +48653,7 @@ declare module "ue" {
     class ActorLayer {
         constructor(Name: string);
         Name: string;
+        static StaticClass(): Class;
     }
     
     class LayersBlueprintLibrary extends BlueprintFunctionLibrary {
@@ -47580,6 +48676,7 @@ declare module "ue" {
     class MyPluginStruct {
         constructor(TestString: string);
         TestString: string;
+        static StaticClass(): Class;
     }
     
     class MyPluginObject extends Object {
@@ -47602,6 +48699,7 @@ declare module "ue" {
         Guid: Guid;
         Name: string;
         Key: string;
+        static StaticClass(): Class;
     }
     
     class CryptoKeysSettings extends Object {
@@ -47638,6 +48736,7 @@ declare module "ue" {
         constructor(ValueInSeconds: number, bIsSelected: boolean);
         ValueInSeconds: number;
         bIsSelected: boolean;
+        static StaticClass(): Class;
     }
     
     class CurveEditorRetimeToolData extends Object {
@@ -47848,6 +48947,7 @@ declare module "ue" {
     
     class GeometryCacheMeshData {
         constructor();
+        static StaticClass(): Class;
     }
     
     class GeometryCacheTrack_FlipbookAnimation extends GeometryCacheTrack {
@@ -47893,6 +48993,7 @@ declare module "ue" {
         FrameStart: number;
         FrameEnd: number;
         bSkipEmpty: boolean;
+        static StaticClass(): Class;
     }
     
     class AbcAssetImportData extends AssetImportData {
@@ -47911,12 +49012,14 @@ declare module "ue" {
         HardEdgeAngleThreshold: number;
         bRecomputeNormals: boolean;
         bIgnoreDegenerateTriangles: boolean;
+        static StaticClass(): Class;
     }
     
     class AbcMaterialSettings {
         constructor(bCreateMaterials: boolean, bFindMaterials: boolean);
         bCreateMaterials: boolean;
         bFindMaterials: boolean;
+        static StaticClass(): Class;
     }
     
     enum EBaseCalculationType { None, PercentageBased, FixedNumber, EBaseCalculationType_MAX}
@@ -47928,6 +49031,7 @@ declare module "ue" {
         PercentageOfTotalBases: number;
         MaxNumberOfBases: number;
         MinimumNumberOfVertexInfluencePercentage: number;
+        static StaticClass(): Class;
     }
     
     class AbcStaticMeshSettings {
@@ -47935,6 +49039,7 @@ declare module "ue" {
         bMergeMeshes: boolean;
         bPropagateMatrixTransformations: boolean;
         bGenerateLightmapUVs: boolean;
+        static StaticClass(): Class;
     }
     
     class AbcGeometryCacheSettings {
@@ -47945,6 +49050,7 @@ declare module "ue" {
         bOptimizeIndexBuffers: boolean;
         CompressedPositionPrecision: number;
         CompressedTextureCoordinatesNumberOfBits: number;
+        static StaticClass(): Class;
     }
     
     enum EAbcConversionPreset { Maya, Max, Custom, EAbcConversionPreset_MAX}
@@ -47955,6 +49061,7 @@ declare module "ue" {
         bFlipV: boolean;
         Scale: Vector;
         Rotation: Vector;
+        static StaticClass(): Class;
     }
     
     class AbcImportSettings extends Object {
@@ -48028,6 +49135,7 @@ declare module "ue" {
         StartOffset: number;
         EndOffset: number;
         GeometryCache: SoftObjectPath;
+        static StaticClass(): Class;
     }
     
     class MovieSceneGeometryCacheSection extends MovieSceneSection {
@@ -48374,6 +49482,7 @@ declare module "ue" {
         constructor(Error: string, ImageData: TArray<number>);
         Error: string;
         ImageData: TArray<number>;
+        static StaticClass(): Class;
     }
     
     enum ETextureRotationDirection { None, Left, Right, Down, ETextureRotationDirection_MAX}
@@ -48492,6 +49601,7 @@ declare module "ue" {
         DeviceName: string;
         NumInputChannels: number;
         SampleRate: number;
+        static StaticClass(): Class;
     }
     
     class AudioCapture extends AudioGenerator {
@@ -48526,6 +49636,7 @@ declare module "ue" {
         OtherActor: Actor;
         ComponentProperty: string;
         PathToComponent: string;
+        static StaticClass(): Class;
     }
     
     class CableComponent extends MeshComponent {
@@ -48570,6 +49681,7 @@ declare module "ue" {
         Vertex0: Vector;
         Vertex1: Vector;
         Vertex2: Vector;
+        static StaticClass(): Class;
     }
     
     class CustomMeshComponent extends MeshComponent {
@@ -48591,6 +49703,7 @@ declare module "ue" {
         MinImpulse: number;
         MaxDistance: number;
         SortMethod: EChaosCollisionSortMethod;
+        static StaticClass(): Class;
     }
     
     enum EChaosBreakingSortMethod { SortNone, SortByHighestMass, SortByHighestSpeed, SortByNearestFirst, Count, EChaosBreakingSortMethod_MAX}
@@ -48602,6 +49715,7 @@ declare module "ue" {
         MinMass: number;
         MaxDistance: number;
         SortMethod: EChaosBreakingSortMethod;
+        static StaticClass(): Class;
     }
     
     enum EChaosTrailingSortMethod { SortNone, SortByHighestMass, SortByHighestSpeed, SortByNearestFirst, Count, EChaosTrailingSortMethod_MAX}
@@ -48613,6 +49727,7 @@ declare module "ue" {
         MinAngularSpeed: number;
         MaxDistance: number;
         SortMethod: EChaosTrailingSortMethod;
+        static StaticClass(): Class;
     }
     
     enum ECollisionTypeEnum { Chaos_Volumetric, Chaos_Surface_Volumetric, Chaos_Max, Chaos_MAX}
@@ -48629,6 +49744,7 @@ declare module "ue" {
         CollisionObjectReductionPercentage: number;
         CollisionParticlesFraction: number;
         MaximumCollisionParticles: number;
+        static StaticClass(): Class;
     }
     
     class GeometryCollection extends Object {
@@ -48676,6 +49792,7 @@ declare module "ue" {
         LevelsetIndex: number;
         ParticleIndexMesh: number;
         LevelsetIndexMesh: number;
+        static StaticClass(): Class;
     }
     
     class SolverBreakingData {
@@ -48686,6 +49803,7 @@ declare module "ue" {
         Mass: number;
         ParticleIndex: number;
         ParticleIndexMesh: number;
+        static StaticClass(): Class;
     }
     
     class SolverTrailingData {
@@ -48696,6 +49814,7 @@ declare module "ue" {
         Mass: number;
         ParticleIndex: number;
         ParticleIndexMesh: number;
+        static StaticClass(): Class;
     }
     
     class RecordedFrame {
@@ -48708,11 +49827,13 @@ declare module "ue" {
         Breakings: TArray<SolverBreakingData>;
         Trailings: TSet<SolverTrailingData>;
         Timestamp: number;
+        static StaticClass(): Class;
     }
     
     class RecordedTransformTrack {
         constructor(Records: TArray<RecordedFrame>);
         Records: TArray<RecordedFrame>;
+        static StaticClass(): Class;
     }
     
     class GeometryCollectionCache extends Object {
@@ -48747,6 +49868,7 @@ declare module "ue" {
         TrailingDataSizeMax: number;
         TrailingMinSpeedThreshold: number;
         TrailingMinVolumeThreshold: number;
+        static StaticClass(): Class;
     }
     
     class ChaosBreakEvent {
@@ -48756,6 +49878,7 @@ declare module "ue" {
         Velocity: Vector;
         AngularVelocity: Vector;
         Mass: number;
+        static StaticClass(): Class;
     }
     
     enum EGeometryCollectionPhysicsTypeEnum { Chaos_AngularVelocity, Chaos_DynamicState, Chaos_LinearVelocity, Chaos_InitialAngularVelocity, Chaos_InitialLinearVelocity, Chaos_CollisionGroup, Chaos_LinearForce, Chaos_AngularTorque, Chaos_Max, Chaos_MAX}
@@ -48803,6 +49926,7 @@ declare module "ue" {
     
     class GeometryCollectionDebugDrawWarningMessage {
         constructor();
+        static StaticClass(): Class;
     }
     
     class GeometryCollectionDebugDrawActorSelectedRigidBody {
@@ -48810,6 +49934,7 @@ declare module "ue" {
         Id: number;
         Solver: ChaosSolverActor;
         GeometryCollection: GeometryCollectionActor;
+        static StaticClass(): Class;
     }
     
     enum EGeometryCollectionDebugDrawActorHideGeometry { HideNone, HideWithCollision, HideSelected, HideWholeCollection, HideAll, EGeometryCollectionDebugDrawActorHideGeometry_MAX}
@@ -48922,6 +50047,7 @@ declare module "ue" {
         Mass1: number;
         Mass2: number;
         Impulse: Vector;
+        static StaticClass(): Class;
     }
     
     class ChaosBreakingEventData {
@@ -48930,6 +50056,7 @@ declare module "ue" {
         Velocity: Vector;
         Mass: number;
         ParticleIndex: number;
+        static StaticClass(): Class;
     }
     
     class ChaosTrailingEventData {
@@ -48939,6 +50066,7 @@ declare module "ue" {
         AngularVelocity: Vector;
         Mass: number;
         ParticleIndex: number;
+        static StaticClass(): Class;
     }
     
     class ChaosDestructionListener extends SceneComponent {
@@ -49050,16 +50178,19 @@ declare module "ue" {
         constructor(VertexID0: VertexID, VertexID1: VertexID);
         VertexID0: VertexID;
         VertexID1: VertexID;
+        static StaticClass(): Class;
     }
     
     class PolygonToSplit {
         constructor(PolygonID: PolygonID, VertexPairsToSplitAt: TArray<VertexPair>);
         PolygonID: PolygonID;
         VertexPairsToSplitAt: TArray<VertexPair>;
+        static StaticClass(): Class;
     }
     
     class MeshElementAttributeValue {
         constructor();
+        static StaticClass(): Class;
     }
     
     class MeshElementAttributeData {
@@ -49067,28 +50198,33 @@ declare module "ue" {
         AttributeName: string;
         AttributeIndex: number;
         AttributeValue: MeshElementAttributeValue;
+        static StaticClass(): Class;
     }
     
     class MeshElementAttributeList {
         constructor(Attributes: TArray<MeshElementAttributeData>);
         Attributes: TArray<MeshElementAttributeData>;
+        static StaticClass(): Class;
     }
     
     class AttributesForVertex {
         constructor(VertexID: VertexID, VertexAttributes: MeshElementAttributeList);
         VertexID: VertexID;
         VertexAttributes: MeshElementAttributeList;
+        static StaticClass(): Class;
     }
     
     class AttributesForVertexInstance {
         constructor(VertexInstanceID: VertexInstanceID, VertexInstanceAttributes: MeshElementAttributeList);
         VertexInstanceID: VertexInstanceID;
         VertexInstanceAttributes: MeshElementAttributeList;
+        static StaticClass(): Class;
     }
     
     class VertexAttributesForPolygonHole {
         constructor(VertexAttributeList: TArray<MeshElementAttributeList>);
         VertexAttributeList: TArray<MeshElementAttributeList>;
+        static StaticClass(): Class;
     }
     
     class VertexAttributesForPolygon {
@@ -49096,18 +50232,21 @@ declare module "ue" {
         PolygonID: PolygonID;
         PerimeterVertexAttributeLists: TArray<MeshElementAttributeList>;
         VertexAttributeListsForEachHole: TArray<VertexAttributesForPolygonHole>;
+        static StaticClass(): Class;
     }
     
     class AttributesForEdge {
         constructor(EdgeID: EdgeID, EdgeAttributes: MeshElementAttributeList);
         EdgeID: EdgeID;
         EdgeAttributes: MeshElementAttributeList;
+        static StaticClass(): Class;
     }
     
     class VertexToMove {
         constructor(VertexID: VertexID, NewVertexPosition: Vector);
         VertexID: VertexID;
         NewVertexPosition: Vector;
+        static StaticClass(): Class;
     }
     
     enum EInsetPolygonsMode { All, CenterPolygonOnly, SidePolygonsOnly, EInsetPolygonsMode_MAX}
@@ -49120,6 +50259,7 @@ declare module "ue" {
         VertexNormal: Vector;
         VertexTangent: Vector;
         VertexBinormalSign: number;
+        static StaticClass(): Class;
     }
     
     class SubdividedQuad {
@@ -49128,17 +50268,20 @@ declare module "ue" {
         QuadVertex1: SubdividedQuadVertex;
         QuadVertex2: SubdividedQuadVertex;
         QuadVertex3: SubdividedQuadVertex;
+        static StaticClass(): Class;
     }
     
     class SubdivisionLimitSection {
         constructor(SubdividedQuads: TArray<SubdividedQuad>);
         SubdividedQuads: TArray<SubdividedQuad>;
+        static StaticClass(): Class;
     }
     
     class SubdividedWireEdge {
         constructor(EdgeVertex0PositionIndex: number, EdgeVertex1PositionIndex: number);
         EdgeVertex0PositionIndex: number;
         EdgeVertex1PositionIndex: number;
+        static StaticClass(): Class;
     }
     
     class SubdivisionLimitData {
@@ -49146,12 +50289,14 @@ declare module "ue" {
         VertexPositions: TArray<Vector>;
         Sections: TArray<SubdivisionLimitSection>;
         SubdividedWireEdges: TArray<SubdividedWireEdge>;
+        static StaticClass(): Class;
     }
     
     class VertexToCreate {
         constructor(VertexAttributes: MeshElementAttributeList, OriginalVertexID: VertexID);
         VertexAttributes: MeshElementAttributeList;
         OriginalVertexID: VertexID;
+        static StaticClass(): Class;
     }
     
     class VertexInstanceToCreate {
@@ -49159,6 +50304,7 @@ declare module "ue" {
         VertexID: VertexID;
         VertexInstanceAttributes: MeshElementAttributeList;
         OriginalVertexInstanceID: VertexInstanceID;
+        static StaticClass(): Class;
     }
     
     class VertexAndAttributes {
@@ -49166,6 +50312,7 @@ declare module "ue" {
         VertexInstanceID: VertexInstanceID;
         VertexID: VertexID;
         PolygonVertexAttributes: MeshElementAttributeList;
+        static StaticClass(): Class;
     }
     
     enum EPolygonEdgeHardness { NewEdgesSoft, NewEdgesHard, AllEdgesSoft, AllEdgesHard, EPolygonEdgeHardness_MAX}
@@ -49175,12 +50322,14 @@ declare module "ue" {
         PerimeterVertices: TArray<VertexAndAttributes>;
         OriginalPolygonID: PolygonID;
         PolygonEdgeHardness: EPolygonEdgeHardness;
+        static StaticClass(): Class;
     }
     
     class PolygonGroupToCreate {
         constructor(PolygonGroupAttributes: MeshElementAttributeList, OriginalPolygonGroupID: PolygonGroupID);
         PolygonGroupAttributes: MeshElementAttributeList;
         OriginalPolygonGroupID: PolygonGroupID;
+        static StaticClass(): Class;
     }
     
     class EdgeToCreate {
@@ -49189,17 +50338,20 @@ declare module "ue" {
         VertexID1: VertexID;
         EdgeAttributes: MeshElementAttributeList;
         OriginalEdgeID: EdgeID;
+        static StaticClass(): Class;
     }
     
     class VertexIndexAndInstanceID {
         constructor(ContourIndex: number, VertexInstanceID: VertexInstanceID);
         ContourIndex: number;
         VertexInstanceID: VertexInstanceID;
+        static StaticClass(): Class;
     }
     
     class VertexInstancesForPolygonHole {
         constructor(VertexIndicesAndInstanceIDs: TArray<VertexIndexAndInstanceID>);
         VertexIndicesAndInstanceIDs: TArray<VertexIndexAndInstanceID>;
+        static StaticClass(): Class;
     }
     
     class ChangeVertexInstancesForPolygon {
@@ -49207,12 +50359,14 @@ declare module "ue" {
         PolygonID: PolygonID;
         PerimeterVertexIndicesAndInstanceIDs: TArray<VertexIndexAndInstanceID>;
         VertexIndicesAndInstanceIDsForEachHole: TArray<VertexInstancesForPolygonHole>;
+        static StaticClass(): Class;
     }
     
     class PolygonGroupForPolygon {
         constructor(PolygonID: PolygonID, PolygonGroupID: PolygonGroupID);
         PolygonID: PolygonID;
         PolygonGroupID: PolygonGroupID;
+        static StaticClass(): Class;
     }
     
     class EditableMesh extends Object {
@@ -49418,6 +50572,7 @@ declare module "ue" {
         UV1: Vector2D;
         Vertex2: Vector;
         UV2: Vector2D;
+        static StaticClass(): Class;
     }
     
     class OculusMR_PlaneMeshComponent extends MeshComponent {
@@ -49491,6 +50646,7 @@ declare module "ue" {
         UserOffset: Vector;
         RawRotation: Rotator;
         RawOffset: Vector;
+        static StaticClass(): Class;
     }
     
     class OculusMR_State extends Object {
@@ -49566,12 +50722,14 @@ declare module "ue" {
         constructor(Name: string, AchievementID: string);
         Name: string;
         AchievementID: string;
+        static StaticClass(): Class;
     }
     
     class GooglePlayLeaderboardMapping {
         constructor(Name: string, LeaderboardID: string);
         Name: string;
         LeaderboardID: string;
+        static StaticClass(): Class;
     }
     
     class AndroidRuntimeSettings extends Object {
@@ -49703,6 +50861,7 @@ declare module "ue" {
         Included: boolean;
         Name: string;
         Id: string;
+        static StaticClass(): Class;
     }
     
     enum EOculusPlatformTarget { Rift, Quest, Mobile, Length, EOculusPlatformTarget_MAX}
@@ -49714,11 +50873,13 @@ declare module "ue" {
         Required: boolean;
         Name: string;
         Sku: string;
+        static StaticClass(): Class;
     }
     
     class AssetConfigArray {
         constructor(ConfigArray: TArray<AssetConfig>);
         ConfigArray: TArray<AssetConfig>;
+        static StaticClass(): Class;
     }
     
     class OculusPlatformToolSettings extends Object {
@@ -49769,12 +50930,14 @@ declare module "ue" {
         PinSubCategoryObject: Object;
         PinContainerType: number;
         bIsReference: boolean;
+        static StaticClass(): Class;
     }
     
     class PEGraphTerminalType {
         constructor(PinCategory: string, PinSubCategoryObject: Object);
         PinCategory: string;
         PinSubCategoryObject: Object;
+        static StaticClass(): Class;
     }
     
     class PEBlueprintAsset extends Object {
@@ -49981,6 +51144,7 @@ declare module "ue" {
         bSkipMeshesWithVertexColors: boolean;
         bUseHLODVolumes: boolean;
         ISMComponentToUse: Class;
+        static StaticClass(): Class;
     }
     
     class MeshInstancingSettingsObject extends Object {
@@ -50026,11 +51190,13 @@ declare module "ue" {
     class IOSBuildResourceDirectory {
         constructor(Path: string);
         Path: string;
+        static StaticClass(): Class;
     }
     
     class IOSBuildResourceFilePath {
         constructor(FilePath: string);
         FilePath: string;
+        static StaticClass(): Class;
     }
     
     enum EIOSLandscapeOrientation { LandscapeLeft, LandscapeRight, EIOSLandscapeOrientation_MAX}
@@ -50136,6 +51302,7 @@ declare module "ue" {
         constructor(ElementType: ELuminComponentSubElementType, Value: string);
         ElementType: ELuminComponentSubElementType;
         Value: string;
+        static StaticClass(): Class;
     }
     
     enum ELuminComponentType { Universe, Fullscreen, SearchProvider, MusicService, Screens, ScreensImmersive, Console, SystemUI, ELuminComponentType_MAX}
@@ -50146,6 +51313,7 @@ declare module "ue" {
         ExecutableName: string;
         ComponentType: ELuminComponentType;
         ExtraComponentSubElements: TArray<LuminComponentSubElement>;
+        static StaticClass(): Class;
     }
     
     class LuminRuntimeSettings extends Object {
@@ -50203,6 +51371,7 @@ declare module "ue" {
         Content: string;
         ExcerptName: string;
         Text: string;
+        static StaticClass(): Class;
     }
     
     class TutorialContentAnchor {
@@ -50215,6 +51384,7 @@ declare module "ue" {
         FriendlyName: string;
         GUIDString: string;
         OuterName: string;
+        static StaticClass(): Class;
     }
     
     class TutorialWidgetContent {
@@ -50226,6 +51396,7 @@ declare module "ue" {
         Offset: Vector2D;
         ContentWidth: number;
         bAutoFocus: boolean;
+        static StaticClass(): Class;
     }
     
     class TutorialStage {
@@ -50237,6 +51408,7 @@ declare module "ue" {
         BackButtonText: string;
         PlatformsToTest: TArray<string>;
         bInvertPlatformTest: boolean;
+        static StaticClass(): Class;
     }
     
     class EditorTutorial extends Object {
@@ -50293,6 +51465,7 @@ declare module "ue" {
         Description: string;
         Icon: string;
         Texture: SoftObjectPath;
+        static StaticClass(): Class;
     }
     
     class TutorialContext {
@@ -50301,6 +51474,7 @@ declare module "ue" {
         BrowserFilter: string;
         AttractTutorial: SoftClassPath;
         LaunchTutorial: SoftClassPath;
+        static StaticClass(): Class;
     }
     
     class EditorTutorialSettings extends Object {
@@ -50328,6 +51502,7 @@ declare module "ue" {
         Tutorial: SoftClassPath;
         CurrentStage: number;
         bUserDismissed: boolean;
+        static StaticClass(): Class;
     }
     
     class TutorialStateSettings extends Object {
@@ -50352,6 +51527,7 @@ declare module "ue" {
         CategoryName: string;
         LogVerbosity: number;
         Enabled: boolean;
+        static StaticClass(): Class;
     }
     
     class VisualLoggerFiltersData {
@@ -50360,6 +51536,7 @@ declare module "ue" {
         ObjectNameFilter: string;
         Categories: TArray<CategoryFilter>;
         SelectedClasses: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class LogVisualizerSettings extends Object {
@@ -50526,6 +51703,7 @@ declare module "ue" {
     class ActorRecordingSettings {
         constructor(Settings: TArray<Object>);
         Settings: TArray<Object>;
+        static StaticClass(): Class;
     }
     
     class AnimationRecordingSettings {
@@ -50537,6 +51715,7 @@ declare module "ue" {
         Length: number;
         InterpMode: number;
         TangentMode: number;
+        static StaticClass(): Class;
     }
     
     class ActorRecording extends SequenceRecordingBase {
@@ -50602,24 +51781,28 @@ declare module "ue" {
     class SequenceRecorderActorFilter {
         constructor(ActorClassesToRecord: TArray<Class>);
         ActorClassesToRecord: TArray<Class>;
+        static StaticClass(): Class;
     }
     
     class PropertiesToRecordForClass {
         constructor(Class: Class, Properties: TArray<string>);
         Class: Class;
         Properties: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class PropertiesToRecordForActorClass {
         constructor(Class: Class, Properties: TArray<string>);
         Class: Class;
         Properties: TArray<string>;
+        static StaticClass(): Class;
     }
     
     class SettingsForActorClass {
         constructor(Class: Class, bRecordToPossessable: boolean);
         Class: Class;
         bRecordToPossessable: boolean;
+        static StaticClass(): Class;
     }
     
     class SequenceRecorderSettings extends Object {
@@ -50666,6 +51849,7 @@ declare module "ue" {
         ImageFormat: EMediaPlayerRecordingImageFormat;
         CompressionQuality: number;
         bResetAlpha: boolean;
+        static StaticClass(): Class;
     }
     
     class MediaPlayerRecording extends SequenceRecordingBase {
@@ -50783,6 +51967,7 @@ declare module "ue" {
         constructor(ComponentPath: string, PropertyPath: string);
         ComponentPath: string;
         PropertyPath: string;
+        static StaticClass(): Class;
     }
     
     class LevelSequenceTrackSettings {
@@ -50792,6 +51977,7 @@ declare module "ue" {
         ExcludeDefaultTracks: TArray<SoftClassPath>;
         DefaultPropertyTracks: TArray<LevelSequencePropertyTrackSettings>;
         ExcludeDefaultPropertyTracks: TArray<LevelSequencePropertyTrackSettings>;
+        static StaticClass(): Class;
     }
     
     class LevelSequenceEditorSettings extends Object {
@@ -50834,6 +52020,7 @@ declare module "ue" {
         KnuckleAverageMS_UE4: Vector;
         WristSideDirectionLS_UE4: Vector;
         WristForwardLS_UE4: Vector;
+        static StaticClass(): Class;
     }
     
     class AnimNode_SteamVRInputAnimPose extends AnimNode_Base {
@@ -50844,6 +52031,7 @@ declare module "ue" {
         Mirror: boolean;
         SteamVRSkeletalTransform: SteamVRSkeletonTransform;
         UE4RetargettingRefs: UE4RetargettingRefs;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_SteamVRInputAnimPose extends AnimGraphNode_Base {
@@ -50859,6 +52047,7 @@ declare module "ue" {
         ReferencePose: PoseLink;
         HandSkeleton: EHandSkeleton;
         TargetPose: PoseLink;
+        static StaticClass(): Class;
     }
     
     class AnimGraphNode_SteamVRSetWristTransform extends AnimGraphNode_Base {
@@ -51024,6 +52213,7 @@ declare module "ue" {
         EraseTextureWeightIndex: ETexturePaintIndex;
         bPaintOnSpecificLOD: boolean;
         LODIndex: number;
+        static StaticClass(): Class;
     }
     
     class TexturePaintSettings {
@@ -51037,6 +52227,7 @@ declare module "ue" {
         UVChannel: number;
         bEnableSeamPainting: boolean;
         PaintTexture: Texture2D;
+        static StaticClass(): Class;
     }
     
     class PaintModeSettings extends MeshPaintSettings {
@@ -51066,6 +52257,7 @@ declare module "ue" {
         LayerFilename: string;
         LayerName: string;
         bNoImport: boolean;
+        static StaticClass(): Class;
     }
     
     enum ELandscapeMirrorOperation { MinusXToPlusX, PlusXToMinusX, MinusYToPlusY, PlusYToMinusY, RotateMinusXToPlusX, RotatePlusXToMinusX, RotateMinusYToPlusY, RotatePlusYToMinusY, ELandscapeMirrorOperation_MAX}
@@ -51077,6 +52269,7 @@ declare module "ue" {
         LayerName: string;
         LayerInfo: LandscapeLayerInfoObject;
         SourceFilePath: string;
+        static StaticClass(): Class;
     }
     
     class LandscapeImportLayer extends LandscapeImportLayerInfo {
@@ -51084,6 +52277,7 @@ declare module "ue" {
         ThumbnailMIC: LandscapeMaterialInstanceConstant;
         ImportResult: ELandscapeImportResult;
         ErrorMessage: string;
+        static StaticClass(): Class;
     }
     
     class LandscapePatternBrushWorldSpaceSettings {
@@ -51092,6 +52286,7 @@ declare module "ue" {
         Rotation: number;
         bCenterTextureOnOrigin: boolean;
         RepeatSize: number;
+        static StaticClass(): Class;
     }
     
     enum ELandscapeLayerPaintingRestriction { None, UseMaxLayers, ExistingOnly, UseComponentWhitelist, ELandscapeLayerPaintingRestriction_MAX}
@@ -51287,6 +52482,7 @@ declare module "ue" {
     
     class PointerToUberGraphFrame {
         constructor();
+        static StaticClass(): Class;
     }
     
     class SKEL_TsTestActor_C extends Actor {
