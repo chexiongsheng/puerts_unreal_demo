@@ -183,8 +183,6 @@ private:
     int32_t Port;
 
     std::unique_ptr<v8_inspector::V8Inspector> V8Inspector;
-    
-    std::unique_ptr<v8_inspector::V8Inspector> V8Inspector2;
 
     int32_t CtxGroupID;
         
