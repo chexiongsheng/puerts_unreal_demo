@@ -5,7 +5,7 @@
     "jsx": "react",
     "sourceMap": true,
     "typeRoots": [
-      "Content/Typing",
+      "Plugins/Puerts/Typing",
       "./node_modules/@types"
     ],
     "outDir": "Content/JavaScript"
