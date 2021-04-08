@@ -48151,8 +48151,16 @@ declare module "ue" {
         static Load(InName: string): JSWidgetGeneratedClass;
     }
     
+    class TypeScriptBlueprint extends Blueprint {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TypeScriptBlueprint;
+        static Load(InName: string): TypeScriptBlueprint;
+    }
+    
     class TypeScriptGeneratedClass extends BlueprintGeneratedClass {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        HasConstructor: boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TypeScriptGeneratedClass;
         static Load(InName: string): TypeScriptGeneratedClass;
@@ -48336,6 +48344,15 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TsGameInstance;
         static Load(InName: string): TsGameInstance;
+    }
+    
+    class TypeScriptGameInstance extends GameInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        StartNotify: $Delegate<() => void>;
+        ShutdownNotify: $Delegate<() => void>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TypeScriptGameInstance;
+        static Load(InName: string): TypeScriptGameInstance;
     }
     
     class VectorExtensionMethods extends ExtensionMethods {
@@ -50906,12 +50923,20 @@ declare module "ue" {
         static Load(InName: string): OculusPlatformToolSettings;
     }
     
+    class CodeGenerator extends Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Gen(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CodeGenerator;
+        static Load(InName: string): CodeGenerator;
+    }
+    
     class FileSystemOperation extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static WriteFile(Path: string, Data: string): void;
         static ResolvePath(Path: string): string;
         static ReadFile(Path: string, Data: $Ref<string>): boolean;
-        static PuertsNotifyChange(Path: string): void;
+        static PuertsNotifyChange(Path: string, Source: string): void;
         static GetFiles(Path: string): TArray<string>;
         static GetDirectories(Path: string): TArray<string>;
         static GetCurrentDirectory(): string;
@@ -50946,14 +50971,15 @@ declare module "ue" {
         Blueprint: Blueprint;
         Package: Package;
         NeedSave: boolean;
+        HasConstructor: boolean;
         Save(): void;
         RemoveNotExistedMemberVariable(): void;
         RemoveNotExistedFunction(): void;
         LoadOrCreate(InName: string, InPath: string, ParentClass: Class): boolean;
         ClearParameter(): void;
         AddParameter(InParameterName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
-        AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
-        AddFunction(InName: string, IsVoid: boolean, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
+        AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: number): void;
+        AddFunction(InName: string, IsVoid: boolean, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: number): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PEBlueprintAsset;
         static Load(InName: string): PEBlueprintAsset;
@@ -50967,6 +50993,14 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PEDirectoryWatcher;
         static Load(InName: string): PEDirectoryWatcher;
+    }
+    
+    class ReactDeclarationGenerator extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Gen(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ReactDeclarationGenerator;
+        static Load(InName: string): ReactDeclarationGenerator;
     }
     
     class MockAI extends Object {
