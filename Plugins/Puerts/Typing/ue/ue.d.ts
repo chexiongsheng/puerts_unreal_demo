@@ -48151,6 +48151,27 @@ declare module "ue" {
         static Load(InName: string): JSWidgetGeneratedClass;
     }
     
+    class ObjectExtension extends ExtensionMethods {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static IsValid(Object: Object): boolean;
+        static GetWorld(Object: Object): World;
+        static GetOuter(Object: Object): Object;
+        static GetName(Object: Object): string;
+        static GetClass(Object: Object): Class;
+        static CreateDefaultSubobject(Object: Object, SubobjectFName: string, ReturnType: Class, ClassToCreateByDefault: Class, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ObjectExtension;
+        static Load(InName: string): ObjectExtension;
+    }
+    
+    class SceneComponentExtension extends ExtensionMethods {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static SetupAttachment(InSelf: SceneComponent, InParent: SceneComponent, InSocketName: string): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SceneComponentExtension;
+        static Load(InName: string): SceneComponentExtension;
+    }
+    
     class TypeScriptBlueprint extends Blueprint {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -48173,6 +48194,18 @@ declare module "ue" {
         static Load(InName: string): TypeScriptObject;
     }
     
+    class PuertsSetting extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Enable: boolean;
+        DebugEnable: boolean;
+        DebugPort: number;
+        WaitDebugger: boolean;
+        NumberOfJsEnv: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PuertsSetting;
+        static Load(InName: string): PuertsSetting;
+    }
+    
     class ReactWidget extends UserWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RemoveChild(Content: Widget): boolean;
@@ -48193,36 +48226,13 @@ declare module "ue" {
         static Load(InName: string): UMGManager;
     }
     
-    class ObjectExtension extends ExtensionMethods {
+    class AsyncLoadState extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static IsValid(Object: Object): boolean;
-        static GetWorld(Object: Object): World;
-        static GetOuter(Object: Object): Object;
-        static GetName(Object: Object): string;
-        static GetClass(Object: Object): Class;
-        static CreateDefaultSubobject(Object: Object, SubobjectFName: string, ReturnType: Class, ClassToCreateByDefault: Class, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
+        LoadedCallback: $Delegate<(Obj: Class) => void>;
+        StartLoad(InPath: string): void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ObjectExtension;
-        static Load(InName: string): ObjectExtension;
-    }
-    
-    class PuertsSetting extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Enable: boolean;
-        DebugEnable: boolean;
-        DebugPort: number;
-        WaitDebugger: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PuertsSetting;
-        static Load(InName: string): PuertsSetting;
-    }
-    
-    class SceneComponentExtension extends ExtensionMethods {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static SetupAttachment(InSelf: SceneComponent, InParent: SceneComponent, InSocketName: string): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SceneComponentExtension;
-        static Load(InName: string): SceneComponentExtension;
+        static Find(OrigInName: string, Outer?: Object): AsyncLoadState;
+        static Load(InName: string): AsyncLoadState;
     }
     
     enum EnumInt32 { VM1, V0, V1, V2, V3, EnumInt32_MAX}
@@ -48263,6 +48273,16 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): JSBlueprintFunctionLibrary;
         static Load(InName: string): JSBlueprintFunctionLibrary;
+    }
+    
+    class LatentActionState extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        LatentActionCallback: $Delegate<() => void>;
+        OnLatentActionCompleted(LinkID: number): void;
+        GetLatentActionInfo(): LatentActionInfo;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LatentActionState;
+        static Load(InName: string): LatentActionState;
     }
     
     class MainActor extends Actor {
