@@ -52838,4 +52838,13 @@ declare module "ue" {
         static Load(InName: string): AnotherActor_C;
     }
     
+    class TestWidgetBlueprint_C extends UserWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Button1: Button;
+        TextBox: MultiLineEditableTextBox;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TestWidgetBlueprint_C;
+        static Load(InName: string): TestWidgetBlueprint_C;
+    }
+    
 }
