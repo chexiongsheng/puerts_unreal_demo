@@ -3,7 +3,7 @@
 import * as UE from 'ue'
 import {argv} from 'puerts'
 
-let world = argv.getByName("World") as UE.World;
+let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld() as UE.World;
 
 let widgetClass = UE.Class.Load("/Game/StarterContent/TestWidgetBlueprint.TestWidgetBlueprint_C");
 
