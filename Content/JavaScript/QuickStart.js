@@ -98,13 +98,14 @@ for (var i = 0; i < u8a2.length; i++) {
 }
 //引擎方法
 console.log("----------------------------------------------------");
-let world = puerts_1.argv.getByName("World");
+//在FJsEnv启动，调用Start时传入的参数可以通过argv获取
+let world = puerts_1.argv.getByName("GameInstance").GetWorld();
 let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
 console.log(actor.GetName());
 console.log(actor.K2_GetActorLocation().ToString());
 //蓝图加载
-const TestBlueprint = puerts_1.blueprint('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
-let bpActor = world.SpawnActor(TestBlueprint.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+let bpClass = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
+let bpActor = world.SpawnActor(bpClass, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
 bpActor.Foo(false, 8000, 9000);
 //Delegate
 console.log("----------------------------------------------------");
@@ -168,6 +169,8 @@ class MyActor extends UE.Actor {
 let cls = puerts_1.makeUClass(MyActor);
 let actor2 = world.SpawnActor(cls, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
 //JS继承一个蓝图类
+//!！注意：blueprint<xxx>会导致这个BP类常驻内存
+const TestBlueprint = puerts_1.blueprint('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
 class MyBPActor extends TestBlueprint {
     //覆盖蓝图提供的方法，此时无论是蓝图在BeginPlay的调用，以及在ts侧的调用，都会用这个新的实现
     Foo(P1, P2, P3) {
@@ -179,7 +182,7 @@ let bpActor2 = world.SpawnActor(clsBP, undefined, UE.ESpawnActorCollisionHandlin
 bpActor2.Foo(false, 8000, 9000);
 //unhandledRejection
 puerts_1.on('unhandledRejection', function (reason) {
-    console.warn('unhandledRejection~~~', reason.stack);
+    console.log('unhandledRejection~~~', reason.stack);
 });
 new Promise(() => {
     throw new Error('unhandled rejection');
