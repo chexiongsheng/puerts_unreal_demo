@@ -1,5 +1,5 @@
 import * as UE from 'ue'
-import {ReactUMG, Root} from './react-umg';
+import {ReactUMG, Root} from 'react-umg';
 import * as UI from './main-ui';
 import {on} from 'puerts';
 

@@ -1,6 +1,6 @@
 import * as UE from 'ue'
 import {$ref, $unref, $set, argv, requestJitModuleMethod, makeUClass, blueprint, on} from 'puerts';
-import {ReactUMG} from './react-umg';
+import {ReactUMG} from 'react-umg';
 import * as UI from './main-ui';
 import * as JitTest from './JitTest'
 
