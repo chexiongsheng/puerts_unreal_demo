@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const UE = require("ue");
-const react_umg_1 = require("./react-umg");
+const react_umg_1 = require("react-umg");
 const UI = require("./main-ui");
 const puerts_1 = require("puerts");
 class TsTestGameInstance extends UE.TypeScriptGameInstance {

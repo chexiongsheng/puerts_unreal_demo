@@ -1,8 +1,5 @@
 import * as UE from 'ue'
-import {$ref, $unref, $set, argv, requestJitModuleMethod, makeUClass, blueprint, on} from 'puerts';
-import {ReactUMG} from 'react-umg';
-import * as UI from './main-ui';
-import * as JitTest from './JitTest'
+import {$ref, $unref, $set, argv, makeUClass, blueprint, on} from 'puerts';
 
 let obj = new UE.MainObject();
 
@@ -161,12 +158,6 @@ console.log("out str:" + $unref(strRef));
 let retStr = actor.NotifyWithStringRet.Execute("console.log('hello world')");
 console.log("ret str:" + retStr);
 console.log("waiting native call script...........");
-
-/*
-//用React来写UI
-ReactUMG.init(world);
-UI.Load();
-*/
 
 //JS继承一个原生类
 class MyActor extends UE.Actor {

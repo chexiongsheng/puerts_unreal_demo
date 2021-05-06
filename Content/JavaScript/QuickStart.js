@@ -137,11 +137,6 @@ console.log("out str:" + puerts_1.$unref(strRef));
 let retStr = actor.NotifyWithStringRet.Execute("console.log('hello world')");
 console.log("ret str:" + retStr);
 console.log("waiting native call script...........");
-/*
-//用React来写UI
-ReactUMG.init(world);
-UI.Load();
-*/
 //JS继承一个原生类
 class MyActor extends UE.Actor {
     //注意，继承UE类的js类，构造函数必须大写开头

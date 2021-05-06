@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = require("react");
-const react_umg_1 = require("../react-umg");
+const react_umg_1 = require("react-umg");
 let SlotOfProgressBar = {
     Size: {
         SizeRule: 1
