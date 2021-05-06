@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { VerticalBox, CanvasPanel, ReactUMG, CanvasPanelSlot, Button, HorizontalBox, TextureImage } from '../react-umg';
+import { VerticalBox, CanvasPanel, ReactUMG, CanvasPanelSlot, Button, HorizontalBox, TextureImage } from 'react-umg';
 import {StatusBar} from './ui-components'
 interface Props {
     names: string[];

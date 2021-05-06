@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, HorizontalBox, TextBlock, ProgressBar, HorizontalBoxSlot, LinearColor } from '../react-umg';
+import { Button, HorizontalBox, TextBlock, ProgressBar, HorizontalBoxSlot, LinearColor } from 'react-umg';
 
 export interface Props {
     name: string;
