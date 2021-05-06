@@ -222,7 +222,6 @@ declare module "react-umg" {
         ColorAndOpacityDelegate?: () => LinearColor;
         ForegroundColor?: SlateColor;
         ForegroundColorDelegate?: () => SlateColor;
-        OnVisibilityChanged?: (InVisibility: ESlateVisibility) => void;
         Padding?: Margin;
         NamedSlotBindings?: TArray<NamedSlotBinding>;
         DesignTimeSize?: Vector2D;
@@ -234,6 +233,7 @@ declare module "react-umg" {
         bStopAction?: boolean;
         bHasScriptImplementedTick?: boolean;
         bHasScriptImplementedPaint?: boolean;
+        bCookedWidgetTree?: boolean;
         TickFrequency?: EWidgetTickFrequency;
         AnimationCallbacks?: TArray<AnimationEventBinding>;
     }
@@ -393,9 +393,6 @@ declare module "react-umg" {
         HorizontalAlignment?: number;
         Padding?: Margin;
         BorderBackgroundColor?: SlateColor;
-        ClickMethod?: number;
-        TouchMethod?: number;
-        PressMethod?: number;
         IsFocusable?: boolean;
         OnCheckStateChanged?: (bIsChecked: boolean) => void;
     }
@@ -421,8 +418,6 @@ declare module "react-umg" {
     interface ComboButtonStyle extends SlateWidgetStyle {
         ButtonStyle?: ButtonStyle;
         DownArrowImage?: SlateBrush;
-        ShadowOffset?: Vector2D;
-        ShadowColorAndOpacity?: LinearColor;
         MenuBorderBrush?: SlateBrush;
         MenuBorderPadding?: Margin;
     }
@@ -466,7 +461,6 @@ declare module "react-umg" {
         OutlineSettings?: FontOutlineSettings;
         TypefaceFontName?: string;
         Size?: number;
-        LetterSpacing?: number;
         FontName?: string;
         Hinting?: EFontHinting;
     }
@@ -490,12 +484,6 @@ declare module "react-umg" {
     class ComboBoxString extends React.Component<ComboBoxStringProps> {}
 
     type EDynamicBoxType = ue.EDynamicBoxType;
-    interface RadialBoxSettings {
-        bDistributeItemsEvenly?: boolean;
-        AngleBetweenItems?: number;
-        StartingAngle?: number;
-    }
-
     interface UserWidgetPool {
     }
 
@@ -507,7 +495,6 @@ declare module "react-umg" {
         EntryHorizontalAlignment?: number;
         EntryVerticalAlignment?: number;
         MaxElementSize?: number;
-        RadialBoxSettings?: RadialBoxSettings;
         EntryWidgetPool?: UserWidgetPool;
     }
 
@@ -531,7 +518,6 @@ declare module "react-umg" {
         bEnableAutocorrect?: boolean;
     }
 
-    type EVirtualKeyboardTrigger = ue.EVirtualKeyboardTrigger;
     type EVirtualKeyboardDismissAction = ue.EVirtualKeyboardDismissAction;
     type ETextShapingMethod = ue.ETextShapingMethod;
     type ETextFlowDirection = ue.ETextFlowDirection;
@@ -561,7 +547,6 @@ declare module "react-umg" {
         AllowContextMenu?: boolean;
         KeyboardType?: number;
         VirtualKeyboardOptions?: VirtualKeyboardOptions;
-        VirtualKeyboardTrigger?: EVirtualKeyboardTrigger;
         VirtualKeyboardDismissAction?: EVirtualKeyboardDismissAction;
         Justification?: number;
         ShapedTextOptions?: ShapedTextOptions;
@@ -620,7 +605,6 @@ declare module "react-umg" {
         AllowContextMenu?: boolean;
         KeyboardType?: number;
         VirtualKeyboardOptions?: VirtualKeyboardOptions;
-        VirtualKeyboardTrigger?: EVirtualKeyboardTrigger;
         VirtualKeyboardDismissAction?: EVirtualKeyboardDismissAction;
         Justification?: number;
         ShapedTextOptions?: ShapedTextOptions;
@@ -842,7 +826,6 @@ declare module "react-umg" {
     class ProgressBar extends React.Component<ProgressBarProps> {}
 
     interface RetainerBoxProps extends ContentWidgetProps {
-        bRetainRender?: boolean;
         RenderOnInvalidation?: boolean;
         RenderOnPhase?: boolean;
         Phase?: number;
@@ -852,14 +835,11 @@ declare module "react-umg" {
 
     class RetainerBox extends React.Component<RetainerBoxProps> {}
 
-    type ETextTransformPolicy = ue.ETextTransformPolicy;
     interface RichTextBlockProps extends TextLayoutWidgetProps {
         Text?: string;
         bOverrideDefaultStyle?: boolean;
         DefaultTextStyleOverride?: TextBlockStyle;
         MinDesiredWidth?: number;
-        TextTransformPolicy?: ETextTransformPolicy;
-        DefaultTextStyle?: TextBlockStyle;
     }
 
     class RichTextBlock extends React.Component<RichTextBlockProps> {}
@@ -901,7 +881,6 @@ declare module "react-umg" {
     }
 
     type EDescendantScrollDestination = ue.EDescendantScrollDestination;
-    type EScrollWhenFocusChanges = ue.EScrollWhenFocusChanges;
     interface ScrollBoxProps extends PanelWidgetProps {
         WidgetStyle?: ScrollBoxStyle;
         WidgetBarStyle?: ScrollBarStyle;
@@ -916,7 +895,6 @@ declare module "react-umg" {
         bAnimateWheelScrolling?: boolean;
         NavigationDestination?: EDescendantScrollDestination;
         NavigationScrollPadding?: number;
-        ScrollWhenFocusChanges?: EScrollWhenFocusChanges;
         bAllowRightClickDragScrolling?: boolean;
         WheelScrollMultiplier?: number;
         OnUserScrolled?: (CurrentOffset: number) => void;
@@ -999,9 +977,6 @@ declare module "react-umg" {
         Value?: number;
         ValueDelegate?: () => number;
         WidgetStyle?: SpinBoxStyle;
-        MinFractionalDigits?: number;
-        MaxFractionalDigits?: number;
-        bAlwaysUsesDeltaSnap?: boolean;
         Delta?: number;
         SliderExponent?: number;
         Font?: SlateFontInfo;
@@ -1039,7 +1014,6 @@ declare module "react-umg" {
         MinDesiredWidth?: number;
         bWrapWithInvalidationPanel?: boolean;
         bAutoWrapText?: boolean;
-        TextTransformPolicy?: ETextTransformPolicy;
         bSimpleTextMode?: boolean;
     }
 
@@ -1105,10 +1079,7 @@ declare module "react-umg" {
     interface WrapBoxProps extends PanelWidgetProps {
         InnerSlotPadding?: Vector2D;
         WrapWidth?: number;
-        WrapSize?: number;
         bExplicitWrapWidth?: boolean;
-        bExplicitWrapSize?: boolean;
-        Orientation?: number;
     }
 
     class WrapBox extends React.Component<WrapBoxProps> {}
@@ -1158,11 +1129,6 @@ declare module "react-umg" {
     }
 
     class LevelSequenceBurnIn extends React.Component<LevelSequenceBurnInProps> {}
-
-    interface SoundEffectPresetUserWidgetProps extends UserWidgetProps {
-    }
-
-    class SoundEffectPresetUserWidget extends React.Component<SoundEffectPresetUserWidgetProps> {}
 
     interface SoftObjectPath {
         AssetPathName?: string;
@@ -1221,86 +1187,8 @@ declare module "react-umg" {
 
     class TextureImage extends React.Component<TextureImageProps> {}
 
-    interface Synth2DSliderStyle extends SlateWidgetStyle {
-        NormalThumbImage?: SlateBrush;
-        DisabledThumbImage?: SlateBrush;
-        NormalBarImage?: SlateBrush;
-        DisabledBarImage?: SlateBrush;
-        BackgroundImage?: SlateBrush;
-        BarThickness?: number;
-    }
-
-    interface Synth2DSliderProps extends WidgetProps {
-        ValueX?: number;
-        ValueY?: number;
-        ValueXDelegate?: () => number;
-        ValueYDelegate?: () => number;
-        WidgetStyle?: Synth2DSliderStyle;
-        SliderHandleColor?: LinearColor;
-        IndentHandle?: boolean;
-        Locked?: boolean;
-        StepSize?: number;
-        IsFocusable?: boolean;
-        OnMouseCaptureBegin?: () => void;
-        OnMouseCaptureEnd?: () => void;
-        OnControllerCaptureBegin?: () => void;
-        OnControllerCaptureEnd?: () => void;
-        OnValueChangedX?: (Value: number) => void;
-        OnValueChangedY?: (Value: number) => void;
-    }
-
-    class Synth2DSlider extends React.Component<Synth2DSliderProps> {}
-
-    type ESynthKnobSize = ue.ESynthKnobSize;
-    interface SynthKnobStyle extends SlateWidgetStyle {
-        LargeKnob?: SlateBrush;
-        LargeKnobOverlay?: SlateBrush;
-        MediumKnob?: SlateBrush;
-        MediumKnobOverlay?: SlateBrush;
-        MinValueAngle?: number;
-        MaxValueAngle?: number;
-        KnobSize?: ESynthKnobSize;
-    }
-
-    interface SynthKnobProps extends WidgetProps {
-        Value?: number;
-        StepSize?: number;
-        MouseSpeed?: number;
-        MouseFineTuneSpeed?: number;
-        ShowTooltipInfo?: boolean;
-        ParameterName?: string;
-        ParameterUnits?: string;
-        ValueDelegate?: () => number;
-        WidgetStyle?: SynthKnobStyle;
-        Locked?: boolean;
-        IsFocusable?: boolean;
-        OnMouseCaptureBegin?: () => void;
-        OnMouseCaptureEnd?: () => void;
-        OnControllerCaptureBegin?: () => void;
-        OnControllerCaptureEnd?: () => void;
-        OnValueChanged?: (Value: number) => void;
-    }
-
-    class SynthKnob extends React.Component<SynthKnobProps> {}
-
-    interface TestWidgetBlueprint_CProps extends UserWidgetProps {
-    }
-
-    class TestWidgetBlueprint_C extends React.Component<TestWidgetBlueprint_CProps> {}
-
     interface PointerToUberGraphFrame {
     }
-
-    interface SKEL_TestWidgetBlueprint_CProps extends UserWidgetProps {
-        UberGraphFrame?: PointerToUberGraphFrame;
-    }
-
-    class SKEL_TestWidgetBlueprint_C extends React.Component<SKEL_TestWidgetBlueprint_CProps> {}
-
-    interface REINST_TestWidgetBlueprint_C_0Props extends UserWidgetProps {
-    }
-
-    class REINST_TestWidgetBlueprint_C_0 extends React.Component<REINST_TestWidgetBlueprint_C_0Props> {}
 
 
     interface Root {
