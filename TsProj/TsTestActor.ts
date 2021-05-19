@@ -77,6 +77,8 @@ class TsTestActor extends UE.Actor {
     //@cpp:name
     fname: string;
 
+    namearr: UE.TArray<string/*@cpp:text*/>;
+
     //@no-blueprint
     TsOnlyMethod():void {
 
