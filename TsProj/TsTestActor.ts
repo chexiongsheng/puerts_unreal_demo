@@ -1,4 +1,5 @@
 import * as UE from 'ue'
+import {rpc} from 'ue'
 
 console.warn("Script init of TsTestActor ");
 
@@ -86,6 +87,14 @@ class TsTestActor extends UE.Actor {
 
     //@no-blueprint
     TsOnlyField: number;
+
+    @rpc.condition(rpc.ELifetimeCondition.COND_InitialOrOwner)
+    dint: number;
+
+    @rpc.flags(rpc.FunctionFlags.FUNC_Net | rpc.FunctionFlags.FUNC_NetClient)
+    Fire(): void {
+
+    }
 }
 
 export default TsTestActor;
