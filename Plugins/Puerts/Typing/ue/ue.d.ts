@@ -38,10 +38,11 @@ declare module "ue" {
         static Load(InName: string): Layer;
     }
     
+    enum ETickingGroup { TG_PrePhysics, TG_StartPhysics, TG_DuringPhysics, TG_EndPhysics, TG_PostPhysics, TG_PostUpdateWork, TG_LastDemotable, TG_NewlySpawned, TG_MAX}
     class TickFunction {
-        constructor(TickGroup: number, EndTickGroup: number, bTickEvenWhenPaused: boolean, bCanEverTick: boolean, bStartWithTickEnabled: boolean, bAllowTickOnDedicatedServer: boolean, TickInterval: number);
-        TickGroup: number;
-        EndTickGroup: number;
+        constructor(TickGroup: ETickingGroup, EndTickGroup: ETickingGroup, bTickEvenWhenPaused: boolean, bCanEverTick: boolean, bStartWithTickEnabled: boolean, bAllowTickOnDedicatedServer: boolean, TickInterval: number);
+        TickGroup: ETickingGroup;
+        EndTickGroup: ETickingGroup;
         bTickEvenWhenPaused: boolean;
         bCanEverTick: boolean;
         bStartWithTickEnabled: boolean;
@@ -56,6 +57,7 @@ declare module "ue" {
     }
     
     enum EActorUpdateOverlapsMethod { UseConfigDefault, AlwaysUpdate, OnlyUpdateMovable, NeverUpdate, EActorUpdateOverlapsMethod_MAX}
+    enum ENetRole { ROLE_None, ROLE_SimulatedProxy, ROLE_AutonomousProxy, ROLE_Authority, ROLE_MAX}
     enum EVectorQuantization { RoundWholeNumber, RoundOneDecimal, RoundTwoDecimals, EVectorQuantization_MAX}
     enum ERotatorQuantization { ByteComponents, ShortComponents, ERotatorQuantization_MAX}
     class RepMovement {
@@ -98,6 +100,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EEndPlayReason { Destroyed, LevelTransition, EndPlayInEditor, RemovedFromWorld, Quit, EEndPlayReason_MAX}
     class ActorComponent extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PrimaryComponentTick: ActorComponentTickFunction;
@@ -118,7 +121,7 @@ declare module "ue" {
         OnComponentDeactivated: $MulticastDelegate<(Component: ActorComponent) => void>;
         UCSModifiedProperties: TArray<SimpleMemberReference>;
         ToggleActive(): void;
-        SetTickGroup(NewTickGroup: number): void;
+        SetTickGroup(NewTickGroup: ETickingGroup): void;
         SetTickableWhenPaused(bTickableWhenPaused: boolean): void;
         SetIsReplicated(ShouldReplicate: boolean): void;
         SetComponentTickInterval(TickInterval: number): void;
@@ -128,7 +131,7 @@ declare module "ue" {
         RemoveTickPrerequisiteComponent(PrerequisiteComponent: ActorComponent): void;
         RemoveTickPrerequisiteActor(PrerequisiteActor: Actor): void;
         ReceiveTick(DeltaSeconds: number): void;
-        ReceiveEndPlay(EndPlayReason: number): void;
+        ReceiveEndPlay(EndPlayReason: EEndPlayReason): void;
         ReceiveBeginPlay(): void;
         OnRep_IsActive(): void;
         K2_DestroyComponent(Object: Object): void;
@@ -147,6 +150,7 @@ declare module "ue" {
         static Load(InName: string): ActorComponent;
     }
     
+    enum EBrushType { Brush_Default, Brush_Add, Brush_Subtract, Brush_MAX}
     class Model extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -154,7 +158,11 @@ declare module "ue" {
         static Load(InName: string): Model;
     }
     
+    enum ESceneDepthPriorityGroup { SDPG_World, SDPG_Foreground, SDPG_MAX}
+    enum EIndirectLightingCacheQuality { ILCQ_Off, ILCQ_Point, ILCQ_Volume, ILCQ_MAX}
     enum ELightmapType { Default, ForceSurface, ForceVolumetric, ELightmapType_MAX}
+    enum EHasCustomNavigableGeometry { No, Yes, EvenIfNotCollidable, DontExport, EHasCustomNavigableGeometry_MAX}
+    enum ECanBeCharacterBase { ECB_No, ECB_Yes, ECB_Owner, ECB_MAX}
     class LightingChannels {
         constructor(bChannel0: boolean, bChannel1: boolean, bChannel2: boolean);
         bChannel0: boolean;
@@ -191,6 +199,7 @@ declare module "ue" {
         static Load(InName: string): StreamableRenderAsset;
     }
     
+    enum ETextureSourceFormat { TSF_Invalid, TSF_G8, TSF_BGRA8, TSF_BGRE8, TSF_RGBA16, TSF_RGBA16F, TSF_RGBA8, TSF_RGBE8, TSF_G16, TSF_MAX}
     class TextureSourceBlock {
         constructor(BlockX: number, BlockY: number, SizeX: number, SizeY: number, NumSlices: number, NumMips: number);
         BlockX: number;
@@ -203,7 +212,7 @@ declare module "ue" {
     }
     
     class TextureSource {
-        constructor(Id: Guid, BaseBlockX: number, BaseBlockY: number, SizeX: number, SizeY: number, NumSlices: number, NumMips: number, NumLayers: number, bPNGCompressed: boolean, bGuidIsHash: boolean, Format: number, LayerFormat: TArray<number>, Blocks: TArray<TextureSourceBlock>);
+        constructor(Id: Guid, BaseBlockX: number, BaseBlockY: number, SizeX: number, SizeY: number, NumSlices: number, NumMips: number, NumLayers: number, bPNGCompressed: boolean, bGuidIsHash: boolean, Format: ETextureSourceFormat, LayerFormat: TArray<ETextureSourceFormat>, Blocks: TArray<TextureSourceBlock>);
         Id: Guid;
         BaseBlockX: number;
         BaseBlockY: number;
@@ -214,8 +223,8 @@ declare module "ue" {
         NumLayers: number;
         bPNGCompressed: boolean;
         bGuidIsHash: boolean;
-        Format: number;
-        LayerFormat: TArray<number>;
+        Format: ETextureSourceFormat;
+        LayerFormat: TArray<ETextureSourceFormat>;
         Blocks: TArray<TextureSourceBlock>;
         static StaticClass(): Class;
     }
@@ -237,9 +246,15 @@ declare module "ue" {
         static Load(InName: string): AssetImportData;
     }
     
+    enum ETextureLossyCompressionAmount { TLCA_Default, TLCA_None, TLCA_Lowest, TLCA_Low, TLCA_Medium, TLCA_High, TLCA_Highest, TLCA_MAX}
+    enum ETextureCompressionQuality { TCQ_Default, TCQ_Lowest, TCQ_Low, TCQ_Medium, TCQ_High, TCQ_Highest, TCQ_MAX}
+    enum ETexturePowerOfTwoSetting { None, PadToPowerOfTwo, PadToSquarePowerOfTwo, ETexturePowerOfTwoSetting_MAX}
+    enum TextureMipGenSettings { TMGS_FromTextureGroup, TMGS_SimpleAverage, TMGS_Sharpen0, TMGS_Sharpen1, TMGS_Sharpen2, TMGS_Sharpen3, TMGS_Sharpen4, TMGS_Sharpen5, TMGS_Sharpen6, TMGS_Sharpen7, TMGS_Sharpen8, TMGS_Sharpen9, TMGS_Sharpen10, TMGS_NoMipmaps, TMGS_LeaveExistingMips, TMGS_Blur1, TMGS_Blur2, TMGS_Blur3, TMGS_Blur4, TMGS_Blur5, TMGS_Unfiltered, TMGS_MAX}
+    enum ECompositeTextureMode { CTM_Disabled, CTM_NormalRoughnessToRed, CTM_NormalRoughnessToGreen, CTM_NormalRoughnessToBlue, CTM_NormalRoughnessToAlpha, CTM_MAX}
+    enum TextureCompressionSettings { TC_Default, TC_Normalmap, TC_Masks, TC_Grayscale, TC_Displacementmap, TC_VectorDisplacementmap, TC_HDR, TC_EditorIcon, TC_Alpha, TC_DistanceFieldFont, TC_HDR_Compressed, TC_BC7, TC_MAX}
     class TextureFormatSettings {
-        constructor(CompressionSettings: number, CompressionNoAlpha: boolean, CompressionNone: boolean, CompressionYCoCg: boolean, SRGB: boolean);
-        CompressionSettings: number;
+        constructor(CompressionSettings: TextureCompressionSettings, CompressionNoAlpha: boolean, CompressionNone: boolean, CompressionYCoCg: boolean, SRGB: boolean);
+        CompressionSettings: TextureCompressionSettings;
         CompressionNoAlpha: boolean;
         CompressionNone: boolean;
         CompressionYCoCg: boolean;
@@ -247,7 +262,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum TextureFilter { TF_Nearest, TF_Bilinear, TF_Trilinear, TF_Default, TF_MAX}
     enum ETextureMipLoadOptions { Default, AllMips, OnlyFirstMip, ETextureMipLoadOptions_MAX}
+    enum TextureGroup { TEXTUREGROUP_World, TEXTUREGROUP_WorldNormalMap, TEXTUREGROUP_WorldSpecular, TEXTUREGROUP_Character, TEXTUREGROUP_CharacterNormalMap, TEXTUREGROUP_CharacterSpecular, TEXTUREGROUP_Weapon, TEXTUREGROUP_WeaponNormalMap, TEXTUREGROUP_WeaponSpecular, TEXTUREGROUP_Vehicle, TEXTUREGROUP_VehicleNormalMap, TEXTUREGROUP_VehicleSpecular, TEXTUREGROUP_Cinematic, TEXTUREGROUP_Effects, TEXTUREGROUP_EffectsNotFiltered, TEXTUREGROUP_Skybox, TEXTUREGROUP_UI, TEXTUREGROUP_Lightmap, TEXTUREGROUP_RenderTarget, TEXTUREGROUP_MobileFlattened, TEXTUREGROUP_ProcBuilding_Face, TEXTUREGROUP_ProcBuilding_LightMap, TEXTUREGROUP_Shadowmap, TEXTUREGROUP_ColorLookupTable, TEXTUREGROUP_Terrain_Heightmap, TEXTUREGROUP_Terrain_Weightmap, TEXTUREGROUP_Bokeh, TEXTUREGROUP_IESLightProfile, TEXTUREGROUP_Pixels2D, TEXTUREGROUP_HierarchicalLOD, TEXTUREGROUP_Impostor, TEXTUREGROUP_ImpostorNormalDepth, TEXTUREGROUP_8BitData, TEXTUREGROUP_16BitData, TEXTUREGROUP_Project01, TEXTUREGROUP_Project02, TEXTUREGROUP_Project03, TEXTUREGROUP_Project04, TEXTUREGROUP_Project05, TEXTUREGROUP_Project06, TEXTUREGROUP_Project07, TEXTUREGROUP_Project08, TEXTUREGROUP_Project09, TEXTUREGROUP_Project10, TEXTUREGROUP_MAX}
     class Texture extends StreamableRenderAsset {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Source: TextureSource;
@@ -265,29 +282,29 @@ declare module "ue" {
         CompressionNoAlpha: boolean;
         CompressionNone: boolean;
         DeferCompression: boolean;
-        LossyCompressionAmount: number;
+        LossyCompressionAmount: ETextureLossyCompressionAmount;
         MaxTextureSize: number;
-        CompressionQuality: number;
+        CompressionQuality: ETextureCompressionQuality;
         bDitherMipMapAlpha: boolean;
         AlphaCoverageThresholds: Vector4;
         bPreserveBorder: boolean;
         bFlipGreenChannel: boolean;
         bForcePVRTC4: boolean;
-        PowerOfTwoMode: number;
+        PowerOfTwoMode: ETexturePowerOfTwoSetting;
         PaddingColor: Color;
         bChromaKeyTexture: boolean;
         ChromaKeyThreshold: number;
         ChromaKeyColor: Color;
-        MipGenSettings: number;
+        MipGenSettings: TextureMipGenSettings;
         CompositeTexture: Texture;
-        CompositeTextureMode: number;
+        CompositeTextureMode: ECompositeTextureMode;
         CompositePower: number;
         LayerFormatSettings: TArray<TextureFormatSettings>;
         LODBias: number;
-        CompressionSettings: number;
-        Filter: number;
+        CompressionSettings: TextureCompressionSettings;
+        Filter: TextureFilter;
         MipLoadOptions: ETextureMipLoadOptions;
-        LODGroup: number;
+        LODGroup: TextureGroup;
         SRGB: boolean;
         bUseLegacyGamma: boolean;
         bNoTiling: boolean;
@@ -300,14 +317,15 @@ declare module "ue" {
         static Load(InName: string): Texture;
     }
     
+    enum TextureAddress { TA_Wrap, TA_Clamp, TA_Mirror, TA_MAX}
     class Texture2D extends Texture {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         LevelIndex: number;
         FirstResourceMemMip: number;
         bTemporarilyDisableStreaming: boolean;
         bHasBeenPaintedInEditor: boolean;
-        AddressX: number;
-        AddressY: number;
+        AddressX: TextureAddress;
+        AddressY: TextureAddress;
         ImportedSize: IntPoint;
         Blueprint_GetSizeY(): number;
         Blueprint_GetSizeX(): number;
@@ -357,48 +375,52 @@ declare module "ue" {
     }
     
     enum ERuntimeVirtualTextureMainPassType { Never, Exclusive, Always, ERuntimeVirtualTextureMainPassType_MAX}
+    enum ECollisionChannel { ECC_WorldStatic, ECC_WorldDynamic, ECC_Pawn, ECC_Visibility, ECC_Camera, ECC_PhysicsBody, ECC_Vehicle, ECC_Destructible, ECC_EngineTraceChannel1, ECC_EngineTraceChannel2, ECC_EngineTraceChannel3, ECC_EngineTraceChannel4, ECC_EngineTraceChannel5, ECC_EngineTraceChannel6, ECC_GameTraceChannel1, ECC_GameTraceChannel2, ECC_GameTraceChannel3, ECC_GameTraceChannel4, ECC_GameTraceChannel5, ECC_GameTraceChannel6, ECC_GameTraceChannel7, ECC_GameTraceChannel8, ECC_GameTraceChannel9, ECC_GameTraceChannel10, ECC_GameTraceChannel11, ECC_GameTraceChannel12, ECC_GameTraceChannel13, ECC_GameTraceChannel14, ECC_GameTraceChannel15, ECC_GameTraceChannel16, ECC_GameTraceChannel17, ECC_GameTraceChannel18, ECC_OverlapAll_Deprecated, ECC_MAX}
+    enum ECollisionEnabled { NoCollision, QueryOnly, PhysicsOnly, QueryAndPhysics, ECollisionEnabled_MAX}
     enum ESleepFamily { Normal, Sensitive, Custom, ESleepFamily_MAX}
+    enum EDOFMode { Default, SixDOF, YZPlane, XZPlane, XYPlane, CustomPlane, None, EDOFMode_MAX}
+    enum ECollisionResponse { ECR_Ignore, ECR_Overlap, ECR_Block, ECR_MAX}
     class CollisionResponseContainer {
-        constructor(WorldStatic: number, WorldDynamic: number, Pawn: number, Visibility: number, Camera: number, PhysicsBody: number, Vehicle: number, Destructible: number, EngineTraceChannel1: number, EngineTraceChannel2: number, EngineTraceChannel3: number, EngineTraceChannel4: number, EngineTraceChannel5: number, EngineTraceChannel6: number, GameTraceChannel1: number, GameTraceChannel2: number, GameTraceChannel3: number, GameTraceChannel4: number, GameTraceChannel5: number, GameTraceChannel6: number, GameTraceChannel7: number, GameTraceChannel8: number, GameTraceChannel9: number, GameTraceChannel10: number, GameTraceChannel11: number, GameTraceChannel12: number, GameTraceChannel13: number, GameTraceChannel14: number, GameTraceChannel15: number, GameTraceChannel16: number, GameTraceChannel17: number, GameTraceChannel18: number);
-        WorldStatic: number;
-        WorldDynamic: number;
-        Pawn: number;
-        Visibility: number;
-        Camera: number;
-        PhysicsBody: number;
-        Vehicle: number;
-        Destructible: number;
-        EngineTraceChannel1: number;
-        EngineTraceChannel2: number;
-        EngineTraceChannel3: number;
-        EngineTraceChannel4: number;
-        EngineTraceChannel5: number;
-        EngineTraceChannel6: number;
-        GameTraceChannel1: number;
-        GameTraceChannel2: number;
-        GameTraceChannel3: number;
-        GameTraceChannel4: number;
-        GameTraceChannel5: number;
-        GameTraceChannel6: number;
-        GameTraceChannel7: number;
-        GameTraceChannel8: number;
-        GameTraceChannel9: number;
-        GameTraceChannel10: number;
-        GameTraceChannel11: number;
-        GameTraceChannel12: number;
-        GameTraceChannel13: number;
-        GameTraceChannel14: number;
-        GameTraceChannel15: number;
-        GameTraceChannel16: number;
-        GameTraceChannel17: number;
-        GameTraceChannel18: number;
+        constructor(WorldStatic: ECollisionResponse, WorldDynamic: ECollisionResponse, Pawn: ECollisionResponse, Visibility: ECollisionResponse, Camera: ECollisionResponse, PhysicsBody: ECollisionResponse, Vehicle: ECollisionResponse, Destructible: ECollisionResponse, EngineTraceChannel1: ECollisionResponse, EngineTraceChannel2: ECollisionResponse, EngineTraceChannel3: ECollisionResponse, EngineTraceChannel4: ECollisionResponse, EngineTraceChannel5: ECollisionResponse, EngineTraceChannel6: ECollisionResponse, GameTraceChannel1: ECollisionResponse, GameTraceChannel2: ECollisionResponse, GameTraceChannel3: ECollisionResponse, GameTraceChannel4: ECollisionResponse, GameTraceChannel5: ECollisionResponse, GameTraceChannel6: ECollisionResponse, GameTraceChannel7: ECollisionResponse, GameTraceChannel8: ECollisionResponse, GameTraceChannel9: ECollisionResponse, GameTraceChannel10: ECollisionResponse, GameTraceChannel11: ECollisionResponse, GameTraceChannel12: ECollisionResponse, GameTraceChannel13: ECollisionResponse, GameTraceChannel14: ECollisionResponse, GameTraceChannel15: ECollisionResponse, GameTraceChannel16: ECollisionResponse, GameTraceChannel17: ECollisionResponse, GameTraceChannel18: ECollisionResponse);
+        WorldStatic: ECollisionResponse;
+        WorldDynamic: ECollisionResponse;
+        Pawn: ECollisionResponse;
+        Visibility: ECollisionResponse;
+        Camera: ECollisionResponse;
+        PhysicsBody: ECollisionResponse;
+        Vehicle: ECollisionResponse;
+        Destructible: ECollisionResponse;
+        EngineTraceChannel1: ECollisionResponse;
+        EngineTraceChannel2: ECollisionResponse;
+        EngineTraceChannel3: ECollisionResponse;
+        EngineTraceChannel4: ECollisionResponse;
+        EngineTraceChannel5: ECollisionResponse;
+        EngineTraceChannel6: ECollisionResponse;
+        GameTraceChannel1: ECollisionResponse;
+        GameTraceChannel2: ECollisionResponse;
+        GameTraceChannel3: ECollisionResponse;
+        GameTraceChannel4: ECollisionResponse;
+        GameTraceChannel5: ECollisionResponse;
+        GameTraceChannel6: ECollisionResponse;
+        GameTraceChannel7: ECollisionResponse;
+        GameTraceChannel8: ECollisionResponse;
+        GameTraceChannel9: ECollisionResponse;
+        GameTraceChannel10: ECollisionResponse;
+        GameTraceChannel11: ECollisionResponse;
+        GameTraceChannel12: ECollisionResponse;
+        GameTraceChannel13: ECollisionResponse;
+        GameTraceChannel14: ECollisionResponse;
+        GameTraceChannel15: ECollisionResponse;
+        GameTraceChannel16: ECollisionResponse;
+        GameTraceChannel17: ECollisionResponse;
+        GameTraceChannel18: ECollisionResponse;
         static StaticClass(): Class;
     }
     
     class ResponseChannel {
-        constructor(Channel: string, Response: number);
+        constructor(Channel: string, Response: ECollisionResponse);
         Channel: string;
-        Response: number;
+        Response: ECollisionResponse;
         static StaticClass(): Class;
     }
     
@@ -409,13 +431,15 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EWalkableSlopeBehavior { WalkableSlope_Default, WalkableSlope_Increase, WalkableSlope_Decrease, WalkableSlope_Unwalkable, WalkableSlope_Max, WalkableSlope_MAX}
     class WalkableSlopeOverride {
-        constructor(WalkableSlopeBehavior: number, WalkableSlopeAngle: number);
-        WalkableSlopeBehavior: number;
+        constructor(WalkableSlopeBehavior: EWalkableSlopeBehavior, WalkableSlopeAngle: number);
+        WalkableSlopeBehavior: EWalkableSlopeBehavior;
         WalkableSlopeAngle: number;
         static StaticClass(): Class;
     }
     
+    enum EFrictionCombineMode { Average, Min, Multiply, Max, EFrictionCombineMode_MAX}
     class PhysicalMaterialPropertyBase extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -423,6 +447,7 @@ declare module "ue" {
         static Load(InName: string): PhysicalMaterialPropertyBase;
     }
     
+    enum EPhysicalSurface { SurfaceType_Default, SurfaceType1, SurfaceType2, SurfaceType3, SurfaceType4, SurfaceType5, SurfaceType6, SurfaceType7, SurfaceType8, SurfaceType9, SurfaceType10, SurfaceType11, SurfaceType12, SurfaceType13, SurfaceType14, SurfaceType15, SurfaceType16, SurfaceType17, SurfaceType18, SurfaceType19, SurfaceType20, SurfaceType21, SurfaceType22, SurfaceType23, SurfaceType24, SurfaceType25, SurfaceType26, SurfaceType27, SurfaceType28, SurfaceType29, SurfaceType30, SurfaceType31, SurfaceType32, SurfaceType33, SurfaceType34, SurfaceType35, SurfaceType36, SurfaceType37, SurfaceType38, SurfaceType39, SurfaceType40, SurfaceType41, SurfaceType42, SurfaceType43, SurfaceType44, SurfaceType45, SurfaceType46, SurfaceType47, SurfaceType48, SurfaceType49, SurfaceType50, SurfaceType51, SurfaceType52, SurfaceType53, SurfaceType54, SurfaceType55, SurfaceType56, SurfaceType57, SurfaceType58, SurfaceType59, SurfaceType60, SurfaceType61, SurfaceType62, SurfaceType_Max, EPhysicalSurface_MAX}
     class DataAsset extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         NativeClass: Class;
@@ -449,16 +474,16 @@ declare module "ue" {
     class PhysicalMaterial extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Friction: number;
-        FrictionCombineMode: number;
+        FrictionCombineMode: EFrictionCombineMode;
         bOverrideFrictionCombineMode: boolean;
         Restitution: number;
-        RestitutionCombineMode: number;
+        RestitutionCombineMode: EFrictionCombineMode;
         bOverrideRestitutionCombineMode: boolean;
         Density: number;
         RaiseMassToPower: number;
         DestructibleDamageThresholdScale: number;
         PhysicalMaterialProperty: PhysicalMaterialPropertyBase;
-        SurfaceType: number;
+        SurfaceType: EPhysicalSurface;
         TireFrictionScale: number;
         TireFrictionScales: TArray<TireFrictionScalePair>;
         static StaticClass(): Class;
@@ -467,11 +492,11 @@ declare module "ue" {
     }
     
     class BodyInstance {
-        constructor(ObjectType: number, CollisionEnabled: number, SleepFamily: ESleepFamily, DOFMode: number, bUseCCD: boolean, bNotifyRigidBodyCollision: boolean, bSimulatePhysics: boolean, bOverrideMass: boolean, bEnableGravity: boolean, bAutoWeld: boolean, bStartAwake: boolean, bGenerateWakeEvents: boolean, bUpdateMassWhenScaleChanges: boolean, bLockTranslation: boolean, bLockRotation: boolean, bLockXTranslation: boolean, bLockYTranslation: boolean, bLockZTranslation: boolean, bLockXRotation: boolean, bLockYRotation: boolean, bLockZRotation: boolean, bOverrideMaxAngularVelocity: boolean, bOverrideMaxDepenetrationVelocity: boolean, bOverrideWalkableSlopeOnInstance: boolean, bInterpolateWhenSubStepping: boolean, ResponseToChannels: CollisionResponseContainer, CollisionProfileName: string, PositionSolverIterationCount: number, VelocitySolverIterationCount: number, CollisionResponses: CollisionResponse, MaxDepenetrationVelocity: number, MassInKgOverride: number, LinearDamping: number, AngularDamping: number, CustomDOFPlaneNormal: Vector, COMNudge: Vector, MassScale: number, InertiaTensorScale: Vector, WalkableSlopeOverride: WalkableSlopeOverride, PhysMaterialOverride: PhysicalMaterial, MaxAngularVelocity: number, CustomSleepThresholdMultiplier: number, StabilizationThresholdMultiplier: number, PhysicsBlendWeight: number);
-        ObjectType: number;
-        CollisionEnabled: number;
+        constructor(ObjectType: ECollisionChannel, CollisionEnabled: ECollisionEnabled, SleepFamily: ESleepFamily, DOFMode: EDOFMode, bUseCCD: boolean, bNotifyRigidBodyCollision: boolean, bSimulatePhysics: boolean, bOverrideMass: boolean, bEnableGravity: boolean, bAutoWeld: boolean, bStartAwake: boolean, bGenerateWakeEvents: boolean, bUpdateMassWhenScaleChanges: boolean, bLockTranslation: boolean, bLockRotation: boolean, bLockXTranslation: boolean, bLockYTranslation: boolean, bLockZTranslation: boolean, bLockXRotation: boolean, bLockYRotation: boolean, bLockZRotation: boolean, bOverrideMaxAngularVelocity: boolean, bOverrideMaxDepenetrationVelocity: boolean, bOverrideWalkableSlopeOnInstance: boolean, bInterpolateWhenSubStepping: boolean, ResponseToChannels: CollisionResponseContainer, CollisionProfileName: string, PositionSolverIterationCount: number, VelocitySolverIterationCount: number, CollisionResponses: CollisionResponse, MaxDepenetrationVelocity: number, MassInKgOverride: number, LinearDamping: number, AngularDamping: number, CustomDOFPlaneNormal: Vector, COMNudge: Vector, MassScale: number, InertiaTensorScale: Vector, WalkableSlopeOverride: WalkableSlopeOverride, PhysMaterialOverride: PhysicalMaterial, MaxAngularVelocity: number, CustomSleepThresholdMultiplier: number, StabilizationThresholdMultiplier: number, PhysicsBlendWeight: number);
+        ObjectType: ECollisionChannel;
+        CollisionEnabled: ECollisionEnabled;
         SleepFamily: ESleepFamily;
-        DOFMode: number;
+        DOFMode: EDOFMode;
         bUseCCD: boolean;
         bNotifyRigidBodyCollision: boolean;
         bSimulatePhysics: boolean;
@@ -554,6 +579,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ETouchIndex { Touch1, Touch2, Touch3, Touch4, Touch5, Touch6, Touch7, Touch8, Touch9, Touch10, CursorPointerIndex, MAX_TOUCHES, ETouchIndex_MAX}
     class SubsurfaceProfileStruct {
         constructor(SurfaceAlbedo: LinearColor, MeanFreePathColor: LinearColor, MeanFreePathDistance: number, WorldUnitScale: number, bEnableBurley: boolean, ScatterRadius: number, SubsurfaceColor: LinearColor, FalloffColor: LinearColor, BoundaryColorBleed: LinearColor, ExtinctionScale: number, NormalScale: number, ScatteringDistribution: number, IOR: number, Roughness0: number, Roughness1: number, LobeMix: number, TransmissionTintColor: LinearColor);
         SurfaceAlbedo: LinearColor;
@@ -621,6 +647,7 @@ declare module "ue" {
         static Load(InName: string): ThumbnailInfo;
     }
     
+    enum EEdGraphPinDirection { EGPD_Input, EGPD_Output, EGPD_MAX}
     class EdGraphTerminalType {
         constructor(TerminalCategory: string, TerminalSubCategory: string, TerminalSubCategoryObject: TWeakObjectPtr<Object>, bTerminalIsConst: boolean, bTerminalIsWeakPointer: boolean);
         TerminalCategory: string;
@@ -652,7 +679,7 @@ declare module "ue" {
         PinName: string;
         PinFriendlyName: string;
         PinToolTip: string;
-        Direction: number;
+        Direction: EEdGraphPinDirection;
         PinType: EdGraphPinType;
         DefaultValue: string;
         AutogeneratedDefaultValue: string;
@@ -675,6 +702,7 @@ declare module "ue" {
         static Load(InName: string): EdGraphPin_Deprecated;
     }
     
+    enum ENodeAdvancedPins { NoPins, Shown, Hidden, ENodeAdvancedPins_MAX}
     enum ENodeEnabledState { Enabled, Disabled, DevelopmentOnly, ENodeEnabledState_MAX}
     class EdGraphNode extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -683,7 +711,7 @@ declare module "ue" {
         NodePosY: number;
         NodeWidth: number;
         NodeHeight: number;
-        AdvancedPinDisplay: number;
+        AdvancedPinDisplay: ENodeAdvancedPins;
         EnabledState: ENodeEnabledState;
         bDisplayAsDisabled: boolean;
         bUserSetEnabledState: boolean;
@@ -819,6 +847,11 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EMaterialDomain { MD_Surface, MD_DeferredDecal, MD_LightFunction, MD_Volume, MD_PostProcess, MD_UI, MD_RuntimeVirtualTexture, MD_MAX}
+    enum EBlendMode { BLEND_Opaque, BLEND_Masked, BLEND_Translucent, BLEND_Additive, BLEND_Modulate, BLEND_AlphaComposite, BLEND_AlphaHoldout, BLEND_MAX}
+    enum EDecalBlendMode { DBM_Translucent, DBM_Stain, DBM_Normal, DBM_Emissive, DBM_DBuffer_ColorNormalRoughness, DBM_DBuffer_Color, DBM_DBuffer_ColorNormal, DBM_DBuffer_ColorRoughness, DBM_DBuffer_Normal, DBM_DBuffer_NormalRoughness, DBM_DBuffer_Roughness, DBM_DBuffer_Emissive, DBM_DBuffer_AlphaComposite, DBM_DBuffer_EmissiveAlphaComposite, DBM_Volumetric_DistanceFunction, DBM_AlphaComposite, DBM_AmbientOcclusion, DBM_MAX}
+    enum EMaterialDecalResponse { MDR_None, MDR_ColorNormalRoughness, MDR_Color, MDR_ColorNormal, MDR_ColorRoughness, MDR_Normal, MDR_NormalRoughness, MDR_Roughness, MDR_MAX}
+    enum EMaterialShadingModel { MSM_Unlit, MSM_DefaultLit, MSM_Subsurface, MSM_PreintegratedSkin, MSM_ClearCoat, MSM_SubsurfaceProfile, MSM_TwoSidedFoliage, MSM_Hair, MSM_Cloth, MSM_Eye, MSM_SingleLayerWater, MSM_NUM, MSM_FromMaterialExpression, MSM_MAX}
     class MaterialShadingModelField {
         constructor(ShadingModelField: number);
         ShadingModelField: number;
@@ -858,6 +891,8 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ETranslucencyLightingMode { TLM_VolumetricNonDirectional, TLM_VolumetricDirectional, TLM_VolumetricPerVertexNonDirectional, TLM_VolumetricPerVertexDirectional, TLM_Surface, TLM_SurfacePerPixelLighting, TLM_MAX}
+    enum EMaterialTessellationMode { MTM_NoTessellation, MTM_FlatTessellation, MTM_PNTriangles, MTM_MAX}
     class ParameterGroupData {
         constructor(GroupName: string, GroupSortPriority: number);
         GroupName: string;
@@ -908,6 +943,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EBlendableLocation { BL_AfterTonemapping, BL_BeforeTonemapping, BL_BeforeTranslucency, BL_ReplacingTonemapper, BL_SSRInput, BL_MAX}
+    enum EMaterialStencilCompare { MSC_Less, MSC_LessEqual, MSC_Greater, MSC_GreaterEqual, MSC_Equal, MSC_NotEqual, MSC_Never, MSC_Always, MSC_Count, MSC_MAX}
+    enum ERefractionMode { RM_IndexOfRefraction, RM_PixelNormalOffset, RM_MAX}
     class Material extends MaterialInterface {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PhysMaterial: PhysicalMaterial;
@@ -921,11 +959,11 @@ declare module "ue" {
         EmissiveColor: ColorMaterialInput;
         Opacity: ScalarMaterialInput;
         OpacityMask: ScalarMaterialInput;
-        MaterialDomain: number;
-        BlendMode: number;
-        DecalBlendMode: number;
-        MaterialDecalResponse: number;
-        ShadingModel: number;
+        MaterialDomain: EMaterialDomain;
+        BlendMode: EBlendMode;
+        DecalBlendMode: EDecalBlendMode;
+        MaterialDecalResponse: EMaterialDecalResponse;
+        ShadingModel: EMaterialShadingModel;
         bCastDynamicShadowAsMasked: boolean;
         ShadingModels: MaterialShadingModelField;
         UsedShadingModels: string;
@@ -950,7 +988,7 @@ declare module "ue" {
         DitheredLODTransition: boolean;
         DitherOpacityMask: boolean;
         bAllowNegativeEmissiveColor: boolean;
-        TranslucencyLightingMode: number;
+        TranslucencyLightingMode: ETranslucencyLightingMode;
         bEnableMobileSeparateTranslucency: boolean;
         NumCustomizedUVs: number;
         TranslucencyDirectionalLightingIntensity: number;
@@ -994,7 +1032,7 @@ declare module "ue" {
         bUseHQForwardReflections: boolean;
         bUsePlanarForwardReflections: boolean;
         bNormalCurvatureToRoughness: boolean;
-        D3D11TessellationMode: number;
+        D3D11TessellationMode: EMaterialTessellationMode;
         bEnableCrackFreeDisplacement: boolean;
         bEnableAdaptiveTessellation: boolean;
         AllowTranslucentCustomDepthWrites: boolean;
@@ -1021,12 +1059,12 @@ declare module "ue" {
         bOutputTranslucentVelocity: boolean;
         bAllowDevelopmentShaderCompile: boolean;
         bIsMaterialEditorStatsMaterial: boolean;
-        BlendableLocation: number;
+        BlendableLocation: EBlendableLocation;
         BlendableOutputAlpha: boolean;
         bEnableStencilTest: boolean;
-        StencilCompare: number;
+        StencilCompare: EMaterialStencilCompare;
         StencilRefValue: number;
-        RefractionMode: number;
+        RefractionMode: ERefractionMode;
         BlendablePriority: number;
         UsageFlagWarnings: number;
         RefractionDepthBias: number;
@@ -1093,19 +1131,23 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ERichCurveExtrapolation { RCCE_Cycle, RCCE_CycleWithOffset, RCCE_Oscillate, RCCE_Linear, RCCE_Constant, RCCE_None, RCCE_MAX}
     class RealCurve extends IndexedCurve {
-        constructor(DefaultValue: number, PreInfinityExtrap: number, PostInfinityExtrap: number);
+        constructor(DefaultValue: number, PreInfinityExtrap: ERichCurveExtrapolation, PostInfinityExtrap: ERichCurveExtrapolation);
         DefaultValue: number;
-        PreInfinityExtrap: number;
-        PostInfinityExtrap: number;
+        PreInfinityExtrap: ERichCurveExtrapolation;
+        PostInfinityExtrap: ERichCurveExtrapolation;
         static StaticClass(): Class;
     }
     
+    enum ERichCurveInterpMode { RCIM_Linear, RCIM_Constant, RCIM_Cubic, RCIM_None, RCIM_MAX}
+    enum ERichCurveTangentMode { RCTM_Auto, RCTM_User, RCTM_Break, RCTM_None, RCTM_MAX}
+    enum ERichCurveTangentWeightMode { RCTWM_WeightedNone, RCTWM_WeightedArrive, RCTWM_WeightedLeave, RCTWM_WeightedBoth, RCTWM_MAX}
     class RichCurveKey {
-        constructor(InterpMode: number, TangentMode: number, TangentWeightMode: number, Time: number, Value: number, ArriveTangent: number, ArriveTangentWeight: number, LeaveTangent: number, LeaveTangentWeight: number);
-        InterpMode: number;
-        TangentMode: number;
-        TangentWeightMode: number;
+        constructor(InterpMode: ERichCurveInterpMode, TangentMode: ERichCurveTangentMode, TangentWeightMode: ERichCurveTangentWeightMode, Time: number, Value: number, ArriveTangent: number, ArriveTangentWeight: number, LeaveTangent: number, LeaveTangentWeight: number);
+        InterpMode: ERichCurveInterpMode;
+        TangentMode: ERichCurveTangentMode;
+        TangentWeightMode: ERichCurveTangentWeightMode;
         Time: number;
         Value: number;
         ArriveTangent: number;
@@ -1157,10 +1199,11 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EMaterialParameterAssociation { LayerParameter, BlendParameter, GlobalParameter, EMaterialParameterAssociation_MAX}
     class MaterialParameterInfo {
-        constructor(Name: string, Association: number, Index: number, ParameterLocation: SoftObjectPath);
+        constructor(Name: string, Association: EMaterialParameterAssociation, Index: number, ParameterLocation: SoftObjectPath);
         Name: string;
-        Association: number;
+        Association: EMaterialParameterAssociation;
         Index: number;
         ParameterLocation: SoftObjectPath;
         static StaticClass(): Class;
@@ -1214,8 +1257,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EFontImportCharacterSet { FontICS_Default, FontICS_Ansi, FontICS_Symbol, FontICS_MAX}
     class FontImportOptionsData {
-        constructor(FontName: string, Height: number, bEnableAntialiasing: boolean, bEnableBold: boolean, bEnableItalic: boolean, bEnableUnderline: boolean, bAlphaOnly: boolean, CharacterSet: number, Chars: string, UnicodeRange: string, CharsFilePath: string, CharsFileWildcard: string, bCreatePrintableOnly: boolean, bIncludeASCIIRange: boolean, ForegroundColor: LinearColor, bEnableDropShadow: boolean, TexturePageWidth: number, TexturePageMaxHeight: number, XPadding: number, YPadding: number, ExtendBoxTop: number, ExtendBoxBottom: number, ExtendBoxRight: number, ExtendBoxLeft: number, bEnableLegacyMode: boolean, Kerning: number, bUseDistanceFieldAlpha: boolean, DistanceFieldScaleFactor: number, DistanceFieldScanRadiusScale: number);
+        constructor(FontName: string, Height: number, bEnableAntialiasing: boolean, bEnableBold: boolean, bEnableItalic: boolean, bEnableUnderline: boolean, bAlphaOnly: boolean, CharacterSet: EFontImportCharacterSet, Chars: string, UnicodeRange: string, CharsFilePath: string, CharsFileWildcard: string, bCreatePrintableOnly: boolean, bIncludeASCIIRange: boolean, ForegroundColor: LinearColor, bEnableDropShadow: boolean, TexturePageWidth: number, TexturePageMaxHeight: number, XPadding: number, YPadding: number, ExtendBoxTop: number, ExtendBoxBottom: number, ExtendBoxRight: number, ExtendBoxLeft: number, bEnableLegacyMode: boolean, Kerning: number, bUseDistanceFieldAlpha: boolean, DistanceFieldScaleFactor: number, DistanceFieldScanRadiusScale: number);
         FontName: string;
         Height: number;
         bEnableAntialiasing: boolean;
@@ -1223,7 +1267,7 @@ declare module "ue" {
         bEnableItalic: boolean;
         bEnableUnderline: boolean;
         bAlphaOnly: boolean;
-        CharacterSet: number;
+        CharacterSet: EFontImportCharacterSet;
         Chars: string;
         UnicodeRange: string;
         CharsFilePath: string;
@@ -1289,9 +1333,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ERangeBoundTypes { Exclusive, Inclusive, Open, ERangeBoundTypes_MAX}
     class Int32RangeBound {
-        constructor(Type: number, Value: number);
-        Type: number;
+        constructor(Type: ERangeBoundTypes, Value: number);
+        Type: ERangeBoundTypes;
         Value: number;
         static StaticClass(): Class;
     }
@@ -1353,7 +1398,7 @@ declare module "ue" {
     }
     
     class MaterialInstanceBasePropertyOverrides {
-        constructor(bOverride_OpacityMaskClipValue: boolean, bOverride_BlendMode: boolean, bOverride_ShadingModel: boolean, bOverride_DitheredLODTransition: boolean, bOverride_CastDynamicShadowAsMasked: boolean, bOverride_TwoSided: boolean, TwoSided: boolean, DitheredLODTransition: boolean, bCastDynamicShadowAsMasked: boolean, BlendMode: number, ShadingModel: number, OpacityMaskClipValue: number);
+        constructor(bOverride_OpacityMaskClipValue: boolean, bOverride_BlendMode: boolean, bOverride_ShadingModel: boolean, bOverride_DitheredLODTransition: boolean, bOverride_CastDynamicShadowAsMasked: boolean, bOverride_TwoSided: boolean, TwoSided: boolean, DitheredLODTransition: boolean, bCastDynamicShadowAsMasked: boolean, BlendMode: EBlendMode, ShadingModel: EMaterialShadingModel, OpacityMaskClipValue: number);
         bOverride_OpacityMaskClipValue: boolean;
         bOverride_BlendMode: boolean;
         bOverride_ShadingModel: boolean;
@@ -1363,8 +1408,8 @@ declare module "ue" {
         TwoSided: boolean;
         DitheredLODTransition: boolean;
         bCastDynamicShadowAsMasked: boolean;
-        BlendMode: number;
-        ShadingModel: number;
+        BlendMode: EBlendMode;
+        ShadingModel: EMaterialShadingModel;
         OpacityMaskClipValue: number;
         static StaticClass(): Class;
     }
@@ -1464,6 +1509,7 @@ declare module "ue" {
         static Load(InName: string): MaterialInstanceDynamic;
     }
     
+    enum EAutoReceiveInput { Disabled, Player0, Player1, Player2, Player3, Player4, Player5, Player6, Player7, EAutoReceiveInput_MAX}
     enum EAutoPossessAI { Disabled, PlacedInWorld, Spawned, PlacedInWorldOrSpawned, EAutoPossessAI_MAX}
     class SpriteCategoryInfo {
         constructor(Category: string, DisplayName: string, Description: string);
@@ -1573,11 +1619,12 @@ declare module "ue" {
         static Load(InName: string): MeshComponent;
     }
     
+    enum EBoneTranslationRetargetingMode { Animation, Skeleton, AnimationScaled, AnimationRelative, OrientAndScale, EBoneTranslationRetargetingMode_MAX}
     class BoneNode {
-        constructor(Name: string, ParentIndex: number, TranslationRetargetingMode: number);
+        constructor(Name: string, ParentIndex: number, TranslationRetargetingMode: EBoneTranslationRetargetingMode);
         Name: string;
         ParentIndex: number;
-        TranslationRetargetingMode: number;
+        TranslationRetargetingMode: EBoneTranslationRetargetingMode;
         static StaticClass(): Class;
     }
     
@@ -1638,9 +1685,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EConstraintTransform { Absolute, Relative, EConstraintTransform_MAX}
     class RigTransformConstraint {
-        constructor(TranformType: number, ParentSpace: string, Weight: number);
-        TranformType: number;
+        constructor(TranformType: EConstraintTransform, ParentSpace: string, Weight: number);
+        TranformType: EConstraintTransform;
         ParentSpace: string;
         Weight: number;
         static StaticClass(): Class;
@@ -1754,10 +1802,11 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EAxis { None, X, Y, Z, EAxis_MAX}
     class BoneMirrorInfo {
-        constructor(SourceIndex: number, BoneFlipAxis: number);
+        constructor(SourceIndex: number, BoneFlipAxis: EAxis);
         SourceIndex: number;
-        BoneFlipAxis: number;
+        BoneFlipAxis: EAxis;
         static StaticClass(): Class;
     }
     
@@ -1784,6 +1833,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum SkeletalMeshTerminationCriterion { SMTC_NumOfTriangles, SMTC_NumOfVerts, SMTC_TriangleOrVert, SMTC_AbsNumOfTriangles, SMTC_AbsNumOfVerts, SMTC_AbsTriangleOrVert, SMTC_MAX}
+    enum SkeletalMeshOptimizationType { SMOT_NumOfTriangles, SMOT_MaxDeviation, SMOT_TriangleOrDeviation, SMOT_MAX}
+    enum SkeletalMeshOptimizationImportance { SMOI_Off, SMOI_Lowest, SMOI_Low, SMOI_Normal, SMOI_High, SMOI_Highest, SMOI_MAX}
     class AnimMetaData extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -1949,11 +2001,13 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ERootMotionRootLock { RefPose, AnimFirstFrame, Zero, ERootMotionRootLock_MAX}
+    enum EAnimNotifyEventType { Begin, End, EAnimNotifyEventType_MAX}
     class BranchingPointMarker {
-        constructor(NotifyIndex: number, TriggerTime: number, NotifyEventType: number);
+        constructor(NotifyIndex: number, TriggerTime: number, NotifyEventType: EAnimNotifyEventType);
         NotifyIndex: number;
         TriggerTime: number;
-        NotifyEventType: number;
+        NotifyEventType: EAnimNotifyEventType;
         static StaticClass(): Class;
     }
     
@@ -1989,7 +2043,7 @@ declare module "ue" {
         bEnableRootMotionTranslation: boolean;
         bEnableRootMotionRotation: boolean;
         bEnableAutoBlendOut: boolean;
-        RootMotionRootLock: number;
+        RootMotionRootLock: ERootMotionRootLock;
         PreviewBasePose: AnimSequence;
         BranchingPointMarkers: TArray<BranchingPointMarker>;
         BranchingPointStateNotifyIndices: TArray<number>;
@@ -2001,13 +2055,14 @@ declare module "ue" {
         static Load(InName: string): AnimMontage;
     }
     
+    enum EAnimLinkMethod { Absolute, Relative, Proportional, EAnimLinkMethod_MAX}
     class AnimLinkableElement {
-        constructor(LinkedMontage: AnimMontage, SlotIndex: number, SegmentIndex: number, LinkMethod: number, CachedLinkMethod: number, SegmentBeginTime: number, SegmentLength: number, LinkValue: number, LinkedSequence: AnimSequenceBase);
+        constructor(LinkedMontage: AnimMontage, SlotIndex: number, SegmentIndex: number, LinkMethod: EAnimLinkMethod, CachedLinkMethod: EAnimLinkMethod, SegmentBeginTime: number, SegmentLength: number, LinkValue: number, LinkedSequence: AnimSequenceBase);
         LinkedMontage: AnimMontage;
         SlotIndex: number;
         SegmentIndex: number;
-        LinkMethod: number;
-        CachedLinkMethod: number;
+        LinkMethod: EAnimLinkMethod;
+        CachedLinkMethod: EAnimLinkMethod;
         SegmentBeginTime: number;
         SegmentLength: number;
         LinkValue: number;
@@ -2037,8 +2092,10 @@ declare module "ue" {
         static Load(InName: string): AnimNotifyState;
     }
     
+    enum EMontageNotifyTickType { Queued, BranchingPoint, EMontageNotifyTickType_MAX}
+    enum ENotifyFilterType { NoFiltering, LOD, ENotifyFilterType_MAX}
     class AnimNotifyEvent extends AnimLinkableElement {
-        constructor(DisplayTime: number, TriggerTimeOffset: number, EndTriggerTimeOffset: number, TriggerWeightThreshold: number, NotifyName: string, Notify: AnimNotify, NotifyStateClass: AnimNotifyState, Duration: number, EndLink: AnimLinkableElement, bConvertedFromBranchingPoint: boolean, MontageTickType: number, NotifyTriggerChance: number, NotifyFilterType: number, NotifyFilterLOD: number, bTriggerOnDedicatedServer: boolean, bTriggerOnFollower: boolean, NotifyColor: Color, TrackIndex: number);
+        constructor(DisplayTime: number, TriggerTimeOffset: number, EndTriggerTimeOffset: number, TriggerWeightThreshold: number, NotifyName: string, Notify: AnimNotify, NotifyStateClass: AnimNotifyState, Duration: number, EndLink: AnimLinkableElement, bConvertedFromBranchingPoint: boolean, MontageTickType: EMontageNotifyTickType, NotifyTriggerChance: number, NotifyFilterType: ENotifyFilterType, NotifyFilterLOD: number, bTriggerOnDedicatedServer: boolean, bTriggerOnFollower: boolean, NotifyColor: Color, TrackIndex: number);
         DisplayTime: number;
         TriggerTimeOffset: number;
         EndTriggerTimeOffset: number;
@@ -2049,9 +2106,9 @@ declare module "ue" {
         Duration: number;
         EndLink: AnimLinkableElement;
         bConvertedFromBranchingPoint: boolean;
-        MontageTickType: number;
+        MontageTickType: EMontageNotifyTickType;
         NotifyTriggerChance: number;
-        NotifyFilterType: number;
+        NotifyFilterType: ENotifyFilterType;
         NotifyFilterLOD: number;
         bTriggerOnDedicatedServer: boolean;
         bTriggerOnFollower: boolean;
@@ -2114,6 +2171,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum AnimationCompressionFormat { ACF_None, ACF_Float96NoW, ACF_Fixed48NoW, ACF_IntervalFixed32NoW, ACF_Fixed32NoW, ACF_Float32NoW, ACF_Identity, ACF_MAX}
     class AnimCompress extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Description: string;
@@ -2121,9 +2179,9 @@ declare module "ue" {
         bEnableSegmenting: boolean;
         IdealNumFramesPerSegment: number;
         MaxNumFramesPerSegment: number;
-        TranslationCompressionFormat: number;
-        RotationCompressionFormat: number;
-        ScaleCompressionFormat: number;
+        TranslationCompressionFormat: AnimationCompressionFormat;
+        RotationCompressionFormat: AnimationCompressionFormat;
+        ScaleCompressionFormat: AnimationCompressionFormat;
         MaxCurveError: number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): AnimCompress;
@@ -2145,6 +2203,8 @@ declare module "ue" {
         static Load(InName: string): AnimCurveCompressionSettings;
     }
     
+    enum EAdditiveAnimationType { AAT_None, AAT_LocalSpaceBase, AAT_RotationOffsetMeshSpace, AAT_MAX}
+    enum EAdditiveBasePoseType { ABPT_None, ABPT_RefPose, ABPT_AnimScaled, ABPT_AnimFrame, ABPT_MAX}
     enum EAnimInterpolationType { Linear, Step, EAnimInterpolationType_MAX}
     class AnimSequence extends AnimSequenceBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -2158,14 +2218,14 @@ declare module "ue" {
         bAllowFrameStripping: boolean;
         CompressionErrorThresholdScale: number;
         CurveCompressionSettings: AnimCurveCompressionSettings;
-        AdditiveAnimType: number;
-        RefPoseType: number;
+        AdditiveAnimType: EAdditiveAnimationType;
+        RefPoseType: EAdditiveBasePoseType;
         RefPoseSeq: AnimSequence;
         RefFrameIndex: number;
         RetargetSource: string;
         Interpolation: EAnimInterpolationType;
         bEnableRootMotion: boolean;
-        RootMotionRootLock: number;
+        RootMotionRootLock: ERootMotionRootLock;
         bForceRootLock: boolean;
         bUseNormalizedRootMotionScale: boolean;
         bRootMotionSettingsCopiedFromMontage: boolean;
@@ -2182,18 +2242,18 @@ declare module "ue" {
     }
     
     class SkeletalMeshOptimizationSettings {
-        constructor(TerminationCriterion: number, NumOfTrianglesPercentage: number, NumOfVertPercentage: number, MaxNumOfTriangles: number, MaxNumOfVerts: number, MaxDeviationPercentage: number, ReductionMethod: number, SilhouetteImportance: number, TextureImportance: number, ShadingImportance: number, SkinningImportance: number, bRemapMorphTargets: boolean, bRecalcNormals: boolean, WeldingThreshold: number, NormalsThreshold: number, MaxBonesPerVertex: number, bEnforceBoneBoundaries: boolean, VolumeImportance: number, bLockEdges: boolean, BaseLOD: number, BonesToRemove: TArray<BoneReference>, BakePose: AnimSequence);
-        TerminationCriterion: number;
+        constructor(TerminationCriterion: SkeletalMeshTerminationCriterion, NumOfTrianglesPercentage: number, NumOfVertPercentage: number, MaxNumOfTriangles: number, MaxNumOfVerts: number, MaxDeviationPercentage: number, ReductionMethod: SkeletalMeshOptimizationType, SilhouetteImportance: SkeletalMeshOptimizationImportance, TextureImportance: SkeletalMeshOptimizationImportance, ShadingImportance: SkeletalMeshOptimizationImportance, SkinningImportance: SkeletalMeshOptimizationImportance, bRemapMorphTargets: boolean, bRecalcNormals: boolean, WeldingThreshold: number, NormalsThreshold: number, MaxBonesPerVertex: number, bEnforceBoneBoundaries: boolean, VolumeImportance: number, bLockEdges: boolean, BaseLOD: number, BonesToRemove: TArray<BoneReference>, BakePose: AnimSequence);
+        TerminationCriterion: SkeletalMeshTerminationCriterion;
         NumOfTrianglesPercentage: number;
         NumOfVertPercentage: number;
         MaxNumOfTriangles: number;
         MaxNumOfVerts: number;
         MaxDeviationPercentage: number;
-        ReductionMethod: number;
-        SilhouetteImportance: number;
-        TextureImportance: number;
-        ShadingImportance: number;
-        SkinningImportance: number;
+        ReductionMethod: SkeletalMeshOptimizationType;
+        SilhouetteImportance: SkeletalMeshOptimizationImportance;
+        TextureImportance: SkeletalMeshOptimizationImportance;
+        ShadingImportance: SkeletalMeshOptimizationImportance;
+        SkinningImportance: SkeletalMeshOptimizationImportance;
         bRemapMorphTargets: boolean;
         bRecalcNormals: boolean;
         WeldingThreshold: number;
@@ -2361,11 +2421,14 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EPhysicsType { PhysType_Default, PhysType_Kinematic, PhysType_Simulated, PhysType_MAX}
+    enum EBodyCollisionResponse { BodyCollision_Enabled, BodyCollision_Disabled, BodyCollision_MAX}
+    enum ECollisionTraceFlag { CTF_UseDefault, CTF_UseSimpleAndComplex, CTF_UseSimpleAsComplex, CTF_UseComplexAsSimple, CTF_MAX}
     class BodySetup extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         AggGeom: KAggregateGeom;
         BoneName: string;
-        PhysicsType: number;
+        PhysicsType: EPhysicsType;
         bAlwaysFullAnimWeight: boolean;
         bConsiderForBounds: boolean;
         bMeshCollideAll: boolean;
@@ -2373,8 +2436,8 @@ declare module "ue" {
         bGenerateNonMirroredCollision: boolean;
         bSharedCookedData: boolean;
         bGenerateMirroredCollision: boolean;
-        CollisionReponse: number;
-        CollisionTraceFlag: number;
+        CollisionReponse: EBodyCollisionResponse;
+        CollisionTraceFlag: ECollisionTraceFlag;
         PhysMaterial: PhysicalMaterial;
         WalkableSlopeOverride: WalkableSlopeOverride;
         BuildScale: number;
@@ -2425,28 +2488,30 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ELinearConstraintMotion { LCM_Free, LCM_Limited, LCM_Locked, LCM_MAX}
     class LinearConstraint extends ConstraintBaseParams {
-        constructor(Limit: number, XMotion: number, YMotion: number, ZMotion: number);
+        constructor(Limit: number, XMotion: ELinearConstraintMotion, YMotion: ELinearConstraintMotion, ZMotion: ELinearConstraintMotion);
         Limit: number;
-        XMotion: number;
-        YMotion: number;
-        ZMotion: number;
+        XMotion: ELinearConstraintMotion;
+        YMotion: ELinearConstraintMotion;
+        ZMotion: ELinearConstraintMotion;
         static StaticClass(): Class;
     }
     
+    enum EAngularConstraintMotion { ACM_Free, ACM_Limited, ACM_Locked, ACM_MAX}
     class ConeConstraint extends ConstraintBaseParams {
-        constructor(Swing1LimitDegrees: number, Swing2LimitDegrees: number, Swing1Motion: number, Swing2Motion: number);
+        constructor(Swing1LimitDegrees: number, Swing2LimitDegrees: number, Swing1Motion: EAngularConstraintMotion, Swing2Motion: EAngularConstraintMotion);
         Swing1LimitDegrees: number;
         Swing2LimitDegrees: number;
-        Swing1Motion: number;
-        Swing2Motion: number;
+        Swing1Motion: EAngularConstraintMotion;
+        Swing2Motion: EAngularConstraintMotion;
         static StaticClass(): Class;
     }
     
     class TwistConstraint extends ConstraintBaseParams {
-        constructor(TwistLimitDegrees: number, TwistMotion: number);
+        constructor(TwistLimitDegrees: number, TwistMotion: EAngularConstraintMotion);
         TwistLimitDegrees: number;
-        TwistMotion: number;
+        TwistMotion: EAngularConstraintMotion;
         static StaticClass(): Class;
     }
     
@@ -2471,14 +2536,15 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EAngularDriveMode { SLERP, TwistAndSwing, EAngularDriveMode_MAX}
     class AngularDriveConstraint {
-        constructor(TwistDrive: ConstraintDrive, SwingDrive: ConstraintDrive, SlerpDrive: ConstraintDrive, OrientationTarget: Rotator, AngularVelocityTarget: Vector, AngularDriveMode: number);
+        constructor(TwistDrive: ConstraintDrive, SwingDrive: ConstraintDrive, SlerpDrive: ConstraintDrive, OrientationTarget: Rotator, AngularVelocityTarget: Vector, AngularDriveMode: EAngularDriveMode);
         TwistDrive: ConstraintDrive;
         SwingDrive: ConstraintDrive;
         SlerpDrive: ConstraintDrive;
         OrientationTarget: Rotator;
         AngularVelocityTarget: Vector;
-        AngularDriveMode: number;
+        AngularDriveMode: EAngularDriveMode;
         static StaticClass(): Class;
     }
     
@@ -2502,7 +2568,7 @@ declare module "ue" {
     }
     
     class ConstraintInstance {
-        constructor(JointName: string, ConstraintBone1: string, ConstraintBone2: string, Pos1: Vector, PriAxis1: Vector, SecAxis1: Vector, Pos2: Vector, PriAxis2: Vector, SecAxis2: Vector, AngularRotationOffset: Rotator, bScaleLinearLimits: boolean, ProfileInstance: ConstraintProfileProperties, bDisableCollision: boolean, bEnableProjection: boolean, ProjectionLinearTolerance: number, ProjectionAngularTolerance: number, LinearXMotion: number, LinearYMotion: number, LinearZMotion: number, LinearLimitSize: number, bLinearLimitSoft: boolean, LinearLimitStiffness: number, LinearLimitDamping: number, bLinearBreakable: boolean, LinearBreakThreshold: number, AngularSwing1Motion: number, AngularTwistMotion: number, AngularSwing2Motion: number, bSwingLimitSoft: boolean, bTwistLimitSoft: boolean, Swing1LimitAngle: number, TwistLimitAngle: number, Swing2LimitAngle: number, SwingLimitStiffness: number, SwingLimitDamping: number, TwistLimitStiffness: number, TwistLimitDamping: number, bAngularBreakable: boolean, AngularBreakThreshold: number, bLinearXPositionDrive: boolean, bLinearXVelocityDrive: boolean, bLinearYPositionDrive: boolean, bLinearYVelocityDrive: boolean, bLinearZPositionDrive: boolean, bLinearZVelocityDrive: boolean, bLinearPositionDrive: boolean, bLinearVelocityDrive: boolean, LinearPositionTarget: Vector, LinearVelocityTarget: Vector, LinearDriveSpring: number, LinearDriveDamping: number, LinearDriveForceLimit: number, bSwingPositionDrive: boolean, bSwingVelocityDrive: boolean, bTwistPositionDrive: boolean, bTwistVelocityDrive: boolean, bAngularSlerpDrive: boolean, bAngularOrientationDrive: boolean, bEnableSwingDrive: boolean, bEnableTwistDrive: boolean, bAngularVelocityDrive: boolean, AngularPositionTarget: Quat, AngularDriveMode: number, AngularOrientationTarget: Rotator, AngularVelocityTarget: Vector, AngularDriveSpring: number, AngularDriveDamping: number, AngularDriveForceLimit: number);
+        constructor(JointName: string, ConstraintBone1: string, ConstraintBone2: string, Pos1: Vector, PriAxis1: Vector, SecAxis1: Vector, Pos2: Vector, PriAxis2: Vector, SecAxis2: Vector, AngularRotationOffset: Rotator, bScaleLinearLimits: boolean, ProfileInstance: ConstraintProfileProperties, bDisableCollision: boolean, bEnableProjection: boolean, ProjectionLinearTolerance: number, ProjectionAngularTolerance: number, LinearXMotion: ELinearConstraintMotion, LinearYMotion: ELinearConstraintMotion, LinearZMotion: ELinearConstraintMotion, LinearLimitSize: number, bLinearLimitSoft: boolean, LinearLimitStiffness: number, LinearLimitDamping: number, bLinearBreakable: boolean, LinearBreakThreshold: number, AngularSwing1Motion: EAngularConstraintMotion, AngularTwistMotion: EAngularConstraintMotion, AngularSwing2Motion: EAngularConstraintMotion, bSwingLimitSoft: boolean, bTwistLimitSoft: boolean, Swing1LimitAngle: number, TwistLimitAngle: number, Swing2LimitAngle: number, SwingLimitStiffness: number, SwingLimitDamping: number, TwistLimitStiffness: number, TwistLimitDamping: number, bAngularBreakable: boolean, AngularBreakThreshold: number, bLinearXPositionDrive: boolean, bLinearXVelocityDrive: boolean, bLinearYPositionDrive: boolean, bLinearYVelocityDrive: boolean, bLinearZPositionDrive: boolean, bLinearZVelocityDrive: boolean, bLinearPositionDrive: boolean, bLinearVelocityDrive: boolean, LinearPositionTarget: Vector, LinearVelocityTarget: Vector, LinearDriveSpring: number, LinearDriveDamping: number, LinearDriveForceLimit: number, bSwingPositionDrive: boolean, bSwingVelocityDrive: boolean, bTwistPositionDrive: boolean, bTwistVelocityDrive: boolean, bAngularSlerpDrive: boolean, bAngularOrientationDrive: boolean, bEnableSwingDrive: boolean, bEnableTwistDrive: boolean, bAngularVelocityDrive: boolean, AngularPositionTarget: Quat, AngularDriveMode: EAngularDriveMode, AngularOrientationTarget: Rotator, AngularVelocityTarget: Vector, AngularDriveSpring: number, AngularDriveDamping: number, AngularDriveForceLimit: number);
         JointName: string;
         ConstraintBone1: string;
         ConstraintBone2: string;
@@ -2519,18 +2585,18 @@ declare module "ue" {
         bEnableProjection: boolean;
         ProjectionLinearTolerance: number;
         ProjectionAngularTolerance: number;
-        LinearXMotion: number;
-        LinearYMotion: number;
-        LinearZMotion: number;
+        LinearXMotion: ELinearConstraintMotion;
+        LinearYMotion: ELinearConstraintMotion;
+        LinearZMotion: ELinearConstraintMotion;
         LinearLimitSize: number;
         bLinearLimitSoft: boolean;
         LinearLimitStiffness: number;
         LinearLimitDamping: number;
         bLinearBreakable: boolean;
         LinearBreakThreshold: number;
-        AngularSwing1Motion: number;
-        AngularTwistMotion: number;
-        AngularSwing2Motion: number;
+        AngularSwing1Motion: EAngularConstraintMotion;
+        AngularTwistMotion: EAngularConstraintMotion;
+        AngularSwing2Motion: EAngularConstraintMotion;
         bSwingLimitSoft: boolean;
         bTwistLimitSoft: boolean;
         Swing1LimitAngle: number;
@@ -2565,7 +2631,7 @@ declare module "ue" {
         bEnableTwistDrive: boolean;
         bAngularVelocityDrive: boolean;
         AngularPositionTarget: Quat;
-        AngularDriveMode: number;
+        AngularDriveMode: EAngularDriveMode;
         AngularOrientationTarget: Rotator;
         AngularVelocityTarget: Vector;
         AngularDriveSpring: number;
@@ -2598,18 +2664,18 @@ declare module "ue" {
         bEnableProjection: boolean;
         ProjectionLinearTolerance: number;
         ProjectionAngularTolerance: number;
-        LinearXMotion: number;
-        LinearYMotion: number;
-        LinearZMotion: number;
+        LinearXMotion: ELinearConstraintMotion;
+        LinearYMotion: ELinearConstraintMotion;
+        LinearZMotion: ELinearConstraintMotion;
         LinearLimitSize: number;
         bLinearLimitSoft: boolean;
         LinearLimitStiffness: number;
         LinearLimitDamping: number;
         bLinearBreakable: boolean;
         LinearBreakThreshold: number;
-        AngularSwing1Motion: number;
-        AngularSwing2Motion: number;
-        AngularTwistMotion: number;
+        AngularSwing1Motion: EAngularConstraintMotion;
+        AngularSwing2Motion: EAngularConstraintMotion;
+        AngularTwistMotion: EAngularConstraintMotion;
         bSwingLimitSoft: boolean;
         bTwistLimitSoft: boolean;
         Swing1LimitAngle: number;
@@ -2783,8 +2849,10 @@ declare module "ue" {
         static Load(InName: string): BlueprintCore;
     }
     
+    enum EBlueprintType { BPTYPE_Normal, BPTYPE_Const, BPTYPE_MacroLibrary, BPTYPE_Interface, BPTYPE_LevelScript, BPTYPE_FunctionLibrary, BPTYPE_MAX}
     enum EBlueprintNativizationFlag { Disabled, Dependency, ExplicitlyEnabled, EBlueprintNativizationFlag_MAX}
     enum EBlueprintCompileMode { Default, Development, FinalRelease, EBlueprintCompileMode_MAX}
+    enum EBlueprintStatus { BS_Unknown, BS_Dirty, BS_Error, BS_UpToDate, BS_BeingCreated, BS_UpToDateWithWarnings, BS_MAX}
     class BlueprintComponentChangedPropertyInfo {
         constructor(PropertyName: string, ArrayIndex: number, PropertyScope: Struct);
         PropertyName: string;
@@ -2861,6 +2929,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ETimelineLengthMode { TL_TimelineLength, TL_LastKeyFrame, TL_MAX}
     class TTTrackBase {
         constructor(TrackName: string, bIsExternalCurve: boolean);
         TrackName: string;
@@ -2911,7 +2980,7 @@ declare module "ue" {
     class TimelineTemplate extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TimelineLength: number;
-        LengthMode: number;
+        LengthMode: ETimelineLengthMode;
         bAutoPlay: boolean;
         bLoop: boolean;
         bReplicated: boolean;
@@ -2964,8 +3033,9 @@ declare module "ue" {
         static Load(InName: string): InheritableComponentHandler;
     }
     
+    enum ELifetimeCondition { COND_None, COND_InitialOnly, COND_OwnerOnly, COND_SkipOwner, COND_SimulatedOnly, COND_AutonomousOnly, COND_SimulatedOrPhysics, COND_InitialOrOwner, COND_Custom, COND_ReplayOrOwner, COND_ReplayOnly, COND_SimulatedOnlyNoReplay, COND_SimulatedOrPhysicsNoReplay, COND_SkipReplay, COND_Never, COND_Max, COND_MAX}
     class BPVariableDescription {
-        constructor(VarName: string, VarGuid: Guid, VarType: EdGraphPinType, FriendlyName: string, Category: string, PropertyFlags: bigint, RepNotifyFunc: string, ReplicationCondition: number, MetaDataArray: TArray<BPVariableMetaDataEntry>, DefaultValue: string);
+        constructor(VarName: string, VarGuid: Guid, VarType: EdGraphPinType, FriendlyName: string, Category: string, PropertyFlags: bigint, RepNotifyFunc: string, ReplicationCondition: ELifetimeCondition, MetaDataArray: TArray<BPVariableMetaDataEntry>, DefaultValue: string);
         VarName: string;
         VarGuid: Guid;
         VarType: EdGraphPinType;
@@ -2973,7 +3043,7 @@ declare module "ue" {
         Category: string;
         PropertyFlags: bigint;
         RepNotifyFunc: string;
-        ReplicationCondition: number;
+        ReplicationCondition: ELifetimeCondition;
         MetaDataArray: TArray<BPVariableMetaDataEntry>;
         DefaultValue: string;
         static StaticClass(): Class;
@@ -3032,7 +3102,7 @@ declare module "ue" {
     class Blueprint extends BlueprintCore {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ParentClass: Class;
-        BlueprintType: number;
+        BlueprintType: EBlueprintType;
         bRecompileOnLoad: boolean;
         bHasBeenRegenerated: boolean;
         bIsRegeneratingOnLoad: boolean;
@@ -3050,7 +3120,7 @@ declare module "ue" {
         bNativize: boolean;
         NativizationFlag: EBlueprintNativizationFlag;
         CompileMode: EBlueprintCompileMode;
-        Status: number;
+        Status: EBlueprintStatus;
         BlueprintDisplayName: string;
         BlueprintDescription: string;
         BlueprintCategory: string;
@@ -3106,8 +3176,8 @@ declare module "ue" {
         MaxNumStreamedLODs: PerPlatformInt;
         MaxNumOptionalLODs: PerPlatformInt;
         LODSettings: SkeletalMeshLODSettings;
-        SkelMirrorAxis: number;
-        SkelMirrorFlipAxis: number;
+        SkelMirrorAxis: EAxis;
+        SkelMirrorFlipAxis: EAxis;
         bUseFullPrecisionUVs: boolean;
         bUseHighPrecisionTangentBasis: boolean;
         bHasBeenSimplified: boolean;
@@ -3168,6 +3238,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EPhysBodyOp { PBO_None, PBO_Term, PBO_MAX}
     class SkinnedMeshComponent extends MeshComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SkeletalMesh: SkeletalMesh;
@@ -3224,7 +3295,7 @@ declare module "ue" {
         IsUsingSkinWeightProfile(): boolean;
         IsMaterialSectionShown(MaterialID: number, LODIndex: number): boolean;
         IsBoneHiddenByName(BoneName: string): boolean;
-        HideBoneByName(BoneName: string, PhysBodyOption: number): void;
+        HideBoneByName(BoneName: string, PhysBodyOption: EPhysBodyOp): void;
         GetTwistAndSwingAngleOfDeltaRotationFromRefPose(BoneName: string, OutTwistAngle: $Ref<number>, OutSwingAngle: $Ref<number>): boolean;
         GetSocketBoneName(InSocketName: string): string;
         GetRefPosePosition(BoneIndex: number): Vector;
@@ -3379,8 +3450,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ETransitionLogicType { TLT_StandardBlend, TLT_Inertialization, TLT_Custom, TLT_MAX}
     class AnimationTransitionBetweenStates extends AnimationStateBase {
-        constructor(PreviousState: number, NextState: number, CrossfadeDuration: number, StartNotify: number, EndNotify: number, InterruptNotify: number, BlendMode: EAlphaBlendOption, CustomCurve: CurveFloat, BlendProfile: BlendProfile, LogicType: number);
+        constructor(PreviousState: number, NextState: number, CrossfadeDuration: number, StartNotify: number, EndNotify: number, InterruptNotify: number, BlendMode: EAlphaBlendOption, CustomCurve: CurveFloat, BlendProfile: BlendProfile, LogicType: ETransitionLogicType);
         PreviousState: number;
         NextState: number;
         CrossfadeDuration: number;
@@ -3390,7 +3462,7 @@ declare module "ue" {
         BlendMode: EAlphaBlendOption;
         CustomCurve: CurveFloat;
         BlendProfile: BlendProfile;
-        LogicType: number;
+        LogicType: ETransitionLogicType;
         static StaticClass(): Class;
     }
     
@@ -3465,6 +3537,7 @@ declare module "ue" {
         static Load(InName: string): AnimBlueprintGeneratedClass;
     }
     
+    enum ERootMotionMode { NoRootMotionExtraction, IgnoreRootMotion, RootMotionFromEverything, RootMotionFromMontagesOnly, ERootMotionMode_MAX}
     class SoftClassPath extends SoftObjectPath {
         constructor();
         static StaticClass(): Class;
@@ -3513,7 +3586,7 @@ declare module "ue" {
     class AnimInstance extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CurrentSkeleton: Skeleton;
-        RootMotionMode: number;
+        RootMotionMode: ERootMotionMode;
         DeltaTime: number;
         bRunUpdatesInWorkerThreads: boolean;
         bCanUseParallelUpdateAnimation: boolean;
@@ -3533,7 +3606,7 @@ declare module "ue" {
         TryGetPawnOwner(): Pawn;
         StopSlotAnimation(InBlendOutTime: number, SlotNodeName: string): void;
         SnapshotPose(Snapshot: $Ref<PoseSnapshot>): void;
-        SetRootMotionMode(Value: number): void;
+        SetRootMotionMode(Value: ERootMotionMode): void;
         SetMorphTarget(MorphTargetName: string, Value: number): void;
         SavePoseSnapshot(SnapshotName: string): void;
         ResetDynamics(InTeleportType: ETeleportType): void;
@@ -3612,6 +3685,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EKinematicBonesUpdateToPhysics { SkipSimulatingBones, SkipAllBones, EKinematicBonesUpdateToPhysics_MAX}
+    enum EPhysicsTransformUpdateMode { SimulationUpatesComponentTransform, ComponentTransformIsKinematic, EPhysicsTransformUpdateMode_MAX}
+    enum EAnimationMode { AnimationBlueprint, AnimationSingleNode, AnimationCustomMode, EAnimationMode_MAX}
     enum EClothMassMode { UniformMass, TotalMass, Density, MaxClothMassMode, EClothMassMode_MAX}
     class ClothingSimulationInteractor extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -3637,9 +3713,9 @@ declare module "ue" {
         CachedBoneSpaceTransforms: TArray<Transform>;
         CachedComponentSpaceTransforms: TArray<Transform>;
         GlobalAnimRateScale: number;
-        KinematicBonesUpdateType: number;
-        PhysicsTransformUpdateMode: number;
-        AnimationMode: number;
+        KinematicBonesUpdateType: EKinematicBonesUpdateToPhysics;
+        PhysicsTransformUpdateMode: EPhysicsTransformUpdateMode;
+        AnimationMode: EAnimationMode;
         bDisablePostProcessBlueprint: boolean;
         bUpdateOverlapsOnAnimationFinalize: boolean;
         bHasValidBodies: boolean;
@@ -3730,7 +3806,7 @@ declare module "ue" {
         SetClothMaxDistanceScale(Scale: number): void;
         SetBodyNotifyRigidBodyCollision(bNewNotifyRigidBodyCollision: boolean, BoneName: string): void;
         SetAnimClass(NewClass: Class): void;
-        SetAnimationMode(InAnimationMode: number): void;
+        SetAnimationMode(InAnimationMode: EAnimationMode): void;
         SetAnimation(NewAnimToPlay: AnimationAsset): void;
         SetAngularLimits(InBoneName: string, Swing1LimitAngle: number, TwistLimitAngle: number, Swing2LimitAngle: number): void;
         SetAllowedAnimCurvesEvaluation(List: TArray<string>, bAllow: boolean): void;
@@ -3776,7 +3852,7 @@ declare module "ue" {
         GetBoneMass(BoneName: string, bScaleMass: boolean): number;
         GetAnimInstance(): AnimInstance;
         GetAnimClass(): Class;
-        GetAnimationMode(): number;
+        GetAnimationMode(): EAnimationMode;
         GetAllowedAnimCurveEvaluate(): boolean;
         ForceClothNextUpdateTeleportAndReset(): void;
         ForceClothNextUpdateTeleport(): void;
@@ -3893,6 +3969,7 @@ declare module "ue" {
         static Load(InName: string): PawnMovementComponent;
     }
     
+    enum EMovementMode { MOVE_None, MOVE_Walking, MOVE_NavWalking, MOVE_Falling, MOVE_Swimming, MOVE_Flying, MOVE_Custom, MOVE_MAX}
     enum ENetworkSmoothingMode { Disabled, Linear, Exponential, Replay, ENetworkSmoothingMode_MAX}
     class FindFloorResult {
         constructor(bBlockingHit: boolean, bWalkableFloor: boolean, bLineTrace: boolean, FloorDist: number, LineDist: number, HitResult: HitResult);
@@ -3985,7 +4062,7 @@ declare module "ue" {
         JumpOffJumpZFactor: number;
         WalkableFloorAngle: number;
         WalkableFloorZ: number;
-        MovementMode: number;
+        MovementMode: EMovementMode;
         CustomMovementMode: number;
         NetworkSmoothingMode: ENetworkSmoothingMode;
         GroundFriction: number;
@@ -4081,9 +4158,9 @@ declare module "ue" {
         LedgeCheckThreshold: number;
         JumpOutOfWaterPitch: number;
         CurrentFloor: FindFloorResult;
-        DefaultLandMovementMode: number;
-        DefaultWaterMovementMode: number;
-        GroundMovementMode: number;
+        DefaultLandMovementMode: EMovementMode;
+        DefaultWaterMovementMode: EMovementMode;
+        GroundMovementMode: EMovementMode;
         bMaintainHorizontalGroundVelocity: boolean;
         bImpartBaseVelocityX: boolean;
         bImpartBaseVelocityY: boolean;
@@ -4134,7 +4211,7 @@ declare module "ue" {
         AnimRootMotionVelocity: Vector;
         SetWalkableFloorZ(InWalkableFloorZ: number): void;
         SetWalkableFloorAngle(InWalkableFloorAngle: number): void;
-        SetMovementMode(NewMovementMode: number, NewCustomMode: number): void;
+        SetMovementMode(NewMovementMode: EMovementMode, NewCustomMode: number): void;
         SetGroupsToIgnoreMask(GroupMask: NavAvoidanceMask): void;
         SetGroupsToIgnore(GroupFlags: number): void;
         SetGroupsToAvoidMask(GroupMask: NavAvoidanceMask): void;
@@ -4299,7 +4376,7 @@ declare module "ue" {
         JumpMaxCount: number;
         JumpCurrentCount: number;
         OnReachedJumpApex: $MulticastDelegate<() => void>;
-        MovementModeChangedDelegate: $MulticastDelegate<(Character: Character, PrevMovementMode: number, PreviousCustomMode: number) => void>;
+        MovementModeChangedDelegate: $MulticastDelegate<(Character: Character, PrevMovementMode: EMovementMode, PreviousCustomMode: number) => void>;
         OnCharacterMovementUpdated: $MulticastDelegate<(DeltaSeconds: number, OldLocation: Vector, OldVelocity: Vector) => void>;
         SavedRootMotion: RootMotionSourceGroup;
         ClientRootMotionParams: RootMotionMovementParams;
@@ -4327,7 +4404,7 @@ declare module "ue" {
         LaunchCharacter(LaunchVelocity: Vector, bXYOverride: boolean, bZOverride: boolean): void;
         K2_UpdateCustomMovement(DeltaTime: number): void;
         K2_OnStartCrouch(HalfHeightAdjust: number, ScaledHalfHeightAdjust: number): void;
-        K2_OnMovementModeChanged(PrevMovementMode: number, NewMovementMode: number, PrevCustomMode: number, NewCustomMode: number): void;
+        K2_OnMovementModeChanged(PrevMovementMode: EMovementMode, NewMovementMode: EMovementMode, PrevCustomMode: number, NewCustomMode: number): void;
         K2_OnEndCrouch(HalfHeightAdjust: number, ScaledHalfHeightAdjust: number): void;
         Jump(): void;
         IsPlayingRootMotion(): boolean;
@@ -4430,7 +4507,7 @@ declare module "ue" {
         K2_StrLen(RenderFont: Font, RenderText: string): Vector2D;
         K2_Project(WorldLocation: Vector): Vector;
         K2_DrawTriangle(RenderTexture: Texture, Triangles: TArray<CanvasUVTri>): void;
-        K2_DrawTexture(RenderTexture: Texture, ScreenPosition: Vector2D, ScreenSize: Vector2D, CoordinatePosition: Vector2D, CoordinateSize: Vector2D, RenderColor: LinearColor, BlendMode: number, Rotation: number, PivotPoint: Vector2D): void;
+        K2_DrawTexture(RenderTexture: Texture, ScreenPosition: Vector2D, ScreenSize: Vector2D, CoordinatePosition: Vector2D, CoordinateSize: Vector2D, RenderColor: LinearColor, BlendMode: EBlendMode, Rotation: number, PivotPoint: Vector2D): void;
         K2_DrawText(RenderFont: Font, RenderText: string, ScreenPosition: Vector2D, Scale: Vector2D, RenderColor: LinearColor, Kerning: number, ShadowColor: LinearColor, ShadowOffset: Vector2D, bCentreX: boolean, bCentreY: boolean, bOutlined: boolean, OutlineColor: LinearColor): void;
         K2_DrawPolygon(RenderTexture: Texture, ScreenPosition: Vector2D, Radius: Vector2D, NumberOfSides: number, RenderColor: LinearColor): void;
         K2_DrawMaterialTriangle(RenderMaterial: MaterialInterface, Triangles: TArray<CanvasUVTri>): void;
@@ -4499,7 +4576,7 @@ declare module "ue" {
         GetOwningPawn(): Pawn;
         GetActorsInSelectionRectangle(ClassFilter: Class, FirstPoint: Vector2D, SecondPoint: Vector2D, OutActors: $Ref<TArray<Actor>>, bIncludeNonCollidingComponents: boolean, bActorMustBeFullyEnclosed: boolean): void;
         DrawTextureSimple(Texture: Texture, ScreenX: number, ScreenY: number, Scale: number, bScalePosition: boolean): void;
-        DrawTexture(Texture: Texture, ScreenX: number, ScreenY: number, ScreenW: number, ScreenH: number, TextureU: number, TextureV: number, TextureUWidth: number, TextureVHeight: number, TintColor: LinearColor, BlendMode: number, Scale: number, bScalePosition: boolean, Rotation: number, RotPivot: Vector2D): void;
+        DrawTexture(Texture: Texture, ScreenX: number, ScreenY: number, ScreenW: number, ScreenH: number, TextureU: number, TextureV: number, TextureUWidth: number, TextureVHeight: number, TintColor: LinearColor, BlendMode: EBlendMode, Scale: number, bScalePosition: boolean, Rotation: number, RotPivot: Vector2D): void;
         DrawText(Text: string, TextColor: LinearColor, ScreenX: number, ScreenY: number, Font: Font, Scale: number, bScalePosition: boolean): void;
         DrawRect(RectColor: LinearColor, ScreenX: number, ScreenY: number, ScreenW: number, ScreenH: number): void;
         DrawMaterialTriangle(Material: MaterialInterface, V0_Pos: Vector2D, V1_Pos: Vector2D, V2_Pos: Vector2D, V0_UV: Vector2D, V1_UV: Vector2D, V2_UV: Vector2D, V0_Color: LinearColor, V1_Color: LinearColor, V2_Color: LinearColor): void;
@@ -4514,6 +4591,10 @@ declare module "ue" {
         static Load(InName: string): HUD;
     }
     
+    enum ECameraProjectionMode { Perspective, Orthographic, ECameraProjectionMode_MAX}
+    enum EBloomMethod { BM_SOG, BM_FFT, BM_MAX}
+    enum EAutoExposureMethod { AEM_Histogram, AEM_Basic, AEM_Manual, AEM_MAX}
+    enum EDepthOfFieldMethod { DOFM_BokehDOF, DOFM_Gaussian, DOFM_CircleDOF, DOFM_MAX}
     class TextureCube extends Texture {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -4539,7 +4620,7 @@ declare module "ue" {
     }
     
     class PostProcessSettings {
-        constructor(bOverride_WhiteTemp: boolean, bOverride_WhiteTint: boolean, bOverride_ColorSaturation: boolean, bOverride_ColorContrast: boolean, bOverride_ColorGamma: boolean, bOverride_ColorGain: boolean, bOverride_ColorOffset: boolean, bOverride_ColorSaturationShadows: boolean, bOverride_ColorContrastShadows: boolean, bOverride_ColorGammaShadows: boolean, bOverride_ColorGainShadows: boolean, bOverride_ColorOffsetShadows: boolean, bOverride_ColorSaturationMidtones: boolean, bOverride_ColorContrastMidtones: boolean, bOverride_ColorGammaMidtones: boolean, bOverride_ColorGainMidtones: boolean, bOverride_ColorOffsetMidtones: boolean, bOverride_ColorSaturationHighlights: boolean, bOverride_ColorContrastHighlights: boolean, bOverride_ColorGammaHighlights: boolean, bOverride_ColorGainHighlights: boolean, bOverride_ColorOffsetHighlights: boolean, bOverride_ColorCorrectionShadowsMax: boolean, bOverride_ColorCorrectionHighlightsMin: boolean, bOverride_BlueCorrection: boolean, bOverride_ExpandGamut: boolean, bOverride_FilmWhitePoint: boolean, bOverride_FilmSaturation: boolean, bOverride_FilmChannelMixerRed: boolean, bOverride_FilmChannelMixerGreen: boolean, bOverride_FilmChannelMixerBlue: boolean, bOverride_FilmContrast: boolean, bOverride_FilmDynamicRange: boolean, bOverride_FilmHealAmount: boolean, bOverride_FilmToeAmount: boolean, bOverride_FilmShadowTint: boolean, bOverride_FilmShadowTintBlend: boolean, bOverride_FilmShadowTintAmount: boolean, bOverride_FilmSlope: boolean, bOverride_FilmToe: boolean, bOverride_FilmShoulder: boolean, bOverride_FilmBlackClip: boolean, bOverride_FilmWhiteClip: boolean, bOverride_SceneColorTint: boolean, bOverride_SceneFringeIntensity: boolean, bOverride_ChromaticAberrationStartOffset: boolean, bOverride_AmbientCubemapTint: boolean, bOverride_AmbientCubemapIntensity: boolean, bOverride_BloomMethod: boolean, bOverride_BloomIntensity: boolean, bOverride_BloomThreshold: boolean, bOverride_Bloom1Tint: boolean, bOverride_Bloom1Size: boolean, bOverride_Bloom2Size: boolean, bOverride_Bloom2Tint: boolean, bOverride_Bloom3Tint: boolean, bOverride_Bloom3Size: boolean, bOverride_Bloom4Tint: boolean, bOverride_Bloom4Size: boolean, bOverride_Bloom5Tint: boolean, bOverride_Bloom5Size: boolean, bOverride_Bloom6Tint: boolean, bOverride_Bloom6Size: boolean, bOverride_BloomSizeScale: boolean, bOverride_BloomConvolutionTexture: boolean, bOverride_BloomConvolutionSize: boolean, bOverride_BloomConvolutionCenterUV: boolean, bOverride_BloomConvolutionPreFilter: boolean, bOverride_BloomConvolutionPreFilterMin: boolean, bOverride_BloomConvolutionPreFilterMax: boolean, bOverride_BloomConvolutionPreFilterMult: boolean, bOverride_BloomConvolutionBufferScale: boolean, bOverride_BloomDirtMaskIntensity: boolean, bOverride_BloomDirtMaskTint: boolean, bOverride_BloomDirtMask: boolean, bOverride_CameraShutterSpeed: boolean, bOverride_CameraISO: boolean, bOverride_AutoExposureMethod: boolean, bOverride_AutoExposureLowPercent: boolean, bOverride_AutoExposureHighPercent: boolean, bOverride_AutoExposureMinBrightness: boolean, bOverride_AutoExposureMaxBrightness: boolean, bOverride_AutoExposureCalibrationConstant: boolean, bOverride_AutoExposureSpeedUp: boolean, bOverride_AutoExposureSpeedDown: boolean, bOverride_AutoExposureBias: boolean, bOverride_AutoExposureBiasCurve: boolean, bOverride_HistogramLogMin: boolean, bOverride_HistogramLogMax: boolean, bOverride_LensFlareIntensity: boolean, bOverride_LensFlareTint: boolean, bOverride_LensFlareTints: boolean, bOverride_LensFlareBokehSize: boolean, bOverride_LensFlareBokehShape: boolean, bOverride_LensFlareThreshold: boolean, bOverride_VignetteIntensity: boolean, bOverride_GrainIntensity: boolean, bOverride_GrainJitter: boolean, bOverride_AmbientOcclusionIntensity: boolean, bOverride_AmbientOcclusionStaticFraction: boolean, bOverride_AmbientOcclusionRadius: boolean, bOverride_AmbientOcclusionFadeDistance: boolean, bOverride_AmbientOcclusionFadeRadius: boolean, bOverride_AmbientOcclusionDistance: boolean, bOverride_AmbientOcclusionRadiusInWS: boolean, bOverride_AmbientOcclusionPower: boolean, bOverride_AmbientOcclusionBias: boolean, bOverride_AmbientOcclusionQuality: boolean, bOverride_AmbientOcclusionMipBlend: boolean, bOverride_AmbientOcclusionMipScale: boolean, bOverride_AmbientOcclusionMipThreshold: boolean, bOverride_RayTracingAO: boolean, bOverride_RayTracingAOSamplesPerPixel: boolean, bOverride_LPVIntensity: boolean, bOverride_LPVDirectionalOcclusionIntensity: boolean, bOverride_LPVDirectionalOcclusionRadius: boolean, bOverride_LPVDiffuseOcclusionExponent: boolean, bOverride_LPVSpecularOcclusionExponent: boolean, bOverride_LPVDiffuseOcclusionIntensity: boolean, bOverride_LPVSpecularOcclusionIntensity: boolean, bOverride_LPVSize: boolean, bOverride_LPVSecondaryOcclusionIntensity: boolean, bOverride_LPVSecondaryBounceIntensity: boolean, bOverride_LPVGeometryVolumeBias: boolean, bOverride_LPVVplInjectionBias: boolean, bOverride_LPVEmissiveInjectionIntensity: boolean, bOverride_LPVFadeRange: boolean, bOverride_LPVDirectionalOcclusionFadeRange: boolean, bOverride_IndirectLightingColor: boolean, bOverride_IndirectLightingIntensity: boolean, bOverride_ColorGradingIntensity: boolean, bOverride_ColorGradingLUT: boolean, bOverride_DepthOfFieldFocalDistance: boolean, bOverride_DepthOfFieldFstop: boolean, bOverride_DepthOfFieldMinFstop: boolean, bOverride_DepthOfFieldBladeCount: boolean, bOverride_DepthOfFieldSensorWidth: boolean, bOverride_DepthOfFieldDepthBlurRadius: boolean, bOverride_DepthOfFieldDepthBlurAmount: boolean, bOverride_DepthOfFieldFocalRegion: boolean, bOverride_DepthOfFieldNearTransitionRegion: boolean, bOverride_DepthOfFieldFarTransitionRegion: boolean, bOverride_DepthOfFieldScale: boolean, bOverride_DepthOfFieldNearBlurSize: boolean, bOverride_DepthOfFieldFarBlurSize: boolean, bOverride_MobileHQGaussian: boolean, bOverride_DepthOfFieldOcclusion: boolean, bOverride_DepthOfFieldSkyFocusDistance: boolean, bOverride_DepthOfFieldVignetteSize: boolean, bOverride_MotionBlurAmount: boolean, bOverride_MotionBlurMax: boolean, bOverride_MotionBlurTargetFPS: boolean, bOverride_MotionBlurPerObjectSize: boolean, bOverride_ScreenPercentage: boolean, bOverride_ScreenSpaceReflectionIntensity: boolean, bOverride_ScreenSpaceReflectionQuality: boolean, bOverride_ScreenSpaceReflectionMaxRoughness: boolean, bOverride_ScreenSpaceReflectionRoughnessScale: boolean, bOverride_ReflectionsType: boolean, bOverride_RayTracingReflectionsMaxRoughness: boolean, bOverride_RayTracingReflectionsMaxBounces: boolean, bOverride_RayTracingReflectionsSamplesPerPixel: boolean, bOverride_RayTracingReflectionsShadows: boolean, bOverride_RayTracingReflectionsTranslucency: boolean, bOverride_TranslucencyType: boolean, bOverride_RayTracingTranslucencyMaxRoughness: boolean, bOverride_RayTracingTranslucencyRefractionRays: boolean, bOverride_RayTracingTranslucencySamplesPerPixel: boolean, bOverride_RayTracingTranslucencyShadows: boolean, bOverride_RayTracingTranslucencyRefraction: boolean, bOverride_RayTracingGI: boolean, bOverride_RayTracingGIMaxBounces: boolean, bOverride_RayTracingGISamplesPerPixel: boolean, bOverride_PathTracingMaxBounces: boolean, bOverride_PathTracingSamplesPerPixel: boolean, bMobileHQGaussian: boolean, BloomMethod: number, AutoExposureMethod: number, DepthOfFieldMethod: number, WhiteTemp: number, WhiteTint: number, ColorSaturation: Vector4, ColorContrast: Vector4, ColorGamma: Vector4, ColorGain: Vector4, ColorOffset: Vector4, ColorSaturationShadows: Vector4, ColorContrastShadows: Vector4, ColorGammaShadows: Vector4, ColorGainShadows: Vector4, ColorOffsetShadows: Vector4, ColorSaturationMidtones: Vector4, ColorContrastMidtones: Vector4, ColorGammaMidtones: Vector4, ColorGainMidtones: Vector4, ColorOffsetMidtones: Vector4, ColorSaturationHighlights: Vector4, ColorContrastHighlights: Vector4, ColorGammaHighlights: Vector4, ColorGainHighlights: Vector4, ColorOffsetHighlights: Vector4, ColorCorrectionHighlightsMin: number, ColorCorrectionShadowsMax: number, BlueCorrection: number, ExpandGamut: number, FilmSlope: number, FilmToe: number, FilmShoulder: number, FilmBlackClip: number, FilmWhiteClip: number, FilmWhitePoint: LinearColor, FilmShadowTint: LinearColor, FilmShadowTintBlend: number, FilmShadowTintAmount: number, FilmSaturation: number, FilmChannelMixerRed: LinearColor, FilmChannelMixerGreen: LinearColor, FilmChannelMixerBlue: LinearColor, FilmContrast: number, FilmToeAmount: number, FilmHealAmount: number, FilmDynamicRange: number, SceneColorTint: LinearColor, SceneFringeIntensity: number, ChromaticAberrationStartOffset: number, BloomIntensity: number, BloomThreshold: number, BloomSizeScale: number, Bloom1Size: number, Bloom2Size: number, Bloom3Size: number, Bloom4Size: number, Bloom5Size: number, Bloom6Size: number, Bloom1Tint: LinearColor, Bloom2Tint: LinearColor, Bloom3Tint: LinearColor, Bloom4Tint: LinearColor, Bloom5Tint: LinearColor, Bloom6Tint: LinearColor, BloomConvolutionSize: number, BloomConvolutionTexture: Texture2D, BloomConvolutionCenterUV: Vector2D, BloomConvolutionPreFilter: Vector, BloomConvolutionPreFilterMin: number, BloomConvolutionPreFilterMax: number, BloomConvolutionPreFilterMult: number, BloomConvolutionBufferScale: number, BloomDirtMask: Texture, BloomDirtMaskIntensity: number, BloomDirtMaskTint: LinearColor, AmbientCubemapTint: LinearColor, AmbientCubemapIntensity: number, AmbientCubemap: TextureCube, CameraShutterSpeed: number, CameraISO: number, DepthOfFieldFstop: number, DepthOfFieldMinFstop: number, DepthOfFieldBladeCount: number, AutoExposureBias: number, AutoExposureBiasCurve: CurveFloat, AutoExposureLowPercent: number, AutoExposureHighPercent: number, AutoExposureMinBrightness: number, AutoExposureMaxBrightness: number, AutoExposureSpeedUp: number, AutoExposureSpeedDown: number, HistogramLogMin: number, HistogramLogMax: number, AutoExposureCalibrationConstant: number, LensFlareIntensity: number, LensFlareTint: LinearColor, LensFlareBokehSize: number, LensFlareThreshold: number, LensFlareBokehShape: Texture, LensFlareTints: FixSizeArray<LinearColor>, VignetteIntensity: number, GrainJitter: number, GrainIntensity: number, AmbientOcclusionIntensity: number, AmbientOcclusionStaticFraction: number, AmbientOcclusionRadius: number, AmbientOcclusionRadiusInWS: boolean, AmbientOcclusionFadeDistance: number, AmbientOcclusionFadeRadius: number, AmbientOcclusionDistance: number, AmbientOcclusionPower: number, AmbientOcclusionBias: number, AmbientOcclusionQuality: number, AmbientOcclusionMipBlend: number, AmbientOcclusionMipScale: number, AmbientOcclusionMipThreshold: number, RayTracingAO: boolean, RayTracingAOSamplesPerPixel: number, IndirectLightingColor: LinearColor, IndirectLightingIntensity: number, RayTracingGI: boolean, RayTracingGIType: ERayTracingGlobalIlluminationType, RayTracingGIMaxBounces: number, RayTracingGISamplesPerPixel: number, ColorGradingIntensity: number, ColorGradingLUT: Texture, DepthOfFieldSensorWidth: number, DepthOfFieldFocalDistance: number, DepthOfFieldDepthBlurAmount: number, DepthOfFieldDepthBlurRadius: number, DepthOfFieldFocalRegion: number, DepthOfFieldNearTransitionRegion: number, DepthOfFieldFarTransitionRegion: number, DepthOfFieldScale: number, DepthOfFieldNearBlurSize: number, DepthOfFieldFarBlurSize: number, DepthOfFieldOcclusion: number, DepthOfFieldSkyFocusDistance: number, DepthOfFieldVignetteSize: number, MotionBlurAmount: number, MotionBlurMax: number, MotionBlurTargetFPS: number, MotionBlurPerObjectSize: number, LPVIntensity: number, LPVVplInjectionBias: number, LPVSize: number, LPVSecondaryOcclusionIntensity: number, LPVSecondaryBounceIntensity: number, LPVGeometryVolumeBias: number, LPVEmissiveInjectionIntensity: number, LPVDirectionalOcclusionIntensity: number, LPVDirectionalOcclusionRadius: number, LPVDiffuseOcclusionExponent: number, LPVSpecularOcclusionExponent: number, LPVDiffuseOcclusionIntensity: number, LPVSpecularOcclusionIntensity: number, ReflectionsType: EReflectionsType, ScreenSpaceReflectionIntensity: number, ScreenSpaceReflectionQuality: number, ScreenSpaceReflectionMaxRoughness: number, RayTracingReflectionsMaxRoughness: number, RayTracingReflectionsMaxBounces: number, RayTracingReflectionsSamplesPerPixel: number, RayTracingReflectionsShadows: EReflectedAndRefractedRayTracedShadows, RayTracingReflectionsTranslucency: boolean, TranslucencyType: ETranslucencyType, RayTracingTranslucencyMaxRoughness: number, RayTracingTranslucencyRefractionRays: number, RayTracingTranslucencySamplesPerPixel: number, RayTracingTranslucencyShadows: EReflectedAndRefractedRayTracedShadows, RayTracingTranslucencyRefraction: boolean, PathTracingMaxBounces: number, PathTracingSamplesPerPixel: number, LPVFadeRange: number, LPVDirectionalOcclusionFadeRange: number, ScreenPercentage: number, WeightedBlendables: WeightedBlendables, Blendables: TArray<Object>);
+        constructor(bOverride_WhiteTemp: boolean, bOverride_WhiteTint: boolean, bOverride_ColorSaturation: boolean, bOverride_ColorContrast: boolean, bOverride_ColorGamma: boolean, bOverride_ColorGain: boolean, bOverride_ColorOffset: boolean, bOverride_ColorSaturationShadows: boolean, bOverride_ColorContrastShadows: boolean, bOverride_ColorGammaShadows: boolean, bOverride_ColorGainShadows: boolean, bOverride_ColorOffsetShadows: boolean, bOverride_ColorSaturationMidtones: boolean, bOverride_ColorContrastMidtones: boolean, bOverride_ColorGammaMidtones: boolean, bOverride_ColorGainMidtones: boolean, bOverride_ColorOffsetMidtones: boolean, bOverride_ColorSaturationHighlights: boolean, bOverride_ColorContrastHighlights: boolean, bOverride_ColorGammaHighlights: boolean, bOverride_ColorGainHighlights: boolean, bOverride_ColorOffsetHighlights: boolean, bOverride_ColorCorrectionShadowsMax: boolean, bOverride_ColorCorrectionHighlightsMin: boolean, bOverride_BlueCorrection: boolean, bOverride_ExpandGamut: boolean, bOverride_FilmWhitePoint: boolean, bOverride_FilmSaturation: boolean, bOverride_FilmChannelMixerRed: boolean, bOverride_FilmChannelMixerGreen: boolean, bOverride_FilmChannelMixerBlue: boolean, bOverride_FilmContrast: boolean, bOverride_FilmDynamicRange: boolean, bOverride_FilmHealAmount: boolean, bOverride_FilmToeAmount: boolean, bOverride_FilmShadowTint: boolean, bOverride_FilmShadowTintBlend: boolean, bOverride_FilmShadowTintAmount: boolean, bOverride_FilmSlope: boolean, bOverride_FilmToe: boolean, bOverride_FilmShoulder: boolean, bOverride_FilmBlackClip: boolean, bOverride_FilmWhiteClip: boolean, bOverride_SceneColorTint: boolean, bOverride_SceneFringeIntensity: boolean, bOverride_ChromaticAberrationStartOffset: boolean, bOverride_AmbientCubemapTint: boolean, bOverride_AmbientCubemapIntensity: boolean, bOverride_BloomMethod: boolean, bOverride_BloomIntensity: boolean, bOverride_BloomThreshold: boolean, bOverride_Bloom1Tint: boolean, bOverride_Bloom1Size: boolean, bOverride_Bloom2Size: boolean, bOverride_Bloom2Tint: boolean, bOverride_Bloom3Tint: boolean, bOverride_Bloom3Size: boolean, bOverride_Bloom4Tint: boolean, bOverride_Bloom4Size: boolean, bOverride_Bloom5Tint: boolean, bOverride_Bloom5Size: boolean, bOverride_Bloom6Tint: boolean, bOverride_Bloom6Size: boolean, bOverride_BloomSizeScale: boolean, bOverride_BloomConvolutionTexture: boolean, bOverride_BloomConvolutionSize: boolean, bOverride_BloomConvolutionCenterUV: boolean, bOverride_BloomConvolutionPreFilter: boolean, bOverride_BloomConvolutionPreFilterMin: boolean, bOverride_BloomConvolutionPreFilterMax: boolean, bOverride_BloomConvolutionPreFilterMult: boolean, bOverride_BloomConvolutionBufferScale: boolean, bOverride_BloomDirtMaskIntensity: boolean, bOverride_BloomDirtMaskTint: boolean, bOverride_BloomDirtMask: boolean, bOverride_CameraShutterSpeed: boolean, bOverride_CameraISO: boolean, bOverride_AutoExposureMethod: boolean, bOverride_AutoExposureLowPercent: boolean, bOverride_AutoExposureHighPercent: boolean, bOverride_AutoExposureMinBrightness: boolean, bOverride_AutoExposureMaxBrightness: boolean, bOverride_AutoExposureCalibrationConstant: boolean, bOverride_AutoExposureSpeedUp: boolean, bOverride_AutoExposureSpeedDown: boolean, bOverride_AutoExposureBias: boolean, bOverride_AutoExposureBiasCurve: boolean, bOverride_HistogramLogMin: boolean, bOverride_HistogramLogMax: boolean, bOverride_LensFlareIntensity: boolean, bOverride_LensFlareTint: boolean, bOverride_LensFlareTints: boolean, bOverride_LensFlareBokehSize: boolean, bOverride_LensFlareBokehShape: boolean, bOverride_LensFlareThreshold: boolean, bOverride_VignetteIntensity: boolean, bOverride_GrainIntensity: boolean, bOverride_GrainJitter: boolean, bOverride_AmbientOcclusionIntensity: boolean, bOverride_AmbientOcclusionStaticFraction: boolean, bOverride_AmbientOcclusionRadius: boolean, bOverride_AmbientOcclusionFadeDistance: boolean, bOverride_AmbientOcclusionFadeRadius: boolean, bOverride_AmbientOcclusionDistance: boolean, bOverride_AmbientOcclusionRadiusInWS: boolean, bOverride_AmbientOcclusionPower: boolean, bOverride_AmbientOcclusionBias: boolean, bOverride_AmbientOcclusionQuality: boolean, bOverride_AmbientOcclusionMipBlend: boolean, bOverride_AmbientOcclusionMipScale: boolean, bOverride_AmbientOcclusionMipThreshold: boolean, bOverride_RayTracingAO: boolean, bOverride_RayTracingAOSamplesPerPixel: boolean, bOverride_LPVIntensity: boolean, bOverride_LPVDirectionalOcclusionIntensity: boolean, bOverride_LPVDirectionalOcclusionRadius: boolean, bOverride_LPVDiffuseOcclusionExponent: boolean, bOverride_LPVSpecularOcclusionExponent: boolean, bOverride_LPVDiffuseOcclusionIntensity: boolean, bOverride_LPVSpecularOcclusionIntensity: boolean, bOverride_LPVSize: boolean, bOverride_LPVSecondaryOcclusionIntensity: boolean, bOverride_LPVSecondaryBounceIntensity: boolean, bOverride_LPVGeometryVolumeBias: boolean, bOverride_LPVVplInjectionBias: boolean, bOverride_LPVEmissiveInjectionIntensity: boolean, bOverride_LPVFadeRange: boolean, bOverride_LPVDirectionalOcclusionFadeRange: boolean, bOverride_IndirectLightingColor: boolean, bOverride_IndirectLightingIntensity: boolean, bOverride_ColorGradingIntensity: boolean, bOverride_ColorGradingLUT: boolean, bOverride_DepthOfFieldFocalDistance: boolean, bOverride_DepthOfFieldFstop: boolean, bOverride_DepthOfFieldMinFstop: boolean, bOverride_DepthOfFieldBladeCount: boolean, bOverride_DepthOfFieldSensorWidth: boolean, bOverride_DepthOfFieldDepthBlurRadius: boolean, bOverride_DepthOfFieldDepthBlurAmount: boolean, bOverride_DepthOfFieldFocalRegion: boolean, bOverride_DepthOfFieldNearTransitionRegion: boolean, bOverride_DepthOfFieldFarTransitionRegion: boolean, bOverride_DepthOfFieldScale: boolean, bOverride_DepthOfFieldNearBlurSize: boolean, bOverride_DepthOfFieldFarBlurSize: boolean, bOverride_MobileHQGaussian: boolean, bOverride_DepthOfFieldOcclusion: boolean, bOverride_DepthOfFieldSkyFocusDistance: boolean, bOverride_DepthOfFieldVignetteSize: boolean, bOverride_MotionBlurAmount: boolean, bOverride_MotionBlurMax: boolean, bOverride_MotionBlurTargetFPS: boolean, bOverride_MotionBlurPerObjectSize: boolean, bOverride_ScreenPercentage: boolean, bOverride_ScreenSpaceReflectionIntensity: boolean, bOverride_ScreenSpaceReflectionQuality: boolean, bOverride_ScreenSpaceReflectionMaxRoughness: boolean, bOverride_ScreenSpaceReflectionRoughnessScale: boolean, bOverride_ReflectionsType: boolean, bOverride_RayTracingReflectionsMaxRoughness: boolean, bOverride_RayTracingReflectionsMaxBounces: boolean, bOverride_RayTracingReflectionsSamplesPerPixel: boolean, bOverride_RayTracingReflectionsShadows: boolean, bOverride_RayTracingReflectionsTranslucency: boolean, bOverride_TranslucencyType: boolean, bOverride_RayTracingTranslucencyMaxRoughness: boolean, bOverride_RayTracingTranslucencyRefractionRays: boolean, bOverride_RayTracingTranslucencySamplesPerPixel: boolean, bOverride_RayTracingTranslucencyShadows: boolean, bOverride_RayTracingTranslucencyRefraction: boolean, bOverride_RayTracingGI: boolean, bOverride_RayTracingGIMaxBounces: boolean, bOverride_RayTracingGISamplesPerPixel: boolean, bOverride_PathTracingMaxBounces: boolean, bOverride_PathTracingSamplesPerPixel: boolean, bMobileHQGaussian: boolean, BloomMethod: EBloomMethod, AutoExposureMethod: EAutoExposureMethod, DepthOfFieldMethod: EDepthOfFieldMethod, WhiteTemp: number, WhiteTint: number, ColorSaturation: Vector4, ColorContrast: Vector4, ColorGamma: Vector4, ColorGain: Vector4, ColorOffset: Vector4, ColorSaturationShadows: Vector4, ColorContrastShadows: Vector4, ColorGammaShadows: Vector4, ColorGainShadows: Vector4, ColorOffsetShadows: Vector4, ColorSaturationMidtones: Vector4, ColorContrastMidtones: Vector4, ColorGammaMidtones: Vector4, ColorGainMidtones: Vector4, ColorOffsetMidtones: Vector4, ColorSaturationHighlights: Vector4, ColorContrastHighlights: Vector4, ColorGammaHighlights: Vector4, ColorGainHighlights: Vector4, ColorOffsetHighlights: Vector4, ColorCorrectionHighlightsMin: number, ColorCorrectionShadowsMax: number, BlueCorrection: number, ExpandGamut: number, FilmSlope: number, FilmToe: number, FilmShoulder: number, FilmBlackClip: number, FilmWhiteClip: number, FilmWhitePoint: LinearColor, FilmShadowTint: LinearColor, FilmShadowTintBlend: number, FilmShadowTintAmount: number, FilmSaturation: number, FilmChannelMixerRed: LinearColor, FilmChannelMixerGreen: LinearColor, FilmChannelMixerBlue: LinearColor, FilmContrast: number, FilmToeAmount: number, FilmHealAmount: number, FilmDynamicRange: number, SceneColorTint: LinearColor, SceneFringeIntensity: number, ChromaticAberrationStartOffset: number, BloomIntensity: number, BloomThreshold: number, BloomSizeScale: number, Bloom1Size: number, Bloom2Size: number, Bloom3Size: number, Bloom4Size: number, Bloom5Size: number, Bloom6Size: number, Bloom1Tint: LinearColor, Bloom2Tint: LinearColor, Bloom3Tint: LinearColor, Bloom4Tint: LinearColor, Bloom5Tint: LinearColor, Bloom6Tint: LinearColor, BloomConvolutionSize: number, BloomConvolutionTexture: Texture2D, BloomConvolutionCenterUV: Vector2D, BloomConvolutionPreFilter: Vector, BloomConvolutionPreFilterMin: number, BloomConvolutionPreFilterMax: number, BloomConvolutionPreFilterMult: number, BloomConvolutionBufferScale: number, BloomDirtMask: Texture, BloomDirtMaskIntensity: number, BloomDirtMaskTint: LinearColor, AmbientCubemapTint: LinearColor, AmbientCubemapIntensity: number, AmbientCubemap: TextureCube, CameraShutterSpeed: number, CameraISO: number, DepthOfFieldFstop: number, DepthOfFieldMinFstop: number, DepthOfFieldBladeCount: number, AutoExposureBias: number, AutoExposureBiasCurve: CurveFloat, AutoExposureLowPercent: number, AutoExposureHighPercent: number, AutoExposureMinBrightness: number, AutoExposureMaxBrightness: number, AutoExposureSpeedUp: number, AutoExposureSpeedDown: number, HistogramLogMin: number, HistogramLogMax: number, AutoExposureCalibrationConstant: number, LensFlareIntensity: number, LensFlareTint: LinearColor, LensFlareBokehSize: number, LensFlareThreshold: number, LensFlareBokehShape: Texture, LensFlareTints: FixSizeArray<LinearColor>, VignetteIntensity: number, GrainJitter: number, GrainIntensity: number, AmbientOcclusionIntensity: number, AmbientOcclusionStaticFraction: number, AmbientOcclusionRadius: number, AmbientOcclusionRadiusInWS: boolean, AmbientOcclusionFadeDistance: number, AmbientOcclusionFadeRadius: number, AmbientOcclusionDistance: number, AmbientOcclusionPower: number, AmbientOcclusionBias: number, AmbientOcclusionQuality: number, AmbientOcclusionMipBlend: number, AmbientOcclusionMipScale: number, AmbientOcclusionMipThreshold: number, RayTracingAO: boolean, RayTracingAOSamplesPerPixel: number, IndirectLightingColor: LinearColor, IndirectLightingIntensity: number, RayTracingGI: boolean, RayTracingGIType: ERayTracingGlobalIlluminationType, RayTracingGIMaxBounces: number, RayTracingGISamplesPerPixel: number, ColorGradingIntensity: number, ColorGradingLUT: Texture, DepthOfFieldSensorWidth: number, DepthOfFieldFocalDistance: number, DepthOfFieldDepthBlurAmount: number, DepthOfFieldDepthBlurRadius: number, DepthOfFieldFocalRegion: number, DepthOfFieldNearTransitionRegion: number, DepthOfFieldFarTransitionRegion: number, DepthOfFieldScale: number, DepthOfFieldNearBlurSize: number, DepthOfFieldFarBlurSize: number, DepthOfFieldOcclusion: number, DepthOfFieldSkyFocusDistance: number, DepthOfFieldVignetteSize: number, MotionBlurAmount: number, MotionBlurMax: number, MotionBlurTargetFPS: number, MotionBlurPerObjectSize: number, LPVIntensity: number, LPVVplInjectionBias: number, LPVSize: number, LPVSecondaryOcclusionIntensity: number, LPVSecondaryBounceIntensity: number, LPVGeometryVolumeBias: number, LPVEmissiveInjectionIntensity: number, LPVDirectionalOcclusionIntensity: number, LPVDirectionalOcclusionRadius: number, LPVDiffuseOcclusionExponent: number, LPVSpecularOcclusionExponent: number, LPVDiffuseOcclusionIntensity: number, LPVSpecularOcclusionIntensity: number, ReflectionsType: EReflectionsType, ScreenSpaceReflectionIntensity: number, ScreenSpaceReflectionQuality: number, ScreenSpaceReflectionMaxRoughness: number, RayTracingReflectionsMaxRoughness: number, RayTracingReflectionsMaxBounces: number, RayTracingReflectionsSamplesPerPixel: number, RayTracingReflectionsShadows: EReflectedAndRefractedRayTracedShadows, RayTracingReflectionsTranslucency: boolean, TranslucencyType: ETranslucencyType, RayTracingTranslucencyMaxRoughness: number, RayTracingTranslucencyRefractionRays: number, RayTracingTranslucencySamplesPerPixel: number, RayTracingTranslucencyShadows: EReflectedAndRefractedRayTracedShadows, RayTracingTranslucencyRefraction: boolean, PathTracingMaxBounces: number, PathTracingSamplesPerPixel: number, LPVFadeRange: number, LPVDirectionalOcclusionFadeRange: number, ScreenPercentage: number, WeightedBlendables: WeightedBlendables, Blendables: TArray<Object>);
         bOverride_WhiteTemp: boolean;
         bOverride_WhiteTint: boolean;
         bOverride_ColorSaturation: boolean;
@@ -4716,9 +4797,9 @@ declare module "ue" {
         bOverride_PathTracingMaxBounces: boolean;
         bOverride_PathTracingSamplesPerPixel: boolean;
         bMobileHQGaussian: boolean;
-        BloomMethod: number;
-        AutoExposureMethod: number;
-        DepthOfFieldMethod: number;
+        BloomMethod: EBloomMethod;
+        AutoExposureMethod: EAutoExposureMethod;
+        DepthOfFieldMethod: EDepthOfFieldMethod;
         WhiteTemp: number;
         WhiteTint: number;
         ColorSaturation: Vector4;
@@ -4898,7 +4979,7 @@ declare module "ue" {
     }
     
     class MinimalViewInfo {
-        constructor(Location: Vector, Rotation: Rotator, FOV: number, DesiredFOV: number, OrthoWidth: number, OrthoNearClipPlane: number, OrthoFarClipPlane: number, AspectRatio: number, bConstrainAspectRatio: boolean, bUseFieldOfViewForLOD: boolean, ProjectionMode: number, PostProcessBlendWeight: number, PostProcessSettings: PostProcessSettings, OffCenterProjectionOffset: Vector2D);
+        constructor(Location: Vector, Rotation: Rotator, FOV: number, DesiredFOV: number, OrthoWidth: number, OrthoNearClipPlane: number, OrthoFarClipPlane: number, AspectRatio: number, bConstrainAspectRatio: boolean, bUseFieldOfViewForLOD: boolean, ProjectionMode: ECameraProjectionMode, PostProcessBlendWeight: number, PostProcessSettings: PostProcessSettings, OffCenterProjectionOffset: Vector2D);
         Location: Vector;
         Rotation: Rotator;
         FOV: number;
@@ -4909,7 +4990,7 @@ declare module "ue" {
         AspectRatio: number;
         bConstrainAspectRatio: boolean;
         bUseFieldOfViewForLOD: boolean;
-        ProjectionMode: number;
+        ProjectionMode: ECameraProjectionMode;
         PostProcessBlendWeight: number;
         PostProcessSettings: PostProcessSettings;
         OffCenterProjectionOffset: Vector2D;
@@ -4976,7 +5057,9 @@ declare module "ue" {
         static Load(InName: string): FXSystemComponent;
     }
     
+    enum EEmitterRenderMode { ERM_Normal, ERM_Point, ERM_Cross, ERM_LightsOnly, ERM_None, ERM_MAX}
     enum EParticleSignificanceLevel { Low, Medium, High, Critical, Num, EParticleSignificanceLevel_MAX}
+    enum EDetailMode { DM_Low, DM_Medium, DM_High, DM_MAX}
     class ParticleModule extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bSpawnModule: boolean;
@@ -4998,6 +5081,8 @@ declare module "ue" {
         static Load(InName: string): ParticleModule;
     }
     
+    enum EParticleScreenAlignment { PSA_FacingCameraPosition, PSA_Square, PSA_Rectangle, PSA_Velocity, PSA_AwayFromCenter, PSA_TypeSpecific, PSA_FacingCameraDistanceBlend, PSA_MAX}
+    enum EParticleSortMode { PSORTMODE_None, PSORTMODE_ViewProjDepth, PSORTMODE_DistanceToView, PSORTMODE_Age_OldestFirst, PSORTMODE_Age_NewestFirst, PSORTMODE_MAX}
     class DistributionLookupTable {
         constructor(TimeScale: number, TimeBias: number, Values: TArray<number>, Op: number, EntryCount: number, EntryStride: number, SubEntryStride: number, LockFlag: number);
         TimeScale: number;
@@ -5049,7 +5134,12 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EParticleSubUVInterpMethod { PSUVIM_None, PSUVIM_Linear, PSUVIM_Linear_Blend, PSUVIM_Random, PSUVIM_Random_Blend, PSUVIM_MAX}
+    enum EParticleBurstMethod { EPBM_Instant, EPBM_Interpolated, EPBM_MAX}
+    enum EOpacitySourceMode { OSM_Alpha, OSM_ColorBrightness, OSM_RedChannel, OSM_GreenChannel, OSM_BlueChannel, OSM_MAX}
+    enum EEmitterNormalsMode { ENM_CameraFacing, ENM_Spherical, ENM_Cylindrical, ENM_MAX}
     enum EParticleUVFlipMode { None, FlipUV, FlipUOnly, FlipVOnly, RandomFlipUV, RandomFlipUOnly, RandomFlipVOnly, RandomFlipUVIndependent, EParticleUVFlipMode_MAX}
+    enum ESubUVBoundingVertexCount { BVC_FourVertices, BVC_EightVertices, BVC_MAX}
     class ParticleModuleRequired extends ParticleModule {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Material: MaterialInterface;
@@ -5057,11 +5147,11 @@ declare module "ue" {
         MaxFacingCameraBlendDistance: number;
         EmitterOrigin: Vector;
         EmitterRotation: Rotator;
-        ScreenAlignment: number;
+        ScreenAlignment: EParticleScreenAlignment;
         bUseLocalSpace: boolean;
         bKillOnDeactivate: boolean;
         bKillOnCompleted: boolean;
-        SortMode: number;
+        SortMode: EParticleSortMode;
         bUseLegacyEmitterTime: boolean;
         bRemoveHMDRoll: boolean;
         bEmitterDurationUseRange: boolean;
@@ -5071,14 +5161,14 @@ declare module "ue" {
         EmitterDelay: number;
         EmitterDelayLow: number;
         bDelayFirstLoopOnly: boolean;
-        InterpolationMethod: number;
+        InterpolationMethod: EParticleSubUVInterpMethod;
         bScaleUV: boolean;
         bEmitterDelayUseRange: boolean;
-        ParticleBurstMethod: number;
+        ParticleBurstMethod: EParticleBurstMethod;
         bOverrideSystemMacroUV: boolean;
         bUseMaxDrawCount: boolean;
-        OpacitySourceMode: number;
-        EmitterNormalsMode: number;
+        OpacitySourceMode: EOpacitySourceMode;
+        EmitterNormalsMode: EEmitterNormalsMode;
         bOrbitModuleAffectsVelocityAlignment: boolean;
         SubImages_Horizontal: number;
         SubImages_Vertical: number;
@@ -5087,7 +5177,7 @@ declare module "ue" {
         MacroUVPosition: Vector;
         MacroUVRadius: number;
         UVFlippingMode: EParticleUVFlipMode;
-        BoundingMode: number;
+        BoundingMode: ESubUVBoundingVertexCount;
         bDurationRecalcEachLoop: boolean;
         NormalsSphereCenter: Vector;
         AlphaThreshold: number;
@@ -5122,7 +5212,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Rate: RawDistributionFloat;
         RateScale: RawDistributionFloat;
-        ParticleBurstMethod: number;
+        ParticleBurstMethod: EParticleBurstMethod;
         BurstList: TArray<ParticleBurst>;
         BurstScale: RawDistributionFloat;
         bApplyGlobalSpawnRateScale: boolean;
@@ -5138,6 +5228,7 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleEventBase;
     }
     
+    enum EParticleEventType { EPET_Any, EPET_Spawn, EPET_Death, EPET_Collision, EPET_Burst, EPET_Blueprint, EPET_MAX}
     class ParticleModuleEventSendToGame extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -5146,8 +5237,8 @@ declare module "ue" {
     }
     
     class ParticleEvent_GenerateInfo {
-        constructor(Type: number, Frequency: number, ParticleFrequency: number, FirstTimeOnly: boolean, LastTimeOnly: boolean, UseReflectedImpactVector: boolean, bUseOrbitOffset: boolean, CustomName: string, ParticleModuleEventsToSendToGame: TArray<ParticleModuleEventSendToGame>);
-        Type: number;
+        constructor(Type: EParticleEventType, Frequency: number, ParticleFrequency: number, FirstTimeOnly: boolean, LastTimeOnly: boolean, UseReflectedImpactVector: boolean, bUseOrbitOffset: boolean, CustomName: string, ParticleModuleEventsToSendToGame: TArray<ParticleModuleEventSendToGame>);
+        Type: EParticleEventType;
         Frequency: number;
         ParticleFrequency: number;
         FirstTimeOnly: boolean;
@@ -5175,6 +5266,7 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleOrbitBase;
     }
     
+    enum EOrbitChainMode { EOChainMode_Add, EOChainMode_Scale, EOChainMode_Link, EOChainMode_MAX}
     class DistributionVector extends Distribution {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bCanBeBaked: boolean;
@@ -5205,7 +5297,7 @@ declare module "ue" {
     
     class ParticleModuleOrbit extends ParticleModuleOrbitBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ChainMode: number;
+        ChainMode: EOrbitChainMode;
         OffsetAmount: RawDistributionVector;
         OffsetOptions: OrbitOptions;
         RotationAmount: RawDistributionVector;
@@ -5219,7 +5311,7 @@ declare module "ue" {
     
     class ParticleModuleEventReceiverBase extends ParticleModuleEventBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        EventGeneratorType: number;
+        EventGeneratorType: EParticleEventType;
         EventName: string;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ParticleModuleEventReceiverBase;
@@ -5251,7 +5343,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         EmitterName: string;
         SubUVDataOffset: number;
-        EmitterRenderMode: number;
+        EmitterRenderMode: EEmitterRenderMode;
         SignificanceLevel: EParticleSignificanceLevel;
         bUseLegacySpawningBehavior: boolean;
         ConvertedModules: boolean;
@@ -5260,7 +5352,7 @@ declare module "ue" {
         bDisabledLODsKeepEmitterAlive: boolean;
         bDisableWhenInsignficant: boolean;
         bCollapsed: boolean;
-        DetailMode: number;
+        DetailMode: EDetailMode;
         EmitterEditorColor: Color;
         LODLevels: TArray<ParticleLODLevel>;
         PeakActiveParticles: number;
@@ -5312,7 +5404,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EParticleSystemUpdateMode { EPSUM_RealTime, EPSUM_FixedTime, EPSUM_MAX}
+    enum ParticleSystemLODMethod { PARTICLESYSTEMLODMETHOD_Automatic, PARTICLESYSTEMLODMETHOD_DirectSet, PARTICLESYSTEMLODMETHOD_ActivateAutomatic, PARTICLESYSTEMLODMETHOD_MAX}
     enum EParticleSystemInsignificanceReaction { Auto, Complete, DisableTick, DisableTickAndKill, Num, EParticleSystemInsignificanceReaction_MAX}
+    enum EParticleSystemOcclusionBoundsMethod { EPSOBM_None, EPSOBM_ParticleBounds, EPSOBM_CustomBounds, EPSOBM_MAX}
     class LODSoloTrack {
         constructor(SoloEnableSetting: TArray<number>);
         SoloEnableSetting: TArray<number>;
@@ -5364,10 +5459,10 @@ declare module "ue" {
         bAllowManagedTicking: boolean;
         bAutoDeactivate: boolean;
         bRegenerateLODDuplicate: boolean;
-        SystemUpdateMode: number;
-        LODMethod: number;
+        SystemUpdateMode: EParticleSystemUpdateMode;
+        LODMethod: ParticleSystemLODMethod;
         InsignificantReaction: EParticleSystemInsignificanceReaction;
-        OcclusionBoundsMethod: number;
+        OcclusionBoundsMethod: EParticleSystemOcclusionBoundsMethod;
         MaxSignificanceLevel: EParticleSignificanceLevel;
         MinTimeBetweenTicks: number;
         InsignificanceDelay: number;
@@ -5381,10 +5476,11 @@ declare module "ue" {
         static Load(InName: string): ParticleSystem;
     }
     
+    enum EParticleSysParamType { PSPT_None, PSPT_Scalar, PSPT_ScalarRand, PSPT_Vector, PSPT_VectorRand, PSPT_Color, PSPT_Actor, PSPT_Material, PSPT_VectorUnitRand, PSPT_MAX}
     class ParticleSysParam {
-        constructor(Name: string, ParamType: number, Scalar: number, Scalar_Low: number, Vector: Vector, Vector_Low: Vector, Color: Color, Actor: Actor, Material: MaterialInterface);
+        constructor(Name: string, ParamType: EParticleSysParamType, Scalar: number, Scalar_Low: number, Vector: Vector, Vector_Low: Vector, Color: Color, Actor: Actor, Material: MaterialInterface);
         Name: string;
-        ParamType: number;
+        ParamType: EParticleSysParamType;
         Scalar: number;
         Scalar_Low: number;
         Vector: Vector;
@@ -5403,6 +5499,8 @@ declare module "ue" {
         static Load(InName: string): ParticleSystemReplay;
     }
     
+    enum EAttachLocation { KeepRelativeOffset, KeepWorldPosition, SnapToTarget, SnapToTargetIncludingScale, EAttachLocation_MAX}
+    enum ETrailWidthMode { ETrailWidthMode_FromCentre, ETrailWidthMode_FromFirst, ETrailWidthMode_FromSecond, ETrailWidthMode_MAX}
     class ParticleSystemComponent extends FXSystemComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Template: ParticleSystem;
@@ -5415,7 +5513,7 @@ declare module "ue" {
         bWarmingUp: boolean;
         bOverrideLODMethod: boolean;
         bSkipUpdateDynamicDataDuringTick: boolean;
-        LODMethod: number;
+        LODMethod: ParticleSystemLODMethod;
         RequiredSignificance: EParticleSignificanceLevel;
         InstanceParameters: TArray<ParticleSysParam>;
         OnParticleSpawn: $MulticastDelegate<(EventName: string, EmitterTime: number, Location: Vector, Velocity: Vector) => void>;
@@ -5434,12 +5532,12 @@ declare module "ue" {
         CustomTimeDilation: number;
         AutoAttachParent: TWeakObjectPtr<SceneComponent>;
         AutoAttachSocketName: string;
-        AutoAttachLocationType: number;
+        AutoAttachLocationType: EAttachLocation;
         AutoAttachLocationRule: EAttachmentRule;
         AutoAttachRotationRule: EAttachmentRule;
         AutoAttachScaleRule: EAttachmentRule;
         OnSystemFinished: $MulticastDelegate<(PSystem: ParticleSystemComponent) => void>;
-        SetTrailSourceData(InFirstSocketName: string, InSecondSocketName: string, InWidthMode: number, InWidth: number): void;
+        SetTrailSourceData(InFirstSocketName: string, InSecondSocketName: string, InWidthMode: ETrailWidthMode, InWidth: number): void;
         SetTemplate(NewTemplate: ParticleSystem): void;
         SetMaterialParameter(ParameterName: string, Param: MaterialInterface): void;
         SetBeamTargetTangent(EmitterIndex: number, NewTangentPoint: Vector, TargetIndex: number): void;
@@ -5449,7 +5547,7 @@ declare module "ue" {
         SetBeamSourceStrength(EmitterIndex: number, NewSourceStrength: number, SourceIndex: number): void;
         SetBeamSourcePoint(EmitterIndex: number, NewSourcePoint: Vector, SourceIndex: number): void;
         SetBeamEndPoint(EmitterIndex: number, NewEndPoint: Vector): void;
-        SetAutoAttachParams(Parent: SceneComponent, SocketName: string, LocationType: number): void;
+        SetAutoAttachParams(Parent: SceneComponent, SocketName: string, LocationType: EAttachLocation): void;
         GetNumActiveParticles(): number;
         GetNamedMaterial(InName: string): MaterialInterface;
         GetBeamTargetTangent(EmitterIndex: number, TargetIndex: number, OutTangentPoint: $Ref<Vector>): boolean;
@@ -5462,7 +5560,7 @@ declare module "ue" {
         GenerateParticleEvent(InEventName: string, InEmitterTime: number, InLocation: Vector, InDirection: Vector, InVelocity: Vector): void;
         EndTrails(): void;
         CreateNamedDynamicMaterialInstance(InName: string, SourceMaterial: MaterialInterface): MaterialInstanceDynamic;
-        BeginTrails(InFirstSocketName: string, InSecondSocketName: string, InWidthMode: number, InWidth: number): void;
+        BeginTrails(InFirstSocketName: string, InSecondSocketName: string, InWidthMode: ETrailWidthMode, InWidth: number): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ParticleSystemComponent;
         static Load(InName: string): ParticleSystemComponent;
@@ -5513,12 +5611,13 @@ declare module "ue" {
         static Load(InName: string): EmitterCameraLensEffectBase;
     }
     
+    enum EInitialOscillatorOffset { EOO_OffsetRandom, EOO_OffsetZero, EOO_MAX}
     enum EOscillatorWaveform { SineWave, PerlinNoise, EOscillatorWaveform_MAX}
     class FOscillator {
-        constructor(Amplitude: number, Frequency: number, InitialOffset: number, Waveform: EOscillatorWaveform);
+        constructor(Amplitude: number, Frequency: number, InitialOffset: EInitialOscillatorOffset, Waveform: EOscillatorWaveform);
         Amplitude: number;
         Frequency: number;
-        InitialOffset: number;
+        InitialOffset: EInitialOscillatorOffset;
         Waveform: EOscillatorWaveform;
         static StaticClass(): Class;
     }
@@ -5556,13 +5655,14 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ETrackActiveCondition { ETAC_Always, ETAC_GoreEnabled, ETAC_GoreDisabled, ETAC_MAX}
     class InterpTrack extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SubTracks: TArray<InterpTrack>;
         SubTrackGroups: TArray<SubTrackGroup>;
         SupportedSubTracks: TArray<SupportedSubTrackInfo>;
         TrackInstClass: Class;
-        ActiveCondition: number;
+        ActiveCondition: ETrackActiveCondition;
         TrackTitle: string;
         bOnePerGroup: boolean;
         bDirGroupOnly: boolean;
@@ -5620,13 +5720,14 @@ declare module "ue" {
         static Load(InName: string): InterpGroupInst;
     }
     
+    enum EInterpCurveMode { CIM_Linear, CIM_CurveAuto, CIM_Constant, CIM_CurveUser, CIM_CurveBreak, CIM_CurveAutoClamped, CIM_MAX}
     class InterpCurvePointVector {
-        constructor(InVal: number, OutVal: Vector, ArriveTangent: Vector, LeaveTangent: Vector, InterpMode: number);
+        constructor(InVal: number, OutVal: Vector, ArriveTangent: Vector, LeaveTangent: Vector, InterpMode: EInterpCurveMode);
         InVal: number;
         OutVal: Vector;
         ArriveTangent: Vector;
         LeaveTangent: Vector;
-        InterpMode: number;
+        InterpMode: EInterpCurveMode;
         static StaticClass(): Class;
     }
     
@@ -5651,6 +5752,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EInterpTrackMoveRotMode { IMR_Keyframed, IMR_LookAtGroup, IMR_Ignore, IMR_MAX}
     class InterpTrackMove extends InterpTrack {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PosTrack: InterpCurveVector;
@@ -5665,7 +5767,7 @@ declare module "ue" {
         bShowTranslationOnCurveEd: boolean;
         bShowRotationOnCurveEd: boolean;
         bHide3DTrack: boolean;
-        RotMode: number;
+        RotMode: EInterpTrackMoveRotMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): InterpTrackMove;
         static Load(InName: string): InterpTrackMove;
@@ -5680,6 +5782,7 @@ declare module "ue" {
         static Load(InName: string): InterpTrackInstMove;
     }
     
+    enum ECameraAnimPlaySpace { CameraLocal, World, UserDefined, ECameraAnimPlaySpace_MAX}
     class CameraAnimInst extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CamAnim: CameraAnim;
@@ -5687,7 +5790,7 @@ declare module "ue" {
         PlayRate: number;
         MoveTrack: InterpTrackMove;
         MoveInst: InterpTrackInstMove;
-        PlaySpace: number;
+        PlaySpace: ECameraAnimPlaySpace;
         Stop(bImmediate: boolean): void;
         SetScale(NewDuration: number): void;
         SetDuration(NewDuration: number): void;
@@ -5765,9 +5868,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EMeshFeatureImportance { Off, Lowest, Low, Normal, High, Highest, EMeshFeatureImportance_MAX}
     enum EStaticMeshReductionTerimationCriterion { Triangles, Vertices, Any, EStaticMeshReductionTerimationCriterion_MAX}
     class MeshReductionSettings {
-        constructor(PercentTriangles: number, PercentVertices: number, MaxDeviation: number, PixelError: number, WeldingThreshold: number, HardAngleThreshold: number, BaseLODModel: number, SilhouetteImportance: number, TextureImportance: number, ShadingImportance: number, bRecalculateNormals: boolean, bGenerateUniqueLightmapUVs: boolean, bKeepSymmetry: boolean, bVisibilityAided: boolean, bCullOccluded: boolean, TerminationCriterion: EStaticMeshReductionTerimationCriterion, VisibilityAggressiveness: number, VertexColorImportance: number);
+        constructor(PercentTriangles: number, PercentVertices: number, MaxDeviation: number, PixelError: number, WeldingThreshold: number, HardAngleThreshold: number, BaseLODModel: number, SilhouetteImportance: EMeshFeatureImportance, TextureImportance: EMeshFeatureImportance, ShadingImportance: EMeshFeatureImportance, bRecalculateNormals: boolean, bGenerateUniqueLightmapUVs: boolean, bKeepSymmetry: boolean, bVisibilityAided: boolean, bCullOccluded: boolean, TerminationCriterion: EStaticMeshReductionTerimationCriterion, VisibilityAggressiveness: EMeshFeatureImportance, VertexColorImportance: EMeshFeatureImportance);
         PercentTriangles: number;
         PercentVertices: number;
         MaxDeviation: number;
@@ -5775,17 +5879,17 @@ declare module "ue" {
         WeldingThreshold: number;
         HardAngleThreshold: number;
         BaseLODModel: number;
-        SilhouetteImportance: number;
-        TextureImportance: number;
-        ShadingImportance: number;
+        SilhouetteImportance: EMeshFeatureImportance;
+        TextureImportance: EMeshFeatureImportance;
+        ShadingImportance: EMeshFeatureImportance;
         bRecalculateNormals: boolean;
         bGenerateUniqueLightmapUVs: boolean;
         bKeepSymmetry: boolean;
         bVisibilityAided: boolean;
         bCullOccluded: boolean;
         TerminationCriterion: EStaticMeshReductionTerimationCriterion;
-        VisibilityAggressiveness: number;
-        VertexColorImportance: number;
+        VisibilityAggressiveness: EMeshFeatureImportance;
+        VertexColorImportance: EMeshFeatureImportance;
         static StaticClass(): Class;
     }
     
@@ -6091,13 +6195,13 @@ declare module "ue" {
         bCameraMeshHiddenInGame: boolean;
         bLockToHmd: boolean;
         bUsePawnControlRotation: boolean;
-        ProjectionMode: number;
+        ProjectionMode: ECameraProjectionMode;
         CameraMesh: StaticMesh;
         PostProcessBlendWeight: number;
         PostProcessSettings: PostProcessSettings;
         bUseControllerViewRotation: boolean;
         SetUseFieldOfViewForLOD(bInUseFieldOfViewForLOD: boolean): void;
-        SetProjectionMode(InProjectionMode: number): void;
+        SetProjectionMode(InProjectionMode: ECameraProjectionMode): void;
         SetPostProcessBlendWeight(InPostProcessBlendWeight: number): void;
         SetOrthoWidth(InOrthoWidth: number): void;
         SetOrthoNearClipPlane(InOrthoNearClipPlane: number): void;
@@ -6117,7 +6221,7 @@ declare module "ue" {
     
     class CameraActor extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AutoActivateForPlayer: number;
+        AutoActivateForPlayer: EAutoReceiveInput;
         CameraComponent: CameraComponent;
         SceneComponent: SceneComponent;
         bConstrainAspectRatio: boolean;
@@ -6180,8 +6284,8 @@ declare module "ue" {
         SetGameCameraCutThisFrame(): void;
         RemoveCameraModifier(ModifierToRemove: CameraModifier): boolean;
         RemoveCameraLensEffect(Emitter: EmitterCameraLensEffectBase): void;
-        PlayCameraShake(ShakeClass: Class, Scale: number, PlaySpace: number, UserPlaySpaceRot: Rotator): CameraShake;
-        PlayCameraAnim(Anim: CameraAnim, Rate: number, Scale: number, BlendInTime: number, BlendOutTime: number, bLoop: boolean, bRandomStartTime: boolean, Duration: number, PlaySpace: number, UserPlaySpaceRot: Rotator): CameraAnimInst;
+        PlayCameraShake(ShakeClass: Class, Scale: number, PlaySpace: ECameraAnimPlaySpace, UserPlaySpaceRot: Rotator): CameraShake;
+        PlayCameraAnim(Anim: CameraAnim, Rate: number, Scale: number, BlendInTime: number, BlendOutTime: number, bLoop: boolean, bRandomStartTime: boolean, Duration: number, PlaySpace: ECameraAnimPlaySpace, UserPlaySpaceRot: Rotator): CameraAnimInst;
         PhotographyCameraModify(NewCameraLocation: Vector, PreviousCameraLocation: Vector, OriginalCameraLocation: Vector, ResultCameraLocation: $Ref<Vector>): void;
         OnPhotographySessionStart(): void;
         OnPhotographySessionEnd(): void;
@@ -6296,7 +6400,7 @@ declare module "ue" {
         DebugCapsuleSweepPawn(): void;
         DebugCapsuleSweepComplex(bTraceComplex: boolean): void;
         DebugCapsuleSweepClear(): void;
-        DebugCapsuleSweepChannel(Channel: number): void;
+        DebugCapsuleSweepChannel(Channel: ECollisionChannel): void;
         DebugCapsuleSweepCapture(): void;
         DebugCapsuleSweep(): void;
         DamageTarget(DamageAmount: number): void;
@@ -6482,12 +6586,14 @@ declare module "ue" {
         static Load(InName: string): NetConnection;
     }
     
+    enum EMouseCursor { None, Default, TextEditBeam, ResizeLeftRight, ResizeUpDown, ResizeSouthEast, ResizeSouthWest, CardinalCross, Crosshairs, Hand, GrabHand, GrabHandClosed, SlashedCircle, EyeDropper, EMouseCursor_MAX}
     class CachedKeyToActionInfo {
         constructor(PlayerInput: PlayerInput);
         PlayerInput: PlayerInput;
         static StaticClass(): Class;
     }
     
+    enum EControllerAnalogStick { CAS_LeftStick, CAS_RightStick, CAS_MAX}
     class InputComponent extends ActorComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CachedKeyToActionInfo: TArray<CachedKeyToActionInfo>;
@@ -6498,7 +6604,7 @@ declare module "ue" {
         GetControllerVectorKeyState(Key: Key): Vector;
         GetControllerMouseDelta(DeltaX: $Ref<number>, DeltaY: $Ref<number>): void;
         GetControllerKeyTimeDown(Key: Key): number;
-        GetControllerAnalogStickState(WhichStick: number, StickX: $Ref<number>, StickY: $Ref<number>): void;
+        GetControllerAnalogStickState(WhichStick: EControllerAnalogStick, StickX: $Ref<number>, StickY: $Ref<number>): void;
         GetControllerAnalogKeyState(Key: Key): number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): InputComponent;
@@ -6648,6 +6754,7 @@ declare module "ue" {
     }
     
     enum EControllerHand { Left, Right, AnyHand, Pad, ExternalCamera, Gun, Special_1, Special_2, Special_3, Special_4, Special_5, Special_6, Special_7, Special_8, Special_9, Special_10, Special_11, ControllerHand_Count, EControllerHand_MAX}
+    enum EViewTargetBlendFunction { VTBlend_Linear, VTBlend_Cubic, VTBlend_EaseIn, VTBlend_EaseOut, VTBlend_EaseInOut, VTBlend_MAX}
     class Visual extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -6785,10 +6892,11 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESlateColorStylingMode { UseColor_Specified, UseColor_Specified_Link, UseColor_Foreground, UseColor_Foreground_Subdued, UseColor_MAX}
     class SlateColor {
-        constructor(SpecifiedColor: LinearColor, ColorUseRule: number);
+        constructor(SpecifiedColor: LinearColor, ColorUseRule: ESlateColorStylingMode);
         SpecifiedColor: LinearColor;
-        ColorUseRule: number;
+        ColorUseRule: ESlateColorStylingMode;
         static StaticClass(): Class;
     }
     
@@ -6801,8 +6909,12 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESlateBrushDrawType { NoDrawType, Box, Border, Image, ESlateBrushDrawType_MAX}
+    enum ESlateBrushTileType { NoTile, Horizontal, Vertical, Both, ESlateBrushTileType_MAX}
+    enum ESlateBrushMirrorType { NoMirror, Horizontal, Vertical, Both, ESlateBrushMirrorType_MAX}
+    enum ESlateBrushImageType { NoImage, FullColor, Linear, ESlateBrushImageType_MAX}
     class SlateBrush {
-        constructor(ImageSize: Vector2D, Margin: Margin, Tint: LinearColor, TintColor: SlateColor, ResourceObject: Object, ResourceName: string, UVRegion: Box2D, DrawAs: number, Tiling: number, Mirroring: number, ImageType: number, bIsDynamicallyLoaded: boolean, bHasUObject: boolean);
+        constructor(ImageSize: Vector2D, Margin: Margin, Tint: LinearColor, TintColor: SlateColor, ResourceObject: Object, ResourceName: string, UVRegion: Box2D, DrawAs: ESlateBrushDrawType, Tiling: ESlateBrushTileType, Mirroring: ESlateBrushMirrorType, ImageType: ESlateBrushImageType, bIsDynamicallyLoaded: boolean, bHasUObject: boolean);
         ImageSize: Vector2D;
         Margin: Margin;
         Tint: LinearColor;
@@ -6810,10 +6922,10 @@ declare module "ue" {
         ResourceObject: Object;
         ResourceName: string;
         UVRegion: Box2D;
-        DrawAs: number;
-        Tiling: number;
-        Mirroring: number;
-        ImageType: number;
+        DrawAs: ESlateBrushDrawType;
+        Tiling: ESlateBrushTileType;
+        Mirroring: ESlateBrushMirrorType;
+        ImageType: ESlateBrushImageType;
         bIsDynamicallyLoaded: boolean;
         bHasUObject: boolean;
         static StaticClass(): Class;
@@ -6851,6 +6963,8 @@ declare module "ue" {
         static Load(InName: string): OnlineSession;
     }
     
+    enum ETravelFailure { NoLevel, LoadMapFailure, InvalidURL, PackageMissing, PackageVersion, NoDownload, TravelFailure, CheatCommands, PendingNetGameCreateFailure, CloudSaveFailure, ServerTravelFailure, ClientTravelFailure, ETravelFailure_MAX}
+    enum ENetworkFailure { NetDriverAlreadyExists, NetDriverCreateFailure, NetDriverListenFailure, ConnectionLost, ConnectionTimeout, FailureReceived, OutdatedClient, OutdatedServer, PendingConnectionFailure, NetGuidMismatch, NetChecksumMismatch, ENetworkFailure_MAX}
     class GameInstance extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         LocalPlayers: TArray<LocalPlayer>;
@@ -6858,8 +6972,8 @@ declare module "ue" {
         ReferencedObjects: TArray<Object>;
         ReceiveShutdown(): void;
         ReceiveInit(): void;
-        HandleTravelError(FailureType: number): void;
-        HandleNetworkError(FailureType: number, bIsServer: boolean): void;
+        HandleTravelError(FailureType: ETravelFailure): void;
+        HandleNetworkError(FailureType: ENetworkFailure, bIsServer: boolean): void;
         DebugRemovePlayer(ControllerId: number): void;
         DebugCreatePlayer(ControllerId: number): void;
         static StaticClass(): Class;
@@ -6881,10 +6995,11 @@ declare module "ue" {
         static Load(InName: string): GameViewportClient;
     }
     
+    enum EAspectRatioAxisConstraint { AspectRatio_MaintainYFOV, AspectRatio_MaintainXFOV, AspectRatio_MajorAxisFOV, AspectRatio_MAX}
     class LocalPlayer extends Player {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ViewportClient: GameViewportClient;
-        AspectRatioAxisConstraint: number;
+        AspectRatioAxisConstraint: EAspectRatioAxisConstraint;
         PendingLevelPlayerControllerClass: Class;
         bSentSplitJoin: boolean;
         ControllerId: number;
@@ -6922,7 +7037,7 @@ declare module "ue" {
         bHiddenInDesigner: boolean;
         bExpandedInDesigner: boolean;
         bLockedInDesigner: boolean;
-        Cursor: number;
+        Cursor: EMouseCursor;
         Clipping: EWidgetClipping;
         Visibility: ESlateVisibility;
         RenderOpacity: number;
@@ -6951,7 +7066,7 @@ declare module "ue" {
         SetKeyboardFocus(): void;
         SetIsEnabled(bInIsEnabled: boolean): void;
         SetFocus(): void;
-        SetCursor(InCursor: number): void;
+        SetCursor(InCursor: EMouseCursor): void;
         SetClipping(InClipping: EWidgetClipping): void;
         SetAllNavigationRules(Rule: EUINavigationRule, WidgetToFocus: string): void;
         ResetCursor(): void;
@@ -6981,7 +7096,7 @@ declare module "ue" {
         GetPaintSpaceGeometry(): Geometry;
         GetOwningPlayer(): PlayerController;
         GetOwningLocalPlayer(): LocalPlayer;
-        GetMouseCursor__DelegateSignature(): number;
+        GetMouseCursor__DelegateSignature(): EMouseCursor;
         GetLinearColor__DelegateSignature(): LinearColor;
         GetIsEnabled(): boolean;
         GetInt32__DelegateSignature(): number;
@@ -7371,8 +7486,8 @@ declare module "ue" {
     }
     
     class FloatRangeBound {
-        constructor(Type: number, Value: number);
-        Type: number;
+        constructor(Type: ERangeBoundTypes, Value: number);
+        Type: ERangeBoundTypes;
         Value: number;
         static StaticClass(): Class;
     }
@@ -7601,6 +7716,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EInputEvent { IE_Pressed, IE_Released, IE_Repeat, IE_DoubleClick, IE_Axis, IE_MAX}
     class Anchors {
         constructor(Minimum: Vector2D, Maximum: Vector2D);
         Minimum: Vector2D;
@@ -7608,9 +7724,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EAudioOutputTarget { Speaker, Controller, ControllerFallbackToSpeaker, EAudioOutputTarget_MAX}
     enum ESoundWaveLoadingBehavior { Inherited, RetainOnLoad, PrimeOnLoad, LoadOnDemand, ForceInline, Uninitialized, ESoundWaveLoadingBehavior_MAX}
     class SoundClassProperties {
-        constructor(Volume: number, Pitch: number, LowPassFilterFrequency: number, StereoBleed: number, LFEBleed: number, VoiceCenterChannelVolume: number, RadioFilterVolume: number, RadioFilterVolumeThreshold: number, bApplyEffects: boolean, bAlwaysPlay: boolean, bIsUISound: boolean, bIsMusic: boolean, bReverb: boolean, Default2DReverbSendAmount: number, bCenterChannelOnly: boolean, bApplyAmbientVolumes: boolean, OutputTarget: number, LoadingBehavior: ESoundWaveLoadingBehavior);
+        constructor(Volume: number, Pitch: number, LowPassFilterFrequency: number, StereoBleed: number, LFEBleed: number, VoiceCenterChannelVolume: number, RadioFilterVolume: number, RadioFilterVolumeThreshold: number, bApplyEffects: boolean, bAlwaysPlay: boolean, bIsUISound: boolean, bIsMusic: boolean, bReverb: boolean, Default2DReverbSendAmount: number, bCenterChannelOnly: boolean, bApplyAmbientVolumes: boolean, OutputTarget: EAudioOutputTarget, LoadingBehavior: ESoundWaveLoadingBehavior);
         Volume: number;
         Pitch: number;
         LowPassFilterFrequency: number;
@@ -7627,7 +7744,7 @@ declare module "ue" {
         Default2DReverbSendAmount: number;
         bCenterChannelOnly: boolean;
         bApplyAmbientVolumes: boolean;
-        OutputTarget: number;
+        OutputTarget: EAudioOutputTarget;
         LoadingBehavior: ESoundWaveLoadingBehavior;
         static StaticClass(): Class;
     }
@@ -7710,11 +7827,12 @@ declare module "ue" {
     }
     
     enum EVirtualizationMode { Disabled, PlayWhenSilent, Restart, EVirtualizationMode_MAX}
+    enum EMaxConcurrentResolutionRule { PreventNew, StopOldest, StopFarthestThenPreventNew, StopFarthestThenOldest, StopLowestPriority, StopQuietest, StopLowestPriorityThenPreventNew, EMaxConcurrentResolutionRule_MAX}
     class SoundConcurrencySettings {
-        constructor(MaxCount: number, bLimitToOwner: boolean, ResolutionRule: number, VolumeScale: number, VolumeScaleAttackTime: number, bVolumeScaleCanRelease: boolean, VolumeScaleReleaseTime: number, VoiceStealReleaseTime: number);
+        constructor(MaxCount: number, bLimitToOwner: boolean, ResolutionRule: EMaxConcurrentResolutionRule, VolumeScale: number, VolumeScaleAttackTime: number, bVolumeScaleCanRelease: boolean, VolumeScaleReleaseTime: number, VoiceStealReleaseTime: number);
         MaxCount: number;
         bLimitToOwner: boolean;
-        ResolutionRule: number;
+        ResolutionRule: EMaxConcurrentResolutionRule;
         VolumeScale: number;
         VolumeScaleAttackTime: number;
         bVolumeScaleCanRelease: boolean;
@@ -7732,10 +7850,11 @@ declare module "ue" {
     }
     
     enum EAttenuationDistanceModel { Linear, Logarithmic, Inverse, LogReverse, NaturalSound, Custom, EAttenuationDistanceModel_MAX}
+    enum EAttenuationShape { Sphere, Capsule, Box, Cone, EAttenuationShape_MAX}
     class BaseAttenuationSettings {
-        constructor(DistanceAlgorithm: EAttenuationDistanceModel, AttenuationShape: number, dBAttenuationAtMax: number, AttenuationShapeExtents: Vector, ConeOffset: number, FalloffDistance: number, CustomAttenuationCurve: RuntimeFloatCurve);
+        constructor(DistanceAlgorithm: EAttenuationDistanceModel, AttenuationShape: EAttenuationShape, dBAttenuationAtMax: number, AttenuationShapeExtents: Vector, ConeOffset: number, FalloffDistance: number, CustomAttenuationCurve: RuntimeFloatCurve);
         DistanceAlgorithm: EAttenuationDistanceModel;
-        AttenuationShape: number;
+        AttenuationShape: EAttenuationShape;
         dBAttenuationAtMax: number;
         AttenuationShapeExtents: Vector;
         ConeOffset: number;
@@ -7744,8 +7863,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESoundSpatializationAlgorithm { SPATIALIZATION_Default, SPATIALIZATION_HRTF, SPATIALIZATION_MAX}
     enum EAirAbsorptionMethod { Linear, CustomCurve, EAirAbsorptionMethod_MAX}
     enum EReverbSendMethod { Linear, CustomCurve, Manual, EReverbSendMethod_MAX}
+    enum ESoundDistanceCalc { SOUNDDISTANCE_Normal, SOUNDDISTANCE_InfiniteXYPlane, SOUNDDISTANCE_InfiniteXZPlane, SOUNDDISTANCE_InfiniteYZPlane, SOUNDDISTANCE_MAX}
     class SpatializationPluginSourceSettingsBase extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -7776,7 +7897,7 @@ declare module "ue" {
     }
     
     class SoundAttenuationSettings extends BaseAttenuationSettings {
-        constructor(bAttenuate: boolean, bSpatialize: boolean, bAttenuateWithLPF: boolean, bEnableListenerFocus: boolean, bEnableFocusInterpolation: boolean, bEnableOcclusion: boolean, bUseComplexCollisionForOcclusion: boolean, bEnableReverbSend: boolean, bApplyNormalizationToStereoSounds: boolean, bEnableLogFrequencyScaling: boolean, SpatializationAlgorithm: number, BinauralRadius: number, AbsorptionMethod: EAirAbsorptionMethod, OcclusionTraceChannel: number, ReverbSendMethod: EReverbSendMethod, DistanceType: number, OmniRadius: number, StereoSpread: number, SpatializationPluginSettings: SpatializationPluginSourceSettingsBase, RadiusMin: number, RadiusMax: number, LPFRadiusMin: number, LPFRadiusMax: number, CustomLowpassAirAbsorptionCurve: RuntimeFloatCurve, CustomHighpassAirAbsorptionCurve: RuntimeFloatCurve, LPFFrequencyAtMin: number, LPFFrequencyAtMax: number, HPFFrequencyAtMin: number, HPFFrequencyAtMax: number, FocusAzimuth: number, NonFocusAzimuth: number, FocusDistanceScale: number, NonFocusDistanceScale: number, FocusPriorityScale: number, NonFocusPriorityScale: number, FocusVolumeAttenuation: number, NonFocusVolumeAttenuation: number, FocusAttackInterpSpeed: number, FocusReleaseInterpSpeed: number, OcclusionLowPassFilterFrequency: number, OcclusionVolumeAttenuation: number, OcclusionInterpolationTime: number, OcclusionPluginSettings: OcclusionPluginSourceSettingsBase, ReverbPluginSettings: ReverbPluginSourceSettingsBase, ReverbWetLevelMin: number, ReverbWetLevelMax: number, ReverbDistanceMin: number, ReverbDistanceMax: number, ManualReverbSendLevel: number, CustomReverbSendCurve: RuntimeFloatCurve, PluginSettings: SoundAttenuationPluginSettings);
+        constructor(bAttenuate: boolean, bSpatialize: boolean, bAttenuateWithLPF: boolean, bEnableListenerFocus: boolean, bEnableFocusInterpolation: boolean, bEnableOcclusion: boolean, bUseComplexCollisionForOcclusion: boolean, bEnableReverbSend: boolean, bApplyNormalizationToStereoSounds: boolean, bEnableLogFrequencyScaling: boolean, SpatializationAlgorithm: ESoundSpatializationAlgorithm, BinauralRadius: number, AbsorptionMethod: EAirAbsorptionMethod, OcclusionTraceChannel: ECollisionChannel, ReverbSendMethod: EReverbSendMethod, DistanceType: ESoundDistanceCalc, OmniRadius: number, StereoSpread: number, SpatializationPluginSettings: SpatializationPluginSourceSettingsBase, RadiusMin: number, RadiusMax: number, LPFRadiusMin: number, LPFRadiusMax: number, CustomLowpassAirAbsorptionCurve: RuntimeFloatCurve, CustomHighpassAirAbsorptionCurve: RuntimeFloatCurve, LPFFrequencyAtMin: number, LPFFrequencyAtMax: number, HPFFrequencyAtMin: number, HPFFrequencyAtMax: number, FocusAzimuth: number, NonFocusAzimuth: number, FocusDistanceScale: number, NonFocusDistanceScale: number, FocusPriorityScale: number, NonFocusPriorityScale: number, FocusVolumeAttenuation: number, NonFocusVolumeAttenuation: number, FocusAttackInterpSpeed: number, FocusReleaseInterpSpeed: number, OcclusionLowPassFilterFrequency: number, OcclusionVolumeAttenuation: number, OcclusionInterpolationTime: number, OcclusionPluginSettings: OcclusionPluginSourceSettingsBase, ReverbPluginSettings: ReverbPluginSourceSettingsBase, ReverbWetLevelMin: number, ReverbWetLevelMax: number, ReverbDistanceMin: number, ReverbDistanceMax: number, ManualReverbSendLevel: number, CustomReverbSendCurve: RuntimeFloatCurve, PluginSettings: SoundAttenuationPluginSettings);
         bAttenuate: boolean;
         bSpatialize: boolean;
         bAttenuateWithLPF: boolean;
@@ -7787,12 +7908,12 @@ declare module "ue" {
         bEnableReverbSend: boolean;
         bApplyNormalizationToStereoSounds: boolean;
         bEnableLogFrequencyScaling: boolean;
-        SpatializationAlgorithm: number;
+        SpatializationAlgorithm: ESoundSpatializationAlgorithm;
         BinauralRadius: number;
         AbsorptionMethod: EAirAbsorptionMethod;
-        OcclusionTraceChannel: number;
+        OcclusionTraceChannel: ECollisionChannel;
         ReverbSendMethod: EReverbSendMethod;
-        DistanceType: number;
+        DistanceType: ESoundDistanceCalc;
         OmniRadius: number;
         StereoSpread: number;
         SpatializationPluginSettings: SpatializationPluginSourceSettingsBase;
@@ -7862,6 +7983,7 @@ declare module "ue" {
     }
     
     enum ESoundwaveSampleRateSettings { Max, High, Medium, Low, Min, MatchDevice, ESoundwaveSampleRateSettings_MAX}
+    enum ESoundGroup { SOUNDGROUP_Default, SOUNDGROUP_Effects, SOUNDGROUP_UI, SOUNDGROUP_Music, SOUNDGROUP_Voice, SOUNDGROUP_GameSoundGroup1, SOUNDGROUP_GameSoundGroup2, SOUNDGROUP_GameSoundGroup3, SOUNDGROUP_GameSoundGroup4, SOUNDGROUP_GameSoundGroup5, SOUNDGROUP_GameSoundGroup6, SOUNDGROUP_GameSoundGroup7, SOUNDGROUP_GameSoundGroup8, SOUNDGROUP_GameSoundGroup9, SOUNDGROUP_GameSoundGroup10, SOUNDGROUP_GameSoundGroup11, SOUNDGROUP_GameSoundGroup12, SOUNDGROUP_GameSoundGroup13, SOUNDGROUP_GameSoundGroup14, SOUNDGROUP_GameSoundGroup15, SOUNDGROUP_GameSoundGroup16, SOUNDGROUP_GameSoundGroup17, SOUNDGROUP_GameSoundGroup18, SOUNDGROUP_GameSoundGroup19, SOUNDGROUP_GameSoundGroup20, SOUNDGROUP_MAX}
     enum ESoundWaveFFTSize { VerySmall_64, Small_256, Medium_512, Large_1024, VeryLarge_2048, ESoundWaveFFTSize_MAX}
     class SoundWaveSpectralDataEntry {
         constructor(Magnitude: number, NormalizedMagnitude: number);
@@ -7905,7 +8027,7 @@ declare module "ue" {
         CompressionQuality: number;
         StreamingPriority: number;
         SampleRateQuality: ESoundwaveSampleRateSettings;
-        SoundGroup: number;
+        SoundGroup: ESoundGroup;
         bLooping: boolean;
         bStreaming: boolean;
         bSeekableStreaming: boolean;
@@ -8047,7 +8169,7 @@ declare module "ue" {
         bHasVirtualizeWhenSilent: boolean;
         bBypassVolumeScaleForPriority: boolean;
         VirtualizationMode: EVirtualizationMode;
-        MaxConcurrentResolutionRule: number;
+        MaxConcurrentResolutionRule: EMaxConcurrentResolutionRule;
         SoundConcurrencySettings: SoundConcurrency;
         ConcurrencySet: TSet<SoundConcurrency>;
         ConcurrencyOverrides: SoundConcurrencySettings;
@@ -8068,6 +8190,7 @@ declare module "ue" {
         static Load(InName: string): SoundBase;
     }
     
+    enum EUMGSequencePlayMode { Forward, Reverse, PingPong, EUMGSequencePlayMode_MAX}
     class FocusEvent {
         constructor();
         static StaticClass(): Class;
@@ -8148,7 +8271,7 @@ declare module "ue" {
         UnbindAllFromAnimationStarted(Animation: WidgetAnimation): void;
         UnbindAllFromAnimationFinished(Animation: WidgetAnimation): void;
         Tick(MyGeometry: Geometry, InDeltaTime: number): void;
-        StopListeningForInputAction(ActionName: string, EventType: number): void;
+        StopListeningForInputAction(ActionName: string, EventType: EInputEvent): void;
         StopListeningForAllInputActions(): void;
         StopAnimationsAndLatentActions(): void;
         StopAnimation(InAnimation: WidgetAnimation): void;
@@ -8170,10 +8293,10 @@ declare module "ue" {
         RegisterInputComponent(): void;
         PreConstruct(IsDesignTime: boolean): void;
         PlaySound(SoundToPlay: SoundBase): void;
-        PlayAnimationTimeRange(InAnimation: WidgetAnimation, StartAtTime: number, EndAtTime: number, NumLoopsToPlay: number, PlayMode: number, PlaybackSpeed: number, bRestoreState: boolean): UMGSequencePlayer;
+        PlayAnimationTimeRange(InAnimation: WidgetAnimation, StartAtTime: number, EndAtTime: number, NumLoopsToPlay: number, PlayMode: EUMGSequencePlayMode, PlaybackSpeed: number, bRestoreState: boolean): UMGSequencePlayer;
         PlayAnimationReverse(InAnimation: WidgetAnimation, PlaybackSpeed: number, bRestoreState: boolean): UMGSequencePlayer;
         PlayAnimationForward(InAnimation: WidgetAnimation, PlaybackSpeed: number, bRestoreState: boolean): UMGSequencePlayer;
-        PlayAnimation(InAnimation: WidgetAnimation, StartAtTime: number, NumLoopsToPlay: number, PlayMode: number, PlaybackSpeed: number, bRestoreState: boolean): UMGSequencePlayer;
+        PlayAnimation(InAnimation: WidgetAnimation, StartAtTime: number, NumLoopsToPlay: number, PlayMode: EUMGSequencePlayMode, PlaybackSpeed: number, bRestoreState: boolean): UMGSequencePlayer;
         PauseAnimation(InAnimation: WidgetAnimation): number;
         OnTouchStarted(MyGeometry: Geometry, InTouchEvent: PointerEvent): EventReply;
         OnTouchMoved(MyGeometry: Geometry, InTouchEvent: PointerEvent): EventReply;
@@ -8209,7 +8332,7 @@ declare module "ue" {
         OnAnimationFinished(Animation: WidgetAnimation): void;
         OnAnalogValueChanged(MyGeometry: Geometry, InAnalogInputEvent: AnalogInputEvent): EventReply;
         OnAddedToFocusPath(InFocusEvent: FocusEvent): void;
-        ListenForInputAction(ActionName: string, EventType: number, bConsume: boolean, Callback: $Delegate<() => void>): void;
+        ListenForInputAction(ActionName: string, EventType: EInputEvent, bConsume: boolean, Callback: $Delegate<() => void>): void;
         IsPlayingAnimation(): boolean;
         IsListeningForInputAction(ActionName: string): boolean;
         IsInViewport(): boolean;
@@ -8236,9 +8359,9 @@ declare module "ue" {
     }
     
     class ViewTargetTransitionParams {
-        constructor(BlendTime: number, BlendFunction: number, BlendExp: number, bLockOutgoing: boolean);
+        constructor(BlendTime: number, BlendFunction: EViewTargetBlendFunction, BlendExp: number, bLockOutgoing: boolean);
         BlendTime: number;
-        BlendFunction: number;
+        BlendFunction: EViewTargetBlendFunction;
         BlendExp: number;
         bLockOutgoing: boolean;
         static StaticClass(): Class;
@@ -8259,6 +8382,7 @@ declare module "ue" {
         static Load(InName: string): HapticFeedbackEffect_Base;
     }
     
+    enum EDynamicForceFeedbackAction { Start, Update, Stop, EDynamicForceFeedbackAction_MAX}
     class LatentActionInfo {
         constructor(Linkage: number, UUID: number, ExecutionFunction: string, CallbackTarget: Object);
         Linkage: number;
@@ -8268,6 +8392,8 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EObjectTypeQuery { ObjectTypeQuery1, ObjectTypeQuery2, ObjectTypeQuery3, ObjectTypeQuery4, ObjectTypeQuery5, ObjectTypeQuery6, ObjectTypeQuery7, ObjectTypeQuery8, ObjectTypeQuery9, ObjectTypeQuery10, ObjectTypeQuery11, ObjectTypeQuery12, ObjectTypeQuery13, ObjectTypeQuery14, ObjectTypeQuery15, ObjectTypeQuery16, ObjectTypeQuery17, ObjectTypeQuery18, ObjectTypeQuery19, ObjectTypeQuery20, ObjectTypeQuery21, ObjectTypeQuery22, ObjectTypeQuery23, ObjectTypeQuery24, ObjectTypeQuery25, ObjectTypeQuery26, ObjectTypeQuery27, ObjectTypeQuery28, ObjectTypeQuery29, ObjectTypeQuery30, ObjectTypeQuery31, ObjectTypeQuery32, ObjectTypeQuery_MAX, EObjectTypeQuery_MAX}
+    enum ETraceTypeQuery { TraceTypeQuery1, TraceTypeQuery2, TraceTypeQuery3, TraceTypeQuery4, TraceTypeQuery5, TraceTypeQuery6, TraceTypeQuery7, TraceTypeQuery8, TraceTypeQuery9, TraceTypeQuery10, TraceTypeQuery11, TraceTypeQuery12, TraceTypeQuery13, TraceTypeQuery14, TraceTypeQuery15, TraceTypeQuery16, TraceTypeQuery17, TraceTypeQuery18, TraceTypeQuery19, TraceTypeQuery20, TraceTypeQuery21, TraceTypeQuery22, TraceTypeQuery23, TraceTypeQuery24, TraceTypeQuery25, TraceTypeQuery26, TraceTypeQuery27, TraceTypeQuery28, TraceTypeQuery29, TraceTypeQuery30, TraceTypeQuery31, TraceTypeQuery32, TraceTypeQuery_MAX, ETraceTypeQuery_MAX}
     class UpdateLevelStreamingLevelStatus {
         constructor(PackageName: string, LODIndex: number, bNewShouldBeLoaded: boolean, bNewShouldBeVisible: boolean, bNewShouldBlockOnLoad: boolean);
         PackageName: string;
@@ -8278,6 +8404,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ETravelType { TRAVEL_Absolute, TRAVEL_Partial, TRAVEL_Relative, TRAVEL_MAX}
     class ForceFeedbackParameters {
         constructor(Tag: string, bLooping: boolean, bIgnoreTimeDilation: boolean, bPlayWhilePaused: boolean);
         Tag: string;
@@ -8323,10 +8450,10 @@ declare module "ue" {
         bForceFeedbackEnabled: boolean;
         ForceFeedbackScale: number;
         ClickEventKeys: TArray<Key>;
-        DefaultMouseCursor: number;
-        CurrentMouseCursor: number;
-        DefaultClickTraceChannel: number;
-        CurrentClickTraceChannel: number;
+        DefaultMouseCursor: EMouseCursor;
+        CurrentMouseCursor: EMouseCursor;
+        DefaultClickTraceChannel: ECollisionChannel;
+        CurrentClickTraceChannel: ECollisionChannel;
         HitResultTraceDistance: number;
         SeamlessTravelCount: number;
         LastCompletedSeamlessTravelCount: number;
@@ -8344,10 +8471,10 @@ declare module "ue" {
         StopHapticEffect(Hand: EControllerHand): void;
         StartFire(FireModeNum: number): void;
         SetVirtualJoystickVisibility(bVisible: boolean): void;
-        SetViewTargetWithBlend(NewViewTarget: Actor, BlendTime: number, BlendFunc: number, BlendExp: number, bLockOutgoing: boolean): void;
+        SetViewTargetWithBlend(NewViewTarget: Actor, BlendTime: number, BlendFunc: EViewTargetBlendFunction, BlendExp: number, bLockOutgoing: boolean): void;
         SetName(S: string): void;
         SetMouseLocation(X: number, Y: number): void;
-        SetMouseCursorWidget(Cursor: number, CursorWidget: UserWidget): void;
+        SetMouseCursorWidget(Cursor: EMouseCursor, CursorWidget: UserWidget): void;
         SetHapticsByValue(Frequency: number, Amplitude: number, Hand: EControllerHand): void;
         SetDisableHaptics(bNewDisabled: boolean): void;
         SetControllerLightColor(Color: Color): void;
@@ -8382,7 +8509,7 @@ declare module "ue" {
         ResetControllerLightColor(): void;
         ProjectWorldLocationToScreen(WorldLocation: Vector, ScreenLocation: $Ref<Vector2D>, bPlayerViewportRelative: boolean): boolean;
         PlayHapticEffect(HapticEffect: HapticFeedbackEffect_Base, Hand: EControllerHand, Scale: number, bLoop: boolean): void;
-        PlayDynamicForceFeedback(Intensity: number, Duration: number, bAffectsLeftLarge: boolean, bAffectsLeftSmall: boolean, bAffectsRightLarge: boolean, bAffectsRightSmall: boolean, Action: number, LatentInfo: LatentActionInfo): void;
+        PlayDynamicForceFeedback(Intensity: number, Duration: number, bAffectsLeftLarge: boolean, bAffectsLeftSmall: boolean, bAffectsRightLarge: boolean, bAffectsRightSmall: boolean, Action: EDynamicForceFeedbackAction, LatentInfo: LatentActionInfo): void;
         Pause(): void;
         OnServerStartedVisualLogger(bIsLogging: boolean): void;
         LocalTravel(URL: string): void;
@@ -8392,19 +8519,19 @@ declare module "ue" {
         GetSpectatorPawn(): SpectatorPawn;
         GetMousePosition(LocationX: $Ref<number>, LocationY: $Ref<number>): boolean;
         GetInputVectorKeyState(Key: Key): Vector;
-        GetInputTouchState(FingerIndex: number, LocationX: $Ref<number>, LocationY: $Ref<number>, bIsCurrentlyPressed: $Ref<boolean>): void;
+        GetInputTouchState(FingerIndex: ETouchIndex, LocationX: $Ref<number>, LocationY: $Ref<number>, bIsCurrentlyPressed: $Ref<boolean>): void;
         GetInputMouseDelta(DeltaX: $Ref<number>, DeltaY: $Ref<number>): void;
         GetInputMotionState(Tilt: $Ref<Vector>, RotationRate: $Ref<Vector>, Gravity: $Ref<Vector>, Acceleration: $Ref<Vector>): void;
         GetInputKeyTimeDown(Key: Key): number;
-        GetInputAnalogStickState(WhichStick: number, StickX: $Ref<number>, StickY: $Ref<number>): void;
+        GetInputAnalogStickState(WhichStick: EControllerAnalogStick, StickX: $Ref<number>, StickY: $Ref<number>): void;
         GetInputAnalogKeyState(Key: Key): number;
         GetHUD(): HUD;
-        GetHitResultUnderFingerForObjects(FingerIndex: number, ObjectTypes: TArray<number>, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
-        GetHitResultUnderFingerByChannel(FingerIndex: number, TraceChannel: number, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
-        GetHitResultUnderFinger(FingerIndex: number, TraceChannel: number, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
-        GetHitResultUnderCursorForObjects(ObjectTypes: TArray<number>, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
-        GetHitResultUnderCursorByChannel(TraceChannel: number, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
-        GetHitResultUnderCursor(TraceChannel: number, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
+        GetHitResultUnderFingerForObjects(FingerIndex: ETouchIndex, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
+        GetHitResultUnderFingerByChannel(FingerIndex: ETouchIndex, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
+        GetHitResultUnderFinger(FingerIndex: ETouchIndex, TraceChannel: ECollisionChannel, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
+        GetHitResultUnderCursorForObjects(ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
+        GetHitResultUnderCursorByChannel(TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
+        GetHitResultUnderCursor(TraceChannel: ECollisionChannel, bTraceComplex: boolean, HitResult: $Ref<HitResult>): boolean;
         GetFocalLocation(): Vector;
         FOV(NewFOV: number): void;
         EnableCheats(): void;
@@ -8416,8 +8543,8 @@ declare module "ue" {
         ClientUpdateMultipleLevelsStreamingStatus(LevelStatuses: TArray<UpdateLevelStreamingLevelStatus>): void;
         ClientUpdateLevelStreamingStatus(PackageName: string, bNewShouldBeLoaded: boolean, bNewShouldBeVisible: boolean, bNewShouldBlockOnLoad: boolean, LODIndex: number): void;
         ClientUnmutePlayer(PlayerId: UniqueNetIdRepl): void;
-        ClientTravelInternal(URL: string, TravelType: number, bSeamless: boolean, MapPackageGuid: Guid): void;
-        ClientTravel(URL: string, TravelType: number, bSeamless: boolean, MapPackageGuid: Guid): void;
+        ClientTravelInternal(URL: string, TravelType: ETravelType, bSeamless: boolean, MapPackageGuid: Guid): void;
+        ClientTravel(URL: string, TravelType: ETravelType, bSeamless: boolean, MapPackageGuid: Guid): void;
         ClientTeamMessage(SenderPlayerState: PlayerState, S: string, Type: string, MsgLifeTime: number): void;
         ClientStopForceFeedback(ForceFeedbackEffect: ForceFeedbackEffect, Tag: string): void;
         ClientStopCameraShake(Shake: Class, bImmediately: boolean): void;
@@ -8444,8 +8571,8 @@ declare module "ue" {
         ClientPlaySoundAtLocation(Sound: SoundBase, Location: Vector, VolumeMultiplier: number, PitchMultiplier: number): void;
         ClientPlaySound(Sound: SoundBase, VolumeMultiplier: number, PitchMultiplier: number): void;
         ClientPlayForceFeedback_Internal(ForceFeedbackEffect: ForceFeedbackEffect, Params: ForceFeedbackParameters): void;
-        ClientPlayCameraShake(Shake: Class, Scale: number, PlaySpace: number, UserPlaySpaceRot: Rotator): void;
-        ClientPlayCameraAnim(AnimToPlay: CameraAnim, Scale: number, Rate: number, BlendInTime: number, BlendOutTime: number, bLoop: boolean, bRandomStartTime: boolean, Space: number, CustomPlaySpace: Rotator): void;
+        ClientPlayCameraShake(Shake: Class, Scale: number, PlaySpace: ECameraAnimPlaySpace, UserPlaySpaceRot: Rotator): void;
+        ClientPlayCameraAnim(AnimToPlay: CameraAnim, Scale: number, Rate: number, BlendInTime: number, BlendOutTime: number, bLoop: boolean, bRandomStartTime: boolean, Space: ECameraAnimPlaySpace, CustomPlaySpace: Rotator): void;
         ClientMutePlayer(PlayerId: UniqueNetIdRepl): void;
         ClientMessage(S: string, Type: string, MsgLifeTime: number): void;
         ClientIgnoreMoveInput(bIgnore: boolean): void;
@@ -8524,7 +8651,7 @@ declare module "ue" {
         bUseControllerRotationRoll: boolean;
         bCanAffectNavigationGeneration: boolean;
         BaseEyeHeight: number;
-        AutoPossessPlayer: number;
+        AutoPossessPlayer: EAutoReceiveInput;
         AutoPossessAI: EAutoPossessAI;
         RemoteViewPitch: number;
         AIControllerClass: Class;
@@ -8567,14 +8694,15 @@ declare module "ue" {
         static Load(InName: string): Pawn;
     }
     
+    enum ERadialImpulseFalloff { RIF_Constant, RIF_Linear, RIF_MAX}
     class PrimitiveComponent extends SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MinDrawDistance: number;
         LDMaxDrawDistance: number;
         CachedMaxDrawDistance: number;
-        DepthPriorityGroup: number;
-        ViewOwnerDepthPriorityGroup: number;
-        IndirectLightingCacheQuality: number;
+        DepthPriorityGroup: ESceneDepthPriorityGroup;
+        ViewOwnerDepthPriorityGroup: ESceneDepthPriorityGroup;
+        IndirectLightingCacheQuality: EIndirectLightingCacheQuality;
         LightmapType: ELightmapType;
         ExcludeForSpecificHLODLevels: TArray<number>;
         bEnableAutoLODGeneration: boolean;
@@ -8626,9 +8754,9 @@ declare module "ue" {
         AlwaysLoadOnServer: boolean;
         bUseEditorCompositing: boolean;
         bRenderCustomDepth: boolean;
-        bHasCustomNavigableGeometry: number;
-        CanBeCharacterBase: number;
-        CanCharacterStepUpOn: number;
+        bHasCustomNavigableGeometry: EHasCustomNavigableGeometry;
+        CanBeCharacterBase: ECanBeCharacterBase;
+        CanCharacterStepUpOn: ECanBeCharacterBase;
         LightingChannels: LightingChannels;
         CustomDepthStencilWriteMask: ERendererStencilMask;
         CustomDepthStencilValue: number;
@@ -8654,10 +8782,10 @@ declare module "ue" {
         OnEndCursorOver: $MulticastDelegate<(TouchedComponent: PrimitiveComponent) => void>;
         OnClicked: $MulticastDelegate<(TouchedComponent: PrimitiveComponent, ButtonPressed: Key) => void>;
         OnReleased: $MulticastDelegate<(TouchedComponent: PrimitiveComponent, ButtonReleased: Key) => void>;
-        OnInputTouchBegin: $MulticastDelegate<(FingerIndex: number, TouchedComponent: PrimitiveComponent) => void>;
-        OnInputTouchEnd: $MulticastDelegate<(FingerIndex: number, TouchedComponent: PrimitiveComponent) => void>;
-        OnInputTouchEnter: $MulticastDelegate<(FingerIndex: number, TouchedComponent: PrimitiveComponent) => void>;
-        OnInputTouchLeave: $MulticastDelegate<(FingerIndex: number, TouchedComponent: PrimitiveComponent) => void>;
+        OnInputTouchBegin: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
+        OnInputTouchEnd: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
+        OnInputTouchEnter: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
+        OnInputTouchLeave: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedComponent: PrimitiveComponent) => void>;
         LODParentPrimitive: PrimitiveComponent;
         WakeRigidBody(BoneName: string): void;
         WakeAllRigidBodies(): void;
@@ -8696,12 +8824,12 @@ declare module "ue" {
         SetCustomDepthStencilWriteMask(WriteMaskBit: ERendererStencilMask): void;
         SetCustomDepthStencilValue(Value: number): void;
         SetCullDistance(NewCullDistance: number): void;
-        SetConstraintMode(ConstraintMode: number): void;
-        SetCollisionResponseToChannel(Channel: number, NewResponse: number): void;
-        SetCollisionResponseToAllChannels(NewResponse: number): void;
+        SetConstraintMode(ConstraintMode: EDOFMode): void;
+        SetCollisionResponseToChannel(Channel: ECollisionChannel, NewResponse: ECollisionResponse): void;
+        SetCollisionResponseToAllChannels(NewResponse: ECollisionResponse): void;
         SetCollisionProfileName(InCollisionProfileName: string): void;
-        SetCollisionObjectType(Channel: number): void;
-        SetCollisionEnabled(NewType: number): void;
+        SetCollisionObjectType(Channel: ECollisionChannel): void;
+        SetCollisionEnabled(NewType: ECollisionEnabled): void;
         SetCenterOfMass(CenterOfMassOffset: Vector, BoneName: string): void;
         SetCastShadow(NewCastShadow: boolean): void;
         SetCastInsetShadow(bInCastInsetShadow: boolean): void;
@@ -8743,10 +8871,10 @@ declare module "ue" {
         GetLinearDamping(): number;
         GetInertiaTensor(BoneName: string): Vector;
         GetGenerateOverlapEvents(): boolean;
-        GetCollisionResponseToChannel(Channel: number): number;
+        GetCollisionResponseToChannel(Channel: ECollisionChannel): ECollisionResponse;
         GetCollisionProfileName(): string;
-        GetCollisionObjectType(): number;
-        GetCollisionEnabled(): number;
+        GetCollisionObjectType(): ECollisionChannel;
+        GetCollisionEnabled(): ECollisionEnabled;
         GetClosestPointOnCollision(Point: Vector, OutPointOnBody: $Ref<Vector>, BoneName: string): number;
         GetCenterOfMass(BoneName: string): Vector;
         GetAngularDamping(): number;
@@ -8761,8 +8889,8 @@ declare module "ue" {
         AddTorqueInRadians(Torque: Vector, BoneName: string, bAccelChange: boolean): void;
         AddTorqueInDegrees(Torque: Vector, BoneName: string, bAccelChange: boolean): void;
         AddTorque(Torque: Vector, BoneName: string, bAccelChange: boolean): void;
-        AddRadialImpulse(Origin: Vector, Radius: number, Strength: number, Falloff: number, bVelChange: boolean): void;
-        AddRadialForce(Origin: Vector, Radius: number, Strength: number, Falloff: number, bAccelChange: boolean): void;
+        AddRadialImpulse(Origin: Vector, Radius: number, Strength: number, Falloff: ERadialImpulseFalloff, bVelChange: boolean): void;
+        AddRadialForce(Origin: Vector, Radius: number, Strength: number, Falloff: ERadialImpulseFalloff, bAccelChange: boolean): void;
         AddImpulseAtLocation(Impulse: Vector, Location: Vector, BoneName: string): void;
         AddImpulse(Impulse: Vector, BoneName: string, bVelChange: boolean): void;
         AddForceAtLocationLocal(Force: Vector, Location: Vector, BoneName: string): void;
@@ -8819,7 +8947,7 @@ declare module "ue" {
     
     class Brush extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BrushType: number;
+        BrushType: EBrushType;
         BrushColor: Color;
         PolyFlags: number;
         bColored: boolean;
@@ -8855,7 +8983,9 @@ declare module "ue" {
         static Load(InName: string): PhysicsVolume;
     }
     
+    enum EComponentMobility { Static, Stationary, Movable, EComponentMobility_MAX}
     enum EDetachmentRule { KeepRelative, KeepWorld, EDetachmentRule_MAX}
+    enum ERelativeTransformSpace { RTS_World, RTS_Actor, RTS_Component, RTS_ParentBoneSpace, RTS_MAX}
     class SceneComponent extends ActorComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PhysicsVolume: TWeakObjectPtr<PhysicsVolume>;
@@ -8880,8 +9010,8 @@ declare module "ue" {
         bBoundsChangeTriggersStreamingDataRebuild: boolean;
         bUseAttachParentBound: boolean;
         bVisualizeComponent: boolean;
-        Mobility: number;
-        DetailMode: number;
+        Mobility: EComponentMobility;
+        DetailMode: EDetailMode;
         PhysicsVolumeChangedDelegate: $MulticastDelegate<(NewVolume: PhysicsVolume) => void>;
         ToggleVisibility(bPropagateToChildren: boolean): void;
         SnapTo(InParent: SceneComponent, InSocketName: string): boolean;
@@ -8889,7 +9019,7 @@ declare module "ue" {
         SetVisibility(bNewVisibility: boolean, bPropagateToChildren: boolean): void;
         SetShouldUpdatePhysicsVolume(bInShouldUpdatePhysicsVolume: boolean): void;
         SetRelativeScale3D(NewScale3D: Vector): void;
-        SetMobility(NewMobility: number): void;
+        SetMobility(NewMobility: EComponentMobility): void;
         SetHiddenInGame(NewHidden: boolean, bPropagateToChildren: boolean): void;
         SetAbsolute(bNewAbsoluteLocation: boolean, bNewAbsoluteRotation: boolean, bNewAbsoluteScale: boolean): void;
         ResetRelativeTransform(): void;
@@ -8912,7 +9042,7 @@ declare module "ue" {
         K2_GetComponentLocation(): Vector;
         K2_DetachFromComponent(LocationRule: EDetachmentRule, RotationRule: EDetachmentRule, ScaleRule: EDetachmentRule, bCallModify: boolean): void;
         K2_AttachToComponent(Parent: SceneComponent, SocketName: string, LocationRule: EAttachmentRule, RotationRule: EAttachmentRule, ScaleRule: EAttachmentRule, bWeldSimulatedBodies: boolean): boolean;
-        K2_AttachTo(InParent: SceneComponent, InSocketName: string, AttachType: number, bWeldSimulatedBodies: boolean): boolean;
+        K2_AttachTo(InParent: SceneComponent, InSocketName: string, AttachType: EAttachLocation, bWeldSimulatedBodies: boolean): boolean;
         K2_AddWorldTransform(DeltaTransform: Transform, bSweep: boolean, SweepHitResult: $Ref<HitResult>, bTeleport: boolean): void;
         K2_AddWorldRotation(DeltaRotation: Rotator, bSweep: boolean, SweepHitResult: $Ref<HitResult>, bTeleport: boolean): void;
         K2_AddWorldOffset(DeltaLocation: Vector, bSweep: boolean, SweepHitResult: $Ref<HitResult>, bTeleport: boolean): void;
@@ -8925,7 +9055,7 @@ declare module "ue" {
         IsSimulatingPhysics(BoneName: string): boolean;
         IsAnySimulatingPhysics(): boolean;
         GetUpVector(): Vector;
-        GetSocketTransform(InSocketName: string, TransformSpace: number): Transform;
+        GetSocketTransform(InSocketName: string, TransformSpace: ERelativeTransformSpace): Transform;
         GetSocketRotation(InSocketName: string): Rotator;
         GetSocketQuaternion(InSocketName: string): Quat;
         GetSocketLocation(InSocketName: string): Vector;
@@ -8961,6 +9091,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ENetDormancy { DORM_Never, DORM_Awake, DORM_DormantAll, DORM_DormantPartial, DORM_Initial, DORM_MAX}
     enum ESpawnActorCollisionHandlingMethod { Undefined, AlwaysSpawn, AdjustIfPossibleButAlwaysSpawn, AdjustIfPossibleButDontSpawnIfColliding, DontSpawnIfColliding, ESpawnActorCollisionHandlingMethod_MAX}
     class InterpFilter extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -9105,17 +9236,17 @@ declare module "ue" {
         bActorIsBeingDestroyed: boolean;
         UpdateOverlapsMethodDuringLevelStreaming: EActorUpdateOverlapsMethod;
         DefaultUpdateOverlapsMethodDuringLevelStreaming: EActorUpdateOverlapsMethod;
-        RemoteRole: number;
+        RemoteRole: ENetRole;
         ReplicatedMovement: RepMovement;
         InitialLifeSpan: number;
         CustomTimeDilation: number;
         AttachmentReplication: RepAttachment;
         Owner: Actor;
         NetDriverName: string;
-        Role: number;
-        NetDormancy: number;
+        Role: ENetRole;
+        NetDormancy: ENetDormancy;
         SpawnCollisionHandlingMethod: ESpawnActorCollisionHandlingMethod;
-        AutoReceiveInput: number;
+        AutoReceiveInput: EAutoReceiveInput;
         InputPriority: number;
         InputComponent: InputComponent;
         NetCullDistanceSquared: number;
@@ -9156,25 +9287,25 @@ declare module "ue" {
         OnEndCursorOver: $MulticastDelegate<(TouchedActor: Actor) => void>;
         OnClicked: $MulticastDelegate<(TouchedActor: Actor, ButtonPressed: Key) => void>;
         OnReleased: $MulticastDelegate<(TouchedActor: Actor, ButtonReleased: Key) => void>;
-        OnInputTouchBegin: $MulticastDelegate<(FingerIndex: number, TouchedActor: Actor) => void>;
-        OnInputTouchEnd: $MulticastDelegate<(FingerIndex: number, TouchedActor: Actor) => void>;
-        OnInputTouchEnter: $MulticastDelegate<(FingerIndex: number, TouchedActor: Actor) => void>;
-        OnInputTouchLeave: $MulticastDelegate<(FingerIndex: number, TouchedActor: Actor) => void>;
+        OnInputTouchBegin: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
+        OnInputTouchEnd: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
+        OnInputTouchEnter: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
+        OnInputTouchLeave: $MulticastDelegate<(FingerIndex: ETouchIndex, TouchedActor: Actor) => void>;
         OnActorHit: $MulticastDelegate<(SelfActor: Actor, OtherActor: Actor, NormalImpulse: Vector, Hit: HitResult) => void>;
         OnDestroyed: $MulticastDelegate<(DestroyedActor: Actor) => void>;
-        OnEndPlay: $MulticastDelegate<(Actor: Actor, EndPlayReason: number) => void>;
+        OnEndPlay: $MulticastDelegate<(Actor: Actor, EndPlayReason: EEndPlayReason) => void>;
         InstanceComponents: TArray<ActorComponent>;
         BlueprintCreatedComponents: TArray<ActorComponent>;
         WasRecentlyRendered(Tolerance: number): boolean;
         UserConstructionScript(): void;
         TearOff(): void;
         SnapRootComponentTo(InParentActor: Actor, InSocketName: string): void;
-        SetTickGroup(NewTickGroup: number): void;
+        SetTickGroup(NewTickGroup: ETickingGroup): void;
         SetTickableWhenPaused(bTickableWhenPaused: boolean): void;
         SetReplicates(bInReplicates: boolean): void;
         SetReplicateMovement(bInReplicateMovement: boolean): void;
         SetOwner(NewOwner: Actor): void;
-        SetNetDormancy(NewDormancy: number): void;
+        SetNetDormancy(NewDormancy: ENetDormancy): void;
         SetLifeSpan(InLifespan: number): void;
         SetIsTemporarilyHiddenInEditor(bIsHidden: boolean): void;
         SetFolderPath(NewFolderPath: string): void;
@@ -9191,15 +9322,15 @@ declare module "ue" {
         ReceiveRadialDamage(DamageReceived: number, DamageType: DamageType, Origin: Vector, HitInfo: HitResult, InstigatedBy: Controller, DamageCauser: Actor): void;
         ReceivePointDamage(Damage: number, DamageType: DamageType, HitLocation: Vector, HitNormal: Vector, HitComponent: PrimitiveComponent, BoneName: string, ShotFromDirection: Vector, InstigatedBy: Controller, DamageCauser: Actor, HitInfo: HitResult): void;
         ReceiveHit(MyComp: PrimitiveComponent, Other: Actor, OtherComp: PrimitiveComponent, bSelfMoved: boolean, HitLocation: Vector, HitNormal: Vector, NormalImpulse: Vector, Hit: HitResult): void;
-        ReceiveEndPlay(EndPlayReason: number): void;
+        ReceiveEndPlay(EndPlayReason: EEndPlayReason): void;
         ReceiveDestroyed(): void;
         ReceiveBeginPlay(): void;
         ReceiveAnyDamage(Damage: number, DamageType: DamageType, InstigatedBy: Controller, DamageCauser: Actor): void;
         ReceiveActorOnReleased(ButtonReleased: Key): void;
-        ReceiveActorOnInputTouchLeave(FingerIndex: number): void;
-        ReceiveActorOnInputTouchEnter(FingerIndex: number): void;
-        ReceiveActorOnInputTouchEnd(FingerIndex: number): void;
-        ReceiveActorOnInputTouchBegin(FingerIndex: number): void;
+        ReceiveActorOnInputTouchLeave(FingerIndex: ETouchIndex): void;
+        ReceiveActorOnInputTouchEnter(FingerIndex: ETouchIndex): void;
+        ReceiveActorOnInputTouchEnd(FingerIndex: ETouchIndex): void;
+        ReceiveActorOnInputTouchBegin(FingerIndex: ETouchIndex): void;
         ReceiveActorOnClicked(ButtonPressed: Key): void;
         ReceiveActorEndOverlap(OtherActor: Actor): void;
         ReceiveActorEndCursorOver(): void;
@@ -9233,8 +9364,8 @@ declare module "ue" {
         K2_DestroyActor(): void;
         K2_AttachToComponent(Parent: SceneComponent, SocketName: string, LocationRule: EAttachmentRule, RotationRule: EAttachmentRule, ScaleRule: EAttachmentRule, bWeldSimulatedBodies: boolean): void;
         K2_AttachToActor(ParentActor: Actor, SocketName: string, LocationRule: EAttachmentRule, RotationRule: EAttachmentRule, ScaleRule: EAttachmentRule, bWeldSimulatedBodies: boolean): void;
-        K2_AttachRootComponentToActor(InParentActor: Actor, InSocketName: string, AttachLocationType: number, bWeldSimulatedBodies: boolean): void;
-        K2_AttachRootComponentTo(InParent: SceneComponent, InSocketName: string, AttachLocationType: number, bWeldSimulatedBodies: boolean): void;
+        K2_AttachRootComponentToActor(InParentActor: Actor, InSocketName: string, AttachLocationType: EAttachLocation, bWeldSimulatedBodies: boolean): void;
+        K2_AttachRootComponentTo(InParent: SceneComponent, InSocketName: string, AttachLocationType: EAttachLocation, bWeldSimulatedBodies: boolean): void;
         K2_AddActorWorldTransform(DeltaTransform: Transform, bSweep: boolean, SweepHitResult: $Ref<HitResult>, bTeleport: boolean): void;
         K2_AddActorWorldRotation(DeltaRotation: Rotator, bSweep: boolean, SweepHitResult: $Ref<HitResult>, bTeleport: boolean): void;
         K2_AddActorWorldOffset(DeltaLocation: Vector, bSweep: boolean, SweepHitResult: $Ref<HitResult>, bTeleport: boolean): void;
@@ -9256,13 +9387,13 @@ declare module "ue" {
         GetTransform(): Transform;
         GetTickableWhenPaused(): boolean;
         GetSquaredDistanceTo(OtherActor: Actor): number;
-        GetRemoteRole(): number;
+        GetRemoteRole(): ENetRole;
         GetParentComponent(): ChildActorComponent;
         GetParentActor(): Actor;
         GetOwner(): Actor;
         GetOverlappingComponents(OverlappingComponents: $Ref<TArray<PrimitiveComponent>>): void;
         GetOverlappingActors(OverlappingActors: $Ref<TArray<Actor>>, ClassFilter: Class): void;
-        GetLocalRole(): number;
+        GetLocalRole(): ENetRole;
         GetLifeSpan(): number;
         GetInstigatorController(): Controller;
         GetInstigator(): Pawn;
@@ -9362,16 +9493,19 @@ declare module "ue" {
         static Load(InName: string): NavigationDataChunk;
     }
     
+    enum ELightingBuildQuality { Quality_Preview, Quality_Medium, Quality_High, Quality_Production, Quality_MAX}
     class MapBuildDataRegistry extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        LevelLightingQuality: number;
+        LevelLightingQuality: ELightingBuildQuality;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MapBuildDataRegistry;
         static Load(InName: string): MapBuildDataRegistry;
     }
     
+    enum ETextureSizingType { TextureSizingType_UseSingleTextureSize, TextureSizingType_UseAutomaticBiasedSizes, TextureSizingType_UseManualOverrideTextureSize, TextureSizingType_UseSimplygonAutomaticSizing, TextureSizingType_MAX}
+    enum EMaterialMergeType { MaterialMergeType_Default, MaterialMergeType_Simplygon, MaterialMergeType_MAX}
     class MaterialProxySettings {
-        constructor(TextureSize: IntPoint, GutterSpace: number, MetallicConstant: number, RoughnessConstant: number, SpecularConstant: number, OpacityConstant: number, OpacityMaskConstant: number, AmbientOcclusionConstant: number, TextureSizingType: number, MaterialMergeType: number, BlendMode: number, bAllowTwoSidedMaterial: boolean, bNormalMap: boolean, bMetallicMap: boolean, bRoughnessMap: boolean, bSpecularMap: boolean, bEmissiveMap: boolean, bOpacityMap: boolean, bOpacityMaskMap: boolean, bAmbientOcclusionMap: boolean, DiffuseTextureSize: IntPoint, NormalTextureSize: IntPoint, MetallicTextureSize: IntPoint, RoughnessTextureSize: IntPoint, SpecularTextureSize: IntPoint, EmissiveTextureSize: IntPoint, OpacityTextureSize: IntPoint, OpacityMaskTextureSize: IntPoint, AmbientOcclusionTextureSize: IntPoint);
+        constructor(TextureSize: IntPoint, GutterSpace: number, MetallicConstant: number, RoughnessConstant: number, SpecularConstant: number, OpacityConstant: number, OpacityMaskConstant: number, AmbientOcclusionConstant: number, TextureSizingType: ETextureSizingType, MaterialMergeType: EMaterialMergeType, BlendMode: EBlendMode, bAllowTwoSidedMaterial: boolean, bNormalMap: boolean, bMetallicMap: boolean, bRoughnessMap: boolean, bSpecularMap: boolean, bEmissiveMap: boolean, bOpacityMap: boolean, bOpacityMaskMap: boolean, bAmbientOcclusionMap: boolean, DiffuseTextureSize: IntPoint, NormalTextureSize: IntPoint, MetallicTextureSize: IntPoint, RoughnessTextureSize: IntPoint, SpecularTextureSize: IntPoint, EmissiveTextureSize: IntPoint, OpacityTextureSize: IntPoint, OpacityMaskTextureSize: IntPoint, AmbientOcclusionTextureSize: IntPoint);
         TextureSize: IntPoint;
         GutterSpace: number;
         MetallicConstant: number;
@@ -9380,9 +9514,9 @@ declare module "ue" {
         OpacityConstant: number;
         OpacityMaskConstant: number;
         AmbientOcclusionConstant: number;
-        TextureSizingType: number;
-        MaterialMergeType: number;
-        BlendMode: number;
+        TextureSizingType: ETextureSizingType;
+        MaterialMergeType: EMaterialMergeType;
+        BlendMode: EBlendMode;
         bAllowTwoSidedMaterial: boolean;
         bNormalMap: boolean;
         bMetallicMap: boolean;
@@ -9425,6 +9559,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EVisibilityAggressiveness { VIS_LeastAggressive, VIS_ModeratelyAggressive, VIS_MostAggressive, VIS_Max, VIS_MAX}
     class NavAgentSelector {
         constructor(bSupportsAgent0: boolean, bSupportsAgent1: boolean, bSupportsAgent2: boolean, bSupportsAgent3: boolean, bSupportsAgent4: boolean, bSupportsAgent5: boolean, bSupportsAgent6: boolean, bSupportsAgent7: boolean, bSupportsAgent8: boolean, bSupportsAgent9: boolean, bSupportsAgent10: boolean, bSupportsAgent11: boolean, bSupportsAgent12: boolean, bSupportsAgent13: boolean, bSupportsAgent14: boolean, bSupportsAgent15: boolean);
         bSupportsAgent0: boolean;
@@ -9457,8 +9592,9 @@ declare module "ue" {
         static Load(InName: string): NavigationSystemConfig;
     }
     
+    enum EVolumeLightingMethod { VLM_VolumetricLightmap, VLM_SparseVolumeLightingSamples, VLM_MAX}
     class LightmassWorldInfoSettings {
-        constructor(StaticLightingLevelScale: number, NumIndirectLightingBounces: number, NumSkyLightingBounces: number, IndirectLightingQuality: number, IndirectLightingSmoothness: number, EnvironmentColor: Color, EnvironmentIntensity: number, EmissiveBoost: number, DiffuseBoost: number, VolumeLightingMethod: number, bUseAmbientOcclusion: boolean, bGenerateAmbientOcclusionMaterialMask: boolean, bVisualizeMaterialDiffuse: boolean, bVisualizeAmbientOcclusion: boolean, bCompressLightmaps: boolean, VolumetricLightmapDetailCellSize: number, VolumetricLightmapMaximumBrickMemoryMb: number, VolumetricLightmapSphericalHarmonicSmoothing: number, VolumeLightSamplePlacementScale: number, DirectIlluminationOcclusionFraction: number, IndirectIlluminationOcclusionFraction: number, OcclusionExponent: number, FullyOccludedSamplesFraction: number, MaxOcclusionDistance: number);
+        constructor(StaticLightingLevelScale: number, NumIndirectLightingBounces: number, NumSkyLightingBounces: number, IndirectLightingQuality: number, IndirectLightingSmoothness: number, EnvironmentColor: Color, EnvironmentIntensity: number, EmissiveBoost: number, DiffuseBoost: number, VolumeLightingMethod: EVolumeLightingMethod, bUseAmbientOcclusion: boolean, bGenerateAmbientOcclusionMaterialMask: boolean, bVisualizeMaterialDiffuse: boolean, bVisualizeAmbientOcclusion: boolean, bCompressLightmaps: boolean, VolumetricLightmapDetailCellSize: number, VolumetricLightmapMaximumBrickMemoryMb: number, VolumetricLightmapSphericalHarmonicSmoothing: number, VolumeLightSamplePlacementScale: number, DirectIlluminationOcclusionFraction: number, IndirectIlluminationOcclusionFraction: number, OcclusionExponent: number, FullyOccludedSamplesFraction: number, MaxOcclusionDistance: number);
         StaticLightingLevelScale: number;
         NumIndirectLightingBounces: number;
         NumSkyLightingBounces: number;
@@ -9468,7 +9604,7 @@ declare module "ue" {
         EnvironmentIntensity: number;
         EmissiveBoost: number;
         DiffuseBoost: number;
-        VolumeLightingMethod: number;
+        VolumeLightingMethod: EVolumeLightingMethod;
         bUseAmbientOcclusion: boolean;
         bGenerateAmbientOcclusionMaterialMask: boolean;
         bVisualizeMaterialDiffuse: boolean;
@@ -9486,6 +9622,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ReverbPreset { REVERB_Default, REVERB_Bathroom, REVERB_StoneRoom, REVERB_Auditorium, REVERB_ConcertHall, REVERB_Cave, REVERB_Hallway, REVERB_StoneCorridor, REVERB_Alley, REVERB_Forest, REVERB_City, REVERB_Mountains, REVERB_Quarry, REVERB_Plain, REVERB_ParkingLot, REVERB_SewerPipe, REVERB_Underwater, REVERB_SmallRoom, REVERB_MediumRoom, REVERB_LargeRoom, REVERB_MediumHall, REVERB_LargeHall, REVERB_Plate, REVERB_MAX}
     class ReverbEffect extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Density: number;
@@ -9507,9 +9644,9 @@ declare module "ue" {
     }
     
     class ReverbSettings {
-        constructor(bApplyReverb: boolean, ReverbType: number, ReverbEffect: ReverbEffect, ReverbPluginEffect: SoundEffectSubmixPreset, Volume: number, FadeTime: number);
+        constructor(bApplyReverb: boolean, ReverbType: ReverbPreset, ReverbEffect: ReverbEffect, ReverbPluginEffect: SoundEffectSubmixPreset, Volume: number, FadeTime: number);
         bApplyReverb: boolean;
-        ReverbType: number;
+        ReverbType: ReverbPreset;
         ReverbEffect: ReverbEffect;
         ReverbPluginEffect: SoundEffectSubmixPreset;
         Volume: number;
@@ -9531,8 +9668,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EProxyNormalComputationMethod { AngleWeighted, AreaWeighted, EqualWeighted, EProxyNormalComputationMethod_MAX}
+    enum ELandscapeCullingPrecision { High, Medium, Low, ELandscapeCullingPrecision_MAX}
     class MeshProxySettings {
-        constructor(ScreenSize: number, VoxelSize: number, MaterialSettings: MaterialProxySettings, TextureWidth: number, TextureHeight: number, bExportNormalMap: boolean, bExportMetallicMap: boolean, bExportRoughnessMap: boolean, bExportSpecularMap: boolean, bBakeVertexData: boolean, MergeDistance: number, UnresolvedGeometryColor: Color, MaxRayCastDist: number, HardAngleThreshold: number, LightMapResolution: number, NormalCalculationMethod: number, LandscapeCullingPrecision: number, bCalculateCorrectLODModel: boolean, bOverrideVoxelSize: boolean, bOverrideTransferDistance: boolean, bUseHardAngleThreshold: boolean, bComputeLightMapResolution: boolean, bRecalculateNormals: boolean, bUseLandscapeCulling: boolean, bAllowAdjacency: boolean, bAllowDistanceField: boolean, bReuseMeshLightmapUVs: boolean, bCreateCollision: boolean, bAllowVertexColors: boolean, bGenerateLightmapUVs: boolean);
+        constructor(ScreenSize: number, VoxelSize: number, MaterialSettings: MaterialProxySettings, TextureWidth: number, TextureHeight: number, bExportNormalMap: boolean, bExportMetallicMap: boolean, bExportRoughnessMap: boolean, bExportSpecularMap: boolean, bBakeVertexData: boolean, MergeDistance: number, UnresolvedGeometryColor: Color, MaxRayCastDist: number, HardAngleThreshold: number, LightMapResolution: number, NormalCalculationMethod: EProxyNormalComputationMethod, LandscapeCullingPrecision: ELandscapeCullingPrecision, bCalculateCorrectLODModel: boolean, bOverrideVoxelSize: boolean, bOverrideTransferDistance: boolean, bUseHardAngleThreshold: boolean, bComputeLightMapResolution: boolean, bRecalculateNormals: boolean, bUseLandscapeCulling: boolean, bAllowAdjacency: boolean, bAllowDistanceField: boolean, bReuseMeshLightmapUVs: boolean, bCreateCollision: boolean, bAllowVertexColors: boolean, bGenerateLightmapUVs: boolean);
         ScreenSize: number;
         VoxelSize: number;
         MaterialSettings: MaterialProxySettings;
@@ -9548,8 +9687,8 @@ declare module "ue" {
         MaxRayCastDist: number;
         HardAngleThreshold: number;
         LightMapResolution: number;
-        NormalCalculationMethod: number;
-        LandscapeCullingPrecision: number;
+        NormalCalculationMethod: EProxyNormalComputationMethod;
+        LandscapeCullingPrecision: ELandscapeCullingPrecision;
         bCalculateCorrectLODModel: boolean;
         bOverrideVoxelSize: boolean;
         bOverrideTransferDistance: boolean;
@@ -9659,7 +9798,7 @@ declare module "ue" {
     class WorldSettings extends Info {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         VisibilityCellSize: number;
-        VisibilityAggressiveness: number;
+        VisibilityAggressiveness: EVisibilityAggressiveness;
         bPrecomputeVisibility: boolean;
         bPlaceCellsOnlyAlongCameraTracks: boolean;
         bEnableWorldBoundsChecks: boolean;
@@ -9837,12 +9976,13 @@ declare module "ue" {
         static Load(InName: string): PhysicsCollisionHandler;
     }
     
+    enum EStreamingVolumeUsage { SVB_Loading, SVB_LoadingAndVisibility, SVB_VisibilityBlockingOnLoad, SVB_BlockingOnLoad, SVB_LoadingNotVisible, SVB_MAX}
     class LevelStreamingVolume extends Volume {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         StreamingLevelNames: TArray<string>;
         bEditorPreVisOnly: boolean;
         bDisabled: boolean;
-        StreamingUsage: number;
+        StreamingUsage: EStreamingVolumeUsage;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): LevelStreamingVolume;
         static Load(InName: string): LevelStreamingVolume;
@@ -10632,9 +10772,10 @@ declare module "ue" {
         static Load(InName: string): ButtonWidgetStyle;
     }
     
+    enum ESlateCheckBoxType { CheckBox, ToggleButton, ESlateCheckBoxType_MAX}
     class CheckBoxStyle extends SlateWidgetStyle {
-        constructor(CheckBoxType: number, UncheckedImage: SlateBrush, UncheckedHoveredImage: SlateBrush, UncheckedPressedImage: SlateBrush, CheckedImage: SlateBrush, CheckedHoveredImage: SlateBrush, CheckedPressedImage: SlateBrush, UndeterminedImage: SlateBrush, UndeterminedHoveredImage: SlateBrush, UndeterminedPressedImage: SlateBrush, Padding: Margin, ForegroundColor: SlateColor, BorderBackgroundColor: SlateColor, CheckedSlateSound: SlateSound, UncheckedSlateSound: SlateSound, HoveredSlateSound: SlateSound, CheckedSound: string, UncheckedSound: string, HoveredSound: string);
-        CheckBoxType: number;
+        constructor(CheckBoxType: ESlateCheckBoxType, UncheckedImage: SlateBrush, UncheckedHoveredImage: SlateBrush, UncheckedPressedImage: SlateBrush, CheckedImage: SlateBrush, CheckedHoveredImage: SlateBrush, CheckedPressedImage: SlateBrush, UndeterminedImage: SlateBrush, UndeterminedHoveredImage: SlateBrush, UndeterminedPressedImage: SlateBrush, Padding: Margin, ForegroundColor: SlateColor, BorderBackgroundColor: SlateColor, CheckedSlateSound: SlateSound, UncheckedSlateSound: SlateSound, HoveredSlateSound: SlateSound, CheckedSound: string, UncheckedSound: string, HoveredSound: string);
+        CheckBoxType: ESlateCheckBoxType;
         UncheckedImage: SlateBrush;
         UncheckedHoveredImage: SlateBrush;
         UncheckedPressedImage: SlateBrush;
@@ -10877,6 +11018,7 @@ declare module "ue" {
     }
     
     enum EColorVisionDeficiency { NormalVision, Deuteranope, Protanope, Tritanope, EColorVisionDeficiency_MAX}
+    enum ELogTimes { None, UTC, SinceGStartTime, Local, ELogTimes_MAX}
     enum EAssetEditorOpenLocation { Default, NewWindow, MainWindow, ContentBrowser, LastDockedWindowOrNewWindow, LastDockedWindowOrMainWindow, LastDockedWindowOrContentBrowser, EAssetEditorOpenLocation_MAX}
     class EditorStyleSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -10914,7 +11056,7 @@ declare module "ue" {
         bShowAllAdvancedDetails: boolean;
         bShowHiddenPropertiesWhilePlaying: boolean;
         LogFontSize: number;
-        LogTimestampMode: number;
+        LogTimestampMode: ELogTimes;
         bPromoteOutputLogWarningsDuringPIE: boolean;
         AssetEditorOpenLocation: EAssetEditorOpenLocation;
         bEnableColorizedEditorTabs: boolean;
@@ -11100,6 +11242,8 @@ declare module "ue" {
         static Load(InName: string): ConsoleSettings;
     }
     
+    enum ETwoPlayerSplitScreenType { Horizontal, Vertical, ETwoPlayerSplitScreenType_MAX}
+    enum EThreePlayerSplitScreenType { FavorTop, FavorBottom, Vertical, Horizontal, EThreePlayerSplitScreenType_MAX}
     enum EFourPlayerSplitScreenType { Grid, Vertical, Horizontal, EFourPlayerSplitScreenType_MAX}
     class GameModeName {
         constructor(Name: string, GameMode: SoftClassPath);
@@ -11114,8 +11258,8 @@ declare module "ue" {
         LocalMapOptions: string;
         TransitionMap: SoftObjectPath;
         bUseSplitscreen: boolean;
-        TwoPlayerSplitscreenLayout: number;
-        ThreePlayerSplitscreenLayout: number;
+        TwoPlayerSplitscreenLayout: ETwoPlayerSplitScreenType;
+        ThreePlayerSplitscreenLayout: EThreePlayerSplitScreenType;
         FourPlayerSplitscreenLayout: EFourPlayerSplitScreenType;
         bOffsetPlayerGamepadIds: boolean;
         GameInstanceClass: SoftClassPath;
@@ -12693,18 +12837,20 @@ declare module "ue" {
         static Load(InName: string): NavigationInvokerComponent;
     }
     
+    enum ENavPathEvent { Cleared, NewPath, UpdatedDueToGoalMoved, UpdatedDueToNavigationChanged, Invalidated, RePathFailed, MetaPathUpdate, Custom, ENavPathEvent_MAX}
+    enum ENavigationOptionFlag { Default, Enable, Disable, MAX}
     class NavigationPath extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        PathUpdatedNotifier: $MulticastDelegate<(AffectedPath: NavigationPath, PathEvent: number) => void>;
+        PathUpdatedNotifier: $MulticastDelegate<(AffectedPath: NavigationPath, PathEvent: ENavPathEvent) => void>;
         PathPoints: TArray<Vector>;
-        RecalculateOnInvalidation: number;
+        RecalculateOnInvalidation: ENavigationOptionFlag;
         IsValid(): boolean;
         IsStringPulled(): boolean;
         IsPartial(): boolean;
         GetPathLength(): number;
         GetPathCost(): number;
         GetDebugString(): string;
-        EnableRecalculationOnInvalidation(DoRecalculation: number): void;
+        EnableRecalculationOnInvalidation(DoRecalculation: ENavigationOptionFlag): void;
         EnableDebugDrawing(bShouldDrawDebugData: boolean, PathColor: LinearColor): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): NavigationPath;
@@ -12770,6 +12916,7 @@ declare module "ue" {
         static Load(InName: string): NavMeshBoundsVolume;
     }
     
+    enum ENavigationQueryResult { Invalid, Error, Fail, Success, ENavigationQueryResult_MAX}
     class NavigationSystemV1 extends NavigationSystemBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MainNavData: NavigationData;
@@ -12814,8 +12961,8 @@ declare module "ue" {
         static IsNavigationBeingBuilt(WorldContextObject: Object): boolean;
         static GetRandomReachablePointInRadius(WorldContextObject: Object, Origin: Vector, Radius: number, NavData: NavigationData, FilterClass: Class): Vector;
         static GetRandomPointInNavigableRadius(WorldContextObject: Object, Origin: Vector, Radius: number, NavData: NavigationData, FilterClass: Class): Vector;
-        static GetPathLength(WorldContextObject: Object, PathStart: Vector, PathEnd: Vector, PathLength: $Ref<number>, NavData: NavigationData, FilterClass: Class): number;
-        static GetPathCost(WorldContextObject: Object, PathStart: Vector, PathEnd: Vector, PathCost: $Ref<number>, NavData: NavigationData, FilterClass: Class): number;
+        static GetPathLength(WorldContextObject: Object, PathStart: Vector, PathEnd: Vector, PathLength: $Ref<number>, NavData: NavigationData, FilterClass: Class): ENavigationQueryResult;
+        static GetPathCost(WorldContextObject: Object, PathStart: Vector, PathEnd: Vector, PathCost: $Ref<number>, NavData: NavigationData, FilterClass: Class): ENavigationQueryResult;
         static GetNavigationSystem(WorldContextObject: Object): NavigationSystemV1;
         static FindPathToLocationSynchronously(WorldContextObject: Object, PathStart: Vector, PathEnd: Vector, PathfindingContext: Actor, FilterClass: Class): NavigationPath;
         static FindPathToActorSynchronously(WorldContextObject: Object, PathStart: Vector, GoalActor: Actor, TetherDistance: number, PathfindingContext: Actor, FilterClass: Class): NavigationPath;
@@ -12842,6 +12989,7 @@ declare module "ue" {
         static Load(InName: string): NavTestRenderingComponent;
     }
     
+    enum ENavCostDisplay { TotalCost, HeuristicOnly, RealCostOnly, ENavCostDisplay_MAX}
     class NavigationTestingActor extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CapsuleComponent: CapsuleComponent;
@@ -12862,7 +13010,7 @@ declare module "ue" {
         bShowBestPath: boolean;
         bShowDiffWithPreviousStep: boolean;
         bShouldBeVisibleInGame: boolean;
-        CostDisplayMode: number;
+        CostDisplayMode: ENavCostDisplay;
         TextCanvasOffset: Vector2D;
         bPathExist: boolean;
         bPathIsPartial: boolean;
@@ -12879,8 +13027,9 @@ declare module "ue" {
         static Load(InName: string): NavigationTestingActor;
     }
     
+    enum ENavLinkDirection { BothWays, LeftToRight, RightToLeft, ENavLinkDirection_MAX}
     class NavigationLinkBase {
-        constructor(LeftProjectHeight: number, MaxFallDownLength: number, SnapRadius: number, SnapHeight: number, SupportedAgents: NavAgentSelector, bSupportsAgent0: boolean, bSupportsAgent1: boolean, bSupportsAgent2: boolean, bSupportsAgent3: boolean, bSupportsAgent4: boolean, bSupportsAgent5: boolean, bSupportsAgent6: boolean, bSupportsAgent7: boolean, bSupportsAgent8: boolean, bSupportsAgent9: boolean, bSupportsAgent10: boolean, bSupportsAgent11: boolean, bSupportsAgent12: boolean, bSupportsAgent13: boolean, bSupportsAgent14: boolean, bSupportsAgent15: boolean, Description: string, Direction: number, bUseSnapHeight: boolean, bSnapToCheapestArea: boolean, bCustomFlag0: boolean, bCustomFlag1: boolean, bCustomFlag2: boolean, bCustomFlag3: boolean, bCustomFlag4: boolean, bCustomFlag5: boolean, bCustomFlag6: boolean, bCustomFlag7: boolean, AreaClass: Class);
+        constructor(LeftProjectHeight: number, MaxFallDownLength: number, SnapRadius: number, SnapHeight: number, SupportedAgents: NavAgentSelector, bSupportsAgent0: boolean, bSupportsAgent1: boolean, bSupportsAgent2: boolean, bSupportsAgent3: boolean, bSupportsAgent4: boolean, bSupportsAgent5: boolean, bSupportsAgent6: boolean, bSupportsAgent7: boolean, bSupportsAgent8: boolean, bSupportsAgent9: boolean, bSupportsAgent10: boolean, bSupportsAgent11: boolean, bSupportsAgent12: boolean, bSupportsAgent13: boolean, bSupportsAgent14: boolean, bSupportsAgent15: boolean, Description: string, Direction: ENavLinkDirection, bUseSnapHeight: boolean, bSnapToCheapestArea: boolean, bCustomFlag0: boolean, bCustomFlag1: boolean, bCustomFlag2: boolean, bCustomFlag3: boolean, bCustomFlag4: boolean, bCustomFlag5: boolean, bCustomFlag6: boolean, bCustomFlag7: boolean, AreaClass: Class);
         LeftProjectHeight: number;
         MaxFallDownLength: number;
         SnapRadius: number;
@@ -12903,7 +13052,7 @@ declare module "ue" {
         bSupportsAgent14: boolean;
         bSupportsAgent15: boolean;
         Description: string;
-        Direction: number;
+        Direction: ENavLinkDirection;
         bUseSnapHeight: boolean;
         bSnapToCheapestArea: boolean;
         bCustomFlag0: boolean;
@@ -12951,7 +13100,7 @@ declare module "ue" {
         SupportedAgents: NavAgentSelector;
         LinkRelativeStart: Vector;
         LinkRelativeEnd: Vector;
-        LinkDirection: number;
+        LinkDirection: ENavLinkDirection;
         bLinkEnabled: boolean;
         bNotifyWhenEnabled: boolean;
         bNotifyWhenDisabled: boolean;
@@ -12961,7 +13110,7 @@ declare module "ue" {
         ObstacleAreaClass: Class;
         BroadcastRadius: number;
         BroadcastInterval: number;
-        BroadcastChannel: number;
+        BroadcastChannel: ECollisionChannel;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): NavLinkCustomComponent;
         static Load(InName: string): NavLinkCustomComponent;
@@ -13067,6 +13216,7 @@ declare module "ue" {
         static Load(InName: string): RecastFilter_UseDefaultArea;
     }
     
+    enum ERecastPartitioning { Monotone, Watershed, ChunkyMonotone, ERecastPartitioning_MAX}
     class RecastNavMesh extends NavigationData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bDrawTriangleEdges: boolean;
@@ -13110,8 +13260,8 @@ declare module "ue" {
         DefaultDrawDistance: number;
         DefaultMaxSearchNodes: number;
         DefaultMaxHierarchicalSearchNodes: number;
-        RegionPartitioning: number;
-        LayerPartitioning: number;
+        RegionPartitioning: ERecastPartitioning;
+        LayerPartitioning: ERecastPartitioning;
         RegionChunkSplits: number;
         LayerChunkSplits: number;
         bSortNavigationAreasByCost: boolean;
@@ -13442,12 +13592,13 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EHDRCaptureGamut { HCGM_Rec709, HCGM_P3DCI, HCGM_Rec2020, HCGM_ACES, HCGM_ACEScg, HCGM_Linear, HCGM_MAX}
     class CompositionGraphCaptureProtocol extends MovieSceneImageCaptureProtocolBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         IncludeRenderPasses: CompositionGraphCapturePasses;
         bCaptureFramesInHDR: boolean;
         HDRCompressionQuality: number;
-        CaptureGamut: number;
+        CaptureGamut: EHDRCaptureGamut;
         PostProcessingMaterial: SoftObjectPath;
         bDisableScreenPercentage: boolean;
         PostProcessingMaterialPtr: MaterialInterface;
@@ -13502,7 +13653,7 @@ declare module "ue" {
     class ImageSequenceProtocol_EXR extends ImageSequenceProtocol {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bCompressed: boolean;
-        CaptureGamut: number;
+        CaptureGamut: EHDRCaptureGamut;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ImageSequenceProtocol_EXR;
         static Load(InName: string): ImageSequenceProtocol_EXR;
@@ -13703,6 +13854,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EMovieScenePlayerStatus { Stopped, Playing, Recording, Scrubbing, Jumping, Stepping, Paused, MAX}
     class MovieSceneRootEvaluationTemplateInstance {
         constructor(DirectorInstances: TMap<MovieSceneSequenceID, Object>);
         DirectorInstances: TMap<MovieSceneSequenceID, Object>;
@@ -13710,9 +13862,9 @@ declare module "ue" {
     }
     
     class MovieSceneSequenceReplProperties {
-        constructor(LastKnownPosition: FrameTime, LastKnownStatus: number, LastKnownNumLoops: number);
+        constructor(LastKnownPosition: FrameTime, LastKnownStatus: EMovieScenePlayerStatus, LastKnownNumLoops: number);
         LastKnownPosition: FrameTime;
-        LastKnownStatus: number;
+        LastKnownStatus: EMovieScenePlayerStatus;
         LastKnownNumLoops: number;
         static StaticClass(): Class;
     }
@@ -13739,7 +13891,7 @@ declare module "ue" {
         OnStop: $MulticastDelegate<() => void>;
         OnPause: $MulticastDelegate<() => void>;
         OnFinished: $MulticastDelegate<() => void>;
-        Status: number;
+        Status: EMovieScenePlayerStatus;
         bReversePlayback: boolean;
         Sequence: MovieSceneSequence;
         StartTime: FrameNumber;
@@ -13862,9 +14014,9 @@ declare module "ue" {
     }
     
     class LevelSequenceCameraSettings {
-        constructor(bOverrideAspectRatioAxisConstraint: boolean, AspectRatioAxisConstraint: number);
+        constructor(bOverrideAspectRatioAxisConstraint: boolean, AspectRatioAxisConstraint: EAspectRatioAxisConstraint);
         bOverrideAspectRatioAxisConstraint: boolean;
-        AspectRatioAxisConstraint: number;
+        AspectRatioAxisConstraint: EAspectRatioAxisConstraint;
         static StaticClass(): Class;
     }
     
@@ -13979,20 +14131,20 @@ declare module "ue" {
     }
     
     class MovieSceneTangentData {
-        constructor(ArriveTangent: number, LeaveTangent: number, TangentWeightMode: number, ArriveTangentWeight: number, LeaveTangentWeight: number);
+        constructor(ArriveTangent: number, LeaveTangent: number, TangentWeightMode: ERichCurveTangentWeightMode, ArriveTangentWeight: number, LeaveTangentWeight: number);
         ArriveTangent: number;
         LeaveTangent: number;
-        TangentWeightMode: number;
+        TangentWeightMode: ERichCurveTangentWeightMode;
         ArriveTangentWeight: number;
         LeaveTangentWeight: number;
         static StaticClass(): Class;
     }
     
     class MovieSceneFloatValue {
-        constructor(Value: number, InterpMode: number, TangentMode: number, Tangent: MovieSceneTangentData);
+        constructor(Value: number, InterpMode: ERichCurveInterpMode, TangentMode: ERichCurveTangentMode, Tangent: MovieSceneTangentData);
         Value: number;
-        InterpMode: number;
-        TangentMode: number;
+        InterpMode: ERichCurveInterpMode;
+        TangentMode: ERichCurveTangentMode;
         Tangent: MovieSceneTangentData;
         static StaticClass(): Class;
     }
@@ -14202,9 +14354,9 @@ declare module "ue" {
     }
     
     class MovieSceneFloatChannel extends MovieSceneChannel {
-        constructor(PreInfinityExtrap: number, PostInfinityExtrap: number, Times: TArray<FrameNumber>, Values: TArray<MovieSceneFloatValue>, DefaultValue: number, bHasDefaultValue: boolean, KeyHandles: MovieSceneKeyHandleMap, TickResolution: FrameRate);
-        PreInfinityExtrap: number;
-        PostInfinityExtrap: number;
+        constructor(PreInfinityExtrap: ERichCurveExtrapolation, PostInfinityExtrap: ERichCurveExtrapolation, Times: TArray<FrameNumber>, Values: TArray<MovieSceneFloatValue>, DefaultValue: number, bHasDefaultValue: boolean, KeyHandles: MovieSceneKeyHandleMap, TickResolution: FrameRate);
+        PreInfinityExtrap: ERichCurveExtrapolation;
+        PostInfinityExtrap: ERichCurveExtrapolation;
         Times: TArray<FrameNumber>;
         Values: TArray<MovieSceneFloatValue>;
         DefaultValue: number;
@@ -14269,6 +14421,9 @@ declare module "ue" {
     enum EAllowEditsMode { AllEdits, AllowSequencerEditsOnly, AllowLevelEditsOnly, EAllowEditsMode_MAX}
     enum EKeyGroupMode { KeyChanged, KeyGroup, KeyAll, EKeyGroupMode_MAX}
     enum EMovieSceneKeyInterpolation { Auto, User, Break, Linear, Constant, EMovieSceneKeyInterpolation_MAX}
+    enum ESequencerSpawnPosition { SSP_Origin, SSP_PlaceInFrontOfCamera, SSP_MAX}
+    enum ESequencerZoomPosition { SZP_CurrentTime, SZP_MousePosition, SZP_MAX}
+    enum ESequencerLoopMode { SLM_NoLoop, SLM_Loop, SLM_LoopSelectionRange, SLM_MAX}
     enum EFrameNumberDisplayFormats { NonDropFrameTimecode, DropFrameTimecode, Seconds, Frames, MAX_Count, EFrameNumberDisplayFormats_MAX}
     class SequencerSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -14278,7 +14433,7 @@ declare module "ue" {
         bKeyInterpPropertiesOnly: boolean;
         KeyInterpolation: EMovieSceneKeyInterpolation;
         bAutoSetTrackDefaults: boolean;
-        SpawnPosition: number;
+        SpawnPosition: ESequencerSpawnPosition;
         bCreateSpawnableCameras: boolean;
         bShowRangeSlider: boolean;
         bIsSnapEnabled: boolean;
@@ -14295,12 +14450,12 @@ declare module "ue" {
         bLabelBrowserVisible: boolean;
         bShowSelectedNodesOnly: boolean;
         bRewindOnRecord: boolean;
-        ZoomPosition: number;
+        ZoomPosition: ESequencerZoomPosition;
         bAutoScrollEnabled: boolean;
         bLinkCurveEditorTimeRange: boolean;
         bSynchronizeCurveEditorSelection: boolean;
         bIsolateCurveEditorToSelection: boolean;
-        LoopMode: number;
+        LoopMode: ESequencerLoopMode;
         bKeepCursorInPlayRangeWhileScrubbing: boolean;
         bKeepCursorInPlayRange: boolean;
         bKeepPlayRangeInSectionBounds: boolean;
@@ -14422,13 +14577,15 @@ declare module "ue" {
         static Load(InName: string): EditorWorldExtension;
     }
     
+    enum EHorizTextAligment { EHTA_Left, EHTA_Center, EHTA_Right, EHTA_MAX}
+    enum EVerticalTextAligment { EVRTA_TextTop, EVRTA_TextCenter, EVRTA_TextBottom, EVRTA_QuadTop, EVRTA_MAX}
     class TextRenderComponent extends PrimitiveComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Text: string;
         TextMaterial: MaterialInterface;
         Font: Font;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
+        HorizontalAlignment: EHorizTextAligment;
+        VerticalAlignment: EVerticalTextAligment;
         TextRenderColor: Color;
         XScale: number;
         YScale: number;
@@ -14441,12 +14598,12 @@ declare module "ue" {
         SetXScale(Value: number): void;
         SetWorldSize(Value: number): void;
         SetVertSpacingAdjust(Value: number): void;
-        SetVerticalAlignment(Value: number): void;
+        SetVerticalAlignment(Value: EVerticalTextAligment): void;
         SetTextRenderColor(Value: Color): void;
         SetTextMaterial(Material: MaterialInterface): void;
         SetText(Value: string): void;
         SetHorizSpacingAdjust(Value: number): void;
-        SetHorizontalAlignment(Value: number): void;
+        SetHorizontalAlignment(Value: EHorizTextAligment): void;
         SetFont(Value: Font): void;
         K2_SetText(Value: string): void;
         GetTextWorldSize(): Vector;
@@ -14527,22 +14684,24 @@ declare module "ue" {
         static Load(InName: string): TextureRenderTarget;
     }
     
+    enum ETextureRenderTargetFormat { RTF_R8, RTF_RG8, RTF_RGBA8, RTF_RGBA8_SRGB, RTF_R16f, RTF_RG16f, RTF_RGBA16f, RTF_R32f, RTF_RG32f, RTF_RGBA32f, RTF_RGB10A2, RTF_MAX}
+    enum EPixelFormat { PF_Unknown, PF_A32B32G32R32F, PF_B8G8R8A8, PF_G8, PF_G16, PF_DXT1, PF_DXT3, PF_DXT5, PF_UYVY, PF_FloatRGB, PF_FloatRGBA, PF_DepthStencil, PF_ShadowDepth, PF_R32_FLOAT, PF_G16R16, PF_G16R16F, PF_G16R16F_FILTER, PF_G32R32F, PF_A2B10G10R10, PF_A16B16G16R16, PF_D24, PF_R16F, PF_R16F_FILTER, PF_BC5, PF_V8U8, PF_A1, PF_FloatR11G11B10, PF_A8, PF_R32_UINT, PF_R32_SINT, PF_PVRTC2, PF_PVRTC4, PF_R16_UINT, PF_R16_SINT, PF_R16G16B16A16_UINT, PF_R16G16B16A16_SINT, PF_R5G6B5_UNORM, PF_R8G8B8A8, PF_A8R8G8B8, PF_BC4, PF_R8G8, PF_ATC_RGB, PF_ATC_RGBA_E, PF_ATC_RGBA_I, PF_X24_G8, PF_ETC1, PF_ETC2_RGB, PF_ETC2_RGBA, PF_R32G32B32A32_UINT, PF_R16G16_UINT, PF_ASTC_4x4, PF_ASTC_6x6, PF_ASTC_8x8, PF_ASTC_10x10, PF_ASTC_12x12, PF_BC6H, PF_BC7, PF_R8_UINT, PF_L8, PF_XGXR8, PF_R8G8B8A8_UINT, PF_R8G8B8A8_SNORM, PF_R16G16B16A16_UNORM, PF_R16G16B16A16_SNORM, PF_PLATFORM_HDR_0, PF_PLATFORM_HDR_1, PF_PLATFORM_HDR_2, PF_NV12, PF_R32G32_UINT, PF_MAX}
     class TextureRenderTarget2D extends TextureRenderTarget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SizeX: number;
         SizeY: number;
         ClearColor: LinearColor;
-        AddressX: number;
-        AddressY: number;
+        AddressX: TextureAddress;
+        AddressY: TextureAddress;
         bForceLinearGamma: boolean;
         bHDR: boolean;
         bGPUSharedFlag: boolean;
-        RenderTargetFormat: number;
+        RenderTargetFormat: ETextureRenderTargetFormat;
         bAutoGenerateMips: boolean;
-        MipsSamplerFilter: number;
-        MipsAddressU: number;
-        MipsAddressV: number;
-        OverrideFormat: number;
+        MipsSamplerFilter: TextureFilter;
+        MipsAddressU: TextureAddress;
+        MipsAddressV: TextureAddress;
+        OverrideFormat: EPixelFormat;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TextureRenderTarget2D;
         static Load(InName: string): TextureRenderTarget2D;
@@ -14694,9 +14853,9 @@ declare module "ue" {
     }
     
     class ViewportActionKeyInput {
-        constructor(ActionType: string, Event: number, bIsInputCaptured: boolean);
+        constructor(ActionType: string, Event: EInputEvent, bIsInputCaptured: boolean);
         ActionType: string;
-        Event: number;
+        Event: EInputEvent;
         bIsInputCaptured: boolean;
         static StaticClass(): Class;
     }
@@ -14819,7 +14978,7 @@ declare module "ue" {
         SetDraggingMode(NewDraggingMode: EViewportInteractionDraggingMode): void;
         SetCanCarry(bInCanCarry: boolean): void;
         IsHoveringOverGizmo(): boolean;
-        HandleInputKey_BP(Action: ViewportActionKeyInput, Key: Key, Event: number, bOutWasHandled: $Ref<boolean>): void;
+        HandleInputKey_BP(Action: ViewportActionKeyInput, Key: Key, Event: EInputEvent, bOutWasHandled: $Ref<boolean>): void;
         HandleInputAxis_BP(Action: ViewportActionKeyInput, Key: Key, Delta: number, DeltaTime: number, bOutWasHandled: $Ref<boolean>): void;
         GetWorldInteraction(): ViewportWorldInteraction;
         GetTransformAndForwardVector(OutHandTransform: $Ref<Transform>, OutForwardVector: $Ref<Vector>): boolean;
@@ -14868,12 +15027,12 @@ declare module "ue" {
     }
     
     class InterpCurvePointQuat {
-        constructor(InVal: number, OutVal: Quat, ArriveTangent: Quat, LeaveTangent: Quat, InterpMode: number);
+        constructor(InVal: number, OutVal: Quat, ArriveTangent: Quat, LeaveTangent: Quat, InterpMode: EInterpCurveMode);
         InVal: number;
         OutVal: Quat;
         ArriveTangent: Quat;
         LeaveTangent: Quat;
-        InterpMode: number;
+        InterpMode: EInterpCurveMode;
         static StaticClass(): Class;
     }
     
@@ -14886,12 +15045,12 @@ declare module "ue" {
     }
     
     class InterpCurvePointFloat {
-        constructor(InVal: number, OutVal: number, ArriveTangent: number, LeaveTangent: number, InterpMode: number);
+        constructor(InVal: number, OutVal: number, ArriveTangent: number, LeaveTangent: number, InterpMode: EInterpCurveMode);
         InVal: number;
         OutVal: number;
         ArriveTangent: number;
         LeaveTangent: number;
-        InterpMode: number;
+        InterpMode: EInterpCurveMode;
         static StaticClass(): Class;
     }
     
@@ -14920,15 +15079,17 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESplineCoordinateSpace { Local, World, ESplineCoordinateSpace_MAX}
+    enum ESplinePointType { Linear, Curve, Constant, CurveClamped, CurveCustomTangent, ESplinePointType_MAX}
     class SplinePoint {
-        constructor(InputKey: number, Position: Vector, ArriveTangent: Vector, LeaveTangent: Vector, Rotation: Rotator, Scale: Vector, Type: number);
+        constructor(InputKey: number, Position: Vector, ArriveTangent: Vector, LeaveTangent: Vector, Rotation: Rotator, Scale: Vector, Type: ESplinePointType);
         InputKey: number;
         Position: Vector;
         ArriveTangent: Vector;
         LeaveTangent: Vector;
         Rotation: Rotator;
         Scale: Vector;
-        Type: number;
+        Type: ESplinePointType;
         static StaticClass(): Class;
     }
     
@@ -14958,18 +15119,18 @@ declare module "ue" {
         ScaleVisualizationWidth: number;
         UpdateSpline(): void;
         SetWorldLocationAtSplinePoint(PointIndex: number, InLocation: Vector): void;
-        SetUpVectorAtSplinePoint(PointIndex: number, InUpVector: Vector, CoordinateSpace: number, bUpdateSpline: boolean): void;
+        SetUpVectorAtSplinePoint(PointIndex: number, InUpVector: Vector, CoordinateSpace: ESplineCoordinateSpace, bUpdateSpline: boolean): void;
         SetUnselectedSplineSegmentColor(SegmentColor: LinearColor): void;
-        SetTangentsAtSplinePoint(PointIndex: number, InArriveTangent: Vector, InLeaveTangent: Vector, CoordinateSpace: number, bUpdateSpline: boolean): void;
-        SetTangentAtSplinePoint(PointIndex: number, InTangent: Vector, CoordinateSpace: number, bUpdateSpline: boolean): void;
+        SetTangentsAtSplinePoint(PointIndex: number, InArriveTangent: Vector, InLeaveTangent: Vector, CoordinateSpace: ESplineCoordinateSpace, bUpdateSpline: boolean): void;
+        SetTangentAtSplinePoint(PointIndex: number, InTangent: Vector, CoordinateSpace: ESplineCoordinateSpace, bUpdateSpline: boolean): void;
         SetSplineWorldPoints(Points: TArray<Vector>): void;
-        SetSplinePointType(PointIndex: number, Type: number, bUpdateSpline: boolean): void;
-        SetSplinePoints(Points: TArray<Vector>, CoordinateSpace: number, bUpdateSpline: boolean): void;
+        SetSplinePointType(PointIndex: number, Type: ESplinePointType, bUpdateSpline: boolean): void;
+        SetSplinePoints(Points: TArray<Vector>, CoordinateSpace: ESplineCoordinateSpace, bUpdateSpline: boolean): void;
         SetSplineLocalPoints(Points: TArray<Vector>): void;
         SetSelectedSplineSegmentColor(SegmentColor: LinearColor): void;
-        SetLocationAtSplinePoint(PointIndex: number, InLocation: Vector, CoordinateSpace: number, bUpdateSpline: boolean): void;
+        SetLocationAtSplinePoint(PointIndex: number, InLocation: Vector, CoordinateSpace: ESplineCoordinateSpace, bUpdateSpline: boolean): void;
         SetDrawDebug(bShow: boolean): void;
-        SetDefaultUpVector(UpVector: Vector, CoordinateSpace: number): void;
+        SetDefaultUpVector(UpVector: Vector, CoordinateSpace: ESplineCoordinateSpace): void;
         SetClosedLoopAtPosition(bInClosedLoop: boolean, Key: number, bUpdateSpline: boolean): void;
         SetClosedLoop(bInClosedLoop: boolean, bUpdateSpline: boolean): void;
         RemoveSplinePoint(Index: number, bUpdateSpline: boolean): void;
@@ -14984,69 +15145,69 @@ declare module "ue" {
         GetWorldDirectionAtDistanceAlongSpline(Distance: number): Vector;
         GetVectorPropertyAtSplinePoint(Index: number, PropertyName: string): Vector;
         GetVectorPropertyAtSplineInputKey(InKey: number, PropertyName: string): Vector;
-        GetUpVectorAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean): Vector;
-        GetUpVectorAtSplinePoint(PointIndex: number, CoordinateSpace: number): Vector;
-        GetUpVectorAtSplineInputKey(InKey: number, CoordinateSpace: number): Vector;
-        GetUpVectorAtDistanceAlongSpline(Distance: number, CoordinateSpace: number): Vector;
-        GetTransformAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean, bUseScale: boolean): Transform;
-        GetTransformAtSplinePoint(PointIndex: number, CoordinateSpace: number, bUseScale: boolean): Transform;
-        GetTransformAtSplineInputKey(InKey: number, CoordinateSpace: number, bUseScale: boolean): Transform;
-        GetTransformAtDistanceAlongSpline(Distance: number, CoordinateSpace: number, bUseScale: boolean): Transform;
-        GetTangentAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean): Vector;
-        GetTangentAtSplinePoint(PointIndex: number, CoordinateSpace: number): Vector;
-        GetTangentAtSplineInputKey(InKey: number, CoordinateSpace: number): Vector;
-        GetTangentAtDistanceAlongSpline(Distance: number, CoordinateSpace: number): Vector;
-        GetSplinePointType(PointIndex: number): number;
+        GetUpVectorAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean): Vector;
+        GetUpVectorAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetUpVectorAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetUpVectorAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetTransformAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean, bUseScale: boolean): Transform;
+        GetTransformAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace, bUseScale: boolean): Transform;
+        GetTransformAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace, bUseScale: boolean): Transform;
+        GetTransformAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace, bUseScale: boolean): Transform;
+        GetTangentAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean): Vector;
+        GetTangentAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetTangentAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetTangentAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetSplinePointType(PointIndex: number): ESplinePointType;
         GetSplineLength(): number;
         GetScaleAtTime(Time: number, bUseConstantVelocity: boolean): Vector;
         GetScaleAtSplinePoint(PointIndex: number): Vector;
         GetScaleAtSplineInputKey(InKey: number): Vector;
         GetScaleAtDistanceAlongSpline(Distance: number): Vector;
-        GetRotationAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean): Rotator;
-        GetRotationAtSplinePoint(PointIndex: number, CoordinateSpace: number): Rotator;
-        GetRotationAtSplineInputKey(InKey: number, CoordinateSpace: number): Rotator;
-        GetRotationAtDistanceAlongSpline(Distance: number, CoordinateSpace: number): Rotator;
-        GetRollAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean): number;
-        GetRollAtSplinePoint(PointIndex: number, CoordinateSpace: number): number;
-        GetRollAtSplineInputKey(InKey: number, CoordinateSpace: number): number;
-        GetRollAtDistanceAlongSpline(Distance: number, CoordinateSpace: number): number;
-        GetRightVectorAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean): Vector;
-        GetRightVectorAtSplinePoint(PointIndex: number, CoordinateSpace: number): Vector;
-        GetRightVectorAtSplineInputKey(InKey: number, CoordinateSpace: number): Vector;
-        GetRightVectorAtDistanceAlongSpline(Distance: number, CoordinateSpace: number): Vector;
+        GetRotationAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean): Rotator;
+        GetRotationAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Rotator;
+        GetRotationAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace): Rotator;
+        GetRotationAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace): Rotator;
+        GetRollAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean): number;
+        GetRollAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): number;
+        GetRollAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace): number;
+        GetRollAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace): number;
+        GetRightVectorAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean): Vector;
+        GetRightVectorAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetRightVectorAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetRightVectorAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
         GetNumberOfSplineSegments(): number;
         GetNumberOfSplinePoints(): number;
-        GetLocationAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean): Vector;
-        GetLocationAtSplinePoint(PointIndex: number, CoordinateSpace: number): Vector;
-        GetLocationAtSplineInputKey(InKey: number, CoordinateSpace: number): Vector;
-        GetLocationAtDistanceAlongSpline(Distance: number, CoordinateSpace: number): Vector;
-        GetLocationAndTangentAtSplinePoint(PointIndex: number, Location: $Ref<Vector>, Tangent: $Ref<Vector>, CoordinateSpace: number): void;
+        GetLocationAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean): Vector;
+        GetLocationAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetLocationAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetLocationAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetLocationAndTangentAtSplinePoint(PointIndex: number, Location: $Ref<Vector>, Tangent: $Ref<Vector>, CoordinateSpace: ESplineCoordinateSpace): void;
         GetLocalLocationAndTangentAtSplinePoint(PointIndex: number, LocalLocation: $Ref<Vector>, LocalTangent: $Ref<Vector>): void;
-        GetLeaveTangentAtSplinePoint(PointIndex: number, CoordinateSpace: number): Vector;
+        GetLeaveTangentAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
         GetInputKeyAtDistanceAlongSpline(Distance: number): number;
         GetFloatPropertyAtSplinePoint(Index: number, PropertyName: string): number;
         GetFloatPropertyAtSplineInputKey(InKey: number, PropertyName: string): number;
         GetDistanceAlongSplineAtSplinePoint(PointIndex: number): number;
-        GetDirectionAtTime(Time: number, CoordinateSpace: number, bUseConstantVelocity: boolean): Vector;
-        GetDirectionAtSplinePoint(PointIndex: number, CoordinateSpace: number): Vector;
-        GetDirectionAtSplineInputKey(InKey: number, CoordinateSpace: number): Vector;
-        GetDirectionAtDistanceAlongSpline(Distance: number, CoordinateSpace: number): Vector;
-        GetDefaultUpVector(CoordinateSpace: number): Vector;
-        GetArriveTangentAtSplinePoint(PointIndex: number, CoordinateSpace: number): Vector;
-        FindUpVectorClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number): Vector;
-        FindTransformClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number, bUseScale: boolean): Transform;
-        FindTangentClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number): Vector;
+        GetDirectionAtTime(Time: number, CoordinateSpace: ESplineCoordinateSpace, bUseConstantVelocity: boolean): Vector;
+        GetDirectionAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetDirectionAtSplineInputKey(InKey: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetDirectionAtDistanceAlongSpline(Distance: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetDefaultUpVector(CoordinateSpace: ESplineCoordinateSpace): Vector;
+        GetArriveTangentAtSplinePoint(PointIndex: number, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        FindUpVectorClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        FindTransformClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace, bUseScale: boolean): Transform;
+        FindTangentClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace): Vector;
         FindScaleClosestToWorldLocation(WorldLocation: Vector): Vector;
-        FindRotationClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number): Rotator;
-        FindRollClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number): number;
-        FindRightVectorClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number): Vector;
-        FindLocationClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number): Vector;
+        FindRotationClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace): Rotator;
+        FindRollClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace): number;
+        FindRightVectorClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace): Vector;
+        FindLocationClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace): Vector;
         FindInputKeyClosestToWorldLocation(WorldLocation: Vector): number;
-        FindDirectionClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: number): Vector;
+        FindDirectionClosestToWorldLocation(WorldLocation: Vector, CoordinateSpace: ESplineCoordinateSpace): Vector;
         ClearSplinePoints(bUpdateSpline: boolean): void;
         AddSplineWorldPoint(Position: Vector): void;
-        AddSplinePointAtIndex(Position: Vector, Index: number, CoordinateSpace: number, bUpdateSpline: boolean): void;
-        AddSplinePoint(Position: Vector, CoordinateSpace: number, bUpdateSpline: boolean): void;
+        AddSplinePointAtIndex(Position: Vector, Index: number, CoordinateSpace: ESplineCoordinateSpace, bUpdateSpline: boolean): void;
+        AddSplinePoint(Position: Vector, CoordinateSpace: ESplineCoordinateSpace, bUpdateSpline: boolean): void;
         AddSplineLocalPoint(Position: Vector): void;
         AddPoints(Points: TArray<SplinePoint>, bUpdateSpline: boolean): void;
         AddPoint(Point: SplinePoint, bUpdateSpline: boolean): void;
@@ -15070,6 +15231,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESplineMeshAxis { X, Y, Z, ESplineMeshAxis_MAX}
     class SplineMeshComponent extends StaticMeshComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SplineParams: SplineMeshParams;
@@ -15081,7 +15243,7 @@ declare module "ue" {
         bAllowSplineEditingPerInstance: boolean;
         bSmoothInterpRollScale: boolean;
         bMeshDirty: boolean;
-        ForwardAxis: number;
+        ForwardAxis: ESplineMeshAxis;
         VirtualTextureMainPassMaxDrawDistance: number;
         bSelected: boolean;
         UpdateMesh(): void;
@@ -15092,7 +15254,7 @@ declare module "ue" {
         SetStartOffset(StartOffset: Vector2D, bUpdateMesh: boolean): void;
         SetStartAndEnd(StartPos: Vector, StartTangent: Vector, EndPos: Vector, EndTangent: Vector, bUpdateMesh: boolean): void;
         SetSplineUpDir(InSplineUpDir: Vector, bUpdateMesh: boolean): void;
-        SetForwardAxis(InForwardAxis: number, bUpdateMesh: boolean): void;
+        SetForwardAxis(InForwardAxis: ESplineMeshAxis, bUpdateMesh: boolean): void;
         SetEndTangent(EndTangent: Vector, bUpdateMesh: boolean): void;
         SetEndScale(EndScale: Vector2D, bUpdateMesh: boolean): void;
         SetEndRoll(EndRoll: number, bUpdateMesh: boolean): void;
@@ -15106,7 +15268,7 @@ declare module "ue" {
         GetStartPosition(): Vector;
         GetStartOffset(): Vector2D;
         GetSplineUpDir(): Vector;
-        GetForwardAxis(): number;
+        GetForwardAxis(): ESplineMeshAxis;
         GetEndTangent(): Vector;
         GetEndScale(): Vector2D;
         GetEndRoll(): number;
@@ -16376,9 +16538,11 @@ declare module "ue" {
         static Load(InName: string): ARSharedWorldPlayerController;
     }
     
+    enum ESkyLightSourceType { SLS_CapturedScene, SLS_SpecifiedCubemap, SLS_MAX}
+    enum EOcclusionCombineMode { OCM_Minimum, OCM_Multiply, OCM_MAX}
     class SkyLightComponent extends LightComponentBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SourceType: number;
+        SourceType: ESkyLightSourceType;
         Cubemap: TextureCube;
         SourceCubemapAngle: number;
         CubemapResolution: number;
@@ -16391,7 +16555,7 @@ declare module "ue" {
         OcclusionExponent: number;
         MinOcclusion: number;
         OcclusionTint: Color;
-        OcclusionCombineMode: number;
+        OcclusionCombineMode: EOcclusionCombineMode;
         BlendDestinationCubemap: TextureCube;
         SetVolumetricScatteringIntensity(NewIntensity: number): void;
         SetOcclusionTint(InTint: Color): void;
@@ -16505,7 +16669,9 @@ declare module "ue" {
         static Load(InName: string): ARTypesDummyClass;
     }
     
+    enum EHMDTrackingOrigin { Floor, Eye, Stage, EHMDTrackingOrigin_MAX}
     enum ESpectatorScreenMode { Disabled, SingleEyeLetterboxed, Undistorted, Distorted, SingleEye, SingleEyeCroppedToFill, Texture, TexturePlusEye, ESpectatorScreenMode_MAX}
+    enum EOrientPositionSelector { Orientation, Position, OrientationAndPosition, EOrientPositionSelector_MAX}
     class XRDeviceId {
         constructor(SystemName: string, DeviceId: number);
         SystemName: string;
@@ -16513,17 +16679,18 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EHMDWornState { Unknown, Worn, NotWorn, EHMDWornState_MAX}
     enum EXRTrackedDeviceType { HeadMountedDisplay, Controller, TrackingReference, Other, Invalid, Any, EXRTrackedDeviceType_MAX}
     class HeadMountedDisplayFunctionLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static UpdateExternalTrackingHMDPosition(ExternalTrackingTransform: Transform): void;
         static SetWorldToMetersScale(WorldContext: Object, NewScale: number): void;
-        static SetTrackingOrigin(Origin: number): void;
+        static SetTrackingOrigin(Origin: EHMDTrackingOrigin): void;
         static SetSpectatorScreenTexture(InTexture: Texture): void;
         static SetSpectatorScreenModeTexturePlusEyeLayout(EyeRectMin: Vector2D, EyeRectMax: Vector2D, TextureRectMin: Vector2D, TextureRectMax: Vector2D, bDrawEyeFirst: boolean, bClearBlack: boolean, bUseAlpha: boolean): void;
         static SetSpectatorScreenMode(Mode: ESpectatorScreenMode): void;
         static SetClippingPlanes(Near: number, Far: number): void;
-        static ResetOrientationAndPosition(Yaw: number, Options: number): void;
+        static ResetOrientationAndPosition(Yaw: number, Options: EOrientPositionSelector): void;
         static IsSpectatorScreenModeControllable(): boolean;
         static IsInLowPersistenceMode(): boolean;
         static IsHeadMountedDisplayEnabled(): boolean;
@@ -16534,13 +16701,13 @@ declare module "ue" {
         static GetVRFocusState(bUseFocus: $Ref<boolean>, bHasFocus: $Ref<boolean>): void;
         static GetTrackingToWorldTransform(WorldContext: Object): Transform;
         static GetTrackingSensorParameters(Origin: $Ref<Vector>, Rotation: $Ref<Rotator>, LeftFOV: $Ref<number>, RightFOV: $Ref<number>, TopFOV: $Ref<number>, BottomFOV: $Ref<number>, Distance: $Ref<number>, NearPlane: $Ref<number>, FarPlane: $Ref<number>, IsActive: $Ref<boolean>, Index: number): void;
-        static GetTrackingOrigin(): number;
+        static GetTrackingOrigin(): EHMDTrackingOrigin;
         static GetScreenPercentage(): number;
         static GetPositionalTrackingCameraParameters(CameraOrigin: $Ref<Vector>, CameraRotation: $Ref<Rotator>, HFOV: $Ref<number>, VFOV: $Ref<number>, CameraDistance: $Ref<number>, NearPlane: $Ref<number>, FarPlane: $Ref<number>): void;
         static GetPixelDensity(): number;
         static GetOrientationAndPosition(DeviceRotation: $Ref<Rotator>, DevicePosition: $Ref<Vector>): void;
         static GetNumOfTrackingSensors(): number;
-        static GetHMDWornState(): number;
+        static GetHMDWornState(): EHMDWornState;
         static GetHMDDeviceName(): string;
         static GetDeviceWorldPose(WorldContext: Object, XRDeviceId: XRDeviceId, bIsTracked: $Ref<boolean>, Orientation: $Ref<Rotator>, bHasPositionalTracking: $Ref<boolean>, Position: $Ref<Vector>): void;
         static GetDevicePose(XRDeviceId: XRDeviceId, bIsTracked: $Ref<boolean>, Orientation: $Ref<Rotator>, bHasPositionalTracking: $Ref<boolean>, Position: $Ref<Vector>): void;
@@ -16707,8 +16874,8 @@ declare module "ue" {
         Type: string;
         MaxDim: Vector2D;
         CurrentDim: Vector2D;
-        Format: number;
-        Group: number;
+        Format: EPixelFormat;
+        Group: TextureGroup;
         LODBias: number;
         CurrentKB: number;
         FullyLoadedKB: number;
@@ -16767,9 +16934,10 @@ declare module "ue" {
         static Load(InName: string): AssetViewerSettings;
     }
     
+    enum EMaterialProperty { MP_EmissiveColor, MP_Opacity, MP_OpacityMask, MP_DiffuseColor, MP_SpecularColor, MP_BaseColor, MP_Metallic, MP_Specular, MP_Roughness, MP_Normal, MP_WorldPositionOffset, MP_WorldDisplacement, MP_TessellationMultiplier, MP_SubsurfaceColor, MP_CustomData0, MP_CustomData1, MP_AmbientOcclusion, MP_Refraction, MP_CustomizedUVs0, MP_CustomizedUVs1, MP_CustomizedUVs2, MP_CustomizedUVs3, MP_CustomizedUVs4, MP_CustomizedUVs5, MP_CustomizedUVs6, MP_CustomizedUVs7, MP_PixelDepthOffset, MP_ShadingModel, MP_MaterialAttributes, MP_CustomOutput, MP_MAX}
     class PropertyEntry {
-        constructor(Property: number, bUseCustomSize: boolean, CustomSize: IntPoint, bUseConstantValue: boolean, ConstantValue: number);
-        Property: number;
+        constructor(Property: EMaterialProperty, bUseCustomSize: boolean, CustomSize: IntPoint, bUseConstantValue: boolean, ConstantValue: number);
+        Property: EMaterialProperty;
         bUseCustomSize: boolean;
         CustomSize: IntPoint;
         bUseConstantValue: boolean;
@@ -16801,7 +16969,7 @@ declare module "ue" {
     class MaterialMergeOptions extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Method: EMaterialBakeMethod;
-        BlendMode: number;
+        BlendMode: EBlendMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialMergeOptions;
         static Load(InName: string): MaterialMergeOptions;
@@ -16818,11 +16986,12 @@ declare module "ue" {
         static Load(InName: string): MaterialInstanceConstant;
     }
     
+    enum EMaterialUsage { MATUSAGE_SkeletalMesh, MATUSAGE_ParticleSprites, MATUSAGE_BeamTrails, MATUSAGE_MeshParticles, MATUSAGE_StaticLighting, MATUSAGE_MorphTargets, MATUSAGE_SplineMesh, MATUSAGE_InstancedStaticMeshes, MATUSAGE_GeometryCollections, MATUSAGE_Clothing, MATUSAGE_NiagaraSprites, MATUSAGE_NiagaraRibbons, MATUSAGE_NiagaraMeshParticles, MATUSAGE_GeometryCache, MATUSAGE_Water, MATUSAGE_HairStrands, MATUSAGE_MAX}
     class MaterialEditingLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static UpdateMaterialInstance(Instance: MaterialInstanceConstant): void;
         static UpdateMaterialFunction(MaterialFunction: MaterialFunctionInterface, PreviewMaterial: Material): void;
-        static SetMaterialUsage(Material: Material, Usage: number, bNeedsRecompile: $Ref<boolean>): boolean;
+        static SetMaterialUsage(Material: Material, Usage: EMaterialUsage, bNeedsRecompile: $Ref<boolean>): boolean;
         static SetMaterialInstanceVectorParameterValue(Instance: MaterialInstanceConstant, ParameterName: string, Value: LinearColor): boolean;
         static SetMaterialInstanceTextureParameterValue(Instance: MaterialInstanceConstant, ParameterName: string, Value: Texture): boolean;
         static SetMaterialInstanceScalarParameterValue(Instance: MaterialInstanceConstant, ParameterName: string, Value: number): boolean;
@@ -16830,7 +16999,7 @@ declare module "ue" {
         static RecompileMaterial(Material: Material): void;
         static LayoutMaterialFunctionExpressions(MaterialFunction: MaterialFunction): void;
         static LayoutMaterialExpressions(Material: Material): void;
-        static HasMaterialUsage(Material: Material, Usage: number): boolean;
+        static HasMaterialUsage(Material: Material, Usage: EMaterialUsage): boolean;
         GetVectorParameterSource(Material: MaterialInterface, ParameterName: string, ParameterSource: $Ref<SoftObjectPath>): boolean;
         static GetVectorParameterNames(Material: MaterialInterface, ParameterNames: $Ref<TArray<string>>): void;
         GetTextureParameterSource(Material: MaterialInterface, ParameterName: string, ParameterSource: $Ref<SoftObjectPath>): boolean;
@@ -16857,7 +17026,7 @@ declare module "ue" {
         static DeleteAllMaterialExpressions(Material: Material): void;
         static CreateMaterialExpressionInFunction(MaterialFunction: MaterialFunction, ExpressionClass: Class, NodePosX: number, NodePosY: number): MaterialExpression;
         static CreateMaterialExpression(Material: Material, ExpressionClass: Class, NodePosX: number, NodePosY: number): MaterialExpression;
-        static ConnectMaterialProperty(FromExpression: MaterialExpression, FromOutputName: string, Property: number): boolean;
+        static ConnectMaterialProperty(FromExpression: MaterialExpression, FromOutputName: string, Property: EMaterialProperty): boolean;
         static ConnectMaterialExpressions(FromExpression: MaterialExpression, FromOutputName: string, ToExpression: MaterialExpression, ToInputName: string): boolean;
         static ClearAllMaterialInstanceParameters(Instance: MaterialInstanceConstant): void;
         static StaticClass(): Class;
@@ -17414,12 +17583,14 @@ declare module "ue" {
         static Load(InName: string): SynthSound;
     }
     
+    enum EHardwareClass { Unspecified, Desktop, Mobile, EHardwareClass_MAX}
+    enum EGraphicsPreset { Unspecified, Maximum, Scalable, EGraphicsPreset_MAX}
     class HardwareTargetingSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TargetedHardwareClass: number;
-        AppliedTargetedHardwareClass: number;
-        DefaultGraphicsPerformance: number;
-        AppliedDefaultGraphicsPerformance: number;
+        TargetedHardwareClass: EHardwareClass;
+        AppliedTargetedHardwareClass: EHardwareClass;
+        DefaultGraphicsPerformance: EGraphicsPreset;
+        AppliedDefaultGraphicsPerformance: EGraphicsPreset;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): HardwareTargetingSettings;
         static Load(InName: string): HardwareTargetingSettings;
@@ -17566,11 +17737,12 @@ declare module "ue" {
     }
     
     enum EditConditionTestEnum { First, Second, EditConditionTestEnum_MAX}
+    enum EditConditionByteEnum { First, Second, EditConditionByteEnum_MAX}
     class EditConditionTestObject extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BoolProperty: boolean;
         EnumProperty: EditConditionTestEnum;
-        ByteEnumProperty: number;
+        ByteEnumProperty: EditConditionByteEnum;
         DoubleProperty: number;
         IntegerProperty: number;
         UintBitfieldProperty: boolean;
@@ -17684,6 +17856,7 @@ declare module "ue" {
         static Load(InName: string): BlueprintDelegateNodeSpawner;
     }
     
+    enum ESaveOnCompile { SoC_Never, SoC_SuccessOnly, SoC_Always, SoC_MAX}
     class BlueprintEditorSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bDrawMidpointArrowsInBlueprints: boolean;
@@ -17710,7 +17883,7 @@ declare module "ue" {
         bIncludeCommentNodesInBookmarksTab: boolean;
         bShowBookmarksForCurrentDocumentOnlyInTab: boolean;
         GraphEditorQuickJumps: TMap<number, EditedDocumentInfo>;
-        SaveOnCompile: number;
+        SaveOnCompile: ESaveOnCompile;
         bJumpToNodeErrors: boolean;
         bAllowExplicitImpureNodeDisabling: boolean;
         bShowActionMenuItemSignatures: boolean;
@@ -17877,10 +18050,11 @@ declare module "ue" {
         static Load(InName: string): K2Node_BitmaskLiteral;
     }
     
+    enum ESelfContextInfo { Unspecified, NotSelfContext, ESelfContextInfo_MAX}
     class K2Node_Variable extends K2Node {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         VariableReference: MemberReference;
-        SelfContextInfo: number;
+        SelfContextInfo: ESelfContextInfo;
         VariableSourceClass: Class;
         VariableName: string;
         bSelfContext: boolean;
@@ -18354,7 +18528,7 @@ declare module "ue" {
     class K2Node_InputActionEvent extends K2Node_Event {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         InputActionName: string;
-        InputKeyEvent: number;
+        InputKeyEvent: EInputEvent;
         bConsumeInput: boolean;
         bExecuteWhenPaused: boolean;
         bOverrideParentBinding: boolean;
@@ -18413,7 +18587,7 @@ declare module "ue" {
     class K2Node_InputKeyEvent extends K2Node_Event {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         InputChord: InputChord;
-        InputKeyEvent: number;
+        InputKeyEvent: EInputEvent;
         bConsumeInput: boolean;
         bExecuteWhenPaused: boolean;
         bOverrideParentBinding: boolean;
@@ -18434,7 +18608,7 @@ declare module "ue" {
     
     class K2Node_InputTouchEvent extends K2Node_Event {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        InputKeyEvent: number;
+        InputKeyEvent: EInputEvent;
         bConsumeInput: boolean;
         bExecuteWhenPaused: boolean;
         bOverrideParentBinding: boolean;
@@ -18750,10 +18924,11 @@ declare module "ue" {
         static Load(InName: string): NodeDependingOnEnumInterface;
     }
     
+    enum EBlueprintPinStyleType { BPST_Original, BPST_VariantA, BPST_MAX}
     enum EGraphPanningMouseButton { Right, Middle, Both, EGraphPanningMouseButton_MAX}
     class GraphEditorSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        DataPinStyle: number;
+        DataPinStyle: EBlueprintPinStyleType;
         PanningMouseButton: EGraphPanningMouseButton;
         PaddingAbovePin: number;
         PaddingBelowPin: number;
@@ -19005,10 +19180,11 @@ declare module "ue" {
         static Load(InName: string): AnimBlueprintPostCompileValidation;
     }
     
+    enum EAnimGroupRole { CanBeLeader, AlwaysFollower, AlwaysLeader, TransitionLeader, TransitionFollower, EAnimGroupRole_MAX}
     class AnimationGroupReference {
-        constructor(GroupName: string, GroupRole: number);
+        constructor(GroupName: string, GroupRole: EAnimGroupRole);
         GroupName: string;
-        GroupRole: number;
+        GroupRole: EAnimGroupRole;
         static StaticClass(): Class;
     }
     
@@ -19028,22 +19204,24 @@ declare module "ue" {
     }
     
     class AnimNode_AssetPlayerBase extends AnimNode_Base {
-        constructor(GroupIndex: number, GroupRole: number, bIgnoreForRelevancyTest: boolean, BlendWeight: number, InternalTimeAccumulator: number);
+        constructor(GroupIndex: number, GroupRole: EAnimGroupRole, bIgnoreForRelevancyTest: boolean, BlendWeight: number, InternalTimeAccumulator: number);
         GroupIndex: number;
-        GroupRole: number;
+        GroupRole: EAnimGroupRole;
         bIgnoreForRelevancyTest: boolean;
         BlendWeight: number;
         InternalTimeAccumulator: number;
         static StaticClass(): Class;
     }
     
+    enum EFilterInterpolationType { BSIT_Average, BSIT_Linear, BSIT_Cubic, BSIT_MAX}
     class InterpolationParameter {
-        constructor(InterpolationTime: number, InterpolationType: number);
+        constructor(InterpolationTime: number, InterpolationType: EFilterInterpolationType);
         InterpolationTime: number;
-        InterpolationType: number;
+        InterpolationType: EFilterInterpolationType;
         static StaticClass(): Class;
     }
     
+    enum ENotifyTriggerMode { AllAnimations, HighestWeightedAnimation, None, ENotifyTriggerMode_MAX}
     class PerBoneInterpolation {
         constructor(BoneReference: BoneReference, InterpolationSpeedPerSec: number);
         BoneReference: BoneReference;
@@ -19084,7 +19262,7 @@ declare module "ue" {
         AnimLength: number;
         InterpolationParam: FixSizeArray<InterpolationParameter>;
         TargetWeightInterpolationSpeedPerSec: number;
-        NotifyTriggerMode: number;
+        NotifyTriggerMode: ENotifyTriggerMode;
         PerBoneBlend: TArray<PerBoneInterpolation>;
         SampleIndexWithMarkers: number;
         SampleData: TArray<BlendSample>;
@@ -19394,14 +19572,15 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EBoneControlSpace { BCS_WorldSpace, BCS_ComponentSpace, BCS_ParentBoneSpace, BCS_BoneSpace, BCS_MAX}
     class AnimNode_BlendBoneByChannel extends AnimNode_Base {
-        constructor(A: PoseLink, B: PoseLink, BoneDefinitions: TArray<BlendBoneByChannelEntry>, Alpha: number, AlphaScaleBias: InputScaleBias, TransformsSpace: number);
+        constructor(A: PoseLink, B: PoseLink, BoneDefinitions: TArray<BlendBoneByChannelEntry>, Alpha: number, AlphaScaleBias: InputScaleBias, TransformsSpace: EBoneControlSpace);
         A: PoseLink;
         B: PoseLink;
         BoneDefinitions: TArray<BlendBoneByChannelEntry>;
         Alpha: number;
         AlphaScaleBias: InputScaleBias;
-        TransformsSpace: number;
+        TransformsSpace: EBoneControlSpace;
         static StaticClass(): Class;
     }
     
@@ -19500,10 +19679,11 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_BlendSpacePlayer;
     }
     
+    enum EComponentType { None, TranslationX, TranslationY, TranslationZ, RotationX, RotationY, RotationZ, Scale, ScaleX, ScaleY, ScaleZ, EComponentType_MAX}
     enum EDrivenDestinationMode { Bone, MorphTarget, MaterialParameter, EDrivenDestinationMode_MAX}
     enum EDrivenBoneModificationMode { AddToInput, ReplaceComponent, AddToRefPose, EDrivenBoneModificationMode_MAX}
     class AnimNode_BoneDrivenController extends AnimNode_SkeletalControlBase {
-        constructor(SourceBone: BoneReference, DrivingCurve: CurveFloat, Multiplier: number, RangeMin: number, RangeMax: number, RemappedMin: number, RemappedMax: number, ParameterName: string, TargetBone: BoneReference, TargetComponent: number, DestinationMode: EDrivenDestinationMode, ModificationMode: EDrivenBoneModificationMode, SourceComponent: number, bUseRange: boolean, bAffectTargetTranslationX: boolean, bAffectTargetTranslationY: boolean, bAffectTargetTranslationZ: boolean, bAffectTargetRotationX: boolean, bAffectTargetRotationY: boolean, bAffectTargetRotationZ: boolean, bAffectTargetScaleX: boolean, bAffectTargetScaleY: boolean, bAffectTargetScaleZ: boolean);
+        constructor(SourceBone: BoneReference, DrivingCurve: CurveFloat, Multiplier: number, RangeMin: number, RangeMax: number, RemappedMin: number, RemappedMax: number, ParameterName: string, TargetBone: BoneReference, TargetComponent: EComponentType, DestinationMode: EDrivenDestinationMode, ModificationMode: EDrivenBoneModificationMode, SourceComponent: EComponentType, bUseRange: boolean, bAffectTargetTranslationX: boolean, bAffectTargetTranslationY: boolean, bAffectTargetTranslationZ: boolean, bAffectTargetRotationX: boolean, bAffectTargetRotationY: boolean, bAffectTargetRotationZ: boolean, bAffectTargetScaleX: boolean, bAffectTargetScaleY: boolean, bAffectTargetScaleZ: boolean);
         SourceBone: BoneReference;
         DrivingCurve: CurveFloat;
         Multiplier: number;
@@ -19513,10 +19693,10 @@ declare module "ue" {
         RemappedMax: number;
         ParameterName: string;
         TargetBone: BoneReference;
-        TargetComponent: number;
+        TargetComponent: EComponentType;
         DestinationMode: EDrivenDestinationMode;
         ModificationMode: EDrivenBoneModificationMode;
-        SourceComponent: number;
+        SourceComponent: EComponentType;
         bUseRange: boolean;
         bAffectTargetTranslationX: boolean;
         bAffectTargetTranslationY: boolean;
@@ -19553,9 +19733,9 @@ declare module "ue" {
     }
     
     class AnimNode_CCDIK extends AnimNode_SkeletalControlBase {
-        constructor(EffectorLocation: Vector, EffectorLocationSpace: number, EffectorTarget: BoneSocketTarget, TipBone: BoneReference, RootBone: BoneReference, Precision: number, MaxIterations: number, bStartFromTail: boolean, bEnableRotationLimit: boolean, RotationLimitPerJoints: TArray<number>);
+        constructor(EffectorLocation: Vector, EffectorLocationSpace: EBoneControlSpace, EffectorTarget: BoneSocketTarget, TipBone: BoneReference, RootBone: BoneReference, Precision: number, MaxIterations: number, bStartFromTail: boolean, bEnableRotationLimit: boolean, RotationLimitPerJoints: TArray<number>);
         EffectorLocation: Vector;
-        EffectorLocationSpace: number;
+        EffectorLocationSpace: EBoneControlSpace;
         EffectorTarget: BoneSocketTarget;
         TipBone: BoneReference;
         RootBone: BoneReference;
@@ -19625,13 +19805,13 @@ declare module "ue" {
     }
     
     class AnimNode_CopyBone extends AnimNode_SkeletalControlBase {
-        constructor(SourceBone: BoneReference, TargetBone: BoneReference, bCopyTranslation: boolean, bCopyRotation: boolean, bCopyScale: boolean, ControlSpace: number);
+        constructor(SourceBone: BoneReference, TargetBone: BoneReference, bCopyTranslation: boolean, bCopyRotation: boolean, bCopyScale: boolean, ControlSpace: EBoneControlSpace);
         SourceBone: BoneReference;
         TargetBone: BoneReference;
         bCopyTranslation: boolean;
         bCopyRotation: boolean;
         bCopyScale: boolean;
-        ControlSpace: number;
+        ControlSpace: EBoneControlSpace;
         static StaticClass(): Class;
     }
     
@@ -19725,16 +19905,17 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_CustomProperty;
     }
     
+    enum EBoneRotationSource { BRS_KeepComponentSpaceRotation, BRS_KeepLocalSpaceRotation, BRS_CopyFromTarget, BRS_MAX}
     class AnimNode_Fabrik extends AnimNode_SkeletalControlBase {
-        constructor(EffectorTransform: Transform, EffectorTarget: BoneSocketTarget, TipBone: BoneReference, RootBone: BoneReference, Precision: number, MaxIterations: number, EffectorTransformSpace: number, EffectorRotationSource: number, bEnableDebugDraw: boolean, EffectorTransformBone: BoneReference);
+        constructor(EffectorTransform: Transform, EffectorTarget: BoneSocketTarget, TipBone: BoneReference, RootBone: BoneReference, Precision: number, MaxIterations: number, EffectorTransformSpace: EBoneControlSpace, EffectorRotationSource: EBoneRotationSource, bEnableDebugDraw: boolean, EffectorTransformBone: BoneReference);
         EffectorTransform: Transform;
         EffectorTarget: BoneSocketTarget;
         TipBone: BoneReference;
         RootBone: BoneReference;
         Precision: number;
         MaxIterations: number;
-        EffectorTransformSpace: number;
-        EffectorRotationSource: number;
+        EffectorTransformSpace: EBoneControlSpace;
+        EffectorRotationSource: EBoneRotationSource;
         bEnableDebugDraw: boolean;
         EffectorTransformBone: BoneReference;
         static StaticClass(): Class;
@@ -19767,9 +19948,10 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_HandIKRetargeting;
     }
     
+    enum ERefPoseType { EIT_LocalSpace, EIT_Additive, EIT_MAX}
     class AnimNode_RefPose extends AnimNode_Base {
-        constructor(RefPoseType: number);
-        RefPoseType: number;
+        constructor(RefPoseType: ERefPoseType);
+        RefPoseType: ERefPoseType;
         static StaticClass(): Class;
     }
     
@@ -19815,6 +19997,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ECurveBlendOption { MaxWeight, NormalizeByWeight, BlendByWeight, ECurveBlendOption_MAX}
     class PerBoneBlendWeight {
         constructor(SourceIndex: number, BlendWeight: number);
         SourceIndex: number;
@@ -19823,14 +20006,14 @@ declare module "ue" {
     }
     
     class AnimNode_LayeredBoneBlend extends AnimNode_Base {
-        constructor(BasePose: PoseLink, BlendPoses: TArray<PoseLink>, LayerSetup: TArray<InputBlendPose>, BlendWeights: TArray<number>, bMeshSpaceRotationBlend: boolean, bMeshSpaceScaleBlend: boolean, CurveBlendOption: number, bBlendRootMotionBasedOnRootBone: boolean, LODThreshold: number, PerBoneBlendWeights: TArray<PerBoneBlendWeight>, SkeletonGuid: Guid, VirtualBoneGuid: Guid);
+        constructor(BasePose: PoseLink, BlendPoses: TArray<PoseLink>, LayerSetup: TArray<InputBlendPose>, BlendWeights: TArray<number>, bMeshSpaceRotationBlend: boolean, bMeshSpaceScaleBlend: boolean, CurveBlendOption: ECurveBlendOption, bBlendRootMotionBasedOnRootBone: boolean, LODThreshold: number, PerBoneBlendWeights: TArray<PerBoneBlendWeight>, SkeletonGuid: Guid, VirtualBoneGuid: Guid);
         BasePose: PoseLink;
         BlendPoses: TArray<PoseLink>;
         LayerSetup: TArray<InputBlendPose>;
         BlendWeights: TArray<number>;
         bMeshSpaceRotationBlend: boolean;
         bMeshSpaceScaleBlend: boolean;
-        CurveBlendOption: number;
+        CurveBlendOption: ECurveBlendOption;
         bBlendRootMotionBasedOnRootBone: boolean;
         LODThreshold: number;
         PerBoneBlendWeights: TArray<PerBoneBlendWeight>;
@@ -19848,13 +20031,13 @@ declare module "ue" {
     }
     
     class AnimLegIKDefinition {
-        constructor(IKFootBone: BoneReference, FKFootBone: BoneReference, NumBonesInLimb: number, MinRotationAngle: number, FootBoneForwardAxis: number, HingeRotationAxis: number, bEnableRotationLimit: boolean, bEnableKneeTwistCorrection: boolean);
+        constructor(IKFootBone: BoneReference, FKFootBone: BoneReference, NumBonesInLimb: number, MinRotationAngle: number, FootBoneForwardAxis: EAxis, HingeRotationAxis: EAxis, bEnableRotationLimit: boolean, bEnableKneeTwistCorrection: boolean);
         IKFootBone: BoneReference;
         FKFootBone: BoneReference;
         NumBonesInLimb: number;
         MinRotationAngle: number;
-        FootBoneForwardAxis: number;
-        HingeRotationAxis: number;
+        FootBoneForwardAxis: EAxis;
+        HingeRotationAxis: EAxis;
         bEnableRotationLimit: boolean;
         bEnableKneeTwistCorrection: boolean;
         static StaticClass(): Class;
@@ -19980,23 +20163,25 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EInterpolationBlend { Linear, Cubic, Sinusoidal, EaseInOutExponent2, EaseInOutExponent3, EaseInOutExponent4, EaseInOutExponent5, MAX}
+    enum EAxisOption { X, Y, Z, X_Neg, Y_Neg, Z_Neg, Custom, EAxisOption_MAX}
     class AnimNode_LookAt extends AnimNode_SkeletalControlBase {
-        constructor(BoneToModify: BoneReference, LookAtTarget: BoneSocketTarget, LookAtLocation: Vector, LookAt_Axis: Axis, bUseLookUpAxis: boolean, InterpolationType: number, LookUp_Axis: Axis, LookAtClamp: number, InterpolationTime: number, InterpolationTriggerThreashold: number, LookAtBone: BoneReference, LookAtSocket: string, LookAtAxis: number, CustomLookAtAxis: Vector, LookUpAxis: number, CustomLookUpAxis: Vector);
+        constructor(BoneToModify: BoneReference, LookAtTarget: BoneSocketTarget, LookAtLocation: Vector, LookAt_Axis: Axis, bUseLookUpAxis: boolean, InterpolationType: EInterpolationBlend, LookUp_Axis: Axis, LookAtClamp: number, InterpolationTime: number, InterpolationTriggerThreashold: number, LookAtBone: BoneReference, LookAtSocket: string, LookAtAxis: EAxisOption, CustomLookAtAxis: Vector, LookUpAxis: EAxisOption, CustomLookUpAxis: Vector);
         BoneToModify: BoneReference;
         LookAtTarget: BoneSocketTarget;
         LookAtLocation: Vector;
         LookAt_Axis: Axis;
         bUseLookUpAxis: boolean;
-        InterpolationType: number;
+        InterpolationType: EInterpolationBlend;
         LookUp_Axis: Axis;
         LookAtClamp: number;
         InterpolationTime: number;
         InterpolationTriggerThreashold: number;
         LookAtBone: BoneReference;
         LookAtSocket: string;
-        LookAtAxis: number;
+        LookAtAxis: EAxisOption;
         CustomLookAtAxis: Vector;
-        LookUpAxis: number;
+        LookUpAxis: EAxisOption;
         CustomLookUpAxis: Vector;
         static StaticClass(): Class;
     }
@@ -20038,18 +20223,19 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_MeshRefPose;
     }
     
+    enum EBoneModificationMode { BMM_Ignore, BMM_Replace, BMM_Additive, BMM_MAX}
     class AnimNode_ModifyBone extends AnimNode_SkeletalControlBase {
-        constructor(BoneToModify: BoneReference, Translation: Vector, Rotation: Rotator, Scale: Vector, TranslationMode: number, RotationMode: number, ScaleMode: number, TranslationSpace: number, RotationSpace: number, ScaleSpace: number);
+        constructor(BoneToModify: BoneReference, Translation: Vector, Rotation: Rotator, Scale: Vector, TranslationMode: EBoneModificationMode, RotationMode: EBoneModificationMode, ScaleMode: EBoneModificationMode, TranslationSpace: EBoneControlSpace, RotationSpace: EBoneControlSpace, ScaleSpace: EBoneControlSpace);
         BoneToModify: BoneReference;
         Translation: Vector;
         Rotation: Rotator;
         Scale: Vector;
-        TranslationMode: number;
-        RotationMode: number;
-        ScaleMode: number;
-        TranslationSpace: number;
-        RotationSpace: number;
-        ScaleSpace: number;
+        TranslationMode: EBoneModificationMode;
+        RotationMode: EBoneModificationMode;
+        ScaleMode: EBoneModificationMode;
+        TranslationSpace: EBoneControlSpace;
+        RotationSpace: EBoneControlSpace;
+        ScaleSpace: EBoneControlSpace;
         static StaticClass(): Class;
     }
     
@@ -20099,9 +20285,9 @@ declare module "ue" {
     }
     
     class AnimNode_ObserveBone extends AnimNode_SkeletalControlBase {
-        constructor(BoneToObserve: BoneReference, DisplaySpace: number, bRelativeToRefPose: boolean, Translation: Vector, Rotation: Rotator, Scale: Vector);
+        constructor(BoneToObserve: BoneReference, DisplaySpace: EBoneControlSpace, bRelativeToRefPose: boolean, Translation: Vector, Rotation: Rotator, Scale: Vector);
         BoneToObserve: BoneReference;
-        DisplaySpace: number;
+        DisplaySpace: EBoneControlSpace;
         bRelativeToRefPose: boolean;
         Translation: Vector;
         Rotation: Rotator;
@@ -20184,14 +20370,15 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EBoneAxis { BA_X, BA_Y, BA_Z, BA_MAX}
     enum ERBFNormalizeMethod { OnlyNormalizeAboveOne, AlwaysNormalize, NormalizeWithinMedian, ERBFNormalizeMethod_MAX}
     class RBFParams {
-        constructor(TargetDimensions: number, Radius: number, Function: ERBFFunctionType, DistanceMethod: ERBFDistanceMethod, TwistAxis: number, WeightThreshold: number, NormalizeMethod: ERBFNormalizeMethod, MedianReference: Vector, MedianMin: number, MedianMax: number);
+        constructor(TargetDimensions: number, Radius: number, Function: ERBFFunctionType, DistanceMethod: ERBFDistanceMethod, TwistAxis: EBoneAxis, WeightThreshold: number, NormalizeMethod: ERBFNormalizeMethod, MedianReference: Vector, MedianMin: number, MedianMax: number);
         TargetDimensions: number;
         Radius: number;
         Function: ERBFFunctionType;
         DistanceMethod: ERBFDistanceMethod;
-        TwistAxis: number;
+        TwistAxis: EBoneAxis;
         WeightThreshold: number;
         NormalizeMethod: ERBFNormalizeMethod;
         MedianReference: Vector;
@@ -20204,7 +20391,7 @@ declare module "ue" {
     enum EPoseDriverSource { Rotation, Translation, EPoseDriverSource_MAX}
     enum EPoseDriverOutput { DrivePoses, DriveCurves, EPoseDriverOutput_MAX}
     class AnimNode_PoseDriver extends AnimNode_PoseHandler {
-        constructor(SourcePose: PoseLink, SourceBones: TArray<BoneReference>, OnlyDriveBones: TArray<BoneReference>, PoseTargets: TArray<PoseDriverTarget>, EvalSpaceBone: BoneReference, RBFParams: RBFParams, SourceBone: BoneReference, TwistAxis: number, Type: EPoseDriverType, RadialScaling: number, DriveSource: EPoseDriverSource, DriveOutput: EPoseDriverOutput, bOnlyDriveSelectedBones: boolean);
+        constructor(SourcePose: PoseLink, SourceBones: TArray<BoneReference>, OnlyDriveBones: TArray<BoneReference>, PoseTargets: TArray<PoseDriverTarget>, EvalSpaceBone: BoneReference, RBFParams: RBFParams, SourceBone: BoneReference, TwistAxis: EBoneAxis, Type: EPoseDriverType, RadialScaling: number, DriveSource: EPoseDriverSource, DriveOutput: EPoseDriverOutput, bOnlyDriveSelectedBones: boolean);
         SourcePose: PoseLink;
         SourceBones: TArray<BoneReference>;
         OnlyDriveBones: TArray<BoneReference>;
@@ -20212,7 +20399,7 @@ declare module "ue" {
         EvalSpaceBone: BoneReference;
         RBFParams: RBFParams;
         SourceBone: BoneReference;
-        TwistAxis: number;
+        TwistAxis: EBoneAxis;
         Type: EPoseDriverType;
         RadialScaling: number;
         DriveSource: EPoseDriverSource;
@@ -20292,7 +20479,7 @@ declare module "ue" {
     
     enum ESimulationSpace { ComponentSpace, WorldSpace, BaseBoneSpace, ESimulationSpace_MAX}
     class AnimNode_RigidBody extends AnimNode_SkeletalControlBase {
-        constructor(OverridePhysicsAsset: PhysicsAsset, OverrideWorldGravity: Vector, ExternalForce: Vector, ComponentLinearAccScale: Vector, ComponentLinearVelScale: Vector, ComponentAppliedLinearAccClamp: Vector, CachedBoundsScale: number, BaseBoneRef: BoneReference, OverlapChannel: number, SimulationSpace: ESimulationSpace, bForceDisableCollisionBetweenConstraintBodies: boolean, bEnableWorldGeometry: boolean, bOverrideWorldGravity: boolean, bTransferBoneVelocities: boolean, bFreezeIncomingPoseOnStart: boolean, bClampLinearTranslationLimitToRefPose: boolean, bComponentSpaceSimulation: boolean);
+        constructor(OverridePhysicsAsset: PhysicsAsset, OverrideWorldGravity: Vector, ExternalForce: Vector, ComponentLinearAccScale: Vector, ComponentLinearVelScale: Vector, ComponentAppliedLinearAccClamp: Vector, CachedBoundsScale: number, BaseBoneRef: BoneReference, OverlapChannel: ECollisionChannel, SimulationSpace: ESimulationSpace, bForceDisableCollisionBetweenConstraintBodies: boolean, bEnableWorldGeometry: boolean, bOverrideWorldGravity: boolean, bTransferBoneVelocities: boolean, bFreezeIncomingPoseOnStart: boolean, bClampLinearTranslationLimitToRefPose: boolean, bComponentSpaceSimulation: boolean);
         OverridePhysicsAsset: PhysicsAsset;
         OverrideWorldGravity: Vector;
         ExternalForce: Vector;
@@ -20301,7 +20488,7 @@ declare module "ue" {
         ComponentAppliedLinearAccClamp: Vector;
         CachedBoundsScale: number;
         BaseBoneRef: BoneReference;
-        OverlapChannel: number;
+        OverlapChannel: ECollisionChannel;
         SimulationSpace: ESimulationSpace;
         bForceDisableCollisionBetweenConstraintBodies: boolean;
         bEnableWorldGeometry: boolean;
@@ -20322,7 +20509,7 @@ declare module "ue" {
     }
     
     class AnimNode_RigidBody_Chaos extends AnimNode_SkeletalControlBase {
-        constructor(OverridePhysicsAsset: PhysicsAsset, OverrideWorldGravity: Vector, ExternalForce: Vector, ComponentLinearAccScale: Vector, ComponentLinearVelScale: Vector, ComponentAppliedLinearAccClamp: Vector, CachedBoundsScale: number, BaseBoneRef: BoneReference, OverlapChannel: number, SimulationSpace: ESimulationSpace, bForceDisableCollisionBetweenConstraintBodies: boolean, bEnableWorldGeometry: boolean, bOverrideWorldGravity: boolean, bTransferBoneVelocities: boolean, bFreezeIncomingPoseOnStart: boolean, bClampLinearTranslationLimitToRefPose: boolean, bComponentSpaceSimulation: boolean);
+        constructor(OverridePhysicsAsset: PhysicsAsset, OverrideWorldGravity: Vector, ExternalForce: Vector, ComponentLinearAccScale: Vector, ComponentLinearVelScale: Vector, ComponentAppliedLinearAccClamp: Vector, CachedBoundsScale: number, BaseBoneRef: BoneReference, OverlapChannel: ECollisionChannel, SimulationSpace: ESimulationSpace, bForceDisableCollisionBetweenConstraintBodies: boolean, bEnableWorldGeometry: boolean, bOverrideWorldGravity: boolean, bTransferBoneVelocities: boolean, bFreezeIncomingPoseOnStart: boolean, bClampLinearTranslationLimitToRefPose: boolean, bComponentSpaceSimulation: boolean);
         OverridePhysicsAsset: PhysicsAsset;
         OverrideWorldGravity: Vector;
         ExternalForce: Vector;
@@ -20331,7 +20518,7 @@ declare module "ue" {
         ComponentAppliedLinearAccClamp: Vector;
         CachedBoundsScale: number;
         BaseBoneRef: BoneReference;
-        OverlapChannel: number;
+        OverlapChannel: ECollisionChannel;
         SimulationSpace: ESimulationSpace;
         bForceDisableCollisionBetweenConstraintBodies: boolean;
         bEnableWorldGeometry: boolean;
@@ -20379,11 +20566,11 @@ declare module "ue" {
     }
     
     class AnimNode_RotationMultiplier extends AnimNode_SkeletalControlBase {
-        constructor(TargetBone: BoneReference, SourceBone: BoneReference, Multiplier: number, RotationAxisToRefer: number, bIsAdditive: boolean);
+        constructor(TargetBone: BoneReference, SourceBone: BoneReference, Multiplier: number, RotationAxisToRefer: EBoneAxis, bIsAdditive: boolean);
         TargetBone: BoneReference;
         SourceBone: BoneReference;
         Multiplier: number;
-        RotationAxisToRefer: number;
+        RotationAxisToRefer: EBoneAxis;
         bIsAdditive: boolean;
         static StaticClass(): Class;
     }
@@ -20456,13 +20643,14 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_ScaleChainLength;
     }
     
+    enum ESequenceEvalReinit { NoReset, StartPosition, ExplicitTime, ESequenceEvalReinit_MAX}
     class AnimNode_SequenceEvaluator extends AnimNode_AssetPlayerBase {
-        constructor(Sequence: AnimSequenceBase, ExplicitTime: number, bShouldLoop: boolean, bTeleportToExplicitTime: boolean, ReinitializationBehavior: number, StartPosition: number);
+        constructor(Sequence: AnimSequenceBase, ExplicitTime: number, bShouldLoop: boolean, bTeleportToExplicitTime: boolean, ReinitializationBehavior: ESequenceEvalReinit, StartPosition: number);
         Sequence: AnimSequenceBase;
         ExplicitTime: number;
         bShouldLoop: boolean;
         bTeleportToExplicitTime: boolean;
-        ReinitializationBehavior: number;
+        ReinitializationBehavior: ESequenceEvalReinit;
         StartPosition: number;
         static StaticClass(): Class;
     }
@@ -20587,10 +20775,10 @@ declare module "ue" {
     }
     
     class AnimNode_Trail extends AnimNode_SkeletalControlBase {
-        constructor(TrailBone: BoneReference, ChainLength: number, ChainBoneAxis: number, bInvertChainBoneAxis: boolean, bLimitStretch: boolean, bLimitRotation: boolean, bUsePlanarLimit: boolean, bActorSpaceFakeVel: boolean, bReorientParentToChild: boolean, bEnableDebug: boolean, bShowBaseMotion: boolean, bShowTrailLocation: boolean, bShowLimit: boolean, DebugLifeTime: number, TrailRelaxation: number, MaxDeltaTime: number, RelaxationSpeedScale: number, TrailRelaxationSpeed: RuntimeFloatCurve, RelaxationSpeedScaleInputProcessor: InputScaleBiasClamp, RotationLimits: TArray<RotationLimit>, RotationOffsets: TArray<Vector>, PlanarLimits: TArray<AnimPhysPlanarLimit>, StretchLimit: number, FakeVelocity: Vector, BaseJoint: BoneReference, TrailBoneRotationBlendAlpha: number, LastBoneRotationAnimAlphaBlend: number);
+        constructor(TrailBone: BoneReference, ChainLength: number, ChainBoneAxis: EAxis, bInvertChainBoneAxis: boolean, bLimitStretch: boolean, bLimitRotation: boolean, bUsePlanarLimit: boolean, bActorSpaceFakeVel: boolean, bReorientParentToChild: boolean, bEnableDebug: boolean, bShowBaseMotion: boolean, bShowTrailLocation: boolean, bShowLimit: boolean, DebugLifeTime: number, TrailRelaxation: number, MaxDeltaTime: number, RelaxationSpeedScale: number, TrailRelaxationSpeed: RuntimeFloatCurve, RelaxationSpeedScaleInputProcessor: InputScaleBiasClamp, RotationLimits: TArray<RotationLimit>, RotationOffsets: TArray<Vector>, PlanarLimits: TArray<AnimPhysPlanarLimit>, StretchLimit: number, FakeVelocity: Vector, BaseJoint: BoneReference, TrailBoneRotationBlendAlpha: number, LastBoneRotationAnimAlphaBlend: number);
         TrailBone: BoneReference;
         ChainLength: number;
-        ChainBoneAxis: number;
+        ChainBoneAxis: EAxis;
         bInvertChainBoneAxis: boolean;
         bLimitStretch: boolean;
         bLimitRotation: boolean;
@@ -20626,11 +20814,13 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_Trail;
     }
     
+    enum EEvaluatorDataSource { EDS_SourcePose, EDS_DestinationPose, EDS_MAX}
+    enum EEvaluatorMode { EM_Standard, EM_Freeze, EM_DelayedFreeze, EM_MAX}
     class AnimNode_TransitionPoseEvaluator extends AnimNode_Base {
-        constructor(FramesToCachePose: number, DataSource: number, EvaluatorMode: number);
+        constructor(FramesToCachePose: number, DataSource: EEvaluatorDataSource, EvaluatorMode: EEvaluatorMode);
         FramesToCachePose: number;
-        DataSource: number;
-        EvaluatorMode: number;
+        DataSource: EEvaluatorDataSource;
+        EvaluatorMode: EEvaluatorMode;
         static StaticClass(): Class;
     }
     
@@ -20676,7 +20866,7 @@ declare module "ue" {
     }
     
     class AnimNode_TwoBoneIK extends AnimNode_SkeletalControlBase {
-        constructor(IKBone: BoneReference, StartStretchRatio: number, MaxStretchScale: number, StretchLimits: Vector2D, bNoTwist: boolean, JointTargetSpaceBoneName: string, EffectorSpaceBoneName: string, EffectorLocation: Vector, EffectorTarget: BoneSocketTarget, JointTargetLocation: Vector, JointTarget: BoneSocketTarget, TwistAxis: Axis, EffectorLocationSpace: number, JointTargetLocationSpace: number, bAllowStretching: boolean, bTakeRotationFromEffectorSpace: boolean, bMaintainEffectorRelRot: boolean, bAllowTwist: boolean);
+        constructor(IKBone: BoneReference, StartStretchRatio: number, MaxStretchScale: number, StretchLimits: Vector2D, bNoTwist: boolean, JointTargetSpaceBoneName: string, EffectorSpaceBoneName: string, EffectorLocation: Vector, EffectorTarget: BoneSocketTarget, JointTargetLocation: Vector, JointTarget: BoneSocketTarget, TwistAxis: Axis, EffectorLocationSpace: EBoneControlSpace, JointTargetLocationSpace: EBoneControlSpace, bAllowStretching: boolean, bTakeRotationFromEffectorSpace: boolean, bMaintainEffectorRelRot: boolean, bAllowTwist: boolean);
         IKBone: BoneReference;
         StartStretchRatio: number;
         MaxStretchScale: number;
@@ -20689,8 +20879,8 @@ declare module "ue" {
         JointTargetLocation: Vector;
         JointTarget: BoneSocketTarget;
         TwistAxis: Axis;
-        EffectorLocationSpace: number;
-        JointTargetLocationSpace: number;
+        EffectorLocationSpace: EBoneControlSpace;
+        JointTargetLocationSpace: EBoneControlSpace;
         bAllowStretching: boolean;
         bTakeRotationFromEffectorSpace: boolean;
         bMaintainEffectorRelRot: boolean;
@@ -20783,9 +20973,10 @@ declare module "ue" {
         static Load(InName: string): AnimSingleNodeInstance;
     }
     
+    enum EMontagePreviewType { EMPT_Normal, EMPT_AllSections, EMPT_MAX}
     class AnimPreviewInstance extends AnimSingleNodeInstance {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MontagePreviewType: number;
+        MontagePreviewType: EMontagePreviewType;
         MontagePreviewStartSectionIdx: number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): AnimPreviewInstance;
@@ -20807,10 +20998,11 @@ declare module "ue" {
         static Load(InName: string): AnimStateConduitNode;
     }
     
+    enum EAnimStateType { AST_SingleAnimation, AST_BlendGraph, AST_MAX}
     class AnimStateNode extends AnimStateNodeBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BoundGraph: EdGraph;
-        StateType: number;
+        StateType: EAnimStateType;
         StateEntered: AnimNotifyEvent;
         StateLeft: AnimNotifyEvent;
         StateFullyBlended: AnimNotifyEvent;
@@ -20820,18 +21012,19 @@ declare module "ue" {
         static Load(InName: string): AnimStateNode;
     }
     
+    enum ETransitionBlendMode { TBM_Linear, TBM_Cubic, TBM_MAX}
     class AnimStateTransitionNode extends AnimStateNodeBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BoundGraph: EdGraph;
         CustomTransitionGraph: EdGraph;
         PriorityOrder: number;
         CrossfadeDuration: number;
-        CrossfadeMode: number;
+        CrossfadeMode: ETransitionBlendMode;
         BlendMode: EAlphaBlendOption;
         CustomBlendCurve: CurveFloat;
         BlendProfile: BlendProfile;
         bAutomaticRuleBasedOnSequencePlayerInState: boolean;
-        LogicType: number;
+        LogicType: ETransitionLogicType;
         TransitionStart: AnimNotifyEvent;
         TransitionEnd: AnimNotifyEvent;
         TransitionInterrupt: AnimNotifyEvent;
@@ -20869,9 +21062,10 @@ declare module "ue" {
         static Load(InName: string): K2Node_PlayMontage;
     }
     
+    enum ETransitionGetter { AnimationAsset_GetCurrentTime, AnimationAsset_GetLength, AnimationAsset_GetCurrentTimeFraction, AnimationAsset_GetTimeFromEnd, AnimationAsset_GetTimeFromEndFraction, CurrentState_ElapsedTime, CurrentState_GetBlendWeight, CurrentTransitionDuration, ArbitraryState_GetBlendWeight, ETransitionGetter_MAX}
     class K2Node_TransitionRuleGetter extends K2Node {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        GetterType: number;
+        GetterType: ETransitionGetter;
         AssociatedAnimAssetPlayerNode: AnimGraphNode_Base;
         AssociatedStateNode: AnimStateNode;
         static StaticClass(): Class;
@@ -20881,7 +21075,7 @@ declare module "ue" {
     
     class Texture2DDynamic extends Texture {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Format: number;
+        Format: EPixelFormat;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): Texture2DDynamic;
         static Load(InName: string): Texture2DDynamic;
@@ -20907,20 +21101,22 @@ declare module "ue" {
         static Load(InName: string): ContentWidget;
     }
     
+    enum EHorizontalAlignment { HAlign_Fill, HAlign_Left, HAlign_Center, HAlign_Right, HAlign_MAX}
+    enum EVerticalAlignment { VAlign_Fill, VAlign_Top, VAlign_Center, VAlign_Bottom, VAlign_MAX}
     class BackgroundBlur extends ContentWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
         bApplyAlphaToBlur: boolean;
         BlurStrength: number;
         bOverrideAutoRadiusCalculation: boolean;
         BlurRadius: number;
         LowQualityFallbackBrush: SlateBrush;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
         SetLowQualityFallbackBrush(InBrush: SlateBrush): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         SetBlurStrength(InStrength: number): void;
         SetBlurRadius(InBlurRadius: number): void;
         SetApplyAlphaToBlur(bInApplyAlphaToBlur: boolean): void;
@@ -20932,11 +21128,11 @@ declare module "ue" {
     class BackgroundBlurSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BackgroundBlurSlot;
         static Load(InName: string): BackgroundBlurSlot;
@@ -20960,8 +21156,8 @@ declare module "ue" {
     
     class Border extends ContentWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
         bShowEffectWhenDisabled: boolean;
         ContentColorAndOpacity: LinearColor;
         ContentColorAndOpacityDelegate: $Delegate<() => LinearColor>;
@@ -20977,9 +21173,9 @@ declare module "ue" {
         OnMouseMoveEvent: $Delegate<(MyGeometry: Geometry, MouseEvent: PointerEvent) => EventReply>;
         OnMouseDoubleClickEvent: $Delegate<(MyGeometry: Geometry, MouseEvent: PointerEvent) => EventReply>;
         Brush: SlateBrushAsset;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         SetDesiredSizeScale(InScale: Vector2D): void;
         SetContentColorAndOpacity(InContentColorAndOpacity: LinearColor): void;
         SetBrushFromTexture(Texture: Texture2D): void;
@@ -20996,11 +21192,11 @@ declare module "ue" {
     class BorderSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BorderSlot;
         static Load(InName: string): BorderSlot;
@@ -21014,26 +21210,29 @@ declare module "ue" {
         static Load(InName: string): BrushBinding;
     }
     
+    enum EButtonClickMethod { DownAndUp, MouseDown, MouseUp, PreciseClick, EButtonClickMethod_MAX}
+    enum EButtonTouchMethod { DownAndUp, Down, PreciseTap, EButtonTouchMethod_MAX}
+    enum EButtonPressMethod { DownAndUp, ButtonPress, ButtonRelease, EButtonPressMethod_MAX}
     class Button extends ContentWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Style: SlateWidgetStyleAsset;
         WidgetStyle: ButtonStyle;
         ColorAndOpacity: LinearColor;
         BackgroundColor: LinearColor;
-        ClickMethod: number;
-        TouchMethod: number;
-        PressMethod: number;
+        ClickMethod: EButtonClickMethod;
+        TouchMethod: EButtonTouchMethod;
+        PressMethod: EButtonPressMethod;
         IsFocusable: boolean;
         OnClicked: $MulticastDelegate<() => void>;
         OnPressed: $MulticastDelegate<() => void>;
         OnReleased: $MulticastDelegate<() => void>;
         OnHovered: $MulticastDelegate<() => void>;
         OnUnhovered: $MulticastDelegate<() => void>;
-        SetTouchMethod(InTouchMethod: number): void;
+        SetTouchMethod(InTouchMethod: EButtonTouchMethod): void;
         SetStyle(InStyle: ButtonStyle): void;
-        SetPressMethod(InPressMethod: number): void;
+        SetPressMethod(InPressMethod: EButtonPressMethod): void;
         SetColorAndOpacity(InColorAndOpacity: LinearColor): void;
-        SetClickMethod(InClickMethod: number): void;
+        SetClickMethod(InClickMethod: EButtonClickMethod): void;
         SetBackgroundColor(InBackgroundColor: LinearColor): void;
         IsPressed(): boolean;
         static StaticClass(): Class;
@@ -21044,11 +21243,11 @@ declare module "ue" {
     class ButtonSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ButtonSlot;
         static Load(InName: string): ButtonSlot;
@@ -21113,7 +21312,7 @@ declare module "ue" {
         UndeterminedImage: SlateBrushAsset;
         UndeterminedHoveredImage: SlateBrushAsset;
         UndeterminedPressedImage: SlateBrushAsset;
-        HorizontalAlignment: number;
+        HorizontalAlignment: EHorizontalAlignment;
         Padding: Margin;
         BorderBackgroundColor: SlateColor;
         IsFocusable: boolean;
@@ -21192,6 +21391,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESelectInfo { OnKeyPress, OnNavigation, OnMouseClick, Direct, ESelectInfo_MAX}
     class ComboBoxString extends Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DefaultOptions: TArray<string>;
@@ -21206,13 +21406,13 @@ declare module "ue" {
         ForegroundColor: SlateColor;
         bIsFocusable: boolean;
         OnGenerateWidgetEvent: $Delegate<(Item: string) => Widget>;
-        OnSelectionChanged: $MulticastDelegate<(SelectedItem: string, SelectionType: number) => void>;
+        OnSelectionChanged: $MulticastDelegate<(SelectedItem: string, SelectionType: ESelectInfo) => void>;
         OnOpening: $MulticastDelegate<() => void>;
         SetSelectedOption(Option: string): void;
         SetSelectedIndex(Index: number): void;
         RemoveOption(Option: string): boolean;
         RefreshOptions(): void;
-        OnSelectionChangedEvent__DelegateSignature(SelectedItem: string, SelectionType: number): void;
+        OnSelectionChangedEvent__DelegateSignature(SelectedItem: string, SelectionType: ESelectInfo): void;
         OnOpeningEvent__DelegateSignature(): void;
         IsOpen(): boolean;
         GetSelectedOption(): string;
@@ -21229,10 +21429,11 @@ declare module "ue" {
     }
     
     enum EDynamicBoxType { Horizontal, Vertical, Wrap, Overlay, EDynamicBoxType_MAX}
+    enum ESlateSizeRule { Automatic, Fill, ESlateSizeRule_MAX}
     class SlateChildSize {
-        constructor(Value: number, SizeRule: number);
+        constructor(Value: number, SizeRule: ESlateSizeRule);
         Value: number;
-        SizeRule: number;
+        SizeRule: ESlateSizeRule;
         static StaticClass(): Class;
     }
     
@@ -21249,8 +21450,8 @@ declare module "ue" {
         EntrySpacing: Vector2D;
         SpacingPattern: TArray<Vector2D>;
         EntrySizeRule: SlateChildSize;
-        EntryHorizontalAlignment: number;
-        EntryVerticalAlignment: number;
+        EntryHorizontalAlignment: EHorizontalAlignment;
+        EntryVerticalAlignment: EVerticalAlignment;
         MaxElementSize: number;
         EntryWidgetPool: UserWidgetPool;
         SetEntrySpacing(InEntrySpacing: Vector2D): void;
@@ -21274,6 +21475,7 @@ declare module "ue" {
         static Load(InName: string): DynamicEntryBox;
     }
     
+    enum EVirtualKeyboardType { Default, Number, Web, Email, Password, AlphaNumeric, EVirtualKeyboardType_MAX}
     class VirtualKeyboardOptions {
         constructor(bEnableAutocorrect: boolean);
         bEnableAutocorrect: boolean;
@@ -21281,6 +21483,7 @@ declare module "ue" {
     }
     
     enum EVirtualKeyboardDismissAction { TextChangeOnDismiss, TextCommitOnAccept, TextCommitOnDismiss, EVirtualKeyboardDismissAction_MAX}
+    enum ETextJustify { Left, Center, Right, ETextJustify_MAX}
     enum ETextShapingMethod { Auto, KerningOnly, FullShaping, ETextShapingMethod_MAX}
     enum ETextFlowDirection { Auto, LeftToRight, RightToLeft, ETextFlowDirection_MAX}
     class ShapedTextOptions {
@@ -21292,6 +21495,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ETextCommit { Default, OnEnter, OnUserMovedFocus, OnCleared, ETextCommit_MAX}
     class EditableText extends Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Text: string;
@@ -21314,19 +21518,19 @@ declare module "ue" {
         ClearKeyboardFocusOnCommit: boolean;
         SelectAllTextOnCommit: boolean;
         AllowContextMenu: boolean;
-        KeyboardType: number;
+        KeyboardType: EVirtualKeyboardType;
         VirtualKeyboardOptions: VirtualKeyboardOptions;
         VirtualKeyboardDismissAction: EVirtualKeyboardDismissAction;
-        Justification: number;
+        Justification: ETextJustify;
         ShapedTextOptions: ShapedTextOptions;
         OnTextChanged: $MulticastDelegate<(Text: string) => void>;
-        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: number) => void>;
+        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
         SetText(InText: string): void;
-        SetJustification(InJustification: number): void;
+        SetJustification(InJustification: ETextJustify): void;
         SetIsReadOnly(InbIsReadyOnly: boolean): void;
         SetIsPassword(InbIsPassword: boolean): void;
         SetHintText(InHintText: string): void;
-        OnEditableTextCommittedEvent__DelegateSignature(Text: string, CommitMethod: number): void;
+        OnEditableTextCommittedEvent__DelegateSignature(Text: string, CommitMethod: ETextCommit): void;
         OnEditableTextChangedEvent__DelegateSignature(Text: string): void;
         GetText(): string;
         static StaticClass(): Class;
@@ -21356,20 +21560,20 @@ declare module "ue" {
         ClearKeyboardFocusOnCommit: boolean;
         SelectAllTextOnCommit: boolean;
         AllowContextMenu: boolean;
-        KeyboardType: number;
+        KeyboardType: EVirtualKeyboardType;
         VirtualKeyboardOptions: VirtualKeyboardOptions;
         VirtualKeyboardDismissAction: EVirtualKeyboardDismissAction;
-        Justification: number;
+        Justification: ETextJustify;
         ShapedTextOptions: ShapedTextOptions;
         OnTextChanged: $MulticastDelegate<(Text: string) => void>;
-        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: number) => void>;
+        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
         SetText(InText: string): void;
-        SetJustification(InJustification: number): void;
+        SetJustification(InJustification: ETextJustify): void;
         SetIsReadOnly(bReadOnly: boolean): void;
         SetIsPassword(bIsPassword: boolean): void;
         SetHintText(InText: string): void;
         SetError(InError: string): void;
-        OnEditableTextBoxCommittedEvent__DelegateSignature(Text: string, CommitMethod: number): void;
+        OnEditableTextBoxCommittedEvent__DelegateSignature(Text: string, CommitMethod: ETextCommit): void;
         OnEditableTextBoxChangedEvent__DelegateSignature(Text: string): void;
         HasError(): boolean;
         GetText(): string;
@@ -21418,21 +21622,21 @@ declare module "ue" {
     class GridSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
         Row: number;
         RowSpan: number;
         Column: number;
         ColumnSpan: number;
         Layer: number;
         Nudge: Vector2D;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetRowSpan(InRowSpan: number): void;
         SetRow(InRow: number): void;
         SetPadding(InPadding: Margin): void;
         SetNudge(InNudge: Vector2D): void;
         SetLayer(InLayer: number): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         SetColumnSpan(InColumnSpan: number): void;
         SetColumn(InColumn: number): void;
         static StaticClass(): Class;
@@ -21456,12 +21660,12 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
         Size: SlateChildSize;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetSize(InSize: SlateChildSize): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): HorizontalBoxSlot;
         static Load(InName: string): HorizontalBoxSlot;
@@ -21620,11 +21824,13 @@ declare module "ue" {
         static Load(InName: string): UserObjectListEntryLibrary;
     }
     
+    enum EOrientation { Orient_Horizontal, Orient_Vertical, Orient_MAX}
+    enum ESelectionMode { None, Single, SingleToggle, Multi, ESelectionMode_MAX}
     enum EConsumeMouseWheel { WhenScrollingPossible, Always, Never, EConsumeMouseWheel_MAX}
     class ListView extends ListViewBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Orientation: number;
-        SelectionMode: number;
+        Orientation: EOrientation;
+        SelectionMode: ESelectionMode;
         ConsumeMouseWheel: EConsumeMouseWheel;
         bClearSelectionOnClick: boolean;
         bIsFocusable: boolean;
@@ -21637,7 +21843,7 @@ declare module "ue" {
         BP_OnItemIsHoveredChanged: $MulticastDelegate<(Item: Object, bIsHovered: boolean) => void>;
         BP_OnItemSelectionChanged: $MulticastDelegate<(Item: Object, bIsSelected: boolean) => void>;
         BP_OnItemScrolledIntoView: $MulticastDelegate<(Item: Object, Widget: UserWidget) => void>;
-        SetSelectionMode(SelectionMode: number): void;
+        SetSelectionMode(SelectionMode: ESelectionMode): void;
         SetSelectedIndex(Index: number): void;
         ScrollIndexIntoView(Index: number): void;
         RemoveItem(Item: Object): void;
@@ -21672,18 +21878,19 @@ declare module "ue" {
         static Load(InName: string): ListViewDesignerPreviewItem;
     }
     
+    enum EMenuPlacement { MenuPlacement_BelowAnchor, MenuPlacement_CenteredBelowAnchor, MenuPlacement_BelowRightAnchor, MenuPlacement_ComboBox, MenuPlacement_ComboBoxRight, MenuPlacement_MenuRight, MenuPlacement_AboveAnchor, MenuPlacement_CenteredAboveAnchor, MenuPlacement_AboveRightAnchor, MenuPlacement_MenuLeft, MenuPlacement_Center, MenuPlacement_RightLeftCenter, MenuPlacement_MatchBottomLeft, MenuPlacement_MAX}
     class MenuAnchor extends ContentWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MenuClass: Class;
         OnGetMenuContentEvent: $Delegate<() => Widget>;
-        Placement: number;
+        Placement: EMenuPlacement;
         bFitInWindow: boolean;
         ShouldDeferPaintingAfterWindowContent: boolean;
         UseApplicationMenuStack: boolean;
         OnMenuOpenChanged: $MulticastDelegate<(bIsOpen: boolean) => void>;
         ToggleOpen(bFocusOnOpen: boolean): void;
         ShouldOpenDueToClick(): boolean;
-        SetPlacement(InPlacement: number): void;
+        SetPlacement(InPlacement: EMenuPlacement): void;
         Open(bFocusMenu: boolean): void;
         IsOpen(): boolean;
         HasOpenSubMenus(): boolean;
@@ -21697,7 +21904,7 @@ declare module "ue" {
     
     class MouseCursorBinding extends PropertyBinding {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        GetValue(): number;
+        GetValue(): EMouseCursor;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MouseCursorBinding;
         static Load(InName: string): MouseCursorBinding;
@@ -21787,13 +21994,13 @@ declare module "ue" {
     class TextLayoutWidget extends Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ShapedTextOptions: ShapedTextOptions;
-        Justification: number;
+        Justification: ETextJustify;
         WrappingPolicy: ETextWrappingPolicy;
         AutoWrapText: boolean;
         WrapTextAt: number;
         Margin: Margin;
         LineHeightPercentage: number;
-        SetJustification(InJustification: number): void;
+        SetJustification(InJustification: ETextJustify): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TextLayoutWidget;
         static Load(InName: string): TextLayoutWidget;
@@ -21815,12 +22022,12 @@ declare module "ue" {
         VirtualKeyboardOptions: VirtualKeyboardOptions;
         VirtualKeyboardDismissAction: EVirtualKeyboardDismissAction;
         OnTextChanged: $MulticastDelegate<(Text: string) => void>;
-        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: number) => void>;
+        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
         SetWidgetStyle(InWidgetStyle: TextBlockStyle): void;
         SetText(InText: string): void;
         SetIsReadOnly(bReadOnly: boolean): void;
         SetHintText(InHintText: string): void;
-        OnMultiLineEditableTextCommittedEvent__DelegateSignature(Text: string, CommitMethod: number): void;
+        OnMultiLineEditableTextCommittedEvent__DelegateSignature(Text: string, CommitMethod: ETextCommit): void;
         OnMultiLineEditableTextChangedEvent__DelegateSignature(Text: string): void;
         GetText(): string;
         GetHintText(): string;
@@ -21846,13 +22053,13 @@ declare module "ue" {
         BackgroundColor: LinearColor;
         ReadOnlyForegroundColor: LinearColor;
         OnTextChanged: $MulticastDelegate<(Text: string) => void>;
-        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: number) => void>;
+        OnTextCommitted: $MulticastDelegate<(Text: string, CommitMethod: ETextCommit) => void>;
         SetTextStyle(InTextStyle: TextBlockStyle): void;
         SetText(InText: string): void;
         SetIsReadOnly(bReadOnly: boolean): void;
         SetHintText(InHintText: string): void;
         SetError(InError: string): void;
-        OnMultiLineEditableTextBoxCommittedEvent__DelegateSignature(Text: string, CommitMethod: number): void;
+        OnMultiLineEditableTextBoxCommittedEvent__DelegateSignature(Text: string, CommitMethod: ETextCommit): void;
         OnMultiLineEditableTextBoxChangedEvent__DelegateSignature(Text: string): void;
         GetText(): string;
         GetHintText(): string;
@@ -21885,11 +22092,11 @@ declare module "ue" {
     class OverlaySlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): OverlaySlot;
         static Load(InName: string): OverlaySlot;
@@ -21903,6 +22110,7 @@ declare module "ue" {
         static Load(InName: string): Overlay;
     }
     
+    enum EProgressBarFillType { LeftToRight, RightToLeft, FillFromCenter, TopToBottom, BottomToTop, EProgressBarFillType_MAX}
     class ProgressBar extends Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         WidgetStyle: ProgressBarStyle;
@@ -21911,7 +22119,7 @@ declare module "ue" {
         FillImage: SlateBrushAsset;
         MarqueeImage: SlateBrushAsset;
         Percent: number;
-        BarFillType: number;
+        BarFillType: EProgressBarFillType;
         bIsMarquee: boolean;
         BorderPadding: Vector2D;
         PercentDelegate: $Delegate<() => number>;
@@ -22001,23 +22209,25 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bIsTitleSafe: boolean;
         SafeAreaScale: Margin;
-        HAlign: number;
-        VAlign: number;
+        HAlign: EHorizontalAlignment;
+        VAlign: EVerticalAlignment;
         Padding: Margin;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SafeZoneSlot;
         static Load(InName: string): SafeZoneSlot;
     }
     
+    enum EStretch { None, Fill, ScaleToFit, ScaleToFitX, ScaleToFitY, ScaleToFill, ScaleBySafeZone, UserSpecified, EStretch_MAX}
+    enum EStretchDirection { Both, DownOnly, UpOnly, EStretchDirection_MAX}
     class ScaleBox extends ContentWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Stretch: number;
-        StretchDirection: number;
+        Stretch: EStretch;
+        StretchDirection: EStretchDirection;
         UserSpecifiedScale: number;
         IgnoreInheritedScale: boolean;
         SetUserSpecifiedScale(InUserSpecifiedScale: number): void;
-        SetStretchDirection(InStretchDirection: number): void;
-        SetStretch(InStretch: number): void;
+        SetStretchDirection(InStretchDirection: EStretchDirection): void;
+        SetStretch(InStretch: EStretch): void;
         SetIgnoreInheritedScale(bInIgnoreInheritedScale: boolean): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ScaleBox;
@@ -22027,11 +22237,11 @@ declare module "ue" {
     class ScaleBoxSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ScaleBoxSlot;
         static Load(InName: string): ScaleBoxSlot;
@@ -22043,7 +22253,7 @@ declare module "ue" {
         Style: SlateWidgetStyleAsset;
         bAlwaysShowScrollbar: boolean;
         bAlwaysShowScrollbarTrack: boolean;
-        Orientation: number;
+        Orientation: EOrientation;
         Thickness: Vector2D;
         Padding: Margin;
         SetState(InOffsetFraction: number, InThumbSizeFraction: number): void;
@@ -22059,7 +22269,7 @@ declare module "ue" {
         WidgetBarStyle: ScrollBarStyle;
         Style: SlateWidgetStyleAsset;
         BarStyle: SlateWidgetStyleAsset;
-        Orientation: number;
+        Orientation: EOrientation;
         ScrollBarVisibility: ESlateVisibility;
         ConsumeMouseWheel: EConsumeMouseWheel;
         ScrollbarThickness: Vector2D;
@@ -22078,7 +22288,7 @@ declare module "ue" {
         SetScrollBarVisibility(NewScrollBarVisibility: ESlateVisibility): void;
         SetScrollbarThickness(NewScrollbarThickness: Vector2D): void;
         SetScrollbarPadding(NewScrollbarPadding: Margin): void;
-        SetOrientation(NewOrientation: number): void;
+        SetOrientation(NewOrientation: EOrientation): void;
         SetConsumeMouseWheel(NewConsumeMouseWheel: EConsumeMouseWheel): void;
         SetAnimateWheelScrolling(bShouldAnimateWheelScrolling: boolean): void;
         SetAlwaysShowScrollbar(NewAlwaysShowScrollbar: boolean): void;
@@ -22098,11 +22308,11 @@ declare module "ue" {
     class ScrollBoxSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ScrollBoxSlot;
         static Load(InName: string): ScrollBoxSlot;
@@ -22150,11 +22360,11 @@ declare module "ue" {
     class SizeBoxSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SizeBoxSlot;
         static Load(InName: string): SizeBoxSlot;
@@ -22229,7 +22439,7 @@ declare module "ue" {
         MinValue: number;
         MaxValue: number;
         WidgetStyle: SliderStyle;
-        Orientation: number;
+        Orientation: EOrientation;
         SliderBarColor: LinearColor;
         SliderHandleColor: LinearColor;
         IndentHandle: boolean;
@@ -22276,13 +22486,13 @@ declare module "ue" {
         Delta: number;
         SliderExponent: number;
         Font: SlateFontInfo;
-        Justification: number;
+        Justification: ETextJustify;
         MinDesiredWidth: number;
         ClearKeyboardFocusOnCommit: boolean;
         SelectAllTextOnCommit: boolean;
         ForegroundColor: SlateColor;
         OnValueChanged: $MulticastDelegate<(InValue: number) => void>;
-        OnValueCommitted: $MulticastDelegate<(InValue: number, CommitMethod: number) => void>;
+        OnValueCommitted: $MulticastDelegate<(InValue: number, CommitMethod: ETextCommit) => void>;
         OnBeginSliderMovement: $MulticastDelegate<() => void>;
         OnEndSliderMovement: $MulticastDelegate<(InValue: number) => void>;
         bOverride_MinValue: boolean;
@@ -22299,7 +22509,7 @@ declare module "ue" {
         SetMaxValue(NewValue: number): void;
         SetMaxSliderValue(NewValue: number): void;
         SetForegroundColor(InForegroundColor: SlateColor): void;
-        OnSpinBoxValueCommittedEvent__DelegateSignature(InValue: number, CommitMethod: number): void;
+        OnSpinBoxValueCommittedEvent__DelegateSignature(InValue: number, CommitMethod: ETextCommit): void;
         OnSpinBoxValueChangedEvent__DelegateSignature(InValue: number): void;
         OnSpinBoxBeginSliderMovement__DelegateSignature(): void;
         GetValue(): number;
@@ -22402,13 +22612,13 @@ declare module "ue" {
     
     class UniformGridSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
         Row: number;
         Column: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetRow(InRow: number): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         SetColumn(InColumn: number): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): UniformGridSlot;
@@ -22433,12 +22643,12 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Size: SlateChildSize;
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetSize(InSize: SlateChildSize): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): VerticalBoxSlot;
         static Load(InName: string): VerticalBoxSlot;
@@ -22494,8 +22704,8 @@ declare module "ue" {
     class WidgetAnimationPlayCallbackProxy extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Finished: $MulticastDelegate<() => void>;
-        static CreatePlayAnimationTimeRangeProxyObject(Result: $Ref<UMGSequencePlayer>, Widget: UserWidget, InAnimation: WidgetAnimation, StartAtTime: number, EndAtTime: number, NumLoopsToPlay: number, PlayMode: number, PlaybackSpeed: number): WidgetAnimationPlayCallbackProxy;
-        static CreatePlayAnimationProxyObject(Result: $Ref<UMGSequencePlayer>, Widget: UserWidget, InAnimation: WidgetAnimation, StartAtTime: number, NumLoopsToPlay: number, PlayMode: number, PlaybackSpeed: number): WidgetAnimationPlayCallbackProxy;
+        static CreatePlayAnimationTimeRangeProxyObject(Result: $Ref<UMGSequencePlayer>, Widget: UserWidget, InAnimation: WidgetAnimation, StartAtTime: number, EndAtTime: number, NumLoopsToPlay: number, PlayMode: EUMGSequencePlayMode, PlaybackSpeed: number): WidgetAnimationPlayCallbackProxy;
+        static CreatePlayAnimationProxyObject(Result: $Ref<UMGSequencePlayer>, Widget: UserWidget, InAnimation: WidgetAnimation, StartAtTime: number, NumLoopsToPlay: number, PlayMode: EUMGSequencePlayMode, PlaybackSpeed: number): WidgetAnimationPlayCallbackProxy;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): WidgetAnimationPlayCallbackProxy;
         static Load(InName: string): WidgetAnimationPlayCallbackProxy;
@@ -22563,7 +22773,7 @@ declare module "ue" {
         static SetInputMode_GameOnly(PlayerController: PlayerController): void;
         static SetInputMode_GameAndUIEx(PlayerController: PlayerController, InWidgetToFocus: Widget, InMouseLockMode: EMouseLockMode, bHideCursorDuringCapture: boolean): void;
         static SetInputMode_GameAndUI(Target: PlayerController, InWidgetToFocus: Widget, bLockMouseToViewport: boolean, bHideCursorDuringCapture: boolean): void;
-        static SetHardwareCursor(WorldContextObject: Object, CursorShape: number, CursorName: string, HotSpot: Vector2D): boolean;
+        static SetHardwareCursor(WorldContextObject: Object, CursorShape: EMouseCursor, CursorName: string, HotSpot: Vector2D): boolean;
         static SetFocusToGameViewport(): void;
         static SetColorVisionDeficiencyType(Type: EColorVisionDeficiency, Severity: number, CorrectDeficiency: boolean, ShowCorrectionWithDeficiency: boolean): void;
         static SetBrushResourceToTexture(Brush: $Ref<SlateBrush>, Texture: Texture2D): void;
@@ -22618,7 +22828,7 @@ declare module "ue" {
         OnHoveredWidgetChanged: $MulticastDelegate<(WidgetComponent: WidgetComponent, PreviousWidgetComponent: WidgetComponent) => void>;
         VirtualUserIndex: number;
         PointerIndex: number;
-        TraceChannel: number;
+        TraceChannel: ECollisionChannel;
         InteractionDistance: number;
         InteractionSource: EWidgetInteractionSource;
         bEnableHitTesting: boolean;
@@ -22658,11 +22868,11 @@ declare module "ue" {
         Padding: Margin;
         bFillEmptySpace: boolean;
         FillSpanWhenLessThan: number;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         SetFillSpanWhenLessThan(InFillSpanWhenLessThan: number): void;
         SetFillEmptySpace(InbFillEmptySpace: boolean): void;
         static StaticClass(): Class;
@@ -22673,11 +22883,11 @@ declare module "ue" {
     class WidgetSwitcherSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): WidgetSwitcherSlot;
         static Load(InName: string): WidgetSwitcherSlot;
@@ -22730,9 +22940,9 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bWindowButtonsEnabled: boolean;
         bDoubleClickTogglesFullscreen: boolean;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): WindowTitleBarArea;
         static Load(InName: string): WindowTitleBarArea;
@@ -22741,11 +22951,11 @@ declare module "ue" {
     class WindowTitleBarAreaSlot extends PanelSlot {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Padding: Margin;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
-        SetVerticalAlignment(InVerticalAlignment: number): void;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
+        SetVerticalAlignment(InVerticalAlignment: EVerticalAlignment): void;
         SetPadding(InPadding: Margin): void;
-        SetHorizontalAlignment(InHorizontalAlignment: number): void;
+        SetHorizontalAlignment(InHorizontalAlignment: EHorizontalAlignment): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): WindowTitleBarAreaSlot;
         static Load(InName: string): WindowTitleBarAreaSlot;
@@ -22809,9 +23019,9 @@ declare module "ue" {
         static K2_MakePerlinNoiseAndRemap(Value: number, RangeOutMin: number, RangeOutMax: number): number;
         static K2_LookAt(CurrentTransform: Transform, TargetPosition: Vector, LookAtVector: Vector, bUseUpVector: boolean, UpVector: Vector, ClampConeInDegree: number): Transform;
         static K2_EndProfilingTimer(bLog: boolean, LogPrefix: string): number;
-        static K2_DistanceBetweenTwoSocketsAndMapRange(Component: SkeletalMeshComponent, SocketOrBoneNameA: string, SocketSpaceA: number, SocketOrBoneNameB: string, SocketSpaceB: number, bRemapRange: boolean, InRangeMin: number, InRangeMax: number, OutRangeMin: number, OutRangeMax: number): number;
+        static K2_DistanceBetweenTwoSocketsAndMapRange(Component: SkeletalMeshComponent, SocketOrBoneNameA: string, SocketSpaceA: ERelativeTransformSpace, SocketOrBoneNameB: string, SocketSpaceB: ERelativeTransformSpace, bRemapRange: boolean, InRangeMin: number, InRangeMax: number, OutRangeMin: number, OutRangeMax: number): number;
         static K2_DirectionBetweenSockets(Component: SkeletalMeshComponent, SocketOrBoneNameFrom: string, SocketOrBoneNameTo: string): Vector;
-        static K2_CalculateVelocityFromSockets(DeltaSeconds: number, Component: SkeletalMeshComponent, SocketOrBoneName: string, ReferenceSocketOrBone: string, SocketSpace: number, OffsetInBoneSpace: Vector, History: $Ref<PositionHistory>, NumberOfSamples: number, VelocityMin: number, VelocityMax: number, EasingType: EEasingFuncType, CustomCurve: RuntimeFloatCurve): number;
+        static K2_CalculateVelocityFromSockets(DeltaSeconds: number, Component: SkeletalMeshComponent, SocketOrBoneName: string, ReferenceSocketOrBone: string, SocketSpace: ERelativeTransformSpace, OffsetInBoneSpace: Vector, History: $Ref<PositionHistory>, NumberOfSamples: number, VelocityMin: number, VelocityMax: number, EasingType: EEasingFuncType, CustomCurve: RuntimeFloatCurve): number;
         static K2_CalculateVelocityFromPositionHistory(DeltaSeconds: number, Position: Vector, History: $Ref<PositionHistory>, NumberOfSamples: number, VelocityMin: number, VelocityMax: number): number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): KismetAnimationLibrary;
@@ -23104,10 +23314,10 @@ declare module "ue" {
     }
     
     class MovieSceneCameraShakeSectionData {
-        constructor(ShakeClass: Class, PlayScale: number, PlaySpace: number, UserDefinedPlaySpace: Rotator);
+        constructor(ShakeClass: Class, PlayScale: number, PlaySpace: ECameraAnimPlaySpace, UserDefinedPlaySpace: Rotator);
         ShakeClass: Class;
         PlayScale: number;
-        PlaySpace: number;
+        PlaySpace: ECameraAnimPlaySpace;
         UserDefinedPlaySpace: Rotator;
         static StaticClass(): Class;
     }
@@ -23117,7 +23327,7 @@ declare module "ue" {
         ShakeData: MovieSceneCameraShakeSectionData;
         ShakeClass: Class;
         PlayScale: number;
-        PlaySpace: number;
+        PlaySpace: ECameraAnimPlaySpace;
         UserDefinedPlaySpace: Rotator;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MovieSceneCameraShakeSection;
@@ -24247,7 +24457,7 @@ declare module "ue" {
     
     class AnimBlueprintFactory extends Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BlueprintType: number;
+        BlueprintType: EBlueprintType;
         ParentClass: Class;
         TargetSkeleton: Skeleton;
         PreviewSkeletalMesh: SkeletalMesh;
@@ -24738,10 +24948,10 @@ declare module "ue" {
     
     enum ECSVImportType { ECSV_DataTable, ECSV_CurveTable, ECSV_CurveFloat, ECSV_CurveVector, ECSV_CurveLinearColor, ECSV_MAX}
     class CSVImportSettings {
-        constructor(ImportRowStruct: ScriptStruct, ImportType: ECSVImportType, ImportCurveInterpMode: number);
+        constructor(ImportRowStruct: ScriptStruct, ImportType: ECSVImportType, ImportCurveInterpMode: ERichCurveInterpMode);
         ImportRowStruct: ScriptStruct;
         ImportType: ECSVImportType;
-        ImportCurveInterpMode: number;
+        ImportCurveInterpMode: ERichCurveInterpMode;
         static StaticClass(): Class;
     }
     
@@ -25091,13 +25301,14 @@ declare module "ue" {
         static Load(InName: string): DumpHiddenCategoriesCommandlet;
     }
     
+    enum ECommentBoxMode { GroupMovement, NoGroupMovement, ECommentBoxMode_MAX}
     class EdGraphNode_Comment extends EdGraphNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CommentColor: LinearColor;
         FontSize: number;
         bCommentBubbleVisible_InDetailsPanel: boolean;
         bColorCommentBubble: boolean;
-        MoveMode: number;
+        MoveMode: ECommentBoxMode;
         CommentDepth: number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): EdGraphNode_Comment;
@@ -25152,6 +25363,7 @@ declare module "ue" {
         static Load(InName: string): EditorCompositeSection;
     }
     
+    enum EWindowMode { Fullscreen, WindowedFullscreen, Windowed, EWindowMode_MAX}
     class GameUserSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bUseVSync: boolean;
@@ -25199,7 +25411,7 @@ declare module "ue" {
         SetResolutionScaleNormalized(NewScaleNormalized: number): void;
         SetPostProcessingQuality(Value: number): void;
         SetOverallScalabilityLevel(Value: number): void;
-        SetFullscreenMode(InFullscreenMode: number): void;
+        SetFullscreenMode(InFullscreenMode: EWindowMode): void;
         SetFrameRateLimit(NewLimit: number): void;
         SetFoliageQuality(Value: number): void;
         SetDynamicResolutionEnabled(bEnable: boolean): void;
@@ -25230,18 +25442,18 @@ declare module "ue" {
         GetResolutionScaleInformationEx(CurrentScaleNormalized: $Ref<number>, CurrentScaleValue: $Ref<number>, MinScaleValue: $Ref<number>, MaxScaleValue: $Ref<number>): void;
         GetResolutionScaleInformation(CurrentScaleNormalized: $Ref<number>, CurrentScaleValue: $Ref<number>, MinScaleValue: $Ref<number>, MaxScaleValue: $Ref<number>): void;
         GetRecommendedResolutionScale(): number;
-        GetPreferredFullscreenMode(): number;
+        GetPreferredFullscreenMode(): EWindowMode;
         GetPostProcessingQuality(): number;
         GetOverallScalabilityLevel(): number;
         GetLastConfirmedScreenResolution(): IntPoint;
-        GetLastConfirmedFullscreenMode(): number;
+        GetLastConfirmedFullscreenMode(): EWindowMode;
         static GetGameUserSettings(): GameUserSettings;
-        GetFullscreenMode(): number;
+        GetFullscreenMode(): EWindowMode;
         GetFrameRateLimit(): number;
         GetFoliageQuality(): number;
         GetDesktopResolution(): IntPoint;
         static GetDefaultWindowPosition(): IntPoint;
-        static GetDefaultWindowMode(): number;
+        static GetDefaultWindowMode(): EWindowMode;
         GetDefaultResolutionScale(): number;
         static GetDefaultResolution(): IntPoint;
         GetCurrentHDRDisplayNits(): number;
@@ -25640,7 +25852,7 @@ declare module "ue" {
         ClickLocation: Vector;
         ClickPlane: Plane;
         MouseMovement: Vector;
-        DetailMode: number;
+        DetailMode: EDetailMode;
         UseSizingBox: boolean;
         UseAxisIndicator: boolean;
         GodMode: boolean;
@@ -25695,6 +25907,7 @@ declare module "ue" {
         static Load(InName: string): EditorEngine;
     }
     
+    enum EConsoleForGamepadLabels { None, XBoxOne, PS4, EConsoleForGamepadLabels_MAX}
     class EditorExperimentalSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bHDREditor: boolean;
@@ -25703,7 +25916,7 @@ declare module "ue" {
         bEnableLocalizationDashboard: boolean;
         bEnableTranslationPicker: boolean;
         bEnableFavoriteSystem: boolean;
-        ConsoleForGamepadLabels: number;
+        ConsoleForGamepadLabels: EConsoleForGamepadLabels;
         bToolbarCustomization: boolean;
         bBreakOnExceptions: boolean;
         bEnableFindAndReplaceReferences: boolean;
@@ -25745,6 +25958,7 @@ declare module "ue" {
         static Load(InName: string): EditorLevelUtils;
     }
     
+    enum ELoadLevelAtStartup { None, ProjectDefault, LastOpened, ELoadLevelAtStartup_MAX}
     class AutoReimportWildcard {
         constructor(Wildcard: string, bInclude: boolean);
         Wildcard: string;
@@ -25762,7 +25976,7 @@ declare module "ue" {
     
     class EditorLoadingSavingSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        LoadLevelAtStartup: number;
+        LoadLevelAtStartup: ELoadLevelAtStartup;
         bForceCompilationAtStartup: boolean;
         bRestoreOpenAssetTabsOnRestart: boolean;
         bEnableSourceControlCompatabilityCheck: boolean;
@@ -26015,6 +26229,7 @@ declare module "ue" {
         static Load(InName: string): FbxAssetImportData;
     }
     
+    enum EFBXAnimationLengthImportType { FBXALIT_ExportedTime, FBXALIT_AnimatedKey, FBXALIT_SetRange, FBXALIT_MAX}
     class Int32Interval {
         constructor(Min: number, Max: number);
         Min: number;
@@ -26025,7 +26240,7 @@ declare module "ue" {
     class FbxAnimSequenceImportData extends FbxAssetImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bImportMeshesInBoneHierarchy: boolean;
-        AnimationLength: number;
+        AnimationLength: EFBXAnimationLengthImportType;
         StartFrame: number;
         EndFrame: number;
         FrameImportRange: Int32Interval;
@@ -26046,9 +26261,11 @@ declare module "ue" {
         static Load(InName: string): FbxAnimSequenceImportData;
     }
     
+    enum EFBXTestPlanActionType { Import, Reimport, AddLOD, ReimportLOD, ImportReload, EFBXTestPlanActionType_MAX}
+    enum EFBXExpectedResultPreset { Error_Number, Warning_Number, Created_Staticmesh_Number, Created_Skeletalmesh_Number, Materials_Created_Number, Material_Slot_Imported_Name, Vertex_Number, Lod_Number, Vertex_Number_Lod, Mesh_Materials_Number, Mesh_LOD_Section_Number, Mesh_LOD_Section_Vertex_Number, Mesh_LOD_Section_Triangle_Number, Mesh_LOD_Section_Material_Name, Mesh_LOD_Section_Material_Index, Mesh_LOD_Section_Material_Imported_Name, Mesh_LOD_Vertex_Position, Mesh_LOD_Vertex_Normal, LOD_UV_Channel_Number, Bone_Number, Bone_Position, Animation_Frame_Number, Animation_Length, EFBXExpectedResultPreset_MAX}
     class FbxTestPlanExpectedResult {
-        constructor(ExpectedPresetsType: number, ExpectedPresetsDataInteger: TArray<number>, ExpectedPresetsDataFloat: TArray<number>, ExpectedPresetsDataDouble: TArray<number>, ExpectedPresetsDataString: TArray<string>);
-        ExpectedPresetsType: number;
+        constructor(ExpectedPresetsType: EFBXExpectedResultPreset, ExpectedPresetsDataInteger: TArray<number>, ExpectedPresetsDataFloat: TArray<number>, ExpectedPresetsDataDouble: TArray<number>, ExpectedPresetsDataString: TArray<string>);
+        ExpectedPresetsType: EFBXExpectedResultPreset;
         ExpectedPresetsDataInteger: TArray<number>;
         ExpectedPresetsDataFloat: TArray<number>;
         ExpectedPresetsDataDouble: TArray<number>;
@@ -26056,6 +26273,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EFBXImportType { FBXIT_StaticMesh, FBXIT_SkeletalMesh, FBXIT_Animation, FBXIT_MAX}
+    enum EFBXNormalImportMethod { FBXNIM_ComputeNormals, FBXNIM_ImportNormals, FBXNIM_ImportNormalsAndTangents, FBXNIM_MAX}
+    enum EFBXNormalGenerationMethod { BuiltIn, MikkTSpace, EFBXNormalGenerationMethod_MAX}
     class ImportMeshLodSectionsData {
         constructor(SectionOriginalMaterialName: TArray<string>);
         SectionOriginalMaterialName: TArray<string>;
@@ -26067,8 +26287,8 @@ declare module "ue" {
         bTransformVertexToAbsolute: boolean;
         bBakePivotInVertex: boolean;
         bImportMeshLODs: boolean;
-        NormalImportMethod: number;
-        NormalGenerationMethod: number;
+        NormalImportMethod: EFBXNormalImportMethod;
+        NormalGenerationMethod: EFBXNormalGenerationMethod;
         bComputeWeightedNormals: boolean;
         bReorderMaterialToFbxOrder: boolean;
         ImportMaterialOriginalNameData: TArray<string>;
@@ -26078,10 +26298,11 @@ declare module "ue" {
         static Load(InName: string): FbxMeshImportData;
     }
     
+    enum EVertexColorImportOption { Replace, Ignore, Override, EVertexColorImportOption_MAX}
     class FbxStaticMeshImportData extends FbxMeshImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         StaticMeshLODGroup: string;
-        VertexColorImportOption: number;
+        VertexColorImportOption: EVertexColorImportOption;
         VertexOverrideColor: Color;
         bRemoveDegenerates: boolean;
         bBuildAdjacencyBuffer: boolean;
@@ -26095,11 +26316,12 @@ declare module "ue" {
         static Load(InName: string): FbxStaticMeshImportData;
     }
     
+    enum EFBXImportContentType { FBXICT_All, FBXICT_Geometry, FBXICT_SkinningWeights, FBXICT_MAX}
     class FbxSkeletalMeshImportData extends FbxMeshImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ImportContentType: number;
-        LastImportContentType: number;
-        VertexColorImportOption: number;
+        ImportContentType: EFBXImportContentType;
+        LastImportContentType: EFBXImportContentType;
+        VertexColorImportOption: EVertexColorImportOption;
         VertexOverrideColor: Color;
         bUpdateSkeletonReferencePose: boolean;
         bUseT0AsRefPose: boolean;
@@ -26134,8 +26356,8 @@ declare module "ue" {
     class FbxImportUI extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bIsObjImport: boolean;
-        OriginalImportType: number;
-        MeshTypeToImport: number;
+        OriginalImportType: EFBXImportType;
+        MeshTypeToImport: EFBXImportType;
         bOverrideFullName: boolean;
         bImportAsSkeletal: boolean;
         bImportMesh: boolean;
@@ -26180,7 +26402,7 @@ declare module "ue" {
     class FbxTestPlan extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TestPlanName: string;
-        Action: number;
+        Action: EFBXTestPlanActionType;
         LodIndex: number;
         bDeleteFolderAssets: boolean;
         ExpectedResult: TArray<FbxTestPlanExpectedResult>;
@@ -26224,11 +26446,12 @@ declare module "ue" {
         static Load(InName: string): SceneImportFactory;
     }
     
+    enum EFBXSceneOptionsCreateHierarchyType { FBXSOCHT_CreateLevelActors, FBXSOCHT_CreateActorComponents, FBXSOCHT_CreateBlueprint, FBXSOCHT_MAX}
     class FbxSceneImportOptions extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bCreateContentFolderHierarchy: boolean;
         bImportAsDynamic: boolean;
-        HierarchyType: number;
+        HierarchyType: EFBXSceneOptionsCreateHierarchyType;
         bForceFrontXAxis: boolean;
         ImportTranslation: Vector;
         ImportRotation: Rotator;
@@ -26243,19 +26466,22 @@ declare module "ue" {
         static Load(InName: string): FbxSceneImportOptions;
     }
     
+    enum EFbxSceneVertexColorImportOption { Replace, Ignore, Override, EFbxSceneVertexColorImportOption_MAX}
+    enum EFBXSceneNormalImportMethod { FBXSceneNIM_ComputeNormals, FBXSceneNIM_ImportNormals, FBXSceneNIM_ImportNormalsAndTangents, FBXSceneNIM_MAX}
+    enum EFBXSceneNormalGenerationMethod { BuiltIn, MikkTSpace, EFBXSceneNormalGenerationMethod_MAX}
     class FbxSceneImportOptionsStaticMesh extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         StaticMeshLODGroup: string;
         bAutoGenerateCollision: boolean;
-        VertexColorImportOption: number;
+        VertexColorImportOption: EFbxSceneVertexColorImportOption;
         VertexOverrideColor: Color;
         bRemoveDegenerates: boolean;
         bBuildAdjacencyBuffer: boolean;
         bBuildReversedIndexBuffer: boolean;
         bGenerateLightmapUVs: boolean;
         bOneConvexHullPerUCX: boolean;
-        NormalImportMethod: number;
-        NormalGenerationMethod: number;
+        NormalImportMethod: EFBXSceneNormalImportMethod;
+        NormalGenerationMethod: EFBXSceneNormalGenerationMethod;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): FbxSceneImportOptionsStaticMesh;
         static Load(InName: string): FbxSceneImportOptionsStaticMesh;
@@ -26273,7 +26499,7 @@ declare module "ue" {
         ThresholdTangentNormal: number;
         ThresholdUV: number;
         bImportAnimations: boolean;
-        AnimationLength: number;
+        AnimationLength: EFBXAnimationLengthImportType;
         FrameImportRange: Int32Interval;
         bUseDefaultSampleRate: boolean;
         CustomSampleRate: number;
@@ -26657,6 +26883,10 @@ declare module "ue" {
         static Load(InName: string): LevelEditorMiscSettings;
     }
     
+    enum ELabelAnchorMode { LabelAnchorMode_TopLeft, LabelAnchorMode_TopCenter, LabelAnchorMode_TopRight, LabelAnchorMode_CenterLeft, LabelAnchorMode_Centered, LabelAnchorMode_CenterRight, LabelAnchorMode_BottomLeft, LabelAnchorMode_BottomCenter, LabelAnchorMode_BottomRight, LabelAnchorMode_MAX}
+    enum EPlayOnBuildMode { PlayOnBuild_Always, PlayOnBuild_Never, PlayOnBuild_Default, PlayOnBuild_IfEditorBuiltLocally, PlayOnBuild_MAX}
+    enum EPlayOnLaunchConfiguration { LaunchConfig_Default, LaunchConfig_Debug, LaunchConfig_Development, LaunchConfig_Test, LaunchConfig_Shipping, LaunchConfig_MAX}
+    enum EPlayNetMode { PIE_Standalone, PIE_ListenServer, PIE_Client, PIE_StandaloneWithServer, PIE_MAX}
     enum NetworkEmulationTarget { Server, Client, Any, NetworkEmulationTarget_MAX}
     class NetworkEmulationPacketSettings {
         constructor(MinLatency: number, MaxLatency: number, PacketLossPercentage: number);
@@ -26676,6 +26906,9 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ELaunchModeType { LaunchMode_OnDevice, LaunchMode_MAX}
+    enum EPlayModeLocations { PlayLocation_CurrentCameraLocation, PlayLocation_DefaultPlayerStart, PlayLocation_MAX}
+    enum EPlayModeType { PlayMode_InViewPort, PlayMode_InEditorFloating, PlayMode_InMobilePreview, PlayMode_InTargetedMobilePreview, PlayMode_InVulkanPreview, PlayMode_InNewProcess, PlayMode_InVR, PlayMode_Simulate, PlayMode_Count, PlayMode_MAX}
     class PlayScreenResolution {
         constructor(Description: string, Width: number, Height: number, AspectRatio: string, bCanSwapAspectRatio: boolean, ProfileName: string);
         Description: string;
@@ -26693,7 +26926,7 @@ declare module "ue" {
         GameGetsMouseControl: boolean;
         UseMouseForTouch: boolean;
         ShowMouseControlLabel: boolean;
-        MouseControlLabelPosition: number;
+        MouseControlLabelPosition: ELabelAnchorMode;
         ViewportGetsHMDControl: boolean;
         ShouldMinimizeEditorOnVRPIE: boolean;
         AutoRecompileBlueprints: boolean;
@@ -26710,10 +26943,10 @@ declare module "ue" {
         DisableStandaloneSound: boolean;
         AdditionalLaunchParameters: string;
         AdditionalLaunchParametersForMobile: string;
-        BuildGameBeforeLaunch: number;
-        LaunchConfiguration: number;
+        BuildGameBeforeLaunch: EPlayOnBuildMode;
+        LaunchConfiguration: EPlayOnLaunchConfiguration;
         bAutoCompileBlueprintsOnLaunch: boolean;
-        PlayNetMode: number;
+        PlayNetMode: EPlayNetMode;
         RunUnderOneProcess: boolean;
         PlayNetDedicated: boolean;
         PlayNumberOfClients: number;
@@ -26732,9 +26965,9 @@ declare module "ue" {
         MultipleInstancePositions: TArray<IntPoint>;
         LastExecutedLaunchDevice: string;
         LastExecutedLaunchName: string;
-        LastExecutedLaunchModeType: number;
-        LastExecutedPlayModeLocation: number;
-        LastExecutedPlayModeType: number;
+        LastExecutedLaunchModeType: ELaunchModeType;
+        LastExecutedPlayModeLocation: EPlayModeLocations;
+        LastExecutedPlayModeType: EPlayModeType;
         LastExecutedPIEPreviewDevice: string;
         LaptopScreenResolutions: TArray<PlayScreenResolution>;
         MonitorScreenResolutions: TArray<PlayScreenResolution>;
@@ -26750,6 +26983,7 @@ declare module "ue" {
         static Load(InName: string): LevelEditorPlaySettings;
     }
     
+    enum EWASDType { WASD_Always, WASD_RMBOnly, WASD_Never, WASD_MAX}
     enum ELandscapeFoliageEditorControlType { IgnoreCtrl, RequireCtrl, RequireNoCtrl, ELandscapeFoliageEditorControlType_MAX}
     enum EScrollGestureDirection { UseSystemSetting, Standard, Natural, EScrollGestureDirection_MAX}
     class SnapToSurfaceSettings {
@@ -26760,6 +26994,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ERotationGridMode { GridMode_DivisionsOf360, GridMode_Common, GridMode_MAX}
+    enum EMeasuringToolUnits { MeasureUnits_Centimeters, MeasureUnits_Meters, MeasureUnits_Kilometers, MeasureUnits_MAX}
+    enum ELevelViewportType { LVT_OrthoXY, LVT_OrthoXZ, LVT_OrthoYZ, LVT_Perspective, LVT_OrthoFreelook, LVT_OrthoNegativeXY, LVT_OrthoNegativeXZ, LVT_OrthoNegativeYZ, LVT_MAX, LVT_None}
+    enum EViewModeIndex { VMI_BrushWireframe, VMI_Wireframe, VMI_Unlit, VMI_Lit, VMI_Lit_DetailLighting, VMI_LightingOnly, VMI_LightComplexity, VMI_ShaderComplexity, VMI_LightmapDensity, VMI_LitLightmapDensity, VMI_ReflectionOverride, VMI_VisualizeBuffer, VMI_StationaryLightOverlap, VMI_CollisionPawn, VMI_CollisionVisibility, VMI_LODColoration, VMI_QuadOverdraw, VMI_PrimitiveDistanceAccuracy, VMI_MeshUVDensityAccuracy, VMI_ShaderComplexityWithQuadOverdraw, VMI_HLODColoration, VMI_GroupLODColoration, VMI_MaterialTextureScaleAccuracy, VMI_RequiredTextureResolution, VMI_PathTracing, VMI_RayTracingDebug, VMI_Max, VMI_Unknown, VMI_MAX}
     class ExposureSettings {
         constructor(FixedEV100: number, bFixed: boolean);
         FixedEV100: number;
@@ -26768,10 +27006,10 @@ declare module "ue" {
     }
     
     class LevelEditorViewportInstanceSettings {
-        constructor(ViewportType: number, PerspViewModeIndex: number, OrthoViewModeIndex: number, EditorShowFlagsString: string, GameShowFlagsString: string, BufferVisualizationMode: string, RayTracingDebugVisualizationMode: string, ExposureSettings: ExposureSettings, FOVAngle: number, FarViewPlane: number, bIsRealtime: boolean, bShowFPS: boolean, bShowOnScreenStats: boolean, EnabledStats: TArray<string>, bShowFullToolbar: boolean);
-        ViewportType: number;
-        PerspViewModeIndex: number;
-        OrthoViewModeIndex: number;
+        constructor(ViewportType: ELevelViewportType, PerspViewModeIndex: EViewModeIndex, OrthoViewModeIndex: EViewModeIndex, EditorShowFlagsString: string, GameShowFlagsString: string, BufferVisualizationMode: string, RayTracingDebugVisualizationMode: string, ExposureSettings: ExposureSettings, FOVAngle: number, FarViewPlane: number, bIsRealtime: boolean, bShowFPS: boolean, bShowOnScreenStats: boolean, EnabledStats: TArray<string>, bShowFullToolbar: boolean);
+        ViewportType: ELevelViewportType;
+        PerspViewModeIndex: EViewModeIndex;
+        OrthoViewModeIndex: EViewModeIndex;
         EditorShowFlagsString: string;
         GameShowFlagsString: string;
         BufferVisualizationMode: string;
@@ -26796,7 +27034,7 @@ declare module "ue" {
     
     class LevelEditorViewportSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        FlightCameraControlType: number;
+        FlightCameraControlType: EWASDType;
         LandscapeEditorControlType: ELandscapeFoliageEditorControlType;
         FoliageEditorControlType: ELandscapeFoliageEditorControlType;
         bPanMovesCanvas: boolean;
@@ -26845,8 +27083,8 @@ declare module "ue" {
         CurrentRotGridSize: number;
         CurrentScalingGridSize: number;
         PreserveNonUniformScale: boolean;
-        CurrentRotGridMode: number;
-        AspectRatioAxisConstraint: number;
+        CurrentRotGridMode: ERotationGridMode;
+        AspectRatioAxisConstraint: EAspectRatioAxisConstraint;
         bEnableViewportHoverFeedback: boolean;
         bHighlightWithBrackets: boolean;
         bUseLinkedOrthographicViewports: boolean;
@@ -26863,7 +27101,7 @@ declare module "ue" {
         BillboardScale: number;
         TransformWidgetSizeAdjustment: number;
         bSaveEngineStats: boolean;
-        MeasuringToolUnits: number;
+        MeasuringToolUnits: EMeasuringToolUnits;
         PerInstanceSettings: TArray<LevelEditorViewportInstanceSettingsKeyValuePair>;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): LevelEditorViewportSettings;
@@ -26992,9 +27230,9 @@ declare module "ue" {
     }
     
     class EditorParameterGroup {
-        constructor(GroupName: string, GroupAssociation: number, Parameters: TArray<DEditorParameterValue>, GroupSortPriority: number);
+        constructor(GroupName: string, GroupAssociation: EMaterialParameterAssociation, Parameters: TArray<DEditorParameterValue>, GroupSortPriority: number);
         GroupName: string;
-        GroupAssociation: number;
+        GroupAssociation: EMaterialParameterAssociation;
         Parameters: TArray<DEditorParameterValue>;
         GroupSortPriority: number;
         static StaticClass(): Class;
@@ -27347,8 +27585,8 @@ declare module "ue" {
     
     enum EAnimationViewportCameraFollowMode { None, Bounds, Bone, EAnimationViewportCameraFollowMode_MAX}
     class ViewportConfigOptions {
-        constructor(ViewModeIndex: number, ViewFOV: number, CameraFollowMode: EAnimationViewportCameraFollowMode, CameraFollowBoneName: string);
-        ViewModeIndex: number;
+        constructor(ViewModeIndex: EViewModeIndex, ViewFOV: number, CameraFollowMode: EAnimationViewportCameraFollowMode, CameraFollowBoneName: string);
+        ViewModeIndex: EViewModeIndex;
         ViewFOV: number;
         CameraFollowMode: EAnimationViewportCameraFollowMode;
         CameraFollowBoneName: string;
@@ -27402,7 +27640,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PhysicsBlend: number;
         bUpdateJointsFromAnimation: boolean;
-        PhysicsUpdateMode: number;
+        PhysicsUpdateMode: EPhysicsTransformUpdateMode;
         PokePauseTime: number;
         PokeBlendTime: number;
         GravScale: number;
@@ -27440,18 +27678,20 @@ declare module "ue" {
         static Load(InName: string): PhysicsAssetFactory;
     }
     
+    enum EPhysAssetFitGeomType { EFG_Box, EFG_Sphyl, EFG_Sphere, EFG_TaperedCapsule, EFG_SingleConvexHull, EFG_MultiConvexHull, EFG_MAX}
+    enum EPhysAssetFitVertWeight { EVW_AnyWeight, EVW_DominantWeight, EVW_MAX}
     class PhysAssetCreateParams {
-        constructor(MinBoneSize: number, MinWeldSize: number, GeomType: number, VertWeight: number, bAutoOrientToBone: boolean, bCreateConstraints: boolean, bWalkPastSmall: boolean, bBodyForAll: boolean, bDisableCollisionsByDefault: boolean, AngularConstraintMode: number, HullCount: number, MaxHullVerts: number);
+        constructor(MinBoneSize: number, MinWeldSize: number, GeomType: EPhysAssetFitGeomType, VertWeight: EPhysAssetFitVertWeight, bAutoOrientToBone: boolean, bCreateConstraints: boolean, bWalkPastSmall: boolean, bBodyForAll: boolean, bDisableCollisionsByDefault: boolean, AngularConstraintMode: EAngularConstraintMotion, HullCount: number, MaxHullVerts: number);
         MinBoneSize: number;
         MinWeldSize: number;
-        GeomType: number;
-        VertWeight: number;
+        GeomType: EPhysAssetFitGeomType;
+        VertWeight: EPhysAssetFitVertWeight;
         bAutoOrientToBone: boolean;
         bCreateConstraints: boolean;
         bWalkPastSmall: boolean;
         bBodyForAll: boolean;
         bDisableCollisionsByDefault: boolean;
-        AngularConstraintMode: number;
+        AngularConstraintMode: EAngularConstraintMotion;
         HullCount: number;
         MaxHullVerts: number;
         static StaticClass(): Class;
@@ -27534,12 +27774,13 @@ declare module "ue" {
     }
     
     enum EProjectPackagingBuild { Always, Never, IfProjectHasCode, IfEditorWasBuiltLocally, EProjectPackagingBuild_MAX}
+    enum EProjectPackagingBuildConfigurations { PPBC_Debug, PPBC_DebugGame, PPBC_Development, PPBC_Test, PPBC_Shipping, PPBC_MAX}
     enum EProjectPackagingBlueprintNativizationMethod { Disabled, Inclusive, Exclusive, EProjectPackagingBlueprintNativizationMethod_MAX}
     enum EProjectPackagingInternationalizationPresets { English, EFIGS, EFIGSCJK, CJK, All, EProjectPackagingInternationalizationPresets_MAX}
     class ProjectPackagingSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Build: EProjectPackagingBuild;
-        BuildConfiguration: number;
+        BuildConfiguration: EProjectPackagingBuildConfigurations;
         BuildTarget: string;
         StagingDirectory: DirectoryPath;
         FullRebuild: boolean;
@@ -27596,6 +27837,7 @@ declare module "ue" {
         static Load(InName: string): ProjectPackagingSettings;
     }
     
+    enum PropertyEditorTestEnum { PropertyEditorTest_Enum1, PropertyEditorTest_Enum2, PropertyEditorTest_Enum3, PropertyEditorTest_Enum4, PropertyEditorTest_Enum5, PropertyEditorTest_Enum6, PropertyEditorTest_MAX}
     enum EditColor { Red, Orange, Yellow, Green, Blue, Indigo, Violet, Pink, Magenta, Cyan, EditColor_MAX}
     class PropertyEditorTestSubStruct {
         constructor(FirstProperty: number, SecondProperty: number, CustomizedStructInsideUncustomizedStruct: LinearColor, CustomizedStructInsideUncustomizedStruct2: SoftObjectPath);
@@ -27663,7 +27905,7 @@ declare module "ue" {
         SubclassOfWithDisallowed: Class;
         LinearColorProperty: LinearColor;
         ColorProperty: Color;
-        EnumByteProperty: number;
+        EnumByteProperty: PropertyEditorTestEnum;
         EnumProperty: EditColor;
         MatrixProperty: Matrix;
         TransformProperty: Transform;
@@ -27682,7 +27924,7 @@ declare module "ue" {
         ActorPropertyArray: TArray<Actor>;
         LinearColorPropertyArray: TArray<LinearColor>;
         ColorPropertyArray: TArray<Color>;
-        EnumPropertyArray: TArray<number>;
+        EnumPropertyArray: TArray<PropertyEditorTestEnum>;
         StructPropertyArray: TArray<PropertyEditorTestBasicStruct>;
         FixedArrayOfInts: TArray<number>;
         StaticArrayOfInts: FixSizeArray<number>;
@@ -27734,7 +27976,7 @@ declare module "ue" {
         StringToActorMap: TMap<string, Actor>;
         ObjectToInt32Map: TMap<Object, number>;
         ObjectToColorMap: TMap<Object, LinearColor>;
-        IntToEnumMap: TMap<number, number>;
+        IntToEnumMap: TMap<number, PropertyEditorTestEnum>;
         NameToNameMap: TMap<string, string>;
         IntToCustomMap: TMap<number, PropertyEditorTestBasicStruct>;
         IntToSubStructMap: TMap<number, PropertyEditorTestSubStruct>;
@@ -27759,7 +28001,7 @@ declare module "ue" {
         EnumEditCondition: EditColor;
         bEnabledWhenBlue: boolean;
         bEnabledWhenPink: boolean;
-        EnumAsByteEditCondition: number;
+        EnumAsByteEditCondition: PropertyEditorTestEnum;
         bEnabledWhenEnumIs2: boolean;
         bEnabledWhenEnumIs4: boolean;
         IntegerEditCondition: number;
@@ -27771,8 +28013,8 @@ declare module "ue" {
         bEditConditionForArrays: boolean;
         ArrayWithEditCondition: TArray<Texture2D>;
         ArrayOfStructsWithEditCondition: TArray<PropertyEditorTestBasicStruct>;
-        InlineProperty: number;
-        PropertyThatHides: number;
+        InlineProperty: EComponentMobility;
+        PropertyThatHides: EComponentMobility;
         bVisibleWhenStatic: boolean;
         VisibleWhenStationary: number;
         DateTime: DateTime;
@@ -27835,7 +28077,7 @@ declare module "ue" {
         NoCompression: boolean;
         NoAlpha: boolean;
         bDeferCompression: boolean;
-        CompressionSettings: number;
+        CompressionSettings: TextureCompressionSettings;
         bCreateMaterial: boolean;
         bRGBToBaseColor: boolean;
         bRGBToEmissive: boolean;
@@ -27844,10 +28086,10 @@ declare module "ue" {
         bAlphaToOpacity: boolean;
         bAlphaToOpacityMask: boolean;
         bTwoSided: boolean;
-        Blending: number;
-        ShadingModel: number;
-        MipGenSettings: number;
-        LODGroup: number;
+        Blending: EBlendMode;
+        ShadingModel: EMaterialShadingModel;
+        MipGenSettings: TextureMipGenSettings;
+        LODGroup: TextureGroup;
         bDitherMipMapAlpha: boolean;
         AlphaCoverageThresholds: Vector4;
         bPreserveBorder: boolean;
@@ -27911,9 +28153,10 @@ declare module "ue" {
         static Load(InName: string): SceneThumbnailInfo;
     }
     
+    enum EThumbnailPrimType { TPT_None, TPT_Sphere, TPT_Cube, TPT_Plane, TPT_Cylinder, TPT_MAX}
     class SceneThumbnailInfoWithPrimitive extends SceneThumbnailInfo {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        PrimitiveType: number;
+        PrimitiveType: EThumbnailPrimType;
         PreviewMesh: SoftObjectPath;
         bUserModifiedShape: boolean;
         static StaticClass(): Class;
@@ -27942,13 +28185,14 @@ declare module "ue" {
         static Load(InName: string): ShaderPipelineCacheToolsCommandlet;
     }
     
+    enum ESheetAxis { AX_Horizontal, AX_XAxis, AX_YAxis, AX_MAX}
     class SheetBuilder extends EditorBrushBuilder {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         X: number;
         Y: number;
         XSegments: number;
         YSegments: number;
-        Axis: number;
+        Axis: ESheetAxis;
         GroupName: string;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SheetBuilder;
@@ -28156,9 +28400,10 @@ declare module "ue" {
         static Load(InName: string): TetrahedronBuilder;
     }
     
+    enum ETexAlign { TEXALIGN_None, TEXALIGN_Default, TEXALIGN_Box, TEXALIGN_Planar, TEXALIGN_Fit, TEXALIGN_PlanarAuto, TEXALIGN_PlanarWall, TEXALIGN_PlanarFloor, TEXALIGN_MAX}
     class TexAligner extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        DefTexAlign: number;
+        DefTexAlign: ETexAlign;
         TAxis: number;
         UTile: number;
         VTile: number;
@@ -28564,10 +28809,11 @@ declare module "ue" {
         static Load(InName: string): WorldFactory;
     }
     
+    enum EOrthoThumbnailDirection { Top, Bottom, Left, Right, Front, Back, EOrthoThumbnailDirection_MAX}
     class WorldThumbnailInfo extends SceneThumbnailInfo {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CameraMode: number;
-        OrthoDirection: number;
+        CameraMode: ECameraProjectionMode;
+        OrthoDirection: EOrthoThumbnailDirection;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): WorldThumbnailInfo;
         static Load(InName: string): WorldThumbnailInfo;
@@ -28681,6 +28927,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum FoliageVertexColorMask { FOLIAGEVERTEXCOLORMASK_Disabled, FOLIAGEVERTEXCOLORMASK_Red, FOLIAGEVERTEXCOLORMASK_Green, FOLIAGEVERTEXCOLORMASK_Blue, FOLIAGEVERTEXCOLORMASK_Alpha, FOLIAGEVERTEXCOLORMASK_MAX}
     class FoliageType extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UpdateGuid: Guid;
@@ -28694,7 +28941,7 @@ declare module "ue" {
         ScaleY: FloatInterval;
         ScaleZ: FloatInterval;
         VertexColorMaskByChannel: FixSizeArray<FoliageVertexColorChannelMask>;
-        VertexColorMask: number;
+        VertexColorMask: FoliageVertexColorMask;
         VertexColorMaskThreshold: number;
         VertexColorMaskInvert: boolean;
         ZOffset: FloatInterval;
@@ -28713,7 +28960,7 @@ declare module "ue" {
         CollisionScale: Vector;
         MeshBounds: BoxSphereBounds;
         LowBoundOriginRadius: Vector;
-        Mobility: number;
+        Mobility: EComponentMobility;
         CullDistance: Int32Interval;
         bEnableStaticLighting: boolean;
         CastShadow: boolean;
@@ -28728,7 +28975,7 @@ declare module "ue" {
         LightmapType: ELightmapType;
         bUseAsOccluder: boolean;
         BodyInstance: BodyInstance;
-        CustomNavigableGeometry: number;
+        CustomNavigableGeometry: EHasCustomNavigableGeometry;
         LightingChannels: LightingChannels;
         bRenderCustomDepth: boolean;
         CustomDepthStencilValue: number;
@@ -28828,7 +29075,7 @@ declare module "ue" {
         StaticMeshComponent: StaticMeshComponent;
         bStaticMeshReplicateMovement: boolean;
         NavigationGeometryGatheringMode: ENavDataGatheringMode;
-        SetMobility(InMobility: number): void;
+        SetMobility(InMobility: EComponentMobility): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): StaticMeshActor;
         static Load(InName: string): StaticMeshActor;
@@ -28982,17 +29229,18 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum LandscapeSplineMeshOrientation { LSMO_XUp, LSMO_YUp, LSMO_MAX}
     class LandscapeSplineMeshEntry {
-        constructor(Mesh: StaticMesh, MaterialOverrides: TArray<MaterialInterface>, bCenterH: boolean, CenterAdjust: Vector2D, bScaleToWidth: boolean, Scale: Vector, Orientation: number, ForwardAxis: number, UpAxis: number);
+        constructor(Mesh: StaticMesh, MaterialOverrides: TArray<MaterialInterface>, bCenterH: boolean, CenterAdjust: Vector2D, bScaleToWidth: boolean, Scale: Vector, Orientation: LandscapeSplineMeshOrientation, ForwardAxis: ESplineMeshAxis, UpAxis: ESplineMeshAxis);
         Mesh: StaticMesh;
         MaterialOverrides: TArray<MaterialInterface>;
         bCenterH: boolean;
         CenterAdjust: Vector2D;
         bScaleToWidth: boolean;
         Scale: Vector;
-        Orientation: number;
-        ForwardAxis: number;
-        UpAxis: number;
+        Orientation: LandscapeSplineMeshOrientation;
+        ForwardAxis: ESplineMeshAxis;
+        UpAxis: ESplineMeshAxis;
         static StaticClass(): Class;
     }
     
@@ -29139,6 +29387,7 @@ declare module "ue" {
         static Load(InName: string): LandscapeSplinesComponent;
     }
     
+    enum ELandscapeLODFalloff { Linear, SquareRoot, ELandscapeLODFalloff_MAX}
     enum ELandscapeLayerDisplayMode { Default, Alphabetical, UserSpecific, ELandscapeLayerDisplayMode_MAX}
     class LandscapeProxyMaterialOverride {
         constructor(LODIndex: PerPlatformInt, Material: MaterialInterface);
@@ -29318,7 +29567,7 @@ declare module "ue" {
         LandscapeSectionOffset: IntPoint;
         MaxLODLevel: number;
         LODDistanceFactor: number;
-        LODFalloff: number;
+        LODFalloff: ELandscapeLODFalloff;
         ComponentScreenSizeToUseSubSections: number;
         LOD0ScreenSize: number;
         LOD0DistributionSetting: number;
@@ -29400,6 +29649,7 @@ declare module "ue" {
         static Load(InName: string): LandscapeProxy;
     }
     
+    enum ELandscapeBlendMode { LSBM_AdditiveBlend, LSBM_AlphaBlend, LSBM_MAX}
     class LandscapeBlueprintBrushBase extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OwningLandscape: Landscape;
@@ -29423,14 +29673,14 @@ declare module "ue" {
     }
     
     class LandscapeLayer {
-        constructor(Guid: Guid, Name: string, bVisible: boolean, bLocked: boolean, HeightmapAlpha: number, WeightmapAlpha: number, BlendMode: number, Brushes: TArray<LandscapeLayerBrush>, WeightmapLayerAllocationBlend: TMap<LandscapeLayerInfoObject, boolean>);
+        constructor(Guid: Guid, Name: string, bVisible: boolean, bLocked: boolean, HeightmapAlpha: number, WeightmapAlpha: number, BlendMode: ELandscapeBlendMode, Brushes: TArray<LandscapeLayerBrush>, WeightmapLayerAllocationBlend: TMap<LandscapeLayerInfoObject, boolean>);
         Guid: Guid;
         Name: string;
         bVisible: boolean;
         bLocked: boolean;
         HeightmapAlpha: number;
         WeightmapAlpha: number;
-        BlendMode: number;
+        BlendMode: ELandscapeBlendMode;
         Brushes: TArray<LandscapeLayerBrush>;
         WeightmapLayerAllocationBlend: TMap<LandscapeLayerInfoObject, boolean>;
         static StaticClass(): Class;
@@ -29502,9 +29752,10 @@ declare module "ue" {
         static Load(InName: string): LandscapeGizmoActor;
     }
     
+    enum ELandscapeGizmoType { LGT_None, LGT_Height, LGT_Weight, LGT_MAX}
     class LandscapeGizmoActiveActor extends LandscapeGizmoActor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        DataType: number;
+        DataType: ELandscapeGizmoType;
         GizmoTexture: Texture2D;
         TextureScale: Vector2D;
         SampledHeight: TArray<Vector>;
@@ -29648,10 +29899,11 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionLandscapeGrassOutput;
     }
     
+    enum ELandscapeLayerBlendType { LB_WeightBlend, LB_AlphaBlend, LB_HeightBlend, LB_MAX}
     class LayerBlendInput {
-        constructor(LayerName: string, BlendType: number, LayerInput: ExpressionInput, HeightInput: ExpressionInput, PreviewWeight: number, ConstLayerInput: Vector, ConstHeightInput: number);
+        constructor(LayerName: string, BlendType: ELandscapeLayerBlendType, LayerInput: ExpressionInput, HeightInput: ExpressionInput, PreviewWeight: number, ConstLayerInput: Vector, ConstHeightInput: number);
         LayerName: string;
-        BlendType: number;
+        BlendType: ELandscapeLayerBlendType;
         LayerInput: ExpressionInput;
         HeightInput: ExpressionInput;
         PreviewWeight: number;
@@ -29669,10 +29921,12 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionLandscapeLayerBlend;
     }
     
+    enum ETerrainCoordMappingType { TCMT_Auto, TCMT_XY, TCMT_XZ, TCMT_YZ, TCMT_MAX}
+    enum ELandscapeCustomizedCoordType { LCCT_None, LCCT_CustomUV0, LCCT_CustomUV1, LCCT_CustomUV2, LCCT_WeightMapUV, LCCT_MAX}
     class MaterialExpressionLandscapeLayerCoords extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MappingType: number;
-        CustomUVType: number;
+        MappingType: ETerrainCoordMappingType;
+        CustomUVType: ELandscapeCustomizedCoordType;
         MappingScale: number;
         MappingRotation: number;
         MappingPanU: number;
@@ -29734,9 +29988,10 @@ declare module "ue" {
         static Load(InName: string): ActorChannel;
     }
     
+    enum EBlendSpaceAxis { BSA_None, BSA_X, BSA_Y, BSA_Max, BSA_MAX}
     class BlendSpace extends BlendSpaceBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AxisToScaleAnimation: number;
+        AxisToScaleAnimation: EBlendSpaceAxis;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BlendSpace;
         static Load(InName: string): BlendSpace;
@@ -29783,8 +30038,8 @@ declare module "ue" {
         CompressCommandletVersion: number;
         KeyEndEffectorsMatchNameArray: TArray<string>;
         DefaultCompressionAlgorithm: Class;
-        RotationCompressionFormat: number;
-        TranslationCompressionFormat: number;
+        RotationCompressionFormat: AnimationCompressionFormat;
+        TranslationCompressionFormat: AnimationCompressionFormat;
         MaxCurveError: number;
         AlternativeCompressionThreshold: number;
         ForceRecompression: boolean;
@@ -29899,9 +30154,9 @@ declare module "ue" {
         MaxPosDiffBitwise: number;
         MaxAngleDiffBitwise: number;
         MaxScaleDiffBitwise: number;
-        AllowedRotationFormats: TArray<number>;
-        AllowedTranslationFormats: TArray<number>;
-        AllowedScaleFormats: TArray<number>;
+        AllowedRotationFormats: TArray<AnimationCompressionFormat>;
+        AllowedTranslationFormats: TArray<AnimationCompressionFormat>;
+        AllowedScaleFormats: TArray<AnimationCompressionFormat>;
         bResampleAnimation: boolean;
         ResampledFramerate: number;
         MinKeysForResampling: number;
@@ -30052,7 +30307,7 @@ declare module "ue" {
         PSTemplate: ParticleSystem;
         FirstSocketName: string;
         SecondSocketName: string;
-        WidthScaleMode: number;
+        WidthScaleMode: ETrailWidthMode;
         WidthScaleCurve: string;
         bRecycleSpawnedSystems: boolean;
         bRenderGeometry: boolean;
@@ -30116,7 +30371,7 @@ declare module "ue" {
         AnimationTrackNames: TArray<string>;
         CurveCompressionSettings: AnimCurveCompressionSettings;
         bEnableRootMotion: boolean;
-        RootMotionRootLock: number;
+        RootMotionRootLock: ERootMotionRootLock;
         bForceRootLock: boolean;
         bUseNormalizedRootMotionScale: boolean;
         static StaticClass(): Class;
@@ -30681,6 +30936,8 @@ declare module "ue" {
         static Load(InName: string): BlueprintPathsLibrary;
     }
     
+    enum EApplicationState { Unknown, Inactive, Background, Active, EApplicationState_MAX}
+    enum EScreenOrientation { Unknown, Portrait, PortraitUpsideDown, LandscapeLeft, LandscapeRight, FaceUp, FaceDown, EScreenOrientation_MAX}
     class PlatformGameInstance extends GameInstance {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ApplicationWillDeactivateDelegate: $MulticastDelegate<() => void>;
@@ -30693,15 +30950,15 @@ declare module "ue" {
         ApplicationRegisteredForRemoteNotificationsDelegate: $MulticastDelegate<(inArray: TArray<number>) => void>;
         ApplicationRegisteredForUserNotificationsDelegate: $MulticastDelegate<(inInt: number) => void>;
         ApplicationFailedToRegisterForRemoteNotificationsDelegate: $MulticastDelegate<(inString: string) => void>;
-        ApplicationReceivedRemoteNotificationDelegate: $MulticastDelegate<(inString: string, inAppState: number) => void>;
-        ApplicationReceivedLocalNotificationDelegate: $MulticastDelegate<(inString: string, inInt: number, inAppState: number) => void>;
-        ApplicationReceivedScreenOrientationChangedNotificationDelegate: $MulticastDelegate<(inScreenOrientation: number) => void>;
+        ApplicationReceivedRemoteNotificationDelegate: $MulticastDelegate<(inString: string, inAppState: EApplicationState) => void>;
+        ApplicationReceivedLocalNotificationDelegate: $MulticastDelegate<(inString: string, inInt: number, inAppState: EApplicationState) => void>;
+        ApplicationReceivedScreenOrientationChangedNotificationDelegate: $MulticastDelegate<(inScreenOrientation: EScreenOrientation) => void>;
         PlatformStartupArgumentsDelegate__DelegateSignature(StartupArguments: TArray<string>): void;
-        PlatformScreenOrientationChangedDelegate__DelegateSignature(inScreenOrientation: number): void;
+        PlatformScreenOrientationChangedDelegate__DelegateSignature(inScreenOrientation: EScreenOrientation): void;
         PlatformRegisteredForUserNotificationsDelegate__DelegateSignature(inInt: number): void;
         PlatformRegisteredForRemoteNotificationsDelegate__DelegateSignature(inArray: TArray<number>): void;
-        PlatformReceivedRemoteNotificationDelegate__DelegateSignature(inString: string, inAppState: number): void;
-        PlatformReceivedLocalNotificationDelegate__DelegateSignature(inString: string, inInt: number, inAppState: number): void;
+        PlatformReceivedRemoteNotificationDelegate__DelegateSignature(inString: string, inAppState: EApplicationState): void;
+        PlatformReceivedLocalNotificationDelegate__DelegateSignature(inString: string, inInt: number, inAppState: EApplicationState): void;
         PlatformFailedToRegisterForRemoteNotificationsDelegate__DelegateSignature(inString: string): void;
         PlatformDelegate__DelegateSignature(): void;
         static StaticClass(): Class;
@@ -30716,7 +30973,7 @@ declare module "ue" {
         static ScheduleLocalNotificationBadgeAtTime(FireDateTime: DateTime, LocalTime: boolean, ActivationEvent: string): number;
         static ScheduleLocalNotificationAtTime(FireDateTime: DateTime, LocalTime: boolean, Title: string, Body: string, Action: string, ActivationEvent: string): number;
         static GetLaunchNotification(NotificationLaunchedApp: $Ref<boolean>, ActivationEvent: $Ref<string>, FireDate: $Ref<number>): void;
-        static GetDeviceOrientation(): number;
+        static GetDeviceOrientation(): EScreenOrientation;
         static ClearAllLocalNotifications(): void;
         static CancelLocalNotificationById(NotificationId: number): void;
         static CancelLocalNotification(ActivationEvent: string): void;
@@ -30870,10 +31127,11 @@ declare module "ue" {
         static Load(InName: string): CheckBoxStyleAsset;
     }
     
+    enum EPlatformInterfaceDataType { PIDT_None, PIDT_Int, PIDT_Float, PIDT_String, PIDT_Object, PIDT_Custom, PIDT_MAX}
     class PlatformInterfaceData {
-        constructor(DataName: string, Type: number, IntValue: number, FloatValue: number, StringValue: string, ObjectValue: Object);
+        constructor(DataName: string, Type: EPlatformInterfaceDataType, IntValue: number, FloatValue: number, StringValue: string, ObjectValue: Object);
         DataName: string;
-        Type: number;
+        Type: EPlatformInterfaceDataType;
         IntValue: number;
         FloatValue: number;
         StringValue: string;
@@ -30912,9 +31170,9 @@ declare module "ue" {
     }
     
     class CollisionResponseTemplate {
-        constructor(Name: string, CollisionEnabled: number, bCanModify: boolean, ObjectTypeName: string, CustomResponses: TArray<ResponseChannel>, HelpMessage: string);
+        constructor(Name: string, CollisionEnabled: ECollisionEnabled, bCanModify: boolean, ObjectTypeName: string, CustomResponses: TArray<ResponseChannel>, HelpMessage: string);
         Name: string;
-        CollisionEnabled: number;
+        CollisionEnabled: ECollisionEnabled;
         bCanModify: boolean;
         ObjectTypeName: string;
         CustomResponses: TArray<ResponseChannel>;
@@ -30923,9 +31181,9 @@ declare module "ue" {
     }
     
     class CustomChannelSetup {
-        constructor(Channel: number, DefaultResponse: number, bTraceType: boolean, bStaticObject: boolean, Name: string);
-        Channel: number;
-        DefaultResponse: number;
+        constructor(Channel: ECollisionChannel, DefaultResponse: ECollisionResponse, bTraceType: boolean, bStaticObject: boolean, Name: string);
+        Channel: ECollisionChannel;
+        DefaultResponse: ECollisionResponse;
         bTraceType: boolean;
         bStaticObject: boolean;
         Name: string;
@@ -31089,6 +31347,7 @@ declare module "ue" {
         static Load(InName: string): PrimaryDataAsset;
     }
     
+    enum EEvaluateCurveTableResult { RowFound, RowNotFound, EEvaluateCurveTableResult_MAX}
     class DataTableFunctionLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static GetDataTableRowNames(Table: DataTable, OutRowNames: $Ref<TArray<string>>): void;
@@ -31098,7 +31357,7 @@ declare module "ue" {
         static FillDataTableFromJSONFile(DataTable: DataTable, JSONFilePath: string): boolean;
         static FillDataTableFromCSVString(DataTable: DataTable, CSVString: string): boolean;
         static FillDataTableFromCSVFile(DataTable: DataTable, CSVFilePath: string): boolean;
-        static EvaluateCurveTableRow(CurveTable: CurveTable, RowName: string, InXY: number, OutResult: $Ref<number>, OutXY: $Ref<number>, ContextString: string): void;
+        static EvaluateCurveTableRow(CurveTable: CurveTable, RowName: string, InXY: number, OutResult: $Ref<EEvaluateCurveTableResult>, OutXY: $Ref<number>, ContextString: string): void;
         static DoesDataTableRowExist(Table: DataTable, RowName: string): boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DataTableFunctionLibrary;
@@ -31106,8 +31365,8 @@ declare module "ue" {
     }
     
     class DebugCameraControllerSettingsViewModeIndex {
-        constructor(ViewModeIndex: number);
-        ViewModeIndex: number;
+        constructor(ViewModeIndex: EViewModeIndex);
+        ViewModeIndex: EViewModeIndex;
         static StaticClass(): Class;
     }
     
@@ -31212,13 +31471,13 @@ declare module "ue" {
     }
     
     class TextureLODGroup {
-        constructor(Group: number, LODBias: number, LODBias_Smaller: number, LODBias_Smallest: number, NumStreamedMips: number, MipGenSettings: number, MinLODSize: number, MaxLODSize: number, MaxLODSize_Smaller: number, MaxLODSize_Smallest: number, OptionalLODBias: number, OptionalMaxLODSize: number, MinMagFilter: string, MipFilter: string, MipLoadOptions: ETextureMipLoadOptions, DuplicateNonOptionalMips: boolean);
-        Group: number;
+        constructor(Group: TextureGroup, LODBias: number, LODBias_Smaller: number, LODBias_Smallest: number, NumStreamedMips: number, MipGenSettings: TextureMipGenSettings, MinLODSize: number, MaxLODSize: number, MaxLODSize_Smaller: number, MaxLODSize_Smallest: number, OptionalLODBias: number, OptionalMaxLODSize: number, MinMagFilter: string, MipFilter: string, MipLoadOptions: ETextureMipLoadOptions, DuplicateNonOptionalMips: boolean);
+        Group: TextureGroup;
         LODBias: number;
         LODBias_Smaller: number;
         LODBias_Smallest: number;
         NumStreamedMips: number;
-        MipGenSettings: number;
+        MipGenSettings: TextureMipGenSettings;
         MinLODSize: number;
         MaxLODSize: number;
         MaxLODSize_Smaller: number;
@@ -31266,10 +31525,12 @@ declare module "ue" {
         static Load(InName: string): DialogueSoundWaveProxy;
     }
     
+    enum EGrammaticalGender { Neuter, Masculine, Feminine, Mixed, EGrammaticalGender_MAX}
+    enum EGrammaticalNumber { Singular, Plural, EGrammaticalNumber_MAX}
     class DialogueVoice extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Gender: number;
-        Plurality: number;
+        Gender: EGrammaticalGender;
+        Plurality: EGrammaticalNumber;
         LocalizationGUID: Guid;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DialogueVoice;
@@ -31401,6 +31662,7 @@ declare module "ue" {
         static Load(InName: string): DistributionFloatConstantCurve;
     }
     
+    enum DistributionParamMode { DPM_Normal, DPM_Abs, DPM_Direct, DPM_MAX}
     class DistributionFloatParameterBase extends DistributionFloatConstant {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ParameterName: string;
@@ -31408,7 +31670,7 @@ declare module "ue" {
         MaxInput: number;
         MinOutput: number;
         MaxOutput: number;
-        ParamMode: number;
+        ParamMode: DistributionParamMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DistributionFloatParameterBase;
         static Load(InName: string): DistributionFloatParameterBase;
@@ -31431,12 +31693,12 @@ declare module "ue" {
     }
     
     class InterpCurvePointVector2D {
-        constructor(InVal: number, OutVal: Vector2D, ArriveTangent: Vector2D, LeaveTangent: Vector2D, InterpMode: number);
+        constructor(InVal: number, OutVal: Vector2D, ArriveTangent: Vector2D, LeaveTangent: Vector2D, InterpMode: EInterpCurveMode);
         InVal: number;
         OutVal: Vector2D;
         ArriveTangent: Vector2D;
         LeaveTangent: Vector2D;
-        InterpMode: number;
+        InterpMode: EInterpCurveMode;
         static StaticClass(): Class;
     }
     
@@ -31456,11 +31718,12 @@ declare module "ue" {
         static Load(InName: string): DistributionFloatUniformCurve;
     }
     
+    enum EDistributionVectorLockFlags { EDVLF_None, EDVLF_XY, EDVLF_XZ, EDVLF_YZ, EDVLF_XYZ, EDVLF_MAX}
     class DistributionVectorConstant extends DistributionVector {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Constant: Vector;
         bLockAxes: boolean;
-        LockedAxes: number;
+        LockedAxes: EDistributionVectorLockFlags;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DistributionVectorConstant;
         static Load(InName: string): DistributionVectorConstant;
@@ -31470,7 +31733,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ConstantCurve: InterpCurveVector;
         bLockAxes: boolean;
-        LockedAxes: number;
+        LockedAxes: EDistributionVectorLockFlags;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DistributionVectorConstantCurve;
         static Load(InName: string): DistributionVectorConstantCurve;
@@ -31483,7 +31746,7 @@ declare module "ue" {
         MaxInput: Vector;
         MinOutput: Vector;
         MaxOutput: Vector;
-        ParamModes: FixSizeArray<number>;
+        ParamModes: FixSizeArray<DistributionParamMode>;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DistributionVectorParameterBase;
         static Load(InName: string): DistributionVectorParameterBase;
@@ -31496,13 +31759,14 @@ declare module "ue" {
         static Load(InName: string): DistributionVectorParticleParameter;
     }
     
+    enum EDistributionVectorMirrorFlags { EDVMF_Same, EDVMF_Different, EDVMF_Mirror, EDVMF_MAX}
     class DistributionVectorUniform extends DistributionVector {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Max: Vector;
         Min: Vector;
         bLockAxes: boolean;
-        LockedAxes: number;
-        MirrorFlags: FixSizeArray<number>;
+        LockedAxes: EDistributionVectorLockFlags;
+        MirrorFlags: FixSizeArray<EDistributionVectorMirrorFlags>;
         bUseExtremes: boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DistributionVectorUniform;
@@ -31517,12 +31781,12 @@ declare module "ue" {
     }
     
     class InterpCurvePointTwoVectors {
-        constructor(InVal: number, OutVal: TwoVectors, ArriveTangent: TwoVectors, LeaveTangent: TwoVectors, InterpMode: number);
+        constructor(InVal: number, OutVal: TwoVectors, ArriveTangent: TwoVectors, LeaveTangent: TwoVectors, InterpMode: EInterpCurveMode);
         InVal: number;
         OutVal: TwoVectors;
         ArriveTangent: TwoVectors;
         LeaveTangent: TwoVectors;
-        InterpMode: number;
+        InterpMode: EInterpCurveMode;
         static StaticClass(): Class;
     }
     
@@ -31539,8 +31803,8 @@ declare module "ue" {
         ConstantCurve: InterpCurveTwoVectors;
         bLockAxes1: boolean;
         bLockAxes2: boolean;
-        LockedAxes: FixSizeArray<number>;
-        MirrorFlags: FixSizeArray<number>;
+        LockedAxes: FixSizeArray<EDistributionVectorLockFlags>;
+        MirrorFlags: FixSizeArray<EDistributionVectorMirrorFlags>;
         bUseExtremes: boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): DistributionVectorUniformCurve;
@@ -31810,20 +32074,22 @@ declare module "ue" {
     
     enum EPSCPoolMethod { None, AutoRelease, ManualRelease, ManualRelease_OnComplete, FreeInPool, EPSCPoolMethod_MAX}
     enum EMouseCaptureMode { NoCapture, CapturePermanently, CapturePermanently_IncludingInitialMouseDown, CaptureDuringMouseDown, CaptureDuringRightMouseDown, EMouseCaptureMode_MAX}
+    enum ESuggestProjVelocityTraceOption { DoNotTrace, TraceFullPath, OnlyTraceWhileAscending, ESuggestProjVelocityTraceOption_MAX}
+    enum EDrawDebugTrace { None, ForOneFrame, ForDuration, Persistent, EDrawDebugTrace_MAX}
     class PredictProjectilePathParams {
-        constructor(StartLocation: Vector, LaunchVelocity: Vector, bTraceWithCollision: boolean, ProjectileRadius: number, MaxSimTime: number, bTraceWithChannel: boolean, TraceChannel: number, ObjectTypes: TArray<number>, ActorsToIgnore: TArray<Actor>, SimFrequency: number, OverrideGravityZ: number, DrawDebugType: number, DrawDebugTime: number, bTraceComplex: boolean);
+        constructor(StartLocation: Vector, LaunchVelocity: Vector, bTraceWithCollision: boolean, ProjectileRadius: number, MaxSimTime: number, bTraceWithChannel: boolean, TraceChannel: ECollisionChannel, ObjectTypes: TArray<EObjectTypeQuery>, ActorsToIgnore: TArray<Actor>, SimFrequency: number, OverrideGravityZ: number, DrawDebugType: EDrawDebugTrace, DrawDebugTime: number, bTraceComplex: boolean);
         StartLocation: Vector;
         LaunchVelocity: Vector;
         bTraceWithCollision: boolean;
         ProjectileRadius: number;
         MaxSimTime: number;
         bTraceWithChannel: boolean;
-        TraceChannel: number;
-        ObjectTypes: TArray<number>;
+        TraceChannel: ECollisionChannel;
+        ObjectTypes: TArray<EObjectTypeQuery>;
         ActorsToIgnore: TArray<Actor>;
         SimFrequency: number;
         OverrideGravityZ: number;
-        DrawDebugType: number;
+        DrawDebugType: EDrawDebugTrace;
         DrawDebugTime: number;
         bTraceComplex: boolean;
         static StaticClass(): Class;
@@ -31849,18 +32115,18 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static UnloadStreamLevel(WorldContextObject: Object, LevelName: string, LatentInfo: LatentActionInfo, bShouldBlockOnUnload: boolean): void;
         static SuggestProjectileVelocity_CustomArc(WorldContextObject: Object, OutLaunchVelocity: $Ref<Vector>, StartPos: Vector, EndPos: Vector, OverrideGravityZ: number, ArcParam: number): boolean;
-        static SpawnSoundAttached(Sound: SoundBase, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: number, bStopWhenAttachedToDestroyed: boolean, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, AttenuationSettings: SoundAttenuation, ConcurrencySettings: SoundConcurrency, bAutoDestroy: boolean): AudioComponent;
+        static SpawnSoundAttached(Sound: SoundBase, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: EAttachLocation, bStopWhenAttachedToDestroyed: boolean, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, AttenuationSettings: SoundAttenuation, ConcurrencySettings: SoundConcurrency, bAutoDestroy: boolean): AudioComponent;
         static SpawnSoundAtLocation(WorldContextObject: Object, Sound: SoundBase, Location: Vector, Rotation: Rotator, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, AttenuationSettings: SoundAttenuation, ConcurrencySettings: SoundConcurrency, bAutoDestroy: boolean): AudioComponent;
         static SpawnSound2D(WorldContextObject: Object, Sound: SoundBase, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, ConcurrencySettings: SoundConcurrency, bPersistAcrossLevelTransition: boolean, bAutoDestroy: boolean): AudioComponent;
         static SpawnObject(ObjectClass: Class, Outer: Object): Object;
-        static SpawnForceFeedbackAttached(ForceFeedbackEffect: ForceFeedbackEffect, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: number, bStopWhenAttachedToDestroyed: boolean, bLooping: boolean, IntensityMultiplier: number, StartTime: number, AttenuationSettings: ForceFeedbackAttenuation, bAutoDestroy: boolean): ForceFeedbackComponent;
+        static SpawnForceFeedbackAttached(ForceFeedbackEffect: ForceFeedbackEffect, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: EAttachLocation, bStopWhenAttachedToDestroyed: boolean, bLooping: boolean, IntensityMultiplier: number, StartTime: number, AttenuationSettings: ForceFeedbackAttenuation, bAutoDestroy: boolean): ForceFeedbackComponent;
         static SpawnForceFeedbackAtLocation(WorldContextObject: Object, ForceFeedbackEffect: ForceFeedbackEffect, Location: Vector, Rotation: Rotator, bLooping: boolean, IntensityMultiplier: number, StartTime: number, AttenuationSettings: ForceFeedbackAttenuation, bAutoDestroy: boolean): ForceFeedbackComponent;
-        static SpawnEmitterAttached(EmitterTemplate: ParticleSystem, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, Scale: Vector, LocationType: number, bAutoDestroy: boolean, PoolingMethod: EPSCPoolMethod, bAutoActivate: boolean): ParticleSystemComponent;
+        static SpawnEmitterAttached(EmitterTemplate: ParticleSystem, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, Scale: Vector, LocationType: EAttachLocation, bAutoDestroy: boolean, PoolingMethod: EPSCPoolMethod, bAutoActivate: boolean): ParticleSystemComponent;
         static SpawnEmitterAtLocation(WorldContextObject: Object, EmitterTemplate: ParticleSystem, Location: Vector, Rotation: Rotator, Scale: Vector, bAutoDestroy: boolean, PoolingMethod: EPSCPoolMethod, bAutoActivateSystem: boolean): ParticleSystemComponent;
-        static SpawnDialogueAttached(Dialogue: DialogueWave, Context: DialogueContext, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: number, bStopWhenAttachedToDestroyed: boolean, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, AttenuationSettings: SoundAttenuation, bAutoDestroy: boolean): AudioComponent;
+        static SpawnDialogueAttached(Dialogue: DialogueWave, Context: DialogueContext, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: EAttachLocation, bStopWhenAttachedToDestroyed: boolean, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, AttenuationSettings: SoundAttenuation, bAutoDestroy: boolean): AudioComponent;
         static SpawnDialogueAtLocation(WorldContextObject: Object, Dialogue: DialogueWave, Context: DialogueContext, Location: Vector, Rotation: Rotator, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, AttenuationSettings: SoundAttenuation, bAutoDestroy: boolean): AudioComponent;
         static SpawnDialogue2D(WorldContextObject: Object, Dialogue: DialogueWave, Context: DialogueContext, VolumeMultiplier: number, PitchMultiplier: number, StartTime: number, bAutoDestroy: boolean): AudioComponent;
-        static SpawnDecalAttached(DecalMaterial: MaterialInterface, DecalSize: Vector, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: number, LifeSpan: number): DecalComponent;
+        static SpawnDecalAttached(DecalMaterial: MaterialInterface, DecalSize: Vector, AttachToComponent: SceneComponent, AttachPointName: string, Location: Vector, Rotation: Rotator, LocationType: EAttachLocation, LifeSpan: number): DecalComponent;
         static SpawnDecalAtLocation(WorldContextObject: Object, DecalMaterial: MaterialInterface, DecalSize: Vector, Location: Vector, Rotation: Rotator, LifeSpan: number): DecalComponent;
         static SetWorldOriginLocation(WorldContextObject: Object, NewLocation: IntVector): void;
         static SetViewportMouseCaptureMode(WorldContextObject: Object, MouseCaptureMode: EMouseCaptureMode): void;
@@ -31904,7 +32170,7 @@ declare module "ue" {
         static GetViewportMouseCaptureMode(WorldContextObject: Object): EMouseCaptureMode;
         static GetUnpausedTimeSeconds(WorldContextObject: Object): number;
         static GetTimeSeconds(WorldContextObject: Object): number;
-        static GetSurfaceType(Hit: HitResult): number;
+        static GetSurfaceType(Hit: HitResult): EPhysicalSurface;
         static GetStreamingLevel(WorldContextObject: Object, PackageName: string): LevelStreaming;
         static GetRealTimeSeconds(WorldContextObject: Object): number;
         static GetPlayerPawn(WorldContextObject: Object, PlayerIndex: number): Pawn;
@@ -31949,17 +32215,17 @@ declare module "ue" {
         static ClearSoundMixClassOverride(WorldContextObject: Object, InSoundMixModifier: SoundMix, InSoundClass: SoundClass, FadeOutTime: number): void;
         static CancelAsyncLoading(): void;
         static BreakHitResult(Hit: HitResult, bBlockingHit: $Ref<boolean>, bInitialOverlap: $Ref<boolean>, Time: $Ref<number>, Distance: $Ref<number>, Location: $Ref<Vector>, ImpactPoint: $Ref<Vector>, Normal: $Ref<Vector>, ImpactNormal: $Ref<Vector>, PhysMat: $Ref<PhysicalMaterial>, HitActor: $Ref<Actor>, HitComponent: $Ref<PrimitiveComponent>, HitBoneName: $Ref<string>, HitItem: $Ref<number>, FaceIndex: $Ref<number>, TraceStart: $Ref<Vector>, TraceEnd: $Ref<Vector>): void;
-        static BlueprintSuggestProjectileVelocity(WorldContextObject: Object, TossVelocity: $Ref<Vector>, StartLocation: Vector, EndLocation: Vector, LaunchSpeed: number, OverrideGravityZ: number, TraceOption: number, CollisionRadius: number, bFavorHighArc: boolean, bDrawDebug: boolean): boolean;
-        static Blueprint_PredictProjectilePath_ByTraceChannel(WorldContextObject: Object, OutHit: $Ref<HitResult>, OutPathPositions: $Ref<TArray<Vector>>, OutLastTraceDestination: $Ref<Vector>, StartPos: Vector, LaunchVelocity: Vector, bTracePath: boolean, ProjectileRadius: number, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, DrawDebugTime: number, SimFrequency: number, MaxSimTime: number, OverrideGravityZ: number): boolean;
-        static Blueprint_PredictProjectilePath_ByObjectType(WorldContextObject: Object, OutHit: $Ref<HitResult>, OutPathPositions: $Ref<TArray<Vector>>, OutLastTraceDestination: $Ref<Vector>, StartPos: Vector, LaunchVelocity: Vector, bTracePath: boolean, ProjectileRadius: number, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, DrawDebugTime: number, SimFrequency: number, MaxSimTime: number, OverrideGravityZ: number): boolean;
+        static BlueprintSuggestProjectileVelocity(WorldContextObject: Object, TossVelocity: $Ref<Vector>, StartLocation: Vector, EndLocation: Vector, LaunchSpeed: number, OverrideGravityZ: number, TraceOption: ESuggestProjVelocityTraceOption, CollisionRadius: number, bFavorHighArc: boolean, bDrawDebug: boolean): boolean;
+        static Blueprint_PredictProjectilePath_ByTraceChannel(WorldContextObject: Object, OutHit: $Ref<HitResult>, OutPathPositions: $Ref<TArray<Vector>>, OutLastTraceDestination: $Ref<Vector>, StartPos: Vector, LaunchVelocity: Vector, bTracePath: boolean, ProjectileRadius: number, TraceChannel: ECollisionChannel, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, DrawDebugTime: number, SimFrequency: number, MaxSimTime: number, OverrideGravityZ: number): boolean;
+        static Blueprint_PredictProjectilePath_ByObjectType(WorldContextObject: Object, OutHit: $Ref<HitResult>, OutPathPositions: $Ref<TArray<Vector>>, OutLastTraceDestination: $Ref<Vector>, StartPos: Vector, LaunchVelocity: Vector, bTracePath: boolean, ProjectileRadius: number, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, DrawDebugTime: number, SimFrequency: number, MaxSimTime: number, OverrideGravityZ: number): boolean;
         static Blueprint_PredictProjectilePath_Advanced(WorldContextObject: Object, PredictParams: PredictProjectilePathParams, PredictResult: $Ref<PredictProjectilePathResult>): boolean;
         static BeginSpawningActorFromClass(WorldContextObject: Object, ActorClass: Class, SpawnTransform: Transform, bNoCollisionFail: boolean, Owner: Actor): Actor;
         static BeginSpawningActorFromBlueprint(WorldContextObject: Object, Blueprint: Blueprint, SpawnTransform: Transform, bNoCollisionFail: boolean): Actor;
         static BeginDeferredActorSpawnFromClass(WorldContextObject: Object, ActorClass: Class, SpawnTransform: Transform, CollisionHandlingOverride: ESpawnActorCollisionHandlingMethod, Owner: Actor): Actor;
         static AreSubtitlesEnabled(): boolean;
         static AreAnyListenersWithinRange(WorldContextObject: Object, Location: Vector, MaximumRange: number): boolean;
-        static ApplyRadialDamageWithFalloff(WorldContextObject: Object, BaseDamage: number, MinimumDamage: number, Origin: Vector, DamageInnerRadius: number, DamageOuterRadius: number, DamageFalloff: number, DamageTypeClass: Class, IgnoreActors: TArray<Actor>, DamageCauser: Actor, InstigatedByController: Controller, DamagePreventionChannel: number): boolean;
-        static ApplyRadialDamage(WorldContextObject: Object, BaseDamage: number, Origin: Vector, DamageRadius: number, DamageTypeClass: Class, IgnoreActors: TArray<Actor>, DamageCauser: Actor, InstigatedByController: Controller, bDoFullDamage: boolean, DamagePreventionChannel: number): boolean;
+        static ApplyRadialDamageWithFalloff(WorldContextObject: Object, BaseDamage: number, MinimumDamage: number, Origin: Vector, DamageInnerRadius: number, DamageOuterRadius: number, DamageFalloff: number, DamageTypeClass: Class, IgnoreActors: TArray<Actor>, DamageCauser: Actor, InstigatedByController: Controller, DamagePreventionChannel: ECollisionChannel): boolean;
+        static ApplyRadialDamage(WorldContextObject: Object, BaseDamage: number, Origin: Vector, DamageRadius: number, DamageTypeClass: Class, IgnoreActors: TArray<Actor>, DamageCauser: Actor, InstigatedByController: Controller, bDoFullDamage: boolean, DamagePreventionChannel: ECollisionChannel): boolean;
         static ApplyPointDamage(DamagedActor: Actor, BaseDamage: number, HitFromDirection: Vector, HitInfo: HitResult, EventInstigator: Controller, DamageCauser: Actor, DamageTypeClass: Class): number;
         static ApplyDamage(DamagedActor: Actor, BaseDamage: number, EventInstigator: Controller, DamageCauser: Actor, DamageTypeClass: Class): number;
         static ActivateReverbEffect(WorldContextObject: Object, ReverbEffect: ReverbEffect, TagName: string, Priority: number, Volume: number, FadeTime: number): void;
@@ -32080,15 +32346,16 @@ declare module "ue" {
         static Load(InName: string): HLODProxy;
     }
     
+    enum EImportanceWeight { Luminance, Red, Green, Blue, Alpha, EImportanceWeight_MAX}
     class ImportanceTexture {
-        constructor(Size: IntPoint, NumMips: number, MarginalCDF: TArray<number>, ConditionalCDF: TArray<number>, TextureData: TArray<Color>, Texture: TWeakObjectPtr<Texture2D>, Weighting: number);
+        constructor(Size: IntPoint, NumMips: number, MarginalCDF: TArray<number>, ConditionalCDF: TArray<number>, TextureData: TArray<Color>, Texture: TWeakObjectPtr<Texture2D>, Weighting: EImportanceWeight);
         Size: IntPoint;
         NumMips: number;
         MarginalCDF: TArray<number>;
         ConditionalCDF: TArray<number>;
         TextureData: TArray<Color>;
         Texture: TWeakObjectPtr<Texture2D>;
-        Weighting: number;
+        Weighting: EImportanceWeight;
         static StaticClass(): Class;
     }
     
@@ -32100,9 +32367,9 @@ declare module "ue" {
         static NextSobolFloat(Index: number, Dimension: number, PreviousValue: number): number;
         static NextSobolCell3D(Index: number, NumCells: number, PreviousValue: Vector): Vector;
         static NextSobolCell2D(Index: number, NumCells: number, PreviousValue: Vector2D): Vector2D;
-        static MakeImportanceTexture(Texture: Texture2D, WeightingFunc: number): ImportanceTexture;
+        static MakeImportanceTexture(Texture: Texture2D, WeightingFunc: EImportanceWeight): ImportanceTexture;
         static ImportanceSample(Texture: ImportanceTexture, Rand: Vector2D, Samples: number, Intensity: number, SamplePosition: $Ref<Vector2D>, SampleColor: $Ref<LinearColor>, SampleIntensity: $Ref<number>, SampleSize: $Ref<number>): void;
-        static BreakImportanceTexture(ImportanceTexture: ImportanceTexture, Texture: $Ref<Texture2D>, WeightingFunc: $Ref<number>): void;
+        static BreakImportanceTexture(ImportanceTexture: ImportanceTexture, Texture: $Ref<Texture2D>, WeightingFunc: $Ref<EImportanceWeight>): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ImportanceSamplingLibrary;
         static Load(InName: string): ImportanceSamplingLibrary;
@@ -32141,9 +32408,9 @@ declare module "ue" {
     }
     
     class BlueprintInputActionDelegateBinding extends BlueprintInputDelegateBinding {
-        constructor(InputActionName: string, InputKeyEvent: number, FunctionNameToBind: string);
+        constructor(InputActionName: string, InputKeyEvent: EInputEvent, FunctionNameToBind: string);
         InputActionName: string;
-        InputKeyEvent: number;
+        InputKeyEvent: EInputEvent;
         FunctionNameToBind: string;
         static StaticClass(): Class;
     }
@@ -32187,9 +32454,9 @@ declare module "ue" {
     }
     
     class BlueprintInputKeyDelegateBinding extends BlueprintInputDelegateBinding {
-        constructor(InputChord: InputChord, InputKeyEvent: number, FunctionNameToBind: string);
+        constructor(InputChord: InputChord, InputKeyEvent: EInputEvent, FunctionNameToBind: string);
         InputChord: InputChord;
-        InputKeyEvent: number;
+        InputKeyEvent: EInputEvent;
         FunctionNameToBind: string;
         static StaticClass(): Class;
     }
@@ -32288,8 +32555,8 @@ declare module "ue" {
     }
     
     class BlueprintInputTouchDelegateBinding extends BlueprintInputDelegateBinding {
-        constructor(InputKeyEvent: number, FunctionNameToBind: string);
-        InputKeyEvent: number;
+        constructor(InputKeyEvent: EInputEvent, FunctionNameToBind: string);
+        InputKeyEvent: EInputEvent;
         FunctionNameToBind: string;
         static StaticClass(): Class;
     }
@@ -32729,9 +32996,10 @@ declare module "ue" {
         static Load(InName: string): InterpTrackInstSound;
     }
     
+    enum ETrackToggleAction { ETTA_Off, ETTA_On, ETTA_Toggle, ETTA_Trigger, ETTA_MAX}
     class InterpTrackInstToggle extends InterpTrackInst {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Action: number;
+        Action: ETrackToggleAction;
         LastUpdatePosition: number;
         bSavedActiveState: boolean;
         static StaticClass(): Class;
@@ -32767,9 +33035,10 @@ declare module "ue" {
         static Load(InName: string): InterpTrackInstVectorProp;
     }
     
+    enum EVisibilityTrackAction { EVTA_Hide, EVTA_Show, EVTA_Toggle, EVTA_MAX}
     class InterpTrackInstVisibility extends InterpTrackInst {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Action: number;
+        Action: EVisibilityTrackAction;
         LastUpdatePosition: number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): InterpTrackInstVisibility;
@@ -32777,12 +33046,12 @@ declare module "ue" {
     }
     
     class InterpCurvePointLinearColor {
-        constructor(InVal: number, OutVal: LinearColor, ArriveTangent: LinearColor, LeaveTangent: LinearColor, InterpMode: number);
+        constructor(InVal: number, OutVal: LinearColor, ArriveTangent: LinearColor, LeaveTangent: LinearColor, InterpMode: EInterpCurveMode);
         InVal: number;
         OutVal: LinearColor;
         ArriveTangent: LinearColor;
         LeaveTangent: LinearColor;
-        InterpMode: number;
+        InterpMode: EInterpCurveMode;
         static StaticClass(): Class;
     }
     
@@ -32811,9 +33080,10 @@ declare module "ue" {
         static Load(InName: string): InterpTrackLinearColorProp;
     }
     
+    enum EInterpMoveAxis { AXIS_TranslationX, AXIS_TranslationY, AXIS_TranslationZ, AXIS_RotationX, AXIS_RotationY, AXIS_RotationZ, AXIS_MAX}
     class InterpTrackMoveAxis extends InterpTrackFloatBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MoveAxis: number;
+        MoveAxis: EInterpMoveAxis;
         LookupTrack: InterpLookupTrack;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): InterpTrackMoveAxis;
@@ -32868,9 +33138,9 @@ declare module "ue" {
     }
     
     class ToggleTrackKey {
-        constructor(Time: number, ToggleAction: number);
+        constructor(Time: number, ToggleAction: ETrackToggleAction);
         Time: number;
-        ToggleAction: number;
+        ToggleAction: ETrackToggleAction;
         static StaticClass(): Class;
     }
     
@@ -32895,11 +33165,12 @@ declare module "ue" {
         static Load(InName: string): InterpTrackVectorProp;
     }
     
+    enum EVisibilityTrackCondition { EVTC_Always, EVTC_GoreEnabled, EVTC_GoreDisabled, EVTC_MAX}
     class VisibilityTrackKey {
-        constructor(Time: number, Action: number, ActiveCondition: number);
+        constructor(Time: number, Action: EVisibilityTrackAction, ActiveCondition: EVisibilityTrackCondition);
         Time: number;
-        Action: number;
-        ActiveCondition: number;
+        Action: EVisibilityTrackAction;
+        ActiveCondition: EVisibilityTrackCondition;
         static StaticClass(): Class;
     }
     
@@ -33069,6 +33340,8 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EEasingFunc { Linear, Step, SinusoidalIn, SinusoidalOut, SinusoidalInOut, EaseIn, EaseOut, EaseInOut, ExpoIn, ExpoOut, ExpoInOut, CircularIn, CircularOut, CircularInOut, EEasingFunc_MAX}
+    enum ELerpInterpolationMode { QuatInterp, EulerInterp, DualQuatInterp, ELerpInterpolationMode_MAX}
     class Timespan {
         constructor();
         static StaticClass(): Class;
@@ -33086,6 +33359,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EMatrixColumns { First, Second, Third, Fourth, EMatrixColumns_MAX}
     class KismetMathLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static Xor_IntInt(A: number, B: number): number;
@@ -33174,7 +33448,7 @@ declare module "ue" {
         static Vector2D_Zero(): Vector2D;
         static Vector2D_Unit45Deg(): Vector2D;
         static Vector2D_One(): Vector2D;
-        static VEase(A: Vector, B: Vector, Alpha: number, EasingFunc: number, BlendExp: number, Steps: number): Vector;
+        static VEase(A: Vector, B: Vector, Alpha: number, EasingFunc: EEasingFunc, BlendExp: number, Steps: number): Vector;
         static UtcNow(): DateTime;
         static TransformRotation(T: Transform, Rotation: Rotator): Rotator;
         static TransformLocation(T: Transform, Location: Vector): Vector;
@@ -33184,14 +33458,14 @@ declare module "ue" {
         static ToRounded2D(A: Vector2D): Vector2D;
         static ToDirectionAndLength2D(A: Vector2D, OutDir: $Ref<Vector2D>, OutLength: $Ref<number>): void;
         static Today(): DateTime;
-        static TLerp(A: Transform, B: Transform, Alpha: number, InterpMode: number): Transform;
+        static TLerp(A: Transform, B: Transform, Alpha: number, InterpMode: ELerpInterpolationMode): Transform;
         static TInterpTo(Current: Transform, Target: Transform, DeltaTime: number, InterpSpeed: number): Transform;
         static TimespanZeroValue(): Timespan;
         static TimespanRatio(A: Timespan, B: Timespan): number;
         static TimespanMinValue(): Timespan;
         static TimespanMaxValue(): Timespan;
         static TimespanFromString(TimespanString: string, Result: $Ref<Timespan>): boolean;
-        static TEase(A: Transform, B: Transform, Alpha: number, EasingFunc: number, BlendExp: number, Steps: number): Transform;
+        static TEase(A: Transform, B: Transform, Alpha: number, EasingFunc: EEasingFunc, BlendExp: number, Steps: number): Transform;
         static Tan(A: number): number;
         static Subtract_VectorVector(A: Vector, B: Vector): Vector;
         static Subtract_VectorInt(A: Vector, B: number): Vector;
@@ -33241,7 +33515,7 @@ declare module "ue" {
         static ResetVectorSpringState(SpringState: $Ref<VectorSpringState>): void;
         static ResetRandomStream(Stream: RandomStream): void;
         static ResetFloatSpringState(SpringState: $Ref<FloatSpringState>): void;
-        static REase(A: Rotator, B: Rotator, Alpha: number, bShortestPath: boolean, EasingFunc: number, BlendExp: number, Steps: number): Rotator;
+        static REase(A: Rotator, B: Rotator, Alpha: number, bShortestPath: boolean, EasingFunc: EEasingFunc, BlendExp: number, Steps: number): Rotator;
         static RandomUnitVectorInEllipticalConeInRadiansFromStream(ConeDir: Vector, MaxYawInRadians: number, MaxPitchInRadians: number, Stream: RandomStream): Vector;
         static RandomUnitVectorInEllipticalConeInRadians(ConeDir: Vector, MaxYawInRadians: number, MaxPitchInRadians: number): Vector;
         static RandomUnitVectorInEllipticalConeInDegreesFromStream(ConeDir: Vector, MaxYawInDegrees: number, MaxPitchInDegrees: number, Stream: RandomStream): Vector;
@@ -33383,21 +33657,21 @@ declare module "ue" {
         static Matrix_TransformPosition(M: Matrix, V: Vector): Vector4;
         static Matrix_ToQuat(M: Matrix): Quat;
         static Matrix_SetOrigin(M: $Ref<Matrix>, NewOrigin: Vector): void;
-        static Matrix_SetColumn(M: $Ref<Matrix>, Column: number, Value: Vector): void;
-        static Matrix_SetAxis(M: $Ref<Matrix>, Axis: number, AxisVector: Vector): void;
+        static Matrix_SetColumn(M: $Ref<Matrix>, Column: EMatrixColumns, Value: Vector): void;
+        static Matrix_SetAxis(M: $Ref<Matrix>, Axis: EAxis, AxisVector: Vector): void;
         static Matrix_ScaleTranslation(M: Matrix, Scale3D: Vector): Matrix;
         static Matrix_RemoveTranslation(M: Matrix): Matrix;
         static Matrix_RemoveScaling(M: $Ref<Matrix>, Tolerance: number): void;
-        static Matrix_Mirror(M: Matrix, MirrorAxis: number, FlipAxis: number): Matrix;
+        static Matrix_Mirror(M: Matrix, MirrorAxis: EAxis, FlipAxis: EAxis): Matrix;
         static Matrix_InverseTransformVector(M: Matrix, V: Vector): Vector;
         static Matrix_InverseTransformPosition(M: Matrix, V: Vector): Vector;
         static Matrix_Identity(): Matrix;
-        static Matrix_GetUnitAxis(M: Matrix, Axis: number): Vector;
+        static Matrix_GetUnitAxis(M: Matrix, Axis: EAxis): Vector;
         static Matrix_GetUnitAxes(M: Matrix, X: $Ref<Vector>, Y: $Ref<Vector>, Z: $Ref<Vector>): void;
         static Matrix_GetTransposed(M: Matrix): Matrix;
         static Matrix_GetTransposeAdjoint(M: Matrix): Matrix;
         static Matrix_GetScaleVector(M: Matrix, Tolerance: number): Vector;
-        static Matrix_GetScaledAxis(M: Matrix, Axis: number): Vector;
+        static Matrix_GetScaledAxis(M: Matrix, Axis: EAxis): Vector;
         static Matrix_GetScaledAxes(M: Matrix, X: $Ref<Vector>, Y: $Ref<Vector>, Z: $Ref<Vector>): void;
         static Matrix_GetRotDeterminant(M: Matrix): number;
         static Matrix_GetRotator(M: Matrix): Rotator;
@@ -33412,7 +33686,7 @@ declare module "ue" {
         static Matrix_GetFrustumFarPlane(M: Matrix, OutPlane: $Ref<Plane>): boolean;
         static Matrix_GetFrustumBottomPlane(M: Matrix, OutPlane: $Ref<Plane>): boolean;
         static Matrix_GetDeterminant(M: Matrix): number;
-        static Matrix_GetColumn(M: Matrix, Column: number): Vector;
+        static Matrix_GetColumn(M: Matrix, Column: EMatrixColumns): Vector;
         static Matrix_ContainsNaN(M: Matrix): boolean;
         static Matrix_ConcatenateTranslation(M: Matrix, Translation: Vector): Matrix;
         static Matrix_ApplyScale(M: Matrix, Scale: number): Matrix;
@@ -33613,7 +33887,7 @@ declare module "ue" {
         static EqualEqual_ClassClass(A: Class, B: Class): boolean;
         static EqualEqual_ByteByte(A: number, B: number): boolean;
         static EqualEqual_BoolBool(A: boolean, B: boolean): boolean;
-        static Ease(A: number, B: number, Alpha: number, EasingFunc: number, BlendExp: number, Steps: number): number;
+        static Ease(A: number, B: number, Alpha: number, EasingFunc: EEasingFunc, BlendExp: number, Steps: number): number;
         static DynamicWeightedMovingAverage_FVector(CurrentSample: Vector, PreviousSample: Vector, MaxDistance: number, MinWeight: number, MaxWeight: number): Vector;
         static DynamicWeightedMovingAverage_FRotator(CurrentSample: Rotator, PreviousSample: Rotator, MaxDistance: number, MinWeight: number, MaxWeight: number): Rotator;
         static DynamicWeightedMovingAverage_Float(CurrentSample: number, PreviousSample: number, MaxDistance: number, MinWeight: number, MaxWeight: number): number;
@@ -33772,7 +34046,7 @@ declare module "ue" {
     class KismetRenderingLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static SetCastInsetShadowForAllAttachments(PrimitiveComponent: PrimitiveComponent, bCastInsetShadow: boolean, bLightAttachmentsAsGroup: boolean): void;
-        static RenderTargetCreateStaticTexture2DEditorOnly(RenderTarget: TextureRenderTarget2D, Name: string, CompressionSettings: number, MipSettings: number): Texture2D;
+        static RenderTargetCreateStaticTexture2DEditorOnly(RenderTarget: TextureRenderTarget2D, Name: string, CompressionSettings: TextureCompressionSettings, MipSettings: TextureMipGenSettings): Texture2D;
         static ReleaseRenderTarget2D(TextureRenderTarget: TextureRenderTarget2D): void;
         static ReadRenderTargetUV(WorldContextObject: Object, TextureRenderTarget: TextureRenderTarget2D, U: number, V: number): Color;
         static ReadRenderTargetRawUV(WorldContextObject: Object, TextureRenderTarget: TextureRenderTarget2D, U: number, V: number): LinearColor;
@@ -33785,7 +34059,7 @@ declare module "ue" {
         static ExportRenderTarget(WorldContextObject: Object, TextureRenderTarget: TextureRenderTarget2D, FilePath: string, FileName: string): void;
         static EndDrawCanvasToRenderTarget(WorldContextObject: Object, Context: DrawToRenderTargetContext): void;
         static DrawMaterialToRenderTarget(WorldContextObject: Object, TextureRenderTarget: TextureRenderTarget2D, Material: MaterialInterface): void;
-        static CreateRenderTarget2D(WorldContextObject: Object, Width: number, Height: number, Format: number, ClearColor: LinearColor, bAutoGenerateMipMaps: boolean): TextureRenderTarget2D;
+        static CreateRenderTarget2D(WorldContextObject: Object, Width: number, Height: number, Format: ETextureRenderTargetFormat, ClearColor: LinearColor, bAutoGenerateMipMaps: boolean): TextureRenderTarget2D;
         static ConvertRenderTargetToTexture2DEditorOnly(WorldContextObject: Object, RenderTarget: TextureRenderTarget2D, Texture: Texture2D): void;
         static ClearRenderTarget2D(WorldContextObject: Object, TextureRenderTarget: TextureRenderTarget2D, ClearColor: LinearColor): void;
         static BreakSkinWeightInfo(InWeight: SkelMeshSkinWeightInfo, Bone0: $Ref<number>, Weight0: $Ref<number>, Bone1: $Ref<number>, Weight1: $Ref<number>, Bone2: $Ref<number>, Weight2: $Ref<number>, Bone3: $Ref<number>, Weight3: $Ref<number>): void;
@@ -33795,6 +34069,8 @@ declare module "ue" {
         static Load(InName: string): KismetRenderingLibrary;
     }
     
+    enum ESearchCase { CaseSensitive, IgnoreCase, ESearchCase_MAX}
+    enum ESearchDir { FromStart, FromEnd, ESearchDir_MAX}
     class KismetStringLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static TrimTrailing(SourceString: string): string;
@@ -33802,19 +34078,19 @@ declare module "ue" {
         static ToUpper(SourceString: string): string;
         static ToLower(SourceString: string): string;
         static TimeSecondsToString(InSeconds: number): string;
-        static StartsWith(SourceString: string, InPrefix: string, SearchCase: number): boolean;
-        static Split(SourceString: string, InStr: string, LeftS: $Ref<string>, RightS: $Ref<string>, SearchCase: number, SearchDir: number): boolean;
+        static StartsWith(SourceString: string, InPrefix: string, SearchCase: ESearchCase): boolean;
+        static Split(SourceString: string, InStr: string, LeftS: $Ref<string>, RightS: $Ref<string>, SearchCase: ESearchCase, SearchDir: ESearchDir): boolean;
         static RightPad(SourceString: string, ChCount: number): string;
         static RightChop(SourceString: string, Count: number): string;
         static Right(SourceString: string, Count: number): string;
         static Reverse(SourceString: string): string;
-        static ReplaceInline(SourceString: $Ref<string>, SearchText: string, ReplacementText: string, SearchCase: number): number;
-        static Replace(SourceString: string, From: string, To: string, SearchCase: number): string;
+        static ReplaceInline(SourceString: $Ref<string>, SearchText: string, ReplacementText: string, SearchCase: ESearchCase): number;
+        static Replace(SourceString: string, From: string, To: string, SearchCase: ESearchCase): string;
         static ParseIntoArray(SourceString: string, Delimiter: string, CullEmptyStrings: boolean): TArray<string>;
         static NotEqual_StrStr(A: string, B: string): boolean;
         static NotEqual_StriStri(A: string, B: string): boolean;
         static Mid(SourceString: string, Start: number, Count: number): string;
-        static MatchesWildcard(SourceString: string, Wildcard: string, SearchCase: number): boolean;
+        static MatchesWildcard(SourceString: string, Wildcard: string, SearchCase: ESearchCase): boolean;
         static Len(S: string): number;
         static LeftPad(SourceString: string, ChCount: number): string;
         static LeftChop(SourceString: string, Count: number): string;
@@ -33827,7 +34103,7 @@ declare module "ue" {
         static FindSubstring(SearchIn: string, Substring: string, bUseCase: boolean, bSearchFromEnd: boolean, StartPosition: number): number;
         static EqualEqual_StrStr(A: string, B: string): boolean;
         static EqualEqual_StriStri(A: string, B: string): boolean;
-        static EndsWith(SourceString: string, InSuffix: string, SearchCase: number): boolean;
+        static EndsWith(SourceString: string, InSuffix: string, SearchCase: ESearchCase): boolean;
         static CullArray(SourceString: string, InArray: $Ref<TArray<string>>): number;
         static Conv_VectorToString(InVec: Vector): string;
         static Conv_Vector2dToString(InVec: Vector2D): string;
@@ -33899,6 +34175,8 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EQuitPreference { Quit, Background, EQuitPreference_MAX}
+    enum EMoveComponentAction { Move, Stop, Return, EMoveComponentAction_MAX}
     class TimerHandle {
         constructor(Handle: bigint);
         Handle: bigint;
@@ -33922,14 +34200,14 @@ declare module "ue" {
         static UnloadPrimaryAsset(PrimaryAssetId: PrimaryAssetId): void;
         static TransactObject(Object: Object): void;
         static StackTrace(): void;
-        static SphereTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static SphereTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static SphereTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static SphereTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static SphereTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static SphereTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static SphereOverlapComponents(WorldContextObject: Object, SpherePos: Vector, SphereRadius: number, ObjectTypes: TArray<number>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
-        static SphereOverlapActors(WorldContextObject: Object, SpherePos: Vector, SphereRadius: number, ObjectTypes: TArray<number>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
+        static SphereTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static SphereTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static SphereTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static SphereTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static SphereTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static SphereTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static SphereOverlapComponents(WorldContextObject: Object, SpherePos: Vector, SphereRadius: number, ObjectTypes: TArray<EObjectTypeQuery>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
+        static SphereOverlapActors(WorldContextObject: Object, SpherePos: Vector, SphereRadius: number, ObjectTypes: TArray<EObjectTypeQuery>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
         static SnapshotObject(Object: Object): void;
         static ShowPlatformSpecificLeaderboardScreen(CategoryName: string): void;
         static ShowPlatformSpecificAchievementsScreen(SpecificPlayer: PlayerController): void;
@@ -33962,7 +34240,7 @@ declare module "ue" {
         static ResetGamepadAssignmentToController(ControllerId: number): void;
         static ResetGamepadAssignments(): void;
         static RegisterForRemoteNotifications(): void;
-        static QuitGame(WorldContextObject: Object, SpecificPlayer: PlayerController, QuitPreference: number, bIgnorePlatformRestrictions: boolean): void;
+        static QuitGame(WorldContextObject: Object, SpecificPlayer: PlayerController, QuitPreference: EQuitPreference, bIgnorePlatformRestrictions: boolean): void;
         static QuitEditor(): void;
         static PrintWarning(InString: string): void;
         static PrintText(WorldContextObject: Object, InText: string, bPrintToScreen: boolean, bPrintToLog: boolean, TextColor: LinearColor, Duration: number): void;
@@ -33974,7 +34252,7 @@ declare module "ue" {
         static NotEqual_PrimaryAssetType(A: PrimaryAssetType, B: PrimaryAssetType): boolean;
         static NotEqual_PrimaryAssetId(A: PrimaryAssetId, B: PrimaryAssetId): boolean;
         static NormalizeFilename(InFilename: string): string;
-        static MoveComponentTo(Component: SceneComponent, TargetRelativeLocation: Vector, TargetRelativeRotation: Rotator, bEaseOut: boolean, bEaseIn: boolean, OverTime: number, bForceShortestRotationPath: boolean, MoveAction: number, LatentInfo: LatentActionInfo): void;
+        static MoveComponentTo(Component: SceneComponent, TargetRelativeLocation: Vector, TargetRelativeRotation: Rotator, bEaseOut: boolean, bEaseIn: boolean, OverTime: number, bForceShortestRotationPath: boolean, MoveAction: EMoveComponentAction, LatentInfo: LatentActionInfo): void;
         static MakeSoftObjectPath(PathString: string): SoftObjectPath;
         static MakeSoftClassPath(PathString: string): SoftClassPath;
         static MakeLiteralText(Value: string): string;
@@ -33989,12 +34267,12 @@ declare module "ue" {
         static LoadAssetClass(WorldContextObject: Object, AssetClass: TSoftObjectPtr<Class>, OnLoaded: $Delegate<(Loaded: Class) => void>, LatentInfo: LatentActionInfo): void;
         static LoadAsset_Blocking(Asset: TSoftObjectPtr<Object>): Object;
         static LoadAsset(WorldContextObject: Object, Asset: TSoftObjectPtr<Object>, OnLoaded: $Delegate<(Loaded: Object) => void>, LatentInfo: LatentActionInfo): void;
-        static LineTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static LineTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static LineTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static LineTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static LineTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static LineTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static LineTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static LineTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static LineTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static LineTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static LineTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static LineTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
         static LaunchURL(URL: string): void;
         static K2_UnPauseTimerHandle(WorldContextObject: Object, Handle: TimerHandle): void;
         static K2_UnPauseTimerDelegate(Delegate: $Delegate<() => void>): void;
@@ -34133,29 +34411,29 @@ declare module "ue" {
         static Conv_InterfaceToObject(Interface: Interface): Object;
         static Conv_ClassToSoftClassReference(Class: Class): TSoftObjectPtr<Class>;
         static ControlScreensaver(bAllowScreenSaver: boolean): void;
-        static ComponentOverlapComponents(Component: PrimitiveComponent, ComponentTransform: Transform, ObjectTypes: TArray<number>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
-        static ComponentOverlapActors(Component: PrimitiveComponent, ComponentTransform: Transform, ObjectTypes: TArray<number>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
+        static ComponentOverlapComponents(Component: PrimitiveComponent, ComponentTransform: Transform, ObjectTypes: TArray<EObjectTypeQuery>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
+        static ComponentOverlapActors(Component: PrimitiveComponent, ComponentTransform: Transform, ObjectTypes: TArray<EObjectTypeQuery>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
         static CollectGarbage(): void;
-        static CapsuleTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static CapsuleTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static CapsuleTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static CapsuleTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static CapsuleTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static CapsuleTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static CapsuleOverlapComponents(WorldContextObject: Object, CapsulePos: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<number>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
-        static CapsuleOverlapActors(WorldContextObject: Object, CapsulePos: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<number>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
+        static CapsuleTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static CapsuleTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static CapsuleTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static CapsuleTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static CapsuleTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static CapsuleTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, Radius: number, HalfHeight: number, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static CapsuleOverlapComponents(WorldContextObject: Object, CapsulePos: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<EObjectTypeQuery>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
+        static CapsuleOverlapActors(WorldContextObject: Object, CapsulePos: Vector, Radius: number, HalfHeight: number, ObjectTypes: TArray<EObjectTypeQuery>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
         static CanLaunchURL(URL: string): boolean;
         static CancelTransaction(Index: number): void;
         static BreakSoftObjectPath(InSoftObjectPath: SoftObjectPath, PathString: $Ref<string>): void;
         static BreakSoftClassPath(InSoftClassPath: SoftClassPath, PathString: $Ref<string>): void;
-        static BoxTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static BoxTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static BoxTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static BoxTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ObjectTypes: TArray<number>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static BoxTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static BoxTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, TraceChannel: number, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: number, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
-        static BoxOverlapComponents(WorldContextObject: Object, BoxPos: Vector, Extent: Vector, ObjectTypes: TArray<number>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
-        static BoxOverlapActors(WorldContextObject: Object, BoxPos: Vector, BoxExtent: Vector, ObjectTypes: TArray<number>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
+        static BoxTraceSingleForObjects(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static BoxTraceSingleByProfile(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static BoxTraceSingle(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHit: $Ref<HitResult>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static BoxTraceMultiForObjects(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ObjectTypes: TArray<EObjectTypeQuery>, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static BoxTraceMultiByProfile(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static BoxTraceMulti(WorldContextObject: Object, Start: Vector, End: Vector, HalfSize: Vector, Orientation: Rotator, TraceChannel: ETraceTypeQuery, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, DrawDebugType: EDrawDebugTrace, OutHits: $Ref<TArray<HitResult>>, bIgnoreSelf: boolean, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): boolean;
+        static BoxOverlapComponents(WorldContextObject: Object, BoxPos: Vector, Extent: Vector, ObjectTypes: TArray<EObjectTypeQuery>, ComponentClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutComponents: $Ref<TArray<PrimitiveComponent>>): boolean;
+        static BoxOverlapActors(WorldContextObject: Object, BoxPos: Vector, BoxExtent: Vector, ObjectTypes: TArray<EObjectTypeQuery>, ActorClassFilter: Class, ActorsToIgnore: TArray<Actor>, OutActors: $Ref<TArray<Actor>>): boolean;
         static BeginTransaction(Context: string, Description: string, PrimaryObject: Object): number;
         static AddFloatHistorySample(Value: number, FloatHistory: DebugFloatHistory): DebugFloatHistory;
         static StaticClass(): Class;
@@ -34176,11 +34454,12 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EFormatArgumentType { Int, UInt, Float, Double, Text, Gender, EFormatArgumentType_MAX}
     enum ETextGender { Masculine, Feminine, Neuter, ETextGender_MAX}
     class FormatArgumentData {
-        constructor(ArgumentName: string, ArgumentValueType: number, ArgumentValue: string, ArgumentValueInt: number, ArgumentValueFloat: number, ArgumentValueGender: ETextGender);
+        constructor(ArgumentName: string, ArgumentValueType: EFormatArgumentType, ArgumentValue: string, ArgumentValueInt: number, ArgumentValueFloat: number, ArgumentValueGender: ETextGender);
         ArgumentName: string;
-        ArgumentValueType: number;
+        ArgumentValueType: EFormatArgumentType;
         ArgumentValue: string;
         ArgumentValueInt: number;
         ArgumentValueFloat: number;
@@ -34188,6 +34467,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ERoundingMode { HalfToEven, HalfFromZero, HalfToZero, FromZero, ToZero, ToNegativeInfinity, ToPositiveInfinity, ERoundingMode_MAX}
     class KismetTextLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static TextTrimTrailing(InText: string): string;
@@ -34220,7 +34500,7 @@ declare module "ue" {
         static Conv_NameToText(InName: string): string;
         static Conv_IntToText(Value: number, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number): string;
         static Conv_Int64ToText(Value: bigint, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number): string;
-        static Conv_FloatToText(Value: number, RoundingMode: number, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number): string;
+        static Conv_FloatToText(Value: number, RoundingMode: ERoundingMode, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number): string;
         static Conv_ColorToText(InColor: LinearColor): string;
         static Conv_ByteToText(Value: number): string;
         static Conv_BoolToText(InBool: boolean): string;
@@ -34229,12 +34509,12 @@ declare module "ue" {
         static AsTimeZoneDate_DateTime(InDateTime: DateTime, InTimeZone: string): string;
         static AsTimespan_Timespan(InTimespan: Timespan): string;
         static AsTime_DateTime(In: DateTime): string;
-        static AsPercent_Float(Value: number, RoundingMode: number, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number): string;
+        static AsPercent_Float(Value: number, RoundingMode: ERoundingMode, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number): string;
         static AsDateTime_DateTime(In: DateTime): string;
         static AsDate_DateTime(InDateTime: DateTime): string;
         static AsCurrencyBase(BaseValue: number, CurrencyCode: string): string;
-        static AsCurrency_Integer(Value: number, RoundingMode: number, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number, CurrencyCode: string): string;
-        static AsCurrency_Float(Value: number, RoundingMode: number, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number, CurrencyCode: string): string;
+        static AsCurrency_Integer(Value: number, RoundingMode: ERoundingMode, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number, CurrencyCode: string): string;
+        static AsCurrency_Float(Value: number, RoundingMode: ERoundingMode, bAlwaysSign: boolean, bUseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number, CurrencyCode: string): string;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): KismetTextLibrary;
         static Load(InName: string): KismetTextLibrary;
@@ -34361,16 +34641,19 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionAdd;
     }
     
+    enum EMaterialSamplerType { SAMPLERTYPE_Color, SAMPLERTYPE_Grayscale, SAMPLERTYPE_Alpha, SAMPLERTYPE_Normal, SAMPLERTYPE_Masks, SAMPLERTYPE_DistanceFieldFont, SAMPLERTYPE_LinearColor, SAMPLERTYPE_LinearGrayscale, SAMPLERTYPE_Data, SAMPLERTYPE_External, SAMPLERTYPE_VirtualColor, SAMPLERTYPE_VirtualGrayscale, SAMPLERTYPE_VirtualAlpha, SAMPLERTYPE_VirtualNormal, SAMPLERTYPE_VirtualMasks, SAMPLERTYPE_VirtualLinearColor, SAMPLERTYPE_VirtualLinearGrayscale, SAMPLERTYPE_MAX}
     class MaterialExpressionTextureBase extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Texture: Texture;
-        SamplerType: number;
+        SamplerType: EMaterialSamplerType;
         IsDefaultMeshpaintTexture: boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionTextureBase;
         static Load(InName: string): MaterialExpressionTextureBase;
     }
     
+    enum ETextureMipValueMode { TMVM_None, TMVM_MipLevel, TMVM_MipBias, TMVM_Derivative, TMVM_MAX}
+    enum ESamplerSourceMode { SSM_FromTextureAsset, SSM_Wrap_WorldGroupSettings, SSM_Clamp_WorldGroupSettings, SSM_MAX}
     class MaterialExpressionTextureSample extends MaterialExpressionTextureBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Coordinates: ExpressionInput;
@@ -34379,8 +34662,8 @@ declare module "ue" {
         CoordinatesDX: ExpressionInput;
         CoordinatesDY: ExpressionInput;
         AutomaticViewMipBiasValue: ExpressionInput;
-        MipValueMode: number;
-        SamplerSource: number;
+        MipValueMode: ETextureMipValueMode;
+        SamplerSource: ESamplerSourceMode;
         AutomaticViewMipBias: boolean;
         ConstCoordinate: number;
         ConstMipValue: number;
@@ -34408,10 +34691,11 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionTextureSampleParameter2D;
     }
     
+    enum ETextureColorChannel { TCC_Red, TCC_Green, TCC_Blue, TCC_Alpha, TCC_MAX}
     class MaterialExpressionAntialiasedTextureMask extends MaterialExpressionTextureSampleParameter2D {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Threshold: number;
-        Channel: number;
+        Channel: ETextureColorChannel;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionAntialiasedTextureMask;
         static Load(InName: string): MaterialExpressionAntialiasedTextureMask;
@@ -34530,13 +34814,14 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionBlackBody;
     }
     
+    enum EMaterialAttributeBlend { Blend, UseA, UseB, EMaterialAttributeBlend_MAX}
     class MaterialExpressionBlendMaterialAttributes extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         A: MaterialAttributesInput;
         B: MaterialAttributesInput;
         Alpha: ExpressionInput;
-        PixelAttributeBlendType: number;
-        VertexAttributeBlendType: number;
+        PixelAttributeBlendType: EMaterialAttributeBlend;
+        VertexAttributeBlendType: EMaterialAttributeBlend;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionBlendMaterialAttributes;
         static Load(InName: string): MaterialExpressionBlendMaterialAttributes;
@@ -34607,21 +34892,23 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionVectorParameter;
     }
     
+    enum EChannelMaskParameterColor { Red, Green, Blue, Alpha, EChannelMaskParameterColor_MAX}
     class MaterialExpressionChannelMaskParameter extends MaterialExpressionVectorParameter {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MaskChannel: number;
+        MaskChannel: EChannelMaskParameterColor;
         Input: ExpressionInput;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionChannelMaskParameter;
         static Load(InName: string): MaterialExpressionChannelMaskParameter;
     }
     
+    enum EClampMode { CMODE_Clamp, CMODE_ClampMin, CMODE_ClampMax, CMODE_MAX}
     class MaterialExpressionClamp extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Input: ExpressionInput;
         Min: ExpressionInput;
         Max: ExpressionInput;
-        ClampMode: number;
+        ClampMode: EClampMode;
         MinDefault: number;
         MaxDefault: number;
         static StaticClass(): Class;
@@ -34742,6 +35029,7 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionCurveAtlasRowParameter;
     }
     
+    enum ECustomMaterialOutputType { CMOT_Float1, CMOT_Float2, CMOT_Float3, CMOT_Float4, CMOT_MAX}
     class CustomInput {
         constructor(InputName: string, Input: ExpressionInput);
         InputName: string;
@@ -34752,7 +35040,7 @@ declare module "ue" {
     class MaterialExpressionCustom extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Code: string;
-        OutputType: number;
+        OutputType: ECustomMaterialOutputType;
         Description: string;
         Inputs: TArray<CustomInput>;
         static StaticClass(): Class;
@@ -34818,9 +35106,10 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionDepthFade;
     }
     
+    enum EDepthOfFieldFunctionValue { TDOF_NearAndFarMask, TDOF_NearMask, TDOF_FarMask, TDOF_CircleOfConfusionRadius, TDOF_MAX}
     class MaterialExpressionDepthOfFieldFunction extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        FunctionValue: number;
+        FunctionValue: EDepthOfFieldFunctionValue;
         Depth: ExpressionInput;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionDepthOfFieldFunction;
@@ -34980,13 +35269,14 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionFresnel;
     }
     
+    enum EFunctionInputType { FunctionInput_Scalar, FunctionInput_Vector2, FunctionInput_Vector3, FunctionInput_Vector4, FunctionInput_Texture2D, FunctionInput_TextureCube, FunctionInput_Texture2DArray, FunctionInput_VolumeTexture, FunctionInput_StaticBool, FunctionInput_MaterialAttributes, FunctionInput_TextureExternal, FunctionInput_MAX}
     class MaterialExpressionFunctionInput extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Preview: ExpressionInput;
         InputName: string;
         Description: string;
         Id: Guid;
-        InputType: number;
+        InputType: EFunctionInputType;
         PreviewValue: Vector4;
         bUsePreviewValueAsDefault: boolean;
         SortPriority: number;
@@ -35229,13 +35519,14 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionMultiply;
     }
     
+    enum ENoiseFunction { NOISEFUNCTION_SimplexTex, NOISEFUNCTION_GradientTex, NOISEFUNCTION_GradientTex3D, NOISEFUNCTION_GradientALU, NOISEFUNCTION_ValueALU, NOISEFUNCTION_VoronoiALU, NOISEFUNCTION_MAX}
     class MaterialExpressionNoise extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Position: ExpressionInput;
         FilterWidth: ExpressionInput;
         Scale: number;
         Quality: number;
-        NoiseFunction: number;
+        NoiseFunction: ENoiseFunction;
         bTurbulence: boolean;
         Levels: number;
         OutputMin: number;
@@ -35556,6 +35847,7 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionRuntimeVirtualTextureReplace;
     }
     
+    enum ERuntimeVirtualTextureMipValueMode { RVTMVM_None, RVTMVM_MipLevel, RVTMVM_MipBias, RVTMVM_MAX}
     class MaterialExpressionRuntimeVirtualTextureSample extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Coordinates: ExpressionInput;
@@ -35563,7 +35855,7 @@ declare module "ue" {
         VirtualTexture: RuntimeVirtualTexture;
         MaterialType: ERuntimeVirtualTextureMaterialType;
         bSinglePhysicalSpace: boolean;
-        MipValueMode: number;
+        MipValueMode: ERuntimeVirtualTextureMipValueMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionRuntimeVirtualTextureSample;
         static Load(InName: string): MaterialExpressionRuntimeVirtualTextureSample;
@@ -35588,9 +35880,10 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionSaturate;
     }
     
+    enum EMaterialSceneAttributeInputMode { Coordinates, OffsetFraction, EMaterialSceneAttributeInputMode_MAX}
     class MaterialExpressionSceneColor extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        InputMode: number;
+        InputMode: EMaterialSceneAttributeInputMode;
         Input: ExpressionInput;
         OffsetFraction: ExpressionInput;
         ConstInput: Vector2D;
@@ -35601,7 +35894,7 @@ declare module "ue" {
     
     class MaterialExpressionSceneDepth extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        InputMode: number;
+        InputMode: EMaterialSceneAttributeInputMode;
         Input: ExpressionInput;
         Coordinates: ExpressionInput;
         ConstInput: Vector2D;
@@ -35617,10 +35910,11 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionSceneTexelSize;
     }
     
+    enum ESceneTextureId { PPI_SceneColor, PPI_SceneDepth, PPI_DiffuseColor, PPI_SpecularColor, PPI_SubsurfaceColor, PPI_BaseColor, PPI_Specular, PPI_Metallic, PPI_WorldNormal, PPI_SeparateTranslucency, PPI_Opacity, PPI_Roughness, PPI_MaterialAO, PPI_CustomDepth, PPI_PostProcessInput0, PPI_PostProcessInput1, PPI_PostProcessInput2, PPI_PostProcessInput3, PPI_PostProcessInput4, PPI_PostProcessInput5, PPI_PostProcessInput6, PPI_DecalMask, PPI_ShadingModelColor, PPI_ShadingModelID, PPI_AmbientOcclusion, PPI_CustomStencil, PPI_StoredBaseColor, PPI_StoredSpecular, PPI_Velocity, PPI_MAX}
     class MaterialExpressionSceneTexture extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Coordinates: ExpressionInput;
-        SceneTextureId: number;
+        SceneTextureId: ESceneTextureId;
         bFiltered: boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionSceneTexture;
@@ -35654,7 +35948,7 @@ declare module "ue" {
     
     class MaterialExpressionShadingModel extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ShadingModel: number;
+        ShadingModel: EMaterialShadingModel;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionShadingModel;
         static Load(InName: string): MaterialExpressionShadingModel;
@@ -35764,15 +36058,18 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionSobol;
     }
     
+    enum ESpeedTreeGeometryType { STG_Branch, STG_Frond, STG_Leaf, STG_FacingLeaf, STG_Billboard, STG_MAX}
+    enum ESpeedTreeWindType { STW_None, STW_Fastest, STW_Fast, STW_Better, STW_Best, STW_Palm, STW_BestPlus, STW_MAX}
+    enum ESpeedTreeLODType { STLOD_Pop, STLOD_Smooth, STLOD_MAX}
     class MaterialExpressionSpeedTree extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         GeometryInput: ExpressionInput;
         WindInput: ExpressionInput;
         LODInput: ExpressionInput;
         ExtraBendWS: ExpressionInput;
-        GeometryType: number;
-        WindType: number;
-        LODType: number;
+        GeometryType: ESpeedTreeGeometryType;
+        WindType: ESpeedTreeWindType;
+        LODType: ESpeedTreeLODType;
         BillboardThreshold: number;
         bAccurateWindVelocities: boolean;
         static StaticClass(): Class;
@@ -35923,10 +36220,11 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionTextureObjectParameter;
     }
     
+    enum EMaterialExposedTextureProperty { TMTM_TextureSize, TMTM_TexelSize, TMTM_MAX}
     class MaterialExpressionTextureProperty extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TextureObject: ExpressionInput;
-        Property: number;
+        Property: EMaterialExposedTextureProperty;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionTextureProperty;
         static Load(InName: string): MaterialExpressionTextureProperty;
@@ -35971,21 +36269,24 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionTime;
     }
     
+    enum EMaterialVectorCoordTransformSource { TRANSFORMSOURCE_Tangent, TRANSFORMSOURCE_Local, TRANSFORMSOURCE_World, TRANSFORMSOURCE_View, TRANSFORMSOURCE_Camera, TRANSFORMSOURCE_ParticleWorld, TRANSFORMSOURCE_MAX}
+    enum EMaterialVectorCoordTransform { TRANSFORM_Tangent, TRANSFORM_Local, TRANSFORM_World, TRANSFORM_View, TRANSFORM_Camera, TRANSFORM_ParticleWorld, TRANSFORM_MAX}
     class MaterialExpressionTransform extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Input: ExpressionInput;
-        TransformSourceType: number;
-        TransformType: number;
+        TransformSourceType: EMaterialVectorCoordTransformSource;
+        TransformType: EMaterialVectorCoordTransform;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionTransform;
         static Load(InName: string): MaterialExpressionTransform;
     }
     
+    enum EMaterialPositionTransformSource { TRANSFORMPOSSOURCE_Local, TRANSFORMPOSSOURCE_World, TRANSFORMPOSSOURCE_TranslatedWorld, TRANSFORMPOSSOURCE_View, TRANSFORMPOSSOURCE_Camera, TRANSFORMPOSSOURCE_Particle, TRANSFORMPOSSOURCE_MAX}
     class MaterialExpressionTransformPosition extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Input: ExpressionInput;
-        TransformSourceType: number;
-        TransformType: number;
+        TransformSourceType: EMaterialPositionTransformSource;
+        TransformType: EMaterialPositionTransformSource;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionTransformPosition;
         static Load(InName: string): MaterialExpressionTransformPosition;
@@ -36006,10 +36307,11 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionTwoSidedSign;
     }
     
+    enum EVectorNoiseFunction { VNF_CellnoiseALU, VNF_VectorALU, VNF_GradientALU, VNF_CurlALU, VNF_VoronoiALU, VNF_MAX}
     class MaterialExpressionVectorNoise extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Position: ExpressionInput;
-        NoiseFunction: number;
+        NoiseFunction: EVectorNoiseFunction;
         Quality: number;
         bTiling: boolean;
         TileSize: number;
@@ -36040,9 +36342,10 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionVertexNormalWS;
     }
     
+    enum EMaterialExposedViewProperty { MEVP_BufferSize, MEVP_FieldOfView, MEVP_TanHalfFieldOfView, MEVP_ViewSize, MEVP_WorldSpaceViewPosition, MEVP_WorldSpaceCameraPosition, MEVP_ViewportOffset, MEVP_TemporalSampleCount, MEVP_TemporalSampleIndex, MEVP_TemporalSampleOffset, MEVP_RuntimeVirtualTextureOutputLevel, MEVP_RuntimeVirtualTextureOutputDerivative, MEVP_PreExposure, MEVP_MAX}
     class MaterialExpressionViewProperty extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Property: number;
+        Property: EMaterialExposedViewProperty;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionViewProperty;
         static Load(InName: string): MaterialExpressionViewProperty;
@@ -36064,9 +36367,10 @@ declare module "ue" {
         static Load(InName: string): MaterialExpressionVirtualTextureFeatureSwitch;
     }
     
+    enum EWorldPositionIncludedOffsets { WPT_Default, WPT_ExcludeAllShaderOffsets, WPT_CameraRelative, WPT_CameraRelativeNoOffsets, WPT_MAX}
     class MaterialExpressionWorldPosition extends MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        WorldPositionShaderOffset: number;
+        WorldPositionShaderOffset: EWorldPositionIncludedOffsets;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): MaterialExpressionWorldPosition;
         static Load(InName: string): MaterialExpressionWorldPosition;
@@ -36393,6 +36697,7 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleAttractorLine;
     }
     
+    enum EAttractorParticleSelectionMethod { EAPSM_Random, EAPSM_Sequential, EAPSM_MAX}
     class ParticleModuleAttractorParticle extends ParticleModuleAttractorBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         EmitterName: string;
@@ -36400,7 +36705,7 @@ declare module "ue" {
         bStrengthByDistance: boolean;
         Strength: RawDistributionFloat;
         bAffectBaseVelocity: boolean;
-        SelectionMethod: number;
+        SelectionMethod: EAttractorParticleSelectionMethod;
         bRenewSource: boolean;
         bInheritSourceVel: boolean;
         LastSelIndex: number;
@@ -36447,6 +36752,7 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleBeamBase;
     }
     
+    enum BeamModifierType { PEB2MT_Source, PEB2MT_Target, PEB2MT_MAX}
     class BeamModifierOptions {
         constructor(bModify: boolean, bScale: boolean, bLock: boolean);
         bModify: boolean;
@@ -36457,7 +36763,7 @@ declare module "ue" {
     
     class ParticleModuleBeamModifier extends ParticleModuleBeamBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ModifierType: number;
+        ModifierType: BeamModifierType;
         PositionOptions: BeamModifierOptions;
         Position: RawDistributionVector;
         TangentOptions: BeamModifierOptions;
@@ -36497,14 +36803,16 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleBeamNoise;
     }
     
+    enum Beam2SourceTargetMethod { PEB2STM_Default, PEB2STM_UserSet, PEB2STM_Emitter, PEB2STM_Particle, PEB2STM_Actor, PEB2STM_MAX}
+    enum Beam2SourceTargetTangentMethod { PEB2STTM_Direct, PEB2STTM_UserSet, PEB2STTM_Distribution, PEB2STTM_Emitter, PEB2STTM_MAX}
     class ParticleModuleBeamSource extends ParticleModuleBeamBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SourceMethod: number;
+        SourceMethod: Beam2SourceTargetMethod;
         SourceName: string;
         bSourceAbsolute: boolean;
         Source: RawDistributionVector;
         bLockSource: boolean;
-        SourceTangentMethod: number;
+        SourceTangentMethod: Beam2SourceTargetTangentMethod;
         SourceTangent: RawDistributionVector;
         bLockSourceTangent: boolean;
         SourceStrength: RawDistributionFloat;
@@ -36516,12 +36824,12 @@ declare module "ue" {
     
     class ParticleModuleBeamTarget extends ParticleModuleBeamBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TargetMethod: number;
+        TargetMethod: Beam2SourceTargetMethod;
         TargetName: string;
         Target: RawDistributionVector;
         bTargetAbsolute: boolean;
         bLockTarget: boolean;
-        TargetTangentMethod: number;
+        TargetTangentMethod: Beam2SourceTargetTangentMethod;
         TargetTangent: RawDistributionVector;
         bLockTargetTangent: boolean;
         TargetStrength: RawDistributionFloat;
@@ -36539,11 +36847,12 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleCameraBase;
     }
     
+    enum EParticleCameraOffsetUpdateMethod { EPCOUM_DirectSet, EPCOUM_Additive, EPCOUM_Scalar, EPCOUM_MAX}
     class ParticleModuleCameraOffset extends ParticleModuleCameraBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CameraOffset: RawDistributionFloat;
         bSpawnTimeOnly: boolean;
-        UpdateMethod: number;
+        UpdateMethod: EParticleCameraOffsetUpdateMethod;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ParticleModuleCameraOffset;
         static Load(InName: string): ParticleModuleCameraOffset;
@@ -36556,13 +36865,14 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleCollisionBase;
     }
     
+    enum EParticleCollisionComplete { EPCC_Kill, EPCC_Freeze, EPCC_HaltCollisions, EPCC_FreezeTranslation, EPCC_FreezeRotation, EPCC_FreezeMovement, EPCC_MAX}
     class ParticleModuleCollision extends ParticleModuleCollisionBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DampingFactor: RawDistributionVector;
         DampingFactorRotation: RawDistributionVector;
         MaxCollisions: RawDistributionFloat;
-        CollisionCompletionOption: number;
-        CollisionTypes: TArray<number>;
+        CollisionCompletionOption: EParticleCollisionComplete;
+        CollisionTypes: TArray<EObjectTypeQuery>;
         bApplyPhysics: boolean;
         bIgnoreTriggerVolumes: boolean;
         ParticleMass: RawDistributionFloat;
@@ -36580,6 +36890,8 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleCollision;
     }
     
+    enum EParticleCollisionResponse { Bounce, Stop, Kill, EParticleCollisionResponse_MAX}
+    enum EParticleCollisionMode { SceneDepth, DistanceField, EParticleCollisionMode_MAX}
     class ParticleModuleCollisionGPU extends ParticleModuleCollisionBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Resilience: RawDistributionFloat;
@@ -36589,8 +36901,8 @@ declare module "ue" {
         RandomDistribution: number;
         RadiusScale: number;
         RadiusBias: number;
-        Response: number;
-        CollisionMode: number;
+        Response: EParticleCollisionResponse;
+        CollisionMode: EParticleCollisionMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ParticleModuleCollisionGPU;
         static Load(InName: string): ParticleModuleCollisionGPU;
@@ -36786,6 +37098,7 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleLocation_Seeded;
     }
     
+    enum ELocationBoneSocketSource { BONESOCKETSOURCE_Bones, BONESOCKETSOURCE_Sockets, BONESOCKETSOURCE_MAX}
     class LocationBoneSocketInfo {
         constructor(BoneSocketName: string, Offset: Vector);
         BoneSocketName: string;
@@ -36793,12 +37106,13 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ELocationBoneSocketSelectionMethod { BONESOCKETSEL_Sequential, BONESOCKETSEL_Random, BONESOCKETSEL_MAX}
     class ParticleModuleLocationBoneSocket extends ParticleModuleLocationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SourceType: number;
+        SourceType: ELocationBoneSocketSource;
         UniversalOffset: Vector;
         SourceLocations: TArray<LocationBoneSocketInfo>;
-        SelectionMethod: number;
+        SelectionMethod: ELocationBoneSocketSelectionMethod;
         bUpdatePositionEachFrame: boolean;
         bOrientMeshEmitters: boolean;
         bInheritBoneVelocity: boolean;
@@ -36822,10 +37136,11 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleLocationDirect;
     }
     
+    enum ELocationEmitterSelectionMethod { ELESM_Random, ELESM_Sequential, ELESM_MAX}
     class ParticleModuleLocationEmitter extends ParticleModuleLocationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         EmitterName: string;
-        SelectionMethod: number;
+        SelectionMethod: ELocationEmitterSelectionMethod;
         InheritSourceVelocity: boolean;
         InheritSourceVelocityScale: number;
         bInheritSourceRotation: boolean;
@@ -36860,12 +37175,13 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleLocationPrimitiveBase;
     }
     
+    enum CylinderHeightAxis { PMLPC_HEIGHTAXIS_X, PMLPC_HEIGHTAXIS_Y, PMLPC_HEIGHTAXIS_Z, PMLPC_HEIGHTAXIS_MAX}
     class ParticleModuleLocationPrimitiveCylinder extends ParticleModuleLocationPrimitiveBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RadialVelocity: boolean;
         StartRadius: RawDistributionFloat;
         StartHeight: RawDistributionFloat;
-        HeightAxis: number;
+        HeightAxis: CylinderHeightAxis;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ParticleModuleLocationPrimitiveCylinder;
         static Load(InName: string): ParticleModuleLocationPrimitiveCylinder;
@@ -36906,9 +37222,10 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleLocationPrimitiveTriangle;
     }
     
+    enum ELocationSkelVertSurfaceSource { VERTSURFACESOURCE_Vert, VERTSURFACESOURCE_Surface, VERTSURFACESOURCE_MAX}
     class ParticleModuleLocationSkelVertSurface extends ParticleModuleLocationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SourceType: number;
+        SourceType: ELocationSkelVertSurfaceSource;
         UniversalOffset: Vector;
         bUpdatePositionEachFrame: boolean;
         bOrientMeshEmitters: boolean;
@@ -37031,9 +37348,10 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleOrientationBase;
     }
     
+    enum EParticleAxisLock { EPAL_NONE, EPAL_X, EPAL_Y, EPAL_Z, EPAL_NEGATIVE_X, EPAL_NEGATIVE_Y, EPAL_NEGATIVE_Z, EPAL_ROTATE_X, EPAL_ROTATE_Y, EPAL_ROTATE_Z, EPAL_MAX}
     class ParticleModuleOrientationAxisLock extends ParticleModuleOrientationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        LockAxisFlags: number;
+        LockAxisFlags: EParticleAxisLock;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ParticleModuleOrientationAxisLock;
         static Load(InName: string): ParticleModuleOrientationAxisLock;
@@ -37046,12 +37364,13 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleParameterBase;
     }
     
+    enum EEmitterDynamicParameterValue { EDPV_UserSet, EDPV_AutoSet, EDPV_VelocityX, EDPV_VelocityY, EDPV_VelocityZ, EDPV_VelocityMag, EDPV_MAX}
     class EmitterDynamicParameter {
-        constructor(ParamName: string, bUseEmitterTime: boolean, bSpawnTimeOnly: boolean, ValueMethod: number, bScaleVelocityByParamValue: boolean, ParamValue: RawDistributionFloat);
+        constructor(ParamName: string, bUseEmitterTime: boolean, bSpawnTimeOnly: boolean, ValueMethod: EEmitterDynamicParameterValue, bScaleVelocityByParamValue: boolean, ParamValue: RawDistributionFloat);
         ParamName: string;
         bUseEmitterTime: boolean;
         bSpawnTimeOnly: boolean;
-        ValueMethod: number;
+        ValueMethod: EEmitterDynamicParameterValue;
         bScaleVelocityByParamValue: boolean;
         ParamValue: RawDistributionFloat;
         static StaticClass(): Class;
@@ -37221,8 +37540,8 @@ declare module "ue" {
         SubUVTexture: Texture2D;
         SubImages_Horizontal: number;
         SubImages_Vertical: number;
-        BoundingMode: number;
-        OpacitySourceMode: number;
+        BoundingMode: ESubUVBoundingVertexCount;
+        OpacitySourceMode: EOpacitySourceMode;
         AlphaThreshold: number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SubUVAnimation;
@@ -37256,15 +37575,17 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleTrailBase;
     }
     
+    enum ETrail2SourceMethod { PET2SRCM_Default, PET2SRCM_Particle, PET2SRCM_Actor, PET2SRCM_MAX}
+    enum EParticleSourceSelectionMethod { EPSSM_Random, EPSSM_Sequential, EPSSM_MAX}
     class ParticleModuleTrailSource extends ParticleModuleTrailBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SourceMethod: number;
+        SourceMethod: ETrail2SourceMethod;
         SourceName: string;
         SourceStrength: RawDistributionFloat;
         bLockSourceStength: boolean;
         SourceOffsetCount: number;
         SourceOffsetDefaults: TArray<Vector>;
-        SelectionMethod: number;
+        SelectionMethod: EParticleSourceSelectionMethod;
         bInheritRotation: boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ParticleModuleTrailSource;
@@ -37285,9 +37606,11 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleTypeDataAnimTrail;
     }
     
+    enum EBeam2Method { PEB2M_Distance, PEB2M_Target, PEB2M_Branch, PEB2M_MAX}
+    enum EBeamTaperMethod { PEBTM_None, PEBTM_Full, PEBTM_Partial, PEBTM_MAX}
     class ParticleModuleTypeDataBeam2 extends ParticleModuleTypeDataBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BeamMethod: number;
+        BeamMethod: EBeam2Method;
         TextureTile: number;
         TextureTileDistance: number;
         Sheets: number;
@@ -37298,7 +37621,7 @@ declare module "ue" {
         UpVectorStepSize: number;
         BranchParentName: string;
         Distance: RawDistributionFloat;
-        TaperMethod: number;
+        TaperMethod: EBeamTaperMethod;
         TaperFactor: RawDistributionFloat;
         TaperScale: RawDistributionFloat;
         RenderGeometry: boolean;
@@ -37343,7 +37666,7 @@ declare module "ue" {
     }
     
     class GPUSpriteEmitterInfo {
-        constructor(RequiredModule: ParticleModuleRequired, SpawnModule: ParticleModuleSpawn, SpawnPerUnitModule: ParticleModuleSpawnPerUnit, SpawnModules: TArray<ParticleModule>, LocalVectorField: GPUSpriteLocalVectorFieldInfo, VectorFieldScale: FloatDistribution, DragCoefficient: FloatDistribution, PointAttractorStrength: FloatDistribution, Resilience: FloatDistribution, ConstantAcceleration: Vector, PointAttractorPosition: Vector, PointAttractorRadiusSq: number, OrbitOffsetBase: Vector, OrbitOffsetRange: Vector, InvMaxSize: Vector2D, InvRotationRateScale: number, MaxLifetime: number, MaxParticleCount: number, ScreenAlignment: number, LockAxisFlag: number, bEnableCollision: boolean, CollisionMode: number, bRemoveHMDRoll: boolean, MinFacingCameraBlendDistance: number, MaxFacingCameraBlendDistance: number, DynamicColor: RawDistributionVector, DynamicAlpha: RawDistributionFloat, DynamicColorScale: RawDistributionVector, DynamicAlphaScale: RawDistributionFloat);
+        constructor(RequiredModule: ParticleModuleRequired, SpawnModule: ParticleModuleSpawn, SpawnPerUnitModule: ParticleModuleSpawnPerUnit, SpawnModules: TArray<ParticleModule>, LocalVectorField: GPUSpriteLocalVectorFieldInfo, VectorFieldScale: FloatDistribution, DragCoefficient: FloatDistribution, PointAttractorStrength: FloatDistribution, Resilience: FloatDistribution, ConstantAcceleration: Vector, PointAttractorPosition: Vector, PointAttractorRadiusSq: number, OrbitOffsetBase: Vector, OrbitOffsetRange: Vector, InvMaxSize: Vector2D, InvRotationRateScale: number, MaxLifetime: number, MaxParticleCount: number, ScreenAlignment: EParticleScreenAlignment, LockAxisFlag: EParticleAxisLock, bEnableCollision: boolean, CollisionMode: EParticleCollisionMode, bRemoveHMDRoll: boolean, MinFacingCameraBlendDistance: number, MaxFacingCameraBlendDistance: number, DynamicColor: RawDistributionVector, DynamicAlpha: RawDistributionFloat, DynamicColorScale: RawDistributionVector, DynamicAlphaScale: RawDistributionFloat);
         RequiredModule: ParticleModuleRequired;
         SpawnModule: ParticleModuleSpawn;
         SpawnPerUnitModule: ParticleModuleSpawnPerUnit;
@@ -37362,10 +37685,10 @@ declare module "ue" {
         InvRotationRateScale: number;
         MaxLifetime: number;
         MaxParticleCount: number;
-        ScreenAlignment: number;
-        LockAxisFlag: number;
+        ScreenAlignment: EParticleScreenAlignment;
+        LockAxisFlag: EParticleAxisLock;
         bEnableCollision: boolean;
-        CollisionMode: number;
+        CollisionMode: EParticleCollisionMode;
         bRemoveHMDRoll: boolean;
         MinFacingCameraBlendDistance: number;
         MaxFacingCameraBlendDistance: number;
@@ -37377,7 +37700,7 @@ declare module "ue" {
     }
     
     class GPUSpriteResourceData {
-        constructor(QuantizedColorSamples: TArray<Color>, QuantizedMiscSamples: TArray<Color>, QuantizedSimulationAttrSamples: TArray<Color>, ColorScale: Vector4, ColorBias: Vector4, MiscScale: Vector4, MiscBias: Vector4, SimulationAttrCurveScale: Vector4, SimulationAttrCurveBias: Vector4, SubImageSize: Vector4, SizeBySpeed: Vector4, ConstantAcceleration: Vector, OrbitOffsetBase: Vector, OrbitOffsetRange: Vector, OrbitFrequencyBase: Vector, OrbitFrequencyRange: Vector, OrbitPhaseBase: Vector, OrbitPhaseRange: Vector, GlobalVectorFieldScale: number, GlobalVectorFieldTightness: number, PerParticleVectorFieldScale: number, PerParticleVectorFieldBias: number, DragCoefficientScale: number, DragCoefficientBias: number, ResilienceScale: number, ResilienceBias: number, CollisionRadiusScale: number, CollisionRadiusBias: number, CollisionTimeBias: number, CollisionRandomSpread: number, CollisionRandomDistribution: number, OneMinusFriction: number, RotationRateScale: number, CameraMotionBlurAmount: number, ScreenAlignment: number, LockAxisFlag: number, PivotOffset: Vector2D, bRemoveHMDRoll: boolean, MinFacingCameraBlendDistance: number, MaxFacingCameraBlendDistance: number);
+        constructor(QuantizedColorSamples: TArray<Color>, QuantizedMiscSamples: TArray<Color>, QuantizedSimulationAttrSamples: TArray<Color>, ColorScale: Vector4, ColorBias: Vector4, MiscScale: Vector4, MiscBias: Vector4, SimulationAttrCurveScale: Vector4, SimulationAttrCurveBias: Vector4, SubImageSize: Vector4, SizeBySpeed: Vector4, ConstantAcceleration: Vector, OrbitOffsetBase: Vector, OrbitOffsetRange: Vector, OrbitFrequencyBase: Vector, OrbitFrequencyRange: Vector, OrbitPhaseBase: Vector, OrbitPhaseRange: Vector, GlobalVectorFieldScale: number, GlobalVectorFieldTightness: number, PerParticleVectorFieldScale: number, PerParticleVectorFieldBias: number, DragCoefficientScale: number, DragCoefficientBias: number, ResilienceScale: number, ResilienceBias: number, CollisionRadiusScale: number, CollisionRadiusBias: number, CollisionTimeBias: number, CollisionRandomSpread: number, CollisionRandomDistribution: number, OneMinusFriction: number, RotationRateScale: number, CameraMotionBlurAmount: number, ScreenAlignment: EParticleScreenAlignment, LockAxisFlag: EParticleAxisLock, PivotOffset: Vector2D, bRemoveHMDRoll: boolean, MinFacingCameraBlendDistance: number, MaxFacingCameraBlendDistance: number);
         QuantizedColorSamples: TArray<Color>;
         QuantizedMiscSamples: TArray<Color>;
         QuantizedSimulationAttrSamples: TArray<Color>;
@@ -37412,8 +37735,8 @@ declare module "ue" {
         OneMinusFriction: number;
         RotationRateScale: number;
         CameraMotionBlurAmount: number;
-        ScreenAlignment: number;
-        LockAxisFlag: number;
+        ScreenAlignment: EParticleScreenAlignment;
+        LockAxisFlag: EParticleAxisLock;
         PivotOffset: Vector2D;
         bRemoveHMDRoll: boolean;
         MinFacingCameraBlendDistance: number;
@@ -37432,6 +37755,9 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleTypeDataGpu;
     }
     
+    enum EMeshScreenAlignment { PSMA_MeshFaceCameraWithRoll, PSMA_MeshFaceCameraWithSpin, PSMA_MeshFaceCameraWithLockedAxis, PSMA_MAX}
+    enum EMeshCameraFacingUpAxis { CameraFacing_NoneUP, CameraFacing_ZUp, CameraFacing_NegativeZUp, CameraFacing_YUp, CameraFacing_NegativeYUp, CameraFacing_MAX}
+    enum EMeshCameraFacingOptions { XAxisFacing_NoUp, XAxisFacing_ZUp, XAxisFacing_NegativeZUp, XAxisFacing_YUp, XAxisFacing_NegativeYUp, LockedAxis_ZAxisFacing, LockedAxis_NegativeZAxisFacing, LockedAxis_YAxisFacing, LockedAxis_NegativeYAxisFacing, VelocityAligned_ZAxisFacing, VelocityAligned_NegativeZAxisFacing, VelocityAligned_YAxisFacing, VelocityAligned_NegativeYAxisFacing, EMeshCameraFacingOptions_MAX}
     class ParticleModuleTypeDataMesh extends ParticleModuleTypeDataBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Mesh: StaticMesh;
@@ -37439,15 +37765,15 @@ declare module "ue" {
         bUseStaticMeshLODs: boolean;
         CastShadows: boolean;
         DoCollisions: boolean;
-        MeshAlignment: number;
+        MeshAlignment: EMeshScreenAlignment;
         bOverrideMaterial: boolean;
         bOverrideDefaultMotionBlurSettings: boolean;
         bEnableMotionBlur: boolean;
         RollPitchYawRange: RawDistributionVector;
-        AxisLockOption: number;
+        AxisLockOption: EParticleAxisLock;
         bCameraFacing: boolean;
-        CameraFacingUpAxisOption: number;
-        CameraFacingOption: number;
+        CameraFacingUpAxisOption: EMeshCameraFacingUpAxis;
+        CameraFacingOption: EMeshCameraFacingOptions;
         bApplyParticleRotationAsSpin: boolean;
         bFaceCameraDirectionRatherThanPosition: boolean;
         bCollisionsConsiderPartilceSize: boolean;
@@ -37456,6 +37782,7 @@ declare module "ue" {
         static Load(InName: string): ParticleModuleTypeDataMesh;
     }
     
+    enum ETrailsRenderAxisOption { Trails_CameraUp, Trails_SourceUp, Trails_WorldUp, Trails_MAX}
     class ParticleModuleTypeDataRibbon extends ParticleModuleTypeDataBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MaxTessellationBetweenParticles: number;
@@ -37468,7 +37795,7 @@ declare module "ue" {
         bEnablePreviousTangentRecalculation: boolean;
         bTangentRecalculationEveryFrame: boolean;
         bSpawnInitialParticle: boolean;
-        RenderAxis: number;
+        RenderAxis: ETrailsRenderAxisOption;
         TangentSpawningScalar: number;
         bRenderGeometry: boolean;
         bRenderSpawnPoints: boolean;
@@ -37663,6 +37990,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EConstraintFrame { Frame1, Frame2, EConstraintFrame_MAX}
     class PhysicsConstraintComponent extends SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ConstraintActor1: Actor;
@@ -37674,9 +38002,9 @@ declare module "ue" {
         ConstraintInstance: ConstraintInstance;
         SetOrientationDriveTwistAndSwing(bEnableTwistDrive: boolean, bEnableSwingDrive: boolean): void;
         SetOrientationDriveSLERP(bEnableSLERP: boolean): void;
-        SetLinearZLimit(ConstraintType: number, LimitSize: number): void;
-        SetLinearYLimit(ConstraintType: number, LimitSize: number): void;
-        SetLinearXLimit(ConstraintType: number, LimitSize: number): void;
+        SetLinearZLimit(ConstraintType: ELinearConstraintMotion, LimitSize: number): void;
+        SetLinearYLimit(ConstraintType: ELinearConstraintMotion, LimitSize: number): void;
+        SetLinearXLimit(ConstraintType: ELinearConstraintMotion, LimitSize: number): void;
         SetLinearVelocityTarget(InVelTarget: Vector): void;
         SetLinearVelocityDrive(bEnableDriveX: boolean, bEnableDriveY: boolean, bEnableDriveZ: boolean): void;
         SetLinearPositionTarget(InPosTarget: Vector): void;
@@ -37684,21 +38012,21 @@ declare module "ue" {
         SetLinearDriveParams(PositionStrength: number, VelocityStrength: number, InForceLimit: number): void;
         SetLinearBreakable(bLinearBreakable: boolean, LinearBreakThreshold: number): void;
         SetDisableCollision(bDisableCollision: boolean): void;
-        SetConstraintReferencePosition(Frame: number, RefPosition: Vector): void;
-        SetConstraintReferenceOrientation(Frame: number, PriAxis: Vector, SecAxis: Vector): void;
-        SetConstraintReferenceFrame(Frame: number, RefFrame: Transform): void;
+        SetConstraintReferencePosition(Frame: EConstraintFrame, RefPosition: Vector): void;
+        SetConstraintReferenceOrientation(Frame: EConstraintFrame, PriAxis: Vector, SecAxis: Vector): void;
+        SetConstraintReferenceFrame(Frame: EConstraintFrame, RefFrame: Transform): void;
         SetConstrainedComponents(Component1: PrimitiveComponent, BoneName1: string, Component2: PrimitiveComponent, BoneName2: string): void;
         SetAngularVelocityTarget(InVelTarget: Vector): void;
         SetAngularVelocityDriveTwistAndSwing(bEnableTwistDrive: boolean, bEnableSwingDrive: boolean): void;
         SetAngularVelocityDriveSLERP(bEnableSLERP: boolean): void;
         SetAngularVelocityDrive(bEnableSwingDrive: boolean, bEnableTwistDrive: boolean): void;
-        SetAngularTwistLimit(ConstraintType: number, TwistLimitAngle: number): void;
-        SetAngularSwing2Limit(MotionType: number, Swing2LimitAngle: number): void;
-        SetAngularSwing1Limit(MotionType: number, Swing1LimitAngle: number): void;
+        SetAngularTwistLimit(ConstraintType: EAngularConstraintMotion, TwistLimitAngle: number): void;
+        SetAngularSwing2Limit(MotionType: EAngularConstraintMotion, Swing2LimitAngle: number): void;
+        SetAngularSwing1Limit(MotionType: EAngularConstraintMotion, Swing1LimitAngle: number): void;
         SetAngularOrientationTarget(InPosTarget: Rotator): void;
         SetAngularOrientationDrive(bEnableSwingDrive: boolean, bEnableTwistDrive: boolean): void;
         SetAngularDriveParams(PositionStrength: number, VelocityStrength: number, InForceLimit: number): void;
-        SetAngularDriveMode(DriveMode: number): void;
+        SetAngularDriveMode(DriveMode: EAngularDriveMode): void;
         SetAngularBreakable(bAngularBreakable: boolean, AngularBreakThreshold: number): void;
         IsBroken(): boolean;
         GetCurrentTwist(): number;
@@ -37770,9 +38098,11 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESettingsLockedAxis { None, X, Y, Z, Invalid, ESettingsLockedAxis_MAX}
+    enum ESettingsDOF { Full3D, YZPlane, XZPlane, XYPlane, ESettingsDOF_MAX}
     class PhysicalSurfaceName {
-        constructor(Type: number, Name: string);
-        Type: number;
+        constructor(Type: EPhysicalSurface, Name: string);
+        Type: EPhysicalSurface;
         Name: string;
         static StaticClass(): Class;
     }
@@ -37802,18 +38132,18 @@ declare module "ue" {
         bWarnMissingLocks: boolean;
         bEnable2DPhysics: boolean;
         PhysicErrorCorrection: RigidBodyErrorCorrection;
-        LockedAxis: number;
-        DefaultDegreesOfFreedom: number;
+        LockedAxis: ESettingsLockedAxis;
+        DefaultDegreesOfFreedom: ESettingsDOF;
         BounceThresholdVelocity: number;
-        FrictionCombineMode: number;
-        RestitutionCombineMode: number;
+        FrictionCombineMode: EFrictionCombineMode;
+        RestitutionCombineMode: EFrictionCombineMode;
         MaxAngularVelocity: number;
         MaxDepenetrationVelocity: number;
         ContactOffsetMultiplier: number;
         MinContactOffset: number;
         MaxContactOffset: number;
         bSimulateSkeletalMeshOnDedicatedServer: boolean;
-        DefaultShapeComplexity: number;
+        DefaultShapeComplexity: ECollisionTraceFlag;
         bDefaultHasComplexCollision: boolean;
         bSuppressFaceRemapTable: boolean;
         bSupportUVFromHitResults: boolean;
@@ -37846,7 +38176,7 @@ declare module "ue" {
         SpringDamping: number;
         SpringLengthAtRest: number;
         SpringRadius: number;
-        SpringChannel: number;
+        SpringChannel: ECollisionChannel;
         bIgnoreSelf: boolean;
         SpringCompression: number;
         GetSpringRestingPoint(): Vector;
@@ -37885,6 +38215,7 @@ declare module "ue" {
     }
     
     enum ESceneCapturePrimitiveRenderMode { PRM_LegacySceneCapture, PRM_RenderScenePrimitives, PRM_UseShowOnlyList, PRM_MAX}
+    enum ESceneCaptureSource { SCS_SceneColorHDR, SCS_SceneColorHDRNoAlpha, SCS_FinalColorLDR, SCS_SceneColorSceneDepth, SCS_SceneDepth, SCS_DeviceDepth, SCS_Normal, SCS_BaseColor, SCS_FinalColorHDR, SCS_MAX}
     class EngineShowFlagsSetting {
         constructor(ShowFlagName: string, Enabled: boolean);
         ShowFlagName: string;
@@ -37895,7 +38226,7 @@ declare module "ue" {
     class SceneCaptureComponent extends SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PrimitiveRenderMode: ESceneCapturePrimitiveRenderMode;
-        CaptureSource: number;
+        CaptureSource: ESceneCaptureSource;
         HiddenComponents: TArray<TWeakObjectPtr<PrimitiveComponent>>;
         HiddenActors: TArray<Actor>;
         ShowOnlyComponents: TArray<TWeakObjectPtr<PrimitiveComponent>>;
@@ -38041,17 +38372,18 @@ declare module "ue" {
         static Load(InName: string): Polys;
     }
     
+    enum EBoneSpaces { WorldSpace, ComponentSpace, EBoneSpaces_MAX}
     class PoseableMeshComponent extends SkinnedMeshComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SetBoneTransformByName(BoneName: string, InTransform: Transform, BoneSpace: number): void;
-        SetBoneScaleByName(BoneName: string, InScale3D: Vector, BoneSpace: number): void;
-        SetBoneRotationByName(BoneName: string, InRotation: Rotator, BoneSpace: number): void;
-        SetBoneLocationByName(BoneName: string, InLocation: Vector, BoneSpace: number): void;
+        SetBoneTransformByName(BoneName: string, InTransform: Transform, BoneSpace: EBoneSpaces): void;
+        SetBoneScaleByName(BoneName: string, InScale3D: Vector, BoneSpace: EBoneSpaces): void;
+        SetBoneRotationByName(BoneName: string, InRotation: Rotator, BoneSpace: EBoneSpaces): void;
+        SetBoneLocationByName(BoneName: string, InLocation: Vector, BoneSpace: EBoneSpaces): void;
         ResetBoneTransformByName(BoneName: string): void;
-        GetBoneTransformByName(BoneName: string, BoneSpace: number): Transform;
-        GetBoneScaleByName(BoneName: string, BoneSpace: number): Vector;
-        GetBoneRotationByName(BoneName: string, BoneSpace: number): Rotator;
-        GetBoneLocationByName(BoneName: string, BoneSpace: number): Vector;
+        GetBoneTransformByName(BoneName: string, BoneSpace: EBoneSpaces): Transform;
+        GetBoneScaleByName(BoneName: string, BoneSpace: EBoneSpaces): Vector;
+        GetBoneRotationByName(BoneName: string, BoneSpace: EBoneSpaces): Rotator;
+        GetBoneLocationByName(BoneName: string, BoneSpace: EBoneSpaces): Vector;
         CopyPoseFromSkeletalComponent(InComponentToCopy: SkeletalMeshComponent): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PoseableMeshComponent;
@@ -38191,16 +38523,16 @@ declare module "ue" {
     class RadialForceComponent extends SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Radius: number;
-        Falloff: number;
+        Falloff: ERadialImpulseFalloff;
         ImpulseStrength: number;
         bImpulseVelChange: boolean;
         bIgnoreOwningActor: boolean;
         ForceStrength: number;
         DestructibleDamage: number;
-        ObjectTypesToAffect: TArray<number>;
-        RemoveObjectTypeToAffect(ObjectType: number): void;
+        ObjectTypesToAffect: TArray<EObjectTypeQuery>;
+        RemoveObjectTypeToAffect(ObjectType: EObjectTypeQuery): void;
         FireImpulse(): void;
-        AddObjectTypeToAffect(ObjectType: number): void;
+        AddObjectTypeToAffect(ObjectType: EObjectTypeQuery): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): RadialForceComponent;
         static Load(InName: string): RadialForceComponent;
@@ -38244,12 +38576,22 @@ declare module "ue" {
         static Load(InName: string): RectLight;
     }
     
+    enum EMobileMSAASampleCount { One, Two, Four, Eight, EMobileMSAASampleCount_MAX}
+    enum ETranslucentSortPolicy { SortByDistance, SortByProjectedZ, SortAlongAxis, ETranslucentSortPolicy_MAX}
+    enum ECustomDepthStencil { Disabled, Enabled, EnabledOnDemand, EnabledWithStencil, ECustomDepthStencil_MAX}
+    enum EAlphaChannelMode { Disabled, LinearColorSpaceOnly, AllowThroughTonemapper, EAlphaChannelMode_MAX}
+    enum EAutoExposureMethodUI { AEM_Histogram, AEM_Basic, AEM_Manual, AEM_MAX}
+    enum EAntiAliasingMethod { AAM_None, AAM_FXAA, AAM_TemporalAA, AAM_MSAA, AAM_MAX}
+    enum EDefaultBackBufferPixelFormat { DBBPF_B8G8R8A8, DBBPF_A16B16G16R16_DEPRECATED, DBBPF_FloatRGB_DEPRECATED, DBBPF_FloatRGBA, DBBPF_A2B10G10R10, DBBPF_MAX}
+    enum EEarlyZPass { None, OpaqueOnly, OpaqueAndMasked, Auto, EEarlyZPass_MAX}
+    enum EClearSceneOptions { NoClear, HardwareClear, QuadAtMaxZ, EClearSceneOptions_MAX}
+    enum EGBufferFormat { Force8BitsPerChannel, Default, HighPrecisionNormals, Force16BitsPerChannel, EGBufferFormat_MAX}
     class RendererSettings extends DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bMobileHDR: boolean;
         bMobileDisableVertexFog: boolean;
         MaxMobileCascades: number;
-        MobileMSAASampleCount: number;
+        MobileMSAASampleCount: EMobileMSAASampleCount;
         bMobileUseLegacyShadingModel: boolean;
         bMobileUseHWsRGBEncoding: boolean;
         bMobileAllowDitheredLODTransition: boolean;
@@ -38282,16 +38624,16 @@ declare module "ue" {
         bCompressMeshDistanceFields: boolean;
         TessellationAdaptivePixelsPerTriangle: number;
         bSeparateTranslucency: boolean;
-        TranslucentSortPolicy: number;
+        TranslucentSortPolicy: ETranslucentSortPolicy;
         TranslucentSortAxis: Vector;
-        CustomDepthStencil: number;
+        CustomDepthStencil: ECustomDepthStencil;
         bCustomDepthTaaJitter: boolean;
-        bEnableAlphaChannelInPostProcessing: number;
+        bEnableAlphaChannelInPostProcessing: EAlphaChannelMode;
         bDefaultFeatureBloom: boolean;
         bDefaultFeatureAmbientOcclusion: boolean;
         bDefaultFeatureAmbientOcclusionStaticFraction: boolean;
         bDefaultFeatureAutoExposure: boolean;
-        DefaultFeatureAutoExposure: number;
+        DefaultFeatureAutoExposure: EAutoExposureMethodUI;
         bExtendDefaultLuminanceRangeInAutoExposureSettings: boolean;
         bUsePreExposure: boolean;
         bEnablePreExposureOnlyInTheEditor: boolean;
@@ -38299,22 +38641,22 @@ declare module "ue" {
         bDefaultFeatureLensFlare: boolean;
         bTemporalUpsampling: boolean;
         bSSGI: boolean;
-        DefaultFeatureAntiAliasing: number;
+        DefaultFeatureAntiAliasing: EAntiAliasingMethod;
         DefaultLightUnits: ELightUnits;
-        DefaultBackBufferPixelFormat: number;
+        DefaultBackBufferPixelFormat: EDefaultBackBufferPixelFormat;
         bRenderUnbuiltPreviewShadowsInGame: boolean;
         bStencilForLODDither: boolean;
-        EarlyZPass: number;
+        EarlyZPass: EEarlyZPass;
         bEarlyZPassOnlyMaterialMasking: boolean;
         bDBuffer: boolean;
-        ClearSceneMethod: number;
+        ClearSceneMethod: EClearSceneOptions;
         bBasePassOutputsVelocity: boolean;
         bSelectiveBasePassOutputs: boolean;
         bDefaultParticleCutouts: boolean;
         GPUSimulationTextureSizeX: number;
         GPUSimulationTextureSizeY: number;
         bGlobalClipPlane: boolean;
-        GBufferFormat: number;
+        GBufferFormat: EGBufferFormat;
         bUseGPUMorphTargets: boolean;
         bNvidiaAftermathEnabled: boolean;
         bInstancedStereo: boolean;
@@ -38417,13 +38759,14 @@ declare module "ue" {
         static Load(InName: string): Scene;
     }
     
+    enum ESceneCaptureCompositeMode { SCCM_Overwrite, SCCM_Additive, SCCM_Composite, SCCM_MAX}
     class SceneCaptureComponent2D extends SceneCaptureComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ProjectionType: number;
+        ProjectionType: ECameraProjectionMode;
         FOVAngle: number;
         OrthoWidth: number;
         TextureTarget: TextureRenderTarget2D;
-        CompositeMode: number;
+        CompositeMode: ESceneCaptureCompositeMode;
         PostProcessSettings: PostProcessSettings;
         PostProcessBlendWeight: number;
         bOverride_CustomNearClippingPlane: boolean;
@@ -38455,7 +38798,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SizeX: number;
         ClearColor: LinearColor;
-        OverrideFormat: number;
+        OverrideFormat: EPixelFormat;
         bHDR: boolean;
         bForceLinearGamma: boolean;
         static StaticClass(): Class;
@@ -38493,9 +38836,10 @@ declare module "ue" {
         static Load(InName: string): Selection;
     }
     
+    enum EShadowMapFlags { SMF_None, SMF_Streamed, SMF_MAX}
     class ShadowMapTexture2D extends Texture2D {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ShadowmapFlags: number;
+        ShadowmapFlags: EShadowMapFlags;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): ShadowMapTexture2D;
         static Load(InName: string): ShadowMapTexture2D;
@@ -38584,8 +38928,8 @@ declare module "ue" {
     }
     
     class SoundGroup {
-        constructor(SoundGroup: number, DisplayName: string, bAlwaysDecompressOnLoad: boolean, DecompressedDuration: number);
-        SoundGroup: number;
+        constructor(SoundGroup: ESoundGroup, DisplayName: string, bAlwaysDecompressOnLoad: boolean, DecompressedDuration: number);
+        SoundGroup: ESoundGroup;
         DisplayName: string;
         bAlwaysDecompressOnLoad: boolean;
         DecompressedDuration: number;
@@ -38750,15 +39094,16 @@ declare module "ue" {
         static Load(InName: string): SoundNodeModulator;
     }
     
+    enum ModulationParamMode { MPM_Normal, MPM_Abs, MPM_Direct, MPM_MAX}
     class ModulatorContinuousParams {
-        constructor(ParameterName: string, Default: number, MinInput: number, MaxInput: number, MinOutput: number, MaxOutput: number, ParamMode: number);
+        constructor(ParameterName: string, Default: number, MinInput: number, MaxInput: number, MinOutput: number, MaxOutput: number, ParamMode: ModulationParamMode);
         ParameterName: string;
         Default: number;
         MinInput: number;
         MaxInput: number;
         MinOutput: number;
         MaxOutput: number;
-        ParamMode: number;
+        ParamMode: ModulationParamMode;
         static StaticClass(): Class;
     }
     
@@ -38892,7 +39237,7 @@ declare module "ue" {
         SocketOffset: Vector;
         TargetOffset: Vector;
         ProbeSize: number;
-        ProbeChannel: number;
+        ProbeChannel: ECollisionChannel;
         bDoCollisionTest: boolean;
         bUsePawnControlRotation: boolean;
         bInheritPitch: boolean;
@@ -38925,6 +39270,8 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EStereoLayerType { SLT_WorldLocked, SLT_TrackerLocked, SLT_FaceLocked, SLT_MAX}
+    enum EStereoLayerShape { SLSH_QuadLayer, SLSH_CylinderLayer, SLSH_CubemapLayer, SLSH_EquirectLayer, SLSH_MAX}
     class StereoLayerComponent extends SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bLiveTexture: boolean;
@@ -38939,8 +39286,8 @@ declare module "ue" {
         CylinderOverlayArc: number;
         CylinderHeight: number;
         EquirectProps: EquirectProps;
-        StereoLayerType: number;
-        StereoLayerShape: number;
+        StereoLayerType: EStereoLayerType;
+        StereoLayerShape: EStereoLayerShape;
         Priority: number;
         SetUVRect(InUVRect: Box2D): void;
         SetTexture(InTexture: Texture): void;
@@ -39035,9 +39382,9 @@ declare module "ue" {
     
     class Texture2DArray extends Texture {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AddressX: number;
-        AddressY: number;
-        AddressZ: number;
+        AddressX: TextureAddress;
+        AddressY: TextureAddress;
+        AddressZ: TextureAddress;
         SourceTextures: TArray<Texture2D>;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): Texture2DArray;
@@ -39082,8 +39429,8 @@ declare module "ue" {
     }
     
     class Timeline {
-        constructor(LengthMode: number, bLooping: boolean, bReversePlayback: boolean, bPlaying: boolean, Length: number, PlayRate: number, Position: number, Events: TArray<TimelineEventEntry>, InterpVectors: TArray<TimelineVectorTrack>, InterpFloats: TArray<TimelineFloatTrack>, InterpLinearColors: TArray<TimelineLinearColorTrack>, TimelinePostUpdateFunc: $Delegate<() => void>, TimelineFinishedFunc: $Delegate<() => void>, PropertySetObject: TWeakObjectPtr<Object>, DirectionPropertyName: string, DirectionProperty: Property);
-        LengthMode: number;
+        constructor(LengthMode: ETimelineLengthMode, bLooping: boolean, bReversePlayback: boolean, bPlaying: boolean, Length: number, PlayRate: number, Position: number, Events: TArray<TimelineEventEntry>, InterpVectors: TArray<TimelineVectorTrack>, InterpFloats: TArray<TimelineFloatTrack>, InterpLinearColors: TArray<TimelineLinearColorTrack>, TimelinePostUpdateFunc: $Delegate<() => void>, TimelineFinishedFunc: $Delegate<() => void>, PropertySetObject: TWeakObjectPtr<Object>, DirectionPropertyName: string, DirectionProperty: Property);
+        LengthMode: ETimelineLengthMode;
         bLooping: boolean;
         bReversePlayback: boolean;
         bPlaying: boolean;
@@ -39108,7 +39455,7 @@ declare module "ue" {
         bIgnoreTimeDilation: boolean;
         Stop(): void;
         SetVectorCurve(NewVectorCurve: CurveVector, VectorTrackName: string): void;
-        SetTimelineLengthMode(NewLengthMode: number): void;
+        SetTimelineLengthMode(NewLengthMode: ETimelineLengthMode): void;
         SetTimelineLength(NewLength: number): void;
         SetPlayRate(NewRate: number): void;
         SetPlaybackPosition(NewPosition: number, bFireEvents: boolean, bFireUpdate: boolean): void;
@@ -39171,9 +39518,10 @@ declare module "ue" {
         static Load(InName: string): TriggerVolume;
     }
     
+    enum ETwitterRequestMethod { TRM_Get, TRM_Post, TRM_Delete, TRM_MAX}
     class TwitterIntegrationBase extends PlatformInterfaceBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TwitterRequest(URL: string, ParamKeysAndValues: TArray<string>, RequestMethod: number, AccountIndex: number): boolean;
+        TwitterRequest(URL: string, ParamKeysAndValues: TArray<string>, RequestMethod: ETwitterRequestMethod, AccountIndex: number): boolean;
         ShowTweetUI(InitialMessage: string, URL: string, Picture: string): boolean;
         Init(): void;
         GetNumAccounts(): number;
@@ -39195,12 +39543,13 @@ declare module "ue" {
         static Load(InName: string): UserDefinedEnum;
     }
     
+    enum EUserDefinedStructureStatus { UDSS_UpToDate, UDSS_Dirty, UDSS_Error, UDSS_Duplicate, UDSS_MAX}
     class UserDefinedStruct extends ScriptStruct {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PrimaryStruct: TWeakObjectPtr<UserDefinedStruct>;
         ErrorMessage: string;
         EditorData: Object;
-        Status: number;
+        Status: EUserDefinedStructureStatus;
         Guid: Guid;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): UserDefinedStruct;
@@ -39219,8 +39568,8 @@ declare module "ue" {
     class UserInterfaceSettings extends DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RenderFocusRule: ERenderFocusRule;
-        HardwareCursors: TMap<number, HardwareCursorReference>;
-        SoftwareCursors: TMap<number, SoftClassPath>;
+        HardwareCursors: TMap<EMouseCursor, HardwareCursorReference>;
+        SoftwareCursors: TMap<EMouseCursor, SoftClassPath>;
         DefaultCursor: SoftClassPath;
         TextEditBeamCursor: SoftClassPath;
         CrosshairsCursor: SoftClassPath;
@@ -39242,6 +39591,7 @@ declare module "ue" {
         static Load(InName: string): UserInterfaceSettings;
     }
     
+    enum EVectorFieldConstructionOp { VFCO_Extrude, VFCO_Revolve, VFCO_MAX}
     class VectorFieldStatic extends VectorField {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SizeX: number;
@@ -39259,7 +39609,7 @@ declare module "ue" {
     class VectorFieldAnimated extends VectorField {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Texture: Texture2D;
-        ConstructionOp: number;
+        ConstructionOp: EVectorFieldConstructionOp;
         VolumeSizeX: number;
         VolumeSizeY: number;
         VolumeSizeZ: number;
@@ -39320,10 +39670,10 @@ declare module "ue" {
     }
     
     class VirtualTextureSpacePoolConfig {
-        constructor(MinTileSize: number, MaxTileSize: number, Formats: TArray<number>, SizeInMegabyte: number, bAllowSizeScale: boolean);
+        constructor(MinTileSize: number, MaxTileSize: number, Formats: TArray<EPixelFormat>, SizeInMegabyte: number, bAllowSizeScale: boolean);
         MinTileSize: number;
         MaxTileSize: number;
-        Formats: TArray<number>;
+        Formats: TArray<EPixelFormat>;
         SizeInMegabyte: number;
         bAllowSizeScale: boolean;
         static StaticClass(): Class;
@@ -39766,14 +40116,14 @@ declare module "ue" {
     enum ERawCurveTrackTypes { RCT_Float, RCT_Vector, RCT_Transform, RCT_MAX}
     class AnimationBlueprintLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static SetRootMotionLockType(AnimationSequence: AnimSequence, RootMotionLockType: number): void;
+        static SetRootMotionLockType(AnimationSequence: AnimSequence, RootMotionLockType: ERootMotionRootLock): void;
         static SetRootMotionEnabled(AnimationSequence: AnimSequence, bEnabled: boolean): void;
         static SetRateScale(AnimationSequence: AnimSequence, RateScale: number): void;
         static SetIsRootMotionLockForced(AnimationSequence: AnimSequence, bForced: boolean): void;
         static SetCompressionScheme(AnimationSequence: AnimSequence, CompressionScheme: AnimCompress): void;
         static SetAnimationInterpolationType(AnimationSequence: AnimSequence, InterpolationType: EAnimInterpolationType): void;
-        static SetAdditiveBasePoseType(AnimationSequence: AnimSequence, AdditiveBasePoseType: number): void;
-        static SetAdditiveAnimationType(AnimationSequence: AnimSequence, AdditiveAnimationType: number): void;
+        static SetAdditiveBasePoseType(AnimationSequence: AnimSequence, AdditiveBasePoseType: EAdditiveBasePoseType): void;
+        static SetAdditiveAnimationType(AnimationSequence: AnimSequence, AdditiveAnimationType: EAdditiveAnimationType): void;
         static ReplaceAnimNotifyStates(AnimationSequence: AnimSequenceBase, OldNotifyClass: Class, NewNotifyClass: Class, OnNotifyStateReplaced: $Delegate<(OldNotifyState: AnimNotifyState, NewNotifyState: AnimNotifyState) => void>): void;
         static ReplaceAnimNotifies(AnimationSequence: AnimSequenceBase, OldNotifyClass: Class, NewNotifyClass: Class, OnNotifyReplaced: $Delegate<(OldNotify: AnimNotify, NewNotify: AnimNotify) => void>): void;
         static RemoveVirtualBones(AnimationSequence: AnimSequence, VirtualBoneNames: TArray<string>): void;
@@ -39804,7 +40154,7 @@ declare module "ue" {
         static GetTransformationKeys(AnimationSequence: AnimSequence, CurveName: string, Times: $Ref<TArray<number>>, Values: $Ref<TArray<Transform>>): void;
         static GetTimeAtFrame(AnimationSequence: AnimSequence, Frame: number, Time: $Ref<number>): void;
         static GetSequenceLength(AnimationSequence: AnimSequence, Length: $Ref<number>): void;
-        static GetRootMotionLockType(AnimationSequence: AnimSequence, LockType: $Ref<number>): void;
+        static GetRootMotionLockType(AnimationSequence: AnimSequence, LockType: $Ref<ERootMotionRootLock>): void;
         static GetRawTrackScaleData(AnimationSequence: AnimSequence, TrackName: string, ScaleData: $Ref<TArray<Vector>>): void;
         static GetRawTrackRotationData(AnimationSequence: AnimSequence, TrackName: string, RotationData: $Ref<TArray<Quat>>): void;
         static GetRawTrackPositionData(AnimationSequence: AnimSequence, TrackName: string, PositionData: $Ref<TArray<Vector>>): void;
@@ -39829,8 +40179,8 @@ declare module "ue" {
         static GetAnimationNotifyEvents(AnimationSequence: AnimSequence, NotifyEvents: $Ref<TArray<AnimNotifyEvent>>): void;
         static GetAnimationNotifyEventNames(AnimationSequence: AnimSequence, EventNames: $Ref<TArray<string>>): void;
         static GetAnimationInterpolationType(AnimationSequence: AnimSequence, InterpolationType: $Ref<EAnimInterpolationType>): void;
-        static GetAdditiveBasePoseType(AnimationSequence: AnimSequence, AdditiveBasePoseType: $Ref<number>): void;
-        static GetAdditiveAnimationType(AnimationSequence: AnimSequence, AdditiveAnimationType: $Ref<number>): void;
+        static GetAdditiveBasePoseType(AnimationSequence: AnimSequence, AdditiveBasePoseType: $Ref<EAdditiveBasePoseType>): void;
+        static GetAdditiveAnimationType(AnimationSequence: AnimSequence, AdditiveAnimationType: $Ref<EAdditiveAnimationType>): void;
         static FindBonePathToRoot(AnimationSequence: AnimSequence, BoneName: string, BonePath: $Ref<TArray<string>>): void;
         static FinalizeBoneAnimation(AnimationSequence: AnimSequence): void;
         static DoesCurveExist(AnimationSequence: AnimSequence, CurveName: string, CurveType: ERawCurveTrackTypes): boolean;
@@ -40102,6 +40452,7 @@ declare module "ue" {
         static Load(InName: string): GameplayTasksComponent;
     }
     
+    enum EPathFollowingResult { Success, Blocked, OffPath, Aborted, Skipped_DEPRECATED, Invalid, EPathFollowingResult_MAX}
     class AIRequestID {
         constructor(RequestID: number);
         RequestID: number;
@@ -40110,9 +40461,9 @@ declare module "ue" {
     
     class AIAsyncTaskBlueprintProxy extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OnSuccess: $MulticastDelegate<(MovementResult: number) => void>;
-        OnFail: $MulticastDelegate<(MovementResult: number) => void>;
-        OnMoveCompleted(RequestID: AIRequestID, MovementResult: number): void;
+        OnSuccess: $MulticastDelegate<(MovementResult: EPathFollowingResult) => void>;
+        OnFail: $MulticastDelegate<(MovementResult: EPathFollowingResult) => void>;
+        OnMoveCompleted(RequestID: AIRequestID, MovementResult: EPathFollowingResult): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): AIAsyncTaskBlueprintProxy;
         static Load(InName: string): AIAsyncTaskBlueprintProxy;
@@ -40155,18 +40506,20 @@ declare module "ue" {
         static Load(InName: string): BTTaskNode;
     }
     
+    enum EBTFlowAbortMode { None, LowerPriority, Self, Both, EBTFlowAbortMode_MAX}
     class BTDecorator extends BTAuxiliaryNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bInverseCondition: boolean;
-        FlowAbortMode: number;
+        FlowAbortMode: EBTFlowAbortMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BTDecorator;
         static Load(InName: string): BTDecorator;
     }
     
+    enum EBTDecoratorLogic { Invalid, Test, And, Or, Not, EBTDecoratorLogic_MAX}
     class BTDecoratorLogic {
-        constructor(Operation: number, Number: number);
-        Operation: number;
+        constructor(Operation: EBTDecoratorLogic, Number: number);
+        Operation: EBTDecoratorLogic;
         Number: number;
         static StaticClass(): Class;
     }
@@ -40230,6 +40583,7 @@ declare module "ue" {
         static Load(InName: string): BehaviorTree;
     }
     
+    enum EPathFollowingAction { Error, NoMove, DirectMove, PartialPath, PathToGoal, EPathFollowingAction_MAX}
     class PathFollowingComponent extends ActorComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MovementComp: NavMovementComponent;
@@ -40237,7 +40591,7 @@ declare module "ue" {
         OnNavDataRegistered(NavData: NavigationData): void;
         OnActorBump(SelfActor: Actor, OtherActor: Actor, NormalImpulse: Vector, Hit: HitResult): void;
         GetPathDestination(): Vector;
-        GetPathActionType(): number;
+        GetPathActionType(): EPathFollowingAction;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PathFollowingComponent;
         static Load(InName: string): PathFollowingComponent;
@@ -40282,7 +40636,7 @@ declare module "ue" {
         OnTargetPerceptionUpdated: $MulticastDelegate<(Actor: Actor, Stimulus: AIStimulus) => void>;
         SetSenseEnabled(SenseClass: Class, bEnable: boolean): void;
         RequestStimuliListenerUpdate(): void;
-        OnOwnerEndPlay(Actor: Actor, EndPlayReason: number): void;
+        OnOwnerEndPlay(Actor: Actor, EndPlayReason: EEndPlayReason): void;
         GetPerceivedHostileActors(OutActors: $Ref<TArray<Actor>>): void;
         GetPerceivedActors(SenseToUse: Class, OutActors: $Ref<TArray<Actor>>): void;
         GetKnownPerceivedActors(SenseToUse: Class, OutActors: $Ref<TArray<Actor>>): void;
@@ -40293,6 +40647,8 @@ declare module "ue" {
         static Load(InName: string): AIPerceptionComponent;
     }
     
+    enum EAIRequestPriority { SoftScript, Logic, HardScript, Reaction, Ultimate, MAX}
+    enum EPawnActionResult { NotStarted, InProgress, Success, Failed, Aborted, EPawnActionResult_MAX}
     class PawnAction extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ChildAction: PawnAction;
@@ -40304,8 +40660,8 @@ declare module "ue" {
         bReplaceActiveSameClassInstance: boolean;
         bShouldPauseMovement: boolean;
         bAlwaysNotifyOnFinished: boolean;
-        GetActionPriority(): number;
-        Finish(WithResult: number): void;
+        GetActionPriority(): EAIRequestPriority;
+        Finish(WithResult: EPawnActionResult): void;
         static CreateActionInstance(WorldContextObject: Object, ActionClass: Class): PawnAction;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PawnAction;
@@ -40324,21 +40680,24 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EPawnActionAbortState { NeverStarted, NotBeingAborted, MarkPendingAbort, LatentAbortInProgress, AbortDone, MAX}
     class PawnActionsComponent extends ActorComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ControlledPawn: Pawn;
         ActionStacks: TArray<PawnActionStack>;
         ActionEvents: TArray<PawnActionEvent>;
         CurrentAction: PawnAction;
-        K2_PushAction(NewAction: PawnAction, Priority: number, Instigator: Object): boolean;
-        static K2_PerformAction(Pawn: Pawn, Action: PawnAction, Priority: number): boolean;
-        K2_ForceAbortAction(ActionToAbort: PawnAction): number;
-        K2_AbortAction(ActionToAbort: PawnAction): number;
+        K2_PushAction(NewAction: PawnAction, Priority: EAIRequestPriority, Instigator: Object): boolean;
+        static K2_PerformAction(Pawn: Pawn, Action: PawnAction, Priority: EAIRequestPriority): boolean;
+        K2_ForceAbortAction(ActionToAbort: PawnAction): EPawnActionAbortState;
+        K2_AbortAction(ActionToAbort: PawnAction): EPawnActionAbortState;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PawnActionsComponent;
         static Load(InName: string): PawnActionsComponent;
     }
     
+    enum EPathFollowingRequestResult { Failed, AlreadyAtGoal, RequestSuccessful, EPathFollowingRequestResult_MAX}
+    enum EPathFollowingStatus { Idle, Waiting, Paused, Moving, EPathFollowingStatus_MAX}
     class AIController extends Controller {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bStopAILogicOnUnposses: boolean;
@@ -40354,7 +40713,7 @@ declare module "ue" {
         Blackboard: BlackboardComponent;
         CachedGameplayTasksComponent: GameplayTasksComponent;
         DefaultNavigationFilterClass: Class;
-        ReceiveMoveCompleted: $MulticastDelegate<(RequestID: AIRequestID, Result: number) => void>;
+        ReceiveMoveCompleted: $MulticastDelegate<(RequestID: AIRequestID, Result: EPathFollowingResult) => void>;
         UseBlackboard(BlackboardAsset: BlackboardData, BlackboardComponent: $Ref<BlackboardComponent>): boolean;
         UnclaimTaskResource(ResourceClass: Class): void;
         SetPathFollowingComponent(NewPFComponent: PathFollowingComponent): void;
@@ -40362,14 +40721,14 @@ declare module "ue" {
         RunBehaviorTree(BTAsset: BehaviorTree): boolean;
         OnUsingBlackBoard(BlackboardComp: BlackboardComponent, BlackboardAsset: BlackboardData): void;
         OnGameplayTaskResourcesClaimed(NewlyClaimed: GameplayResourceSet, FreshlyReleased: GameplayResourceSet): void;
-        MoveToLocation(Dest: Vector, AcceptanceRadius: number, bStopOnOverlap: boolean, bUsePathfinding: boolean, bProjectDestinationToNavigation: boolean, bCanStrafe: boolean, FilterClass: Class, bAllowPartialPath: boolean): number;
-        MoveToActor(Goal: Actor, AcceptanceRadius: number, bStopOnOverlap: boolean, bUsePathfinding: boolean, bCanStrafe: boolean, FilterClass: Class, bAllowPartialPath: boolean): number;
+        MoveToLocation(Dest: Vector, AcceptanceRadius: number, bStopOnOverlap: boolean, bUsePathfinding: boolean, bProjectDestinationToNavigation: boolean, bCanStrafe: boolean, FilterClass: Class, bAllowPartialPath: boolean): EPathFollowingRequestResult;
+        MoveToActor(Goal: Actor, AcceptanceRadius: number, bStopOnOverlap: boolean, bUsePathfinding: boolean, bCanStrafe: boolean, FilterClass: Class, bAllowPartialPath: boolean): EPathFollowingRequestResult;
         K2_SetFocus(NewFocus: Actor): void;
         K2_SetFocalPoint(FP: Vector): void;
         K2_ClearFocus(): void;
         HasPartialPath(): boolean;
         GetPathFollowingComponent(): PathFollowingComponent;
-        GetMoveStatus(): number;
+        GetMoveStatus(): EPathFollowingStatus;
         GetImmediateMoveDestination(): Vector;
         GetFocusActor(): Actor;
         GetFocalPointOnActor(Actor: Actor): Vector;
@@ -40549,6 +40908,10 @@ declare module "ue" {
         static Load(InName: string): EnvQueryGenerator;
     }
     
+    enum EEnvTestPurpose { Filter, Score, FilterAndScore, EEnvTestPurpose_MAX}
+    enum EEnvTestFilterOperator { AllPass, AnyPass, EEnvTestFilterOperator_MAX}
+    enum EEnvTestScoreOperator { AverageScore, MinScore, MaxScore, Multiply, EEnvTestScoreOperator_MAX}
+    enum EEnvTestFilterType { Minimum, Maximum, Range, Match, EEnvTestFilterType_MAX}
     class AIDataProviderValue {
         constructor(CachedProperty: Property, DataBinding: AIDataProvider, DataField: string);
         CachedProperty: Property;
@@ -40575,21 +40938,23 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EEnvTestScoreEquation { Linear, Square, InverseLinear, SquareRoot, Constant, EEnvTestScoreEquation_MAX}
+    enum EEnvQueryTestClamping { None, SpecifiedValue, FilterThreshold, EEnvQueryTestClamping_MAX}
     enum EEQSNormalizationType { Absolute, RelativeToScores, EEQSNormalizationType_MAX}
     class EnvQueryTest extends EnvQueryNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TestOrder: number;
-        TestPurpose: number;
+        TestPurpose: EEnvTestPurpose;
         TestComment: string;
-        MultipleContextFilterOp: number;
-        MultipleContextScoreOp: number;
-        FilterType: number;
+        MultipleContextFilterOp: EEnvTestFilterOperator;
+        MultipleContextScoreOp: EEnvTestScoreOperator;
+        FilterType: EEnvTestFilterType;
         BoolValue: AIDataProviderBoolValue;
         FloatValueMin: AIDataProviderFloatValue;
         FloatValueMax: AIDataProviderFloatValue;
-        ScoringEquation: number;
-        ClampMinType: number;
-        ClampMaxType: number;
+        ScoringEquation: EEnvTestScoreEquation;
+        ClampMinType: EEnvQueryTestClamping;
+        ClampMaxType: EEnvQueryTestClamping;
         NormalizationType: EEQSNormalizationType;
         ScoreClampMin: AIDataProviderFloatValue;
         ScoreClampMax: AIDataProviderFloatValue;
@@ -40634,24 +40999,26 @@ declare module "ue" {
         static Load(InName: string): EnvQueryContext;
     }
     
+    enum EEnvQueryStatus { Processing, Success, Failed, Aborted, OwnerLost, MissingParam, EEnvQueryStatus_MAX}
     class EnvQueryInstanceBlueprintWrapper extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         QueryID: number;
         ItemType: Class;
         OptionIndex: number;
-        OnQueryFinishedEvent: $MulticastDelegate<(QueryInstance: EnvQueryInstanceBlueprintWrapper, QueryStatus: number) => void>;
+        OnQueryFinishedEvent: $MulticastDelegate<(QueryInstance: EnvQueryInstanceBlueprintWrapper, QueryStatus: EEnvQueryStatus) => void>;
         SetNamedParam(ParamName: string, Value: number): void;
         GetResultsAsLocations(): TArray<Vector>;
         GetResultsAsActors(): TArray<Actor>;
         GetQueryResultsAsLocations(ResultLocations: $Ref<TArray<Vector>>): boolean;
         GetQueryResultsAsActors(ResultActors: $Ref<TArray<Actor>>): boolean;
         GetItemScore(ItemIndex: number): number;
-        EQSQueryDoneSignature__DelegateSignature(QueryInstance: EnvQueryInstanceBlueprintWrapper, QueryStatus: number): void;
+        EQSQueryDoneSignature__DelegateSignature(QueryInstance: EnvQueryInstanceBlueprintWrapper, QueryStatus: EEnvQueryStatus): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): EnvQueryInstanceBlueprintWrapper;
         static Load(InName: string): EnvQueryInstanceBlueprintWrapper;
     }
     
+    enum EEnvQueryRunMode { SingleResult, RandomBest5Pct, RandomBest25Pct, AllMatching, EEnvQueryRunMode_MAX}
     class EnvQueryManager extends AISubsystem {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         InstanceCache: TArray<EnvQueryInstanceCache>;
@@ -40661,7 +41028,7 @@ declare module "ue" {
         bTestQueriesUsingBreadth: boolean;
         QueryCountWarningThreshold: number;
         QueryCountWarningInterval: number;
-        static RunEQSQuery(WorldContextObject: Object, QueryTemplate: EnvQuery, Querier: Object, RunMode: number, WrapperClass: Class): EnvQueryInstanceBlueprintWrapper;
+        static RunEQSQuery(WorldContextObject: Object, QueryTemplate: EnvQuery, Querier: Object, RunMode: EEnvQueryRunMode, WrapperClass: Class): EnvQueryInstanceBlueprintWrapper;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): EnvQueryManager;
         static Load(InName: string): EnvQueryManager;
@@ -40694,7 +41061,7 @@ declare module "ue" {
         static ReportPerceptionEvent(WorldContextObject: Object, PerceptionEvent: AISenseEvent): void;
         ReportEvent(PerceptionEvent: AISenseEvent): void;
         static RegisterPerceptionStimuliSource(WorldContextObject: Object, Sense: Class, Target: Actor): boolean;
-        OnPerceptionStimuliSourceEndPlay(Actor: Actor, EndPlayReason: number): void;
+        OnPerceptionStimuliSourceEndPlay(Actor: Actor, EndPlayReason: EEndPlayReason): void;
         static GetSenseClassForStimulus(WorldContextObject: Object, Stimulus: AIStimulus): Class;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): AIPerceptionSystem;
@@ -40728,7 +41095,7 @@ declare module "ue" {
         bEnableBTAITasks: boolean;
         bAllowControllersAsEQSQuerier: boolean;
         bEnableDebuggerPlugin: boolean;
-        DefaultSightCollisionChannel: number;
+        DefaultSightCollisionChannel: ECollisionChannel;
         BehaviorTreeManager: BehaviorTreeManager;
         EnvironmentQueryManager: EnvQueryManager;
         PerceptionSystem: AIPerceptionSystem;
@@ -41008,12 +41375,13 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EAIOptionFlag { Default, Enable, Disable, MAX}
     class AITask_MoveTo extends AITask {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnRequestFailed: $MulticastDelegate<() => void>;
-        OnMoveFinished: $MulticastDelegate<(Result: number, AIController: AIController) => void>;
+        OnMoveFinished: $MulticastDelegate<(Result: EPathFollowingResult, AIController: AIController) => void>;
         MoveRequest: AIMoveRequest;
-        static AIMoveTo(Controller: AIController, GoalLocation: Vector, GoalActor: Actor, AcceptanceRadius: number, StopOnOverlap: number, AcceptPartialPath: number, bUsePathfinding: boolean, bLockAILogic: boolean, bUseContinuosGoalTracking: boolean, ProjectGoalOnNavigation: number): AITask_MoveTo;
+        static AIMoveTo(Controller: AIController, GoalLocation: Vector, GoalActor: Actor, AcceptanceRadius: number, StopOnOverlap: EAIOptionFlag, AcceptPartialPath: EAIOptionFlag, bUsePathfinding: boolean, bLockAILogic: boolean, bUseContinuosGoalTracking: boolean, ProjectGoalOnNavigation: EAIOptionFlag): AITask_MoveTo;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): AITask_MoveTo;
         static Load(InName: string): AITask_MoveTo;
@@ -41133,9 +41501,10 @@ declare module "ue" {
         static Load(InName: string): BTComposite_Sequence;
     }
     
+    enum EBTParallelMode { AbortBackground, WaitForBackground, EBTParallelMode_MAX}
     class BTComposite_SimpleParallel extends BTCompositeNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        FinishMode: number;
+        FinishMode: EBTParallelMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BTComposite_SimpleParallel;
         static Load(InName: string): BTComposite_SimpleParallel;
@@ -41159,6 +41528,10 @@ declare module "ue" {
         static Load(InName: string): BTDecorator_BlackboardBase;
     }
     
+    enum EBTBlackboardRestart { ValueChange, ResultChange, EBTBlackboardRestart_MAX}
+    enum EBasicKeyOperation { Set, NotSet, EBasicKeyOperation_MAX}
+    enum EArithmeticKeyOperation { Equal, NotEqual, Less, LessOrEqual, Greater, GreaterOrEqual, EArithmeticKeyOperation_MAX}
+    enum ETextKeyOperation { Equal, NotEqual, Contain, NotContain, ETextKeyOperation_MAX}
     class BTDecorator_Blackboard extends BTDecorator_BlackboardBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         IntValue: number;
@@ -41166,15 +41539,16 @@ declare module "ue" {
         StringValue: string;
         CachedDescription: string;
         OperationType: number;
-        NotifyObserver: number;
-        BasicOperation: number;
-        ArithmeticOperation: number;
-        TextOperation: number;
+        NotifyObserver: EBTBlackboardRestart;
+        BasicOperation: EBasicKeyOperation;
+        ArithmeticOperation: EArithmeticKeyOperation;
+        TextOperation: ETextKeyOperation;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BTDecorator_Blackboard;
         static Load(InName: string): BTDecorator_Blackboard;
     }
     
+    enum EBTNodeResult { Succeeded, Failed, Aborted, InProgress, EBTNodeResult_MAX}
     class BTDecorator_BlueprintBase extends BTDecorator {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         AIOwner: AIController;
@@ -41191,8 +41565,8 @@ declare module "ue" {
         ReceiveObserverActivated(OwnerActor: Actor): void;
         ReceiveExecutionStartAI(OwnerController: AIController, ControlledPawn: Pawn): void;
         ReceiveExecutionStart(OwnerActor: Actor): void;
-        ReceiveExecutionFinishAI(OwnerController: AIController, ControlledPawn: Pawn, NodeResult: number): void;
-        ReceiveExecutionFinish(OwnerActor: Actor, NodeResult: number): void;
+        ReceiveExecutionFinishAI(OwnerController: AIController, ControlledPawn: Pawn, NodeResult: EBTNodeResult): void;
+        ReceiveExecutionFinish(OwnerActor: Actor, NodeResult: EBTNodeResult): void;
         PerformConditionCheckAI(OwnerController: AIController, ControlledPawn: Pawn): boolean;
         PerformConditionCheck(OwnerActor: Actor): boolean;
         IsDecoratorObserverActive(): boolean;
@@ -41214,9 +41588,10 @@ declare module "ue" {
         static Load(InName: string): BTDecorator_CheckGameplayTagsOnActor;
     }
     
+    enum EBlackBoardEntryComparison { Equal, NotEqual, EBlackBoardEntryComparison_MAX}
     class BTDecorator_CompareBBEntries extends BTDecorator {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Operator: number;
+        Operator: EBlackBoardEntryComparison;
         BlackboardKeyA: BlackboardKeySelector;
         BlackboardKeyB: BlackboardKeySelector;
         static StaticClass(): Class;
@@ -41250,12 +41625,13 @@ declare module "ue" {
         static Load(InName: string): BTDecorator_Cooldown;
     }
     
+    enum EPathExistanceQueryType { NavmeshRaycast2D, HierarchicalQuery, RegularPathFinding, EPathExistanceQueryType_MAX}
     class BTDecorator_DoesPathExist extends BTDecorator {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BlackboardKeyA: BlackboardKeySelector;
         BlackboardKeyB: BlackboardKeySelector;
         bUseSelf: boolean;
-        PathQueryType: number;
+        PathQueryType: EPathExistanceQueryType;
         FilterClass: Class;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BTDecorator_DoesPathExist;
@@ -41430,11 +41806,11 @@ declare module "ue" {
     }
     
     class EQSParametrizedQueryExecutionRequest {
-        constructor(QueryTemplate: EnvQuery, QueryConfig: TArray<AIDynamicParam>, EQSQueryBlackboardKey: BlackboardKeySelector, RunMode: number, bUseBBKeyForQueryTemplate: boolean);
+        constructor(QueryTemplate: EnvQuery, QueryConfig: TArray<AIDynamicParam>, EQSQueryBlackboardKey: BlackboardKeySelector, RunMode: EEnvQueryRunMode, bUseBBKeyForQueryTemplate: boolean);
         QueryTemplate: EnvQuery;
         QueryConfig: TArray<AIDynamicParam>;
         EQSQueryBlackboardKey: BlackboardKeySelector;
-        RunMode: number;
+        RunMode: EEnvQueryRunMode;
         bUseBBKeyForQueryTemplate: boolean;
         static StaticClass(): Class;
     }
@@ -41486,7 +41862,7 @@ declare module "ue" {
     
     class BTTask_FinishWithResult extends BTTaskNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Result: number;
+        Result: EBTNodeResult;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BTTask_FinishWithResult;
         static Load(InName: string): BTTask_FinishWithResult;
@@ -41611,7 +41987,7 @@ declare module "ue" {
         QueryTemplate: EnvQuery;
         QueryParams: TArray<EnvNamedValue>;
         QueryConfig: TArray<AIDynamicParam>;
-        RunMode: number;
+        RunMode: EEnvQueryRunMode;
         EQSQueryBlackboardKey: BlackboardKeySelector;
         bUseBBKey: boolean;
         EQSRequest: EQSParametrizedQueryExecutionRequest;
@@ -41783,8 +42159,10 @@ declare module "ue" {
         static Load(InName: string): EnvQueryGenerator_Composite;
     }
     
+    enum EEnvTraceShape { Line, Box, Sphere, Capsule, EEnvTraceShape_MAX}
+    enum EEnvQueryTrace { None, Navigation, Geometry, NavigationOverLedges, EEnvQueryTrace_MAX}
     class EnvTraceData {
-        constructor(VersionNum: number, NavigationFilter: Class, ProjectDown: number, ProjectUp: number, ExtentX: number, ExtentY: number, ExtentZ: number, PostProjectionVerticalOffset: number, TraceChannel: number, SerializedChannel: number, TraceShape: number, TraceMode: number, bTraceComplex: boolean, bOnlyBlockingHits: boolean, bCanTraceOnNavMesh: boolean, bCanTraceOnGeometry: boolean, bCanDisableTrace: boolean, bCanProjectDown: boolean);
+        constructor(VersionNum: number, NavigationFilter: Class, ProjectDown: number, ProjectUp: number, ExtentX: number, ExtentY: number, ExtentZ: number, PostProjectionVerticalOffset: number, TraceChannel: ETraceTypeQuery, SerializedChannel: ECollisionChannel, TraceShape: EEnvTraceShape, TraceMode: EEnvQueryTrace, bTraceComplex: boolean, bOnlyBlockingHits: boolean, bCanTraceOnNavMesh: boolean, bCanTraceOnGeometry: boolean, bCanDisableTrace: boolean, bCanProjectDown: boolean);
         VersionNum: number;
         NavigationFilter: Class;
         ProjectDown: number;
@@ -41793,10 +42171,10 @@ declare module "ue" {
         ExtentY: number;
         ExtentZ: number;
         PostProjectionVerticalOffset: number;
-        TraceChannel: number;
-        SerializedChannel: number;
-        TraceShape: number;
-        TraceMode: number;
+        TraceChannel: ETraceTypeQuery;
+        SerializedChannel: ECollisionChannel;
+        TraceShape: EEnvTraceShape;
+        TraceMode: EEnvQueryTrace;
         bTraceComplex: boolean;
         bOnlyBlockingHits: boolean;
         bCanTraceOnNavMesh: boolean;
@@ -41841,12 +42219,13 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EEnvDirection { TwoPoints, Rotation, EEnvDirection_MAX}
     class EnvDirection {
-        constructor(LineFrom: Class, LineTo: Class, Rotation: Class, DirMode: number);
+        constructor(LineFrom: Class, LineTo: Class, Rotation: Class, DirMode: EEnvDirection);
         LineFrom: Class;
         LineTo: Class;
         Rotation: Class;
-        DirMode: number;
+        DirMode: EEnvDirection;
         static StaticClass(): Class;
     }
     
@@ -41948,9 +42327,10 @@ declare module "ue" {
         static Load(InName: string): EnvQueryItemType_Point;
     }
     
+    enum EEnvTestDistance { Distance3D, Distance2D, DistanceZ, DistanceAbsoluteZ, EEnvTestDistance_MAX}
     class EnvQueryTest_Distance extends EnvQueryTest {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TestMode: number;
+        TestMode: EEnvTestDistance;
         DistanceTo: Class;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): EnvQueryTest_Distance;
@@ -41980,14 +42360,15 @@ declare module "ue" {
         static Load(InName: string): EnvQueryTest_GameplayTags;
     }
     
+    enum EEnvOverlapShape { Box, Sphere, Capsule, EEnvOverlapShape_MAX}
     class EnvOverlapData {
-        constructor(ExtentX: number, ExtentY: number, ExtentZ: number, ShapeOffset: Vector, OverlapChannel: number, OverlapShape: number, bOnlyBlockingHits: boolean, bOverlapComplex: boolean, bSkipOverlapQuerier: boolean);
+        constructor(ExtentX: number, ExtentY: number, ExtentZ: number, ShapeOffset: Vector, OverlapChannel: ECollisionChannel, OverlapShape: EEnvOverlapShape, bOnlyBlockingHits: boolean, bOverlapComplex: boolean, bSkipOverlapQuerier: boolean);
         ExtentX: number;
         ExtentY: number;
         ExtentZ: number;
         ShapeOffset: Vector;
-        OverlapChannel: number;
-        OverlapShape: number;
+        OverlapChannel: ECollisionChannel;
+        OverlapShape: EEnvOverlapShape;
         bOnlyBlockingHits: boolean;
         bOverlapComplex: boolean;
         bSkipOverlapQuerier: boolean;
@@ -42002,9 +42383,10 @@ declare module "ue" {
         static Load(InName: string): EnvQueryTest_Overlap;
     }
     
+    enum EEnvTestPathfinding { PathExist, PathCost, PathLength, EEnvTestPathfinding_MAX}
     class EnvQueryTest_Pathfinding extends EnvQueryTest {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TestMode: number;
+        TestMode: EEnvTestPathfinding;
         Context: Class;
         PathFromContext: AIDataProviderBoolValue;
         SkipUnreachable: AIDataProviderBoolValue;
@@ -42094,7 +42476,7 @@ declare module "ue" {
         bReRunQueryOnlyOnFinishedMove: boolean;
         bShouldBeVisibleInGame: boolean;
         bTickDuringGame: boolean;
-        QueryingMode: number;
+        QueryingMode: EEnvQueryRunMode;
         NavAgentProperties: NavAgentProperties;
         EdRenderComp: EQSRenderingComponent;
         static StaticClass(): Class;
@@ -42163,7 +42545,7 @@ declare module "ue" {
         ActionStart(ControlledPawn: Pawn): void;
         ActionResume(ControlledPawn: Pawn): void;
         ActionPause(ControlledPawn: Pawn): void;
-        ActionFinished(ControlledPawn: Pawn, WithResult: number): void;
+        ActionFinished(ControlledPawn: Pawn, WithResult: EPawnActionResult): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PawnAction_BlueprintBase;
         static Load(InName: string): PawnAction_BlueprintBase;
@@ -42187,11 +42569,12 @@ declare module "ue" {
         static Load(InName: string): PawnAction_Move;
     }
     
+    enum EPawnActionFailHandling { RequireSuccess, IgnoreFailure, EPawnActionFailHandling_MAX}
     class PawnAction_Repeat extends PawnAction {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ActionToRepeat: PawnAction;
         RecentActionCopy: PawnAction;
-        ChildFailureHandlingMode: number;
+        ChildFailureHandlingMode: EPawnActionFailHandling;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PawnAction_Repeat;
         static Load(InName: string): PawnAction_Repeat;
@@ -42200,7 +42583,7 @@ declare module "ue" {
     class PawnAction_Sequence extends PawnAction {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ActionSequence: TArray<PawnAction>;
-        ChildFailureHandlingMode: number;
+        ChildFailureHandlingMode: EPawnActionFailHandling;
         RecentActionCopy: PawnAction;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PawnAction_Sequence;
@@ -42715,7 +43098,7 @@ declare module "ue" {
     }
     
     class DatasmithPostProcessSettingsTemplate {
-        constructor(bOverride_WhiteTemp: boolean, bOverride_ColorSaturation: boolean, bOverride_VignetteIntensity: boolean, bOverride_FilmWhitePoint: boolean, bOverride_AutoExposureMethod: boolean, bOverride_CameraISO: boolean, bOverride_CameraShutterSpeed: boolean, bOverride_DepthOfFieldFstop: boolean, WhiteTemp: number, VignetteIntensity: number, FilmWhitePoint: LinearColor, ColorSaturation: Vector4, AutoExposureMethod: number, CameraISO: number, CameraShutterSpeed: number, DepthOfFieldFstop: number);
+        constructor(bOverride_WhiteTemp: boolean, bOverride_ColorSaturation: boolean, bOverride_VignetteIntensity: boolean, bOverride_FilmWhitePoint: boolean, bOverride_AutoExposureMethod: boolean, bOverride_CameraISO: boolean, bOverride_CameraShutterSpeed: boolean, bOverride_DepthOfFieldFstop: boolean, WhiteTemp: number, VignetteIntensity: number, FilmWhitePoint: LinearColor, ColorSaturation: Vector4, AutoExposureMethod: EAutoExposureMethod, CameraISO: number, CameraShutterSpeed: number, DepthOfFieldFstop: number);
         bOverride_WhiteTemp: boolean;
         bOverride_ColorSaturation: boolean;
         bOverride_VignetteIntensity: boolean;
@@ -42728,7 +43111,7 @@ declare module "ue" {
         VignetteIntensity: number;
         FilmWhitePoint: LinearColor;
         ColorSaturation: Vector4;
-        AutoExposureMethod: number;
+        AutoExposureMethod: EAutoExposureMethod;
         CameraISO: number;
         CameraShutterSpeed: number;
         DepthOfFieldFstop: number;
@@ -42906,7 +43289,7 @@ declare module "ue" {
     class DatasmithSceneComponentTemplate extends DatasmithObjectTemplate {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RelativeTransform: Transform;
-        Mobility: number;
+        Mobility: EComponentMobility;
         AttachParent: TSoftObjectPtr<SceneComponent>;
         Tags: TSet<string>;
         static StaticClass(): Class;
@@ -42916,7 +43299,7 @@ declare module "ue" {
     
     class DatasmithSkyLightComponentTemplate extends DatasmithObjectTemplate {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SourceType: number;
+        SourceType: ESkyLightSourceType;
         CubemapResolution: number;
         Cubemap: TextureCube;
         static StaticClass(): Class;
@@ -43315,11 +43698,12 @@ declare module "ue" {
         static Load(InName: string): DestroySessionCallbackProxy;
     }
     
+    enum EMPMatchOutcome { None, Quit, Won, Lost, Tied, TimeExpired, First, Second, Third, Fourth, EMPMatchOutcome_MAX}
     class EndMatchCallbackProxy extends OnlineBlueprintCallProxyBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnSuccess: $MulticastDelegate<() => void>;
         OnFailure: $MulticastDelegate<() => void>;
-        static EndMatch(WorldContextObject: Object, PlayerController: PlayerController, MatchActor: TurnBasedMatchInterface, MatchID: string, LocalPlayerOutcome: number, OtherPlayersOutcome: number): EndMatchCallbackProxy;
+        static EndMatch(WorldContextObject: Object, PlayerController: PlayerController, MatchActor: TurnBasedMatchInterface, MatchID: string, LocalPlayerOutcome: EMPMatchOutcome, OtherPlayersOutcome: EMPMatchOutcome): EndMatchCallbackProxy;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): EndMatchCallbackProxy;
         static Load(InName: string): EndMatchCallbackProxy;
@@ -43364,6 +43748,7 @@ declare module "ue" {
         static Load(InName: string): FindTurnBasedMatchCallbackProxy;
     }
     
+    enum EInAppPurchaseState { Unknown, Success, Failed, Cancelled, Invalid, NotAllowed, Restored, AlreadyOwned, EInAppPurchaseState_MAX}
     class InAppPurchaseProductInfo {
         constructor(Identifier: string, TransactionIdentifier: string, DisplayName: string, DisplayDescription: string, DisplayPrice: string, RawPrice: number, CurrencyCode: string, CurrencySymbol: string, DecimalSeparator: string, GroupingSeparator: string, ReceiptData: string);
         Identifier: string;
@@ -43389,8 +43774,8 @@ declare module "ue" {
     
     class InAppPurchaseCallbackProxy extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OnSuccess: $MulticastDelegate<(CompletionStatus: number, InAppPurchaseInformation: InAppPurchaseProductInfo) => void>;
-        OnFailure: $MulticastDelegate<(CompletionStatus: number, InAppPurchaseInformation: InAppPurchaseProductInfo) => void>;
+        OnSuccess: $MulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppPurchaseInformation: InAppPurchaseProductInfo) => void>;
+        OnFailure: $MulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppPurchaseInformation: InAppPurchaseProductInfo) => void>;
         static CreateProxyObjectForInAppPurchase(PlayerController: PlayerController, ProductRequest: InAppPurchaseProductRequest): InAppPurchaseCallbackProxy;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): InAppPurchaseCallbackProxy;
@@ -43417,8 +43802,8 @@ declare module "ue" {
     
     class InAppPurchaseRestoreCallbackProxy extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OnSuccess: $MulticastDelegate<(CompletionStatus: number, InAppRestorePurchaseInformation: TArray<InAppPurchaseRestoreInfo>) => void>;
-        OnFailure: $MulticastDelegate<(CompletionStatus: number, InAppRestorePurchaseInformation: TArray<InAppPurchaseRestoreInfo>) => void>;
+        OnSuccess: $MulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppRestorePurchaseInformation: TArray<InAppPurchaseRestoreInfo>) => void>;
+        OnFailure: $MulticastDelegate<(CompletionStatus: EInAppPurchaseState, InAppRestorePurchaseInformation: TArray<InAppPurchaseRestoreInfo>) => void>;
         static CreateProxyObjectForInAppPurchaseRestore(ConsumableProductFlags: TArray<InAppPurchaseProductRequest>, PlayerController: PlayerController): InAppPurchaseRestoreCallbackProxy;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): InAppPurchaseRestoreCallbackProxy;
@@ -43593,6 +43978,7 @@ declare module "ue" {
     }
     
     enum EClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ReservationRemoveMembers, EClientRequestType_MAX}
+    enum EPartyReservationResult { NoResult, RequestPending, GeneralError, PartyLimitReached, IncorrectPlayerCount, RequestTimedOut, ReservationDuplicate, ReservationNotFound, ReservationAccepted, ReservationDenied, ReservationDenied_CrossPlayRestriction, ReservationDenied_Banned, ReservationRequestCanceled, ReservationInvalid, BadSessionId, ReservationDenied_ContainsExistingPlayers, EPartyReservationResult_MAX}
     class PartyBeaconClient extends OnlineBeaconClient {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DestSessionId: string;
@@ -43606,8 +43992,8 @@ declare module "ue" {
         ServerCancelReservationRequest(PartyLeader: UniqueNetIdRepl): void;
         ClientSendReservationUpdates(NumRemainingReservations: number): void;
         ClientSendReservationFull(): void;
-        ClientReservationResponse(ReservationResponse: number): void;
-        ClientCancelReservationResponse(ReservationResponse: number): void;
+        ClientReservationResponse(ReservationResponse: EPartyReservationResult): void;
+        ClientCancelReservationResponse(ReservationResponse: EPartyReservationResult): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PartyBeaconClient;
         static Load(InName: string): PartyBeaconClient;
@@ -43646,7 +44032,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnSuccess: $MulticastDelegate<() => void>;
         OnFailure: $MulticastDelegate<() => void>;
-        static QuitMatch(WorldContextObject: Object, PlayerController: PlayerController, MatchID: string, Outcome: number, TurnTimeoutInSeconds: number): QuitMatchCallbackProxy;
+        static QuitMatch(WorldContextObject: Object, PlayerController: PlayerController, MatchID: string, Outcome: EMPMatchOutcome, TurnTimeoutInSeconds: number): QuitMatchCallbackProxy;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): QuitMatchCallbackProxy;
         static Load(InName: string): QuitMatchCallbackProxy;
@@ -43670,6 +44056,7 @@ declare module "ue" {
     }
     
     enum ESpectatorClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ESpectatorClientRequestType_MAX}
+    enum ESpectatorReservationResult { NoResult, RequestPending, GeneralError, SpectatorLimitReached, IncorrectPlayerCount, RequestTimedOut, ReservationDuplicate, ReservationNotFound, ReservationAccepted, ReservationDenied, ReservationDenied_CrossPlayRestriction, ReservationDenied_Banned, ReservationRequestCanceled, ReservationInvalid, BadSessionId, ReservationDenied_ContainsExistingPlayers, ESpectatorReservationResult_MAX}
     class SpectatorBeaconClient extends OnlineBeaconClient {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DestSessionId: string;
@@ -43681,8 +44068,8 @@ declare module "ue" {
         ServerCancelReservationRequest(Spectator: UniqueNetIdRepl): void;
         ClientSendReservationUpdates(NumRemainingReservations: number): void;
         ClientSendReservationFull(): void;
-        ClientReservationResponse(ReservationResponse: number): void;
-        ClientCancelReservationResponse(ReservationResponse: number): void;
+        ClientReservationResponse(ReservationResponse: ESpectatorReservationResult): void;
+        ClientCancelReservationResponse(ReservationResponse: ESpectatorReservationResult): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SpectatorBeaconClient;
         static Load(InName: string): SpectatorBeaconClient;
@@ -43832,8 +44219,8 @@ declare module "ue" {
         static SetDisplayFrequency(RequestedFrequency: number): void;
         static SetCPUAndGPULevels(CPULevel: number, GPULevel: number): void;
         static SetColorScaleAndOffset(ColorScale: LinearColor, ColorOffset: LinearColor, bApplyToAllLayers: boolean): void;
-        static SetBaseRotationAndPositionOffset(BaseRot: Rotator, PosOffset: Vector, Options: number): void;
-        static SetBaseRotationAndBaseOffsetInMeters(Rotation: Rotator, BaseOffsetInMeters: Vector, Options: number): void;
+        static SetBaseRotationAndPositionOffset(BaseRot: Rotator, PosOffset: Vector, Options: EOrientPositionSelector): void;
+        static SetBaseRotationAndBaseOffsetInMeters(Rotation: Rotator, BaseOffsetInMeters: Vector, Options: EOrientPositionSelector): void;
         static IsLoadingIconEnabled(): boolean;
         static IsGuardianDisplayed(): boolean;
         static IsGuardianConfigured(): boolean;
@@ -44292,6 +44679,7 @@ declare module "ue" {
         static Load(InName: string): FieldSystem;
     }
     
+    enum EFieldPhysicsType { Field_None, Field_DynamicState, Field_LinearForce, Field_ExternalClusterStrain, Field_Kill, Field_LinearVelocity, Field_AngularVelociy, Field_AngularTorque, Field_InternalClusterStrain, Field_DisableThreshold, Field_SleepingThreshold, Field_PositionStatic, Field_PositionAnimated, Field_PositionTarget, Field_DynamicConstraint, Field_CollisionGroup, Field_ActivateDisabled, Field_PhysicsType_Max}
     class FieldSystemMetaData extends ActorComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -44316,9 +44704,9 @@ declare module "ue" {
         ApplyStayDynamicField(Enabled: boolean, Position: Vector, Radius: number): void;
         ApplyRadialVectorFalloffForce(Enabled: boolean, Position: Vector, Radius: number, Magnitude: number): void;
         ApplyRadialForce(Enabled: boolean, Position: Vector, Magnitude: number): void;
-        ApplyPhysicsField(Enabled: boolean, Target: number, MetaData: FieldSystemMetaData, Field: FieldNodeBase): void;
+        ApplyPhysicsField(Enabled: boolean, Target: EFieldPhysicsType, MetaData: FieldSystemMetaData, Field: FieldNodeBase): void;
         ApplyLinearForce(Enabled: boolean, Direction: Vector, Magnitude: number): void;
-        AddFieldCommand(Enabled: boolean, Target: number, MetaData: FieldSystemMetaData, Field: FieldNodeBase): void;
+        AddFieldCommand(Enabled: boolean, Target: EFieldPhysicsType, MetaData: FieldSystemMetaData, Field: FieldNodeBase): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): FieldSystemComponent;
         static Load(InName: string): FieldSystemComponent;
@@ -44341,10 +44729,11 @@ declare module "ue" {
         static Load(InName: string): FieldSystemMetaDataIteration;
     }
     
+    enum EFieldResolutionType { Field_Resolution_Minimal, Field_Resolution_DisabledParents, Field_Resolution_Maximum, Field_Resolution_Max, Field_Resolution_MAX}
     class FieldSystemMetaDataProcessingResolution extends FieldSystemMetaData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ResolutionType: number;
-        SetMetaDataaProcessingResolutionType(ResolutionType: number): FieldSystemMetaDataProcessingResolution;
+        ResolutionType: EFieldResolutionType;
+        SetMetaDataaProcessingResolutionType(ResolutionType: EFieldResolutionType): FieldSystemMetaDataProcessingResolution;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): FieldSystemMetaDataProcessingResolution;
         static Load(InName: string): FieldSystemMetaDataProcessingResolution;
@@ -44380,14 +44769,15 @@ declare module "ue" {
         static Load(InName: string): UniformInteger;
     }
     
+    enum ESetMaskConditionType { Field_Set_Always, Field_Set_IFF_NOT_Interior, Field_Set_IFF_NOT_Exterior, Field_MaskCondition_Max}
     class RadialIntMask extends FieldNodeInt {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Radius: number;
         Position: Vector;
         InteriorValue: number;
         ExteriorValue: number;
-        SetMaskCondition: number;
-        SetRadialIntMask(Radius: number, Position: Vector, InteriorValue: number, ExteriorValue: number, SetMaskConditionIn: number): RadialIntMask;
+        SetMaskCondition: ESetMaskConditionType;
+        SetRadialIntMask(Radius: number, Position: Vector, InteriorValue: number, ExteriorValue: number, SetMaskConditionIn: ESetMaskConditionType): RadialIntMask;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): RadialIntMask;
         static Load(InName: string): RadialIntMask;
@@ -44402,6 +44792,7 @@ declare module "ue" {
         static Load(InName: string): UniformScalar;
     }
     
+    enum EFieldFalloffType { Field_FallOff_None, Field_Falloff_Linear, Field_Falloff_Inverse, Field_Falloff_Squared, Field_Falloff_Logarithmic, Field_Falloff_Max}
     class RadialFalloff extends FieldNodeFloat {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Magnitude: number;
@@ -44410,8 +44801,8 @@ declare module "ue" {
         Default: number;
         Radius: number;
         Position: Vector;
-        Falloff: number;
-        SetRadialFalloff(Magnitude: number, MinRange: number, MaxRange: number, Default: number, Radius: number, Position: Vector, Falloff: number): RadialFalloff;
+        Falloff: EFieldFalloffType;
+        SetRadialFalloff(Magnitude: number, MinRange: number, MaxRange: number, Default: number, Radius: number, Position: Vector, Falloff: EFieldFalloffType): RadialFalloff;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): RadialFalloff;
         static Load(InName: string): RadialFalloff;
@@ -44426,8 +44817,8 @@ declare module "ue" {
         Distance: number;
         Position: Vector;
         Normal: Vector;
-        Falloff: number;
-        SetPlaneFalloff(Magnitude: number, MinRange: number, MaxRange: number, Default: number, Distance: number, Position: Vector, Normal: Vector, Falloff: number): PlaneFalloff;
+        Falloff: EFieldFalloffType;
+        SetPlaneFalloff(Magnitude: number, MinRange: number, MaxRange: number, Default: number, Distance: number, Position: Vector, Normal: Vector, Falloff: EFieldFalloffType): PlaneFalloff;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PlaneFalloff;
         static Load(InName: string): PlaneFalloff;
@@ -44440,8 +44831,8 @@ declare module "ue" {
         MaxRange: number;
         Default: number;
         Transform: Transform;
-        Falloff: number;
-        SetBoxFalloff(Magnitude: number, MinRange: number, MaxRange: number, Default: number, Transform: Transform, Falloff: number): BoxFalloff;
+        Falloff: EFieldFalloffType;
+        SetBoxFalloff(Magnitude: number, MinRange: number, MaxRange: number, Default: number, Transform: Transform, Falloff: EFieldFalloffType): BoxFalloff;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BoxFalloff;
         static Load(InName: string): BoxFalloff;
@@ -44487,13 +44878,14 @@ declare module "ue" {
         static Load(InName: string): RandomVector;
     }
     
+    enum EFieldOperationType { Field_Multiply, Field_Divide, Field_Add, Field_Substract, Field_Operation_Max}
     class OperatorField extends FieldNodeBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Magnitude: number;
         RightField: FieldNodeBase;
         LeftField: FieldNodeBase;
-        Operation: number;
-        SetOperatorField(Magnitude: number, RightField: FieldNodeBase, LeftField: FieldNodeBase, Operation: number): OperatorField;
+        Operation: EFieldOperationType;
+        SetOperatorField(Magnitude: number, RightField: FieldNodeBase, LeftField: FieldNodeBase, Operation: EFieldOperationType): OperatorField;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): OperatorField;
         static Load(InName: string): OperatorField;
@@ -44517,12 +44909,13 @@ declare module "ue" {
         static Load(InName: string): ToFloatField;
     }
     
+    enum EFieldCullingOperationType { Field_Culling_Inside, Field_Culling_Outside, Field_Culling_Operation_Max, Field_Culling_MAX}
     class CullingField extends FieldNodeBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Culling: FieldNodeBase;
         Field: FieldNodeBase;
-        Operation: number;
-        SetCullingField(Culling: FieldNodeBase, Field: FieldNodeBase, Operation: number): CullingField;
+        Operation: EFieldCullingOperationType;
+        SetCullingField(Culling: FieldNodeBase, Field: FieldNodeBase, Operation: EFieldCullingOperationType): CullingField;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): CullingField;
         static Load(InName: string): CullingField;
@@ -45005,7 +45398,7 @@ declare module "ue" {
     
     class WidgetBlueprintFactory extends Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BlueprintType: number;
+        BlueprintType: EBlueprintType;
         ParentClass: Class;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): WidgetBlueprintFactory;
@@ -45475,7 +45868,7 @@ declare module "ue" {
     
     class FunctionalTestUtilityLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static TraceChannelTestUtil(WorldContextObject: Object, BatchOptions: TraceChannelTestBatchOptions, Start: Vector, End: Vector, SphereCapsuleRadius: number, CapsuleHalfHeight: number, BoxHalfSize: Vector, Orientation: Rotator, TraceChannel: number, ObjectTypes: TArray<number>, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, bIgnoreSelf: boolean, DrawDebugType: number, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): TraceQueryTestResults;
+        static TraceChannelTestUtil(WorldContextObject: Object, BatchOptions: TraceChannelTestBatchOptions, Start: Vector, End: Vector, SphereCapsuleRadius: number, CapsuleHalfHeight: number, BoxHalfSize: Vector, Orientation: Rotator, TraceChannel: ETraceTypeQuery, ObjectTypes: TArray<EObjectTypeQuery>, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<Actor>, bIgnoreSelf: boolean, DrawDebugType: EDrawDebugTrace, TraceColor: LinearColor, TraceHitColor: LinearColor, DrawTime: number): TraceQueryTestResults;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): FunctionalTestUtilityLibrary;
         static Load(InName: string): FunctionalTestUtilityLibrary;
@@ -45599,9 +45992,10 @@ declare module "ue" {
         static Load(InName: string): BehaviorTreeDecoratorGraphNode_Decorator;
     }
     
+    enum EDecoratorLogicMode { Sink, And, Or, Not, EDecoratorLogicMode_MAX}
     class BehaviorTreeDecoratorGraphNode_Logic extends BehaviorTreeDecoratorGraphNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        LogicMode: number;
+        LogicMode: EDecoratorLogicMode;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): BehaviorTreeDecoratorGraphNode_Logic;
         static Load(InName: string): BehaviorTreeDecoratorGraphNode_Logic;
@@ -46022,8 +46416,8 @@ declare module "ue" {
     
     class MediaTexture extends Texture {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AddressX: number;
-        AddressY: number;
+        AddressX: TextureAddress;
+        AddressY: TextureAddress;
         AutoClear: boolean;
         ClearColor: LinearColor;
         MediaPlayer: MediaPlayer;
@@ -46081,6 +46475,8 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESpriteCollisionMode { None, Use2DPhysics, Use3DPhysics, ESpriteCollisionMode_MAX}
+    enum ESpritePivotMode { Top_Left, Top_Center, Top_Right, Center_Left, Center_Center, Center_Right, Bottom_Left, Bottom_Center, Bottom_Right, Custom, ESpritePivotMode_MAX}
     enum ESpriteShapeType { Box, Circle, Polygon, ESpriteShapeType_MAX}
     class SpriteGeometryShape {
         constructor(ShapeType: ESpriteShapeType, Vertices: TArray<Vector2D>, BoxSize: Vector2D, BoxPosition: Vector2D, Rotation: number, bNegativeWinding: boolean);
@@ -46093,10 +46489,11 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum ESpritePolygonMode { SourceBoundingBox, TightBoundingBox, ShrinkWrapped, FullyCustom, Diced, ESpritePolygonMode_MAX}
     class SpriteGeometryCollection {
-        constructor(Shapes: TArray<SpriteGeometryShape>, GeometryType: number, PixelsPerSubdivisionX: number, PixelsPerSubdivisionY: number, bAvoidVertexMerging: boolean, AlphaThreshold: number, DetailAmount: number, SimplifyEpsilon: number);
+        constructor(Shapes: TArray<SpriteGeometryShape>, GeometryType: ESpritePolygonMode, PixelsPerSubdivisionX: number, PixelsPerSubdivisionY: number, bAvoidVertexMerging: boolean, AlphaThreshold: number, DetailAmount: number, SimplifyEpsilon: number);
         Shapes: TArray<SpriteGeometryShape>;
-        GeometryType: number;
+        GeometryType: ESpritePolygonMode;
         PixelsPerSubdivisionX: number;
         PixelsPerSubdivisionY: number;
         bAvoidVertexMerging: boolean;
@@ -46126,8 +46523,8 @@ declare module "ue" {
         MipCount: number;
         PaddingType: EPaperSpriteAtlasPadding;
         Padding: number;
-        CompressionSettings: number;
-        Filter: number;
+        CompressionSettings: TextureCompressionSettings;
+        Filter: TextureFilter;
         GeneratedTextures: TArray<Texture>;
         AtlasGUID: Guid;
         bRebuildAtlas: boolean;
@@ -46159,10 +46556,10 @@ declare module "ue" {
         DefaultMaterial: MaterialInterface;
         AlternateMaterial: MaterialInterface;
         Sockets: TArray<PaperSpriteSocket>;
-        SpriteCollisionDomain: number;
+        SpriteCollisionDomain: ESpriteCollisionMode;
         PixelsPerUnrealUnit: number;
         BodySetup: BodySetup;
-        PivotMode: number;
+        PivotMode: ESpritePivotMode;
         CustomPivotPoint: Vector2D;
         bSnapPivotToPixelGrid: boolean;
         CollisionGeometry: SpriteGeometryCollection;
@@ -46183,12 +46580,13 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EFlipbookCollisionMode { NoCollision, FirstFrameCollision, EachFrameCollision, EFlipbookCollisionMode_MAX}
     class PaperFlipbook extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         FramesPerSecond: number;
         KeyFrames: TArray<PaperFlipbookKeyFrame>;
         DefaultMaterial: MaterialInterface;
-        CollisionSource: number;
+        CollisionSource: EFlipbookCollisionMode;
         IsValidKeyFrameIndex(Index: number): boolean;
         GetTotalDuration(): number;
         GetSpriteAtTime(Time: number, bClampToEnds: boolean): PaperSprite;
@@ -46371,7 +46769,7 @@ declare module "ue" {
         SegmentOverlapAmount: number;
         TerrainColor: LinearColor;
         ReparamStepsPerSegment: number;
-        SpriteCollisionDomain: number;
+        SpriteCollisionDomain: ESpriteCollisionMode;
         CollisionThickness: number;
         CachedBodySetup: BodySetup;
         SetTerrainColor(NewColor: LinearColor): void;
@@ -46468,6 +46866,7 @@ declare module "ue" {
         static Load(InName: string): PaperTileLayer;
     }
     
+    enum ETileMapProjectionMode { Orthogonal, IsometricDiamond, IsometricStaggered, HexagonalStaggered, ETileMapProjectionMode_MAX}
     class PaperTileMap extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MapWidth: number;
@@ -46482,8 +46881,8 @@ declare module "ue" {
         Material: MaterialInterface;
         TileLayers: TArray<PaperTileLayer>;
         CollisionThickness: number;
-        SpriteCollisionDomain: number;
-        ProjectionMode: number;
+        SpriteCollisionDomain: ESpriteCollisionMode;
+        ProjectionMode: ETileMapProjectionMode;
         HexSideLength: number;
         BodySetup: BodySetup;
         AssetImportData: AssetImportData;
@@ -46827,7 +47226,7 @@ declare module "ue" {
         Metallic: number;
         Specular: number;
         Roughness: number;
-        MaterialShadingModel: number;
+        MaterialShadingModel: EMaterialShadingModel;
         SelectiveOutputMask: number;
         BaseColor: LinearColor;
         IndirectIrradiance: number;
@@ -46965,7 +47364,7 @@ declare module "ue" {
     
     class EditorUtilityWidgetBlueprintFactory extends Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BlueprintType: number;
+        BlueprintType: EBlueprintType;
         ParentClass: Class;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): EditorUtilityWidgetBlueprintFactory;
@@ -47868,6 +48267,7 @@ declare module "ue" {
         static Load(InName: string): TireConfig;
     }
     
+    enum EWheelSweepType { SimpleAndComplex, Simple, Complex, EWheelSweepType_MAX}
     class VehicleWheel extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CollisionMesh: StaticMesh;
@@ -47890,7 +48290,7 @@ declare module "ue" {
         SuspensionMaxDrop: number;
         SuspensionNaturalFrequency: number;
         SuspensionDampingRatio: number;
-        SweepType: number;
+        SweepType: EWheelSweepType;
         MaxBrakeTorque: number;
         MaxHandBrakeTorque: number;
         VehicleSim: WheeledVehicleMovementComponent;
@@ -48050,9 +48450,10 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EVehicleDifferential4W { LimitedSlip_4W, LimitedSlip_FrontDrive, LimitedSlip_RearDrive, Open_4W, Open_FrontDrive, Open_RearDrive, EVehicleDifferential4W_MAX}
     class VehicleDifferential4WData {
-        constructor(DifferentialType: number, FrontRearSplit: number, FrontLeftRightSplit: number, RearLeftRightSplit: number, CentreBias: number, FrontBias: number, RearBias: number);
-        DifferentialType: number;
+        constructor(DifferentialType: EVehicleDifferential4W, FrontRearSplit: number, FrontLeftRightSplit: number, RearLeftRightSplit: number, CentreBias: number, FrontBias: number, RearBias: number);
+        DifferentialType: EVehicleDifferential4W;
         FrontRearSplit: number;
         FrontLeftRightSplit: number;
         RearLeftRightSplit: number;
@@ -48503,9 +48904,9 @@ declare module "ue" {
         DefaultPixelsPerUnrealUnit: number;
         NormalMapTextureSuffixes: TArray<string>;
         BaseMapTextureSuffixes: TArray<string>;
-        DefaultSpriteTextureGroup: number;
+        DefaultSpriteTextureGroup: TextureGroup;
         bOverrideTextureCompression: boolean;
-        DefaultSpriteTextureCompression: number;
+        DefaultSpriteTextureCompression: TextureCompressionSettings;
         UnlitDefaultMaskedMaterialName: SoftObjectPath;
         UnlitDefaultTranslucentMaterialName: SoftObjectPath;
         UnlitDefaultOpaqueMaterialName: SoftObjectPath;
@@ -48828,11 +49229,13 @@ declare module "ue" {
         static Load(InName: string): ReimportSpeedTreeFactory;
     }
     
+    enum EImportGeometryType { IGT_3D, IGT_Billboards, IGT_Both, IGT_MAX}
+    enum EImportLODType { ILT_PaintedFoliage, ILT_IndividualActors, ILT_MAX}
     class SpeedTreeImportData extends AssetImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TreeScale: number;
-        ImportGeometryType: number;
-        LODType: number;
+        ImportGeometryType: EImportGeometryType;
+        LODType: EImportLODType;
         IncludeCollision: boolean;
         MakeMaterialsCheck: boolean;
         IncludeNormalMapCheck: boolean;
@@ -50755,6 +51158,11 @@ declare module "ue" {
         static Load(InName: string): OculusMRFunctionLibrary;
     }
     
+    enum EAndroidInstallLocation { InternalOnly, PreferExternal, Auto, EAndroidInstallLocation_MAX}
+    enum EAndroidScreenOrientation { Portrait, ReversePortrait, SensorPortrait, Landscape, ReverseLandscape, SensorLandscape, Sensor, FullSensor, EAndroidScreenOrientation_MAX}
+    enum EAndroidDepthBufferPreference { Default, Bits16, Bits24, Bits32, EAndroidDepthBufferPreference_MAX}
+    enum EOculusMobileDevice { GearGo, Quest, EOculusMobileDevice_MAX}
+    enum EGoogleVRCaps { Cardboard, Daydream33, Daydream63, Daydream66, EGoogleVRCaps_MAX}
     class GooglePlayAchievementMapping {
         constructor(Name: string, AchievementID: string);
         Name: string;
@@ -50769,6 +51177,8 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EAndroidAudio { Default, OGG, ADPCM, EAndroidAudio_MAX}
+    enum EAndroidGraphicsDebugger { None, Mali, Adreno, EAndroidGraphicsDebugger_MAX}
     class AndroidRuntimeSettings extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PackageName: string;
@@ -50780,7 +51190,7 @@ declare module "ue" {
         VersionDisplayName: string;
         MinSDKVersion: number;
         TargetSDKVersion: number;
-        InstallLocation: number;
+        InstallLocation: EAndroidInstallLocation;
         bEnableGradle: boolean;
         bEnableLint: boolean;
         bPackageDataInsideApk: boolean;
@@ -50790,13 +51200,13 @@ declare module "ue" {
         bAllowPatchOBBFile: boolean;
         bUseExternalFilesDir: boolean;
         bPublicLogFiles: boolean;
-        Orientation: number;
+        Orientation: EAndroidScreenOrientation;
         MaxAspectRatio: number;
         bUseDisplayCutout: boolean;
         bRestoreNotificationsOnReboot: boolean;
         bFullScreen: boolean;
         bEnableNewKeyboard: boolean;
-        DepthBufferPreference: number;
+        DepthBufferPreference: EAndroidDepthBufferPreference;
         bValidateTextureFormats: boolean;
         ExtraManifestNodeTags: TArray<string>;
         ExtraApplicationNodeTags: TArray<string>;
@@ -50805,9 +51215,9 @@ declare module "ue" {
         ExtraActivitySettings: string;
         ExtraPermissions: TArray<string>;
         bAndroidVoiceEnabled: boolean;
-        PackageForOculusMobile: TArray<number>;
+        PackageForOculusMobile: TArray<EOculusMobileDevice>;
         bRemoveOSIG: boolean;
-        GoogleVRCaps: TArray<number>;
+        GoogleVRCaps: TArray<EGoogleVRCaps>;
         bGoogleVRSustainedPerformance: boolean;
         KeyStore: string;
         KeyAlias: string;
@@ -50837,7 +51247,7 @@ declare module "ue" {
         bAllowIMU: boolean;
         bAllowControllers: boolean;
         bBlockAndroidKeysOnControllers: boolean;
-        AndroidAudio: number;
+        AndroidAudio: EAndroidAudio;
         AudioSampleRate: number;
         AudioCallbackBufferFrameSize: number;
         AudioNumBuffersToEnqueue: number;
@@ -50859,7 +51269,7 @@ declare module "ue" {
         MinSampleRate: number;
         CompressionQualityModifier: number;
         AutoStreamingThreshold: number;
-        AndroidGraphicsDebugger: number;
+        AndroidGraphicsDebugger: EAndroidGraphicsDebugger;
         MaliGraphicsDebuggerPath: DirectoryPath;
         bMultiTargetFormat_ETC1: boolean;
         bMultiTargetFormat_ETC1a: boolean;
@@ -50998,7 +51408,7 @@ declare module "ue" {
         LoadOrCreate(InName: string, InPath: string, ParentClass: Class): boolean;
         ClearParameter(): void;
         AddParameter(InParameterName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
-        AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: number, InLifetimeCondition: number): void;
+        AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: bigint, InLifetimeCondition: number): void;
         AddFunction(InName: string, IsVoid: boolean, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: number): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PEBlueprintAsset;
@@ -51099,7 +51509,7 @@ declare module "ue" {
         AbortTicks: number;
         KeyNameExecute: string;
         KeyNameAbort: string;
-        LogResult: number;
+        LogResult: EBTNodeResult;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TestBTTask_LatentWithFlags;
         static Load(InName: string): TestBTTask_LatentWithFlags;
@@ -51110,7 +51520,7 @@ declare module "ue" {
         LogIndex: number;
         LogFinished: number;
         ExecutionTicks: number;
-        LogResult: number;
+        LogResult: EBTNodeResult;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TestBTTask_Log;
         static Load(InName: string): TestBTTask_Log;
@@ -51120,7 +51530,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         KeyName: string;
         bValue: boolean;
-        TaskResult: number;
+        TaskResult: EBTNodeResult;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TestBTTask_SetFlag;
         static Load(InName: string): TestBTTask_SetFlag;
@@ -51130,7 +51540,7 @@ declare module "ue" {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         KeyName: string;
         Value: number;
-        TaskResult: number;
+        TaskResult: EBTNodeResult;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TestBTTask_SetValue;
         static Load(InName: string): TestBTTask_SetValue;
@@ -51419,18 +51829,20 @@ declare module "ue" {
         static Load(InName: string): MagicLeapSDKSettings;
     }
     
+    enum ETutorialContent { None, Text, UDNExcerpt, RichText, ETutorialContent_MAX}
     class TutorialContent {
-        constructor(Type: number, Content: string, ExcerptName: string, Text: string);
-        Type: number;
+        constructor(Type: ETutorialContent, Content: string, ExcerptName: string, Text: string);
+        Type: ETutorialContent;
         Content: string;
         ExcerptName: string;
         Text: string;
         static StaticClass(): Class;
     }
     
+    enum ETutorialAnchorIdentifier { None, NamedWidget, Asset, ETutorialAnchorIdentifier_MAX}
     class TutorialContentAnchor {
-        constructor(Type: number, WrapperIdentifier: string, Asset: SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
-        Type: number;
+        constructor(Type: ETutorialAnchorIdentifier, WrapperIdentifier: string, Asset: SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
+        Type: ETutorialAnchorIdentifier;
         WrapperIdentifier: string;
         Asset: SoftObjectPath;
         bDrawHighlight: boolean;
@@ -51442,11 +51854,11 @@ declare module "ue" {
     }
     
     class TutorialWidgetContent {
-        constructor(Content: TutorialContent, WidgetAnchor: TutorialContentAnchor, HorizontalAlignment: number, VerticalAlignment: number, Offset: Vector2D, ContentWidth: number, bAutoFocus: boolean);
+        constructor(Content: TutorialContent, WidgetAnchor: TutorialContentAnchor, HorizontalAlignment: EHorizontalAlignment, VerticalAlignment: EVerticalAlignment, Offset: Vector2D, ContentWidth: number, bAutoFocus: boolean);
         Content: TutorialContent;
         WidgetAnchor: TutorialContentAnchor;
-        HorizontalAlignment: number;
-        VerticalAlignment: number;
+        HorizontalAlignment: EHorizontalAlignment;
+        VerticalAlignment: EVerticalAlignment;
         Offset: Vector2D;
         ContentWidth: number;
         bAutoFocus: boolean;
@@ -51761,14 +52173,14 @@ declare module "ue" {
     }
     
     class AnimationRecordingSettings {
-        constructor(bRecordInWorldSpace: boolean, bRemoveRootAnimation: boolean, bAutoSaveAsset: boolean, SampleRate: number, Length: number, InterpMode: number, TangentMode: number);
+        constructor(bRecordInWorldSpace: boolean, bRemoveRootAnimation: boolean, bAutoSaveAsset: boolean, SampleRate: number, Length: number, InterpMode: ERichCurveInterpMode, TangentMode: ERichCurveTangentMode);
         bRecordInWorldSpace: boolean;
         bRemoveRootAnimation: boolean;
         bAutoSaveAsset: boolean;
         SampleRate: number;
         Length: number;
-        InterpMode: number;
-        TangentMode: number;
+        InterpMode: ERichCurveInterpMode;
+        TangentMode: ERichCurveTangentMode;
         static StaticClass(): Class;
     }
     
@@ -52195,7 +52607,7 @@ declare module "ue" {
         TotalSegments: number;
         Segments: number;
         AlignToSide: boolean;
-        Axis: number;
+        Axis: EAxis;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): GeomModifier_Lathe;
         static Load(InName: string): GeomModifier_Lathe;
@@ -52343,6 +52755,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    enum EColorChannel { Red, Green, Blue, Alpha, EColorChannel_MAX}
     enum ELandscapeLayerPaintingRestriction { None, UseMaxLayers, ExistingOnly, UseComponentWhitelist, ELandscapeLayerPaintingRestriction_MAX}
     class LandscapeEditorObject extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -52424,7 +52837,7 @@ declare module "ue" {
         bUseWorldSpacePatternBrush: boolean;
         WorldSpacePatternBrushSettings: LandscapePatternBrushWorldSpaceSettings;
         AlphaTexture: Texture2D;
-        AlphaTextureChannel: number;
+        AlphaTextureChannel: EColorChannel;
         AlphaTextureSizeX: number;
         AlphaTextureSizeY: number;
         AlphaTextureData: TArray<number>;
@@ -52534,111 +52947,11 @@ declare module "ue" {
         static Load(InName: string): DmgTypeBP_Environmental_C;
     }
     
-    class PointerToUberGraphFrame {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class SKEL_TsTestActor_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        tickCount: number;
-        actor: Actor;
-        cls: Class;
-        b: boolean;
-        int64_1: bigint;
-        int64_2: bigint;
-        str: string;
-        v: Vector;
-        map: TMap<string, number>;
-        arr: TArray<Object>;
-        set: TSet<string>;
-        Classmap: TMap<string, Class>;
-        Objectmap: TMap<string, Actor>;
-        ReceiveBeginPlay(): void;
-        ReceiveActorBeginOverlap(OtherActor: Actor): void;
-        ReceiveTick(DeltaSeconds: number): void;
-        InpAxisEvt_MoveForward1_K2Node_InputAxisEvent_0(AxisValue: number): void;
-        UserConstructionScript(): void;
-        Add(a: number, b: number): number;
-        GetActor(): Actor;
-        SetActor(p: Actor): void;
-        GetArray(): TArray<Object>;
-        SetArray(p: $Ref<TArray<Object>>): void;
-        GetMap(): TMap<string, number>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestActor_C;
-        static Load(InName: string): SKEL_TsTestActor_C;
-    }
-    
-    class SKEL_DmgTypeBP_Environmental_C extends DamageType {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_DmgTypeBP_Environmental_C;
-        static Load(InName: string): SKEL_DmgTypeBP_Environmental_C;
-    }
-    
     class LevelEditorAttract_C extends EditorTutorial {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): LevelEditorAttract_C;
         static Load(InName: string): LevelEditorAttract_C;
-    }
-    
-    class SKEL_LevelEditorAttract_C extends EditorTutorial {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_LevelEditorAttract_C;
-        static Load(InName: string): SKEL_LevelEditorAttract_C;
-    }
-    
-    class TsTestGameInstance_C extends GameInstance {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        ReceiveInit(): void;
-        ReceiveShutdown(): void;
-        ExecuteUbergraph_TsTestGameInstance(EntryPoint: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TsTestGameInstance_C;
-        static Load(InName: string): TsTestGameInstance_C;
-    }
-    
-    class SKEL_TsTestGameInstance_C extends GameInstance {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        ReceiveInit(): void;
-        ReceiveShutdown(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestGameInstance_C;
-        static Load(InName: string): SKEL_TsTestGameInstance_C;
-    }
-    
-    class SKEL_TsTestGameMode_C extends GameModeBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        ReceiveBeginPlay(): void;
-        ReceiveTick(DeltaSeconds: number): void;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_TsTestGameMode_C;
-        static Load(InName: string): SKEL_TsTestGameMode_C;
-    }
-    
-    class SKEL_AnotherActor_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        ReceiveBeginPlay(): void;
-        ReceiveActorBeginOverlap(OtherActor: Actor): void;
-        ReceiveTick(DeltaSeconds: number): void;
-        UserConstructionScript(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_AnotherActor_C;
-        static Load(InName: string): SKEL_AnotherActor_C;
     }
     
     class StandardMacros_C extends Object {
@@ -52648,64 +52961,27 @@ declare module "ue" {
         static Load(InName: string): StandardMacros_C;
     }
     
-    class SKEL_StandardMacros_C extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_StandardMacros_C;
-        static Load(InName: string): SKEL_StandardMacros_C;
-    }
-    
-    class SKEL_BP_Sky_Sphere_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        SkySphereMesh: StaticMeshComponent;
-        Base: SceneComponent;
-        Skymaterial: MaterialInstanceDynamic;
-        Refreshmaterial: boolean;
-        Directionallightactor: DirectionalLight;
-        Colorsdeterminedbysunposition: boolean;
-        Sunheight: number;
-        Sunbrightness: number;
-        HorizonFalloff: number;
-        ZenithColor: LinearColor;
-        Horizoncolor: LinearColor;
-        Cloudcolor: LinearColor;
-        OverallColor: LinearColor;
-        Cloudspeed: number;
-        Cloudopacity: number;
-        Starsbrightness: number;
-        Horizoncolorcurve: CurveLinearColor;
-        Zenithcolorcurve: CurveLinearColor;
-        Cloudcolorcurve: CurveLinearColor;
-        UserConstructionScript(): void;
-        UpdateSunDirection(): void;
-        RefreshMaterial(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_BP_Sky_Sphere_C;
-        static Load(InName: string): SKEL_BP_Sky_Sphere_C;
-    }
-    
     class BP_Sky_Sphere_C extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SkySphereMesh: StaticMeshComponent;
         Base: SceneComponent;
-        Skymaterial: MaterialInstanceDynamic;
-        Refreshmaterial: boolean;
-        Directionallightactor: DirectionalLight;
-        Colorsdeterminedbysunposition: boolean;
-        Sunheight: number;
-        Sunbrightness: number;
-        HorizonFalloff: number;
-        ZenithColor: LinearColor;
-        Horizoncolor: LinearColor;
-        Cloudcolor: LinearColor;
-        OverallColor: LinearColor;
-        Cloudspeed: number;
-        Cloudopacity: number;
-        Starsbrightness: number;
-        Horizoncolorcurve: CurveLinearColor;
-        Zenithcolorcurve: CurveLinearColor;
-        Cloudcolorcurve: CurveLinearColor;
+        ["Sky material"]: MaterialInstanceDynamic;
+        ["Refresh material"]: boolean;
+        ["Directional light actor"]: DirectionalLight;
+        ["Colors determined by sun position"]: boolean;
+        ["Sun height"]: number;
+        ["Sun brightness"]: number;
+        ["Horizon Falloff"]: number;
+        ["Zenith Color"]: LinearColor;
+        ["Horizon color"]: LinearColor;
+        ["Cloud color"]: LinearColor;
+        ["Overall Color"]: LinearColor;
+        ["Cloud speed"]: number;
+        ["Cloud opacity"]: number;
+        ["Stars brightness"]: number;
+        ["Horizon color curve"]: CurveLinearColor;
+        ["Zenith color curve"]: CurveLinearColor;
+        ["Cloud color curve"]: CurveLinearColor;
         RefreshMaterial(): void;
         UpdateSunDirection(): void;
         UserConstructionScript(): void;
@@ -52721,12 +52997,9 @@ declare module "ue" {
         static Load(InName: string): LevelEditorOverview_C;
     }
     
-    class SKEL_LevelEditorOverview_C extends EditorTutorial {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
+    class PointerToUberGraphFrame {
+        constructor();
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_LevelEditorOverview_C;
-        static Load(InName: string): SKEL_LevelEditorOverview_C;
     }
     
     class TestBlueprint_C extends Actor {
@@ -52742,100 +53015,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TestBlueprint_C;
         static Load(InName: string): TestBlueprint_C;
-    }
-    
-    class SKEL_TestBlueprint_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        B1: boolean;
-        I1: number;
-        I2: number;
-        ReceiveBeginPlay(): void;
-        ReceiveActorBeginOverlap(OtherActor: Actor): void;
-        ReceiveTick(DeltaSeconds: number): void;
-        UserConstructionScript(): void;
-        Foo(P1: boolean, P2: number, P3: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SKEL_TestBlueprint_C;
-        static Load(InName: string): SKEL_TestBlueprint_C;
-    }
-    
-    class REINST_TestBlueprint_C_47 extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        B1: boolean;
-        I1: number;
-        I2: number;
-        Foo(P1: boolean, P2: number, P3: number): void;
-        UserConstructionScript(): void;
-        ReceiveBeginPlay(): void;
-        ExecuteUbergraph_TestBlueprint(EntryPoint: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): REINST_TestBlueprint_C_47;
-        static Load(InName: string): REINST_TestBlueprint_C_47;
-    }
-    
-    class TRASHCLASS_TestBlueprint_48 {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TRASHCLASS_TestBlueprint_48;
-        static Load(InName: string): TRASHCLASS_TestBlueprint_48;
-    }
-    
-    class TsTestActor_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        tickCount: number;
-        actor: Actor;
-        cls: Class;
-        b: boolean;
-        int64_1: bigint;
-        int64_2: bigint;
-        str: string;
-        v: Vector;
-        map: TMap<string, number>;
-        arr: TArray<Object>;
-        set: TSet<string>;
-        Classmap: TMap<string, Class>;
-        Objectmap: TMap<string, Actor>;
-        GetMap(): TMap<string, number>;
-        SetArray(p: $Ref<TArray<Object>>): void;
-        GetArray(): TArray<Object>;
-        SetActor(p: Actor): void;
-        GetActor(): Actor;
-        Add(a: number, b: number): number;
-        ReceiveBeginPlay(): void;
-        ReceiveTick(DeltaSeconds: number): void;
-        InpAxisEvt_MoveForward1_K2Node_InputAxisEvent_0(AxisValue: number): void;
-        ExecuteUbergraph_TsTestActor(EntryPoint: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TsTestActor_C;
-        static Load(InName: string): TsTestActor_C;
-    }
-    
-    class TsTestGameMode_C extends GameModeBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        ReceiveBeginPlay(): void;
-        ExecuteUbergraph_TsTestGameMode(EntryPoint: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TsTestGameMode_C;
-        static Load(InName: string): TsTestGameMode_C;
-    }
-    
-    class AnotherActor_C extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UberGraphFrame: PointerToUberGraphFrame;
-        DefaultSceneRoot: SceneComponent;
-        ReceiveBeginPlay(): void;
-        ExecuteUbergraph_AnotherActor(EntryPoint: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AnotherActor_C;
-        static Load(InName: string): AnotherActor_C;
     }
     
     class TestWidgetBlueprint_C extends UserWidget {

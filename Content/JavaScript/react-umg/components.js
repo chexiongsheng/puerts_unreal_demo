@@ -59,3 +59,5 @@ exports.SinglePropertyView = 'SinglePropertyView';
 exports.EditorUtilityWidget = 'EditorUtilityWidget';
 exports.ReactWidget = 'ReactWidget';
 exports.TextureImage = 'TextureImage';
+exports.TestWidgetBlueprint_C = 'TestWidgetBlueprint_C';
+exports.lazyloadComponents.TestWidgetBlueprint_C = '/Game/StarterContent/TestWidgetBlueprint.TestWidgetBlueprint_C';
