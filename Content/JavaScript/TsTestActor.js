@@ -54,8 +54,11 @@ class TsTestActor extends UE.Actor {
     }
     Fire() {
     }
+    OnRep_dint() {
+    }
 }
 __decorate([
+    ue_1.rpc.flags(ue_1.rpc.PropertyFlags.CPF_Net | ue_1.rpc.PropertyFlags.CPF_RepNotify),
     ue_1.rpc.condition(ue_1.rpc.ELifetimeCondition.COND_InitialOrOwner)
 ], TsTestActor.prototype, "dint", void 0);
 __decorate([

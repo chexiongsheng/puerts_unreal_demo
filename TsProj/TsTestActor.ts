@@ -88,6 +88,7 @@ class TsTestActor extends UE.Actor {
     //@no-blueprint
     TsOnlyField: number;
 
+    @rpc.flags(rpc.PropertyFlags.CPF_Net | rpc.PropertyFlags.CPF_RepNotify)
     @rpc.condition(rpc.ELifetimeCondition.COND_InitialOrOwner)
     dint: number;
 
@@ -95,6 +96,14 @@ class TsTestActor extends UE.Actor {
     Fire(): void {
 
     }
+
+    OnRep_dint(): void {
+        
+    }
+
+    e: UE.ETickingGroup;
+
+    ea: UE.TArray<UE.ETickingGroup>;
 }
 
 export default TsTestActor;
