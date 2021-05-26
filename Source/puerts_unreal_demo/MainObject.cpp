@@ -105,6 +105,11 @@ void UMainObject::NameTest(FName Name)
     UE_LOG(LogTemp, Warning, TEXT("IsNone? %d"), Name == NAME_None);
 }
 
+void UMainObject::DefaultTest(FString Str, int I, FVector Vec)
+{
+    UE_LOG(LogTemp, Warning, TEXT("DefaultTest Str = '%s', I = %d, Vec = %s"), *Str, I, *Vec.ToString());
+}
+
 FArrayBuffer UMainObject::ArrayBufferTest(const FArrayBuffer& Ab) const
 {
     UE_LOG(LogTemp, Warning, TEXT("Ab(%p, %d)"), Ab.Data, Ab.Length);

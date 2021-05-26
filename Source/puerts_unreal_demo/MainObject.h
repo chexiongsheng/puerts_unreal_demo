@@ -72,8 +72,11 @@ public:
     UFUNCTION(BlueprintCallable, meta = (DisplayName = "Bar3", ScriptName = "Bar3", Keywords = "test"), Category = "Test")
     FArrayBuffer ArrayBufferTest(const FArrayBuffer& Ab) const;
 
-    UFUNCTION(BlueprintCallable, meta = (DisplayName = "EnumTest", ScriptName = "GetInts", Keywords = "test"), Category = "Test")
+    UFUNCTION(BlueprintCallable, meta = (DisplayName = "EnumTest", ScriptName = "EnumTest", Keywords = "test"), Category = "Test")
     void NameTest(FName Name);
+
+    UFUNCTION(BlueprintCallable, meta = (DisplayName = "DefaultTest", ScriptName = "DefaultTest", Keywords = "test"), Category = "Test")
+    void DefaultTest(FString Str = TEXT("i am default"), int I = 10, FVector Vec = FVector(1.1, 2.2, 3.3));
 
     UPROPERTY()
     FSomeData SomeData;

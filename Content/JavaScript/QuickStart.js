@@ -46,6 +46,12 @@ console.log('vec', vec.ToString());
 console.log("----------------------------------------------------");
 obj.EnumTest(UE.EToTest.V1);
 obj.EnumTest(UE.EToTest.V13);
+//默认值
+console.log("----------------------------------------------------");
+obj.DefaultTest();
+obj.DefaultTest("hello john");
+obj.DefaultTest("hello john", 1024);
+obj.DefaultTest("hello john", 1024, new UE.Vector(7, 8, 9));
 //定长数组
 console.log("----------------------------------------------------");
 console.log("MyFixSizeArray.Num()", obj.MyFixSizeArray.Num());
