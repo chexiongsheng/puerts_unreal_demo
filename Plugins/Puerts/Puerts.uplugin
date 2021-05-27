@@ -11,7 +11,7 @@
   "EnabledByDefault": true,
   "MarketplaceURL" : "",
   "CanContainContent": true,
-  "CanBeUsedWithUnrealHeaderTool" : false,
+  "CanBeUsedWithUnrealHeaderTool" : true,
   "Modules": [
     {
       "Name": "JsEnv",
@@ -23,6 +23,11 @@
       "Name": "DeclarationGenerator",
       "Type": "Editor",
       "LoadingPhase": "Default"
+    },
+    {
+        "Name" : "ParamDefaultValueMetas",
+        "Type" : "Program",
+        "LoadingPhase" : "PostConfigInit"
     },
     {
       "Name": "Puerts",
