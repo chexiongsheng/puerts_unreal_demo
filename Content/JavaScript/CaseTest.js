@@ -159,7 +159,7 @@ describe('Test TMap', function () {
         assert.equal(obj.MyMap.Get("Che"), 10);
     });
 });
-let world = puerts_1.argv.getByName("World");
+let world = puerts_1.argv.getByName("GameInstance").GetWorld();
 let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
 //引擎方法
 describe('Calling Engine Methods', function () {

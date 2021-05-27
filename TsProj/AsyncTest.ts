@@ -4,7 +4,7 @@ import * as UE from 'ue'
 import * as AsyncUtils from './AsyncUtils'
 import {argv} from 'puerts';
 
-let world = argv.getByName("World") as UE.World;
+let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 
 async function asyncTest() {
     console.warn("begin to delay for 3 seconds...");

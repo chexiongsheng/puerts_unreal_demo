@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const UE = require("ue");
 const AsyncUtils = require("./AsyncUtils");
 const puerts_1 = require("puerts");
-let world = puerts_1.argv.getByName("World");
+let world = puerts_1.argv.getByName("GameInstance").GetWorld();
 async function asyncTest() {
     console.warn("begin to delay for 3 seconds...");
     let latentActionState = new UE.LatentActionState();

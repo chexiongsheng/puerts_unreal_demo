@@ -175,7 +175,7 @@ describe('Test TMap', function() {
     });
 });
 
-let world = argv.getByName("World") as UE.World;
+let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.MainActor;
 
 //引擎方法
