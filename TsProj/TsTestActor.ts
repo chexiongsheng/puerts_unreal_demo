@@ -97,6 +97,11 @@ class TsTestActor extends UE.Actor {
 
     }
 
+    @rpc.flags(rpc.FunctionFlags.FUNC_Net | rpc.FunctionFlags.FUNC_NetServer)
+    FireServer(): void {
+
+    }
+
     OnRep_dint(): void {
         
     }
@@ -104,6 +109,8 @@ class TsTestActor extends UE.Actor {
     e: UE.ETickingGroup;
 
     ea: UE.TArray<UE.ETickingGroup>;
+
+    clsOfWidget: UE.TSubclassOf<UE.Widget>;
 }
 
 export default TsTestActor;

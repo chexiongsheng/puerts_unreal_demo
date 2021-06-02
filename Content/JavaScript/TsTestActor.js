@@ -54,6 +54,8 @@ class TsTestActor extends UE.Actor {
     }
     Fire() {
     }
+    FireServer() {
+    }
     OnRep_dint() {
     }
 }
@@ -64,5 +66,8 @@ __decorate([
 __decorate([
     ue_1.rpc.flags(ue_1.rpc.FunctionFlags.FUNC_Net | ue_1.rpc.FunctionFlags.FUNC_NetClient)
 ], TsTestActor.prototype, "Fire", null);
+__decorate([
+    ue_1.rpc.flags(ue_1.rpc.FunctionFlags.FUNC_Net | ue_1.rpc.FunctionFlags.FUNC_NetServer)
+], TsTestActor.prototype, "FireServer", null);
 exports.default = TsTestActor;
 //# sourceMappingURL=TsTestActor.js.map
