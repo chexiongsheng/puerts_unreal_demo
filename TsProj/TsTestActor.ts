@@ -111,6 +111,10 @@ class TsTestActor extends UE.Actor {
     ea: UE.TArray<UE.ETickingGroup>;
 
     clsOfWidget: UE.TSubclassOf<UE.Widget>;
+
+    softObject: UE.TSoftObjectPtr<UE.Actor>;
+
+    softClass: UE.TSoftClassPtr<UE.Actor>;
 }
 
 export default TsTestActor;
