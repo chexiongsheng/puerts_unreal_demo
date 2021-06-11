@@ -48597,10 +48597,11 @@ declare module "ue" {
     
     class PuertsSetting extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Enable: boolean;
+        AutoModeEnable: boolean;
         DebugEnable: boolean;
         DebugPort: number;
         WaitDebugger: boolean;
+        WaitDebuggerTimeout: number;
         NumberOfJsEnv: number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PuertsSetting;
@@ -51409,7 +51410,7 @@ declare module "ue" {
         LoadOrCreate(InName: string, InPath: string, ParentClass: Class): boolean;
         ClearParameter(): void;
         AddParameter(InParameterName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
-        AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: bigint, InLifetimeCondition: number): void;
+        AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InLFlags: number, InHFlags: number, InLifetimeCondition: number): void;
         AddFunction(InName: string, IsVoid: boolean, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: number): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PEBlueprintAsset;
@@ -53003,6 +53004,13 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
+    class TestStruct {
+        constructor(speed: number, age: number);
+        speed: number;
+        age: number;
+        static StaticClass(): Class;
+    }
+    
     class TestBlueprint_C extends Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         UberGraphFrame: PointerToUberGraphFrame;
@@ -53010,6 +53018,7 @@ declare module "ue" {
         B1: boolean;
         I1: number;
         I2: number;
+        Bar(NewParam: TestStruct): void;
         Foo(P1: boolean, P2: number, P3: number): void;
         ReceiveBeginPlay(): void;
         ExecuteUbergraph_TestBlueprint(EntryPoint: number): void;
@@ -53025,6 +53034,75 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TestWidgetBlueprint_C;
         static Load(InName: string): TestWidgetBlueprint_C;
+    }
+    
+    class TsTestActor_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        tickCount: number;
+        actor: Actor;
+        cls: Class;
+        b: boolean;
+        int64_1: bigint;
+        int64_2: bigint;
+        str: string;
+        v: Vector;
+        map: TMap<string, number>;
+        arr: TArray<Object>;
+        fname: string;
+        namearr: TArray<string>;
+        dint: number;
+        e: ETickingGroup;
+        ea: TArray<ETickingGroup>;
+        set: TSet<string>;
+        OnRep_dint(): void;
+        TestCppType(p1: number, p2: number): string;
+        GetMap(): TMap<string, number>;
+        SetArray(p: $Ref<TArray<Object>>): void;
+        GetArray(): TArray<Object>;
+        SetActor(p: Actor): void;
+        GetActor(): Actor;
+        Add(a: number, b: number): number;
+        ReceiveBeginPlay(): void;
+        ReceiveTick(DeltaSeconds: number): void;
+        Fire(): void;
+        ExecuteUbergraph_TsTestActor(EntryPoint: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TsTestActor_C;
+        static Load(InName: string): TsTestActor_C;
+    }
+    
+    class TsTestGameInstance_C extends TypeScriptGameInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        ReceiveInit(): void;
+        ExecuteUbergraph_TsTestGameInstance(EntryPoint: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TsTestGameInstance_C;
+        static Load(InName: string): TsTestGameInstance_C;
+    }
+    
+    class TsTestGameMode_C extends GameModeBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        ReceiveBeginPlay(): void;
+        ExecuteUbergraph_TsTestGameMode(EntryPoint: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TsTestGameMode_C;
+        static Load(InName: string): TsTestGameMode_C;
+    }
+    
+    class AnotherActor_C extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UberGraphFrame: PointerToUberGraphFrame;
+        DefaultSceneRoot: SceneComponent;
+        ReceiveBeginPlay(): void;
+        ExecuteUbergraph_AnotherActor(EntryPoint: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AnotherActor_C;
+        static Load(InName: string): AnotherActor_C;
     }
     
 }

@@ -130,6 +130,13 @@ let bpClass = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C'
 let bpActor = world.SpawnActor(bpClass, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.TestBlueprint_C;
 bpActor.Foo(false, 8000, 9000);
 
+//蓝图结构体加载
+let TestStruct = UE.UserDefinedStruct.Load("UserDefinedStruct'/Game/StarterContent/TestStruct.TestStruct'");
+let testStruct = UE.NewStruct(TestStruct) as UE.TestStruct;
+testStruct.age = 10;
+testStruct.speed = 5;
+bpActor.Bar(testStruct);
+
 //Delegate
 console.log("----------------------------------------------------");
 function MutiCast1(i) {
