@@ -208,6 +208,12 @@ FJsEnvImpl::FJsEnvImpl(std::shared_ptr<IJSModuleLoader> InModuleLoader, std::sha
         Self->NewObjectByClass(Info);
     }, This)->GetFunction(Context).ToLocalChecked()).Check();
 
+    Global->Set(Context, FV8Utils::ToV8String(Isolate, "__tgjsNewStruct"), v8::FunctionTemplate::New(Isolate, [](const v8::FunctionCallbackInfo<v8::Value>& Info)
+    {
+        auto Self = reinterpret_cast<FJsEnvImpl*>((v8::Local<v8::External>::Cast(Info.Data()))->Value());
+        Self->NewStructByScriptStruct(Info);
+    }, This)->GetFunction(Context).ToLocalChecked()).Check();
+
     Global->Set(Context, FV8Utils::ToV8String(Isolate, "__tgjsMakeUClass"), v8::FunctionTemplate::New(Isolate, [](const v8::FunctionCallbackInfo<v8::Value>& Info)
     {
         auto Self = reinterpret_cast<FJsEnvImpl*>((v8::Local<v8::External>::Cast(Info.Data()))->Value());
@@ -588,6 +594,32 @@ void FJsEnvImpl::NewObjectByClass(const v8::FunctionCallbackInfo<v8::Value>& Inf
 
         auto Result = FV8Utils::IsolateData<IObjectMapper>(Isolate)->FindOrAdd(Isolate, Context, Object->GetClass(), Object);
         Info.GetReturnValue().Set(Result);
+    }
+    else
+    {
+        FV8Utils::ThrowException(Isolate, "invalid argument");
+    }
+}
+
+void FJsEnvImpl::NewStructByScriptStruct(const v8::FunctionCallbackInfo<v8::Value>& Info)
+{
+    v8::Isolate* Isolate = Info.GetIsolate();
+    v8::Isolate::Scope IsolateScope(Isolate);
+    v8::HandleScope HandleScope(Isolate);
+    v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
+    v8::Context::Scope ContextScope(Context);
+
+    UObject* Outer = GetTransientPackage();
+    FName Name = NAME_None;
+    EObjectFlags ObjectFlags = RF_NoFlags;
+
+    UScriptStruct *ScriptStruct = Cast<UScriptStruct>(FV8Utils::GetUObject(Context, Info[0]));
+
+    if (ScriptStruct)
+    {
+        void *Ptr = FScriptStructWrapper::Alloc(ScriptStruct);
+
+        Info.GetReturnValue().Set(FV8Utils::IsolateData<IObjectMapper>(Isolate)->FindOrAddStruct(Isolate, Context, ScriptStruct, Ptr, false));
     }
     else
     {
@@ -2186,10 +2218,10 @@ void FJsEnvImpl::ExecuteModule(const FString& ModuleName, std::function<FString(
         return;
     }
 
-#if UE_BUILD_DEBUG || UE_BUILD_DEVELOPMENT
-    if (!DebugPath.IsEmpty())
-        OutPath = DebugPath;
-#endif
+// #if UE_BUILD_DEBUG || UE_BUILD_DEVELOPMENT
+//     if (!DebugPath.IsEmpty())
+//         OutPath = DebugPath;
+// #endif
 
     FString Script;
     FFileHelper::BufferToString(Script, Data.GetData(), Data.Num());
@@ -2203,10 +2235,10 @@ void FJsEnvImpl::ExecuteModule(const FString& ModuleName, std::function<FString(
     v8::Context::Scope ContextScope(Context);
     {
 #if PLATFORM_MAC
-        FString FormattedScriptUrl = OutPath;
+        FString FormattedScriptUrl = DebugPath;
 #else
         // 修改URL分隔符格式，否则无法匹配Inspector协议在打断点时发送的正则表达式，导致断点失败
-        FString FormattedScriptUrl = OutPath.Replace(TEXT("/"), TEXT("\\"));
+        FString FormattedScriptUrl = DebugPath.Replace(TEXT("/"), TEXT("\\"));
 #endif
         v8::Local<v8::String> Name = FV8Utils::ToV8String(Isolate, FormattedScriptUrl);
         v8::ScriptOrigin Origin(Name);
