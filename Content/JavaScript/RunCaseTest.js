@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("tgamejs");
+require("puerts");
 ;
 ;
-let mochaStr = tgamejs.loadModule("mocha", "../JavaScript/mocha.js");
+let mochaStr = puerts.loadModule("mocha", "../JavaScript/mocha.js");
 mochaStr = mochaStr.substring(mochaStr.indexOf('\n') + 1).substring(mochaStr.indexOf('\n') + 1);
 let executeScript = mochaStr
     + " mocha.setup({ "
@@ -31,5 +31,5 @@ function wrapCode(src) {
     const code = new Function('console', 'global', 'require', src);
     return code;
 }
-wrapCode(executeScript)(tgamejs.console, global, require);
+wrapCode(executeScript)(console, global, require);
 //# sourceMappingURL=RunCaseTest.js.map

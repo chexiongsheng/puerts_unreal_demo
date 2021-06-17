@@ -1,6 +1,6 @@
-import 'tgamejs';
+import 'puerts';
 
-declare class tgamejs {
+declare class puerts {
     static loadModule(moduleName: string, modulePath: string): string;
 
     static console: any;
@@ -10,7 +10,7 @@ declare class global {
     static location: any;
 };
 
-let mochaStr = tgamejs.loadModule("mocha", "../JavaScript/mocha.js");
+let mochaStr = puerts.loadModule("mocha", "../JavaScript/mocha.js");
 
 mochaStr = mochaStr.substring(mochaStr.indexOf('\n') + 1).substring(mochaStr.indexOf('\n') + 1);
 
@@ -44,4 +44,4 @@ function wrapCode(src: string) {
     return code;
 }
 
-wrapCode(executeScript)(tgamejs.console, global, require);
+wrapCode(executeScript)(console, global, require);

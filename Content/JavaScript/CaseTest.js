@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const UE = require("ue");
 const puerts_1 = require("puerts");
-const JitTest = require("./JitTest");
 const assert = require("./MyAssert");
 require("./mocha");
 /*
@@ -213,24 +212,6 @@ describe('Test Delegate', function () {
         });
         let retStr = actor.NotifyWithStringRet.Execute('console.log("hello world")');
         assert.equal(retStr, '////console.log("hello world")');
-    });
-});
-//请求托管到Jit环境的方法
-describe('Calling method in Jit environment', function () {
-    // 延长默认timeout
-    this.timeout(5000);
-    puerts_1.requestJitModuleMethod("JitTest", "Fib", function (err, result) {
-        if (err) {
-            console.log("call JitTest.Fib fail! " + err.stack);
-        }
-        else {
-            console.log("jit env: " + result); //jit open in iOS, Android, Window, Mac
-        }
-    }, 30);
-    it('JitTest.Fib(30) should be 832040', function () {
-        let jitTestReturn = JitTest.Fib(30);
-        let jitTestResult = jitTestReturn.match(/result\ = (\d+)/g);
-        assert.equal(jitTestResult[0], 'result = 832040'); //jit open in Android, Window, Mac, but not iOS
     });
 });
 /*

@@ -1,6 +1,5 @@
 import * as UE from 'ue';
-import {$ref, $unref, $set, argv, merge, requestJitModuleMethod} from 'puerts';
-import * as JitTest from './JitTest';
+import {$ref, $unref, $set, argv} from 'puerts';
 import * as assert from './MyAssert';
 import './mocha';
 
@@ -240,27 +239,6 @@ describe('Test Delegate', function() {
         let retStr = actor.NotifyWithStringRet.Execute('console.log("hello world")');
 
         assert.equal(retStr, '////console.log("hello world")');
-    });
-});
-
-//请求托管到Jit环境的方法
-describe('Calling method in Jit environment', function() {
-
-    // 延长默认timeout
-    this.timeout(5000);
-
-    requestJitModuleMethod("JitTest", "Fib", function(err: Error, result: string) {
-        if(err) {
-            console.log("call JitTest.Fib fail! " + err.stack);
-        } else{
-            console.log("jit env: " + result);          //jit open in iOS, Android, Window, Mac
-        }
-    }, 30);
-
-    it('JitTest.Fib(30) should be 832040', function() {
-        let jitTestReturn = JitTest.Fib(30);
-        let jitTestResult = jitTestReturn.match(/result\ = (\d+)/g);
-        assert.equal(jitTestResult[0], 'result = 832040');       //jit open in Android, Window, Mac, but not iOS
     });
 });
 
