@@ -50,7 +50,7 @@ PrintTestDataByValue(p);
 
 const structTypePtr = ffi.makePointer(structType);
 const PrintTestDataByPtr = ffi.binding(3, "void", [structTypePtr]);
-PrintTestDataByPtr(p);
+PrintTestDataByPtr(structTypePtr.ref(p));
 
 //返回函数指针，通过指针调用函数
 const GetFunc = ffi.binding(5, "pointer", []);
