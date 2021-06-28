@@ -21,8 +21,8 @@ for(var i = 0; i < jsArray.length; i++) {
 console.log("before qsort:" + line);
 
 let cb = ffi.closure.alloc((x, y) => {
-    let a = int32TypeInfo.read(x);
-    let b = int32TypeInfo.read(y);
+    let a = int32pointerTypeInfo.unref(x);
+    let b = int32pointerTypeInfo.unref(y);
     return a - b;
 }, "int32", [int32pointerTypeInfo, int32pointerTypeInfo])
 
