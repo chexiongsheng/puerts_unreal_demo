@@ -18,7 +18,7 @@ public class JsEnv : ModuleRules
 
     private bool WinDll = false;
 
-    private bool WithFFI = false;
+    private bool WithFFI = true;
 
     public JsEnv(ReadOnlyTargetRules Target) : base(Target)
     {
