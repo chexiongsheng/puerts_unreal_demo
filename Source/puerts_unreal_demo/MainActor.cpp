@@ -22,7 +22,7 @@ void AMainActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-    //Í¨¹ýdelegateµ÷ÓÃjsµÄ»Øµ÷
+    //é€šè¿‡delegateè°ƒç”¨jsçš„å›žè°ƒ
     if ((++TickTimes == 100 || TickTimes == 200))
     {
         NotifyWithInt.Broadcast(1024);
