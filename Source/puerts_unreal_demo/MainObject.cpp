@@ -131,6 +131,15 @@ void  UMainObject::PrintState() const
     UE_LOG(LogTemp, Warning, TEXT("SomeData.WillSerialize = %d"), SomeData.WillSerialize);
 }
 
+void UMainObject::PassJsFunctionAsDelegate(FCallback Callback) const
+{
+    auto Ret = Callback.Execute(TEXT("John"));
+    UE_LOG(LogTemp, Warning, TEXT("John ? %d"), Ret);
+
+    Ret = Callback.Execute(TEXT("Che"));
+    UE_LOG(LogTemp, Warning, TEXT("Che ? %d"), Ret);
+}
+
 UMainObject::~UMainObject()
 {
     ::free(ArrayBuffer.Data);

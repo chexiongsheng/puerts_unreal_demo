@@ -149,6 +149,13 @@ console.log("out str:" + puerts_1.$unref(strRef));
 let retStr = actor.NotifyWithStringRet.Execute("console.log('hello world')");
 console.log("ret str:" + retStr);
 console.log("waiting native call script...........");
+//Pass JsFunction as Delegate
+function IsJohn(str) {
+    return str == "John";
+}
+obj.PassJsFunctionAsDelegate(puerts_1.toManualReleaseDelegate(IsJohn));
+//release after using
+puerts_1.releaseManualReleaseDelegate(IsJohn);
 //unhandledRejection
 puerts_1.on('unhandledRejection', function (reason) {
     console.log('unhandledRejection~~~', reason.stack);

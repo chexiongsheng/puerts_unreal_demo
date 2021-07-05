@@ -1,5 +1,5 @@
 import * as UE from 'ue'
-import {$ref, $unref, $set, argv, on} from 'puerts';
+import {$ref, $unref, $set, argv, on, toManualReleaseDelegate, releaseManualReleaseDelegate} from 'puerts';
 
 let obj = new UE.MainObject();
 
@@ -172,6 +172,14 @@ console.log("out str:" + $unref(strRef));
 let retStr = actor.NotifyWithStringRet.Execute("console.log('hello world')");
 console.log("ret str:" + retStr);
 console.log("waiting native call script...........");
+
+//Pass JsFunction as Delegate
+function IsJohn(str:string) : boolean {
+    return str == "John";
+}
+obj.PassJsFunctionAsDelegate(toManualReleaseDelegate(IsJohn));
+//release after using
+releaseManualReleaseDelegate(IsJohn);
 
 //unhandledRejection
 on('unhandledRejection', function(reason: any) {

@@ -105,5 +105,10 @@ public:
     UFUNCTION(BlueprintCallable, meta = (DisplayName = "PrintState", ScriptName = "PrintState", Keywords = "test"), Category = "Test")
     void PrintState() const;
 
+    DECLARE_DYNAMIC_DELEGATE_RetVal_OneParam(bool, FCallback, FString, A);
+
+    UFUNCTION(BlueprintCallable, meta = (DisplayName = "TestCallback", ScriptName = "TestCallback", Keywords = "test"), Category = "Test")
+    void PassJsFunctionAsDelegate(FCallback Callback) const;
+
     ~UMainObject();
 };
