@@ -48666,6 +48666,13 @@ declare module "ue" {
         static Load(InName: string): ContainersTest;
     }
     
+    class FFITestGameInstance extends GameInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FFITestGameInstance;
+        static Load(InName: string): FFITestGameInstance;
+    }
+    
     class JSBlueprintFunctionLibrary extends BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static Info(To: Class): void;
@@ -48718,6 +48725,7 @@ declare module "ue" {
         MyString: string;
         ArrayBuffer: ArrayBuffer;
         PrintState(): void;
+        PassJsFunctionAsDelegate(Callback: $Delegate<(A: string) => boolean>): void;
         NameTest(Name: string): void;
         GetStrings(): TArray<string>;
         GetInts(): TArray<number>;
@@ -48725,6 +48733,7 @@ declare module "ue" {
         Foo(): string;
         EnumTest(E: EToTest): void;
         DefaultTest(Str?: string /* = "i am default" */, I?: number /* = 10 */, Vec?: Vector /* = 1.100000,2.200000,3.300000 */): void;
+        Callback__DelegateSignature(A: string): boolean;
         Bar3(V: $Ref<Vector>): Vector;
         Bar2(V: $Ref<Vector>): string;
         Bar(V: Vector): string;
