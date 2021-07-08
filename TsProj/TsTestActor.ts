@@ -1,5 +1,5 @@
 import * as UE from 'ue'
-import {rpc} from 'ue'
+import {rpc, edit_on_instance} from 'ue'
 
 console.warn("Script init of TsTestActor ");
 
@@ -10,6 +10,7 @@ class TsTestActor extends UE.Actor {
 
     cls: UE.Class;
 
+    @edit_on_instance()
     b: boolean;
 
     int64_1: BigInt;
