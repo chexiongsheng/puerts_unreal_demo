@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cpp = require("cpp");
 let TestClass = cpp.TestClass;
 console.log(TestClass.Add(12, 34));
-console.log(TestClass.CheckedAdd(1, 2));
 TestClass.Overload();
 TestClass.Overload(1);
 TestClass.Overload(1, 2);
@@ -20,7 +19,6 @@ obj.Y = 97;
 console.log(obj.X, obj.Y);
 obj.OverloadMethod();
 obj.Id(100);
-obj.CheckedId(100);
 obj.Foo(888);
 TestClass.PrintInfo(obj.GetSelf());
 //# sourceMappingURL=CDataTest.js.map

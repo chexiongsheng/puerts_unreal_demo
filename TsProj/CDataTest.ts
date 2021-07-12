@@ -4,8 +4,6 @@ let TestClass = cpp.TestClass;
 
 console.log(TestClass.Add(12, 34));
 
-console.log(TestClass.CheckedAdd(1, 2));
-
 TestClass.Overload();
 TestClass.Overload(1);
 TestClass.Overload(1, 2);
@@ -13,8 +11,6 @@ TestClass.Overload("hello", 2);
 
 
 let obj = new TestClass();
-
-
 obj = new TestClass(8, 9);
 
 obj.OverloadMethod()
@@ -30,8 +26,6 @@ console.log(obj.X, obj.Y)
 obj.OverloadMethod()
 
 obj.Id(100);
-
-obj.CheckedId(100);
 
 obj.Foo(888);
 
