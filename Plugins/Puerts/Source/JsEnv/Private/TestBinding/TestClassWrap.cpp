@@ -15,9 +15,12 @@ struct AutoRegisterForTestClass
 		puerts::DefineClass<TestClass>()
 		    .Extends<BaseClass>()
 		    //.Constructor<int32_t, int32_t>() //if only one Constructor
-		    .Constructors<MakeConstructor(TestClass, int32_t, int32_t), MakeConstructor(TestClass)>()
-		    .Property("X", MakeGetter(&TestClass::X), MakeSetter(&TestClass::X))
-		    .Property("Y", MakeGetter(&TestClass::Y), MakeSetter(&TestClass::Y))
+		    .Constructor(CombineConstructors(
+		    	MakeConstructor(TestClass, int32_t, int32_t),
+		    	MakeConstructor(TestClass)
+		    	))
+		    .Property("X", MakeProperty(&TestClass::X))
+		    .Property("Y", MakeProperty(&TestClass::Y))
 		    .Function("CheckedAdd", MakeCheckFunction(&TestClass::Add))
 		    .Function("Add", MakeFunction(&TestClass::Add))
 		    .Method("CheckedId", MakeCheckFunction(&TestClass::Id))
@@ -29,13 +32,13 @@ struct AutoRegisterForTestClass
 		    	MakeOverload(void(*)(int32_t), &TestClass::Overload),
 		    	MakeOverload(void(*)(int32_t, int32_t), &TestClass::Overload),
 		    	MakeOverload(void(*)(std::string, int32_t), &TestClass::Overload)
-		    ))
+		        ))
 		    .Method("OverloadMethod", CombineOverloads(
 		        MakeOverload(int32_t(TestClass::*)(), &TestClass::OverloadMethod),
 		    	MakeOverload(int32_t(TestClass::*)(int32_t), &TestClass::OverloadMethod),
 		    	MakeOverload(uint32_t(TestClass::*)(uint32_t), &TestClass::OverloadMethod),
 				MakeOverload(int64_t(TestClass::*)(int64_t), &TestClass::OverloadMethod)
-		    ))
+		        ))
 		    .Register();
 	}
 };
