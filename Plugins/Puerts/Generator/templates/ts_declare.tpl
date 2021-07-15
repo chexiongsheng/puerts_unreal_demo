@@ -8,6 +8,7 @@
 
 /// <reference path="puerts.d.ts" />
 declare module "ue" {
+    import {$Ref, $Nullable} from "puerts"
 
 {%- for type in types %}
     {%- for namespace in type.namespaces %}
