@@ -1,3 +1,4 @@
+import {$ref, $unref} from 'puerts';
 import * as cpp from 'cpp'
 
 let TestClass = cpp.TestClass;
@@ -32,3 +33,9 @@ obj.Foo(888);
 
 //pass object
 TestClass.PrintInfo(obj.GetSelf())
+
+//ref
+let r = $ref(999);
+let ret = obj.Ref(r);
+console.log("$unref:" + $unref(r) + ", ret:" + ret);
+obj.ConstRef(999);

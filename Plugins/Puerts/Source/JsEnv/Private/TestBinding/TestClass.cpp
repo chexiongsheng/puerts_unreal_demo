@@ -70,12 +70,6 @@ int64_t TestClass::OverloadMethod(int64_t a)
 	return a;
 }
 
-int32_t TestClass::Id(int32_t a)
-{
-	UE_LOG(LogTemp, Warning, TEXT("1 TestClass::Id(%d)"), a);
-	return a;
-}
-
 TestClass * TestClass::GetSelf()
 {
 	UE_LOG(LogTemp, Warning, TEXT("1 TestClass::GetSelf()"));
@@ -87,3 +81,15 @@ void TestClass::PrintInfo(TestClass * tc)
 	UE_LOG(LogTemp, Warning, TEXT("0 TestClass::PrintInfo(), X = %d, Y = %d"), tc->X, tc->Y);
 }
 
+
+int TestClass::Ref(int32_t & a)
+{
+	UE_LOG(LogTemp, Warning, TEXT("TestClass::Ref(%d)"), a);
+	++a;
+	return a + 1;
+}
+
+void TestClass::ConstRef(const int32_t & a)
+{
+	UE_LOG(LogTemp, Warning, TEXT("TestClass::ConstRef(%d)"), a);
+}

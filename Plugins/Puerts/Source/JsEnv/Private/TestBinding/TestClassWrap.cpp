@@ -24,7 +24,8 @@ struct AutoRegisterForTestClass
             .Function("Add", MakeFunction(&TestClass::Add))
             .Function("PrintInfo", MakeFunction(&TestClass::PrintInfo))
             .Method("GetSelf", MakeCheckFunction(&TestClass::GetSelf))
-            .Method("Id", MakeFunction(&TestClass::Id))
+            .Method("Ref", MakeCheckFunction(&TestClass::Ref))
+            .Method("ConstRef", MakeCheckFunction(&TestClass::ConstRef))
             .Function("Overload", CombineOverloads(
                 MakeOverload(void(*)(), &TestClass::Overload),
                 MakeOverload(void(*)(int32_t), &TestClass::Overload),

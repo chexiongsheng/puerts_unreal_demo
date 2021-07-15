@@ -39,9 +39,11 @@ public:
 
 	int64_t OverloadMethod(int64_t a);
 
-	int32_t Id(int32_t a);
-
 	TestClass *GetSelf();
 
 	static void PrintInfo(TestClass *);
+
+	int Ref(int32_t & a);
+
+	void ConstRef(const int32_t & a);
 };

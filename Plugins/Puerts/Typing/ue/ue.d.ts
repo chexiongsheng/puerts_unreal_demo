@@ -1,5 +1,7 @@
 /// <reference path="puerts.d.ts" />
 declare module "ue" {
+    import {$Ref, $Nullable} from "puerts"
+
     class Field extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;

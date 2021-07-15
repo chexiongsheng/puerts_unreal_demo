@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const puerts_1 = require("puerts");
 const cpp = require("cpp");
 let TestClass = cpp.TestClass;
 //static function
@@ -26,4 +27,9 @@ obj.OverloadMethod();
 obj.Foo(888);
 //pass object
 TestClass.PrintInfo(obj.GetSelf());
+//ref
+let r = puerts_1.$ref(999);
+let ret = obj.Ref(r);
+console.log("$unref:" + puerts_1.$unref(r) + ", ret:" + ret);
+obj.ConstRef(999);
 //# sourceMappingURL=CDataTest.js.map
