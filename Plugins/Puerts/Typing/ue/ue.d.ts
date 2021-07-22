@@ -2,6 +2,33 @@
 declare module "ue" {
     import {$Ref, $Nullable} from "puerts"
 
+    class Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ExecuteUbergraph(EntryPoint: number): void;
+        CreateDefaultSubobject(p0: string, p1: $Nullable<Class>, p2: $Nullable<Class>, p3: boolean, p4: boolean) :Object;
+        GetName() :string;
+        GetOuter() :Object;
+        GetClass() :Class;
+        GetWorld() :World;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Object;
+        static Load(InName: string): Object;
+    }
+    
+    class GCObjectReferencer extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GCObjectReferencer;
+        static Load(InName: string): GCObjectReferencer;
+    }
+    
+    class TextBuffer extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TextBuffer;
+        static Load(InName: string): TextBuffer;
+    }
+    
     class Field extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -16,6 +43,20 @@ declare module "ue" {
         static Load(InName: string): Struct;
     }
     
+    class ScriptStruct extends Struct {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ScriptStruct;
+        static Load(InName: string): ScriptStruct;
+    }
+    
+    class Package extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Package;
+        static Load(InName: string): Package;
+    }
+    
     class Class extends Struct {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -23,22 +64,1610 @@ declare module "ue" {
         static Load(InName: string): Class;
     }
     
-    class LayerActorStats {
+    class Function extends Struct {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Function;
+        static Load(InName: string): Function;
+    }
+    
+    class DelegateFunction extends Function {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): DelegateFunction;
+        static Load(InName: string): DelegateFunction;
+    }
+    
+    class SparseDelegateFunction extends DelegateFunction {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SparseDelegateFunction;
+        static Load(InName: string): SparseDelegateFunction;
+    }
+    
+    class DynamicClass extends Class {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): DynamicClass;
+        static Load(InName: string): DynamicClass;
+    }
+    
+    class PackageMap extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PackageMap;
+        static Load(InName: string): PackageMap;
+    }
+    
+    class Enum extends Field {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Enum;
+        static Load(InName: string): Enum;
+    }
+    
+    class Property extends Field {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Property;
+        static Load(InName: string): Property;
+    }
+    
+    class EnumProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EnumProperty;
+        static Load(InName: string): EnumProperty;
+    }
+    
+    class Interface extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Interface;
+        static Load(InName: string): Interface;
+    }
+    
+    class LinkerPlaceholderClass extends Class {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LinkerPlaceholderClass;
+        static Load(InName: string): LinkerPlaceholderClass;
+    }
+    
+    class LinkerPlaceholderExportObject extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LinkerPlaceholderExportObject;
+        static Load(InName: string): LinkerPlaceholderExportObject;
+    }
+    
+    class LinkerPlaceholderFunction extends Function {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LinkerPlaceholderFunction;
+        static Load(InName: string): LinkerPlaceholderFunction;
+    }
+    
+    class MetaData extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MetaData;
+        static Load(InName: string): MetaData;
+    }
+    
+    class ObjectRedirector extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ObjectRedirector;
+        static Load(InName: string): ObjectRedirector;
+    }
+    
+    class ArrayProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ArrayProperty;
+        static Load(InName: string): ArrayProperty;
+    }
+    
+    class ObjectPropertyBase extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ObjectPropertyBase;
+        static Load(InName: string): ObjectPropertyBase;
+    }
+    
+    class BoolProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BoolProperty;
+        static Load(InName: string): BoolProperty;
+    }
+    
+    class NumericProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): NumericProperty;
+        static Load(InName: string): NumericProperty;
+    }
+    
+    class ByteProperty extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ByteProperty;
+        static Load(InName: string): ByteProperty;
+    }
+    
+    class ObjectProperty extends ObjectPropertyBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ObjectProperty;
+        static Load(InName: string): ObjectProperty;
+    }
+    
+    class ClassProperty extends ObjectProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ClassProperty;
+        static Load(InName: string): ClassProperty;
+    }
+    
+    class DelegateProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): DelegateProperty;
+        static Load(InName: string): DelegateProperty;
+    }
+    
+    class DoubleProperty extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): DoubleProperty;
+        static Load(InName: string): DoubleProperty;
+    }
+    
+    class FloatProperty extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FloatProperty;
+        static Load(InName: string): FloatProperty;
+    }
+    
+    class IntProperty extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): IntProperty;
+        static Load(InName: string): IntProperty;
+    }
+    
+    class Int16Property extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Int16Property;
+        static Load(InName: string): Int16Property;
+    }
+    
+    class Int64Property extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Int64Property;
+        static Load(InName: string): Int64Property;
+    }
+    
+    class Int8Property extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Int8Property;
+        static Load(InName: string): Int8Property;
+    }
+    
+    class InterfaceProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): InterfaceProperty;
+        static Load(InName: string): InterfaceProperty;
+    }
+    
+    class LazyObjectProperty extends ObjectPropertyBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LazyObjectProperty;
+        static Load(InName: string): LazyObjectProperty;
+    }
+    
+    class MapProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MapProperty;
+        static Load(InName: string): MapProperty;
+    }
+    
+    class MulticastDelegateProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MulticastDelegateProperty;
+        static Load(InName: string): MulticastDelegateProperty;
+    }
+    
+    class MulticastInlineDelegateProperty extends MulticastDelegateProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MulticastInlineDelegateProperty;
+        static Load(InName: string): MulticastInlineDelegateProperty;
+    }
+    
+    class MulticastSparseDelegateProperty extends MulticastDelegateProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MulticastSparseDelegateProperty;
+        static Load(InName: string): MulticastSparseDelegateProperty;
+    }
+    
+    class NameProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): NameProperty;
+        static Load(InName: string): NameProperty;
+    }
+    
+    class SetProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SetProperty;
+        static Load(InName: string): SetProperty;
+    }
+    
+    class SoftObjectProperty extends ObjectPropertyBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoftObjectProperty;
+        static Load(InName: string): SoftObjectProperty;
+    }
+    
+    class SoftClassProperty extends SoftObjectProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoftClassProperty;
+        static Load(InName: string): SoftClassProperty;
+    }
+    
+    class StrProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): StrProperty;
+        static Load(InName: string): StrProperty;
+    }
+    
+    class StructProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): StructProperty;
+        static Load(InName: string): StructProperty;
+    }
+    
+    class UInt16Property extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): UInt16Property;
+        static Load(InName: string): UInt16Property;
+    }
+    
+    class UInt32Property extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): UInt32Property;
+        static Load(InName: string): UInt32Property;
+    }
+    
+    class UInt64Property extends NumericProperty {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): UInt64Property;
+        static Load(InName: string): UInt64Property;
+    }
+    
+    class WeakObjectProperty extends ObjectPropertyBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WeakObjectProperty;
+        static Load(InName: string): WeakObjectProperty;
+    }
+    
+    class TextProperty extends Property {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TextProperty;
+        static Load(InName: string): TextProperty;
+    }
+    
+    class InputCoreTypes extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): InputCoreTypes;
+        static Load(InName: string): InputCoreTypes;
+    }
+    
+    class FontBulkData extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FontBulkData;
+        static Load(InName: string): FontBulkData;
+    }
+    
+    class FontFaceInterface extends Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FontFaceInterface;
+        static Load(InName: string): FontFaceInterface;
+    }
+    
+    class FontProviderInterface extends Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FontProviderInterface;
+        static Load(InName: string): FontProviderInterface;
+    }
+    
+    class SlateTypes extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SlateTypes;
+        static Load(InName: string): SlateTypes;
+    }
+    
+    class SlateWidgetStyleContainerBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SlateWidgetStyleContainerBase;
+        static Load(InName: string): SlateWidgetStyleContainerBase;
+    }
+    
+    class SlateWidgetStyleAsset extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CustomStyle: SlateWidgetStyleContainerBase;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SlateWidgetStyleAsset;
+        static Load(InName: string): SlateWidgetStyleAsset;
+    }
+    
+    class SlateWidgetStyleContainerInterface extends Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SlateWidgetStyleContainerInterface;
+        static Load(InName: string): SlateWidgetStyleContainerInterface;
+    }
+    
+    class SlateWidgetStyle {
         constructor();
-        constructor(Type: Class, Total: number);
-        Type: Class;
-        Total: number;
         static StaticClass(): Class;
     }
     
-    class Layer extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        LayerName: string;
-        bIsVisible: boolean;
-        ActorStats: TArray<LayerActorStats>;
+    class Margin {
+        constructor();
+        constructor(Left: number, Top: number, Right: number, Bottom: number);
+        Left: number;
+        Top: number;
+        Right: number;
+        Bottom: number;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Layer;
-        static Load(InName: string): Layer;
+    }
+    
+    enum ESlateColorStylingMode { UseColor_Specified, UseColor_Specified_Link, UseColor_Foreground, UseColor_Foreground_Subdued, UseColor_MAX}
+    class SlateColor {
+        constructor();
+        constructor(SpecifiedColor: LinearColor, ColorUseRule: ESlateColorStylingMode);
+        SpecifiedColor: LinearColor;
+        ColorUseRule: ESlateColorStylingMode;
+        static StaticClass(): Class;
+    }
+    
+    enum ESlateBrushDrawType { NoDrawType, Box, Border, Image, ESlateBrushDrawType_MAX}
+    enum ESlateBrushTileType { NoTile, Horizontal, Vertical, Both, ESlateBrushTileType_MAX}
+    enum ESlateBrushMirrorType { NoMirror, Horizontal, Vertical, Both, ESlateBrushMirrorType_MAX}
+    enum ESlateBrushImageType { NoImage, FullColor, Linear, ESlateBrushImageType_MAX}
+    class SlateBrush {
+        constructor();
+        constructor(ImageSize: Vector2D, Margin: Margin, Tint: LinearColor, TintColor: SlateColor, ResourceObject: Object, ResourceName: string, UVRegion: Box2D, DrawAs: ESlateBrushDrawType, Tiling: ESlateBrushTileType, Mirroring: ESlateBrushMirrorType, ImageType: ESlateBrushImageType, bIsDynamicallyLoaded: boolean, bHasUObject: boolean);
+        ImageSize: Vector2D;
+        Margin: Margin;
+        Tint: LinearColor;
+        TintColor: SlateColor;
+        ResourceObject: Object;
+        ResourceName: string;
+        UVRegion: Box2D;
+        DrawAs: ESlateBrushDrawType;
+        Tiling: ESlateBrushTileType;
+        Mirroring: ESlateBrushMirrorType;
+        ImageType: ESlateBrushImageType;
+        bIsDynamicallyLoaded: boolean;
+        bHasUObject: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class SlateSound {
+        constructor();
+        constructor(ResourceObject: Object);
+        ResourceObject: Object;
+        static StaticClass(): Class;
+    }
+    
+    class ButtonStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(Normal: SlateBrush, Hovered: SlateBrush, Pressed: SlateBrush, Disabled: SlateBrush, NormalPadding: Margin, PressedPadding: Margin, PressedSlateSound: SlateSound, HoveredSlateSound: SlateSound, PressedSound: string, HoveredSound: string);
+        Normal: SlateBrush;
+        Hovered: SlateBrush;
+        Pressed: SlateBrush;
+        Disabled: SlateBrush;
+        NormalPadding: Margin;
+        PressedPadding: Margin;
+        PressedSlateSound: SlateSound;
+        HoveredSlateSound: SlateSound;
+        PressedSound: string;
+        HoveredSound: string;
+        static StaticClass(): Class;
+    }
+    
+    class ButtonWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ButtonStyle: ButtonStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ButtonWidgetStyle;
+        static Load(InName: string): ButtonWidgetStyle;
+    }
+    
+    enum ESlateCheckBoxType { CheckBox, ToggleButton, ESlateCheckBoxType_MAX}
+    class CheckBoxStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(CheckBoxType: ESlateCheckBoxType, UncheckedImage: SlateBrush, UncheckedHoveredImage: SlateBrush, UncheckedPressedImage: SlateBrush, CheckedImage: SlateBrush, CheckedHoveredImage: SlateBrush, CheckedPressedImage: SlateBrush, UndeterminedImage: SlateBrush, UndeterminedHoveredImage: SlateBrush, UndeterminedPressedImage: SlateBrush, Padding: Margin, ForegroundColor: SlateColor, BorderBackgroundColor: SlateColor, CheckedSlateSound: SlateSound, UncheckedSlateSound: SlateSound, HoveredSlateSound: SlateSound, CheckedSound: string, UncheckedSound: string, HoveredSound: string);
+        CheckBoxType: ESlateCheckBoxType;
+        UncheckedImage: SlateBrush;
+        UncheckedHoveredImage: SlateBrush;
+        UncheckedPressedImage: SlateBrush;
+        CheckedImage: SlateBrush;
+        CheckedHoveredImage: SlateBrush;
+        CheckedPressedImage: SlateBrush;
+        UndeterminedImage: SlateBrush;
+        UndeterminedHoveredImage: SlateBrush;
+        UndeterminedPressedImage: SlateBrush;
+        Padding: Margin;
+        ForegroundColor: SlateColor;
+        BorderBackgroundColor: SlateColor;
+        CheckedSlateSound: SlateSound;
+        UncheckedSlateSound: SlateSound;
+        HoveredSlateSound: SlateSound;
+        CheckedSound: string;
+        UncheckedSound: string;
+        HoveredSound: string;
+        static StaticClass(): Class;
+    }
+    
+    class CheckBoxWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CheckBoxStyle: CheckBoxStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CheckBoxWidgetStyle;
+        static Load(InName: string): CheckBoxWidgetStyle;
+    }
+    
+    class ComboButtonStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(ButtonStyle: ButtonStyle, DownArrowImage: SlateBrush, MenuBorderBrush: SlateBrush, MenuBorderPadding: Margin);
+        ButtonStyle: ButtonStyle;
+        DownArrowImage: SlateBrush;
+        MenuBorderBrush: SlateBrush;
+        MenuBorderPadding: Margin;
+        static StaticClass(): Class;
+    }
+    
+    class ComboBoxStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(ComboButtonStyle: ComboButtonStyle, PressedSlateSound: SlateSound, SelectionChangeSlateSound: SlateSound, PressedSound: string, SelectionChangeSound: string);
+        ComboButtonStyle: ComboButtonStyle;
+        PressedSlateSound: SlateSound;
+        SelectionChangeSlateSound: SlateSound;
+        PressedSound: string;
+        SelectionChangeSound: string;
+        static StaticClass(): Class;
+    }
+    
+    class ComboBoxWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ComboBoxStyle: ComboBoxStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ComboBoxWidgetStyle;
+        static Load(InName: string): ComboBoxWidgetStyle;
+    }
+    
+    class ComboButtonWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ComboButtonStyle: ComboButtonStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ComboButtonWidgetStyle;
+        static Load(InName: string): ComboButtonWidgetStyle;
+    }
+    
+    class FontOutlineSettings {
+        constructor();
+        constructor(OutlineSize: number, bSeparateFillAlpha: boolean, bApplyOutlineToDropShadows: boolean, OutlineMaterial: Object, OutlineColor: LinearColor);
+        OutlineSize: number;
+        bSeparateFillAlpha: boolean;
+        bApplyOutlineToDropShadows: boolean;
+        OutlineMaterial: Object;
+        OutlineColor: LinearColor;
+        static StaticClass(): Class;
+    }
+    
+    enum EFontHinting { Default, Auto, AutoLight, Monochrome, None, EFontHinting_MAX}
+    class SlateFontInfo {
+        constructor();
+        constructor(FontObject: Object, FontMaterial: Object, OutlineSettings: FontOutlineSettings, TypefaceFontName: string, Size: number, FontName: string, Hinting: EFontHinting);
+        FontObject: Object;
+        FontMaterial: Object;
+        OutlineSettings: FontOutlineSettings;
+        TypefaceFontName: string;
+        Size: number;
+        FontName: string;
+        Hinting: EFontHinting;
+        static StaticClass(): Class;
+    }
+    
+    class ScrollBarStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(HorizontalBackgroundImage: SlateBrush, VerticalBackgroundImage: SlateBrush, VerticalTopSlotImage: SlateBrush, HorizontalTopSlotImage: SlateBrush, VerticalBottomSlotImage: SlateBrush, HorizontalBottomSlotImage: SlateBrush, NormalThumbImage: SlateBrush, HoveredThumbImage: SlateBrush, DraggedThumbImage: SlateBrush);
+        HorizontalBackgroundImage: SlateBrush;
+        VerticalBackgroundImage: SlateBrush;
+        VerticalTopSlotImage: SlateBrush;
+        HorizontalTopSlotImage: SlateBrush;
+        VerticalBottomSlotImage: SlateBrush;
+        HorizontalBottomSlotImage: SlateBrush;
+        NormalThumbImage: SlateBrush;
+        HoveredThumbImage: SlateBrush;
+        DraggedThumbImage: SlateBrush;
+        static StaticClass(): Class;
+    }
+    
+    class EditableTextBoxStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(BackgroundImageNormal: SlateBrush, BackgroundImageHovered: SlateBrush, BackgroundImageFocused: SlateBrush, BackgroundImageReadOnly: SlateBrush, Padding: Margin, Font: SlateFontInfo, ForegroundColor: SlateColor, BackgroundColor: SlateColor, ReadOnlyForegroundColor: SlateColor, HScrollBarPadding: Margin, VScrollBarPadding: Margin, ScrollBarStyle: ScrollBarStyle);
+        BackgroundImageNormal: SlateBrush;
+        BackgroundImageHovered: SlateBrush;
+        BackgroundImageFocused: SlateBrush;
+        BackgroundImageReadOnly: SlateBrush;
+        Padding: Margin;
+        Font: SlateFontInfo;
+        ForegroundColor: SlateColor;
+        BackgroundColor: SlateColor;
+        ReadOnlyForegroundColor: SlateColor;
+        HScrollBarPadding: Margin;
+        VScrollBarPadding: Margin;
+        ScrollBarStyle: ScrollBarStyle;
+        static StaticClass(): Class;
+    }
+    
+    class EditableTextBoxWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        EditableTextBoxStyle: EditableTextBoxStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EditableTextBoxWidgetStyle;
+        static Load(InName: string): EditableTextBoxWidgetStyle;
+    }
+    
+    class EditableTextStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(Font: SlateFontInfo, ColorAndOpacity: SlateColor, BackgroundImageSelected: SlateBrush, BackgroundImageComposing: SlateBrush, CaretImage: SlateBrush);
+        Font: SlateFontInfo;
+        ColorAndOpacity: SlateColor;
+        BackgroundImageSelected: SlateBrush;
+        BackgroundImageComposing: SlateBrush;
+        CaretImage: SlateBrush;
+        static StaticClass(): Class;
+    }
+    
+    class EditableTextWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        EditableTextStyle: EditableTextStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EditableTextWidgetStyle;
+        static Load(InName: string): EditableTextWidgetStyle;
+    }
+    
+    class ProgressBarStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(BackgroundImage: SlateBrush, FillImage: SlateBrush, MarqueeImage: SlateBrush);
+        BackgroundImage: SlateBrush;
+        FillImage: SlateBrush;
+        MarqueeImage: SlateBrush;
+        static StaticClass(): Class;
+    }
+    
+    class ProgressWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ProgressBarStyle: ProgressBarStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ProgressWidgetStyle;
+        static Load(InName: string): ProgressWidgetStyle;
+    }
+    
+    class ScrollBarWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ScrollBarStyle: ScrollBarStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ScrollBarWidgetStyle;
+        static Load(InName: string): ScrollBarWidgetStyle;
+    }
+    
+    class ScrollBoxStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(TopShadowBrush: SlateBrush, BottomShadowBrush: SlateBrush, LeftShadowBrush: SlateBrush, RightShadowBrush: SlateBrush);
+        TopShadowBrush: SlateBrush;
+        BottomShadowBrush: SlateBrush;
+        LeftShadowBrush: SlateBrush;
+        RightShadowBrush: SlateBrush;
+        static StaticClass(): Class;
+    }
+    
+    class ScrollBoxWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ScrollBoxStyle: ScrollBoxStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ScrollBoxWidgetStyle;
+        static Load(InName: string): ScrollBoxWidgetStyle;
+    }
+    
+    class SlateSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bExplicitCanvasChildZOrder: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SlateSettings;
+        static Load(InName: string): SlateSettings;
+    }
+    
+    class SpinBoxStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(BackgroundBrush: SlateBrush, HoveredBackgroundBrush: SlateBrush, ActiveFillBrush: SlateBrush, InactiveFillBrush: SlateBrush, ArrowsImage: SlateBrush, ForegroundColor: SlateColor, TextPadding: Margin);
+        BackgroundBrush: SlateBrush;
+        HoveredBackgroundBrush: SlateBrush;
+        ActiveFillBrush: SlateBrush;
+        InactiveFillBrush: SlateBrush;
+        ArrowsImage: SlateBrush;
+        ForegroundColor: SlateColor;
+        TextPadding: Margin;
+        static StaticClass(): Class;
+    }
+    
+    class SpinBoxWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SpinBoxStyle: SpinBoxStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SpinBoxWidgetStyle;
+        static Load(InName: string): SpinBoxWidgetStyle;
+    }
+    
+    class TextBlockStyle extends SlateWidgetStyle {
+        constructor();
+        constructor(Font: SlateFontInfo, ColorAndOpacity: SlateColor, ShadowOffset: Vector2D, ShadowColorAndOpacity: LinearColor, SelectedBackgroundColor: SlateColor, HighlightColor: LinearColor, HighlightShape: SlateBrush, StrikeBrush: SlateBrush, UnderlineBrush: SlateBrush);
+        Font: SlateFontInfo;
+        ColorAndOpacity: SlateColor;
+        ShadowOffset: Vector2D;
+        ShadowColorAndOpacity: LinearColor;
+        SelectedBackgroundColor: SlateColor;
+        HighlightColor: LinearColor;
+        HighlightShape: SlateBrush;
+        StrikeBrush: SlateBrush;
+        UnderlineBrush: SlateBrush;
+        static StaticClass(): Class;
+    }
+    
+    class TextBlockWidgetStyle extends SlateWidgetStyleContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        TextBlockStyle: TextBlockStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TextBlockWidgetStyle;
+        static Load(InName: string): TextBlockWidgetStyle;
+    }
+    
+    class ToolMenuBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenuBase;
+        static Load(InName: string): ToolMenuBase;
+    }
+    
+    enum EColorVisionDeficiency { NormalVision, Deuteranope, Protanope, Tritanope, EColorVisionDeficiency_MAX}
+    enum ELogTimes { None, UTC, SinceGStartTime, Local, ELogTimes_MAX}
+    enum EAssetEditorOpenLocation { Default, NewWindow, MainWindow, ContentBrowser, LastDockedWindowOrNewWindow, LastDockedWindowOrMainWindow, LastDockedWindowOrContentBrowser, EAssetEditorOpenLocation_MAX}
+    class EditorStyleSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bEnableHighDPIAwareness: boolean;
+        bEnableUserEditorLayoutManagement: boolean;
+        ColorVisionDeficiencyPreviewType: EColorVisionDeficiency;
+        ColorVisionDeficiencySeverity: number;
+        bColorVisionDeficiencyCorrection: boolean;
+        bColorVisionDeficiencyCorrectionPreviewWithDeficiency: boolean;
+        SelectionColor: LinearColor;
+        PressedSelectionColor: LinearColor;
+        InactiveSelectionColor: LinearColor;
+        KeyboardFocusColor: LinearColor;
+        EditorWindowBackgroundColor: LinearColor;
+        EditorMainWindowBackgroundOverride: SlateBrush;
+        EditorChildWindowBackgroundOverride: SlateBrush;
+        bResetEditorWindowBackgroundSettings: boolean;
+        bUseSmallToolBarIcons: boolean;
+        bUseGrid: boolean;
+        RegularColor: LinearColor;
+        RuleColor: LinearColor;
+        CenterColor: LinearColor;
+        GridSnapSize: number;
+        bEnableWindowAnimations: boolean;
+        bShowFriendlyNames: boolean;
+        bExpandConfigurationMenus: boolean;
+        bShowProjectMenus: boolean;
+        bShowLaunchMenus: boolean;
+        LogBackgroundColor: LinearColor;
+        LogSelectionBackgroundColor: LinearColor;
+        LogNormalColor: LinearColor;
+        LogCommandColor: LinearColor;
+        LogWarningColor: LinearColor;
+        LogErrorColor: LinearColor;
+        bShowAllAdvancedDetails: boolean;
+        bShowHiddenPropertiesWhilePlaying: boolean;
+        LogFontSize: number;
+        LogTimestampMode: ELogTimes;
+        bPromoteOutputLogWarningsDuringPIE: boolean;
+        AssetEditorOpenLocation: EAssetEditorOpenLocation;
+        bEnableColorizedEditorTabs: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EditorStyleSettings;
+        static Load(InName: string): EditorStyleSettings;
+    }
+    
+    enum EMobileCSMQuality { NoFiltering, PCF_1x1, PCF_2x2, EMobileCSMQuality_MAX}
+    class MaterialQualityOverrides {
+        constructor();
+        constructor(bDiscardQualityDuringCook: boolean, bEnableOverride: boolean, bForceFullyRough: boolean, bForceNonMetal: boolean, bForceDisableLMDirectionality: boolean, bForceLQReflections: boolean, bDisableMaterialNormalCalculation: boolean, MobileCSMQuality: EMobileCSMQuality);
+        bDiscardQualityDuringCook: boolean;
+        bEnableOverride: boolean;
+        bForceFullyRough: boolean;
+        bForceNonMetal: boolean;
+        bForceDisableLMDirectionality: boolean;
+        bForceLQReflections: boolean;
+        bDisableMaterialNormalCalculation: boolean;
+        MobileCSMQuality: EMobileCSMQuality;
+        static StaticClass(): Class;
+    }
+    
+    class ShaderPlatformQualitySettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        QualityOverrides: FixSizeArray<MaterialQualityOverrides>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ShaderPlatformQualitySettings;
+        static Load(InName: string): ShaderPlatformQualitySettings;
+    }
+    
+    class MaterialShaderQualitySettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ForwardSettingMap: TMap<string, ShaderPlatformQualitySettings>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MaterialShaderQualitySettings;
+        static Load(InName: string): MaterialShaderQualitySettings;
+    }
+    
+    class MeshDescription extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MeshDescription;
+        static Load(InName: string): MeshDescription;
+    }
+    
+    class ElementID {
+        constructor();
+        constructor(IDValue: number);
+        IDValue: number;
+        static StaticClass(): Class;
+    }
+    
+    class VertexID extends ElementID {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class PolygonID extends ElementID {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class VertexInstanceID extends ElementID {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class PolygonGroupID extends ElementID {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class TriangleID extends ElementID {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class EdgeID extends ElementID {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class MeshDescriptionBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SetVertexPosition(VertexID: VertexID, Position: Vector): void;
+        SetPolygonVertexInstance(PolygonID: PolygonID, PerimeterIndex: number, VertexInstanceID: VertexInstanceID): void;
+        SetPolygonPolygonGroup(PolygonID: PolygonID, PolygonGroupID: PolygonGroupID): void;
+        ReversePolygonFacing(PolygonID: PolygonID): void;
+        ReserveNewVertices(NumberOfNewVertices: number): void;
+        ReserveNewVertexInstances(NumberOfNewVertexInstances: number): void;
+        ReserveNewTriangles(NumberOfNewTriangles: number): void;
+        ReserveNewPolygons(NumberOfNewPolygons: number): void;
+        ReserveNewPolygonGroups(NumberOfNewPolygonGroups: number): void;
+        ReserveNewEdges(NumberOfNewEdges: number): void;
+        IsVertexValid(VertexID: VertexID): boolean;
+        IsVertexOrphaned(VertexID: VertexID): boolean;
+        IsVertexInstanceValid(VertexInstanceID: VertexInstanceID): boolean;
+        IsTriangleValid(TriangleID: TriangleID): boolean;
+        IsTrianglePartOfNgon(TriangleID: TriangleID): boolean;
+        IsPolygonValid(PolygonID: PolygonID): boolean;
+        IsPolygonGroupValid(PolygonGroupID: PolygonGroupID): boolean;
+        IsEmpty(): boolean;
+        IsEdgeValid(EdgeID: EdgeID): boolean;
+        IsEdgeInternalToPolygon(EdgeID: EdgeID, PolygonID: PolygonID): boolean;
+        IsEdgeInternal(EdgeID: EdgeID): boolean;
+        GetVertexVertexInstances(VertexID: VertexID, OutVertexInstanceIDs: $Ref<TArray<VertexInstanceID>>): void;
+        GetVertexPosition(VertexID: VertexID): Vector;
+        GetVertexPairEdge(VertexID0: VertexID, VertexID1: VertexID): EdgeID;
+        GetVertexInstanceVertex(VertexInstanceID: VertexInstanceID): VertexID;
+        GetVertexInstancePairEdge(VertexInstanceID0: VertexInstanceID, VertexInstanceID1: VertexInstanceID): EdgeID;
+        GetVertexInstanceForTriangleVertex(TriangleID: TriangleID, VertexID: VertexID): VertexInstanceID;
+        GetVertexInstanceForPolygonVertex(PolygonID: PolygonID, VertexID: VertexID): VertexInstanceID;
+        GetVertexInstanceConnectedTriangles(VertexInstanceID: VertexInstanceID, OutConnectedTriangleIDs: $Ref<TArray<TriangleID>>): void;
+        GetVertexInstanceConnectedPolygons(VertexInstanceID: VertexInstanceID, OutConnectedPolygonIDs: $Ref<TArray<PolygonID>>): void;
+        GetVertexConnectedTriangles(VertexID: VertexID, OutConnectedTriangleIDs: $Ref<TArray<TriangleID>>): void;
+        GetVertexConnectedPolygons(VertexID: VertexID, OutConnectedPolygonIDs: $Ref<TArray<PolygonID>>): void;
+        GetVertexConnectedEdges(VertexID: VertexID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
+        GetVertexAdjacentVertices(VertexID: VertexID, OutAdjacentVertexIDs: $Ref<TArray<VertexID>>): void;
+        GetTriangleVertices(TriangleID: TriangleID, OutVertexIDs: $Ref<TArray<VertexID>>): void;
+        GetTriangleVertexInstances(TriangleID: TriangleID, OutVertexInstanceIDs: $Ref<TArray<VertexInstanceID>>): void;
+        GetTriangleVertexInstance(TriangleID: TriangleID, Index: number): VertexInstanceID;
+        GetTrianglePolygonGroup(TriangleID: TriangleID): PolygonGroupID;
+        GetTrianglePolygon(TriangleID: TriangleID): PolygonID;
+        GetTriangleEdges(TriangleID: TriangleID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
+        GetTriangleAdjacentTriangles(TriangleID: TriangleID, OutTriangleIDs: $Ref<TArray<TriangleID>>): void;
+        GetPolygonVertices(PolygonID: PolygonID, OutVertexIDs: $Ref<TArray<VertexID>>): void;
+        GetPolygonVertexInstances(PolygonID: PolygonID, OutVertexInstanceIDs: $Ref<TArray<VertexInstanceID>>): void;
+        GetPolygonTriangles(PolygonID: PolygonID, OutTriangleIDs: $Ref<TArray<TriangleID>>): void;
+        GetPolygonPolygonGroup(PolygonID: PolygonID): PolygonGroupID;
+        GetPolygonPerimeterEdges(PolygonID: PolygonID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
+        GetPolygonInternalEdges(PolygonID: PolygonID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
+        GetPolygonGroupPolygons(PolygonGroupID: PolygonGroupID, OutPolygonIDs: $Ref<TArray<PolygonID>>): void;
+        GetPolygonAdjacentPolygons(PolygonID: PolygonID, OutPolygonIDs: $Ref<TArray<PolygonID>>): void;
+        GetNumVertexVertexInstances(VertexID: VertexID): number;
+        GetNumVertexInstanceConnectedTriangles(VertexInstanceID: VertexInstanceID): number;
+        GetNumVertexInstanceConnectedPolygons(VertexInstanceID: VertexInstanceID): number;
+        GetNumVertexConnectedTriangles(VertexID: VertexID): number;
+        GetNumVertexConnectedPolygons(VertexID: VertexID): number;
+        GetNumVertexConnectedEdges(VertexID: VertexID): number;
+        GetNumPolygonVertices(PolygonID: PolygonID): number;
+        GetNumPolygonTriangles(PolygonID: PolygonID): number;
+        GetNumPolygonInternalEdges(PolygonID: PolygonID): number;
+        GetNumPolygonGroupPolygons(PolygonGroupID: PolygonGroupID): number;
+        GetNumEdgeConnectedTriangles(EdgeID: EdgeID): number;
+        GetNumEdgeConnectedPolygons(EdgeID: EdgeID): number;
+        GetEdgeVertices(EdgeID: EdgeID, OutVertexIDs: $Ref<TArray<VertexID>>): void;
+        GetEdgeVertex(EdgeID: EdgeID, VertexNumber: number): VertexID;
+        GetEdgeConnectedTriangles(EdgeID: EdgeID, OutConnectedTriangleIDs: $Ref<TArray<TriangleID>>): void;
+        GetEdgeConnectedPolygons(EdgeID: EdgeID, OutConnectedPolygonIDs: $Ref<TArray<PolygonID>>): void;
+        Empty(): void;
+        DeleteVertexInstance(VertexInstanceID: VertexInstanceID, OrphanedVertices: $Ref<TArray<VertexID>>): void;
+        DeleteVertex(VertexID: VertexID): void;
+        DeleteTriangle(TriangleID: TriangleID, OrphanedEdges: $Ref<TArray<EdgeID>>, OrphanedVertexInstances: $Ref<TArray<VertexInstanceID>>, OrphanedPolygonGroupsPtr: $Ref<TArray<PolygonGroupID>>): void;
+        DeletePolygonGroup(PolygonGroupID: PolygonGroupID): void;
+        DeletePolygon(PolygonID: PolygonID, OrphanedEdges: $Ref<TArray<EdgeID>>, OrphanedVertexInstances: $Ref<TArray<VertexInstanceID>>, OrphanedPolygonGroups: $Ref<TArray<PolygonGroupID>>): void;
+        DeleteEdge(EdgeID: EdgeID, OrphanedVertices: $Ref<TArray<VertexID>>): void;
+        CreateVertexWithID(VertexID: VertexID): void;
+        CreateVertexInstanceWithID(VertexInstanceID: VertexInstanceID, VertexID: VertexID): void;
+        CreateVertexInstance(VertexID: VertexID): VertexInstanceID;
+        CreateVertex(): VertexID;
+        CreateTriangleWithID(TriangleID: TriangleID, PolygonGroupID: PolygonGroupID, VertexInstanceIDs: TArray<VertexInstanceID>, NewEdgeIDs: $Ref<TArray<EdgeID>>): void;
+        CreateTriangle(PolygonGroupID: PolygonGroupID, VertexInstanceIDs: TArray<VertexInstanceID>, NewEdgeIDs: $Ref<TArray<EdgeID>>): TriangleID;
+        CreatePolygonWithID(PolygonID: PolygonID, PolygonGroupID: PolygonGroupID, VertexInstanceIDs: $Ref<TArray<VertexInstanceID>>, NewEdgeIDs: $Ref<TArray<EdgeID>>): void;
+        CreatePolygonGroupWithID(PolygonGroupID: PolygonGroupID): void;
+        CreatePolygonGroup(): PolygonGroupID;
+        CreatePolygon(PolygonGroupID: PolygonGroupID, VertexInstanceIDs: $Ref<TArray<VertexInstanceID>>, NewEdgeIDs: $Ref<TArray<EdgeID>>): PolygonID;
+        CreateEdgeWithID(EdgeID: EdgeID, VertexID0: VertexID, VertexID1: VertexID): void;
+        CreateEdge(VertexID0: VertexID, VertexID1: VertexID): EdgeID;
+        ComputePolygonTriangulation(PolygonID: PolygonID): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MeshDescriptionBase;
+        static Load(InName: string): MeshDescriptionBase;
+    }
+    
+    class StaticMeshDescription extends MeshDescriptionBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SetVertexInstanceUV(VertexInstanceID: VertexInstanceID, UV: Vector2D, UVIndex?: number /* = 0 */): void;
+        SetPolygonGroupMaterialSlotName(PolygonGroupID: PolygonGroupID, SlotName: string): void;
+        GetVertexInstanceUV(VertexInstanceID: VertexInstanceID, UVIndex?: number /* = 0 */): Vector2D;
+        CreateCube(Center: Vector, HalfExtents: Vector, PolygonGroup: PolygonGroupID, PolygonID_PlusX: $Ref<PolygonID>, PolygonID_MinusX: $Ref<PolygonID>, PolygonID_PlusY: $Ref<PolygonID>, PolygonID_MinusY: $Ref<PolygonID>, PolygonID_PlusZ: $Ref<PolygonID>, PolygonID_MinusZ: $Ref<PolygonID>): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): StaticMeshDescription;
+        static Load(InName: string): StaticMeshDescription;
+    }
+    
+    class ClothingAssetFactoryBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ClothingAssetFactoryBase;
+        static Load(InName: string): ClothingAssetFactoryBase;
+    }
+    
+    class NetAnalyticsDataConfig {
+        constructor();
+        constructor(DataName: string, bEnabled: boolean);
+        DataName: string;
+        bEnabled: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class NetAnalyticsAggregatorConfig extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        NetAnalyticsData: TArray<NetAnalyticsDataConfig>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): NetAnalyticsAggregatorConfig;
+        static Load(InName: string): NetAnalyticsAggregatorConfig;
+    }
+    
+    class AssetRegistryImpl extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AssetRegistryImpl;
+        static Load(InName: string): AssetRegistryImpl;
+    }
+    
+    class AssetData {
+        constructor();
+        constructor(ObjectPath: string, PackageName: string, PackagePath: string, AssetName: string, AssetClass: string);
+        ObjectPath: string;
+        PackageName: string;
+        PackagePath: string;
+        AssetName: string;
+        AssetClass: string;
+        static StaticClass(): Class;
+    }
+    
+    class SoftObjectPath {
+        constructor();
+        constructor(AssetPathName: string, SubPathString: string);
+        AssetPathName: string;
+        SubPathString: string;
+        static StaticClass(): Class;
+    }
+    
+    class ARFilter {
+        constructor();
+        constructor(PackageNames: TArray<string>, PackagePaths: TArray<string>, ObjectPaths: TArray<string>, ClassNames: TArray<string>, RecursiveClassesExclusionSet: TSet<string>, bRecursivePaths: boolean, bRecursiveClasses: boolean, bIncludeOnlyOnDiskAssets: boolean);
+        PackageNames: TArray<string>;
+        PackagePaths: TArray<string>;
+        ObjectPaths: TArray<string>;
+        ClassNames: TArray<string>;
+        RecursiveClassesExclusionSet: TSet<string>;
+        bRecursivePaths: boolean;
+        bRecursiveClasses: boolean;
+        bIncludeOnlyOnDiskAssets: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class TagAndValue {
+        constructor();
+        constructor(Tag: string, Value: string);
+        Tag: string;
+        Value: string;
+        static StaticClass(): Class;
+    }
+    
+    class AssetRegistryDependencyOptions {
+        constructor();
+        constructor(bIncludeSoftPackageReferences: boolean, bIncludeHardPackageReferences: boolean, bIncludeSearchableNames: boolean, bIncludeSoftManagementReferences: boolean, bIncludeHardManagementReferences: boolean);
+        bIncludeSoftPackageReferences: boolean;
+        bIncludeHardPackageReferences: boolean;
+        bIncludeSearchableNames: boolean;
+        bIncludeSoftManagementReferences: boolean;
+        bIncludeHardManagementReferences: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class AssetRegistry extends Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        UseFilterToExcludeAssets(AssetDataList: $Ref<TArray<AssetData>>, Filter: ARFilter): void;
+        SearchAllAssets(bSynchronousSearch: boolean): void;
+        ScanPathsSynchronous(InPaths: TArray<string>, bForceRescan?: boolean /* = false */): void;
+        ScanModifiedAssetFiles(InFilePaths: TArray<string>): void;
+        ScanFilesSynchronous(InFilePaths: TArray<string>, bForceRescan?: boolean /* = false */): void;
+        RunAssetsThroughFilter(AssetDataList: $Ref<TArray<AssetData>>, Filter: ARFilter): void;
+        PrioritizeSearchPath(PathToPrioritize: string): void;
+        K2_GetReferencers(PackageName: string, ReferenceOptions: AssetRegistryDependencyOptions, OutReferencers: $Ref<TArray<string>>): boolean;
+        K2_GetDependencies(PackageName: string, DependencyOptions: AssetRegistryDependencyOptions, OutDependencies: $Ref<TArray<string>>): boolean;
+        IsLoadingAssets(): boolean;
+        HasAssets(PackagePath: string, bRecursive?: boolean /* = false */): boolean;
+        GetSubPaths(InBasePath: string, OutPathList: $Ref<TArray<string>>, bInRecurse: boolean): void;
+        GetAssetsByPath(PackagePath: string, OutAssetData: $Ref<TArray<AssetData>>, bRecursive?: boolean /* = false */, bIncludeOnlyOnDiskAssets?: boolean /* = false */): boolean;
+        GetAssetsByPackageName(PackageName: string, OutAssetData: $Ref<TArray<AssetData>>, bIncludeOnlyOnDiskAssets?: boolean /* = false */): boolean;
+        GetAssetsByClass(ClassName: string, OutAssetData: $Ref<TArray<AssetData>>, bSearchSubClasses?: boolean /* = false */): boolean;
+        GetAssets(Filter: ARFilter, OutAssetData: $Ref<TArray<AssetData>>): boolean;
+        GetAssetByObjectPath(ObjectPath: string, bIncludeOnlyOnDiskAssets?: boolean /* = false */): AssetData;
+        GetAllCachedPaths(OutPathList: $Ref<TArray<string>>): void;
+        GetAllAssets(OutAssetData: $Ref<TArray<AssetData>>, bIncludeOnlyOnDiskAssets?: boolean /* = false */): boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AssetRegistry;
+        static Load(InName: string): AssetRegistry;
+    }
+    
+    class AssetRegistryHelpers extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static ToSoftObjectPath(InAssetData: AssetData): SoftObjectPath;
+        static SetFilterTagsAndValues(InFilter: ARFilter, InTagsAndValues: TArray<TagAndValue>): ARFilter;
+        static IsValid(InAssetData: AssetData): boolean;
+        static IsUAsset(InAssetData: AssetData): boolean;
+        static IsRedirector(InAssetData: AssetData): boolean;
+        static IsAssetLoaded(InAssetData: AssetData): boolean;
+        static GetTagValue(InAssetData: AssetData, InTagName: string, OutTagValue: $Ref<string>): boolean;
+        static GetFullName(InAssetData: AssetData): string;
+        static GetExportTextName(InAssetData: AssetData): string;
+        static GetClass(InAssetData: AssetData): Class;
+        static GetAssetRegistry(): AssetRegistry;
+        static GetAsset(InAssetData: AssetData): Object;
+        static CreateAssetData(InAsset: $Nullable<Object>, bAllowBlueprintClass?: boolean /* = false */): AssetData;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AssetRegistryHelpers;
+        static Load(InName: string): AssetRegistryHelpers;
+    }
+    
+    class AutoCompleteCommand {
+        constructor();
+        constructor(Command: string, Desc: string);
+        Command: string;
+        Desc: string;
+        static StaticClass(): Class;
+    }
+    
+    class ConsoleSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        MaxScrollbackSize: number;
+        ManualAutoCompleteList: TArray<AutoCompleteCommand>;
+        AutoCompleteMapPaths: TArray<string>;
+        BackgroundOpacityPercentage: number;
+        bOrderTopToBottom: boolean;
+        bDisplayHelpInAutoComplete: boolean;
+        InputColor: Color;
+        HistoryColor: Color;
+        AutoCompleteCommandColor: Color;
+        AutoCompleteCVarColor: Color;
+        AutoCompleteFadedColor: Color;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ConsoleSettings;
+        static Load(InName: string): ConsoleSettings;
+    }
+    
+    enum ETwoPlayerSplitScreenType { Horizontal, Vertical, ETwoPlayerSplitScreenType_MAX}
+    enum EThreePlayerSplitScreenType { FavorTop, FavorBottom, Vertical, Horizontal, EThreePlayerSplitScreenType_MAX}
+    enum EFourPlayerSplitScreenType { Grid, Vertical, Horizontal, EFourPlayerSplitScreenType_MAX}
+    class SoftClassPath extends SoftObjectPath {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class GameModeName {
+        constructor();
+        constructor(Name: string, GameMode: SoftClassPath);
+        Name: string;
+        GameMode: SoftClassPath;
+        static StaticClass(): Class;
+    }
+    
+    class GameMapsSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        EditorStartupMap: SoftObjectPath;
+        LocalMapOptions: string;
+        TransitionMap: SoftObjectPath;
+        bUseSplitscreen: boolean;
+        TwoPlayerSplitscreenLayout: ETwoPlayerSplitScreenType;
+        ThreePlayerSplitscreenLayout: EThreePlayerSplitScreenType;
+        FourPlayerSplitscreenLayout: EFourPlayerSplitScreenType;
+        bOffsetPlayerGamepadIds: boolean;
+        GameInstanceClass: SoftClassPath;
+        GameDefaultMap: SoftObjectPath;
+        ServerDefaultMap: SoftObjectPath;
+        GlobalDefaultGameMode: SoftClassPath;
+        GlobalDefaultServerGameMode: SoftClassPath;
+        GameModeMapPrefixes: TArray<GameModeName>;
+        GameModeClassAliases: TArray<GameModeName>;
+        SetSkipAssigningGamepadToPlayer1(bSkipFirstPlayer?: boolean /* = true */): void;
+        GetSkipAssigningGamepadToPlayer1(): boolean;
+        static GetGameMapsSettings(): GameMapsSettings;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameMapsSettings;
+        static Load(InName: string): GameMapsSettings;
+    }
+    
+    class GameNetworkManagerSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        MinDynamicBandwidth: number;
+        MaxDynamicBandwidth: number;
+        TotalNetBandwidth: number;
+        BadPingThreshold: number;
+        bIsStandbyCheckingEnabled: boolean;
+        StandbyRxCheatTime: number;
+        StandbyTxCheatTime: number;
+        PercentMissingForRxStandby: number;
+        PercentMissingForTxStandby: number;
+        PercentForBadPing: number;
+        JoinInProgressStandbyWaitTime: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameNetworkManagerSettings;
+        static Load(InName: string): GameNetworkManagerSettings;
+    }
+    
+    class GameSessionSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        MaxSpectators: number;
+        MaxPlayers: number;
+        bRequiresPushToTalk: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameSessionSettings;
+        static Load(InName: string): GameSessionSettings;
+    }
+    
+    class GeneralEngineSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GeneralEngineSettings;
+        static Load(InName: string): GeneralEngineSettings;
+    }
+    
+    class GeneralProjectSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CompanyName: string;
+        CompanyDistinguishedName: string;
+        CopyrightNotice: string;
+        Description: string;
+        Homepage: string;
+        LicensingTerms: string;
+        PrivacyPolicy: string;
+        ProjectID: Guid;
+        ProjectName: string;
+        ProjectVersion: string;
+        SupportContact: string;
+        ProjectDisplayedTitle: string;
+        ProjectDebugTitleInfo: string;
+        bShouldWindowPreserveAspectRatio: boolean;
+        bUseBorderlessWindow: boolean;
+        bStartInVR: boolean;
+        bStartInAR: boolean;
+        bSupportAR: boolean;
+        bAllowWindowResize: boolean;
+        bAllowClose: boolean;
+        bAllowMaximize: boolean;
+        bAllowMinimize: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GeneralProjectSettings;
+        static Load(InName: string): GeneralProjectSettings;
+    }
+    
+    class HudSettings extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bShowHUD: boolean;
+        DebugDisplay: TArray<string>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): HudSettings;
+        static Load(InName: string): HudSettings;
+    }
+    
+    class HandlerComponentFactory extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): HandlerComponentFactory;
+        static Load(InName: string): HandlerComponentFactory;
+    }
+    
+    class PacketHandlerProfileConfig extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Components: TArray<string>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PacketHandlerProfileConfig;
+        static Load(InName: string): PacketHandlerProfileConfig;
+    }
+    
+    class ClothConfigBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ClothConfigBase;
+        static Load(InName: string): ClothConfigBase;
+    }
+    
+    class ClothingAssetBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ImportedFilePath: string;
+        AssetGuid: Guid;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ClothingAssetBase;
+        static Load(InName: string): ClothingAssetBase;
+    }
+    
+    class ClothingSimulationFactory extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ClothingSimulationFactory;
+        static Load(InName: string): ClothingSimulationFactory;
+    }
+    
+    class ClothingSimulationInteractor extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        PhysicsAssetUpdated(): void;
+        ClothConfigUpdated(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ClothingSimulationInteractor;
+        static Load(InName: string): ClothingSimulationInteractor;
+    }
+    
+    class ClothVertBoneData {
+        constructor();
+        constructor(NumInfluences: number, BoneIndices: FixSizeArray<number>, BoneWeights: FixSizeArray<number>);
+        NumInfluences: number;
+        BoneIndices: FixSizeArray<number>;
+        BoneWeights: FixSizeArray<number>;
+        static StaticClass(): Class;
+    }
+    
+    class ClothPhysicalMeshDataBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Vertices: TArray<Vector>;
+        Normals: TArray<Vector>;
+        VertexColors: TArray<Color>;
+        Indices: TArray<number>;
+        InverseMasses: TArray<number>;
+        BoneData: TArray<ClothVertBoneData>;
+        NumFixedVerts: number;
+        MaxBoneWeights: number;
+        SelfCollisionIndices: TArray<number>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ClothPhysicalMeshDataBase;
+        static Load(InName: string): ClothPhysicalMeshDataBase;
+    }
+    
+    class JsonUtilitiesDummyObject extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): JsonUtilitiesDummyObject;
+        static Load(InName: string): JsonUtilitiesDummyObject;
+    }
+    
+    enum EMultiBoxType { MenuBar, ToolBar, VerticalToolBar, Menu, ButtonRow, ToolMenuBar, EMultiBoxType_MAX}
+    class ToolMenuOwner {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
+    class ToolMenuContext {
+        constructor();
+        constructor(ContextObjects: TArray<Object>);
+        ContextObjects: TArray<Object>;
+        static StaticClass(): Class;
+    }
+    
+    enum EMultiBlockType { None, ButtonRow, EditableText, Heading, MenuEntry, MenuSeparator, ToolBarButton, ToolBarComboButton, ToolBarSeparator, Widget, EMultiBlockType_MAX}
+    enum EUserInterfaceActionType { None, Button, ToggleButton, RadioButton, Check, CollapsedButton, EUserInterfaceActionType_MAX}
+    enum EToolMenuInsertType { Default, Before, After, First, EToolMenuInsertType_MAX}
+    class ToolMenuInsert {
+        constructor();
+        constructor(Name: string, Position: EToolMenuInsertType);
+        Name: string;
+        Position: EToolMenuInsertType;
+        static StaticClass(): Class;
+    }
+    
+    class ScriptSlateIcon {
+        constructor();
+        constructor(StyleSetName: string, StyleName: string, SmallStyleName: string);
+        StyleSetName: string;
+        StyleName: string;
+        SmallStyleName: string;
+        static StaticClass(): Class;
+    }
+    
+    class ToolMenuEntryScriptDataAdvanced {
+        constructor();
+        constructor(TutorialHighlight: string, EntryType: EMultiBlockType, UserInterfaceActionType: EUserInterfaceActionType, bIsSubMenu: boolean, bOpenSubMenuOnClick: boolean, bShouldCloseWindowAfterMenuSelection: boolean, bSimpleComboBox: boolean);
+        TutorialHighlight: string;
+        EntryType: EMultiBlockType;
+        UserInterfaceActionType: EUserInterfaceActionType;
+        bIsSubMenu: boolean;
+        bOpenSubMenuOnClick: boolean;
+        bShouldCloseWindowAfterMenuSelection: boolean;
+        bSimpleComboBox: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class ToolMenuEntryScriptData {
+        constructor();
+        constructor(Menu: string, Section: string, Name: string, Label: string, ToolTip: string, Icon: ScriptSlateIcon, OwnerName: string, InsertPosition: ToolMenuInsert, Advanced: ToolMenuEntryScriptDataAdvanced);
+        Menu: string;
+        Section: string;
+        Name: string;
+        Label: string;
+        ToolTip: string;
+        Icon: ScriptSlateIcon;
+        OwnerName: string;
+        InsertPosition: ToolMenuInsert;
+        Advanced: ToolMenuEntryScriptDataAdvanced;
+        static StaticClass(): Class;
+    }
+    
+    enum ECheckBoxState { Unchecked, Checked, Undetermined, ECheckBoxState_MAX}
+    class ToolMenuEntryScript extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Data: ToolMenuEntryScriptData;
+        RegisterMenuEntry(): void;
+        IsVisible(Context: ToolMenuContext): boolean;
+        InitEntry(OwnerName: string, Menu: string, Section: string, Name: string, Label?: string /* = "" */, ToolTip?: string /* = "" */): void;
+        GetToolTip(Context: ToolMenuContext): string;
+        GetLabel(Context: ToolMenuContext): string;
+        GetIcon(Context: ToolMenuContext): ScriptSlateIcon;
+        GetCheckState(Context: ToolMenuContext): ECheckBoxState;
+        Execute(Context: ToolMenuContext): void;
+        ConstructMenuEntry(Menu: $Nullable<ToolMenu>, SectionName: string, Context: ToolMenuContext): void;
+        CanExecute(Context: ToolMenuContext): boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenuEntryScript;
+        static Load(InName: string): ToolMenuEntryScript;
+    }
+    
+    class ToolMenuEntry {
+        constructor();
+        constructor(Name: string, Owner: ToolMenuOwner, Type: EMultiBlockType, UserInterfaceActionType: EUserInterfaceActionType, TutorialHighlightName: string, InsertPosition: ToolMenuInsert, bShouldCloseWindowAfterMenuSelection: boolean, ScriptObject: ToolMenuEntryScript);
+        Name: string;
+        Owner: ToolMenuOwner;
+        Type: EMultiBlockType;
+        UserInterfaceActionType: EUserInterfaceActionType;
+        TutorialHighlightName: string;
+        InsertPosition: ToolMenuInsert;
+        bShouldCloseWindowAfterMenuSelection: boolean;
+        ScriptObject: ToolMenuEntryScript;
+        static StaticClass(): Class;
+    }
+    
+    class ToolMenuSectionDynamic extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ConstructSections(Menu: $Nullable<ToolMenu>, Context: ToolMenuContext): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenuSectionDynamic;
+        static Load(InName: string): ToolMenuSectionDynamic;
+    }
+    
+    class ToolMenuSection {
+        constructor();
+        constructor(Name: string, Blocks: TArray<ToolMenuEntry>, InsertPosition: ToolMenuInsert, Context: ToolMenuContext, ToolMenuSectionDynamic: ToolMenuSectionDynamic);
+        Name: string;
+        Blocks: TArray<ToolMenuEntry>;
+        InsertPosition: ToolMenuInsert;
+        Context: ToolMenuContext;
+        ToolMenuSectionDynamic: ToolMenuSectionDynamic;
+        static StaticClass(): Class;
+    }
+    
+    class ToolMenu extends ToolMenuBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        MenuName: string;
+        MenuParent: string;
+        StyleName: string;
+        TutorialHighlightName: string;
+        MenuType: EMultiBoxType;
+        bShouldCloseWindowAfterMenuSelection: boolean;
+        bCloseSelfOnly: boolean;
+        bSearchable: boolean;
+        bToolBarIsFocusable: boolean;
+        bToolBarForceSmallIcons: boolean;
+        bPreventCustomization: boolean;
+        MenuOwner: ToolMenuOwner;
+        Context: ToolMenuContext;
+        Sections: TArray<ToolMenuSection>;
+        SubMenuParent: ToolMenu;
+        SubMenuSourceEntryName: string;
+        InitMenu(Owner: ToolMenuOwner, Name: string, Parent?: string /* = "None" */, Type?: EMultiBoxType /* = Menu */): void;
+        AddSubMenuScript(Owner: string, SectionName: string, Name: string, Label: string, ToolTip?: string /* = "" */): ToolMenu;
+        AddSectionScript(SectionName: string, Label?: string /* = "" */, InsertName?: string /* = "None" */, InsertType?: EToolMenuInsertType /* = Default */): void;
+        AddMenuEntryObject(InObject: $Nullable<ToolMenuEntryScript>): void;
+        AddMenuEntry(SectionName: string, Args: ToolMenuEntry): void;
+        AddDynamicSectionScript(SectionName: string, Object: $Nullable<ToolMenuSectionDynamic>): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenu;
+        static Load(InName: string): ToolMenu;
+    }
+    
+    class ToolMenuContextBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenuContextBase;
+        static Load(InName: string): ToolMenuContextBase;
+    }
+    
+    class SlateTabManagerContext extends ToolMenuContextBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SlateTabManagerContext;
+        static Load(InName: string): SlateTabManagerContext;
+    }
+    
+    enum ECustomizedToolMenuVisibility { None, Visible, Hidden, ECustomizedToolMenuVisibility_MAX}
+    class CustomizedToolMenuEntry {
+        constructor();
+        constructor(Visibility: ECustomizedToolMenuVisibility);
+        Visibility: ECustomizedToolMenuVisibility;
+        static StaticClass(): Class;
+    }
+    
+    class CustomizedToolMenuSection {
+        constructor();
+        constructor(Visibility: ECustomizedToolMenuVisibility);
+        Visibility: ECustomizedToolMenuVisibility;
+        static StaticClass(): Class;
+    }
+    
+    class CustomizedToolMenuNameArray {
+        constructor();
+        constructor(Names: TArray<string>);
+        Names: TArray<string>;
+        static StaticClass(): Class;
+    }
+    
+    class CustomizedToolMenu {
+        constructor();
+        constructor(Name: string, Entries: TMap<string, CustomizedToolMenuEntry>, Sections: TMap<string, CustomizedToolMenuSection>, EntryOrder: TMap<string, CustomizedToolMenuNameArray>, SectionOrder: TArray<string>);
+        Name: string;
+        Entries: TMap<string, CustomizedToolMenuEntry>;
+        Sections: TMap<string, CustomizedToolMenuSection>;
+        EntryOrder: TMap<string, CustomizedToolMenuNameArray>;
+        SectionOrder: TArray<string>;
+        static StaticClass(): Class;
+    }
+    
+    class ToolMenus extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CustomizedMenus: TArray<CustomizedToolMenu>;
+        Menus: TMap<string, ToolMenu>;
+        UnregisterOwnerByName(InOwnerName: string): void;
+        SetSectionPosition(MenuName: string, SectionName: string, OtherSectionName: string, PositionType: EToolMenuInsertType): void;
+        SetSectionLabel(MenuName: string, SectionName: string, Label: string): void;
+        RemoveSection(MenuName: string, Section: string): void;
+        RemoveMenu(MenuName: string): void;
+        RemoveEntry(MenuName: string, Section: string, Name: string): void;
+        RegisterMenu(Name: string, Parent?: string /* = "None" */, Type?: EMultiBoxType /* = Menu */, bWarnIfAlreadyRegistered?: boolean /* = true */): ToolMenu;
+        RefreshMenuWidget(Name: string): boolean;
+        RefreshAllWidgets(): void;
+        IsMenuRegistered(Name: string): boolean;
+        static Get(): ToolMenus;
+        FindMenu(Name: string): ToolMenu;
+        static FindContext(InContext: ToolMenuContext, InClass: $Nullable<Class>): Object;
+        ExtendMenu(Name: string): ToolMenu;
+        static AddMenuEntryObject(MenuEntryObject: $Nullable<ToolMenuEntryScript>): boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenus;
+        static Load(InName: string): ToolMenus;
+    }
+    
+    class ToolMenuContextExtensions extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static FindByClass(Context: ToolMenuContext, InClass: $Nullable<Class>): Object;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenuContextExtensions;
+        static Load(InName: string): ToolMenuContextExtensions;
+    }
+    
+    enum EToolMenuStringCommandType { Command, Python, Custom, EToolMenuStringCommandType_MAX}
+    class ToolMenuStringCommand {
+        constructor();
+        constructor(Type: EToolMenuStringCommandType, CustomType: string, String: string);
+        Type: EToolMenuStringCommandType;
+        CustomType: string;
+        String: string;
+        static StaticClass(): Class;
+    }
+    
+    class ToolMenuEntryExtensions extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static SetToolTip(Target: $Ref<ToolMenuEntry>, ToolTip: string): void;
+        static SetStringCommand(Target: $Ref<ToolMenuEntry>, Type: EToolMenuStringCommandType, CustomType: string, String: string): void;
+        static SetLabel(Target: $Ref<ToolMenuEntry>, Label: string): void;
+        static SetIcon(Target: $Ref<ToolMenuEntry>, StyleSetName: string, StyleName?: string /* = "None" */, SmallStyleName?: string /* = "None" */): void;
+        static MakeToolMenuOwner(Name: string): ToolMenuOwner;
+        static MakeStringCommand(Type: EToolMenuStringCommandType, CustomType: string, String: string): ToolMenuStringCommand;
+        static MakeScriptSlateIcon(StyleSetName: string, StyleName: string, SmallStyleName?: string /* = "None" */): ScriptSlateIcon;
+        static InitMenuEntry(InOwner: string, InName: string, InLabel: string, InToolTip: string, CommandType: EToolMenuStringCommandType, CustomCommandType: string, CommandString: string): ToolMenuEntry;
+        static GetToolTip(Target: ToolMenuEntry): string;
+        static GetLabel(Target: ToolMenuEntry): string;
+        static BreakToolMenuOwner(InValue: ToolMenuOwner, Name: $Ref<string>): void;
+        static BreakStringCommand(InValue: ToolMenuStringCommand, Type: $Ref<EToolMenuStringCommandType>, CustomType: $Ref<string>, String: $Ref<string>): void;
+        static BreakScriptSlateIcon(InValue: ScriptSlateIcon, StyleSetName: $Ref<string>, StyleName: $Ref<string>, SmallStyleName: $Ref<string>): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenuEntryExtensions;
+        static Load(InName: string): ToolMenuEntryExtensions;
+    }
+    
+    class ToolMenuSectionExtensions extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static SetLabel(Section: $Ref<ToolMenuSection>, Label: string): void;
+        static GetLabel(Section: ToolMenuSection): string;
+        static AddEntryObject(Section: $Ref<ToolMenuSection>, InObject: $Nullable<ToolMenuEntryScript>): void;
+        static AddEntry(Section: $Ref<ToolMenuSection>, Args: ToolMenuEntry): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ToolMenuSectionExtensions;
+        static Load(InName: string): ToolMenuSectionExtensions;
+    }
+    
+    enum EPIEPreviewDeviceType { Unset, Android, IOS, TVOS, Switch, MAX}
+    class PIEPreviewDeviceSpecification extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        PreviewDeviceType: EPIEPreviewDeviceType;
+        GPUFamily: string;
+        GLVersion: string;
+        VulkanVersion: string;
+        AndroidVersion: string;
+        DeviceMake: string;
+        DeviceModel: string;
+        DeviceBuildNumber: string;
+        UsingHoudini: boolean;
+        Hardware: string;
+        Chipset: string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PIEPreviewDeviceSpecification;
+        static Load(InName: string): PIEPreviewDeviceSpecification;
+    }
+    
+    class BlueprintFunctionLibrary extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BlueprintFunctionLibrary;
+        static Load(InName: string): BlueprintFunctionLibrary;
+    }
+    
+    class GameplayTag {
+        constructor();
+        constructor(TagName: string);
+        TagName: string;
+        static StaticClass(): Class;
+    }
+    
+    class GameplayTagContainer {
+        constructor();
+        constructor(GameplayTags: TArray<GameplayTag>, ParentTags: TArray<GameplayTag>);
+        GameplayTags: TArray<GameplayTag>;
+        ParentTags: TArray<GameplayTag>;
+        static StaticClass(): Class;
+    }
+    
+    class GameplayTagQuery {
+        constructor();
+        constructor(TokenStreamVersion: number, TagDictionary: TArray<GameplayTag>, QueryTokenStream: TArray<number>, UserDescription: string, AutoDescription: string);
+        TokenStreamVersion: number;
+        TagDictionary: TArray<GameplayTag>;
+        QueryTokenStream: TArray<number>;
+        UserDescription: string;
+        AutoDescription: string;
+        static StaticClass(): Class;
+    }
+    
+    class GameplayTagAssetInterface extends Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        HasMatchingGameplayTag(TagToCheck: GameplayTag): boolean;
+        HasAnyMatchingGameplayTags(TagContainer: GameplayTagContainer): boolean;
+        HasAllMatchingGameplayTags(TagContainer: GameplayTagContainer): boolean;
+        GetOwnedGameplayTags(TagContainer: $Ref<GameplayTagContainer>): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameplayTagAssetInterface;
+        static Load(InName: string): GameplayTagAssetInterface;
     }
     
     enum ETickingGroup { TG_PrePhysics, TG_StartPhysics, TG_DuringPhysics, TG_EndPhysics, TG_PostPhysics, TG_PostUpdateWork, TG_LastDemotable, TG_NewlySpawned, TG_MAX}
@@ -642,14 +2271,6 @@ declare module "ue" {
         bOverrideEmissiveBoost: boolean;
         bOverrideDiffuseBoost: boolean;
         bOverrideExportResolutionScale: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class SoftObjectPath {
-        constructor();
-        constructor(AssetPathName: string, SubPathString: string);
-        AssetPathName: string;
-        SubPathString: string;
         static StaticClass(): Class;
     }
     
@@ -1346,15 +2967,7 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
-    enum EFontHinting { Default, Auto, AutoLight, Monochrome, None, EFontHinting_MAX}
     enum EFontLoadingPolicy { LazyLoad, Stream, Inline, EFontLoadingPolicy_MAX}
-    class FontBulkData extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): FontBulkData;
-        static Load(InName: string): FontBulkData;
-    }
-    
     class FontData {
         constructor();
         constructor(FontFilename: string, Hinting: EFontHinting, LoadingPolicy: EFontLoadingPolicy, SubFaceIndex: number, FontFaceAsset: Object, BulkDataPtr: FontBulkData, FontData: TArray<number>);
@@ -2918,15 +4531,6 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
-    class ClothingAssetBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ImportedFilePath: string;
-        AssetGuid: Guid;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ClothingAssetBase;
-        static Load(InName: string): ClothingAssetBase;
-    }
-    
     class SkeletalMeshSamplingRegionMaterialFilter {
         constructor();
         constructor(MaterialName: string);
@@ -3538,27 +5142,6 @@ declare module "ue" {
         static Load(InName: string): DynamicBlueprintBinding;
     }
     
-    class Property extends Field {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Property;
-        static Load(InName: string): Property;
-    }
-    
-    class StructProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): StructProperty;
-        static Load(InName: string): StructProperty;
-    }
-    
-    class Function extends Struct {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Function;
-        static Load(InName: string): Function;
-    }
-    
     class EventGraphFastCallPair {
         constructor();
         constructor(FunctionToPatch: Function, EventGraphCallOffset: number);
@@ -3722,11 +5305,6 @@ declare module "ue" {
     }
     
     enum ERootMotionMode { NoRootMotionExtraction, IgnoreRootMotion, RootMotionFromEverything, RootMotionFromMontagesOnly, ERootMotionMode_MAX}
-    class SoftClassPath extends SoftObjectPath {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
     class AnimNotifyEventReference {
         constructor();
         constructor(NotifySource: Object);
@@ -3879,15 +5457,6 @@ declare module "ue" {
     enum EPhysicsTransformUpdateMode { SimulationUpatesComponentTransform, ComponentTransformIsKinematic, EPhysicsTransformUpdateMode_MAX}
     enum EAnimationMode { AnimationBlueprint, AnimationSingleNode, AnimationCustomMode, EAnimationMode_MAX}
     enum EClothMassMode { UniformMass, TotalMass, Density, MaxClothMassMode, EClothMassMode_MAX}
-    class ClothingSimulationInteractor extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        PhysicsAssetUpdated(): void;
-        ClothConfigUpdated(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ClothingSimulationInteractor;
-        static Load(InName: string): ClothingSimulationInteractor;
-    }
-    
     class SkeletalMeshComponent extends SkinnedMeshComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         AnimationBlueprint: AnimBlueprint;
@@ -6203,146 +7772,6 @@ declare module "ue" {
         static Load(InName: string): NavCollisionBase;
     }
     
-    class ElementID {
-        constructor();
-        constructor(IDValue: number);
-        IDValue: number;
-        static StaticClass(): Class;
-    }
-    
-    class VertexID extends ElementID {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class PolygonID extends ElementID {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class VertexInstanceID extends ElementID {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class PolygonGroupID extends ElementID {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class TriangleID extends ElementID {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class EdgeID extends ElementID {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class MeshDescriptionBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SetVertexPosition(VertexID: VertexID, Position: Vector): void;
-        SetPolygonVertexInstance(PolygonID: PolygonID, PerimeterIndex: number, VertexInstanceID: VertexInstanceID): void;
-        SetPolygonPolygonGroup(PolygonID: PolygonID, PolygonGroupID: PolygonGroupID): void;
-        ReversePolygonFacing(PolygonID: PolygonID): void;
-        ReserveNewVertices(NumberOfNewVertices: number): void;
-        ReserveNewVertexInstances(NumberOfNewVertexInstances: number): void;
-        ReserveNewTriangles(NumberOfNewTriangles: number): void;
-        ReserveNewPolygons(NumberOfNewPolygons: number): void;
-        ReserveNewPolygonGroups(NumberOfNewPolygonGroups: number): void;
-        ReserveNewEdges(NumberOfNewEdges: number): void;
-        IsVertexValid(VertexID: VertexID): boolean;
-        IsVertexOrphaned(VertexID: VertexID): boolean;
-        IsVertexInstanceValid(VertexInstanceID: VertexInstanceID): boolean;
-        IsTriangleValid(TriangleID: TriangleID): boolean;
-        IsTrianglePartOfNgon(TriangleID: TriangleID): boolean;
-        IsPolygonValid(PolygonID: PolygonID): boolean;
-        IsPolygonGroupValid(PolygonGroupID: PolygonGroupID): boolean;
-        IsEmpty(): boolean;
-        IsEdgeValid(EdgeID: EdgeID): boolean;
-        IsEdgeInternalToPolygon(EdgeID: EdgeID, PolygonID: PolygonID): boolean;
-        IsEdgeInternal(EdgeID: EdgeID): boolean;
-        GetVertexVertexInstances(VertexID: VertexID, OutVertexInstanceIDs: $Ref<TArray<VertexInstanceID>>): void;
-        GetVertexPosition(VertexID: VertexID): Vector;
-        GetVertexPairEdge(VertexID0: VertexID, VertexID1: VertexID): EdgeID;
-        GetVertexInstanceVertex(VertexInstanceID: VertexInstanceID): VertexID;
-        GetVertexInstancePairEdge(VertexInstanceID0: VertexInstanceID, VertexInstanceID1: VertexInstanceID): EdgeID;
-        GetVertexInstanceForTriangleVertex(TriangleID: TriangleID, VertexID: VertexID): VertexInstanceID;
-        GetVertexInstanceForPolygonVertex(PolygonID: PolygonID, VertexID: VertexID): VertexInstanceID;
-        GetVertexInstanceConnectedTriangles(VertexInstanceID: VertexInstanceID, OutConnectedTriangleIDs: $Ref<TArray<TriangleID>>): void;
-        GetVertexInstanceConnectedPolygons(VertexInstanceID: VertexInstanceID, OutConnectedPolygonIDs: $Ref<TArray<PolygonID>>): void;
-        GetVertexConnectedTriangles(VertexID: VertexID, OutConnectedTriangleIDs: $Ref<TArray<TriangleID>>): void;
-        GetVertexConnectedPolygons(VertexID: VertexID, OutConnectedPolygonIDs: $Ref<TArray<PolygonID>>): void;
-        GetVertexConnectedEdges(VertexID: VertexID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
-        GetVertexAdjacentVertices(VertexID: VertexID, OutAdjacentVertexIDs: $Ref<TArray<VertexID>>): void;
-        GetTriangleVertices(TriangleID: TriangleID, OutVertexIDs: $Ref<TArray<VertexID>>): void;
-        GetTriangleVertexInstances(TriangleID: TriangleID, OutVertexInstanceIDs: $Ref<TArray<VertexInstanceID>>): void;
-        GetTriangleVertexInstance(TriangleID: TriangleID, Index: number): VertexInstanceID;
-        GetTrianglePolygonGroup(TriangleID: TriangleID): PolygonGroupID;
-        GetTrianglePolygon(TriangleID: TriangleID): PolygonID;
-        GetTriangleEdges(TriangleID: TriangleID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
-        GetTriangleAdjacentTriangles(TriangleID: TriangleID, OutTriangleIDs: $Ref<TArray<TriangleID>>): void;
-        GetPolygonVertices(PolygonID: PolygonID, OutVertexIDs: $Ref<TArray<VertexID>>): void;
-        GetPolygonVertexInstances(PolygonID: PolygonID, OutVertexInstanceIDs: $Ref<TArray<VertexInstanceID>>): void;
-        GetPolygonTriangles(PolygonID: PolygonID, OutTriangleIDs: $Ref<TArray<TriangleID>>): void;
-        GetPolygonPolygonGroup(PolygonID: PolygonID): PolygonGroupID;
-        GetPolygonPerimeterEdges(PolygonID: PolygonID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
-        GetPolygonInternalEdges(PolygonID: PolygonID, OutEdgeIDs: $Ref<TArray<EdgeID>>): void;
-        GetPolygonGroupPolygons(PolygonGroupID: PolygonGroupID, OutPolygonIDs: $Ref<TArray<PolygonID>>): void;
-        GetPolygonAdjacentPolygons(PolygonID: PolygonID, OutPolygonIDs: $Ref<TArray<PolygonID>>): void;
-        GetNumVertexVertexInstances(VertexID: VertexID): number;
-        GetNumVertexInstanceConnectedTriangles(VertexInstanceID: VertexInstanceID): number;
-        GetNumVertexInstanceConnectedPolygons(VertexInstanceID: VertexInstanceID): number;
-        GetNumVertexConnectedTriangles(VertexID: VertexID): number;
-        GetNumVertexConnectedPolygons(VertexID: VertexID): number;
-        GetNumVertexConnectedEdges(VertexID: VertexID): number;
-        GetNumPolygonVertices(PolygonID: PolygonID): number;
-        GetNumPolygonTriangles(PolygonID: PolygonID): number;
-        GetNumPolygonInternalEdges(PolygonID: PolygonID): number;
-        GetNumPolygonGroupPolygons(PolygonGroupID: PolygonGroupID): number;
-        GetNumEdgeConnectedTriangles(EdgeID: EdgeID): number;
-        GetNumEdgeConnectedPolygons(EdgeID: EdgeID): number;
-        GetEdgeVertices(EdgeID: EdgeID, OutVertexIDs: $Ref<TArray<VertexID>>): void;
-        GetEdgeVertex(EdgeID: EdgeID, VertexNumber: number): VertexID;
-        GetEdgeConnectedTriangles(EdgeID: EdgeID, OutConnectedTriangleIDs: $Ref<TArray<TriangleID>>): void;
-        GetEdgeConnectedPolygons(EdgeID: EdgeID, OutConnectedPolygonIDs: $Ref<TArray<PolygonID>>): void;
-        Empty(): void;
-        DeleteVertexInstance(VertexInstanceID: VertexInstanceID, OrphanedVertices: $Ref<TArray<VertexID>>): void;
-        DeleteVertex(VertexID: VertexID): void;
-        DeleteTriangle(TriangleID: TriangleID, OrphanedEdges: $Ref<TArray<EdgeID>>, OrphanedVertexInstances: $Ref<TArray<VertexInstanceID>>, OrphanedPolygonGroupsPtr: $Ref<TArray<PolygonGroupID>>): void;
-        DeletePolygonGroup(PolygonGroupID: PolygonGroupID): void;
-        DeletePolygon(PolygonID: PolygonID, OrphanedEdges: $Ref<TArray<EdgeID>>, OrphanedVertexInstances: $Ref<TArray<VertexInstanceID>>, OrphanedPolygonGroups: $Ref<TArray<PolygonGroupID>>): void;
-        DeleteEdge(EdgeID: EdgeID, OrphanedVertices: $Ref<TArray<VertexID>>): void;
-        CreateVertexWithID(VertexID: VertexID): void;
-        CreateVertexInstanceWithID(VertexInstanceID: VertexInstanceID, VertexID: VertexID): void;
-        CreateVertexInstance(VertexID: VertexID): VertexInstanceID;
-        CreateVertex(): VertexID;
-        CreateTriangleWithID(TriangleID: TriangleID, PolygonGroupID: PolygonGroupID, VertexInstanceIDs: TArray<VertexInstanceID>, NewEdgeIDs: $Ref<TArray<EdgeID>>): void;
-        CreateTriangle(PolygonGroupID: PolygonGroupID, VertexInstanceIDs: TArray<VertexInstanceID>, NewEdgeIDs: $Ref<TArray<EdgeID>>): TriangleID;
-        CreatePolygonWithID(PolygonID: PolygonID, PolygonGroupID: PolygonGroupID, VertexInstanceIDs: $Ref<TArray<VertexInstanceID>>, NewEdgeIDs: $Ref<TArray<EdgeID>>): void;
-        CreatePolygonGroupWithID(PolygonGroupID: PolygonGroupID): void;
-        CreatePolygonGroup(): PolygonGroupID;
-        CreatePolygon(PolygonGroupID: PolygonGroupID, VertexInstanceIDs: $Ref<TArray<VertexInstanceID>>, NewEdgeIDs: $Ref<TArray<EdgeID>>): PolygonID;
-        CreateEdgeWithID(EdgeID: EdgeID, VertexID0: VertexID, VertexID1: VertexID): void;
-        CreateEdge(VertexID0: VertexID, VertexID1: VertexID): EdgeID;
-        ComputePolygonTriangulation(PolygonID: PolygonID): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MeshDescriptionBase;
-        static Load(InName: string): MeshDescriptionBase;
-    }
-    
-    class StaticMeshDescription extends MeshDescriptionBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SetVertexInstanceUV(VertexInstanceID: VertexInstanceID, UV: Vector2D, UVIndex?: number /* = 0 */): void;
-        SetPolygonGroupMaterialSlotName(PolygonGroupID: PolygonGroupID, SlotName: string): void;
-        GetVertexInstanceUV(VertexInstanceID: VertexInstanceID, UVIndex?: number /* = 0 */): Vector2D;
-        CreateCube(Center: Vector, HalfExtents: Vector, PolygonGroup: PolygonGroupID, PolygonID_PlusX: $Ref<PolygonID>, PolygonID_MinusX: $Ref<PolygonID>, PolygonID_PlusY: $Ref<PolygonID>, PolygonID_MinusY: $Ref<PolygonID>, PolygonID_PlusZ: $Ref<PolygonID>, PolygonID_MinusZ: $Ref<PolygonID>): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): StaticMeshDescription;
-        static Load(InName: string): StaticMeshDescription;
-    }
-    
     class StaticMesh extends StreamableRenderAsset {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SourceModels: TArray<StaticMeshSourceModel>;
@@ -6406,13 +7835,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): StaticMesh;
         static Load(InName: string): StaticMesh;
-    }
-    
-    class Interface extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Interface;
-        static Load(InName: string): Interface;
     }
     
     class BlendableInterface extends Interface {
@@ -6727,11 +8149,1539 @@ declare module "ue" {
         static Load(InName: string): ChildConnection;
     }
     
-    class Package extends Object {
+    class LayerActorStats {
+        constructor();
+        constructor(Type: Class, Total: number);
+        Type: Class;
+        Total: number;
+        static StaticClass(): Class;
+    }
+    
+    class Layer extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        LayerName: string;
+        bIsVisible: boolean;
+        ActorStats: TArray<LayerActorStats>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Layer;
+        static Load(InName: string): Layer;
+    }
+    
+    class ModelComponent extends PrimitiveComponent {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ModelBodySetup: BodySetup;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ModelComponent;
+        static Load(InName: string): ModelComponent;
+    }
+    
+    class LevelActorContainer extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Actors: TArray<Actor>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LevelActorContainer;
+        static Load(InName: string): LevelActorContainer;
+    }
+    
+    class LevelScriptBlueprint extends Blueprint {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        FriendlyName: string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LevelScriptBlueprint;
+        static Load(InName: string): LevelScriptBlueprint;
+    }
+    
+    class LevelScriptActor extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bInputEnabled: boolean;
+        WorldOriginLocationChanged(OldOriginLocation: IntVector, NewOriginLocation: IntVector): void;
+        SetCinematicMode(bCinematicMode: boolean, bHidePlayer?: boolean /* = true */, bAffectsHUD?: boolean /* = true */, bAffectsMovement?: boolean /* = false */, bAffectsTurning?: boolean /* = false */): void;
+        RemoteEvent(EventName: string): boolean;
+        LevelReset(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LevelScriptActor;
+        static Load(InName: string): LevelScriptActor;
+    }
+    
+    class NavigationObjectBase extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CapsuleComponent: CapsuleComponent;
+        GoodSprite: BillboardComponent;
+        BadSprite: BillboardComponent;
+        bIsPIEPlayerStart: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): NavigationObjectBase;
+        static Load(InName: string): NavigationObjectBase;
+    }
+    
+    class NavigationDataChunk extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        NavigationDataName: string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): NavigationDataChunk;
+        static Load(InName: string): NavigationDataChunk;
+    }
+    
+    enum ELightingBuildQuality { Quality_Preview, Quality_Medium, Quality_High, Quality_Production, Quality_MAX}
+    class MapBuildDataRegistry extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        LevelLightingQuality: ELightingBuildQuality;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MapBuildDataRegistry;
+        static Load(InName: string): MapBuildDataRegistry;
+    }
+    
+    enum ETextureSizingType { TextureSizingType_UseSingleTextureSize, TextureSizingType_UseAutomaticBiasedSizes, TextureSizingType_UseManualOverrideTextureSize, TextureSizingType_UseSimplygonAutomaticSizing, TextureSizingType_MAX}
+    enum EMaterialMergeType { MaterialMergeType_Default, MaterialMergeType_Simplygon, MaterialMergeType_MAX}
+    class MaterialProxySettings {
+        constructor();
+        constructor(TextureSize: IntPoint, GutterSpace: number, MetallicConstant: number, RoughnessConstant: number, SpecularConstant: number, OpacityConstant: number, OpacityMaskConstant: number, AmbientOcclusionConstant: number, TextureSizingType: ETextureSizingType, MaterialMergeType: EMaterialMergeType, BlendMode: EBlendMode, bAllowTwoSidedMaterial: boolean, bNormalMap: boolean, bMetallicMap: boolean, bRoughnessMap: boolean, bSpecularMap: boolean, bEmissiveMap: boolean, bOpacityMap: boolean, bOpacityMaskMap: boolean, bAmbientOcclusionMap: boolean, DiffuseTextureSize: IntPoint, NormalTextureSize: IntPoint, MetallicTextureSize: IntPoint, RoughnessTextureSize: IntPoint, SpecularTextureSize: IntPoint, EmissiveTextureSize: IntPoint, OpacityTextureSize: IntPoint, OpacityMaskTextureSize: IntPoint, AmbientOcclusionTextureSize: IntPoint);
+        TextureSize: IntPoint;
+        GutterSpace: number;
+        MetallicConstant: number;
+        RoughnessConstant: number;
+        SpecularConstant: number;
+        OpacityConstant: number;
+        OpacityMaskConstant: number;
+        AmbientOcclusionConstant: number;
+        TextureSizingType: ETextureSizingType;
+        MaterialMergeType: EMaterialMergeType;
+        BlendMode: EBlendMode;
+        bAllowTwoSidedMaterial: boolean;
+        bNormalMap: boolean;
+        bMetallicMap: boolean;
+        bRoughnessMap: boolean;
+        bSpecularMap: boolean;
+        bEmissiveMap: boolean;
+        bOpacityMap: boolean;
+        bOpacityMaskMap: boolean;
+        bAmbientOcclusionMap: boolean;
+        DiffuseTextureSize: IntPoint;
+        NormalTextureSize: IntPoint;
+        MetallicTextureSize: IntPoint;
+        RoughnessTextureSize: IntPoint;
+        SpecularTextureSize: IntPoint;
+        EmissiveTextureSize: IntPoint;
+        OpacityTextureSize: IntPoint;
+        OpacityMaskTextureSize: IntPoint;
+        AmbientOcclusionTextureSize: IntPoint;
+        static StaticClass(): Class;
+    }
+    
+    class LevelSimplificationDetails {
+        constructor();
+        constructor(bCreatePackagePerAsset: boolean, DetailsPercentage: number, StaticMeshMaterialSettings: MaterialProxySettings, bOverrideLandscapeExportLOD: boolean, LandscapeExportLOD: number, LandscapeMaterialSettings: MaterialProxySettings, bBakeFoliageToLandscape: boolean, bBakeGrassToLandscape: boolean, bGenerateMeshNormalMap: boolean, bGenerateMeshMetallicMap: boolean, bGenerateMeshRoughnessMap: boolean, bGenerateMeshSpecularMap: boolean, bGenerateLandscapeNormalMap: boolean, bGenerateLandscapeMetallicMap: boolean, bGenerateLandscapeRoughnessMap: boolean, bGenerateLandscapeSpecularMap: boolean);
+        bCreatePackagePerAsset: boolean;
+        DetailsPercentage: number;
+        StaticMeshMaterialSettings: MaterialProxySettings;
+        bOverrideLandscapeExportLOD: boolean;
+        LandscapeExportLOD: number;
+        LandscapeMaterialSettings: MaterialProxySettings;
+        bBakeFoliageToLandscape: boolean;
+        bBakeGrassToLandscape: boolean;
+        bGenerateMeshNormalMap: boolean;
+        bGenerateMeshMetallicMap: boolean;
+        bGenerateMeshRoughnessMap: boolean;
+        bGenerateMeshSpecularMap: boolean;
+        bGenerateLandscapeNormalMap: boolean;
+        bGenerateLandscapeMetallicMap: boolean;
+        bGenerateLandscapeRoughnessMap: boolean;
+        bGenerateLandscapeSpecularMap: boolean;
+        static StaticClass(): Class;
+    }
+    
+    enum EVisibilityAggressiveness { VIS_LeastAggressive, VIS_ModeratelyAggressive, VIS_MostAggressive, VIS_Max, VIS_MAX}
+    class NavAgentSelector {
+        constructor();
+        constructor(bSupportsAgent0: boolean, bSupportsAgent1: boolean, bSupportsAgent2: boolean, bSupportsAgent3: boolean, bSupportsAgent4: boolean, bSupportsAgent5: boolean, bSupportsAgent6: boolean, bSupportsAgent7: boolean, bSupportsAgent8: boolean, bSupportsAgent9: boolean, bSupportsAgent10: boolean, bSupportsAgent11: boolean, bSupportsAgent12: boolean, bSupportsAgent13: boolean, bSupportsAgent14: boolean, bSupportsAgent15: boolean);
+        bSupportsAgent0: boolean;
+        bSupportsAgent1: boolean;
+        bSupportsAgent2: boolean;
+        bSupportsAgent3: boolean;
+        bSupportsAgent4: boolean;
+        bSupportsAgent5: boolean;
+        bSupportsAgent6: boolean;
+        bSupportsAgent7: boolean;
+        bSupportsAgent8: boolean;
+        bSupportsAgent9: boolean;
+        bSupportsAgent10: boolean;
+        bSupportsAgent11: boolean;
+        bSupportsAgent12: boolean;
+        bSupportsAgent13: boolean;
+        bSupportsAgent14: boolean;
+        bSupportsAgent15: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class NavigationSystemConfig extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        NavigationSystemClass: SoftClassPath;
+        SupportedAgentsMask: NavAgentSelector;
+        DefaultAgentName: string;
+        bIsOverriden: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): NavigationSystemConfig;
+        static Load(InName: string): NavigationSystemConfig;
+    }
+    
+    enum EVolumeLightingMethod { VLM_VolumetricLightmap, VLM_SparseVolumeLightingSamples, VLM_MAX}
+    class LightmassWorldInfoSettings {
+        constructor();
+        constructor(StaticLightingLevelScale: number, NumIndirectLightingBounces: number, NumSkyLightingBounces: number, IndirectLightingQuality: number, IndirectLightingSmoothness: number, EnvironmentColor: Color, EnvironmentIntensity: number, EmissiveBoost: number, DiffuseBoost: number, VolumeLightingMethod: EVolumeLightingMethod, bUseAmbientOcclusion: boolean, bGenerateAmbientOcclusionMaterialMask: boolean, bVisualizeMaterialDiffuse: boolean, bVisualizeAmbientOcclusion: boolean, bCompressLightmaps: boolean, VolumetricLightmapDetailCellSize: number, VolumetricLightmapMaximumBrickMemoryMb: number, VolumetricLightmapSphericalHarmonicSmoothing: number, VolumeLightSamplePlacementScale: number, DirectIlluminationOcclusionFraction: number, IndirectIlluminationOcclusionFraction: number, OcclusionExponent: number, FullyOccludedSamplesFraction: number, MaxOcclusionDistance: number);
+        StaticLightingLevelScale: number;
+        NumIndirectLightingBounces: number;
+        NumSkyLightingBounces: number;
+        IndirectLightingQuality: number;
+        IndirectLightingSmoothness: number;
+        EnvironmentColor: Color;
+        EnvironmentIntensity: number;
+        EmissiveBoost: number;
+        DiffuseBoost: number;
+        VolumeLightingMethod: EVolumeLightingMethod;
+        bUseAmbientOcclusion: boolean;
+        bGenerateAmbientOcclusionMaterialMask: boolean;
+        bVisualizeMaterialDiffuse: boolean;
+        bVisualizeAmbientOcclusion: boolean;
+        bCompressLightmaps: boolean;
+        VolumetricLightmapDetailCellSize: number;
+        VolumetricLightmapMaximumBrickMemoryMb: number;
+        VolumetricLightmapSphericalHarmonicSmoothing: number;
+        VolumeLightSamplePlacementScale: number;
+        DirectIlluminationOcclusionFraction: number;
+        IndirectIlluminationOcclusionFraction: number;
+        OcclusionExponent: number;
+        FullyOccludedSamplesFraction: number;
+        MaxOcclusionDistance: number;
+        static StaticClass(): Class;
+    }
+    
+    enum ReverbPreset { REVERB_Default, REVERB_Bathroom, REVERB_StoneRoom, REVERB_Auditorium, REVERB_ConcertHall, REVERB_Cave, REVERB_Hallway, REVERB_StoneCorridor, REVERB_Alley, REVERB_Forest, REVERB_City, REVERB_Mountains, REVERB_Quarry, REVERB_Plain, REVERB_ParkingLot, REVERB_SewerPipe, REVERB_Underwater, REVERB_SmallRoom, REVERB_MediumRoom, REVERB_LargeRoom, REVERB_MediumHall, REVERB_LargeHall, REVERB_Plate, REVERB_MAX}
+    class ReverbEffect extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Density: number;
+        Diffusion: number;
+        Gain: number;
+        GainHF: number;
+        DecayTime: number;
+        DecayHFRatio: number;
+        ReflectionsGain: number;
+        ReflectionsDelay: number;
+        LateGain: number;
+        LateDelay: number;
+        AirAbsorptionGainHF: number;
+        RoomRolloffFactor: number;
+        bChanged: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ReverbEffect;
+        static Load(InName: string): ReverbEffect;
+    }
+    
+    class SoundEffectPreset extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Package;
-        static Load(InName: string): Package;
+        static Find(OrigInName: string, Outer?: Object): SoundEffectPreset;
+        static Load(InName: string): SoundEffectPreset;
+    }
+    
+    class SoundEffectSubmixPreset extends SoundEffectPreset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundEffectSubmixPreset;
+        static Load(InName: string): SoundEffectSubmixPreset;
+    }
+    
+    class ReverbSettings {
+        constructor();
+        constructor(bApplyReverb: boolean, ReverbType: ReverbPreset, ReverbEffect: ReverbEffect, ReverbPluginEffect: SoundEffectSubmixPreset, Volume: number, FadeTime: number);
+        bApplyReverb: boolean;
+        ReverbType: ReverbPreset;
+        ReverbEffect: ReverbEffect;
+        ReverbPluginEffect: SoundEffectSubmixPreset;
+        Volume: number;
+        FadeTime: number;
+        static StaticClass(): Class;
+    }
+    
+    class InteriorSettings {
+        constructor();
+        constructor(bIsWorldSettings: boolean, ExteriorVolume: number, ExteriorTime: number, ExteriorLPF: number, ExteriorLPFTime: number, InteriorVolume: number, InteriorTime: number, InteriorLPF: number, InteriorLPFTime: number);
+        bIsWorldSettings: boolean;
+        ExteriorVolume: number;
+        ExteriorTime: number;
+        ExteriorLPF: number;
+        ExteriorLPFTime: number;
+        InteriorVolume: number;
+        InteriorTime: number;
+        InteriorLPF: number;
+        InteriorLPFTime: number;
+        static StaticClass(): Class;
+    }
+    
+    class AudioEQEffect {
+        constructor();
+        constructor(FrequencyCenter0: number, Gain0: number, Bandwidth0: number, FrequencyCenter1: number, Gain1: number, Bandwidth1: number, FrequencyCenter2: number, Gain2: number, Bandwidth2: number, FrequencyCenter3: number, Gain3: number, Bandwidth3: number);
+        FrequencyCenter0: number;
+        Gain0: number;
+        Bandwidth0: number;
+        FrequencyCenter1: number;
+        Gain1: number;
+        Bandwidth1: number;
+        FrequencyCenter2: number;
+        Gain2: number;
+        Bandwidth2: number;
+        FrequencyCenter3: number;
+        Gain3: number;
+        Bandwidth3: number;
+        static StaticClass(): Class;
+    }
+    
+    enum EAudioOutputTarget { Speaker, Controller, ControllerFallbackToSpeaker, EAudioOutputTarget_MAX}
+    enum ESoundWaveLoadingBehavior { Inherited, RetainOnLoad, PrimeOnLoad, LoadOnDemand, ForceInline, Uninitialized, ESoundWaveLoadingBehavior_MAX}
+    class SoundClassProperties {
+        constructor();
+        constructor(Volume: number, Pitch: number, LowPassFilterFrequency: number, StereoBleed: number, LFEBleed: number, VoiceCenterChannelVolume: number, RadioFilterVolume: number, RadioFilterVolumeThreshold: number, bApplyEffects: boolean, bAlwaysPlay: boolean, bIsUISound: boolean, bIsMusic: boolean, bReverb: boolean, Default2DReverbSendAmount: number, bCenterChannelOnly: boolean, bApplyAmbientVolumes: boolean, OutputTarget: EAudioOutputTarget, LoadingBehavior: ESoundWaveLoadingBehavior);
+        Volume: number;
+        Pitch: number;
+        LowPassFilterFrequency: number;
+        StereoBleed: number;
+        LFEBleed: number;
+        VoiceCenterChannelVolume: number;
+        RadioFilterVolume: number;
+        RadioFilterVolumeThreshold: number;
+        bApplyEffects: boolean;
+        bAlwaysPlay: boolean;
+        bIsUISound: boolean;
+        bIsMusic: boolean;
+        bReverb: boolean;
+        Default2DReverbSendAmount: number;
+        bCenterChannelOnly: boolean;
+        bApplyAmbientVolumes: boolean;
+        OutputTarget: EAudioOutputTarget;
+        LoadingBehavior: ESoundWaveLoadingBehavior;
+        static StaticClass(): Class;
+    }
+    
+    class PassiveSoundMixModifier {
+        constructor();
+        constructor(SoundMix: SoundMix, MinVolumeThreshold: number, MaxVolumeThreshold: number);
+        SoundMix: SoundMix;
+        MinVolumeThreshold: number;
+        MaxVolumeThreshold: number;
+        static StaticClass(): Class;
+    }
+    
+    class SoundModulationPluginSourceSettingsBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundModulationPluginSourceSettingsBase;
+        static Load(InName: string): SoundModulationPluginSourceSettingsBase;
+    }
+    
+    class SoundModulation {
+        constructor();
+        constructor(Settings: TArray<SoundModulationPluginSourceSettingsBase>);
+        Settings: TArray<SoundModulationPluginSourceSettingsBase>;
+        static StaticClass(): Class;
+    }
+    
+    class SoundClass extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Properties: SoundClassProperties;
+        ChildClasses: TArray<SoundClass>;
+        PassiveSoundMixModifiers: TArray<PassiveSoundMixModifier>;
+        Modulation: SoundModulation;
+        ParentClass: SoundClass;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundClass;
+        static Load(InName: string): SoundClass;
+    }
+    
+    class SoundClassAdjuster {
+        constructor();
+        constructor(SoundClassObject: SoundClass, VolumeAdjuster: number, PitchAdjuster: number, LowPassFilterFrequency: number, bApplyToChildren: boolean, VoiceCenterChannelVolumeAdjuster: number);
+        SoundClassObject: SoundClass;
+        VolumeAdjuster: number;
+        PitchAdjuster: number;
+        LowPassFilterFrequency: number;
+        bApplyToChildren: boolean;
+        VoiceCenterChannelVolumeAdjuster: number;
+        static StaticClass(): Class;
+    }
+    
+    class SoundMix extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bApplyEQ: boolean;
+        EQPriority: number;
+        EQSettings: AudioEQEffect;
+        SoundClassEffects: TArray<SoundClassAdjuster>;
+        InitialDelay: number;
+        FadeInTime: number;
+        Duration: number;
+        FadeOutTime: number;
+        bChanged: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundMix;
+        static Load(InName: string): SoundMix;
+    }
+    
+    enum EProxyNormalComputationMethod { AngleWeighted, AreaWeighted, EqualWeighted, EProxyNormalComputationMethod_MAX}
+    enum ELandscapeCullingPrecision { High, Medium, Low, ELandscapeCullingPrecision_MAX}
+    class MeshProxySettings {
+        constructor();
+        constructor(ScreenSize: number, VoxelSize: number, MaterialSettings: MaterialProxySettings, TextureWidth: number, TextureHeight: number, bExportNormalMap: boolean, bExportMetallicMap: boolean, bExportRoughnessMap: boolean, bExportSpecularMap: boolean, bBakeVertexData: boolean, MergeDistance: number, UnresolvedGeometryColor: Color, MaxRayCastDist: number, HardAngleThreshold: number, LightMapResolution: number, NormalCalculationMethod: EProxyNormalComputationMethod, LandscapeCullingPrecision: ELandscapeCullingPrecision, bCalculateCorrectLODModel: boolean, bOverrideVoxelSize: boolean, bOverrideTransferDistance: boolean, bUseHardAngleThreshold: boolean, bComputeLightMapResolution: boolean, bRecalculateNormals: boolean, bUseLandscapeCulling: boolean, bAllowAdjacency: boolean, bAllowDistanceField: boolean, bReuseMeshLightmapUVs: boolean, bCreateCollision: boolean, bAllowVertexColors: boolean, bGenerateLightmapUVs: boolean);
+        ScreenSize: number;
+        VoxelSize: number;
+        MaterialSettings: MaterialProxySettings;
+        TextureWidth: number;
+        TextureHeight: number;
+        bExportNormalMap: boolean;
+        bExportMetallicMap: boolean;
+        bExportRoughnessMap: boolean;
+        bExportSpecularMap: boolean;
+        bBakeVertexData: boolean;
+        MergeDistance: number;
+        UnresolvedGeometryColor: Color;
+        MaxRayCastDist: number;
+        HardAngleThreshold: number;
+        LightMapResolution: number;
+        NormalCalculationMethod: EProxyNormalComputationMethod;
+        LandscapeCullingPrecision: ELandscapeCullingPrecision;
+        bCalculateCorrectLODModel: boolean;
+        bOverrideVoxelSize: boolean;
+        bOverrideTransferDistance: boolean;
+        bUseHardAngleThreshold: boolean;
+        bComputeLightMapResolution: boolean;
+        bRecalculateNormals: boolean;
+        bUseLandscapeCulling: boolean;
+        bAllowAdjacency: boolean;
+        bAllowDistanceField: boolean;
+        bReuseMeshLightmapUVs: boolean;
+        bCreateCollision: boolean;
+        bAllowVertexColors: boolean;
+        bGenerateLightmapUVs: boolean;
+        static StaticClass(): Class;
+    }
+    
+    enum EUVOutput { DoNotOutputChannel, OutputChannel, EUVOutput_MAX}
+    enum EMeshLODSelectionType { AllLODs, SpecificLOD, CalculateLOD, LowestDetailLOD, EMeshLODSelectionType_MAX}
+    class MeshMergingSettings {
+        constructor();
+        constructor(TargetLightMapResolution: number, OutputUVs: FixSizeArray<EUVOutput>, MaterialSettings: MaterialProxySettings, GutterSize: number, SpecificLOD: number, LODSelectionType: EMeshLODSelectionType, bGenerateLightMapUV: boolean, bComputedLightMapResolution: boolean, bPivotPointAtZero: boolean, bMergePhysicsData: boolean, bMergeMaterials: boolean, bCreateMergedMaterial: boolean, bBakeVertexDataToMesh: boolean, bUseVertexDataForBakingMaterial: boolean, bUseTextureBinning: boolean, bReuseMeshLightmapUVs: boolean, bMergeEquivalentMaterials: boolean, bUseLandscapeCulling: boolean, bIncludeImposters: boolean, bAllowDistanceField: boolean, bImportVertexColors: boolean, bCalculateCorrectLODModel: boolean, bExportNormalMap: boolean, bExportMetallicMap: boolean, bExportRoughnessMap: boolean, bExportSpecularMap: boolean, MergedMaterialAtlasResolution: number, ExportSpecificLOD: number);
+        TargetLightMapResolution: number;
+        OutputUVs: FixSizeArray<EUVOutput>;
+        MaterialSettings: MaterialProxySettings;
+        GutterSize: number;
+        SpecificLOD: number;
+        LODSelectionType: EMeshLODSelectionType;
+        bGenerateLightMapUV: boolean;
+        bComputedLightMapResolution: boolean;
+        bPivotPointAtZero: boolean;
+        bMergePhysicsData: boolean;
+        bMergeMaterials: boolean;
+        bCreateMergedMaterial: boolean;
+        bBakeVertexDataToMesh: boolean;
+        bUseVertexDataForBakingMaterial: boolean;
+        bUseTextureBinning: boolean;
+        bReuseMeshLightmapUVs: boolean;
+        bMergeEquivalentMaterials: boolean;
+        bUseLandscapeCulling: boolean;
+        bIncludeImposters: boolean;
+        bAllowDistanceField: boolean;
+        bImportVertexColors: boolean;
+        bCalculateCorrectLODModel: boolean;
+        bExportNormalMap: boolean;
+        bExportMetallicMap: boolean;
+        bExportRoughnessMap: boolean;
+        bExportSpecularMap: boolean;
+        MergedMaterialAtlasResolution: number;
+        ExportSpecificLOD: number;
+        static StaticClass(): Class;
+    }
+    
+    class HierarchicalSimplification {
+        constructor();
+        constructor(TransitionScreenSize: number, OverrideDrawDistance: number, bUseOverrideDrawDistance: boolean, bAllowSpecificExclusion: boolean, bSimplifyMesh: boolean, bOnlyGenerateClustersForVolumes: boolean, bReusePreviousLevelClusters: boolean, ProxySetting: MeshProxySettings, MergeSetting: MeshMergingSettings, DesiredBoundRadius: number, DesiredFillingPercentage: number, MinNumberOfActorsToBuild: number);
+        TransitionScreenSize: number;
+        OverrideDrawDistance: number;
+        bUseOverrideDrawDistance: boolean;
+        bAllowSpecificExclusion: boolean;
+        bSimplifyMesh: boolean;
+        bOnlyGenerateClustersForVolumes: boolean;
+        bReusePreviousLevelClusters: boolean;
+        ProxySetting: MeshProxySettings;
+        MergeSetting: MeshMergingSettings;
+        DesiredBoundRadius: number;
+        DesiredFillingPercentage: number;
+        MinNumberOfActorsToBuild: number;
+        static StaticClass(): Class;
+    }
+    
+    class BookmarkBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BookmarkBase;
+        static Load(InName: string): BookmarkBase;
+    }
+    
+    class BookMark extends BookmarkBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Location: Vector;
+        Rotation: Rotator;
+        HiddenLevels: TArray<string>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BookMark;
+        static Load(InName: string): BookMark;
+    }
+    
+    class BroadphaseSettings {
+        constructor();
+        constructor(bUseMBPOnClient: boolean, bUseMBPOnServer: boolean, bUseMBPOuterBounds: boolean, MBPBounds: Box, MBPOuterBounds: Box, MBPNumSubdivs: number);
+        bUseMBPOnClient: boolean;
+        bUseMBPOnServer: boolean;
+        bUseMBPOuterBounds: boolean;
+        MBPBounds: Box;
+        MBPOuterBounds: Box;
+        MBPNumSubdivs: number;
+        static StaticClass(): Class;
+    }
+    
+    class NetViewer {
+        constructor();
+        constructor(Connection: NetConnection, InViewer: Actor, ViewTarget: Actor, ViewLocation: Vector, ViewDir: Vector);
+        Connection: NetConnection;
+        InViewer: Actor;
+        ViewTarget: Actor;
+        ViewLocation: Vector;
+        ViewDir: Vector;
+        static StaticClass(): Class;
+    }
+    
+    class WorldSettings extends Info {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        VisibilityCellSize: number;
+        VisibilityAggressiveness: EVisibilityAggressiveness;
+        bPrecomputeVisibility: boolean;
+        bPlaceCellsOnlyAlongCameraTracks: boolean;
+        bEnableWorldBoundsChecks: boolean;
+        bEnableNavigationSystem: boolean;
+        bEnableAISystem: boolean;
+        bEnableWorldComposition: boolean;
+        bUseClientSideLevelStreamingVolumes: boolean;
+        bEnableWorldOriginRebasing: boolean;
+        bWorldGravitySet: boolean;
+        bGlobalGravitySet: boolean;
+        bMinimizeBSPSections: boolean;
+        bForceNoPrecomputedLighting: boolean;
+        bHighPriorityLoading: boolean;
+        bHighPriorityLoadingLocal: boolean;
+        bOverrideDefaultBroadphaseSettings: boolean;
+        NavigationSystemConfig: NavigationSystemConfig;
+        NavigationSystemConfigOverride: NavigationSystemConfig;
+        WorldToMeters: number;
+        KillZ: number;
+        KillZDamageType: Class;
+        WorldGravityZ: number;
+        GlobalGravityZ: number;
+        DefaultPhysicsVolumeClass: Class;
+        PhysicsCollisionHandlerClass: Class;
+        DefaultGameMode: Class;
+        GameNetworkManagerClass: Class;
+        PackedLightAndShadowMapTextureSize: number;
+        DefaultColorScale: Vector;
+        DefaultMaxDistanceFieldOcclusionDistance: number;
+        GlobalDistanceFieldViewDistance: number;
+        DynamicIndirectShadowsSelfShadowingIntensity: number;
+        LightmassSettings: LightmassWorldInfoSettings;
+        DefaultReverbSettings: ReverbSettings;
+        DefaultAmbientZoneSettings: InteriorSettings;
+        MonoCullingDistance: number;
+        DefaultBaseSoundMix: SoundMix;
+        bEnableHierarchicalLODSystem: boolean;
+        HLODSetupAsset: TSoftObjectPtr<Class>;
+        OverrideBaseMaterial: TSoftObjectPtr<MaterialInterface>;
+        HierarchicalLODSetup: TArray<HierarchicalSimplification>;
+        NumHLODLevels: number;
+        bGenerateSingleClusterForLevel: boolean;
+        BookMarks: FixSizeArray<BookMark>;
+        TimeDilation: number;
+        MatineeTimeDilation: number;
+        DemoPlayTimeDilation: number;
+        MinGlobalTimeDilation: number;
+        MaxGlobalTimeDilation: number;
+        MinUndilatedFrameTime: number;
+        MaxUndilatedFrameTime: number;
+        BroadphaseSettings: BroadphaseSettings;
+        Pauser: PlayerState;
+        ReplicationViewers: TArray<NetViewer>;
+        AssetUserData: TArray<AssetUserData>;
+        PauserPlayerState: PlayerState;
+        MaxNumberOfBookmarks: number;
+        DefaultBookmarkClass: Class;
+        BookmarkArray: TArray<BookmarkBase>;
+        LastBookmarkClass: Class;
+        OnRep_WorldGravityZ(): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WorldSettings;
+        static Load(InName: string): WorldSettings;
+    }
+    
+    class ReplicatedStaticActorDestructionInfo {
+        constructor();
+        constructor(ObjClass: Class);
+        ObjClass: Class;
+        static StaticClass(): Class;
+    }
+    
+    class Level extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OwningWorld: World;
+        Model: Model;
+        ModelComponents: TArray<ModelComponent>;
+        ActorCluster: LevelActorContainer;
+        LevelScriptBlueprint: LevelScriptBlueprint;
+        TextureStreamingResourceGuids: TArray<Guid>;
+        NumTextureStreamingUnbuiltComponents: number;
+        NumTextureStreamingDirtyResources: number;
+        LevelScriptActor: LevelScriptActor;
+        NavListStart: NavigationObjectBase;
+        NavListEnd: NavigationObjectBase;
+        NavDataChunks: TArray<NavigationDataChunk>;
+        LightmapTotalSize: number;
+        ShadowmapTotalSize: number;
+        StaticNavigableGeometry: TArray<Vector>;
+        StreamingTextureGuids: TArray<Guid>;
+        LevelBuildDataId: Guid;
+        MapBuildData: MapBuildDataRegistry;
+        LightBuildLevelOffset: IntVector;
+        bIsLightingScenario: boolean;
+        bTextureStreamingRotationChanged: boolean;
+        bStaticComponentsRegisteredInStreamingManager: boolean;
+        bIsVisible: boolean;
+        bLocked: boolean;
+        LevelSimplification: FixSizeArray<LevelSimplificationDetails>;
+        LevelColor: LinearColor;
+        bLevelOkayForPlacementWhileCheckedIn: boolean;
+        WorldSettings: WorldSettings;
+        AssetUserData: TArray<AssetUserData>;
+        DestroyedReplicatedStaticActors: TArray<ReplicatedStaticActorDestructionInfo>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Level;
+        static Load(InName: string): Level;
+    }
+    
+    class LineBatchComponent extends PrimitiveComponent {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LineBatchComponent;
+        static Load(InName: string): LineBatchComponent;
+    }
+    
+    class GameNetworkManager extends Info {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        BadPacketLossThreshold: number;
+        SeverePacketLossThreshold: number;
+        BadPingThreshold: number;
+        SeverePingThreshold: number;
+        AdjustedNetSpeed: number;
+        LastNetSpeedUpdateTime: number;
+        TotalNetBandwidth: number;
+        MinDynamicBandwidth: number;
+        MaxDynamicBandwidth: number;
+        bIsStandbyCheckingEnabled: boolean;
+        bHasStandbyCheatTriggered: boolean;
+        StandbyRxCheatTime: number;
+        StandbyTxCheatTime: number;
+        PercentMissingForRxStandby: number;
+        PercentMissingForTxStandby: number;
+        PercentForBadPing: number;
+        JoinInProgressStandbyWaitTime: number;
+        MoveRepSize: number;
+        MAXPOSITIONERRORSQUARED: number;
+        MAXNEARZEROVELOCITYSQUARED: number;
+        CLIENTADJUSTUPDATECOST: number;
+        MAXCLIENTUPDATEINTERVAL: number;
+        MaxClientForcedUpdateDuration: number;
+        ServerForcedUpdateHitchThreshold: number;
+        ServerForcedUpdateHitchCooldown: number;
+        MaxMoveDeltaTime: number;
+        MaxClientSmoothingDeltaTime: number;
+        ClientNetSendMoveDeltaTime: number;
+        ClientNetSendMoveDeltaTimeThrottled: number;
+        ClientNetSendMoveDeltaTimeStationary: number;
+        ClientNetSendMoveThrottleAtNetSpeed: number;
+        ClientNetSendMoveThrottleOverPlayerCount: number;
+        ClientAuthorativePosition: boolean;
+        ClientErrorUpdateRateLimit: number;
+        ClientNetCamUpdateDeltaTime: number;
+        ClientNetCamUpdatePositionLimit: number;
+        bMovementTimeDiscrepancyDetection: boolean;
+        bMovementTimeDiscrepancyResolution: boolean;
+        MovementTimeDiscrepancyMaxTimeMargin: number;
+        MovementTimeDiscrepancyMinTimeMargin: number;
+        MovementTimeDiscrepancyResolutionRate: number;
+        MovementTimeDiscrepancyDriftAllowance: number;
+        bMovementTimeDiscrepancyForceCorrectionsDuringResolution: boolean;
+        bUseDistanceBasedRelevancy: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameNetworkManager;
+        static Load(InName: string): GameNetworkManager;
+    }
+    
+    enum EVirtualizationMode { Disabled, PlayWhenSilent, Restart, EVirtualizationMode_MAX}
+    enum EMaxConcurrentResolutionRule { PreventNew, StopOldest, StopFarthestThenPreventNew, StopFarthestThenOldest, StopLowestPriority, StopQuietest, StopLowestPriorityThenPreventNew, EMaxConcurrentResolutionRule_MAX}
+    class SoundConcurrencySettings {
+        constructor();
+        constructor(MaxCount: number, bLimitToOwner: boolean, ResolutionRule: EMaxConcurrentResolutionRule, VolumeScale: number, VolumeScaleAttackTime: number, bVolumeScaleCanRelease: boolean, VolumeScaleReleaseTime: number, VoiceStealReleaseTime: number);
+        MaxCount: number;
+        bLimitToOwner: boolean;
+        ResolutionRule: EMaxConcurrentResolutionRule;
+        VolumeScale: number;
+        VolumeScaleAttackTime: number;
+        bVolumeScaleCanRelease: boolean;
+        VolumeScaleReleaseTime: number;
+        VoiceStealReleaseTime: number;
+        static StaticClass(): Class;
+    }
+    
+    class SoundConcurrency extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Concurrency: SoundConcurrencySettings;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundConcurrency;
+        static Load(InName: string): SoundConcurrency;
+    }
+    
+    enum EAttenuationDistanceModel { Linear, Logarithmic, Inverse, LogReverse, NaturalSound, Custom, EAttenuationDistanceModel_MAX}
+    enum EAttenuationShape { Sphere, Capsule, Box, Cone, EAttenuationShape_MAX}
+    class BaseAttenuationSettings {
+        constructor();
+        constructor(DistanceAlgorithm: EAttenuationDistanceModel, AttenuationShape: EAttenuationShape, dBAttenuationAtMax: number, AttenuationShapeExtents: Vector, ConeOffset: number, FalloffDistance: number, CustomAttenuationCurve: RuntimeFloatCurve);
+        DistanceAlgorithm: EAttenuationDistanceModel;
+        AttenuationShape: EAttenuationShape;
+        dBAttenuationAtMax: number;
+        AttenuationShapeExtents: Vector;
+        ConeOffset: number;
+        FalloffDistance: number;
+        CustomAttenuationCurve: RuntimeFloatCurve;
+        static StaticClass(): Class;
+    }
+    
+    enum ESoundSpatializationAlgorithm { SPATIALIZATION_Default, SPATIALIZATION_HRTF, SPATIALIZATION_MAX}
+    enum EAirAbsorptionMethod { Linear, CustomCurve, EAirAbsorptionMethod_MAX}
+    enum EReverbSendMethod { Linear, CustomCurve, Manual, EReverbSendMethod_MAX}
+    enum ESoundDistanceCalc { SOUNDDISTANCE_Normal, SOUNDDISTANCE_InfiniteXYPlane, SOUNDDISTANCE_InfiniteXZPlane, SOUNDDISTANCE_InfiniteYZPlane, SOUNDDISTANCE_MAX}
+    class SpatializationPluginSourceSettingsBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SpatializationPluginSourceSettingsBase;
+        static Load(InName: string): SpatializationPluginSourceSettingsBase;
+    }
+    
+    class OcclusionPluginSourceSettingsBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): OcclusionPluginSourceSettingsBase;
+        static Load(InName: string): OcclusionPluginSourceSettingsBase;
+    }
+    
+    class ReverbPluginSourceSettingsBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ReverbPluginSourceSettingsBase;
+        static Load(InName: string): ReverbPluginSourceSettingsBase;
+    }
+    
+    class SoundAttenuationPluginSettings {
+        constructor();
+        constructor(SpatializationPluginSettingsArray: TArray<SpatializationPluginSourceSettingsBase>, OcclusionPluginSettingsArray: TArray<OcclusionPluginSourceSettingsBase>, ReverbPluginSettingsArray: TArray<ReverbPluginSourceSettingsBase>);
+        SpatializationPluginSettingsArray: TArray<SpatializationPluginSourceSettingsBase>;
+        OcclusionPluginSettingsArray: TArray<OcclusionPluginSourceSettingsBase>;
+        ReverbPluginSettingsArray: TArray<ReverbPluginSourceSettingsBase>;
+        static StaticClass(): Class;
+    }
+    
+    class SoundAttenuationSettings extends BaseAttenuationSettings {
+        constructor();
+        constructor(bAttenuate: boolean, bSpatialize: boolean, bAttenuateWithLPF: boolean, bEnableListenerFocus: boolean, bEnableFocusInterpolation: boolean, bEnableOcclusion: boolean, bUseComplexCollisionForOcclusion: boolean, bEnableReverbSend: boolean, bApplyNormalizationToStereoSounds: boolean, bEnableLogFrequencyScaling: boolean, SpatializationAlgorithm: ESoundSpatializationAlgorithm, BinauralRadius: number, AbsorptionMethod: EAirAbsorptionMethod, OcclusionTraceChannel: ECollisionChannel, ReverbSendMethod: EReverbSendMethod, DistanceType: ESoundDistanceCalc, OmniRadius: number, StereoSpread: number, SpatializationPluginSettings: SpatializationPluginSourceSettingsBase, RadiusMin: number, RadiusMax: number, LPFRadiusMin: number, LPFRadiusMax: number, CustomLowpassAirAbsorptionCurve: RuntimeFloatCurve, CustomHighpassAirAbsorptionCurve: RuntimeFloatCurve, LPFFrequencyAtMin: number, LPFFrequencyAtMax: number, HPFFrequencyAtMin: number, HPFFrequencyAtMax: number, FocusAzimuth: number, NonFocusAzimuth: number, FocusDistanceScale: number, NonFocusDistanceScale: number, FocusPriorityScale: number, NonFocusPriorityScale: number, FocusVolumeAttenuation: number, NonFocusVolumeAttenuation: number, FocusAttackInterpSpeed: number, FocusReleaseInterpSpeed: number, OcclusionLowPassFilterFrequency: number, OcclusionVolumeAttenuation: number, OcclusionInterpolationTime: number, OcclusionPluginSettings: OcclusionPluginSourceSettingsBase, ReverbPluginSettings: ReverbPluginSourceSettingsBase, ReverbWetLevelMin: number, ReverbWetLevelMax: number, ReverbDistanceMin: number, ReverbDistanceMax: number, ManualReverbSendLevel: number, CustomReverbSendCurve: RuntimeFloatCurve, PluginSettings: SoundAttenuationPluginSettings);
+        bAttenuate: boolean;
+        bSpatialize: boolean;
+        bAttenuateWithLPF: boolean;
+        bEnableListenerFocus: boolean;
+        bEnableFocusInterpolation: boolean;
+        bEnableOcclusion: boolean;
+        bUseComplexCollisionForOcclusion: boolean;
+        bEnableReverbSend: boolean;
+        bApplyNormalizationToStereoSounds: boolean;
+        bEnableLogFrequencyScaling: boolean;
+        SpatializationAlgorithm: ESoundSpatializationAlgorithm;
+        BinauralRadius: number;
+        AbsorptionMethod: EAirAbsorptionMethod;
+        OcclusionTraceChannel: ECollisionChannel;
+        ReverbSendMethod: EReverbSendMethod;
+        DistanceType: ESoundDistanceCalc;
+        OmniRadius: number;
+        StereoSpread: number;
+        SpatializationPluginSettings: SpatializationPluginSourceSettingsBase;
+        RadiusMin: number;
+        RadiusMax: number;
+        LPFRadiusMin: number;
+        LPFRadiusMax: number;
+        CustomLowpassAirAbsorptionCurve: RuntimeFloatCurve;
+        CustomHighpassAirAbsorptionCurve: RuntimeFloatCurve;
+        LPFFrequencyAtMin: number;
+        LPFFrequencyAtMax: number;
+        HPFFrequencyAtMin: number;
+        HPFFrequencyAtMax: number;
+        FocusAzimuth: number;
+        NonFocusAzimuth: number;
+        FocusDistanceScale: number;
+        NonFocusDistanceScale: number;
+        FocusPriorityScale: number;
+        NonFocusPriorityScale: number;
+        FocusVolumeAttenuation: number;
+        NonFocusVolumeAttenuation: number;
+        FocusAttackInterpSpeed: number;
+        FocusReleaseInterpSpeed: number;
+        OcclusionLowPassFilterFrequency: number;
+        OcclusionVolumeAttenuation: number;
+        OcclusionInterpolationTime: number;
+        OcclusionPluginSettings: OcclusionPluginSourceSettingsBase;
+        ReverbPluginSettings: ReverbPluginSourceSettingsBase;
+        ReverbWetLevelMin: number;
+        ReverbWetLevelMax: number;
+        ReverbDistanceMin: number;
+        ReverbDistanceMax: number;
+        ManualReverbSendLevel: number;
+        CustomReverbSendCurve: RuntimeFloatCurve;
+        PluginSettings: SoundAttenuationPluginSettings;
+        static StaticClass(): Class;
+    }
+    
+    class SoundAttenuation extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Attenuation: SoundAttenuationSettings;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundAttenuation;
+        static Load(InName: string): SoundAttenuation;
+    }
+    
+    enum ESubmixChannelFormat { Device, Stereo, Quad, FiveDotOne, SevenDotOne, Ambisonics, Count, ESubmixChannelFormat_MAX}
+    class AmbisonicsSubmixSettingsBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AmbisonicsSubmixSettingsBase;
+        static Load(InName: string): AmbisonicsSubmixSettingsBase;
+    }
+    
+    enum ESoundwaveSampleRateSettings { Max, High, Medium, Low, Min, MatchDevice, ESoundwaveSampleRateSettings_MAX}
+    enum ESoundGroup { SOUNDGROUP_Default, SOUNDGROUP_Effects, SOUNDGROUP_UI, SOUNDGROUP_Music, SOUNDGROUP_Voice, SOUNDGROUP_GameSoundGroup1, SOUNDGROUP_GameSoundGroup2, SOUNDGROUP_GameSoundGroup3, SOUNDGROUP_GameSoundGroup4, SOUNDGROUP_GameSoundGroup5, SOUNDGROUP_GameSoundGroup6, SOUNDGROUP_GameSoundGroup7, SOUNDGROUP_GameSoundGroup8, SOUNDGROUP_GameSoundGroup9, SOUNDGROUP_GameSoundGroup10, SOUNDGROUP_GameSoundGroup11, SOUNDGROUP_GameSoundGroup12, SOUNDGROUP_GameSoundGroup13, SOUNDGROUP_GameSoundGroup14, SOUNDGROUP_GameSoundGroup15, SOUNDGROUP_GameSoundGroup16, SOUNDGROUP_GameSoundGroup17, SOUNDGROUP_GameSoundGroup18, SOUNDGROUP_GameSoundGroup19, SOUNDGROUP_GameSoundGroup20, SOUNDGROUP_MAX}
+    enum ESoundWaveFFTSize { VerySmall_64, Small_256, Medium_512, Large_1024, VeryLarge_2048, ESoundWaveFFTSize_MAX}
+    class SoundWaveSpectralDataEntry {
+        constructor();
+        constructor(Magnitude: number, NormalizedMagnitude: number);
+        Magnitude: number;
+        NormalizedMagnitude: number;
+        static StaticClass(): Class;
+    }
+    
+    class SoundWaveSpectralTimeData {
+        constructor();
+        constructor(Data: TArray<SoundWaveSpectralDataEntry>, TimeSec: number);
+        Data: TArray<SoundWaveSpectralDataEntry>;
+        TimeSec: number;
+        static StaticClass(): Class;
+    }
+    
+    class SoundWaveEnvelopeTimeData {
+        constructor();
+        constructor(Amplitude: number, TimeSec: number);
+        Amplitude: number;
+        TimeSec: number;
+        static StaticClass(): Class;
+    }
+    
+    class SubtitleCue {
+        constructor();
+        constructor(Text: string, Time: number);
+        Text: string;
+        Time: number;
+        static StaticClass(): Class;
+    }
+    
+    class CurveTable extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        AssetImportData: AssetImportData;
+        ImportPath: string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CurveTable;
+        static Load(InName: string): CurveTable;
+    }
+    
+    class SoundWave extends SoundBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CompressionQuality: number;
+        StreamingPriority: number;
+        SampleRateQuality: ESoundwaveSampleRateSettings;
+        SoundGroup: ESoundGroup;
+        bLooping: boolean;
+        bStreaming: boolean;
+        bSeekableStreaming: boolean;
+        LoadingBehavior: ESoundWaveLoadingBehavior;
+        bMature: boolean;
+        bManualWordWrap: boolean;
+        bSingleLine: boolean;
+        bVirtualizeWhenSilent: boolean;
+        bIsAmbisonics: boolean;
+        OverrideSoundToUseForAnalysis: SoundWave;
+        TreatFileAsLoopingForAnalysis: boolean;
+        bEnableBakedFFTAnalysis: boolean;
+        bEnableAmplitudeEnvelopeAnalysis: boolean;
+        FFTSize: ESoundWaveFFTSize;
+        FFTAnalysisFrameSize: number;
+        FFTAnalysisAttackTime: number;
+        FFTAnalysisReleaseTime: number;
+        EnvelopeFollowerFrameSize: number;
+        EnvelopeFollowerAttackTime: number;
+        EnvelopeFollowerReleaseTime: number;
+        FrequenciesToAnalyze: TArray<number>;
+        CookedSpectralTimeData: TArray<SoundWaveSpectralTimeData>;
+        CookedEnvelopeTimeData: TArray<SoundWaveEnvelopeTimeData>;
+        InitialChunkSize: number;
+        SpokenText: string;
+        SubtitlePriority: number;
+        Volume: number;
+        Pitch: number;
+        NumChannels: number;
+        ChannelOffsets: TArray<number>;
+        ChannelSizes: TArray<number>;
+        SampleRate: number;
+        Subtitles: TArray<SubtitleCue>;
+        Comment: string;
+        SourceFilePath: string;
+        SourceFileTimestamp: string;
+        AssetImportData: AssetImportData;
+        Curves: CurveTable;
+        InternalCurves: CurveTable;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundWave;
+        static Load(InName: string): SoundWave;
+    }
+    
+    enum EAudioRecordingExportType { SoundWave, WavFile, EAudioRecordingExportType_MAX}
+    class SoundSubmix extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ChildSubmixes: TArray<SoundSubmix>;
+        ParentSubmix: SoundSubmix;
+        ChannelFormat: ESubmixChannelFormat;
+        bMuteWhenBackgrounded: boolean;
+        SubmixEffectChain: TArray<SoundEffectSubmixPreset>;
+        AmbisonicsPluginSettings: AmbisonicsSubmixSettingsBase;
+        EnvelopeFollowerAttackTime: number;
+        EnvelopeFollowerReleaseTime: number;
+        OutputVolume: number;
+        OnSubmixRecordedFileDone: $MulticastDelegate<(ResultingSoundWave: $Nullable<SoundWave>) => void>;
+        StopRecordingOutput(WorldContextObject: $Nullable<Object>, ExportType: EAudioRecordingExportType, Name: string, Path: string, ExistingSoundWaveToOverwrite?: SoundWave /* = None */): void;
+        StopEnvelopeFollowing(WorldContextObject: $Nullable<Object>): void;
+        StartRecordingOutput(WorldContextObject: $Nullable<Object>, ExpectedDuration: number): void;
+        StartEnvelopeFollowing(WorldContextObject: $Nullable<Object>): void;
+        SetSubmixOutputVolume(WorldContextObject: $Nullable<Object>, InOutputVolume: number): void;
+        AddEnvelopeFollowerDelegate(WorldContextObject: $Nullable<Object>, OnSubmixEnvelopeBP: $Delegate<(Envelope: TArray<number>) => void>): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundSubmix;
+        static Load(InName: string): SoundSubmix;
+    }
+    
+    enum ESendLevelControlMethod { Linear, CustomCurve, Manual, ESendLevelControlMethod_MAX}
+    class SoundSubmixSendInfo {
+        constructor();
+        constructor(SendLevelControlMethod: ESendLevelControlMethod, SoundSubmix: SoundSubmix, SendLevel: number, MinSendLevel: number, MaxSendLevel: number, MinSendDistance: number, MaxSendDistance: number, CustomSendLevelCurve: RuntimeFloatCurve);
+        SendLevelControlMethod: ESendLevelControlMethod;
+        SoundSubmix: SoundSubmix;
+        SendLevel: number;
+        MinSendLevel: number;
+        MaxSendLevel: number;
+        MinSendDistance: number;
+        MaxSendDistance: number;
+        CustomSendLevelCurve: RuntimeFloatCurve;
+        static StaticClass(): Class;
+    }
+    
+    class SoundEffectSourcePreset extends SoundEffectPreset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundEffectSourcePreset;
+        static Load(InName: string): SoundEffectSourcePreset;
+    }
+    
+    class SourceEffectChainEntry {
+        constructor();
+        constructor(Preset: SoundEffectSourcePreset, bBypass: boolean);
+        Preset: SoundEffectSourcePreset;
+        bBypass: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class SoundEffectSourcePresetChain extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Chain: TArray<SourceEffectChainEntry>;
+        bPlayEffectChainTails: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundEffectSourcePresetChain;
+        static Load(InName: string): SoundEffectSourcePresetChain;
+    }
+    
+    enum ESourceBusSendLevelControlMethod { Linear, CustomCurve, Manual, ESourceBusSendLevelControlMethod_MAX}
+    enum ESourceBusChannels { Mono, Stereo, ESourceBusChannels_MAX}
+    class SoundSourceBus extends SoundWave {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SourceBusChannels: ESourceBusChannels;
+        SourceBusDuration: number;
+        bAutoDeactivateWhenSilent: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundSourceBus;
+        static Load(InName: string): SoundSourceBus;
+    }
+    
+    class SoundSourceBusSendInfo {
+        constructor();
+        constructor(SourceBusSendLevelControlMethod: ESourceBusSendLevelControlMethod, SoundSourceBus: SoundSourceBus, SendLevel: number, MinSendLevel: number, MaxSendLevel: number, MinSendDistance: number, MaxSendDistance: number, CustomSendLevelCurve: RuntimeFloatCurve);
+        SourceBusSendLevelControlMethod: ESourceBusSendLevelControlMethod;
+        SoundSourceBus: SoundSourceBus;
+        SendLevel: number;
+        MinSendLevel: number;
+        MaxSendLevel: number;
+        MinSendDistance: number;
+        MaxSendDistance: number;
+        CustomSendLevelCurve: RuntimeFloatCurve;
+        static StaticClass(): Class;
+    }
+    
+    class SoundBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SoundClassObject: SoundClass;
+        bDebug: boolean;
+        bOverrideConcurrency: boolean;
+        bOutputToBusOnly: boolean;
+        bHasDelayNode: boolean;
+        bHasConcatenatorNode: boolean;
+        bHasVirtualizeWhenSilent: boolean;
+        bBypassVolumeScaleForPriority: boolean;
+        VirtualizationMode: EVirtualizationMode;
+        MaxConcurrentResolutionRule: EMaxConcurrentResolutionRule;
+        SoundConcurrencySettings: SoundConcurrency;
+        ConcurrencySet: TSet<SoundConcurrency>;
+        ConcurrencyOverrides: SoundConcurrencySettings;
+        MaxConcurrentPlayCount: number;
+        Duration: number;
+        MaxDistance: number;
+        TotalSamples: number;
+        Priority: number;
+        AttenuationSettings: SoundAttenuation;
+        Modulation: SoundModulation;
+        SoundSubmixObject: SoundSubmix;
+        SoundSubmixSends: TArray<SoundSubmixSendInfo>;
+        SourceEffectChain: SoundEffectSourcePresetChain;
+        BusSends: TArray<SoundSourceBusSendInfo>;
+        PreEffectBusSends: TArray<SoundSourceBusSendInfo>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SoundBase;
+        static Load(InName: string): SoundBase;
+    }
+    
+    class PhysicsCollisionHandler extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ImpactThreshold: number;
+        ImpactReFireDelay: number;
+        DefaultImpactSound: SoundBase;
+        LastImpactSoundTime: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PhysicsCollisionHandler;
+        static Load(InName: string): PhysicsCollisionHandler;
+    }
+    
+    enum EStreamingVolumeUsage { SVB_Loading, SVB_LoadingAndVisibility, SVB_VisibilityBlockingOnLoad, SVB_BlockingOnLoad, SVB_LoadingNotVisible, SVB_MAX}
+    class LevelStreamingVolume extends Volume {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        StreamingLevelNames: TArray<string>;
+        bEditorPreVisOnly: boolean;
+        bDisabled: boolean;
+        StreamingUsage: EStreamingVolumeUsage;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LevelStreamingVolume;
+        static Load(InName: string): LevelStreamingVolume;
+    }
+    
+    class LevelStreaming extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        PackageName: string;
+        WorldAsset: TSoftObjectPtr<World>;
+        PackageNameToLoad: string;
+        LODPackageNames: TArray<string>;
+        LevelTransform: Transform;
+        LevelLODIndex: number;
+        StreamingPriority: number;
+        bShouldBeVisibleInEditor: boolean;
+        bShouldBeVisible: boolean;
+        bShouldBeLoaded: boolean;
+        bLocked: boolean;
+        bIsStatic: boolean;
+        bShouldBlockOnLoad: boolean;
+        bShouldBlockOnUnload: boolean;
+        bDisableDistanceStreaming: boolean;
+        bDrawOnLevelStatusMap: boolean;
+        DrawColor: Color;
+        LevelColor: LinearColor;
+        EditorStreamingVolumes: TArray<LevelStreamingVolume>;
+        MinTimeBetweenVolumeUnloadRequests: number;
+        Keywords: TArray<string>;
+        OnLevelLoaded: $MulticastDelegate<() => void>;
+        OnLevelUnloaded: $MulticastDelegate<() => void>;
+        OnLevelShown: $MulticastDelegate<() => void>;
+        OnLevelHidden: $MulticastDelegate<() => void>;
+        LoadedLevel: Level;
+        PendingUnloadLevel: Level;
+        FolderPath: string;
+        ShouldBeLoaded(): boolean;
+        SetShouldBeVisible(bInShouldBeVisible: boolean): void;
+        SetShouldBeLoaded(bInShouldBeLoaded: boolean): void;
+        SetPriority(NewPriority: number): void;
+        SetLevelLODIndex(LODIndex: number): void;
+        IsStreamingStatePending(): boolean;
+        IsLevelVisible(): boolean;
+        IsLevelLoaded(): boolean;
+        GetWorldAssetPackageFName(): string;
+        GetLoadedLevel(): Level;
+        GetLevelScriptActor(): LevelScriptActor;
+        CreateInstance(UniqueInstanceName: string): LevelStreaming;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LevelStreaming;
+        static Load(InName: string): LevelStreaming;
+    }
+    
+    class LevelStreamingWrapper {
+        constructor();
+        constructor(StreamingLevel: LevelStreaming);
+        StreamingLevel: LevelStreaming;
+        static StaticClass(): Class;
+    }
+    
+    class StreamingLevelsToConsider {
+        constructor();
+        constructor(StreamingLevels: TArray<LevelStreamingWrapper>);
+        StreamingLevels: TArray<LevelStreamingWrapper>;
+        static StaticClass(): Class;
+    }
+    
+    class RollbackNetStartupActorInfo {
+        constructor();
+        constructor(Archetype: Object, Level: Level, ObjReferences: TArray<Object>);
+        Archetype: Object;
+        Level: Level;
+        ObjReferences: TArray<Object>;
+        static StaticClass(): Class;
+    }
+    
+    class MulticastRecordOptions {
+        constructor();
+        constructor(FuncPathName: string, bServerSkip: boolean, bClientSkip: boolean);
+        FuncPathName: string;
+        bServerSkip: boolean;
+        bClientSkip: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class DemoNetDriver extends NetDriver {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        RollbackNetStartupActors: TMap<string, RollbackNetStartupActorInfo>;
+        CheckpointSaveMaxMSPerFrame: number;
+        MulticastRecordOptions: TArray<MulticastRecordOptions>;
+        bIsLocalReplay: boolean;
+        SpectatorControllers: TArray<PlayerController>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): DemoNetDriver;
+        static Load(InName: string): DemoNetDriver;
+    }
+    
+    class ParticleEventManager extends Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ParticleEventManager;
+        static Load(InName: string): ParticleEventManager;
+    }
+    
+    class NavigationSystemBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): NavigationSystemBase;
+        static Load(InName: string): NavigationSystemBase;
+    }
+    
+    class GameSession extends Info {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        MaxSpectators: number;
+        MaxPlayers: number;
+        MaxPartySize: number;
+        MaxSplitscreensPerConnection: number;
+        bRequiresPushToTalk: boolean;
+        SessionName: string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameSession;
+        static Load(InName: string): GameSession;
+    }
+    
+    class GameStateBase extends Info {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        GameModeClass: Class;
+        AuthorityGameMode: GameModeBase;
+        SpectatorClass: Class;
+        PlayerArray: TArray<PlayerState>;
+        bReplicatedHasBegunPlay: boolean;
+        ReplicatedWorldTimeSeconds: number;
+        ServerWorldTimeSecondsDelta: number;
+        ServerWorldTimeSecondsUpdateFrequency: number;
+        OnRep_SpectatorClass(): void;
+        OnRep_ReplicatedWorldTimeSeconds(): void;
+        OnRep_ReplicatedHasBegunPlay(): void;
+        OnRep_GameModeClass(): void;
+        HasMatchStarted(): boolean;
+        HasBegunPlay(): boolean;
+        GetServerWorldTimeSeconds(): number;
+        GetPlayerStartTime(Controller: $Nullable<Controller>): number;
+        GetPlayerRespawnDelay(Controller: $Nullable<Controller>): number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameStateBase;
+        static Load(InName: string): GameStateBase;
+    }
+    
+    class ServerStatReplicator extends Info {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bUpdateStatNet: boolean;
+        bOverwriteClientStats: boolean;
+        Channels: number;
+        InRate: number;
+        OutRate: number;
+        OutSaturation: number;
+        MaxPacketOverhead: number;
+        InRateClientMax: number;
+        InRateClientMin: number;
+        InRateClientAvg: number;
+        InPacketsClientMax: number;
+        InPacketsClientMin: number;
+        InPacketsClientAvg: number;
+        OutRateClientMax: number;
+        OutRateClientMin: number;
+        OutRateClientAvg: number;
+        OutPacketsClientMax: number;
+        OutPacketsClientMin: number;
+        OutPacketsClientAvg: number;
+        NetNumClients: number;
+        InPackets: number;
+        OutPackets: number;
+        InBunches: number;
+        OutBunches: number;
+        OutLoss: number;
+        InLoss: number;
+        VoiceBytesSent: number;
+        VoiceBytesRecv: number;
+        VoicePacketsSent: number;
+        VoicePacketsRecv: number;
+        PercentInVoice: number;
+        PercentOutVoice: number;
+        NumActorChannels: number;
+        NumConsideredActors: number;
+        PrioritizedActors: number;
+        NumRelevantActors: number;
+        NumRelevantDeletedActors: number;
+        NumReplicatedActorAttempts: number;
+        NumReplicatedActors: number;
+        NumActors: number;
+        NumNetActors: number;
+        NumDormantActors: number;
+        NumInitiallyDormantActors: number;
+        NumNetGUIDsAckd: number;
+        NumNetGUIDsPending: number;
+        NumNetGUIDsUnAckd: number;
+        ObjPathBytes: number;
+        NetGUIDOutRate: number;
+        NetGUIDInRate: number;
+        NetSaturated: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ServerStatReplicator;
+        static Load(InName: string): ServerStatReplicator;
+    }
+    
+    class GameModeBase extends Info {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OptionsString: string;
+        GameSessionClass: Class;
+        GameStateClass: Class;
+        PlayerControllerClass: Class;
+        PlayerStateClass: Class;
+        HUDClass: Class;
+        DefaultPawnClass: Class;
+        SpectatorClass: Class;
+        ReplaySpectatorPlayerControllerClass: Class;
+        ServerStatReplicatorClass: Class;
+        GameSession: GameSession;
+        GameState: GameStateBase;
+        ServerStatReplicator: ServerStatReplicator;
+        DefaultPlayerName: string;
+        bUseSeamlessTravel: boolean;
+        bStartPlayersAsSpectators: boolean;
+        bPauseable: boolean;
+        StartPlay(): void;
+        SpawnDefaultPawnFor(NewPlayer: $Nullable<Controller>, StartSpot: $Nullable<Actor>): Pawn;
+        SpawnDefaultPawnAtTransform(NewPlayer: $Nullable<Controller>, SpawnTransform: Transform): Pawn;
+        ShouldReset(ActorToReset: $Nullable<Actor>): boolean;
+        ReturnToMainMenuHost(): void;
+        RestartPlayerAtTransform(NewPlayer: $Nullable<Controller>, SpawnTransform: Transform): void;
+        RestartPlayerAtPlayerStart(NewPlayer: $Nullable<Controller>, StartSpot: $Nullable<Actor>): void;
+        RestartPlayer(NewPlayer: $Nullable<Controller>): void;
+        ResetLevel(): void;
+        PlayerCanRestart(Player: $Nullable<PlayerController>): boolean;
+        MustSpectate(NewPlayerController: $Nullable<PlayerController>): boolean;
+        K2_PostLogin(NewPlayer: $Nullable<PlayerController>): void;
+        K2_OnSwapPlayerControllers(OldPC: $Nullable<PlayerController>, NewPC: $Nullable<PlayerController>): void;
+        K2_OnRestartPlayer(NewPlayer: $Nullable<Controller>): void;
+        K2_OnLogout(ExitingController: $Nullable<Controller>): void;
+        K2_OnChangeName(Other: $Nullable<Controller>, NewName: string, bNameChange: boolean): void;
+        K2_FindPlayerStart(Player: $Nullable<Controller>, IncomingName?: string /* = "" */): Actor;
+        InitStartSpot(StartSpot: $Nullable<Actor>, NewPlayer: $Nullable<Controller>): void;
+        InitializeHUDForPlayer(NewPlayer: $Nullable<PlayerController>): void;
+        HasMatchStarted(): boolean;
+        HandleStartingNewPlayer(NewPlayer: $Nullable<PlayerController>): void;
+        GetNumSpectators(): number;
+        GetNumPlayers(): number;
+        GetDefaultPawnClassForController(InController: $Nullable<Controller>): Class;
+        FindPlayerStart(Player: $Nullable<Controller>, IncomingName: string): Actor;
+        ChoosePlayerStart(Player: $Nullable<Controller>): Actor;
+        ChangeName(Controller: $Nullable<Controller>, NewName: string, bNameChange: boolean): void;
+        CanSpectate(Viewer: $Nullable<PlayerController>, ViewTarget: $Nullable<PlayerState>): boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameModeBase;
+        static Load(InName: string): GameModeBase;
+    }
+    
+    class AISystemBase extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        AISystemClassName: SoftClassPath;
+        AISystemModuleName: string;
+        bInstantiateAISystemOnClient: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AISystemBase;
+        static Load(InName: string): AISystemBase;
+    }
+    
+    class AvoidanceManager extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        DefaultTimeToLive: number;
+        LockTimeAfterAvoid: number;
+        LockTimeAfterClean: number;
+        DeltaTimeToPredict: number;
+        ArtificialRadiusExpansion: number;
+        TestHeightDifference: number;
+        HeightCheckMargin: number;
+        RegisterMovementComponent(MovementComp: $Nullable<MovementComponent>, AvoidanceWeight?: number /* = 0.500000 */): boolean;
+        GetObjectCount(): number;
+        GetNewAvoidanceUID(): number;
+        GetAvoidanceVelocityForComponent(MovementComp: $Nullable<MovementComponent>): Vector;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AvoidanceManager;
+        static Load(InName: string): AvoidanceManager;
+    }
+    
+    class LevelCollection {
+        constructor();
+        constructor(GameState: GameStateBase, NetDriver: NetDriver, DemoNetDriver: DemoNetDriver, PersistentLevel: Level, Levels: TSet<Level>);
+        GameState: GameStateBase;
+        NetDriver: NetDriver;
+        DemoNetDriver: DemoNetDriver;
+        PersistentLevel: Level;
+        Levels: TSet<Level>;
+        static StaticClass(): Class;
+    }
+    
+    class ScriptViewportClient extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ScriptViewportClient;
+        static Load(InName: string): ScriptViewportClient;
+    }
+    
+    class Console extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ConsoleTargetPlayer: LocalPlayer;
+        DefaultTexture_Black: Texture2D;
+        DefaultTexture_White: Texture2D;
+        HistoryBuffer: TArray<string>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Console;
+        static Load(InName: string): Console;
+    }
+    
+    class DebugDisplayProperty {
+        constructor();
+        constructor(Obj: Object, WithinClass: Class);
+        Obj: Object;
+        WithinClass: Class;
+        static StaticClass(): Class;
+    }
+    
+    class GameViewportClient extends ScriptViewportClient {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ViewportConsole: Console;
+        DebugProperties: TArray<DebugDisplayProperty>;
+        World: World;
+        GameInstance: GameInstance;
+        SSSwapControllers(): void;
+        ShowTitleSafeArea(): void;
+        SetConsoleTarget(PlayerIndex: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameViewportClient;
+        static Load(InName: string): GameViewportClient;
+    }
+    
+    enum EAspectRatioAxisConstraint { AspectRatio_MaintainYFOV, AspectRatio_MaintainXFOV, AspectRatio_MajorAxisFOV, AspectRatio_MAX}
+    class LocalPlayer extends Player {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ViewportClient: GameViewportClient;
+        AspectRatioAxisConstraint: EAspectRatioAxisConstraint;
+        PendingLevelPlayerControllerClass: Class;
+        bSentSplitJoin: boolean;
+        ControllerId: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LocalPlayer;
+        static Load(InName: string): LocalPlayer;
+    }
+    
+    class OnlineSession extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): OnlineSession;
+        static Load(InName: string): OnlineSession;
+    }
+    
+    enum ETravelFailure { NoLevel, LoadMapFailure, InvalidURL, PackageMissing, PackageVersion, NoDownload, TravelFailure, CheatCommands, PendingNetGameCreateFailure, CloudSaveFailure, ServerTravelFailure, ClientTravelFailure, ETravelFailure_MAX}
+    enum ENetworkFailure { NetDriverAlreadyExists, NetDriverCreateFailure, NetDriverListenFailure, ConnectionLost, ConnectionTimeout, FailureReceived, OutdatedClient, OutdatedServer, PendingConnectionFailure, NetGuidMismatch, NetChecksumMismatch, ENetworkFailure_MAX}
+    class GameInstance extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        LocalPlayers: TArray<LocalPlayer>;
+        OnlineSession: OnlineSession;
+        ReferencedObjects: TArray<Object>;
+        ReceiveShutdown(): void;
+        ReceiveInit(): void;
+        HandleTravelError(FailureType: ETravelFailure): void;
+        HandleNetworkError(FailureType: ENetworkFailure, bIsServer: boolean): void;
+        DebugRemovePlayer(ControllerId: number): void;
+        DebugCreatePlayer(ControllerId: number): void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameInstance;
+        static Load(InName: string): GameInstance;
+    }
+    
+    class MaterialParameterCollectionInstance extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Collection: MaterialParameterCollection;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MaterialParameterCollectionInstance;
+        static Load(InName: string): MaterialParameterCollectionInstance;
+    }
+    
+    class LevelViewportInfo {
+        constructor();
+        constructor(CamPosition: Vector, CamRotation: Rotator, CamOrthoZoom: number, CamUpdated: boolean);
+        CamPosition: Vector;
+        CamRotation: Rotator;
+        CamOrthoZoom: number;
+        CamUpdated: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class WorldComposition extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        TilesStreaming: TArray<LevelStreaming>;
+        TilesStreamingTimeThreshold: number;
+        bLoadAllTilesDuringCinematic: boolean;
+        bRebaseOriginIn3DSpace: boolean;
+        bLockTilesLocation: boolean;
+        RebaseOriginDistance: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WorldComposition;
+        static Load(InName: string): WorldComposition;
+    }
+    
+    class PSCPoolElem {
+        constructor();
+        constructor(PSC: ParticleSystemComponent);
+        PSC: ParticleSystemComponent;
+        static StaticClass(): Class;
+    }
+    
+    class PSCPool {
+        constructor();
+        constructor(FreeElements: TArray<PSCPoolElem>, InUseComponents_Auto: TArray<ParticleSystemComponent>, InUseComponents_Manual: TArray<ParticleSystemComponent>);
+        FreeElements: TArray<PSCPoolElem>;
+        InUseComponents_Auto: TArray<ParticleSystemComponent>;
+        InUseComponents_Manual: TArray<ParticleSystemComponent>;
+        static StaticClass(): Class;
+    }
+    
+    class WorldPSCPool {
+        constructor();
+        constructor(WorldParticleSystemPools: TMap<ParticleSystem, PSCPool>);
+        WorldParticleSystemPools: TMap<ParticleSystem, PSCPool>;
+        static StaticClass(): Class;
+    }
+    
+    enum ESpawnActorCollisionHandlingMethod { Undefined, AlwaysSpawn, AdjustIfPossibleButAlwaysSpawn, AdjustIfPossibleButDontSpawnIfColliding, DontSpawnIfColliding, ESpawnActorCollisionHandlingMethod_MAX}
+    class World extends Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Layers: TArray<Layer>;
+        ActiveGroupActors: TArray<Actor>;
+        ThumbnailInfo: ThumbnailInfo;
+        PersistentLevel: Level;
+        NetDriver: NetDriver;
+        LineBatcher: LineBatchComponent;
+        PersistentLineBatcher: LineBatchComponent;
+        ForegroundLineBatcher: LineBatchComponent;
+        NetworkManager: GameNetworkManager;
+        PhysicsCollisionHandler: PhysicsCollisionHandler;
+        ExtraReferencedObjects: TArray<Object>;
+        PerModuleDataObjects: TArray<Object>;
+        LevelSequenceActors: TArray<Actor>;
+        StreamingLevels: TArray<LevelStreaming>;
+        StreamingLevelsToConsider: StreamingLevelsToConsider;
+        StreamingLevelsPrefix: string;
+        CurrentLevelPendingVisibility: Level;
+        CurrentLevelPendingInvisibility: Level;
+        DemoNetDriver: DemoNetDriver;
+        MyParticleEventManager: ParticleEventManager;
+        DefaultPhysicsVolume: PhysicsVolume;
+        bAreConstraintsDirty: boolean;
+        NavigationSystem: NavigationSystemBase;
+        AuthorityGameMode: GameModeBase;
+        GameState: GameStateBase;
+        AISystem: AISystemBase;
+        AvoidanceManager: AvoidanceManager;
+        Levels: TArray<Level>;
+        LevelCollections: TArray<LevelCollection>;
+        CurrentLevel: Level;
+        OwningGameInstance: GameInstance;
+        ParameterCollectionInstances: TArray<MaterialParameterCollectionInstance>;
+        CanvasForRenderingToTarget: Canvas;
+        CanvasForDrawMaterialToRenderTarget: Canvas;
+        EditorViews: TArray<LevelViewportInfo>;
+        ComponentsThatNeedEndOfFrameUpdate: TArray<ActorComponent>;
+        ComponentsThatNeedEndOfFrameUpdate_OnGameThread: TArray<ActorComponent>;
+        SelectedLevels: TArray<Level>;
+        WorldComposition: WorldComposition;
+        PSCPool: WorldPSCPool;
+        K2_GetWorldSettings(): WorldSettings;
+        HandleTimelineScrubbed(): void;
+        SpawnActor(Class: $Nullable<Class>, Transform: Transform, SpawnCollisionHandlingOverride: ESpawnActorCollisionHandlingMethod, Owner: $Nullable<Actor>, Instigator: $Nullable<Pawn>): Actor;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): World;
+        static Load(InName: string): World;
     }
     
     class ChannelDefinition {
@@ -6801,13 +9751,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): NetDriver;
         static Load(InName: string): NetDriver;
-    }
-    
-    class PackageMap extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PackageMap;
-        static Load(InName: string): PackageMap;
     }
     
     class NetConnection extends Player {
@@ -7144,127 +10087,6 @@ declare module "ue" {
         static StaticClass(): Class;
     }
     
-    enum ESlateColorStylingMode { UseColor_Specified, UseColor_Specified_Link, UseColor_Foreground, UseColor_Foreground_Subdued, UseColor_MAX}
-    class SlateColor {
-        constructor();
-        constructor(SpecifiedColor: LinearColor, ColorUseRule: ESlateColorStylingMode);
-        SpecifiedColor: LinearColor;
-        ColorUseRule: ESlateColorStylingMode;
-        static StaticClass(): Class;
-    }
-    
-    class Margin {
-        constructor();
-        constructor(Left: number, Top: number, Right: number, Bottom: number);
-        Left: number;
-        Top: number;
-        Right: number;
-        Bottom: number;
-        static StaticClass(): Class;
-    }
-    
-    enum ESlateBrushDrawType { NoDrawType, Box, Border, Image, ESlateBrushDrawType_MAX}
-    enum ESlateBrushTileType { NoTile, Horizontal, Vertical, Both, ESlateBrushTileType_MAX}
-    enum ESlateBrushMirrorType { NoMirror, Horizontal, Vertical, Both, ESlateBrushMirrorType_MAX}
-    enum ESlateBrushImageType { NoImage, FullColor, Linear, ESlateBrushImageType_MAX}
-    class SlateBrush {
-        constructor();
-        constructor(ImageSize: Vector2D, Margin: Margin, Tint: LinearColor, TintColor: SlateColor, ResourceObject: Object, ResourceName: string, UVRegion: Box2D, DrawAs: ESlateBrushDrawType, Tiling: ESlateBrushTileType, Mirroring: ESlateBrushMirrorType, ImageType: ESlateBrushImageType, bIsDynamicallyLoaded: boolean, bHasUObject: boolean);
-        ImageSize: Vector2D;
-        Margin: Margin;
-        Tint: LinearColor;
-        TintColor: SlateColor;
-        ResourceObject: Object;
-        ResourceName: string;
-        UVRegion: Box2D;
-        DrawAs: ESlateBrushDrawType;
-        Tiling: ESlateBrushTileType;
-        Mirroring: ESlateBrushMirrorType;
-        ImageType: ESlateBrushImageType;
-        bIsDynamicallyLoaded: boolean;
-        bHasUObject: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class ScriptViewportClient extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ScriptViewportClient;
-        static Load(InName: string): ScriptViewportClient;
-    }
-    
-    class Console extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ConsoleTargetPlayer: LocalPlayer;
-        DefaultTexture_Black: Texture2D;
-        DefaultTexture_White: Texture2D;
-        HistoryBuffer: TArray<string>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Console;
-        static Load(InName: string): Console;
-    }
-    
-    class DebugDisplayProperty {
-        constructor();
-        constructor(Obj: Object, WithinClass: Class);
-        Obj: Object;
-        WithinClass: Class;
-        static StaticClass(): Class;
-    }
-    
-    class OnlineSession extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): OnlineSession;
-        static Load(InName: string): OnlineSession;
-    }
-    
-    enum ETravelFailure { NoLevel, LoadMapFailure, InvalidURL, PackageMissing, PackageVersion, NoDownload, TravelFailure, CheatCommands, PendingNetGameCreateFailure, CloudSaveFailure, ServerTravelFailure, ClientTravelFailure, ETravelFailure_MAX}
-    enum ENetworkFailure { NetDriverAlreadyExists, NetDriverCreateFailure, NetDriverListenFailure, ConnectionLost, ConnectionTimeout, FailureReceived, OutdatedClient, OutdatedServer, PendingConnectionFailure, NetGuidMismatch, NetChecksumMismatch, ENetworkFailure_MAX}
-    class GameInstance extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        LocalPlayers: TArray<LocalPlayer>;
-        OnlineSession: OnlineSession;
-        ReferencedObjects: TArray<Object>;
-        ReceiveShutdown(): void;
-        ReceiveInit(): void;
-        HandleTravelError(FailureType: ETravelFailure): void;
-        HandleNetworkError(FailureType: ENetworkFailure, bIsServer: boolean): void;
-        DebugRemovePlayer(ControllerId: number): void;
-        DebugCreatePlayer(ControllerId: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameInstance;
-        static Load(InName: string): GameInstance;
-    }
-    
-    class GameViewportClient extends ScriptViewportClient {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ViewportConsole: Console;
-        DebugProperties: TArray<DebugDisplayProperty>;
-        World: World;
-        GameInstance: GameInstance;
-        SSSwapControllers(): void;
-        ShowTitleSafeArea(): void;
-        SetConsoleTarget(PlayerIndex: number): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameViewportClient;
-        static Load(InName: string): GameViewportClient;
-    }
-    
-    enum EAspectRatioAxisConstraint { AspectRatio_MaintainYFOV, AspectRatio_MaintainXFOV, AspectRatio_MajorAxisFOV, AspectRatio_MAX}
-    class LocalPlayer extends Player {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ViewportClient: GameViewportClient;
-        AspectRatioAxisConstraint: EAspectRatioAxisConstraint;
-        PendingLevelPlayerControllerClass: Class;
-        bSentSplitJoin: boolean;
-        ControllerId: number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LocalPlayer;
-        static Load(InName: string): LocalPlayer;
-    }
-    
-    enum ECheckBoxState { Unchecked, Checked, Undetermined, ECheckBoxState_MAX}
     class Widget extends Visual {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Slot: PanelSlot;
@@ -8024,488 +10846,6 @@ declare module "ue" {
         Minimum: Vector2D;
         Maximum: Vector2D;
         static StaticClass(): Class;
-    }
-    
-    enum EAudioOutputTarget { Speaker, Controller, ControllerFallbackToSpeaker, EAudioOutputTarget_MAX}
-    enum ESoundWaveLoadingBehavior { Inherited, RetainOnLoad, PrimeOnLoad, LoadOnDemand, ForceInline, Uninitialized, ESoundWaveLoadingBehavior_MAX}
-    class SoundClassProperties {
-        constructor();
-        constructor(Volume: number, Pitch: number, LowPassFilterFrequency: number, StereoBleed: number, LFEBleed: number, VoiceCenterChannelVolume: number, RadioFilterVolume: number, RadioFilterVolumeThreshold: number, bApplyEffects: boolean, bAlwaysPlay: boolean, bIsUISound: boolean, bIsMusic: boolean, bReverb: boolean, Default2DReverbSendAmount: number, bCenterChannelOnly: boolean, bApplyAmbientVolumes: boolean, OutputTarget: EAudioOutputTarget, LoadingBehavior: ESoundWaveLoadingBehavior);
-        Volume: number;
-        Pitch: number;
-        LowPassFilterFrequency: number;
-        StereoBleed: number;
-        LFEBleed: number;
-        VoiceCenterChannelVolume: number;
-        RadioFilterVolume: number;
-        RadioFilterVolumeThreshold: number;
-        bApplyEffects: boolean;
-        bAlwaysPlay: boolean;
-        bIsUISound: boolean;
-        bIsMusic: boolean;
-        bReverb: boolean;
-        Default2DReverbSendAmount: number;
-        bCenterChannelOnly: boolean;
-        bApplyAmbientVolumes: boolean;
-        OutputTarget: EAudioOutputTarget;
-        LoadingBehavior: ESoundWaveLoadingBehavior;
-        static StaticClass(): Class;
-    }
-    
-    class AudioEQEffect {
-        constructor();
-        constructor(FrequencyCenter0: number, Gain0: number, Bandwidth0: number, FrequencyCenter1: number, Gain1: number, Bandwidth1: number, FrequencyCenter2: number, Gain2: number, Bandwidth2: number, FrequencyCenter3: number, Gain3: number, Bandwidth3: number);
-        FrequencyCenter0: number;
-        Gain0: number;
-        Bandwidth0: number;
-        FrequencyCenter1: number;
-        Gain1: number;
-        Bandwidth1: number;
-        FrequencyCenter2: number;
-        Gain2: number;
-        Bandwidth2: number;
-        FrequencyCenter3: number;
-        Gain3: number;
-        Bandwidth3: number;
-        static StaticClass(): Class;
-    }
-    
-    class SoundClassAdjuster {
-        constructor();
-        constructor(SoundClassObject: SoundClass, VolumeAdjuster: number, PitchAdjuster: number, LowPassFilterFrequency: number, bApplyToChildren: boolean, VoiceCenterChannelVolumeAdjuster: number);
-        SoundClassObject: SoundClass;
-        VolumeAdjuster: number;
-        PitchAdjuster: number;
-        LowPassFilterFrequency: number;
-        bApplyToChildren: boolean;
-        VoiceCenterChannelVolumeAdjuster: number;
-        static StaticClass(): Class;
-    }
-    
-    class SoundMix extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bApplyEQ: boolean;
-        EQPriority: number;
-        EQSettings: AudioEQEffect;
-        SoundClassEffects: TArray<SoundClassAdjuster>;
-        InitialDelay: number;
-        FadeInTime: number;
-        Duration: number;
-        FadeOutTime: number;
-        bChanged: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundMix;
-        static Load(InName: string): SoundMix;
-    }
-    
-    class PassiveSoundMixModifier {
-        constructor();
-        constructor(SoundMix: SoundMix, MinVolumeThreshold: number, MaxVolumeThreshold: number);
-        SoundMix: SoundMix;
-        MinVolumeThreshold: number;
-        MaxVolumeThreshold: number;
-        static StaticClass(): Class;
-    }
-    
-    class SoundModulationPluginSourceSettingsBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundModulationPluginSourceSettingsBase;
-        static Load(InName: string): SoundModulationPluginSourceSettingsBase;
-    }
-    
-    class SoundModulation {
-        constructor();
-        constructor(Settings: TArray<SoundModulationPluginSourceSettingsBase>);
-        Settings: TArray<SoundModulationPluginSourceSettingsBase>;
-        static StaticClass(): Class;
-    }
-    
-    class SoundClass extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Properties: SoundClassProperties;
-        ChildClasses: TArray<SoundClass>;
-        PassiveSoundMixModifiers: TArray<PassiveSoundMixModifier>;
-        Modulation: SoundModulation;
-        ParentClass: SoundClass;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundClass;
-        static Load(InName: string): SoundClass;
-    }
-    
-    enum EVirtualizationMode { Disabled, PlayWhenSilent, Restart, EVirtualizationMode_MAX}
-    enum EMaxConcurrentResolutionRule { PreventNew, StopOldest, StopFarthestThenPreventNew, StopFarthestThenOldest, StopLowestPriority, StopQuietest, StopLowestPriorityThenPreventNew, EMaxConcurrentResolutionRule_MAX}
-    class SoundConcurrencySettings {
-        constructor();
-        constructor(MaxCount: number, bLimitToOwner: boolean, ResolutionRule: EMaxConcurrentResolutionRule, VolumeScale: number, VolumeScaleAttackTime: number, bVolumeScaleCanRelease: boolean, VolumeScaleReleaseTime: number, VoiceStealReleaseTime: number);
-        MaxCount: number;
-        bLimitToOwner: boolean;
-        ResolutionRule: EMaxConcurrentResolutionRule;
-        VolumeScale: number;
-        VolumeScaleAttackTime: number;
-        bVolumeScaleCanRelease: boolean;
-        VolumeScaleReleaseTime: number;
-        VoiceStealReleaseTime: number;
-        static StaticClass(): Class;
-    }
-    
-    class SoundConcurrency extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Concurrency: SoundConcurrencySettings;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundConcurrency;
-        static Load(InName: string): SoundConcurrency;
-    }
-    
-    enum EAttenuationDistanceModel { Linear, Logarithmic, Inverse, LogReverse, NaturalSound, Custom, EAttenuationDistanceModel_MAX}
-    enum EAttenuationShape { Sphere, Capsule, Box, Cone, EAttenuationShape_MAX}
-    class BaseAttenuationSettings {
-        constructor();
-        constructor(DistanceAlgorithm: EAttenuationDistanceModel, AttenuationShape: EAttenuationShape, dBAttenuationAtMax: number, AttenuationShapeExtents: Vector, ConeOffset: number, FalloffDistance: number, CustomAttenuationCurve: RuntimeFloatCurve);
-        DistanceAlgorithm: EAttenuationDistanceModel;
-        AttenuationShape: EAttenuationShape;
-        dBAttenuationAtMax: number;
-        AttenuationShapeExtents: Vector;
-        ConeOffset: number;
-        FalloffDistance: number;
-        CustomAttenuationCurve: RuntimeFloatCurve;
-        static StaticClass(): Class;
-    }
-    
-    enum ESoundSpatializationAlgorithm { SPATIALIZATION_Default, SPATIALIZATION_HRTF, SPATIALIZATION_MAX}
-    enum EAirAbsorptionMethod { Linear, CustomCurve, EAirAbsorptionMethod_MAX}
-    enum EReverbSendMethod { Linear, CustomCurve, Manual, EReverbSendMethod_MAX}
-    enum ESoundDistanceCalc { SOUNDDISTANCE_Normal, SOUNDDISTANCE_InfiniteXYPlane, SOUNDDISTANCE_InfiniteXZPlane, SOUNDDISTANCE_InfiniteYZPlane, SOUNDDISTANCE_MAX}
-    class SpatializationPluginSourceSettingsBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SpatializationPluginSourceSettingsBase;
-        static Load(InName: string): SpatializationPluginSourceSettingsBase;
-    }
-    
-    class OcclusionPluginSourceSettingsBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): OcclusionPluginSourceSettingsBase;
-        static Load(InName: string): OcclusionPluginSourceSettingsBase;
-    }
-    
-    class ReverbPluginSourceSettingsBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ReverbPluginSourceSettingsBase;
-        static Load(InName: string): ReverbPluginSourceSettingsBase;
-    }
-    
-    class SoundAttenuationPluginSettings {
-        constructor();
-        constructor(SpatializationPluginSettingsArray: TArray<SpatializationPluginSourceSettingsBase>, OcclusionPluginSettingsArray: TArray<OcclusionPluginSourceSettingsBase>, ReverbPluginSettingsArray: TArray<ReverbPluginSourceSettingsBase>);
-        SpatializationPluginSettingsArray: TArray<SpatializationPluginSourceSettingsBase>;
-        OcclusionPluginSettingsArray: TArray<OcclusionPluginSourceSettingsBase>;
-        ReverbPluginSettingsArray: TArray<ReverbPluginSourceSettingsBase>;
-        static StaticClass(): Class;
-    }
-    
-    class SoundAttenuationSettings extends BaseAttenuationSettings {
-        constructor();
-        constructor(bAttenuate: boolean, bSpatialize: boolean, bAttenuateWithLPF: boolean, bEnableListenerFocus: boolean, bEnableFocusInterpolation: boolean, bEnableOcclusion: boolean, bUseComplexCollisionForOcclusion: boolean, bEnableReverbSend: boolean, bApplyNormalizationToStereoSounds: boolean, bEnableLogFrequencyScaling: boolean, SpatializationAlgorithm: ESoundSpatializationAlgorithm, BinauralRadius: number, AbsorptionMethod: EAirAbsorptionMethod, OcclusionTraceChannel: ECollisionChannel, ReverbSendMethod: EReverbSendMethod, DistanceType: ESoundDistanceCalc, OmniRadius: number, StereoSpread: number, SpatializationPluginSettings: SpatializationPluginSourceSettingsBase, RadiusMin: number, RadiusMax: number, LPFRadiusMin: number, LPFRadiusMax: number, CustomLowpassAirAbsorptionCurve: RuntimeFloatCurve, CustomHighpassAirAbsorptionCurve: RuntimeFloatCurve, LPFFrequencyAtMin: number, LPFFrequencyAtMax: number, HPFFrequencyAtMin: number, HPFFrequencyAtMax: number, FocusAzimuth: number, NonFocusAzimuth: number, FocusDistanceScale: number, NonFocusDistanceScale: number, FocusPriorityScale: number, NonFocusPriorityScale: number, FocusVolumeAttenuation: number, NonFocusVolumeAttenuation: number, FocusAttackInterpSpeed: number, FocusReleaseInterpSpeed: number, OcclusionLowPassFilterFrequency: number, OcclusionVolumeAttenuation: number, OcclusionInterpolationTime: number, OcclusionPluginSettings: OcclusionPluginSourceSettingsBase, ReverbPluginSettings: ReverbPluginSourceSettingsBase, ReverbWetLevelMin: number, ReverbWetLevelMax: number, ReverbDistanceMin: number, ReverbDistanceMax: number, ManualReverbSendLevel: number, CustomReverbSendCurve: RuntimeFloatCurve, PluginSettings: SoundAttenuationPluginSettings);
-        bAttenuate: boolean;
-        bSpatialize: boolean;
-        bAttenuateWithLPF: boolean;
-        bEnableListenerFocus: boolean;
-        bEnableFocusInterpolation: boolean;
-        bEnableOcclusion: boolean;
-        bUseComplexCollisionForOcclusion: boolean;
-        bEnableReverbSend: boolean;
-        bApplyNormalizationToStereoSounds: boolean;
-        bEnableLogFrequencyScaling: boolean;
-        SpatializationAlgorithm: ESoundSpatializationAlgorithm;
-        BinauralRadius: number;
-        AbsorptionMethod: EAirAbsorptionMethod;
-        OcclusionTraceChannel: ECollisionChannel;
-        ReverbSendMethod: EReverbSendMethod;
-        DistanceType: ESoundDistanceCalc;
-        OmniRadius: number;
-        StereoSpread: number;
-        SpatializationPluginSettings: SpatializationPluginSourceSettingsBase;
-        RadiusMin: number;
-        RadiusMax: number;
-        LPFRadiusMin: number;
-        LPFRadiusMax: number;
-        CustomLowpassAirAbsorptionCurve: RuntimeFloatCurve;
-        CustomHighpassAirAbsorptionCurve: RuntimeFloatCurve;
-        LPFFrequencyAtMin: number;
-        LPFFrequencyAtMax: number;
-        HPFFrequencyAtMin: number;
-        HPFFrequencyAtMax: number;
-        FocusAzimuth: number;
-        NonFocusAzimuth: number;
-        FocusDistanceScale: number;
-        NonFocusDistanceScale: number;
-        FocusPriorityScale: number;
-        NonFocusPriorityScale: number;
-        FocusVolumeAttenuation: number;
-        NonFocusVolumeAttenuation: number;
-        FocusAttackInterpSpeed: number;
-        FocusReleaseInterpSpeed: number;
-        OcclusionLowPassFilterFrequency: number;
-        OcclusionVolumeAttenuation: number;
-        OcclusionInterpolationTime: number;
-        OcclusionPluginSettings: OcclusionPluginSourceSettingsBase;
-        ReverbPluginSettings: ReverbPluginSourceSettingsBase;
-        ReverbWetLevelMin: number;
-        ReverbWetLevelMax: number;
-        ReverbDistanceMin: number;
-        ReverbDistanceMax: number;
-        ManualReverbSendLevel: number;
-        CustomReverbSendCurve: RuntimeFloatCurve;
-        PluginSettings: SoundAttenuationPluginSettings;
-        static StaticClass(): Class;
-    }
-    
-    class SoundAttenuation extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Attenuation: SoundAttenuationSettings;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundAttenuation;
-        static Load(InName: string): SoundAttenuation;
-    }
-    
-    enum ESubmixChannelFormat { Device, Stereo, Quad, FiveDotOne, SevenDotOne, Ambisonics, Count, ESubmixChannelFormat_MAX}
-    class SoundEffectPreset extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundEffectPreset;
-        static Load(InName: string): SoundEffectPreset;
-    }
-    
-    class SoundEffectSubmixPreset extends SoundEffectPreset {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundEffectSubmixPreset;
-        static Load(InName: string): SoundEffectSubmixPreset;
-    }
-    
-    class AmbisonicsSubmixSettingsBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AmbisonicsSubmixSettingsBase;
-        static Load(InName: string): AmbisonicsSubmixSettingsBase;
-    }
-    
-    enum ESoundwaveSampleRateSettings { Max, High, Medium, Low, Min, MatchDevice, ESoundwaveSampleRateSettings_MAX}
-    enum ESoundGroup { SOUNDGROUP_Default, SOUNDGROUP_Effects, SOUNDGROUP_UI, SOUNDGROUP_Music, SOUNDGROUP_Voice, SOUNDGROUP_GameSoundGroup1, SOUNDGROUP_GameSoundGroup2, SOUNDGROUP_GameSoundGroup3, SOUNDGROUP_GameSoundGroup4, SOUNDGROUP_GameSoundGroup5, SOUNDGROUP_GameSoundGroup6, SOUNDGROUP_GameSoundGroup7, SOUNDGROUP_GameSoundGroup8, SOUNDGROUP_GameSoundGroup9, SOUNDGROUP_GameSoundGroup10, SOUNDGROUP_GameSoundGroup11, SOUNDGROUP_GameSoundGroup12, SOUNDGROUP_GameSoundGroup13, SOUNDGROUP_GameSoundGroup14, SOUNDGROUP_GameSoundGroup15, SOUNDGROUP_GameSoundGroup16, SOUNDGROUP_GameSoundGroup17, SOUNDGROUP_GameSoundGroup18, SOUNDGROUP_GameSoundGroup19, SOUNDGROUP_GameSoundGroup20, SOUNDGROUP_MAX}
-    enum ESoundWaveFFTSize { VerySmall_64, Small_256, Medium_512, Large_1024, VeryLarge_2048, ESoundWaveFFTSize_MAX}
-    class SoundWaveSpectralDataEntry {
-        constructor();
-        constructor(Magnitude: number, NormalizedMagnitude: number);
-        Magnitude: number;
-        NormalizedMagnitude: number;
-        static StaticClass(): Class;
-    }
-    
-    class SoundWaveSpectralTimeData {
-        constructor();
-        constructor(Data: TArray<SoundWaveSpectralDataEntry>, TimeSec: number);
-        Data: TArray<SoundWaveSpectralDataEntry>;
-        TimeSec: number;
-        static StaticClass(): Class;
-    }
-    
-    class SoundWaveEnvelopeTimeData {
-        constructor();
-        constructor(Amplitude: number, TimeSec: number);
-        Amplitude: number;
-        TimeSec: number;
-        static StaticClass(): Class;
-    }
-    
-    class SubtitleCue {
-        constructor();
-        constructor(Text: string, Time: number);
-        Text: string;
-        Time: number;
-        static StaticClass(): Class;
-    }
-    
-    class CurveTable extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AssetImportData: AssetImportData;
-        ImportPath: string;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): CurveTable;
-        static Load(InName: string): CurveTable;
-    }
-    
-    class SoundWave extends SoundBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CompressionQuality: number;
-        StreamingPriority: number;
-        SampleRateQuality: ESoundwaveSampleRateSettings;
-        SoundGroup: ESoundGroup;
-        bLooping: boolean;
-        bStreaming: boolean;
-        bSeekableStreaming: boolean;
-        LoadingBehavior: ESoundWaveLoadingBehavior;
-        bMature: boolean;
-        bManualWordWrap: boolean;
-        bSingleLine: boolean;
-        bVirtualizeWhenSilent: boolean;
-        bIsAmbisonics: boolean;
-        OverrideSoundToUseForAnalysis: SoundWave;
-        TreatFileAsLoopingForAnalysis: boolean;
-        bEnableBakedFFTAnalysis: boolean;
-        bEnableAmplitudeEnvelopeAnalysis: boolean;
-        FFTSize: ESoundWaveFFTSize;
-        FFTAnalysisFrameSize: number;
-        FFTAnalysisAttackTime: number;
-        FFTAnalysisReleaseTime: number;
-        EnvelopeFollowerFrameSize: number;
-        EnvelopeFollowerAttackTime: number;
-        EnvelopeFollowerReleaseTime: number;
-        FrequenciesToAnalyze: TArray<number>;
-        CookedSpectralTimeData: TArray<SoundWaveSpectralTimeData>;
-        CookedEnvelopeTimeData: TArray<SoundWaveEnvelopeTimeData>;
-        InitialChunkSize: number;
-        SpokenText: string;
-        SubtitlePriority: number;
-        Volume: number;
-        Pitch: number;
-        NumChannels: number;
-        ChannelOffsets: TArray<number>;
-        ChannelSizes: TArray<number>;
-        SampleRate: number;
-        Subtitles: TArray<SubtitleCue>;
-        Comment: string;
-        SourceFilePath: string;
-        SourceFileTimestamp: string;
-        AssetImportData: AssetImportData;
-        Curves: CurveTable;
-        InternalCurves: CurveTable;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundWave;
-        static Load(InName: string): SoundWave;
-    }
-    
-    enum EAudioRecordingExportType { SoundWave, WavFile, EAudioRecordingExportType_MAX}
-    class SoundSubmix extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ChildSubmixes: TArray<SoundSubmix>;
-        ParentSubmix: SoundSubmix;
-        ChannelFormat: ESubmixChannelFormat;
-        bMuteWhenBackgrounded: boolean;
-        SubmixEffectChain: TArray<SoundEffectSubmixPreset>;
-        AmbisonicsPluginSettings: AmbisonicsSubmixSettingsBase;
-        EnvelopeFollowerAttackTime: number;
-        EnvelopeFollowerReleaseTime: number;
-        OutputVolume: number;
-        OnSubmixRecordedFileDone: $MulticastDelegate<(ResultingSoundWave: $Nullable<SoundWave>) => void>;
-        StopRecordingOutput(WorldContextObject: $Nullable<Object>, ExportType: EAudioRecordingExportType, Name: string, Path: string, ExistingSoundWaveToOverwrite?: SoundWave /* = None */): void;
-        StopEnvelopeFollowing(WorldContextObject: $Nullable<Object>): void;
-        StartRecordingOutput(WorldContextObject: $Nullable<Object>, ExpectedDuration: number): void;
-        StartEnvelopeFollowing(WorldContextObject: $Nullable<Object>): void;
-        SetSubmixOutputVolume(WorldContextObject: $Nullable<Object>, InOutputVolume: number): void;
-        AddEnvelopeFollowerDelegate(WorldContextObject: $Nullable<Object>, OnSubmixEnvelopeBP: $Delegate<(Envelope: TArray<number>) => void>): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundSubmix;
-        static Load(InName: string): SoundSubmix;
-    }
-    
-    enum ESendLevelControlMethod { Linear, CustomCurve, Manual, ESendLevelControlMethod_MAX}
-    class SoundSubmixSendInfo {
-        constructor();
-        constructor(SendLevelControlMethod: ESendLevelControlMethod, SoundSubmix: SoundSubmix, SendLevel: number, MinSendLevel: number, MaxSendLevel: number, MinSendDistance: number, MaxSendDistance: number, CustomSendLevelCurve: RuntimeFloatCurve);
-        SendLevelControlMethod: ESendLevelControlMethod;
-        SoundSubmix: SoundSubmix;
-        SendLevel: number;
-        MinSendLevel: number;
-        MaxSendLevel: number;
-        MinSendDistance: number;
-        MaxSendDistance: number;
-        CustomSendLevelCurve: RuntimeFloatCurve;
-        static StaticClass(): Class;
-    }
-    
-    class SoundEffectSourcePreset extends SoundEffectPreset {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundEffectSourcePreset;
-        static Load(InName: string): SoundEffectSourcePreset;
-    }
-    
-    class SourceEffectChainEntry {
-        constructor();
-        constructor(Preset: SoundEffectSourcePreset, bBypass: boolean);
-        Preset: SoundEffectSourcePreset;
-        bBypass: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class SoundEffectSourcePresetChain extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Chain: TArray<SourceEffectChainEntry>;
-        bPlayEffectChainTails: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundEffectSourcePresetChain;
-        static Load(InName: string): SoundEffectSourcePresetChain;
-    }
-    
-    enum ESourceBusSendLevelControlMethod { Linear, CustomCurve, Manual, ESourceBusSendLevelControlMethod_MAX}
-    enum ESourceBusChannels { Mono, Stereo, ESourceBusChannels_MAX}
-    class SoundSourceBus extends SoundWave {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SourceBusChannels: ESourceBusChannels;
-        SourceBusDuration: number;
-        bAutoDeactivateWhenSilent: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundSourceBus;
-        static Load(InName: string): SoundSourceBus;
-    }
-    
-    class SoundSourceBusSendInfo {
-        constructor();
-        constructor(SourceBusSendLevelControlMethod: ESourceBusSendLevelControlMethod, SoundSourceBus: SoundSourceBus, SendLevel: number, MinSendLevel: number, MaxSendLevel: number, MinSendDistance: number, MaxSendDistance: number, CustomSendLevelCurve: RuntimeFloatCurve);
-        SourceBusSendLevelControlMethod: ESourceBusSendLevelControlMethod;
-        SoundSourceBus: SoundSourceBus;
-        SendLevel: number;
-        MinSendLevel: number;
-        MaxSendLevel: number;
-        MinSendDistance: number;
-        MaxSendDistance: number;
-        CustomSendLevelCurve: RuntimeFloatCurve;
-        static StaticClass(): Class;
-    }
-    
-    class SoundBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SoundClassObject: SoundClass;
-        bDebug: boolean;
-        bOverrideConcurrency: boolean;
-        bOutputToBusOnly: boolean;
-        bHasDelayNode: boolean;
-        bHasConcatenatorNode: boolean;
-        bHasVirtualizeWhenSilent: boolean;
-        bBypassVolumeScaleForPriority: boolean;
-        VirtualizationMode: EVirtualizationMode;
-        MaxConcurrentResolutionRule: EMaxConcurrentResolutionRule;
-        SoundConcurrencySettings: SoundConcurrency;
-        ConcurrencySet: TSet<SoundConcurrency>;
-        ConcurrencyOverrides: SoundConcurrencySettings;
-        MaxConcurrentPlayCount: number;
-        Duration: number;
-        MaxDistance: number;
-        TotalSamples: number;
-        Priority: number;
-        AttenuationSettings: SoundAttenuation;
-        Modulation: SoundModulation;
-        SoundSubmixObject: SoundSubmix;
-        SoundSubmixSends: TArray<SoundSubmixSendInfo>;
-        SourceEffectChain: SoundEffectSourcePresetChain;
-        BusSends: TArray<SoundSourceBusSendInfo>;
-        PreEffectBusSends: TArray<SoundSourceBusSendInfo>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoundBase;
-        static Load(InName: string): SoundBase;
     }
     
     enum EUMGSequencePlayMode { Forward, Reverse, PingPong, EUMGSequencePlayMode_MAX}
@@ -9399,7 +11739,7 @@ declare module "ue" {
         GetAllSocketNames(): TArray<string>;
         DoesSocketExist(InSocketName: string): boolean;
         DetachFromParent(bMaintainWorldPosition?: boolean /* = false */, bCallModify?: boolean /* = true */): void;
-        SetupAttachment(InParent: $Nullable<SceneComponent>, InSocketName?: string /* = "None" */): void;
+        SetupAttachment(p0: $Nullable<SceneComponent>, p1: string) :void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): SceneComponent;
         static Load(InName: string): SceneComponent;
@@ -9418,7 +11758,6 @@ declare module "ue" {
     }
     
     enum ENetDormancy { DORM_Never, DORM_Awake, DORM_DormantAll, DORM_DormantPartial, DORM_Initial, DORM_MAX}
-    enum ESpawnActorCollisionHandlingMethod { Undefined, AlwaysSpawn, AdjustIfPossibleButAlwaysSpawn, AdjustIfPossibleButDontSpawnIfColliding, DontSpawnIfColliding, ESpawnActorCollisionHandlingMethod_MAX}
     class InterpFilter extends Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Caption: string;
@@ -9764,2346 +12103,6 @@ declare module "ue" {
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): Actor;
         static Load(InName: string): Actor;
-    }
-    
-    class ModelComponent extends PrimitiveComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ModelBodySetup: BodySetup;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ModelComponent;
-        static Load(InName: string): ModelComponent;
-    }
-    
-    class LevelActorContainer extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Actors: TArray<Actor>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LevelActorContainer;
-        static Load(InName: string): LevelActorContainer;
-    }
-    
-    class LevelScriptBlueprint extends Blueprint {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        FriendlyName: string;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LevelScriptBlueprint;
-        static Load(InName: string): LevelScriptBlueprint;
-    }
-    
-    class LevelScriptActor extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bInputEnabled: boolean;
-        WorldOriginLocationChanged(OldOriginLocation: IntVector, NewOriginLocation: IntVector): void;
-        SetCinematicMode(bCinematicMode: boolean, bHidePlayer?: boolean /* = true */, bAffectsHUD?: boolean /* = true */, bAffectsMovement?: boolean /* = false */, bAffectsTurning?: boolean /* = false */): void;
-        RemoteEvent(EventName: string): boolean;
-        LevelReset(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LevelScriptActor;
-        static Load(InName: string): LevelScriptActor;
-    }
-    
-    class NavigationObjectBase extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CapsuleComponent: CapsuleComponent;
-        GoodSprite: BillboardComponent;
-        BadSprite: BillboardComponent;
-        bIsPIEPlayerStart: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): NavigationObjectBase;
-        static Load(InName: string): NavigationObjectBase;
-    }
-    
-    class NavigationDataChunk extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        NavigationDataName: string;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): NavigationDataChunk;
-        static Load(InName: string): NavigationDataChunk;
-    }
-    
-    enum ELightingBuildQuality { Quality_Preview, Quality_Medium, Quality_High, Quality_Production, Quality_MAX}
-    class MapBuildDataRegistry extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        LevelLightingQuality: ELightingBuildQuality;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MapBuildDataRegistry;
-        static Load(InName: string): MapBuildDataRegistry;
-    }
-    
-    enum ETextureSizingType { TextureSizingType_UseSingleTextureSize, TextureSizingType_UseAutomaticBiasedSizes, TextureSizingType_UseManualOverrideTextureSize, TextureSizingType_UseSimplygonAutomaticSizing, TextureSizingType_MAX}
-    enum EMaterialMergeType { MaterialMergeType_Default, MaterialMergeType_Simplygon, MaterialMergeType_MAX}
-    class MaterialProxySettings {
-        constructor();
-        constructor(TextureSize: IntPoint, GutterSpace: number, MetallicConstant: number, RoughnessConstant: number, SpecularConstant: number, OpacityConstant: number, OpacityMaskConstant: number, AmbientOcclusionConstant: number, TextureSizingType: ETextureSizingType, MaterialMergeType: EMaterialMergeType, BlendMode: EBlendMode, bAllowTwoSidedMaterial: boolean, bNormalMap: boolean, bMetallicMap: boolean, bRoughnessMap: boolean, bSpecularMap: boolean, bEmissiveMap: boolean, bOpacityMap: boolean, bOpacityMaskMap: boolean, bAmbientOcclusionMap: boolean, DiffuseTextureSize: IntPoint, NormalTextureSize: IntPoint, MetallicTextureSize: IntPoint, RoughnessTextureSize: IntPoint, SpecularTextureSize: IntPoint, EmissiveTextureSize: IntPoint, OpacityTextureSize: IntPoint, OpacityMaskTextureSize: IntPoint, AmbientOcclusionTextureSize: IntPoint);
-        TextureSize: IntPoint;
-        GutterSpace: number;
-        MetallicConstant: number;
-        RoughnessConstant: number;
-        SpecularConstant: number;
-        OpacityConstant: number;
-        OpacityMaskConstant: number;
-        AmbientOcclusionConstant: number;
-        TextureSizingType: ETextureSizingType;
-        MaterialMergeType: EMaterialMergeType;
-        BlendMode: EBlendMode;
-        bAllowTwoSidedMaterial: boolean;
-        bNormalMap: boolean;
-        bMetallicMap: boolean;
-        bRoughnessMap: boolean;
-        bSpecularMap: boolean;
-        bEmissiveMap: boolean;
-        bOpacityMap: boolean;
-        bOpacityMaskMap: boolean;
-        bAmbientOcclusionMap: boolean;
-        DiffuseTextureSize: IntPoint;
-        NormalTextureSize: IntPoint;
-        MetallicTextureSize: IntPoint;
-        RoughnessTextureSize: IntPoint;
-        SpecularTextureSize: IntPoint;
-        EmissiveTextureSize: IntPoint;
-        OpacityTextureSize: IntPoint;
-        OpacityMaskTextureSize: IntPoint;
-        AmbientOcclusionTextureSize: IntPoint;
-        static StaticClass(): Class;
-    }
-    
-    class LevelSimplificationDetails {
-        constructor();
-        constructor(bCreatePackagePerAsset: boolean, DetailsPercentage: number, StaticMeshMaterialSettings: MaterialProxySettings, bOverrideLandscapeExportLOD: boolean, LandscapeExportLOD: number, LandscapeMaterialSettings: MaterialProxySettings, bBakeFoliageToLandscape: boolean, bBakeGrassToLandscape: boolean, bGenerateMeshNormalMap: boolean, bGenerateMeshMetallicMap: boolean, bGenerateMeshRoughnessMap: boolean, bGenerateMeshSpecularMap: boolean, bGenerateLandscapeNormalMap: boolean, bGenerateLandscapeMetallicMap: boolean, bGenerateLandscapeRoughnessMap: boolean, bGenerateLandscapeSpecularMap: boolean);
-        bCreatePackagePerAsset: boolean;
-        DetailsPercentage: number;
-        StaticMeshMaterialSettings: MaterialProxySettings;
-        bOverrideLandscapeExportLOD: boolean;
-        LandscapeExportLOD: number;
-        LandscapeMaterialSettings: MaterialProxySettings;
-        bBakeFoliageToLandscape: boolean;
-        bBakeGrassToLandscape: boolean;
-        bGenerateMeshNormalMap: boolean;
-        bGenerateMeshMetallicMap: boolean;
-        bGenerateMeshRoughnessMap: boolean;
-        bGenerateMeshSpecularMap: boolean;
-        bGenerateLandscapeNormalMap: boolean;
-        bGenerateLandscapeMetallicMap: boolean;
-        bGenerateLandscapeRoughnessMap: boolean;
-        bGenerateLandscapeSpecularMap: boolean;
-        static StaticClass(): Class;
-    }
-    
-    enum EVisibilityAggressiveness { VIS_LeastAggressive, VIS_ModeratelyAggressive, VIS_MostAggressive, VIS_Max, VIS_MAX}
-    class NavAgentSelector {
-        constructor();
-        constructor(bSupportsAgent0: boolean, bSupportsAgent1: boolean, bSupportsAgent2: boolean, bSupportsAgent3: boolean, bSupportsAgent4: boolean, bSupportsAgent5: boolean, bSupportsAgent6: boolean, bSupportsAgent7: boolean, bSupportsAgent8: boolean, bSupportsAgent9: boolean, bSupportsAgent10: boolean, bSupportsAgent11: boolean, bSupportsAgent12: boolean, bSupportsAgent13: boolean, bSupportsAgent14: boolean, bSupportsAgent15: boolean);
-        bSupportsAgent0: boolean;
-        bSupportsAgent1: boolean;
-        bSupportsAgent2: boolean;
-        bSupportsAgent3: boolean;
-        bSupportsAgent4: boolean;
-        bSupportsAgent5: boolean;
-        bSupportsAgent6: boolean;
-        bSupportsAgent7: boolean;
-        bSupportsAgent8: boolean;
-        bSupportsAgent9: boolean;
-        bSupportsAgent10: boolean;
-        bSupportsAgent11: boolean;
-        bSupportsAgent12: boolean;
-        bSupportsAgent13: boolean;
-        bSupportsAgent14: boolean;
-        bSupportsAgent15: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class NavigationSystemConfig extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        NavigationSystemClass: SoftClassPath;
-        SupportedAgentsMask: NavAgentSelector;
-        DefaultAgentName: string;
-        bIsOverriden: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): NavigationSystemConfig;
-        static Load(InName: string): NavigationSystemConfig;
-    }
-    
-    enum EVolumeLightingMethod { VLM_VolumetricLightmap, VLM_SparseVolumeLightingSamples, VLM_MAX}
-    class LightmassWorldInfoSettings {
-        constructor();
-        constructor(StaticLightingLevelScale: number, NumIndirectLightingBounces: number, NumSkyLightingBounces: number, IndirectLightingQuality: number, IndirectLightingSmoothness: number, EnvironmentColor: Color, EnvironmentIntensity: number, EmissiveBoost: number, DiffuseBoost: number, VolumeLightingMethod: EVolumeLightingMethod, bUseAmbientOcclusion: boolean, bGenerateAmbientOcclusionMaterialMask: boolean, bVisualizeMaterialDiffuse: boolean, bVisualizeAmbientOcclusion: boolean, bCompressLightmaps: boolean, VolumetricLightmapDetailCellSize: number, VolumetricLightmapMaximumBrickMemoryMb: number, VolumetricLightmapSphericalHarmonicSmoothing: number, VolumeLightSamplePlacementScale: number, DirectIlluminationOcclusionFraction: number, IndirectIlluminationOcclusionFraction: number, OcclusionExponent: number, FullyOccludedSamplesFraction: number, MaxOcclusionDistance: number);
-        StaticLightingLevelScale: number;
-        NumIndirectLightingBounces: number;
-        NumSkyLightingBounces: number;
-        IndirectLightingQuality: number;
-        IndirectLightingSmoothness: number;
-        EnvironmentColor: Color;
-        EnvironmentIntensity: number;
-        EmissiveBoost: number;
-        DiffuseBoost: number;
-        VolumeLightingMethod: EVolumeLightingMethod;
-        bUseAmbientOcclusion: boolean;
-        bGenerateAmbientOcclusionMaterialMask: boolean;
-        bVisualizeMaterialDiffuse: boolean;
-        bVisualizeAmbientOcclusion: boolean;
-        bCompressLightmaps: boolean;
-        VolumetricLightmapDetailCellSize: number;
-        VolumetricLightmapMaximumBrickMemoryMb: number;
-        VolumetricLightmapSphericalHarmonicSmoothing: number;
-        VolumeLightSamplePlacementScale: number;
-        DirectIlluminationOcclusionFraction: number;
-        IndirectIlluminationOcclusionFraction: number;
-        OcclusionExponent: number;
-        FullyOccludedSamplesFraction: number;
-        MaxOcclusionDistance: number;
-        static StaticClass(): Class;
-    }
-    
-    enum ReverbPreset { REVERB_Default, REVERB_Bathroom, REVERB_StoneRoom, REVERB_Auditorium, REVERB_ConcertHall, REVERB_Cave, REVERB_Hallway, REVERB_StoneCorridor, REVERB_Alley, REVERB_Forest, REVERB_City, REVERB_Mountains, REVERB_Quarry, REVERB_Plain, REVERB_ParkingLot, REVERB_SewerPipe, REVERB_Underwater, REVERB_SmallRoom, REVERB_MediumRoom, REVERB_LargeRoom, REVERB_MediumHall, REVERB_LargeHall, REVERB_Plate, REVERB_MAX}
-    class ReverbEffect extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Density: number;
-        Diffusion: number;
-        Gain: number;
-        GainHF: number;
-        DecayTime: number;
-        DecayHFRatio: number;
-        ReflectionsGain: number;
-        ReflectionsDelay: number;
-        LateGain: number;
-        LateDelay: number;
-        AirAbsorptionGainHF: number;
-        RoomRolloffFactor: number;
-        bChanged: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ReverbEffect;
-        static Load(InName: string): ReverbEffect;
-    }
-    
-    class ReverbSettings {
-        constructor();
-        constructor(bApplyReverb: boolean, ReverbType: ReverbPreset, ReverbEffect: ReverbEffect, ReverbPluginEffect: SoundEffectSubmixPreset, Volume: number, FadeTime: number);
-        bApplyReverb: boolean;
-        ReverbType: ReverbPreset;
-        ReverbEffect: ReverbEffect;
-        ReverbPluginEffect: SoundEffectSubmixPreset;
-        Volume: number;
-        FadeTime: number;
-        static StaticClass(): Class;
-    }
-    
-    class InteriorSettings {
-        constructor();
-        constructor(bIsWorldSettings: boolean, ExteriorVolume: number, ExteriorTime: number, ExteriorLPF: number, ExteriorLPFTime: number, InteriorVolume: number, InteriorTime: number, InteriorLPF: number, InteriorLPFTime: number);
-        bIsWorldSettings: boolean;
-        ExteriorVolume: number;
-        ExteriorTime: number;
-        ExteriorLPF: number;
-        ExteriorLPFTime: number;
-        InteriorVolume: number;
-        InteriorTime: number;
-        InteriorLPF: number;
-        InteriorLPFTime: number;
-        static StaticClass(): Class;
-    }
-    
-    enum EProxyNormalComputationMethod { AngleWeighted, AreaWeighted, EqualWeighted, EProxyNormalComputationMethod_MAX}
-    enum ELandscapeCullingPrecision { High, Medium, Low, ELandscapeCullingPrecision_MAX}
-    class MeshProxySettings {
-        constructor();
-        constructor(ScreenSize: number, VoxelSize: number, MaterialSettings: MaterialProxySettings, TextureWidth: number, TextureHeight: number, bExportNormalMap: boolean, bExportMetallicMap: boolean, bExportRoughnessMap: boolean, bExportSpecularMap: boolean, bBakeVertexData: boolean, MergeDistance: number, UnresolvedGeometryColor: Color, MaxRayCastDist: number, HardAngleThreshold: number, LightMapResolution: number, NormalCalculationMethod: EProxyNormalComputationMethod, LandscapeCullingPrecision: ELandscapeCullingPrecision, bCalculateCorrectLODModel: boolean, bOverrideVoxelSize: boolean, bOverrideTransferDistance: boolean, bUseHardAngleThreshold: boolean, bComputeLightMapResolution: boolean, bRecalculateNormals: boolean, bUseLandscapeCulling: boolean, bAllowAdjacency: boolean, bAllowDistanceField: boolean, bReuseMeshLightmapUVs: boolean, bCreateCollision: boolean, bAllowVertexColors: boolean, bGenerateLightmapUVs: boolean);
-        ScreenSize: number;
-        VoxelSize: number;
-        MaterialSettings: MaterialProxySettings;
-        TextureWidth: number;
-        TextureHeight: number;
-        bExportNormalMap: boolean;
-        bExportMetallicMap: boolean;
-        bExportRoughnessMap: boolean;
-        bExportSpecularMap: boolean;
-        bBakeVertexData: boolean;
-        MergeDistance: number;
-        UnresolvedGeometryColor: Color;
-        MaxRayCastDist: number;
-        HardAngleThreshold: number;
-        LightMapResolution: number;
-        NormalCalculationMethod: EProxyNormalComputationMethod;
-        LandscapeCullingPrecision: ELandscapeCullingPrecision;
-        bCalculateCorrectLODModel: boolean;
-        bOverrideVoxelSize: boolean;
-        bOverrideTransferDistance: boolean;
-        bUseHardAngleThreshold: boolean;
-        bComputeLightMapResolution: boolean;
-        bRecalculateNormals: boolean;
-        bUseLandscapeCulling: boolean;
-        bAllowAdjacency: boolean;
-        bAllowDistanceField: boolean;
-        bReuseMeshLightmapUVs: boolean;
-        bCreateCollision: boolean;
-        bAllowVertexColors: boolean;
-        bGenerateLightmapUVs: boolean;
-        static StaticClass(): Class;
-    }
-    
-    enum EUVOutput { DoNotOutputChannel, OutputChannel, EUVOutput_MAX}
-    enum EMeshLODSelectionType { AllLODs, SpecificLOD, CalculateLOD, LowestDetailLOD, EMeshLODSelectionType_MAX}
-    class MeshMergingSettings {
-        constructor();
-        constructor(TargetLightMapResolution: number, OutputUVs: FixSizeArray<EUVOutput>, MaterialSettings: MaterialProxySettings, GutterSize: number, SpecificLOD: number, LODSelectionType: EMeshLODSelectionType, bGenerateLightMapUV: boolean, bComputedLightMapResolution: boolean, bPivotPointAtZero: boolean, bMergePhysicsData: boolean, bMergeMaterials: boolean, bCreateMergedMaterial: boolean, bBakeVertexDataToMesh: boolean, bUseVertexDataForBakingMaterial: boolean, bUseTextureBinning: boolean, bReuseMeshLightmapUVs: boolean, bMergeEquivalentMaterials: boolean, bUseLandscapeCulling: boolean, bIncludeImposters: boolean, bAllowDistanceField: boolean, bImportVertexColors: boolean, bCalculateCorrectLODModel: boolean, bExportNormalMap: boolean, bExportMetallicMap: boolean, bExportRoughnessMap: boolean, bExportSpecularMap: boolean, MergedMaterialAtlasResolution: number, ExportSpecificLOD: number);
-        TargetLightMapResolution: number;
-        OutputUVs: FixSizeArray<EUVOutput>;
-        MaterialSettings: MaterialProxySettings;
-        GutterSize: number;
-        SpecificLOD: number;
-        LODSelectionType: EMeshLODSelectionType;
-        bGenerateLightMapUV: boolean;
-        bComputedLightMapResolution: boolean;
-        bPivotPointAtZero: boolean;
-        bMergePhysicsData: boolean;
-        bMergeMaterials: boolean;
-        bCreateMergedMaterial: boolean;
-        bBakeVertexDataToMesh: boolean;
-        bUseVertexDataForBakingMaterial: boolean;
-        bUseTextureBinning: boolean;
-        bReuseMeshLightmapUVs: boolean;
-        bMergeEquivalentMaterials: boolean;
-        bUseLandscapeCulling: boolean;
-        bIncludeImposters: boolean;
-        bAllowDistanceField: boolean;
-        bImportVertexColors: boolean;
-        bCalculateCorrectLODModel: boolean;
-        bExportNormalMap: boolean;
-        bExportMetallicMap: boolean;
-        bExportRoughnessMap: boolean;
-        bExportSpecularMap: boolean;
-        MergedMaterialAtlasResolution: number;
-        ExportSpecificLOD: number;
-        static StaticClass(): Class;
-    }
-    
-    class HierarchicalSimplification {
-        constructor();
-        constructor(TransitionScreenSize: number, OverrideDrawDistance: number, bUseOverrideDrawDistance: boolean, bAllowSpecificExclusion: boolean, bSimplifyMesh: boolean, bOnlyGenerateClustersForVolumes: boolean, bReusePreviousLevelClusters: boolean, ProxySetting: MeshProxySettings, MergeSetting: MeshMergingSettings, DesiredBoundRadius: number, DesiredFillingPercentage: number, MinNumberOfActorsToBuild: number);
-        TransitionScreenSize: number;
-        OverrideDrawDistance: number;
-        bUseOverrideDrawDistance: boolean;
-        bAllowSpecificExclusion: boolean;
-        bSimplifyMesh: boolean;
-        bOnlyGenerateClustersForVolumes: boolean;
-        bReusePreviousLevelClusters: boolean;
-        ProxySetting: MeshProxySettings;
-        MergeSetting: MeshMergingSettings;
-        DesiredBoundRadius: number;
-        DesiredFillingPercentage: number;
-        MinNumberOfActorsToBuild: number;
-        static StaticClass(): Class;
-    }
-    
-    class BookmarkBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): BookmarkBase;
-        static Load(InName: string): BookmarkBase;
-    }
-    
-    class BookMark extends BookmarkBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Location: Vector;
-        Rotation: Rotator;
-        HiddenLevels: TArray<string>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): BookMark;
-        static Load(InName: string): BookMark;
-    }
-    
-    class BroadphaseSettings {
-        constructor();
-        constructor(bUseMBPOnClient: boolean, bUseMBPOnServer: boolean, bUseMBPOuterBounds: boolean, MBPBounds: Box, MBPOuterBounds: Box, MBPNumSubdivs: number);
-        bUseMBPOnClient: boolean;
-        bUseMBPOnServer: boolean;
-        bUseMBPOuterBounds: boolean;
-        MBPBounds: Box;
-        MBPOuterBounds: Box;
-        MBPNumSubdivs: number;
-        static StaticClass(): Class;
-    }
-    
-    class NetViewer {
-        constructor();
-        constructor(Connection: NetConnection, InViewer: Actor, ViewTarget: Actor, ViewLocation: Vector, ViewDir: Vector);
-        Connection: NetConnection;
-        InViewer: Actor;
-        ViewTarget: Actor;
-        ViewLocation: Vector;
-        ViewDir: Vector;
-        static StaticClass(): Class;
-    }
-    
-    class WorldSettings extends Info {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        VisibilityCellSize: number;
-        VisibilityAggressiveness: EVisibilityAggressiveness;
-        bPrecomputeVisibility: boolean;
-        bPlaceCellsOnlyAlongCameraTracks: boolean;
-        bEnableWorldBoundsChecks: boolean;
-        bEnableNavigationSystem: boolean;
-        bEnableAISystem: boolean;
-        bEnableWorldComposition: boolean;
-        bUseClientSideLevelStreamingVolumes: boolean;
-        bEnableWorldOriginRebasing: boolean;
-        bWorldGravitySet: boolean;
-        bGlobalGravitySet: boolean;
-        bMinimizeBSPSections: boolean;
-        bForceNoPrecomputedLighting: boolean;
-        bHighPriorityLoading: boolean;
-        bHighPriorityLoadingLocal: boolean;
-        bOverrideDefaultBroadphaseSettings: boolean;
-        NavigationSystemConfig: NavigationSystemConfig;
-        NavigationSystemConfigOverride: NavigationSystemConfig;
-        WorldToMeters: number;
-        KillZ: number;
-        KillZDamageType: Class;
-        WorldGravityZ: number;
-        GlobalGravityZ: number;
-        DefaultPhysicsVolumeClass: Class;
-        PhysicsCollisionHandlerClass: Class;
-        DefaultGameMode: Class;
-        GameNetworkManagerClass: Class;
-        PackedLightAndShadowMapTextureSize: number;
-        DefaultColorScale: Vector;
-        DefaultMaxDistanceFieldOcclusionDistance: number;
-        GlobalDistanceFieldViewDistance: number;
-        DynamicIndirectShadowsSelfShadowingIntensity: number;
-        LightmassSettings: LightmassWorldInfoSettings;
-        DefaultReverbSettings: ReverbSettings;
-        DefaultAmbientZoneSettings: InteriorSettings;
-        MonoCullingDistance: number;
-        DefaultBaseSoundMix: SoundMix;
-        bEnableHierarchicalLODSystem: boolean;
-        HLODSetupAsset: TSoftObjectPtr<Class>;
-        OverrideBaseMaterial: TSoftObjectPtr<MaterialInterface>;
-        HierarchicalLODSetup: TArray<HierarchicalSimplification>;
-        NumHLODLevels: number;
-        bGenerateSingleClusterForLevel: boolean;
-        BookMarks: FixSizeArray<BookMark>;
-        TimeDilation: number;
-        MatineeTimeDilation: number;
-        DemoPlayTimeDilation: number;
-        MinGlobalTimeDilation: number;
-        MaxGlobalTimeDilation: number;
-        MinUndilatedFrameTime: number;
-        MaxUndilatedFrameTime: number;
-        BroadphaseSettings: BroadphaseSettings;
-        Pauser: PlayerState;
-        ReplicationViewers: TArray<NetViewer>;
-        AssetUserData: TArray<AssetUserData>;
-        PauserPlayerState: PlayerState;
-        MaxNumberOfBookmarks: number;
-        DefaultBookmarkClass: Class;
-        BookmarkArray: TArray<BookmarkBase>;
-        LastBookmarkClass: Class;
-        OnRep_WorldGravityZ(): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WorldSettings;
-        static Load(InName: string): WorldSettings;
-    }
-    
-    class ReplicatedStaticActorDestructionInfo {
-        constructor();
-        constructor(ObjClass: Class);
-        ObjClass: Class;
-        static StaticClass(): Class;
-    }
-    
-    class Level extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OwningWorld: World;
-        Model: Model;
-        ModelComponents: TArray<ModelComponent>;
-        ActorCluster: LevelActorContainer;
-        LevelScriptBlueprint: LevelScriptBlueprint;
-        TextureStreamingResourceGuids: TArray<Guid>;
-        NumTextureStreamingUnbuiltComponents: number;
-        NumTextureStreamingDirtyResources: number;
-        LevelScriptActor: LevelScriptActor;
-        NavListStart: NavigationObjectBase;
-        NavListEnd: NavigationObjectBase;
-        NavDataChunks: TArray<NavigationDataChunk>;
-        LightmapTotalSize: number;
-        ShadowmapTotalSize: number;
-        StaticNavigableGeometry: TArray<Vector>;
-        StreamingTextureGuids: TArray<Guid>;
-        LevelBuildDataId: Guid;
-        MapBuildData: MapBuildDataRegistry;
-        LightBuildLevelOffset: IntVector;
-        bIsLightingScenario: boolean;
-        bTextureStreamingRotationChanged: boolean;
-        bStaticComponentsRegisteredInStreamingManager: boolean;
-        bIsVisible: boolean;
-        bLocked: boolean;
-        LevelSimplification: FixSizeArray<LevelSimplificationDetails>;
-        LevelColor: LinearColor;
-        bLevelOkayForPlacementWhileCheckedIn: boolean;
-        WorldSettings: WorldSettings;
-        AssetUserData: TArray<AssetUserData>;
-        DestroyedReplicatedStaticActors: TArray<ReplicatedStaticActorDestructionInfo>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Level;
-        static Load(InName: string): Level;
-    }
-    
-    class LineBatchComponent extends PrimitiveComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LineBatchComponent;
-        static Load(InName: string): LineBatchComponent;
-    }
-    
-    class GameNetworkManager extends Info {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BadPacketLossThreshold: number;
-        SeverePacketLossThreshold: number;
-        BadPingThreshold: number;
-        SeverePingThreshold: number;
-        AdjustedNetSpeed: number;
-        LastNetSpeedUpdateTime: number;
-        TotalNetBandwidth: number;
-        MinDynamicBandwidth: number;
-        MaxDynamicBandwidth: number;
-        bIsStandbyCheckingEnabled: boolean;
-        bHasStandbyCheatTriggered: boolean;
-        StandbyRxCheatTime: number;
-        StandbyTxCheatTime: number;
-        PercentMissingForRxStandby: number;
-        PercentMissingForTxStandby: number;
-        PercentForBadPing: number;
-        JoinInProgressStandbyWaitTime: number;
-        MoveRepSize: number;
-        MAXPOSITIONERRORSQUARED: number;
-        MAXNEARZEROVELOCITYSQUARED: number;
-        CLIENTADJUSTUPDATECOST: number;
-        MAXCLIENTUPDATEINTERVAL: number;
-        MaxClientForcedUpdateDuration: number;
-        ServerForcedUpdateHitchThreshold: number;
-        ServerForcedUpdateHitchCooldown: number;
-        MaxMoveDeltaTime: number;
-        MaxClientSmoothingDeltaTime: number;
-        ClientNetSendMoveDeltaTime: number;
-        ClientNetSendMoveDeltaTimeThrottled: number;
-        ClientNetSendMoveDeltaTimeStationary: number;
-        ClientNetSendMoveThrottleAtNetSpeed: number;
-        ClientNetSendMoveThrottleOverPlayerCount: number;
-        ClientAuthorativePosition: boolean;
-        ClientErrorUpdateRateLimit: number;
-        ClientNetCamUpdateDeltaTime: number;
-        ClientNetCamUpdatePositionLimit: number;
-        bMovementTimeDiscrepancyDetection: boolean;
-        bMovementTimeDiscrepancyResolution: boolean;
-        MovementTimeDiscrepancyMaxTimeMargin: number;
-        MovementTimeDiscrepancyMinTimeMargin: number;
-        MovementTimeDiscrepancyResolutionRate: number;
-        MovementTimeDiscrepancyDriftAllowance: number;
-        bMovementTimeDiscrepancyForceCorrectionsDuringResolution: boolean;
-        bUseDistanceBasedRelevancy: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameNetworkManager;
-        static Load(InName: string): GameNetworkManager;
-    }
-    
-    class PhysicsCollisionHandler extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ImpactThreshold: number;
-        ImpactReFireDelay: number;
-        DefaultImpactSound: SoundBase;
-        LastImpactSoundTime: number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PhysicsCollisionHandler;
-        static Load(InName: string): PhysicsCollisionHandler;
-    }
-    
-    enum EStreamingVolumeUsage { SVB_Loading, SVB_LoadingAndVisibility, SVB_VisibilityBlockingOnLoad, SVB_BlockingOnLoad, SVB_LoadingNotVisible, SVB_MAX}
-    class LevelStreamingVolume extends Volume {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        StreamingLevelNames: TArray<string>;
-        bEditorPreVisOnly: boolean;
-        bDisabled: boolean;
-        StreamingUsage: EStreamingVolumeUsage;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LevelStreamingVolume;
-        static Load(InName: string): LevelStreamingVolume;
-    }
-    
-    class LevelStreaming extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        PackageName: string;
-        WorldAsset: TSoftObjectPtr<World>;
-        PackageNameToLoad: string;
-        LODPackageNames: TArray<string>;
-        LevelTransform: Transform;
-        LevelLODIndex: number;
-        StreamingPriority: number;
-        bShouldBeVisibleInEditor: boolean;
-        bShouldBeVisible: boolean;
-        bShouldBeLoaded: boolean;
-        bLocked: boolean;
-        bIsStatic: boolean;
-        bShouldBlockOnLoad: boolean;
-        bShouldBlockOnUnload: boolean;
-        bDisableDistanceStreaming: boolean;
-        bDrawOnLevelStatusMap: boolean;
-        DrawColor: Color;
-        LevelColor: LinearColor;
-        EditorStreamingVolumes: TArray<LevelStreamingVolume>;
-        MinTimeBetweenVolumeUnloadRequests: number;
-        Keywords: TArray<string>;
-        OnLevelLoaded: $MulticastDelegate<() => void>;
-        OnLevelUnloaded: $MulticastDelegate<() => void>;
-        OnLevelShown: $MulticastDelegate<() => void>;
-        OnLevelHidden: $MulticastDelegate<() => void>;
-        LoadedLevel: Level;
-        PendingUnloadLevel: Level;
-        FolderPath: string;
-        ShouldBeLoaded(): boolean;
-        SetShouldBeVisible(bInShouldBeVisible: boolean): void;
-        SetShouldBeLoaded(bInShouldBeLoaded: boolean): void;
-        SetPriority(NewPriority: number): void;
-        SetLevelLODIndex(LODIndex: number): void;
-        IsStreamingStatePending(): boolean;
-        IsLevelVisible(): boolean;
-        IsLevelLoaded(): boolean;
-        GetWorldAssetPackageFName(): string;
-        GetLoadedLevel(): Level;
-        GetLevelScriptActor(): LevelScriptActor;
-        CreateInstance(UniqueInstanceName: string): LevelStreaming;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LevelStreaming;
-        static Load(InName: string): LevelStreaming;
-    }
-    
-    class LevelStreamingWrapper {
-        constructor();
-        constructor(StreamingLevel: LevelStreaming);
-        StreamingLevel: LevelStreaming;
-        static StaticClass(): Class;
-    }
-    
-    class StreamingLevelsToConsider {
-        constructor();
-        constructor(StreamingLevels: TArray<LevelStreamingWrapper>);
-        StreamingLevels: TArray<LevelStreamingWrapper>;
-        static StaticClass(): Class;
-    }
-    
-    class RollbackNetStartupActorInfo {
-        constructor();
-        constructor(Archetype: Object, Level: Level, ObjReferences: TArray<Object>);
-        Archetype: Object;
-        Level: Level;
-        ObjReferences: TArray<Object>;
-        static StaticClass(): Class;
-    }
-    
-    class MulticastRecordOptions {
-        constructor();
-        constructor(FuncPathName: string, bServerSkip: boolean, bClientSkip: boolean);
-        FuncPathName: string;
-        bServerSkip: boolean;
-        bClientSkip: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class DemoNetDriver extends NetDriver {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        RollbackNetStartupActors: TMap<string, RollbackNetStartupActorInfo>;
-        CheckpointSaveMaxMSPerFrame: number;
-        MulticastRecordOptions: TArray<MulticastRecordOptions>;
-        bIsLocalReplay: boolean;
-        SpectatorControllers: TArray<PlayerController>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): DemoNetDriver;
-        static Load(InName: string): DemoNetDriver;
-    }
-    
-    class ParticleEventManager extends Actor {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ParticleEventManager;
-        static Load(InName: string): ParticleEventManager;
-    }
-    
-    class NavigationSystemBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): NavigationSystemBase;
-        static Load(InName: string): NavigationSystemBase;
-    }
-    
-    class GameSession extends Info {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MaxSpectators: number;
-        MaxPlayers: number;
-        MaxPartySize: number;
-        MaxSplitscreensPerConnection: number;
-        bRequiresPushToTalk: boolean;
-        SessionName: string;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameSession;
-        static Load(InName: string): GameSession;
-    }
-    
-    class GameStateBase extends Info {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        GameModeClass: Class;
-        AuthorityGameMode: GameModeBase;
-        SpectatorClass: Class;
-        PlayerArray: TArray<PlayerState>;
-        bReplicatedHasBegunPlay: boolean;
-        ReplicatedWorldTimeSeconds: number;
-        ServerWorldTimeSecondsDelta: number;
-        ServerWorldTimeSecondsUpdateFrequency: number;
-        OnRep_SpectatorClass(): void;
-        OnRep_ReplicatedWorldTimeSeconds(): void;
-        OnRep_ReplicatedHasBegunPlay(): void;
-        OnRep_GameModeClass(): void;
-        HasMatchStarted(): boolean;
-        HasBegunPlay(): boolean;
-        GetServerWorldTimeSeconds(): number;
-        GetPlayerStartTime(Controller: $Nullable<Controller>): number;
-        GetPlayerRespawnDelay(Controller: $Nullable<Controller>): number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameStateBase;
-        static Load(InName: string): GameStateBase;
-    }
-    
-    class ServerStatReplicator extends Info {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bUpdateStatNet: boolean;
-        bOverwriteClientStats: boolean;
-        Channels: number;
-        InRate: number;
-        OutRate: number;
-        OutSaturation: number;
-        MaxPacketOverhead: number;
-        InRateClientMax: number;
-        InRateClientMin: number;
-        InRateClientAvg: number;
-        InPacketsClientMax: number;
-        InPacketsClientMin: number;
-        InPacketsClientAvg: number;
-        OutRateClientMax: number;
-        OutRateClientMin: number;
-        OutRateClientAvg: number;
-        OutPacketsClientMax: number;
-        OutPacketsClientMin: number;
-        OutPacketsClientAvg: number;
-        NetNumClients: number;
-        InPackets: number;
-        OutPackets: number;
-        InBunches: number;
-        OutBunches: number;
-        OutLoss: number;
-        InLoss: number;
-        VoiceBytesSent: number;
-        VoiceBytesRecv: number;
-        VoicePacketsSent: number;
-        VoicePacketsRecv: number;
-        PercentInVoice: number;
-        PercentOutVoice: number;
-        NumActorChannels: number;
-        NumConsideredActors: number;
-        PrioritizedActors: number;
-        NumRelevantActors: number;
-        NumRelevantDeletedActors: number;
-        NumReplicatedActorAttempts: number;
-        NumReplicatedActors: number;
-        NumActors: number;
-        NumNetActors: number;
-        NumDormantActors: number;
-        NumInitiallyDormantActors: number;
-        NumNetGUIDsAckd: number;
-        NumNetGUIDsPending: number;
-        NumNetGUIDsUnAckd: number;
-        ObjPathBytes: number;
-        NetGUIDOutRate: number;
-        NetGUIDInRate: number;
-        NetSaturated: number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ServerStatReplicator;
-        static Load(InName: string): ServerStatReplicator;
-    }
-    
-    class GameModeBase extends Info {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OptionsString: string;
-        GameSessionClass: Class;
-        GameStateClass: Class;
-        PlayerControllerClass: Class;
-        PlayerStateClass: Class;
-        HUDClass: Class;
-        DefaultPawnClass: Class;
-        SpectatorClass: Class;
-        ReplaySpectatorPlayerControllerClass: Class;
-        ServerStatReplicatorClass: Class;
-        GameSession: GameSession;
-        GameState: GameStateBase;
-        ServerStatReplicator: ServerStatReplicator;
-        DefaultPlayerName: string;
-        bUseSeamlessTravel: boolean;
-        bStartPlayersAsSpectators: boolean;
-        bPauseable: boolean;
-        StartPlay(): void;
-        SpawnDefaultPawnFor(NewPlayer: $Nullable<Controller>, StartSpot: $Nullable<Actor>): Pawn;
-        SpawnDefaultPawnAtTransform(NewPlayer: $Nullable<Controller>, SpawnTransform: Transform): Pawn;
-        ShouldReset(ActorToReset: $Nullable<Actor>): boolean;
-        ReturnToMainMenuHost(): void;
-        RestartPlayerAtTransform(NewPlayer: $Nullable<Controller>, SpawnTransform: Transform): void;
-        RestartPlayerAtPlayerStart(NewPlayer: $Nullable<Controller>, StartSpot: $Nullable<Actor>): void;
-        RestartPlayer(NewPlayer: $Nullable<Controller>): void;
-        ResetLevel(): void;
-        PlayerCanRestart(Player: $Nullable<PlayerController>): boolean;
-        MustSpectate(NewPlayerController: $Nullable<PlayerController>): boolean;
-        K2_PostLogin(NewPlayer: $Nullable<PlayerController>): void;
-        K2_OnSwapPlayerControllers(OldPC: $Nullable<PlayerController>, NewPC: $Nullable<PlayerController>): void;
-        K2_OnRestartPlayer(NewPlayer: $Nullable<Controller>): void;
-        K2_OnLogout(ExitingController: $Nullable<Controller>): void;
-        K2_OnChangeName(Other: $Nullable<Controller>, NewName: string, bNameChange: boolean): void;
-        K2_FindPlayerStart(Player: $Nullable<Controller>, IncomingName?: string /* = "" */): Actor;
-        InitStartSpot(StartSpot: $Nullable<Actor>, NewPlayer: $Nullable<Controller>): void;
-        InitializeHUDForPlayer(NewPlayer: $Nullable<PlayerController>): void;
-        HasMatchStarted(): boolean;
-        HandleStartingNewPlayer(NewPlayer: $Nullable<PlayerController>): void;
-        GetNumSpectators(): number;
-        GetNumPlayers(): number;
-        GetDefaultPawnClassForController(InController: $Nullable<Controller>): Class;
-        FindPlayerStart(Player: $Nullable<Controller>, IncomingName: string): Actor;
-        ChoosePlayerStart(Player: $Nullable<Controller>): Actor;
-        ChangeName(Controller: $Nullable<Controller>, NewName: string, bNameChange: boolean): void;
-        CanSpectate(Viewer: $Nullable<PlayerController>, ViewTarget: $Nullable<PlayerState>): boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameModeBase;
-        static Load(InName: string): GameModeBase;
-    }
-    
-    class AISystemBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AISystemClassName: SoftClassPath;
-        AISystemModuleName: string;
-        bInstantiateAISystemOnClient: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AISystemBase;
-        static Load(InName: string): AISystemBase;
-    }
-    
-    class AvoidanceManager extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        DefaultTimeToLive: number;
-        LockTimeAfterAvoid: number;
-        LockTimeAfterClean: number;
-        DeltaTimeToPredict: number;
-        ArtificialRadiusExpansion: number;
-        TestHeightDifference: number;
-        HeightCheckMargin: number;
-        RegisterMovementComponent(MovementComp: $Nullable<MovementComponent>, AvoidanceWeight?: number /* = 0.500000 */): boolean;
-        GetObjectCount(): number;
-        GetNewAvoidanceUID(): number;
-        GetAvoidanceVelocityForComponent(MovementComp: $Nullable<MovementComponent>): Vector;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AvoidanceManager;
-        static Load(InName: string): AvoidanceManager;
-    }
-    
-    class LevelCollection {
-        constructor();
-        constructor(GameState: GameStateBase, NetDriver: NetDriver, DemoNetDriver: DemoNetDriver, PersistentLevel: Level, Levels: TSet<Level>);
-        GameState: GameStateBase;
-        NetDriver: NetDriver;
-        DemoNetDriver: DemoNetDriver;
-        PersistentLevel: Level;
-        Levels: TSet<Level>;
-        static StaticClass(): Class;
-    }
-    
-    class MaterialParameterCollectionInstance extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Collection: MaterialParameterCollection;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MaterialParameterCollectionInstance;
-        static Load(InName: string): MaterialParameterCollectionInstance;
-    }
-    
-    class LevelViewportInfo {
-        constructor();
-        constructor(CamPosition: Vector, CamRotation: Rotator, CamOrthoZoom: number, CamUpdated: boolean);
-        CamPosition: Vector;
-        CamRotation: Rotator;
-        CamOrthoZoom: number;
-        CamUpdated: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class WorldComposition extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TilesStreaming: TArray<LevelStreaming>;
-        TilesStreamingTimeThreshold: number;
-        bLoadAllTilesDuringCinematic: boolean;
-        bRebaseOriginIn3DSpace: boolean;
-        bLockTilesLocation: boolean;
-        RebaseOriginDistance: number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WorldComposition;
-        static Load(InName: string): WorldComposition;
-    }
-    
-    class PSCPoolElem {
-        constructor();
-        constructor(PSC: ParticleSystemComponent);
-        PSC: ParticleSystemComponent;
-        static StaticClass(): Class;
-    }
-    
-    class PSCPool {
-        constructor();
-        constructor(FreeElements: TArray<PSCPoolElem>, InUseComponents_Auto: TArray<ParticleSystemComponent>, InUseComponents_Manual: TArray<ParticleSystemComponent>);
-        FreeElements: TArray<PSCPoolElem>;
-        InUseComponents_Auto: TArray<ParticleSystemComponent>;
-        InUseComponents_Manual: TArray<ParticleSystemComponent>;
-        static StaticClass(): Class;
-    }
-    
-    class WorldPSCPool {
-        constructor();
-        constructor(WorldParticleSystemPools: TMap<ParticleSystem, PSCPool>);
-        WorldParticleSystemPools: TMap<ParticleSystem, PSCPool>;
-        static StaticClass(): Class;
-    }
-    
-    class World extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Layers: TArray<Layer>;
-        ActiveGroupActors: TArray<Actor>;
-        ThumbnailInfo: ThumbnailInfo;
-        PersistentLevel: Level;
-        NetDriver: NetDriver;
-        LineBatcher: LineBatchComponent;
-        PersistentLineBatcher: LineBatchComponent;
-        ForegroundLineBatcher: LineBatchComponent;
-        NetworkManager: GameNetworkManager;
-        PhysicsCollisionHandler: PhysicsCollisionHandler;
-        ExtraReferencedObjects: TArray<Object>;
-        PerModuleDataObjects: TArray<Object>;
-        LevelSequenceActors: TArray<Actor>;
-        StreamingLevels: TArray<LevelStreaming>;
-        StreamingLevelsToConsider: StreamingLevelsToConsider;
-        StreamingLevelsPrefix: string;
-        CurrentLevelPendingVisibility: Level;
-        CurrentLevelPendingInvisibility: Level;
-        DemoNetDriver: DemoNetDriver;
-        MyParticleEventManager: ParticleEventManager;
-        DefaultPhysicsVolume: PhysicsVolume;
-        bAreConstraintsDirty: boolean;
-        NavigationSystem: NavigationSystemBase;
-        AuthorityGameMode: GameModeBase;
-        GameState: GameStateBase;
-        AISystem: AISystemBase;
-        AvoidanceManager: AvoidanceManager;
-        Levels: TArray<Level>;
-        LevelCollections: TArray<LevelCollection>;
-        CurrentLevel: Level;
-        OwningGameInstance: GameInstance;
-        ParameterCollectionInstances: TArray<MaterialParameterCollectionInstance>;
-        CanvasForRenderingToTarget: Canvas;
-        CanvasForDrawMaterialToRenderTarget: Canvas;
-        EditorViews: TArray<LevelViewportInfo>;
-        ComponentsThatNeedEndOfFrameUpdate: TArray<ActorComponent>;
-        ComponentsThatNeedEndOfFrameUpdate_OnGameThread: TArray<ActorComponent>;
-        SelectedLevels: TArray<Level>;
-        WorldComposition: WorldComposition;
-        PSCPool: WorldPSCPool;
-        K2_GetWorldSettings(): WorldSettings;
-        HandleTimelineScrubbed(): void;
-        SpawnActor(Class: $Nullable<Class>, Transform: Transform, SpawnCollisionHandlingOverride: ESpawnActorCollisionHandlingMethod, Owner: $Nullable<Actor>, Instigator: $Nullable<Pawn>): Actor;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): World;
-        static Load(InName: string): World;
-    }
-    
-    class Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ExecuteUbergraph(EntryPoint: number): void;
-        IsValid(): boolean;
-        GetWorld(): World;
-        GetOuter(): Object;
-        GetName(): string;
-        GetClass(): Class;
-        CreateDefaultSubobject(SubobjectFName: string, ReturnType: $Nullable<Class>, ClassToCreateByDefault: $Nullable<Class>, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Object;
-        static Load(InName: string): Object;
-    }
-    
-    class GCObjectReferencer extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GCObjectReferencer;
-        static Load(InName: string): GCObjectReferencer;
-    }
-    
-    class TextBuffer extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TextBuffer;
-        static Load(InName: string): TextBuffer;
-    }
-    
-    class ScriptStruct extends Struct {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ScriptStruct;
-        static Load(InName: string): ScriptStruct;
-    }
-    
-    class DelegateFunction extends Function {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): DelegateFunction;
-        static Load(InName: string): DelegateFunction;
-    }
-    
-    class SparseDelegateFunction extends DelegateFunction {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SparseDelegateFunction;
-        static Load(InName: string): SparseDelegateFunction;
-    }
-    
-    class DynamicClass extends Class {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): DynamicClass;
-        static Load(InName: string): DynamicClass;
-    }
-    
-    class Enum extends Field {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Enum;
-        static Load(InName: string): Enum;
-    }
-    
-    class EnumProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EnumProperty;
-        static Load(InName: string): EnumProperty;
-    }
-    
-    class LinkerPlaceholderClass extends Class {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LinkerPlaceholderClass;
-        static Load(InName: string): LinkerPlaceholderClass;
-    }
-    
-    class LinkerPlaceholderExportObject extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LinkerPlaceholderExportObject;
-        static Load(InName: string): LinkerPlaceholderExportObject;
-    }
-    
-    class LinkerPlaceholderFunction extends Function {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LinkerPlaceholderFunction;
-        static Load(InName: string): LinkerPlaceholderFunction;
-    }
-    
-    class MetaData extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MetaData;
-        static Load(InName: string): MetaData;
-    }
-    
-    class ObjectRedirector extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ObjectRedirector;
-        static Load(InName: string): ObjectRedirector;
-    }
-    
-    class ArrayProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ArrayProperty;
-        static Load(InName: string): ArrayProperty;
-    }
-    
-    class ObjectPropertyBase extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ObjectPropertyBase;
-        static Load(InName: string): ObjectPropertyBase;
-    }
-    
-    class BoolProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): BoolProperty;
-        static Load(InName: string): BoolProperty;
-    }
-    
-    class NumericProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): NumericProperty;
-        static Load(InName: string): NumericProperty;
-    }
-    
-    class ByteProperty extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ByteProperty;
-        static Load(InName: string): ByteProperty;
-    }
-    
-    class ObjectProperty extends ObjectPropertyBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ObjectProperty;
-        static Load(InName: string): ObjectProperty;
-    }
-    
-    class ClassProperty extends ObjectProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ClassProperty;
-        static Load(InName: string): ClassProperty;
-    }
-    
-    class DelegateProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): DelegateProperty;
-        static Load(InName: string): DelegateProperty;
-    }
-    
-    class DoubleProperty extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): DoubleProperty;
-        static Load(InName: string): DoubleProperty;
-    }
-    
-    class FloatProperty extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): FloatProperty;
-        static Load(InName: string): FloatProperty;
-    }
-    
-    class IntProperty extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): IntProperty;
-        static Load(InName: string): IntProperty;
-    }
-    
-    class Int16Property extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Int16Property;
-        static Load(InName: string): Int16Property;
-    }
-    
-    class Int64Property extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Int64Property;
-        static Load(InName: string): Int64Property;
-    }
-    
-    class Int8Property extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Int8Property;
-        static Load(InName: string): Int8Property;
-    }
-    
-    class InterfaceProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): InterfaceProperty;
-        static Load(InName: string): InterfaceProperty;
-    }
-    
-    class LazyObjectProperty extends ObjectPropertyBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LazyObjectProperty;
-        static Load(InName: string): LazyObjectProperty;
-    }
-    
-    class MapProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MapProperty;
-        static Load(InName: string): MapProperty;
-    }
-    
-    class MulticastDelegateProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MulticastDelegateProperty;
-        static Load(InName: string): MulticastDelegateProperty;
-    }
-    
-    class MulticastInlineDelegateProperty extends MulticastDelegateProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MulticastInlineDelegateProperty;
-        static Load(InName: string): MulticastInlineDelegateProperty;
-    }
-    
-    class MulticastSparseDelegateProperty extends MulticastDelegateProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MulticastSparseDelegateProperty;
-        static Load(InName: string): MulticastSparseDelegateProperty;
-    }
-    
-    class NameProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): NameProperty;
-        static Load(InName: string): NameProperty;
-    }
-    
-    class SetProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SetProperty;
-        static Load(InName: string): SetProperty;
-    }
-    
-    class SoftObjectProperty extends ObjectPropertyBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoftObjectProperty;
-        static Load(InName: string): SoftObjectProperty;
-    }
-    
-    class SoftClassProperty extends SoftObjectProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SoftClassProperty;
-        static Load(InName: string): SoftClassProperty;
-    }
-    
-    class StrProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): StrProperty;
-        static Load(InName: string): StrProperty;
-    }
-    
-    class UInt16Property extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): UInt16Property;
-        static Load(InName: string): UInt16Property;
-    }
-    
-    class UInt32Property extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): UInt32Property;
-        static Load(InName: string): UInt32Property;
-    }
-    
-    class UInt64Property extends NumericProperty {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): UInt64Property;
-        static Load(InName: string): UInt64Property;
-    }
-    
-    class WeakObjectProperty extends ObjectPropertyBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WeakObjectProperty;
-        static Load(InName: string): WeakObjectProperty;
-    }
-    
-    class TextProperty extends Property {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TextProperty;
-        static Load(InName: string): TextProperty;
-    }
-    
-    class InputCoreTypes extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): InputCoreTypes;
-        static Load(InName: string): InputCoreTypes;
-    }
-    
-    class FontFaceInterface extends Interface {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): FontFaceInterface;
-        static Load(InName: string): FontFaceInterface;
-    }
-    
-    class FontProviderInterface extends Interface {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): FontProviderInterface;
-        static Load(InName: string): FontProviderInterface;
-    }
-    
-    class SlateTypes extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SlateTypes;
-        static Load(InName: string): SlateTypes;
-    }
-    
-    class SlateWidgetStyleContainerBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SlateWidgetStyleContainerBase;
-        static Load(InName: string): SlateWidgetStyleContainerBase;
-    }
-    
-    class SlateWidgetStyleAsset extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CustomStyle: SlateWidgetStyleContainerBase;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SlateWidgetStyleAsset;
-        static Load(InName: string): SlateWidgetStyleAsset;
-    }
-    
-    class SlateWidgetStyleContainerInterface extends Interface {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SlateWidgetStyleContainerInterface;
-        static Load(InName: string): SlateWidgetStyleContainerInterface;
-    }
-    
-    class SlateWidgetStyle {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class SlateSound {
-        constructor();
-        constructor(ResourceObject: Object);
-        ResourceObject: Object;
-        static StaticClass(): Class;
-    }
-    
-    class ButtonStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(Normal: SlateBrush, Hovered: SlateBrush, Pressed: SlateBrush, Disabled: SlateBrush, NormalPadding: Margin, PressedPadding: Margin, PressedSlateSound: SlateSound, HoveredSlateSound: SlateSound, PressedSound: string, HoveredSound: string);
-        Normal: SlateBrush;
-        Hovered: SlateBrush;
-        Pressed: SlateBrush;
-        Disabled: SlateBrush;
-        NormalPadding: Margin;
-        PressedPadding: Margin;
-        PressedSlateSound: SlateSound;
-        HoveredSlateSound: SlateSound;
-        PressedSound: string;
-        HoveredSound: string;
-        static StaticClass(): Class;
-    }
-    
-    class ButtonWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ButtonStyle: ButtonStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ButtonWidgetStyle;
-        static Load(InName: string): ButtonWidgetStyle;
-    }
-    
-    enum ESlateCheckBoxType { CheckBox, ToggleButton, ESlateCheckBoxType_MAX}
-    class CheckBoxStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(CheckBoxType: ESlateCheckBoxType, UncheckedImage: SlateBrush, UncheckedHoveredImage: SlateBrush, UncheckedPressedImage: SlateBrush, CheckedImage: SlateBrush, CheckedHoveredImage: SlateBrush, CheckedPressedImage: SlateBrush, UndeterminedImage: SlateBrush, UndeterminedHoveredImage: SlateBrush, UndeterminedPressedImage: SlateBrush, Padding: Margin, ForegroundColor: SlateColor, BorderBackgroundColor: SlateColor, CheckedSlateSound: SlateSound, UncheckedSlateSound: SlateSound, HoveredSlateSound: SlateSound, CheckedSound: string, UncheckedSound: string, HoveredSound: string);
-        CheckBoxType: ESlateCheckBoxType;
-        UncheckedImage: SlateBrush;
-        UncheckedHoveredImage: SlateBrush;
-        UncheckedPressedImage: SlateBrush;
-        CheckedImage: SlateBrush;
-        CheckedHoveredImage: SlateBrush;
-        CheckedPressedImage: SlateBrush;
-        UndeterminedImage: SlateBrush;
-        UndeterminedHoveredImage: SlateBrush;
-        UndeterminedPressedImage: SlateBrush;
-        Padding: Margin;
-        ForegroundColor: SlateColor;
-        BorderBackgroundColor: SlateColor;
-        CheckedSlateSound: SlateSound;
-        UncheckedSlateSound: SlateSound;
-        HoveredSlateSound: SlateSound;
-        CheckedSound: string;
-        UncheckedSound: string;
-        HoveredSound: string;
-        static StaticClass(): Class;
-    }
-    
-    class CheckBoxWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CheckBoxStyle: CheckBoxStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): CheckBoxWidgetStyle;
-        static Load(InName: string): CheckBoxWidgetStyle;
-    }
-    
-    class ComboButtonStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(ButtonStyle: ButtonStyle, DownArrowImage: SlateBrush, MenuBorderBrush: SlateBrush, MenuBorderPadding: Margin);
-        ButtonStyle: ButtonStyle;
-        DownArrowImage: SlateBrush;
-        MenuBorderBrush: SlateBrush;
-        MenuBorderPadding: Margin;
-        static StaticClass(): Class;
-    }
-    
-    class ComboBoxStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(ComboButtonStyle: ComboButtonStyle, PressedSlateSound: SlateSound, SelectionChangeSlateSound: SlateSound, PressedSound: string, SelectionChangeSound: string);
-        ComboButtonStyle: ComboButtonStyle;
-        PressedSlateSound: SlateSound;
-        SelectionChangeSlateSound: SlateSound;
-        PressedSound: string;
-        SelectionChangeSound: string;
-        static StaticClass(): Class;
-    }
-    
-    class ComboBoxWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ComboBoxStyle: ComboBoxStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ComboBoxWidgetStyle;
-        static Load(InName: string): ComboBoxWidgetStyle;
-    }
-    
-    class ComboButtonWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ComboButtonStyle: ComboButtonStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ComboButtonWidgetStyle;
-        static Load(InName: string): ComboButtonWidgetStyle;
-    }
-    
-    class FontOutlineSettings {
-        constructor();
-        constructor(OutlineSize: number, bSeparateFillAlpha: boolean, bApplyOutlineToDropShadows: boolean, OutlineMaterial: Object, OutlineColor: LinearColor);
-        OutlineSize: number;
-        bSeparateFillAlpha: boolean;
-        bApplyOutlineToDropShadows: boolean;
-        OutlineMaterial: Object;
-        OutlineColor: LinearColor;
-        static StaticClass(): Class;
-    }
-    
-    class SlateFontInfo {
-        constructor();
-        constructor(FontObject: Object, FontMaterial: Object, OutlineSettings: FontOutlineSettings, TypefaceFontName: string, Size: number, FontName: string, Hinting: EFontHinting);
-        FontObject: Object;
-        FontMaterial: Object;
-        OutlineSettings: FontOutlineSettings;
-        TypefaceFontName: string;
-        Size: number;
-        FontName: string;
-        Hinting: EFontHinting;
-        static StaticClass(): Class;
-    }
-    
-    class ScrollBarStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(HorizontalBackgroundImage: SlateBrush, VerticalBackgroundImage: SlateBrush, VerticalTopSlotImage: SlateBrush, HorizontalTopSlotImage: SlateBrush, VerticalBottomSlotImage: SlateBrush, HorizontalBottomSlotImage: SlateBrush, NormalThumbImage: SlateBrush, HoveredThumbImage: SlateBrush, DraggedThumbImage: SlateBrush);
-        HorizontalBackgroundImage: SlateBrush;
-        VerticalBackgroundImage: SlateBrush;
-        VerticalTopSlotImage: SlateBrush;
-        HorizontalTopSlotImage: SlateBrush;
-        VerticalBottomSlotImage: SlateBrush;
-        HorizontalBottomSlotImage: SlateBrush;
-        NormalThumbImage: SlateBrush;
-        HoveredThumbImage: SlateBrush;
-        DraggedThumbImage: SlateBrush;
-        static StaticClass(): Class;
-    }
-    
-    class EditableTextBoxStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(BackgroundImageNormal: SlateBrush, BackgroundImageHovered: SlateBrush, BackgroundImageFocused: SlateBrush, BackgroundImageReadOnly: SlateBrush, Padding: Margin, Font: SlateFontInfo, ForegroundColor: SlateColor, BackgroundColor: SlateColor, ReadOnlyForegroundColor: SlateColor, HScrollBarPadding: Margin, VScrollBarPadding: Margin, ScrollBarStyle: ScrollBarStyle);
-        BackgroundImageNormal: SlateBrush;
-        BackgroundImageHovered: SlateBrush;
-        BackgroundImageFocused: SlateBrush;
-        BackgroundImageReadOnly: SlateBrush;
-        Padding: Margin;
-        Font: SlateFontInfo;
-        ForegroundColor: SlateColor;
-        BackgroundColor: SlateColor;
-        ReadOnlyForegroundColor: SlateColor;
-        HScrollBarPadding: Margin;
-        VScrollBarPadding: Margin;
-        ScrollBarStyle: ScrollBarStyle;
-        static StaticClass(): Class;
-    }
-    
-    class EditableTextBoxWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        EditableTextBoxStyle: EditableTextBoxStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EditableTextBoxWidgetStyle;
-        static Load(InName: string): EditableTextBoxWidgetStyle;
-    }
-    
-    class EditableTextStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(Font: SlateFontInfo, ColorAndOpacity: SlateColor, BackgroundImageSelected: SlateBrush, BackgroundImageComposing: SlateBrush, CaretImage: SlateBrush);
-        Font: SlateFontInfo;
-        ColorAndOpacity: SlateColor;
-        BackgroundImageSelected: SlateBrush;
-        BackgroundImageComposing: SlateBrush;
-        CaretImage: SlateBrush;
-        static StaticClass(): Class;
-    }
-    
-    class EditableTextWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        EditableTextStyle: EditableTextStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EditableTextWidgetStyle;
-        static Load(InName: string): EditableTextWidgetStyle;
-    }
-    
-    class ProgressBarStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(BackgroundImage: SlateBrush, FillImage: SlateBrush, MarqueeImage: SlateBrush);
-        BackgroundImage: SlateBrush;
-        FillImage: SlateBrush;
-        MarqueeImage: SlateBrush;
-        static StaticClass(): Class;
-    }
-    
-    class ProgressWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ProgressBarStyle: ProgressBarStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ProgressWidgetStyle;
-        static Load(InName: string): ProgressWidgetStyle;
-    }
-    
-    class ScrollBarWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ScrollBarStyle: ScrollBarStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ScrollBarWidgetStyle;
-        static Load(InName: string): ScrollBarWidgetStyle;
-    }
-    
-    class ScrollBoxStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(TopShadowBrush: SlateBrush, BottomShadowBrush: SlateBrush, LeftShadowBrush: SlateBrush, RightShadowBrush: SlateBrush);
-        TopShadowBrush: SlateBrush;
-        BottomShadowBrush: SlateBrush;
-        LeftShadowBrush: SlateBrush;
-        RightShadowBrush: SlateBrush;
-        static StaticClass(): Class;
-    }
-    
-    class ScrollBoxWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ScrollBoxStyle: ScrollBoxStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ScrollBoxWidgetStyle;
-        static Load(InName: string): ScrollBoxWidgetStyle;
-    }
-    
-    class SlateSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bExplicitCanvasChildZOrder: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SlateSettings;
-        static Load(InName: string): SlateSettings;
-    }
-    
-    class SpinBoxStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(BackgroundBrush: SlateBrush, HoveredBackgroundBrush: SlateBrush, ActiveFillBrush: SlateBrush, InactiveFillBrush: SlateBrush, ArrowsImage: SlateBrush, ForegroundColor: SlateColor, TextPadding: Margin);
-        BackgroundBrush: SlateBrush;
-        HoveredBackgroundBrush: SlateBrush;
-        ActiveFillBrush: SlateBrush;
-        InactiveFillBrush: SlateBrush;
-        ArrowsImage: SlateBrush;
-        ForegroundColor: SlateColor;
-        TextPadding: Margin;
-        static StaticClass(): Class;
-    }
-    
-    class SpinBoxWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        SpinBoxStyle: SpinBoxStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SpinBoxWidgetStyle;
-        static Load(InName: string): SpinBoxWidgetStyle;
-    }
-    
-    class TextBlockStyle extends SlateWidgetStyle {
-        constructor();
-        constructor(Font: SlateFontInfo, ColorAndOpacity: SlateColor, ShadowOffset: Vector2D, ShadowColorAndOpacity: LinearColor, SelectedBackgroundColor: SlateColor, HighlightColor: LinearColor, HighlightShape: SlateBrush, StrikeBrush: SlateBrush, UnderlineBrush: SlateBrush);
-        Font: SlateFontInfo;
-        ColorAndOpacity: SlateColor;
-        ShadowOffset: Vector2D;
-        ShadowColorAndOpacity: LinearColor;
-        SelectedBackgroundColor: SlateColor;
-        HighlightColor: LinearColor;
-        HighlightShape: SlateBrush;
-        StrikeBrush: SlateBrush;
-        UnderlineBrush: SlateBrush;
-        static StaticClass(): Class;
-    }
-    
-    class TextBlockWidgetStyle extends SlateWidgetStyleContainerBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TextBlockStyle: TextBlockStyle;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TextBlockWidgetStyle;
-        static Load(InName: string): TextBlockWidgetStyle;
-    }
-    
-    class ToolMenuBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenuBase;
-        static Load(InName: string): ToolMenuBase;
-    }
-    
-    enum EColorVisionDeficiency { NormalVision, Deuteranope, Protanope, Tritanope, EColorVisionDeficiency_MAX}
-    enum ELogTimes { None, UTC, SinceGStartTime, Local, ELogTimes_MAX}
-    enum EAssetEditorOpenLocation { Default, NewWindow, MainWindow, ContentBrowser, LastDockedWindowOrNewWindow, LastDockedWindowOrMainWindow, LastDockedWindowOrContentBrowser, EAssetEditorOpenLocation_MAX}
-    class EditorStyleSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bEnableHighDPIAwareness: boolean;
-        bEnableUserEditorLayoutManagement: boolean;
-        ColorVisionDeficiencyPreviewType: EColorVisionDeficiency;
-        ColorVisionDeficiencySeverity: number;
-        bColorVisionDeficiencyCorrection: boolean;
-        bColorVisionDeficiencyCorrectionPreviewWithDeficiency: boolean;
-        SelectionColor: LinearColor;
-        PressedSelectionColor: LinearColor;
-        InactiveSelectionColor: LinearColor;
-        KeyboardFocusColor: LinearColor;
-        EditorWindowBackgroundColor: LinearColor;
-        EditorMainWindowBackgroundOverride: SlateBrush;
-        EditorChildWindowBackgroundOverride: SlateBrush;
-        bResetEditorWindowBackgroundSettings: boolean;
-        bUseSmallToolBarIcons: boolean;
-        bUseGrid: boolean;
-        RegularColor: LinearColor;
-        RuleColor: LinearColor;
-        CenterColor: LinearColor;
-        GridSnapSize: number;
-        bEnableWindowAnimations: boolean;
-        bShowFriendlyNames: boolean;
-        bExpandConfigurationMenus: boolean;
-        bShowProjectMenus: boolean;
-        bShowLaunchMenus: boolean;
-        LogBackgroundColor: LinearColor;
-        LogSelectionBackgroundColor: LinearColor;
-        LogNormalColor: LinearColor;
-        LogCommandColor: LinearColor;
-        LogWarningColor: LinearColor;
-        LogErrorColor: LinearColor;
-        bShowAllAdvancedDetails: boolean;
-        bShowHiddenPropertiesWhilePlaying: boolean;
-        LogFontSize: number;
-        LogTimestampMode: ELogTimes;
-        bPromoteOutputLogWarningsDuringPIE: boolean;
-        AssetEditorOpenLocation: EAssetEditorOpenLocation;
-        bEnableColorizedEditorTabs: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EditorStyleSettings;
-        static Load(InName: string): EditorStyleSettings;
-    }
-    
-    enum EMobileCSMQuality { NoFiltering, PCF_1x1, PCF_2x2, EMobileCSMQuality_MAX}
-    class MaterialQualityOverrides {
-        constructor();
-        constructor(bDiscardQualityDuringCook: boolean, bEnableOverride: boolean, bForceFullyRough: boolean, bForceNonMetal: boolean, bForceDisableLMDirectionality: boolean, bForceLQReflections: boolean, bDisableMaterialNormalCalculation: boolean, MobileCSMQuality: EMobileCSMQuality);
-        bDiscardQualityDuringCook: boolean;
-        bEnableOverride: boolean;
-        bForceFullyRough: boolean;
-        bForceNonMetal: boolean;
-        bForceDisableLMDirectionality: boolean;
-        bForceLQReflections: boolean;
-        bDisableMaterialNormalCalculation: boolean;
-        MobileCSMQuality: EMobileCSMQuality;
-        static StaticClass(): Class;
-    }
-    
-    class ShaderPlatformQualitySettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        QualityOverrides: FixSizeArray<MaterialQualityOverrides>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ShaderPlatformQualitySettings;
-        static Load(InName: string): ShaderPlatformQualitySettings;
-    }
-    
-    class MaterialShaderQualitySettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ForwardSettingMap: TMap<string, ShaderPlatformQualitySettings>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MaterialShaderQualitySettings;
-        static Load(InName: string): MaterialShaderQualitySettings;
-    }
-    
-    class MeshDescription extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MeshDescription;
-        static Load(InName: string): MeshDescription;
-    }
-    
-    class ClothingAssetFactoryBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ClothingAssetFactoryBase;
-        static Load(InName: string): ClothingAssetFactoryBase;
-    }
-    
-    class NetAnalyticsDataConfig {
-        constructor();
-        constructor(DataName: string, bEnabled: boolean);
-        DataName: string;
-        bEnabled: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class NetAnalyticsAggregatorConfig extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        NetAnalyticsData: TArray<NetAnalyticsDataConfig>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): NetAnalyticsAggregatorConfig;
-        static Load(InName: string): NetAnalyticsAggregatorConfig;
-    }
-    
-    class AssetRegistryImpl extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AssetRegistryImpl;
-        static Load(InName: string): AssetRegistryImpl;
-    }
-    
-    class AssetData {
-        constructor();
-        constructor(ObjectPath: string, PackageName: string, PackagePath: string, AssetName: string, AssetClass: string);
-        ObjectPath: string;
-        PackageName: string;
-        PackagePath: string;
-        AssetName: string;
-        AssetClass: string;
-        static StaticClass(): Class;
-    }
-    
-    class ARFilter {
-        constructor();
-        constructor(PackageNames: TArray<string>, PackagePaths: TArray<string>, ObjectPaths: TArray<string>, ClassNames: TArray<string>, RecursiveClassesExclusionSet: TSet<string>, bRecursivePaths: boolean, bRecursiveClasses: boolean, bIncludeOnlyOnDiskAssets: boolean);
-        PackageNames: TArray<string>;
-        PackagePaths: TArray<string>;
-        ObjectPaths: TArray<string>;
-        ClassNames: TArray<string>;
-        RecursiveClassesExclusionSet: TSet<string>;
-        bRecursivePaths: boolean;
-        bRecursiveClasses: boolean;
-        bIncludeOnlyOnDiskAssets: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class TagAndValue {
-        constructor();
-        constructor(Tag: string, Value: string);
-        Tag: string;
-        Value: string;
-        static StaticClass(): Class;
-    }
-    
-    class AssetRegistryDependencyOptions {
-        constructor();
-        constructor(bIncludeSoftPackageReferences: boolean, bIncludeHardPackageReferences: boolean, bIncludeSearchableNames: boolean, bIncludeSoftManagementReferences: boolean, bIncludeHardManagementReferences: boolean);
-        bIncludeSoftPackageReferences: boolean;
-        bIncludeHardPackageReferences: boolean;
-        bIncludeSearchableNames: boolean;
-        bIncludeSoftManagementReferences: boolean;
-        bIncludeHardManagementReferences: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class AssetRegistry extends Interface {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        UseFilterToExcludeAssets(AssetDataList: $Ref<TArray<AssetData>>, Filter: ARFilter): void;
-        SearchAllAssets(bSynchronousSearch: boolean): void;
-        ScanPathsSynchronous(InPaths: TArray<string>, bForceRescan?: boolean /* = false */): void;
-        ScanModifiedAssetFiles(InFilePaths: TArray<string>): void;
-        ScanFilesSynchronous(InFilePaths: TArray<string>, bForceRescan?: boolean /* = false */): void;
-        RunAssetsThroughFilter(AssetDataList: $Ref<TArray<AssetData>>, Filter: ARFilter): void;
-        PrioritizeSearchPath(PathToPrioritize: string): void;
-        K2_GetReferencers(PackageName: string, ReferenceOptions: AssetRegistryDependencyOptions, OutReferencers: $Ref<TArray<string>>): boolean;
-        K2_GetDependencies(PackageName: string, DependencyOptions: AssetRegistryDependencyOptions, OutDependencies: $Ref<TArray<string>>): boolean;
-        IsLoadingAssets(): boolean;
-        HasAssets(PackagePath: string, bRecursive?: boolean /* = false */): boolean;
-        GetSubPaths(InBasePath: string, OutPathList: $Ref<TArray<string>>, bInRecurse: boolean): void;
-        GetAssetsByPath(PackagePath: string, OutAssetData: $Ref<TArray<AssetData>>, bRecursive?: boolean /* = false */, bIncludeOnlyOnDiskAssets?: boolean /* = false */): boolean;
-        GetAssetsByPackageName(PackageName: string, OutAssetData: $Ref<TArray<AssetData>>, bIncludeOnlyOnDiskAssets?: boolean /* = false */): boolean;
-        GetAssetsByClass(ClassName: string, OutAssetData: $Ref<TArray<AssetData>>, bSearchSubClasses?: boolean /* = false */): boolean;
-        GetAssets(Filter: ARFilter, OutAssetData: $Ref<TArray<AssetData>>): boolean;
-        GetAssetByObjectPath(ObjectPath: string, bIncludeOnlyOnDiskAssets?: boolean /* = false */): AssetData;
-        GetAllCachedPaths(OutPathList: $Ref<TArray<string>>): void;
-        GetAllAssets(OutAssetData: $Ref<TArray<AssetData>>, bIncludeOnlyOnDiskAssets?: boolean /* = false */): boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AssetRegistry;
-        static Load(InName: string): AssetRegistry;
-    }
-    
-    class AssetRegistryHelpers extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static ToSoftObjectPath(InAssetData: AssetData): SoftObjectPath;
-        static SetFilterTagsAndValues(InFilter: ARFilter, InTagsAndValues: TArray<TagAndValue>): ARFilter;
-        static IsValid(InAssetData: AssetData): boolean;
-        static IsUAsset(InAssetData: AssetData): boolean;
-        static IsRedirector(InAssetData: AssetData): boolean;
-        static IsAssetLoaded(InAssetData: AssetData): boolean;
-        static GetTagValue(InAssetData: AssetData, InTagName: string, OutTagValue: $Ref<string>): boolean;
-        static GetFullName(InAssetData: AssetData): string;
-        static GetExportTextName(InAssetData: AssetData): string;
-        static GetClass(InAssetData: AssetData): Class;
-        static GetAssetRegistry(): AssetRegistry;
-        static GetAsset(InAssetData: AssetData): Object;
-        static CreateAssetData(InAsset: $Nullable<Object>, bAllowBlueprintClass?: boolean /* = false */): AssetData;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AssetRegistryHelpers;
-        static Load(InName: string): AssetRegistryHelpers;
-    }
-    
-    class AutoCompleteCommand {
-        constructor();
-        constructor(Command: string, Desc: string);
-        Command: string;
-        Desc: string;
-        static StaticClass(): Class;
-    }
-    
-    class ConsoleSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MaxScrollbackSize: number;
-        ManualAutoCompleteList: TArray<AutoCompleteCommand>;
-        AutoCompleteMapPaths: TArray<string>;
-        BackgroundOpacityPercentage: number;
-        bOrderTopToBottom: boolean;
-        bDisplayHelpInAutoComplete: boolean;
-        InputColor: Color;
-        HistoryColor: Color;
-        AutoCompleteCommandColor: Color;
-        AutoCompleteCVarColor: Color;
-        AutoCompleteFadedColor: Color;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ConsoleSettings;
-        static Load(InName: string): ConsoleSettings;
-    }
-    
-    enum ETwoPlayerSplitScreenType { Horizontal, Vertical, ETwoPlayerSplitScreenType_MAX}
-    enum EThreePlayerSplitScreenType { FavorTop, FavorBottom, Vertical, Horizontal, EThreePlayerSplitScreenType_MAX}
-    enum EFourPlayerSplitScreenType { Grid, Vertical, Horizontal, EFourPlayerSplitScreenType_MAX}
-    class GameModeName {
-        constructor();
-        constructor(Name: string, GameMode: SoftClassPath);
-        Name: string;
-        GameMode: SoftClassPath;
-        static StaticClass(): Class;
-    }
-    
-    class GameMapsSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        EditorStartupMap: SoftObjectPath;
-        LocalMapOptions: string;
-        TransitionMap: SoftObjectPath;
-        bUseSplitscreen: boolean;
-        TwoPlayerSplitscreenLayout: ETwoPlayerSplitScreenType;
-        ThreePlayerSplitscreenLayout: EThreePlayerSplitScreenType;
-        FourPlayerSplitscreenLayout: EFourPlayerSplitScreenType;
-        bOffsetPlayerGamepadIds: boolean;
-        GameInstanceClass: SoftClassPath;
-        GameDefaultMap: SoftObjectPath;
-        ServerDefaultMap: SoftObjectPath;
-        GlobalDefaultGameMode: SoftClassPath;
-        GlobalDefaultServerGameMode: SoftClassPath;
-        GameModeMapPrefixes: TArray<GameModeName>;
-        GameModeClassAliases: TArray<GameModeName>;
-        SetSkipAssigningGamepadToPlayer1(bSkipFirstPlayer?: boolean /* = true */): void;
-        GetSkipAssigningGamepadToPlayer1(): boolean;
-        static GetGameMapsSettings(): GameMapsSettings;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameMapsSettings;
-        static Load(InName: string): GameMapsSettings;
-    }
-    
-    class GameNetworkManagerSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MinDynamicBandwidth: number;
-        MaxDynamicBandwidth: number;
-        TotalNetBandwidth: number;
-        BadPingThreshold: number;
-        bIsStandbyCheckingEnabled: boolean;
-        StandbyRxCheatTime: number;
-        StandbyTxCheatTime: number;
-        PercentMissingForRxStandby: number;
-        PercentMissingForTxStandby: number;
-        PercentForBadPing: number;
-        JoinInProgressStandbyWaitTime: number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameNetworkManagerSettings;
-        static Load(InName: string): GameNetworkManagerSettings;
-    }
-    
-    class GameSessionSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MaxSpectators: number;
-        MaxPlayers: number;
-        bRequiresPushToTalk: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameSessionSettings;
-        static Load(InName: string): GameSessionSettings;
-    }
-    
-    class GeneralEngineSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GeneralEngineSettings;
-        static Load(InName: string): GeneralEngineSettings;
-    }
-    
-    class GeneralProjectSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CompanyName: string;
-        CompanyDistinguishedName: string;
-        CopyrightNotice: string;
-        Description: string;
-        Homepage: string;
-        LicensingTerms: string;
-        PrivacyPolicy: string;
-        ProjectID: Guid;
-        ProjectName: string;
-        ProjectVersion: string;
-        SupportContact: string;
-        ProjectDisplayedTitle: string;
-        ProjectDebugTitleInfo: string;
-        bShouldWindowPreserveAspectRatio: boolean;
-        bUseBorderlessWindow: boolean;
-        bStartInVR: boolean;
-        bStartInAR: boolean;
-        bSupportAR: boolean;
-        bAllowWindowResize: boolean;
-        bAllowClose: boolean;
-        bAllowMaximize: boolean;
-        bAllowMinimize: boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GeneralProjectSettings;
-        static Load(InName: string): GeneralProjectSettings;
-    }
-    
-    class HudSettings extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bShowHUD: boolean;
-        DebugDisplay: TArray<string>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): HudSettings;
-        static Load(InName: string): HudSettings;
-    }
-    
-    class HandlerComponentFactory extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): HandlerComponentFactory;
-        static Load(InName: string): HandlerComponentFactory;
-    }
-    
-    class PacketHandlerProfileConfig extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Components: TArray<string>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PacketHandlerProfileConfig;
-        static Load(InName: string): PacketHandlerProfileConfig;
-    }
-    
-    class ClothConfigBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ClothConfigBase;
-        static Load(InName: string): ClothConfigBase;
-    }
-    
-    class ClothingSimulationFactory extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ClothingSimulationFactory;
-        static Load(InName: string): ClothingSimulationFactory;
-    }
-    
-    class ClothVertBoneData {
-        constructor();
-        constructor(NumInfluences: number, BoneIndices: FixSizeArray<number>, BoneWeights: FixSizeArray<number>);
-        NumInfluences: number;
-        BoneIndices: FixSizeArray<number>;
-        BoneWeights: FixSizeArray<number>;
-        static StaticClass(): Class;
-    }
-    
-    class ClothPhysicalMeshDataBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Vertices: TArray<Vector>;
-        Normals: TArray<Vector>;
-        VertexColors: TArray<Color>;
-        Indices: TArray<number>;
-        InverseMasses: TArray<number>;
-        BoneData: TArray<ClothVertBoneData>;
-        NumFixedVerts: number;
-        MaxBoneWeights: number;
-        SelfCollisionIndices: TArray<number>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ClothPhysicalMeshDataBase;
-        static Load(InName: string): ClothPhysicalMeshDataBase;
-    }
-    
-    class JsonUtilitiesDummyObject extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): JsonUtilitiesDummyObject;
-        static Load(InName: string): JsonUtilitiesDummyObject;
-    }
-    
-    enum EMultiBoxType { MenuBar, ToolBar, VerticalToolBar, Menu, ButtonRow, ToolMenuBar, EMultiBoxType_MAX}
-    class ToolMenuOwner {
-        constructor();
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenuContext {
-        constructor();
-        constructor(ContextObjects: TArray<Object>);
-        ContextObjects: TArray<Object>;
-        static StaticClass(): Class;
-    }
-    
-    enum EMultiBlockType { None, ButtonRow, EditableText, Heading, MenuEntry, MenuSeparator, ToolBarButton, ToolBarComboButton, ToolBarSeparator, Widget, EMultiBlockType_MAX}
-    enum EUserInterfaceActionType { None, Button, ToggleButton, RadioButton, Check, CollapsedButton, EUserInterfaceActionType_MAX}
-    enum EToolMenuInsertType { Default, Before, After, First, EToolMenuInsertType_MAX}
-    class ToolMenuInsert {
-        constructor();
-        constructor(Name: string, Position: EToolMenuInsertType);
-        Name: string;
-        Position: EToolMenuInsertType;
-        static StaticClass(): Class;
-    }
-    
-    class ScriptSlateIcon {
-        constructor();
-        constructor(StyleSetName: string, StyleName: string, SmallStyleName: string);
-        StyleSetName: string;
-        StyleName: string;
-        SmallStyleName: string;
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenuEntryScriptDataAdvanced {
-        constructor();
-        constructor(TutorialHighlight: string, EntryType: EMultiBlockType, UserInterfaceActionType: EUserInterfaceActionType, bIsSubMenu: boolean, bOpenSubMenuOnClick: boolean, bShouldCloseWindowAfterMenuSelection: boolean, bSimpleComboBox: boolean);
-        TutorialHighlight: string;
-        EntryType: EMultiBlockType;
-        UserInterfaceActionType: EUserInterfaceActionType;
-        bIsSubMenu: boolean;
-        bOpenSubMenuOnClick: boolean;
-        bShouldCloseWindowAfterMenuSelection: boolean;
-        bSimpleComboBox: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenuEntryScriptData {
-        constructor();
-        constructor(Menu: string, Section: string, Name: string, Label: string, ToolTip: string, Icon: ScriptSlateIcon, OwnerName: string, InsertPosition: ToolMenuInsert, Advanced: ToolMenuEntryScriptDataAdvanced);
-        Menu: string;
-        Section: string;
-        Name: string;
-        Label: string;
-        ToolTip: string;
-        Icon: ScriptSlateIcon;
-        OwnerName: string;
-        InsertPosition: ToolMenuInsert;
-        Advanced: ToolMenuEntryScriptDataAdvanced;
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenuEntryScript extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Data: ToolMenuEntryScriptData;
-        RegisterMenuEntry(): void;
-        IsVisible(Context: ToolMenuContext): boolean;
-        InitEntry(OwnerName: string, Menu: string, Section: string, Name: string, Label?: string /* = "" */, ToolTip?: string /* = "" */): void;
-        GetToolTip(Context: ToolMenuContext): string;
-        GetLabel(Context: ToolMenuContext): string;
-        GetIcon(Context: ToolMenuContext): ScriptSlateIcon;
-        GetCheckState(Context: ToolMenuContext): ECheckBoxState;
-        Execute(Context: ToolMenuContext): void;
-        ConstructMenuEntry(Menu: $Nullable<ToolMenu>, SectionName: string, Context: ToolMenuContext): void;
-        CanExecute(Context: ToolMenuContext): boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenuEntryScript;
-        static Load(InName: string): ToolMenuEntryScript;
-    }
-    
-    class ToolMenuEntry {
-        constructor();
-        constructor(Name: string, Owner: ToolMenuOwner, Type: EMultiBlockType, UserInterfaceActionType: EUserInterfaceActionType, TutorialHighlightName: string, InsertPosition: ToolMenuInsert, bShouldCloseWindowAfterMenuSelection: boolean, ScriptObject: ToolMenuEntryScript);
-        Name: string;
-        Owner: ToolMenuOwner;
-        Type: EMultiBlockType;
-        UserInterfaceActionType: EUserInterfaceActionType;
-        TutorialHighlightName: string;
-        InsertPosition: ToolMenuInsert;
-        bShouldCloseWindowAfterMenuSelection: boolean;
-        ScriptObject: ToolMenuEntryScript;
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenuSectionDynamic extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ConstructSections(Menu: $Nullable<ToolMenu>, Context: ToolMenuContext): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenuSectionDynamic;
-        static Load(InName: string): ToolMenuSectionDynamic;
-    }
-    
-    class ToolMenuSection {
-        constructor();
-        constructor(Name: string, Blocks: TArray<ToolMenuEntry>, InsertPosition: ToolMenuInsert, Context: ToolMenuContext, ToolMenuSectionDynamic: ToolMenuSectionDynamic);
-        Name: string;
-        Blocks: TArray<ToolMenuEntry>;
-        InsertPosition: ToolMenuInsert;
-        Context: ToolMenuContext;
-        ToolMenuSectionDynamic: ToolMenuSectionDynamic;
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenu extends ToolMenuBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        MenuName: string;
-        MenuParent: string;
-        StyleName: string;
-        TutorialHighlightName: string;
-        MenuType: EMultiBoxType;
-        bShouldCloseWindowAfterMenuSelection: boolean;
-        bCloseSelfOnly: boolean;
-        bSearchable: boolean;
-        bToolBarIsFocusable: boolean;
-        bToolBarForceSmallIcons: boolean;
-        bPreventCustomization: boolean;
-        MenuOwner: ToolMenuOwner;
-        Context: ToolMenuContext;
-        Sections: TArray<ToolMenuSection>;
-        SubMenuParent: ToolMenu;
-        SubMenuSourceEntryName: string;
-        InitMenu(Owner: ToolMenuOwner, Name: string, Parent?: string /* = "None" */, Type?: EMultiBoxType /* = Menu */): void;
-        AddSubMenuScript(Owner: string, SectionName: string, Name: string, Label: string, ToolTip?: string /* = "" */): ToolMenu;
-        AddSectionScript(SectionName: string, Label?: string /* = "" */, InsertName?: string /* = "None" */, InsertType?: EToolMenuInsertType /* = Default */): void;
-        AddMenuEntryObject(InObject: $Nullable<ToolMenuEntryScript>): void;
-        AddMenuEntry(SectionName: string, Args: ToolMenuEntry): void;
-        AddDynamicSectionScript(SectionName: string, Object: $Nullable<ToolMenuSectionDynamic>): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenu;
-        static Load(InName: string): ToolMenu;
-    }
-    
-    class ToolMenuContextBase extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenuContextBase;
-        static Load(InName: string): ToolMenuContextBase;
-    }
-    
-    class SlateTabManagerContext extends ToolMenuContextBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SlateTabManagerContext;
-        static Load(InName: string): SlateTabManagerContext;
-    }
-    
-    enum ECustomizedToolMenuVisibility { None, Visible, Hidden, ECustomizedToolMenuVisibility_MAX}
-    class CustomizedToolMenuEntry {
-        constructor();
-        constructor(Visibility: ECustomizedToolMenuVisibility);
-        Visibility: ECustomizedToolMenuVisibility;
-        static StaticClass(): Class;
-    }
-    
-    class CustomizedToolMenuSection {
-        constructor();
-        constructor(Visibility: ECustomizedToolMenuVisibility);
-        Visibility: ECustomizedToolMenuVisibility;
-        static StaticClass(): Class;
-    }
-    
-    class CustomizedToolMenuNameArray {
-        constructor();
-        constructor(Names: TArray<string>);
-        Names: TArray<string>;
-        static StaticClass(): Class;
-    }
-    
-    class CustomizedToolMenu {
-        constructor();
-        constructor(Name: string, Entries: TMap<string, CustomizedToolMenuEntry>, Sections: TMap<string, CustomizedToolMenuSection>, EntryOrder: TMap<string, CustomizedToolMenuNameArray>, SectionOrder: TArray<string>);
-        Name: string;
-        Entries: TMap<string, CustomizedToolMenuEntry>;
-        Sections: TMap<string, CustomizedToolMenuSection>;
-        EntryOrder: TMap<string, CustomizedToolMenuNameArray>;
-        SectionOrder: TArray<string>;
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenus extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CustomizedMenus: TArray<CustomizedToolMenu>;
-        Menus: TMap<string, ToolMenu>;
-        UnregisterOwnerByName(InOwnerName: string): void;
-        SetSectionPosition(MenuName: string, SectionName: string, OtherSectionName: string, PositionType: EToolMenuInsertType): void;
-        SetSectionLabel(MenuName: string, SectionName: string, Label: string): void;
-        RemoveSection(MenuName: string, Section: string): void;
-        RemoveMenu(MenuName: string): void;
-        RemoveEntry(MenuName: string, Section: string, Name: string): void;
-        RegisterMenu(Name: string, Parent?: string /* = "None" */, Type?: EMultiBoxType /* = Menu */, bWarnIfAlreadyRegistered?: boolean /* = true */): ToolMenu;
-        RefreshMenuWidget(Name: string): boolean;
-        RefreshAllWidgets(): void;
-        IsMenuRegistered(Name: string): boolean;
-        static Get(): ToolMenus;
-        FindMenu(Name: string): ToolMenu;
-        static FindContext(InContext: ToolMenuContext, InClass: $Nullable<Class>): Object;
-        ExtendMenu(Name: string): ToolMenu;
-        static AddMenuEntryObject(MenuEntryObject: $Nullable<ToolMenuEntryScript>): boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenus;
-        static Load(InName: string): ToolMenus;
-    }
-    
-    class ToolMenuContextExtensions extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static FindByClass(Context: ToolMenuContext, InClass: $Nullable<Class>): Object;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenuContextExtensions;
-        static Load(InName: string): ToolMenuContextExtensions;
-    }
-    
-    enum EToolMenuStringCommandType { Command, Python, Custom, EToolMenuStringCommandType_MAX}
-    class ToolMenuStringCommand {
-        constructor();
-        constructor(Type: EToolMenuStringCommandType, CustomType: string, String: string);
-        Type: EToolMenuStringCommandType;
-        CustomType: string;
-        String: string;
-        static StaticClass(): Class;
-    }
-    
-    class ToolMenuEntryExtensions extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static SetToolTip(Target: $Ref<ToolMenuEntry>, ToolTip: string): void;
-        static SetStringCommand(Target: $Ref<ToolMenuEntry>, Type: EToolMenuStringCommandType, CustomType: string, String: string): void;
-        static SetLabel(Target: $Ref<ToolMenuEntry>, Label: string): void;
-        static SetIcon(Target: $Ref<ToolMenuEntry>, StyleSetName: string, StyleName?: string /* = "None" */, SmallStyleName?: string /* = "None" */): void;
-        static MakeToolMenuOwner(Name: string): ToolMenuOwner;
-        static MakeStringCommand(Type: EToolMenuStringCommandType, CustomType: string, String: string): ToolMenuStringCommand;
-        static MakeScriptSlateIcon(StyleSetName: string, StyleName: string, SmallStyleName?: string /* = "None" */): ScriptSlateIcon;
-        static InitMenuEntry(InOwner: string, InName: string, InLabel: string, InToolTip: string, CommandType: EToolMenuStringCommandType, CustomCommandType: string, CommandString: string): ToolMenuEntry;
-        static GetToolTip(Target: ToolMenuEntry): string;
-        static GetLabel(Target: ToolMenuEntry): string;
-        static BreakToolMenuOwner(InValue: ToolMenuOwner, Name: $Ref<string>): void;
-        static BreakStringCommand(InValue: ToolMenuStringCommand, Type: $Ref<EToolMenuStringCommandType>, CustomType: $Ref<string>, String: $Ref<string>): void;
-        static BreakScriptSlateIcon(InValue: ScriptSlateIcon, StyleSetName: $Ref<string>, StyleName: $Ref<string>, SmallStyleName: $Ref<string>): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenuEntryExtensions;
-        static Load(InName: string): ToolMenuEntryExtensions;
-    }
-    
-    class ToolMenuSectionExtensions extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static SetLabel(Section: $Ref<ToolMenuSection>, Label: string): void;
-        static GetLabel(Section: ToolMenuSection): string;
-        static AddEntryObject(Section: $Ref<ToolMenuSection>, InObject: $Nullable<ToolMenuEntryScript>): void;
-        static AddEntry(Section: $Ref<ToolMenuSection>, Args: ToolMenuEntry): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ToolMenuSectionExtensions;
-        static Load(InName: string): ToolMenuSectionExtensions;
-    }
-    
-    enum EPIEPreviewDeviceType { Unset, Android, IOS, TVOS, Switch, MAX}
-    class PIEPreviewDeviceSpecification extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        PreviewDeviceType: EPIEPreviewDeviceType;
-        GPUFamily: string;
-        GLVersion: string;
-        VulkanVersion: string;
-        AndroidVersion: string;
-        DeviceMake: string;
-        DeviceModel: string;
-        DeviceBuildNumber: string;
-        UsingHoudini: boolean;
-        Hardware: string;
-        Chipset: string;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PIEPreviewDeviceSpecification;
-        static Load(InName: string): PIEPreviewDeviceSpecification;
-    }
-    
-    class BlueprintFunctionLibrary extends Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): BlueprintFunctionLibrary;
-        static Load(InName: string): BlueprintFunctionLibrary;
-    }
-    
-    class GameplayTag {
-        constructor();
-        constructor(TagName: string);
-        TagName: string;
-        static StaticClass(): Class;
-    }
-    
-    class GameplayTagContainer {
-        constructor();
-        constructor(GameplayTags: TArray<GameplayTag>, ParentTags: TArray<GameplayTag>);
-        GameplayTags: TArray<GameplayTag>;
-        ParentTags: TArray<GameplayTag>;
-        static StaticClass(): Class;
-    }
-    
-    class GameplayTagQuery {
-        constructor();
-        constructor(TokenStreamVersion: number, TagDictionary: TArray<GameplayTag>, QueryTokenStream: TArray<number>, UserDescription: string, AutoDescription: string);
-        TokenStreamVersion: number;
-        TagDictionary: TArray<GameplayTag>;
-        QueryTokenStream: TArray<number>;
-        UserDescription: string;
-        AutoDescription: string;
-        static StaticClass(): Class;
-    }
-    
-    class GameplayTagAssetInterface extends Interface {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        HasMatchingGameplayTag(TagToCheck: GameplayTag): boolean;
-        HasAnyMatchingGameplayTags(TagContainer: GameplayTagContainer): boolean;
-        HasAllMatchingGameplayTags(TagContainer: GameplayTagContainer): boolean;
-        GetOwnedGameplayTags(TagContainer: $Ref<GameplayTagContainer>): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameplayTagAssetInterface;
-        static Load(InName: string): GameplayTagAssetInterface;
     }
     
     class BlueprintGameplayTagLibrary extends BlueprintFunctionLibrary {
@@ -49568,27 +49567,6 @@ declare module "ue" {
         static Load(InName: string): JSWidgetGeneratedClass;
     }
     
-    class ObjectExtension extends ExtensionMethods {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static IsValid(Object: $Nullable<Object>): boolean;
-        static GetWorld(Object: $Nullable<Object>): World;
-        static GetOuter(Object: $Nullable<Object>): Object;
-        static GetName(Object: $Nullable<Object>): string;
-        static GetClass(Object: $Nullable<Object>): Class;
-        static CreateDefaultSubobject(Object: $Nullable<Object>, SubobjectFName: string, ReturnType: $Nullable<Class>, ClassToCreateByDefault: $Nullable<Class>, bIsRequired: boolean, bAbstract: boolean, bIsTransient: boolean): Object;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ObjectExtension;
-        static Load(InName: string): ObjectExtension;
-    }
-    
-    class SceneComponentExtension extends ExtensionMethods {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static SetupAttachment(InSelf: $Nullable<SceneComponent>, InParent: $Nullable<SceneComponent>, InSocketName?: string /* = "None" */): void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SceneComponentExtension;
-        static Load(InName: string): SceneComponentExtension;
-    }
-    
     class TypeScriptBlueprint extends Blueprint {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -52507,11 +52485,11 @@ declare module "ue" {
         Save(): void;
         RemoveNotExistedMemberVariable(): void;
         RemoveNotExistedFunction(): void;
-        LoadOrCreate(InName: string, InPath: string, ParentClass: $Nullable<Class>): boolean;
+        LoadOrCreate(InName: string, InPath: string, ParentClass: $Nullable<Class>, InSetFlags: number, InClearFlags: number): boolean;
         ClearParameter(): void;
         AddParameter(InParameterName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType): void;
         AddMemberVariable(NewVarName: string, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InLFlags: number, InHFlags: number, InLifetimeCondition: number): void;
-        AddFunction(InName: string, IsVoid: boolean, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InFlags: number): void;
+        AddFunction(InName: string, IsVoid: boolean, InGraphPinType: PEGraphPinType, InPinValueType: PEGraphTerminalType, InSetFlags: number, InClearFlags: number): void;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PEBlueprintAsset;
         static Load(InName: string): PEBlueprintAsset;
