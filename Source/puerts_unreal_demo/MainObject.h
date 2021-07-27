@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "ExtensionMethods.h"
+#include "ArrayBuffer.h"
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "MainObject.generated.h"
