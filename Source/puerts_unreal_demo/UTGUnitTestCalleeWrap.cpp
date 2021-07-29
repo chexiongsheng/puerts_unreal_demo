@@ -86,7 +86,7 @@ struct AutoRegisterForUTGUnitTestCallee
         ClassDef.UStructName = "UTGUnitTestCallee";
         ClassDef.Methods = Methods;
 
-        puerts::RegisterClass(ClassDef);
+        puerts::RegisterJSClass(ClassDef);
     }
 };
 
