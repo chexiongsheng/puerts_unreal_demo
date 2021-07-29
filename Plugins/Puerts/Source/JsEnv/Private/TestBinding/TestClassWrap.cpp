@@ -1,8 +1,8 @@
 #include "TestClass.h"
 #include "Binding.hpp"
 
-UsingCppClass(BaseClass);
-UsingCppClass(TestClass);
+UsingCppType(BaseClass);
+UsingCppType(TestClass);
 
 struct AutoRegisterForTestClass
 {
