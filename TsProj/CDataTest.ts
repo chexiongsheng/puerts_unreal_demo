@@ -39,3 +39,8 @@ let r = $ref(999);
 let ret = obj.Ref(r);
 console.log("$unref:" + $unref(r) + ", ret:" + ret);
 obj.ConstRef(999);
+
+//js object
+let j:any = {p:100};
+obj.JsObjectTest1(j);
+console.log(j.q);

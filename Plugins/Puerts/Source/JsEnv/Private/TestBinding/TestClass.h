@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "JsObject.h"
 
 class BaseClass
 {
@@ -46,4 +47,6 @@ public:
 	int Ref(int32_t & a);
 
 	void ConstRef(const int32_t & a);
+
+	void JsObjectTest1(FJsObject Object);
 };

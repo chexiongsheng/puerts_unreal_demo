@@ -93,3 +93,10 @@ void TestClass::ConstRef(const int32_t & a)
 {
 	UE_LOG(LogTemp, Warning, TEXT("TestClass::ConstRef(%d)"), a);
 }
+
+void TestClass::JsObjectTest1(FJsObject Object)
+{
+	auto P = Object.Get<int>("p");
+	UE_LOG(LogTemp, Warning, TEXT("TestClass::JsObjectTest1({p:%d})"), P);
+	Object.Set<std::string>("q", "john");
+}

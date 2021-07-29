@@ -23,9 +23,10 @@ struct AutoRegisterForTestClass
             .Property("Y", MakeProperty(&TestClass::Y))
             .Function("Add", MakeFunction(&TestClass::Add))
             .Function("PrintInfo", MakeFunction(&TestClass::PrintInfo))
-            .Method("GetSelf", MakeCheckFunction(&TestClass::GetSelf))
-            .Method("Ref", MakeCheckFunction(&TestClass::Ref))
-            .Method("ConstRef", MakeCheckFunction(&TestClass::ConstRef))
+            .Method("JsObjectTest1", MakeFunction(&TestClass::JsObjectTest1))
+            .Method("GetSelf", MakeFunction(&TestClass::GetSelf))
+            .Method("Ref", MakeFunction(&TestClass::Ref))
+            .Method("ConstRef", MakeFunction(&TestClass::ConstRef))
             .Function("Overload", CombineOverloads(
                 MakeOverload(void(*)(), &TestClass::Overload),
                 MakeOverload(void(*)(int32_t), &TestClass::Overload),
