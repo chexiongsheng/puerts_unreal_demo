@@ -62,11 +62,11 @@ struct AutoRegisterFor{{type.spelling}}
             {0, 0}
         };
 {% if type.is_cdata %}
-        Def.CDataName = "{{type.spelling}}";
-        {% if type.super_type %}Def.CDataSuperName = "{{type.super_type.spelling}}";{% endif %}
+        Def.CPPTypeName = "{{type.spelling}}";
+        {% if type.super_type %}Def.CPPSuperTypeName = "{{type.super_type.spelling}}";{% endif %}
         Def.Finalize = _{{type.spelling}}Delete_;
 {% else %}
-        Def.UStructName = "{{type.spelling}}";
+        Def.UETypeName = "{{type.spelling}}";
 {% endif %}
         Def.Initialize = _{{type.spelling}}New_;
         Def.Propertys = Properties;

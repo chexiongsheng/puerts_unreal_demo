@@ -83,7 +83,7 @@ struct AutoRegisterForUTGUnitTestCallee
             { "sStrArgIntRet",  StrArgIntRet},
             { 0, 0,}
         };
-        ClassDef.UStructName = "UTGUnitTestCallee";
+        ClassDef.UETypeName = "UTGUnitTestCallee";
         ClassDef.Methods = Methods;
 
         puerts::RegisterJSClass(ClassDef);
