@@ -36,4 +36,8 @@ obj.ConstRef(999);
 let j = { p: 100 };
 obj.JsObjectTest1(j);
 console.log(j.q);
+obj.JsObjectTest2((i, str) => {
+    console.log(i, str);
+    return 1.01;
+});
 //# sourceMappingURL=CDataTest.js.map

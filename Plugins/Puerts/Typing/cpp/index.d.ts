@@ -17,6 +17,7 @@ declare module "cpp" {
         static Overload(p0: number, p1: number) :void;
         static Overload(p0: string, p1: number) :void;
         JsObjectTest1(p0: object) :void;
+        JsObjectTest2(p0: object) :void;
         GetSelf() :TestClass;
         Ref(p0: $Ref<number>) :number;
         ConstRef(p0: number) :void;

@@ -24,6 +24,7 @@ struct AutoRegisterForTestClass
             .Function("Add", MakeFunction(&TestClass::Add))
             .Function("PrintInfo", MakeFunction(&TestClass::PrintInfo))
             .Method("JsObjectTest1", MakeFunction(&TestClass::JsObjectTest1))
+            .Method("JsObjectTest2", MakeFunction(&TestClass::JsObjectTest2))
             .Method("GetSelf", MakeFunction(&TestClass::GetSelf))
             .Method("Ref", MakeFunction(&TestClass::Ref))
             .Method("ConstRef", MakeFunction(&TestClass::ConstRef))

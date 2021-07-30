@@ -49,4 +49,6 @@ public:
 	void ConstRef(const int32_t & a);
 
 	void JsObjectTest1(FJsObject Object);
+
+	void JsObjectTest2(FJsObject Object);
 };
