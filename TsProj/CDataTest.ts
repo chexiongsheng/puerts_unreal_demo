@@ -41,11 +41,18 @@ console.log("$unref:" + $unref(r) + ", ret:" + ret);
 obj.ConstRef(999);
 
 //js object
+let obj2  = new cpp.AdvanceTestClass(100);
+
 let j:any = {p:100};
-obj.JsObjectTest1(j);
+obj2.JsObjectTest(j);
 console.log(j.q);
 
-obj.JsObjectTest2((i, str) => {
+obj2.CallJsObjectTest((i, str) => {
     console.log(i, str);
     return 1.01;
+})
+
+obj2.StdFunctionTest((x:number, y:number) => {
+    console.log('x=' + x + ",y=" + y);
+    return x + y;
 })

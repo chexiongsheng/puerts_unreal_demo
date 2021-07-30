@@ -93,17 +93,3 @@ void TestClass::ConstRef(const int32_t & a)
 {
 	UE_LOG(LogTemp, Warning, TEXT("TestClass::ConstRef(%d)"), a);
 }
-
-void TestClass::JsObjectTest1(FJsObject Object)
-{
-	auto P = Object.Get<int>("p");
-	UE_LOG(LogTemp, Warning, TEXT("TestClass::JsObjectTest1({p:%d})"), P);
-	Object.Set<std::string>("q", "john");
-}
-
-void TestClass::JsObjectTest2(FJsObject Object)
-{
-	//Object.Action(1024, "che");
-	auto Ret = Object.Func<float>(1024, "che");
-	UE_LOG(LogTemp, Warning, TEXT("TestClass::JsObjectTest2 Callback Ret %f"), Ret);
-}

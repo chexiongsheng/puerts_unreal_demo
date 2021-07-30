@@ -1,8 +1,10 @@
 #include "TestClass.h"
 #include "Binding.hpp"
+#include "AdvanceTestClass.h"
 
 UsingCppType(BaseClass);
 UsingCppType(TestClass);
+UsingCppType(AdvanceTestClass);
 
 struct AutoRegisterForTestClass
 {
@@ -23,8 +25,6 @@ struct AutoRegisterForTestClass
             .Property("Y", MakeProperty(&TestClass::Y))
             .Function("Add", MakeFunction(&TestClass::Add))
             .Function("PrintInfo", MakeFunction(&TestClass::PrintInfo))
-            .Method("JsObjectTest1", MakeFunction(&TestClass::JsObjectTest1))
-            .Method("JsObjectTest2", MakeFunction(&TestClass::JsObjectTest2))
             .Method("GetSelf", MakeFunction(&TestClass::GetSelf))
             .Method("Ref", MakeFunction(&TestClass::Ref))
             .Method("ConstRef", MakeFunction(&TestClass::ConstRef))
@@ -40,6 +40,13 @@ struct AutoRegisterForTestClass
                 MakeOverload(uint32_t(TestClass::*)(uint32_t), &TestClass::OverloadMethod),
                 MakeOverload(int64_t(TestClass::*)(int64_t), &TestClass::OverloadMethod)
                 ))
+            .Register();
+
+        puerts::DefineClass<AdvanceTestClass>()
+            .Constructor<int>() //if only one Constructor
+            .Method("JsObjectTest", MakeFunction(&AdvanceTestClass::JsObjectTest))
+            .Method("CallJsObjectTest", MakeFunction(&AdvanceTestClass::CallJsObjectTest))
+            .Method("StdFunctionTest", MakeFunction(&AdvanceTestClass::StdFunctionTest))
             .Register();
     }
 };

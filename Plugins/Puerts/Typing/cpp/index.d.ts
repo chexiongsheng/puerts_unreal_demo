@@ -16,14 +16,19 @@ declare module "cpp" {
         static Overload(p0: number) :void;
         static Overload(p0: number, p1: number) :void;
         static Overload(p0: string, p1: number) :void;
-        JsObjectTest1(p0: object) :void;
-        JsObjectTest2(p0: object) :void;
         GetSelf() :TestClass;
         Ref(p0: $Ref<number>) :number;
         ConstRef(p0: number) :void;
         OverloadMethod() :number;
         OverloadMethod(p0: number) :number;
         OverloadMethod(p0: bigint) :bigint;
+    }
+
+    class AdvanceTestClass {
+        constructor(p0: number);
+        JsObjectTest(p0: object) :void;
+        CallJsObjectTest(p0: object) :void;
+        StdFunctionTest(p0: Function) :void;
     }
 
 }
