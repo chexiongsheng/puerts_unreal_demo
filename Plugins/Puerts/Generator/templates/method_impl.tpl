@@ -18,7 +18,7 @@ static void {{type.spelling}}{{method.method_key}}(const v8::FunctionCallbackInf
 
             {#- 调用对应函数，接收返回值 #}
             {%- if not overload.is_static%}
-            auto Self = puerts::DataTransfer::GetPoninterFast<{{type.spelling}}>(Info.Holder());
+            auto Self = puerts::DataTransfer::GetPointerFast<{{type.spelling}}>(Info.Holder());
             if (!Self)
             {
                 puerts::DataTransfer::ThrowException(Isolate, "[{{type.spelling}}::{{method.method_key}}] Attempt to access a NULL self pointer");

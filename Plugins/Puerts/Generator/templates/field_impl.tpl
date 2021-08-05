@@ -4,7 +4,7 @@ static void _{{type.spelling}}{{field.spelling}}Get_(v8::Local<v8::Name> Propert
 {
     {{ macros.gen_scope() }}
 
-    auto Self = puerts::DataTransfer::GetPoninterFast<{{type.spelling}}>(Info.This());
+    auto Self = puerts::DataTransfer::GetPointerFast<{{type.spelling}}>(Info.This());
 
     auto V8Result = 
     {%- if field.is_object -%}
@@ -44,13 +44,13 @@ static void _{{type.spelling}}{{field.spelling}}Set_(v8::Local<v8::Name> Propert
 {
     {{ macros.gen_scope() }}
 
-    auto Self = puerts::DataTransfer::GetPoninterFast<{{type.spelling}}>(Info.This());
+    auto Self = puerts::DataTransfer::GetPointerFast<{{type.spelling}}>(Info.This());
 
     Self->{{field.spelling}} =
     {%- if field.is_object -%}
-    *puerts::DataTransfer::GetPoninterFast<{{field.variable_decl_type}}>(Value->ToObject(Context).ToLocalChecked());
+    *puerts::DataTransfer::GetPointerFast<{{field.variable_decl_type}}>(Value->ToObject(Context).ToLocalChecked());
     {%- elif field.is_pointer -%}
-    puerts::DataTransfer::GetPoninterFast<{{field.pointee_type}}>(Value->ToObject(Context).ToLocalChecked());
+    puerts::DataTransfer::GetPointerFast<{{field.pointee_type}}>(Value->ToObject(Context).ToLocalChecked());
     {%- elif field.v8_type == "String" -%}
         {%- if field.variable_decl_type == "FText"-%}
         FText::FromString(UTF8_TO_TCHAR(*(v8::String::Utf8Value(Isolate, Value))));

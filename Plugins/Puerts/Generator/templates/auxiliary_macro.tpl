@@ -50,7 +50,7 @@
                 指针类型parameter，variable_decl_type自带星号 #}
             {{ "const " if parameter.is_const }}{{ parameter.variable_decl_type }}{{- "*" if parameter.is_object }} Arg{{loop.index-1}} = {%if parameter.is_enum%}{{parameter.variable_decl_type}}({%endif%}
         {%- if parameter.is_pointer -%}
-            puerts::DataTransfer::GetPoninterFast<{{parameter.pointee_type}}>({{ get_v8_value(Info, loop.index-1, parameter.out) }}->ToObject(Context).ToLocalChecked())
+            puerts::DataTransfer::GetPointerFast<{{parameter.pointee_type}}>({{ get_v8_value(Info, loop.index-1, parameter.out) }}->ToObject(Context).ToLocalChecked())
         {%- elif parameter.is_primitive_type or parameter.is_enum -%}
             {%- if parameter.v8_type == "String" -%}
                 {%- if parameter.variable_decl_type == "FText"-%}
@@ -66,7 +66,7 @@
             {{ get_v8_value(Info, loop.index-1, parameter.out) }}->{{parameter.v8_type_cast_method}}(Context).ToLocalChecked()->Value()
             {%- endif -%}
         {%- elif parameter.is_object -%}
-            puerts::DataTransfer::GetPoninterFast<{{parameter.variable_decl_type}}>({{ get_v8_value(Info, loop.index-1, parameter.out) }}->ToObject(Context).ToLocalChecked())
+            puerts::DataTransfer::GetPointerFast<{{parameter.variable_decl_type}}>({{ get_v8_value(Info, loop.index-1, parameter.out) }}->ToObject(Context).ToLocalChecked())
         {%- endif -%}
             {%-if parameter.is_enum%}){%endif-%}
             ;
