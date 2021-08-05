@@ -3,14 +3,9 @@
 
 #include "JSClassRegister.h"
 #include "CoreMinimal.h"
-#include "TGUnitTestCallee.h"
 
-template<typename T>
-FORCEINLINE static T * GetPoninterFast(v8::Local<v8::Object> Object, int Index = 0)
-{
-    return Object->InternalFieldCount() > Index ?
-        reinterpret_cast<T*>(Object->GetAlignedPointerFromInternalField(Index)) : nullptr;
-}
+#include "DataTransfer.h"
+#include "TGUnitTestCallee.h"
 
 static void NoArgNoRet(const v8::FunctionCallbackInfo<v8::Value>& Info)
 {
@@ -20,7 +15,7 @@ static void NoArgNoRet(const v8::FunctionCallbackInfo<v8::Value>& Info)
     v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
     v8::Context::Scope ContextScope(Context);
 
-    auto Self = GetPoninterFast<UTGUnitTestCallee>(Info.Holder());
+    auto Self = puerts::DataTransfer::GetPointerFast<UTGUnitTestCallee>(Info.Holder());
     Self->NoArgNoRet();
 }
 
@@ -32,7 +27,7 @@ static void RetInt(const v8::FunctionCallbackInfo<v8::Value>& Info)
     v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
     v8::Context::Scope ContextScope(Context);
 
-    auto Self = GetPoninterFast<UTGUnitTestCallee>(Info.Holder());
+    auto Self = puerts::DataTransfer::GetPointerFast<UTGUnitTestCallee>(Info.Holder());
     auto Res = Self->RetInt();
     Info.GetReturnValue().Set(Res);
 }
@@ -45,7 +40,7 @@ static void IntArgIntRet(const v8::FunctionCallbackInfo<v8::Value>& Info)
     v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
     v8::Context::Scope ContextScope(Context);
 
-    auto Self = GetPoninterFast<UTGUnitTestCallee>(Info.Holder());
+    auto Self = puerts::DataTransfer::GetPointerFast<UTGUnitTestCallee>(Info.Holder());
     auto Arg1 = Info[0]->Int32Value(Context).ToChecked();
 
     auto Res = Self->IntArgIntRet(Arg1);
@@ -61,7 +56,7 @@ static void StrArgIntRet(const v8::FunctionCallbackInfo<v8::Value>& Info)
     v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
     v8::Context::Scope ContextScope(Context);
 
-    auto Self = GetPoninterFast<UTGUnitTestCallee>(Info.Holder());
+    auto Self = puerts::DataTransfer::GetPointerFast<UTGUnitTestCallee>(Info.Holder());
     //auto Arg1 = UTF8_TO_TCHAR(*(v8::String::Utf8Value(Isolate, Info[0])));
 
     auto Arg1 = *(v8::String::Value(Isolate, Info[0]));
