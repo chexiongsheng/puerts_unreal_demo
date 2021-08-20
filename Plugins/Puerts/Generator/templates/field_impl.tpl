@@ -1,6 +1,6 @@
 {%- import "auxiliary_macro.tpl" as macros -%}
 
-static void _{{type.spelling}}{{field.spelling}}Get_(v8::Local<v8::Name> Property, const v8::PropertyCallbackInfo<v8::Value>& Info)
+static void _{{type.spelling}}{{field.spelling}}Get_(const v8::FunctionCallbackInfo<v8::Value>& Info)
 {
     {{ macros.gen_scope() }}
 
@@ -40,11 +40,12 @@ static void _{{type.spelling}}{{field.spelling}}Get_(v8::Local<v8::Name> Propert
 }
 
 {%- if not field.is_const %}
-static void _{{type.spelling}}{{field.spelling}}Set_(v8::Local<v8::Name> Property, v8::Local<v8::Value> Value, const v8::PropertyCallbackInfo<void>& Info)
+static void _{{type.spelling}}{{field.spelling}}Set_(const v8::FunctionCallbackInfo<v8::Value>& Info)
 {
     {{ macros.gen_scope() }}
 
     auto Self = puerts::DataTransfer::GetPointerFast<{{type.spelling}}>(Info.This());
+    auto Value = Info[0];
 
     Self->{{field.spelling}} =
     {%- if field.is_object -%}

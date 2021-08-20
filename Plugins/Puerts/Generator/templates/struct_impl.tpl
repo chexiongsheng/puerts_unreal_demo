@@ -69,11 +69,11 @@ struct AutoRegisterFor{{type.spelling}}
         Def.UETypeName = "{{type.spelling}}";
 {% endif %}
         Def.Initialize = _{{type.spelling}}New_;
-        Def.Propertys = Properties;
+        Def.Properties = Properties;
         Def.Methods = Methods;
         Def.Functions = Functions;
 
-        puerts::RegisterClass(Def);
+        puerts::RegisterJSClass(Def);
         
     }
 };
