@@ -4,4 +4,4 @@ if (
 {%- for type in types%}
 {{"|| " if not loop.first}}SName == "{{type}}"
 {%- endfor -%}
-    ) return;
+    ) {return;};
