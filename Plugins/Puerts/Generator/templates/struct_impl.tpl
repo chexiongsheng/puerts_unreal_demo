@@ -64,11 +64,11 @@ struct AutoRegisterFor{{type.spelling}}
 {% if type.is_cdata %}
         Def.CPPTypeName = "{{type.spelling}}";
         {% if type.super_type %}Def.CPPSuperTypeName = "{{type.super_type.spelling}}";{% endif %}
-        Def.Finalize = _{{type.spelling}}Delete_;
 {% else %}
         Def.UETypeName = "{{type.spelling}}";
 {% endif %}
         Def.Initialize = _{{type.spelling}}New_;
+        Def.Finalize = _{{type.spelling}}Delete_;
         Def.Properties = Properties;
         Def.Methods = Methods;
         Def.Functions = Functions;

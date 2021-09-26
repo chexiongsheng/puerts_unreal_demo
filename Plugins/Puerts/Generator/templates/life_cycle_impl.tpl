@@ -35,11 +35,10 @@ static void* _{{type.spelling}}New_(const v8::FunctionCallbackInfo<v8::Value>& I
     return Obj;
     {%- endif %}
 }
-{% if type.is_cdata %}
+
 static void _{{type.spelling}}Delete_(void *Ptr)
 {
     {{type.spelling}} *Self = static_cast<{{type.spelling}}*>(Ptr);
     // UE_LOG(LogTemp, Warning, TEXT("_{{type.spelling}}Delete_:%p"), Self);
     delete Self;
 }
-{% endif %}
