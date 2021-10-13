@@ -9,7 +9,9 @@
             "request": "attach",
             "name": "Launch",
             "protocol": "inspector",
-            "port": 8080
+            "port": 8080,
+            "sourceMaps": true,
+            "remoteRoot": "${workspaceRoot}Content/JavaScript"
         }
     ]
 }
