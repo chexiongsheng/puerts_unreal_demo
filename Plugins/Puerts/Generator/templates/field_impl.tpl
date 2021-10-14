@@ -5,6 +5,11 @@ static void _{{type.spelling}}{{field.spelling}}Get_(const v8::FunctionCallbackI
     {{ macros.gen_scope() }}
 
     auto Self = puerts::DataTransfer::GetPointerFast<{{type.spelling}}>(Info.Holder());
+    
+    if (!Self) {
+        puerts::DataTransfer::ThrowException(Isolate, "[{{type.spelling}}::{{field.spelling}}] Attempt to access a NULL self pointer");
+        return;
+    }
 
     auto V8Result = 
     {%- if field.is_object -%}
@@ -45,6 +50,10 @@ static void _{{type.spelling}}{{field.spelling}}Set_(const v8::FunctionCallbackI
     {{ macros.gen_scope() }}
 
     auto Self = puerts::DataTransfer::GetPointerFast<{{type.spelling}}>(Info.Holder());
+    if (!Self) {
+        puerts::DataTransfer::ThrowException(Isolate, "[{{type.spelling}}::{{field.spelling}}] Attempt to access a NULL self pointer");
+        return;
+    }
     auto Value = Info[0];
 
     Self->{{field.spelling}} =
