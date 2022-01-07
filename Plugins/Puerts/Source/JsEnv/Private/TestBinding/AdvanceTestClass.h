@@ -6,11 +6,11 @@
 class AdvanceTestClass
 {
 public:
-	AdvanceTestClass(int A);
-	
-	void JsObjectTest(FJsObject Object);
+    AdvanceTestClass(int A);
 
-	void CallJsObjectTest(FJsObject Object);
+    void JsObjectTest(FJsObject Object);
 
-	void StdFunctionTest(std::function<int(int, int)> Func);
+    void CallJsObjectTest(FJsObject Object);
+
+    void StdFunctionTest(std::function<int(int, int)> Func);
 };
