@@ -311,7 +311,8 @@ const FString& FTypeScriptDeclarationGenerator::GetNamespace(UObject* Obj)
 FString FTypeScriptDeclarationGenerator::GetNameWithNamespace(UObject* Obj)
 {
 #if WITH_BP_NAMESPACE
-    if (!Obj->IsNative()) return GetNamespace(Obj) + TEXT(".") + SafeName(Obj->GetName());
+    if (!Obj->IsNative())
+        return GetNamespace(Obj) + TEXT(".") + SafeName(Obj->GetName());
 #endif
     return SafeName(Obj->GetName());
 }
@@ -810,7 +811,7 @@ void FTypeScriptDeclarationGenerator::GenClass(UClass* Class)
     StringBuffer << "}\n\n";
 
     NamespaceBegin(Class);
-    
+
     Output << StringBuffer;
 
     NamespaceEnd(Class);
@@ -878,7 +879,7 @@ void FTypeScriptDeclarationGenerator::GenEnum(UEnum* Enum)
     StringBuffer << "}\n";
 
     NamespaceBegin(Enum);
-    
+
     Output << StringBuffer;
 
     NamespaceEnd(Enum);
@@ -972,9 +973,9 @@ void FTypeScriptDeclarationGenerator::GenStruct(UStruct* Struct)
     StringBuffer << "}\n\n";
 
     NamespaceBegin(Struct);
-    
+
     Output << StringBuffer;
-    
+
     NamespaceEnd(Struct);
 }
 
