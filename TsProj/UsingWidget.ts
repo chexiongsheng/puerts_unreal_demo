@@ -7,7 +7,7 @@ let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld() as UE
 
 let widgetClass = UE.Class.Load("/Game/StarterContent/TestWidgetBlueprint.TestWidgetBlueprint_C");
 
-let widget = UE.UMGManager.CreateWidget(world, widgetClass) as UE.TestWidgetBlueprint_C;
+let widget = UE.UMGManager.CreateWidget(world, widgetClass) as UE.Game.StarterContent.TestWidgetBlueprint.TestWidgetBlueprint_C;
 
 widget.AddToViewport(0);
 

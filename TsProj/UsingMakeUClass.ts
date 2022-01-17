@@ -38,7 +38,7 @@ world.SpawnActor(cls, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined
 
 //JS继承一个蓝图类
 //!！注意：blueprint<xxx>会导致这个BP类常驻内存
-const TestBlueprint = blueprint<typeof UE.TestBlueprint_C>('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
+const TestBlueprint = blueprint<typeof UE.Game.StarterContent.TestBlueprint.TestBlueprint_C>('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
 class MyBPActor extends TestBlueprint {
     //覆盖蓝图提供的方法，此时无论是蓝图在BeginPlay的调用，以及在ts侧的调用，都会用这个新的实现
     Foo(P1: boolean, P2: number, P3: number): void {
@@ -46,5 +46,5 @@ class MyBPActor extends TestBlueprint {
     }
 }
 let clsBP = makeUClass(MyBPActor);
-let bpActor2 =  world.SpawnActor(clsBP, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.TestBlueprint_C;
+let bpActor2 =  world.SpawnActor(clsBP, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
 bpActor2.Foo(false, 8000, 9000);
