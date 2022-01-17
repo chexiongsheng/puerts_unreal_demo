@@ -1,5 +1,13 @@
 declare module "cpp" {
+    import * as UE from "ue"
     import {$Ref, $Nullable} from "puerts"
+
+    class AdvanceTestClass {
+        constructor(p0: number);
+        JsObjectTest(p0: object) :void;
+        CallJsObjectTest(p0: object) :void;
+        StdFunctionTest(p0: Function) :void;
+    }
 
     class BaseClass {
         Foo(p0: number) :void;
@@ -22,13 +30,6 @@ declare module "cpp" {
         OverloadMethod() :number;
         OverloadMethod(p0: number) :number;
         OverloadMethod(p0: bigint) :bigint;
-    }
-
-    class AdvanceTestClass {
-        constructor(p0: number);
-        JsObjectTest(p0: object) :void;
-        CallJsObjectTest(p0: object) :void;
-        StdFunctionTest(p0: Function) :void;
     }
 
 }
