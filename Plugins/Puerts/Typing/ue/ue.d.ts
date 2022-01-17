@@ -38094,9 +38094,9 @@ declare module "ue" {
         MySet: TSet<string>;
         MyMap: TMap<string, number>;
         MyString: string;
-        ArrayBuffer: UE.ArrayBuffer;
+        ArrayBuffer: ArrayBuffer;
         Add(a: number, b: number) : number;
-        ArrayBufferTest(Ab: UE.ArrayBuffer) : UE.ArrayBuffer;
+        ArrayBufferTest(Ab: ArrayBuffer) : ArrayBuffer;
         Bar(V: UE.Vector) : string;
         Bar2(V: $Ref<UE.Vector>) : string;
         Bar3(V: $Ref<UE.Vector>) : UE.Vector;
