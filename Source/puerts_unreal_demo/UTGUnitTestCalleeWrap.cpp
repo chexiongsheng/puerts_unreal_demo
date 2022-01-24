@@ -6,6 +6,8 @@
 
 #include "DataTransfer.h"
 #include "TGUnitTestCallee.h"
+#include "Binding.hpp"
+#include "UEDataBinding.hpp"
 
 static void NoArgNoRet(const v8::FunctionCallbackInfo<v8::Value>& Info)
 {
@@ -66,11 +68,39 @@ static void StrArgIntRet(const v8::FunctionCallbackInfo<v8::Value>& Info)
     Info.GetReturnValue().Set(Res);
 }
 
+static void VPGet(const v8::FunctionCallbackInfo<v8::Value>& Info)
+{
+    v8::Isolate* Isolate = Info.GetIsolate();
+    v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
+
+    auto Self = puerts::DataTransfer::GetPointerFast<UTGUnitTestCallee>(Info.Holder());
+    
+    auto Res = puerts::DataTransfer::FindOrAddStruct<FVector>(Isolate, Context, &Self->VP, true);
+
+    Info.GetReturnValue().Set(Res);
+}
+
+static void VPSet(const v8::FunctionCallbackInfo<v8::Value>& Info)
+{
+    v8::Isolate* Isolate = Info.GetIsolate();
+    v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
+
+    auto Self = puerts::DataTransfer::GetPointerFast<UTGUnitTestCallee>(Info.Holder());
+
+    auto Value = ::puerts::DataTransfer::GetPointerFast<FVector>(Info[0].As<v8::Object>());
+
+    Self->VP = *Value;
+}
+
+
+UsingUClass(UTGUnitTestCallee);
+UsingUStruct(FVector);
+
 struct AutoRegisterForUTGUnitTestCallee
 {
     AutoRegisterForUTGUnitTestCallee()
     {
-        puerts::JSClassDefinition ClassDef = JSClassEmptyDefinition;
+        /*puerts::JSClassDefinition ClassDef = JSClassEmptyDefinition;
         static puerts::JSFunctionInfo Methods[] = {
             { "sNoArgNoRet", NoArgNoRet}, //为了便于在PerfTest.ts做对比测试，加了s前缀，正常情况下直接用原函数名即可
             { "sRetInt",  RetInt},
@@ -81,7 +111,15 @@ struct AutoRegisterForUTGUnitTestCallee
         ClassDef.UETypeName = "UTGUnitTestCallee";
         ClassDef.Methods = Methods;
 
-        puerts::RegisterJSClass(ClassDef);
+        puerts::RegisterJSClass(ClassDef);*/
+        puerts::DefineClass<UTGUnitTestCallee>()
+            .Method("sNoArgNoRet", MakeFunction(&UTGUnitTestCallee::NoArgNoRet))
+            .Method("sRetInt", MakeFunction(&UTGUnitTestCallee::RetInt))
+            .Method("sIntArgIntRet", MakeFunction(&UTGUnitTestCallee::IntArgIntRet))
+            .Method("sStrArgIntRet", MakeFunction(&UTGUnitTestCallee::StrArgIntRet))
+            .Property("sVP", MakeProperty(&UTGUnitTestCallee::VP))
+            //.Property("sVP", &VPGet, &VPSet)
+            .Register();
     }
 };
 

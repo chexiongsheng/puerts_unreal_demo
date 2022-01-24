@@ -26,4 +26,7 @@ public:
 
     UFUNCTION(BlueprintCallable, Category = "TGameJs|TestCase")
     int StrArgIntRet(FString Str);
+
+    UPROPERTY()
+    FVector VP;
 };
