@@ -127,12 +127,12 @@ console.log(actor.K2_GetActorLocation().ToString());
 
 //蓝图加载
 let bpClass = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C')
-let bpActor = world.SpawnActor(bpClass, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.TestBlueprint_C;
+let bpActor = world.SpawnActor(bpClass, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
 bpActor.Foo(false, 8000, 9000);
 
 //蓝图结构体加载
 let TestStruct = UE.UserDefinedStruct.Load("UserDefinedStruct'/Game/StarterContent/TestStruct.TestStruct'");
-let testStruct = UE.NewStruct(TestStruct) as UE.TestStruct;
+let testStruct = UE.NewStruct(TestStruct) as UE.Game.StarterContent.TestStruct.TestStruct;
 testStruct.age = 10;
 testStruct.speed = 5;
 bpActor.Bar(testStruct);

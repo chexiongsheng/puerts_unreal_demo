@@ -1,5 +1,6 @@
 import * as UE from 'ue'
 import {rpc, edit_on_instance} from 'ue'
+import {$InRef, $unref} from 'puerts'
 
 console.warn("Script init of TsTestActor ");
 
@@ -55,8 +56,8 @@ class TsTestActor extends UE.Actor {
         return this.arr;
     }
 
-    SetArray(p: UE.TArray<UE.Object>): void {
-        this.arr = p;
+    SetArray(p: $InRef<UE.TArray<UE.Object>>): void {
+        this.arr = $unref(p);
     }
 
     GetMap() :UE.TMap<string, number> {

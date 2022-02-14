@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const UE = require("ue");
 const ue_1 = require("ue");
+const puerts_1 = require("puerts");
 console.warn("Script init of TsTestActor ");
 class TsTestActor extends UE.Actor {
     //注意，继承UE类的js类，构造函数必须大写开头
@@ -33,7 +34,7 @@ class TsTestActor extends UE.Actor {
         return this.arr;
     }
     SetArray(p) {
-        this.arr = p;
+        this.arr = puerts_1.$unref(p);
     }
     GetMap() {
         return this.map;
