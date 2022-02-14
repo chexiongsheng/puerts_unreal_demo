@@ -51647,9 +51647,14 @@ declare module "ue" {
     
     class TGUnitTestCallee extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        VP: UE.Vector;
         IntArgIntRet(Arg: number) : number;
         NoArgNoRet() : void;
         RetInt() : number;
+        sIntArgIntRet(p0: number) : number;
+        sNoArgNoRet() : void;
+        sRetInt() : number;
+        sStrArgIntRet(p0: string) : number;
         StrArgIntRet(Str: string) : number;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TGUnitTestCallee;
