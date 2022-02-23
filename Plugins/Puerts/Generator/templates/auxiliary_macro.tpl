@@ -39,7 +39,6 @@
 
 {%- macro gen_scope() -%}
     v8::Isolate* Isolate = Info.GetIsolate();
-    v8::HandleScope HandleScope(Isolate);
     v8::Local<v8::Context> Context = Isolate->GetCurrentContext();
 
 {%- endmacro -%}
