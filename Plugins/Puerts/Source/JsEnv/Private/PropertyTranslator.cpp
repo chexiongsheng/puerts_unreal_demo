@@ -54,13 +54,7 @@ void FPropertyTranslator::Getter(
     }
     else
     {
-        auto Ptr = FV8Utils::GetPointer(Info.Holder());
-        if (!Ptr)
-        {
-            FV8Utils::ThrowException(Isolate, "access a null struct");
-            return;
-        }
-        Info.GetReturnValue().Set(UEToJsInContainer(Isolate, Context, Ptr, true));
+        Info.GetReturnValue().Set(UEToJsInContainer(Isolate, Context, FV8Utils::GetPointer(Info.Holder()), true));
     }
 }
 
@@ -99,13 +93,7 @@ void FPropertyTranslator::Setter(v8::Isolate* Isolate, v8::Local<v8::Context>& C
     }
     else
     {
-        auto Ptr = FV8Utils::GetPointer(Info.Holder());
-        if (!Ptr)
-        {
-            FV8Utils::ThrowException(Isolate, "access a null struct");
-            return;
-        }
-        JsToUEInContainer(Isolate, Context, Value, Ptr, true);
+        JsToUEInContainer(Isolate, Context, Value, FV8Utils::GetPointer(Info.Holder()), true);
     }
 }
 
