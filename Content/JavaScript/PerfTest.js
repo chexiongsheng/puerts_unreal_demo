@@ -1,7 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const puerts_1 = require("puerts");
 const UE = require("ue");
 let testobj = new UE.TGUnitTestCallee();
+//let cs = $ref(new UE.CustomStruct());
+//testobj.sCustomStructRefNoRet(cs);
+//cs = $ref<UE.CustomStruct>();
+//testobj.sCustomStructRefNoRet(cs);
+//let Positions = UE.NewArray(UE.Vector);
+//for (let i = 0; i < 1024; i++) {
+//    Positions.Add(new UE.Vector(i, i, i));
+//}
+//let Positions_Ref = $ref(Positions);
+//testobj.TArrayRefIntRet(Positions_Ref);
+//testobj.ConstTArrayRefIntRet(Positions);
 const LOOP_COUNT = 1000000;
 let beginTime = new Date();
 for (var i = 0; i < LOOP_COUNT; i++) {
@@ -41,6 +53,44 @@ for (var i = 0; i < LOOP_COUNT; i++) {
 }
 endTime = new Date();
 console.log("1m Vector Property Set using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+let Positions = UE.NewArray(UE.Vector);
+for (let i = 0; i < 1024; i++) {
+    Positions.Add(new UE.Vector(i, i, i));
+}
+let Positions_Ref = puerts_1.$ref(Positions);
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    testobj.TArrayRefIntRet(Positions_Ref);
+}
+endTime = new Date();
+console.log("1m TArrayRefIntRet using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+console.log('TArrayRefIntRet:' + testobj.TArrayRefIntRet(Positions_Ref));
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    testobj.ConstTArrayRefIntRet(Positions);
+}
+endTime = new Date();
+console.log("1m ConstTArrayRefIntRet using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+console.log('ConstTArrayRefIntRet:' + testobj.ConstTArrayRefIntRet(Positions));
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    testobj.TArrayRet();
+}
+endTime = new Date();
+console.log("1m TArrayRet using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+let arr = testobj.TArrayRet();
+arr.Add(100);
+console.log(arr.Num(), arr.Get(0));
+arr.RemoveAt(0);
+console.log(arr.Num());
+arr.Add(100);
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    arr.Get(0);
+}
+endTime = new Date();
+console.log("1m arr.Get using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+console.log('---------------------------------------------------------');
 beginTime = new Date();
 for (var i = 0; i < LOOP_COUNT; i++) {
     testobj.sNoArgNoRet();
@@ -78,4 +128,36 @@ for (var i = 0; i < LOOP_COUNT; i++) {
 }
 endTime = new Date();
 console.log("1m Vector Property sSet using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    testobj.sTArrayRefIntRet(Positions_Ref);
+}
+endTime = new Date();
+console.log("1m sTArrayRefIntRet using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+console.log('sTArrayRefIntRet:' + testobj.sTArrayRefIntRet(Positions_Ref));
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    testobj.sConstTArrayRefIntRet(Positions);
+}
+endTime = new Date();
+console.log("1m sConstTArrayRefIntRet using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+console.log('sConstTArrayRefIntRet:' + testobj.sConstTArrayRefIntRet(Positions));
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    testobj.sTArrayRet();
+}
+endTime = new Date();
+console.log("1m sTArrayRet using " + (endTime.getTime() - beginTime.getTime()) + "ms");
+let sarr = testobj.sTArrayRet();
+sarr.Add(100);
+console.log(sarr.Num(), sarr.Get(0));
+sarr.RemoveAt(0);
+console.log(sarr.Num());
+sarr.Add(100);
+beginTime = new Date();
+for (var i = 0; i < LOOP_COUNT; i++) {
+    sarr.Get(0);
+}
+endTime = new Date();
+console.log("1m sarr.Get using " + (endTime.getTime() - beginTime.getTime()) + "ms");
 //# sourceMappingURL=PerfTest.js.map
