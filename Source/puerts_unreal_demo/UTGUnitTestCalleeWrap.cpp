@@ -95,6 +95,10 @@ static void VPSet(const v8::FunctionCallbackInfo<v8::Value>& Info)
 
 UsingUClass(UTGUnitTestCallee);
 UsingUStruct(FVector);
+UsingUStruct(FCustomStruct);
+UsingTArray(FVector, "TArray<UE.Vector>");
+//TODO: ts名字得和typeid分开，否则TArray<int>, TArray<float>这些没法区分
+UsingTArray(int, "TArray<number>");
 
 struct AutoRegisterForUTGUnitTestCallee
 {
@@ -117,9 +121,17 @@ struct AutoRegisterForUTGUnitTestCallee
             .Method("sRetInt", MakeFunction(&UTGUnitTestCallee::RetInt))
             .Method("sIntArgIntRet", MakeFunction(&UTGUnitTestCallee::IntArgIntRet))
             .Method("sStrArgIntRet", MakeFunction(&UTGUnitTestCallee::StrArgIntRet))
+            .Method("sTArrayRefIntRet", MakeFunction(&UTGUnitTestCallee::TArrayRefIntRet))
+            .Method("sConstTArrayRefIntRet", MakeFunction(&UTGUnitTestCallee::ConstTArrayRefIntRet))
+            .Method("sTArrayRet", MakeFunction(&UTGUnitTestCallee::TArrayRet))
+            .Method("sCustomStructRefNoRet", MakeFunction(&UTGUnitTestCallee::CustomStructRefNoRet))
             .Property("sVP", MakeProperty(&UTGUnitTestCallee::VP))
             //.Property("sVP", &VPGet, &VPSet)
             .Register();
+
+        //需要返回到脚本里头使用需要注册
+        RegisterTArray(FVector);
+        RegisterTArray(int);
     }
 };
 

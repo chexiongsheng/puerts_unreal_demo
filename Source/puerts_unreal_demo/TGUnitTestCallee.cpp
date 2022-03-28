@@ -20,3 +20,23 @@ int UTGUnitTestCallee::StrArgIntRet(FString Arg)
 {
     return Arg.Len();
 }
+
+int UTGUnitTestCallee::TArrayRefIntRet(TArray<FVector>& Data)
+{
+    return Data.Num();
+}
+
+int UTGUnitTestCallee::ConstTArrayRefIntRet(const TArray<FVector>& Data)
+{
+    return Data.Num();
+}
+
+TArray<int> UTGUnitTestCallee::TArrayRet()
+{
+    return {};
+}
+
+void UTGUnitTestCallee::CustomStructRefNoRet(FCustomStruct& Data)
+{
+    UE_LOG(LogTemp, Warning, TEXT("CustomStructRefNoRet(%p)"), &Data);
+}
