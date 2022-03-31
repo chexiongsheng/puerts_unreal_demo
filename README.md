@@ -4,7 +4,7 @@
 
 * git clone https://github.com/chexiongsheng/puerts_unreal_demo.git 
 
-* ue4.25及以上版本，需要到这里下载[v8](https://github.com/puerts/backend-v8/releases/tag/V8_9.6.180.15_0330)，解压到[Plugins/Puerts/ThirdParty](Plugins/Puerts/ThirdParty)
+* ue4.25及以上版本，需要到这里下载[V8_8.4.371.19_0323](https://github.com/puerts/backend-v8/releases/tag/V8_8.4.371.19_0323)，解压到[Plugins/Puerts/ThirdParty](Plugins/Puerts/ThirdParty)
 
 * 双击puerts_unreal_demo.uproject后，跟着直接点运行即可
 
