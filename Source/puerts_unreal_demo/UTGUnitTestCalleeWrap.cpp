@@ -59,9 +59,9 @@ static void StrArgIntRet(const v8::FunctionCallbackInfo<v8::Value>& Info)
     v8::Context::Scope ContextScope(Context);
 
     auto Self = puerts::DataTransfer::GetPointerFast<UTGUnitTestCallee>(Info.Holder());
-    //auto Arg1 = UTF8_TO_TCHAR(*(v8::String::Utf8Value(Isolate, Info[0])));
+    auto Arg1 = UTF8_TO_TCHAR(*(v8::String::Utf8Value(Isolate, Info[0])));
 
-    auto Arg1 = *(v8::String::Value(Isolate, Info[0]));
+    //auto Arg1 = *(v8::String::Value(Isolate, Info[0]));
 
     auto Res = Self->StrArgIntRet((TCHAR*)Arg1);
 
