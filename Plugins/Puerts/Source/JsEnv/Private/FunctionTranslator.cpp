@@ -29,7 +29,7 @@ static void ParamDefaultMetasInit()
 }
 PRAGMA_ENABLE_OPTIMIZATION
 
-std::once_flag  ParamDefaultMetasInitFlag;
+std::once_flag ParamDefaultMetasInitFlag;
 
 TMap<FName, FString>* GetParamDefaultMetaFor(UFunction* InFunction)
 {
