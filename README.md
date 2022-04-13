@@ -21,3 +21,5 @@
 * QuickStart.js是由[TsProj](TsProj)下QuickStart.ts的编译结果，所以直接看QuickStart.ts即可，里头演示主要功能的用法。
 
 * 编译，在vscode上“Terminal -> Run Build Task”选tsc watch，修改代码后会自动编译。
+
+* PerfTest.ts编辑器下在老版本v8以及quickjs后端不可用
