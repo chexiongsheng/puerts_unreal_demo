@@ -503,6 +503,34 @@ void pesapi_set_property(pesapi_env env, pesapi_value pobject, const char* key, 
     }
 }
 
+pesapi_value pesapi_get_property_uint32(pesapi_env env, pesapi_value pobject, uint32_t key)
+{
+    auto context = v8impl::V8LocalContextFromPesapiEnv(env);
+    auto object = v8impl::V8LocalValueFromPesapiValue(pobject);
+    if (object->IsObject())
+    {
+        auto MaybeValue = object.As<v8::Object>()->Get(context, key);
+        v8::Local<v8::Value> Val;
+        if (MaybeValue.ToLocal(&Val))
+        {
+            return v8impl::PesapiValueFromV8LocalValue(Val);
+        }
+    }
+    return pesapi_create_undefined(env);
+}
+
+void pesapi_set_property_uint32(pesapi_env env, pesapi_value pobject, uint32_t key, pesapi_value pvalue)
+{
+    auto context = v8impl::V8LocalContextFromPesapiEnv(env);
+    auto object = v8impl::V8LocalValueFromPesapiValue(pobject);
+    auto value = v8impl::V8LocalValueFromPesapiValue(pvalue);
+
+    if (object->IsObject())
+    {
+        auto _un_used = object.As<v8::Object>()->Set(context, key, value);
+    }
+}
+
 pesapi_value pesapi_call_function(pesapi_env env, pesapi_value pfunc, pesapi_value this_object, int argc, const pesapi_value argv[])
 {
     auto context = v8impl::V8LocalContextFromPesapiEnv(env);
@@ -632,6 +660,14 @@ static void free_property_descriptor(pesapi_property_descriptor properties, size
         }
     }
 }
+
+#ifndef MSVC_PRAGMA
+#if !defined(__clang__) && defined(_MSC_VER)
+#define MSVC_PRAGMA(Pragma) __pragma(Pragma)
+#else
+#define MSVC_PRAGMA(...)
+#endif
+#endif
 
 MSVC_PRAGMA(warning(push))
 MSVC_PRAGMA(warning(disable : 4191))
