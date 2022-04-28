@@ -29,9 +29,9 @@ class MyActor extends UE.Actor {
 }
 let cls = puerts_1.makeUClass(MyActor);
 world.SpawnActor(cls, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
-//JS继承一个蓝图类
-//!！注意：blueprint<xxx>会导致这个BP类常驻内存
-const TestBlueprint = puerts_1.blueprint('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
+let ucls = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
+//TestBlueprint是根据ucls生成的类，两者需要声明周期保持同步，慎防只拿着TestBlueprint用，ucls释放了，然后进而这个蓝图被UE给GC了
+const TestBlueprint = puerts_1.blueprint.tojs(ucls);
 class MyBPActor extends TestBlueprint {
     //覆盖蓝图提供的方法，此时无论是蓝图在BeginPlay的调用，以及在ts侧的调用，都会用这个新的实现
     Foo(P1, P2, P3) {
