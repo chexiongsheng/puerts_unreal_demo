@@ -23,17 +23,24 @@ class Fooable {
         console.log(`Ts Add(${x}, ${y})`)
         return x + y;
     }
+
+    //mixin建议只包含函数
+    //如果mixin如果包括纯脚本字段，有两种方式（二选一）
+    //1、需要在脚本中保持对象引用，否则脚本侧数据会被gc
+    //2、blueprint.mixin参数3，objectTakeByNative传true，
+    //   这个方式脚本对象的生命周期会由UE管理，在脚本持有该
+    //   对象不会阻止UE GC对对应蓝图对象的回收
+    //tsdata: number;
 }
 
 //这句可以让Fooable能调用到TestBlueprint_C其它方法
 interface Fooable extends UE.Game.StarterContent.TestBlueprint.TestBlueprint_C {};
 
-//参数二的mixin建议只包含函数
-//如果mixin如果包括纯脚本字段，需要在脚本中保持对象引用，否则脚本侧数据会被gc
 const TestBlueprintWithMixin = blueprint.mixin(TestBlueprint, Fooable);
 
 let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 
-world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);// as InstanceType<typeof TestBlueprintWithMixin>;
+world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
 
+//let o = new TestBlueprintWithMixin();
 

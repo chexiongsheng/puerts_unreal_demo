@@ -22,9 +22,8 @@ class Fooable {
     }
 }
 ;
-//参数二的mixin建议只包含函数
-//如果mixin如果包括纯脚本字段，需要在脚本中保持对象引用，否则脚本侧数据会被gc
 const TestBlueprintWithMixin = puerts_1.blueprint.mixin(TestBlueprint, Fooable);
 let world = puerts_1.argv.getByName("GameInstance").GetWorld();
-world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined); // as InstanceType<typeof TestBlueprintWithMixin>;
+world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+//let o = new TestBlueprintWithMixin();
 //# sourceMappingURL=UsingMixin.js.map
