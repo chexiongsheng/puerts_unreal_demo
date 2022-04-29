@@ -10,7 +10,7 @@ class Fooable {
     //ReceiveBeginPlay():void {
     //    console.log(`Ts ReceiveBeginPlay 1 + 3 = ${this.TsAdd(1, 3)}`);
     //}
-    //可以覆盖蓝图对应的函数
+    //可以覆盖蓝图对应的函数，函数签名和TestBlueprint_C声明的不匹配会报错
     Foo(P1, P2, P3) {
         console.log(this.GetName(), "Foo", P1 ? P2 : P3);
         console.log(`1 + 3 = ${this.TsAdd(1, 3)}`);
