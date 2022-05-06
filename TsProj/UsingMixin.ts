@@ -3,7 +3,7 @@ import {argv, blueprint} from 'puerts';
 
 let ucls = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
 
-//TestBlueprint是根据ucls生成的类，两者需要声明周期保持同步，慎防只拿着TestBlueprint用，ucls释放了，然后进而这个蓝图被UE给GC了
+//TestBlueprint是根据ucls生成的类，两者需要生命周期保持同步，慎防只拿着TestBlueprint用，ucls释放了，然后进而这个蓝图被UE给GC了
 const TestBlueprint = blueprint.tojs<typeof UE.Game.StarterContent.TestBlueprint.TestBlueprint_C>(ucls);
 
 class Fooable {
@@ -36,7 +36,8 @@ class Fooable {
 //这句可以让Fooable能调用到TestBlueprint_C其它方法
 interface Fooable extends UE.Game.StarterContent.TestBlueprint.TestBlueprint_C {};
 
-const TestBlueprintWithMixin = blueprint.mixin(TestBlueprint, Fooable);
+//返回mixin后ts类以及UClass，两者需要生命周期保持同步
+const [TestBlueprintWithMixin, UClassMixin] = blueprint.mixin(TestBlueprint, Fooable);
 
 let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 
