@@ -10,7 +10,7 @@ class Fooable {
     //ReceiveBeginPlay():void {
     //    console.log(`Ts ReceiveBeginPlay 1 + 3 = ${this.TsAdd(1, 3)}`);
     //}
-    //可以覆盖蓝图对应的函数，函数签名和TestBlueprint_C声明的不匹配会报错
+    //可以覆盖蓝图对应的函数，函数签名和TestBlueprint_C声明的不兼容（不需要严格一致，能满足协变逆变要求即可）会报错
     Foo(P1, P2, P3) {
         console.log(this.GetName(), "Foo", P1 ? P2 : P3);
         console.log(`1 + 3 = ${this.TsAdd(1, 3)}`);
@@ -24,6 +24,7 @@ class Fooable {
 ;
 const TestBlueprintWithMixin = puerts_1.blueprint.mixin(TestBlueprint, Fooable);
 let world = puerts_1.argv.getByName("GameInstance").GetWorld();
-world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+let o = world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+o.Foo(true, 1, 5);
 //let o = new TestBlueprintWithMixin();
 //# sourceMappingURL=UsingMixin.js.map
