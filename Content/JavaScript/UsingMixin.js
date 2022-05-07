@@ -23,8 +23,6 @@ class Fooable {
 }
 ;
 const TestBlueprintWithMixin = puerts_1.blueprint.mixin(TestBlueprint, Fooable);
-puerts_1.blueprint.mixin(TestBlueprint, Fooable);
-puerts_1.blueprint.mixin(TestBlueprint, Fooable);
 let world = puerts_1.argv.getByName("GameInstance").GetWorld();
 let o = world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
 o.Foo(true, 1, 5);

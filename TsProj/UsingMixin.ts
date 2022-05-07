@@ -38,9 +38,6 @@ interface Fooable extends UE.Game.StarterContent.TestBlueprint.TestBlueprint_C {
 
 const TestBlueprintWithMixin = blueprint.mixin(TestBlueprint, Fooable);
 
-blueprint.mixin(TestBlueprint, Fooable);
-blueprint.mixin(TestBlueprint, Fooable);
-
 let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 
 let o = world.SpawnActor(TestBlueprintWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as Fooable;
