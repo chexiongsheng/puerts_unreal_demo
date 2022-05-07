@@ -27,7 +27,7 @@ class Fooable {
     //mixin建议只包含函数
     //如果mixin如果包括纯脚本字段，有两种方式（二选一）
     //1、需要在脚本中保持对象引用，否则脚本侧数据会被gc
-    //2、blueprint.mixin参数3，objectTakeByNative传true，
+    //2、blueprint.mixin参数3，config.objectTakeByNative传true，
     //   这个方式脚本对象的生命周期会由UE管理，在脚本持有该
     //   对象不会阻止UE GC对对应蓝图对象的回收
     //tsdata: number;
