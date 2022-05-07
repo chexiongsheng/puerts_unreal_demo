@@ -36,8 +36,10 @@ class Fooable {
 //这句可以让Fooable能调用到TestBlueprint_C其它方法
 interface Fooable extends UE.Game.StarterContent.TestBlueprint.TestBlueprint_C {};
 
-//返回mixin后ts类以及UClass，两者需要生命周期保持同步
-const [TestBlueprintWithMixin, UClassMixin] = blueprint.mixin(TestBlueprint, Fooable);
+const TestBlueprintWithMixin = blueprint.mixin(TestBlueprint, Fooable);
+
+blueprint.mixin(TestBlueprint, Fooable);
+blueprint.mixin(TestBlueprint, Fooable);
 
 let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 
