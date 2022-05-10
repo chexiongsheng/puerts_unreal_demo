@@ -140,6 +140,12 @@ void UMainObject::PassJsFunctionAsDelegate(FCallback Callback) const
     UE_LOG(LogTemp, Warning, TEXT("Che ? %d"), Ret);
 }
 
+int32 UMainObject::Mult_Implementation(int32 a, int32 b) const
+{
+	UE_LOG(LogTemp, Warning, TEXT("wrong implementation div %d %d"), a, b);
+	return a + b;
+}
+
 UMainObject::~UMainObject()
 {
     ::free(ArrayBuffer.Data);

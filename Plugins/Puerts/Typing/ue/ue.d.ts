@@ -238,6 +238,7 @@ declare module "ue" {
         ReceiveBeginPlay() : void;
         ReceiveEndPlay(EndPlayReason: UE.EEndPlayReason) : void;
         ReceiveTick(DeltaSeconds: number) : void;
+        RegisterComponent() : void;
         RemoveTickPrerequisiteActor(PrerequisiteActor: $Nullable<UE.Actor>) : void;
         RemoveTickPrerequisiteComponent(PrerequisiteComponent: $Nullable<UE.ActorComponent>) : void;
         SetActive(bNewActive: boolean, bReset?: boolean /* = false */) : void;
@@ -11324,6 +11325,16 @@ declare module "ue" {
         static Load(InName: string): ActorGroupingUtils;
     }
     
+    namespace Engine.EditorBlueprintResources.ActorMacros {
+        class ActorMacros_C extends UE.Actor {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): ActorMacros_C;
+            static Load(InName: string): ActorMacros_C;
+        }
+        
+    }
+
     class SequenceRecordingBase extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -19385,6 +19396,100 @@ declare module "ue" {
         static Load(InName: string): BlueprintEditorSettings;
     }
     
+    enum ETutorialContent { None, Text, UDNExcerpt, RichText, ETutorialContent_MAX}
+    class TutorialContent {
+        constructor();
+        constructor(Type: UE.ETutorialContent, Content: string, ExcerptName: string, Text: string);
+        Type: UE.ETutorialContent;
+        Content: string;
+        ExcerptName: string;
+        Text: string;
+        static StaticClass(): Class;
+    }
+    
+    enum ETutorialAnchorIdentifier { None, NamedWidget, Asset, ETutorialAnchorIdentifier_MAX}
+    class TutorialContentAnchor {
+        constructor();
+        constructor(Type: UE.ETutorialAnchorIdentifier, WrapperIdentifier: string, Asset: UE.SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
+        Type: UE.ETutorialAnchorIdentifier;
+        WrapperIdentifier: string;
+        Asset: UE.SoftObjectPath;
+        bDrawHighlight: boolean;
+        TabToFocusOrOpen: string;
+        FriendlyName: string;
+        GUIDString: string;
+        OuterName: string;
+        static StaticClass(): Class;
+    }
+    
+    class TutorialWidgetContent {
+        constructor();
+        constructor(Content: UE.TutorialContent, WidgetAnchor: UE.TutorialContentAnchor, HorizontalAlignment: UE.EHorizontalAlignment, VerticalAlignment: UE.EVerticalAlignment, Offset: UE.Vector2D, ContentWidth: number, bAutoFocus: boolean);
+        Content: UE.TutorialContent;
+        WidgetAnchor: UE.TutorialContentAnchor;
+        HorizontalAlignment: UE.EHorizontalAlignment;
+        VerticalAlignment: UE.EVerticalAlignment;
+        Offset: UE.Vector2D;
+        ContentWidth: number;
+        bAutoFocus: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class TutorialStage {
+        constructor();
+        constructor(Name: string, Content: UE.TutorialContent, WidgetContent: TArray<UE.TutorialWidgetContent>, NextButtonText: string, BackButtonText: string, PlatformsToTest: TArray<string>, bInvertPlatformTest: boolean);
+        Name: string;
+        Content: UE.TutorialContent;
+        WidgetContent: TArray<UE.TutorialWidgetContent>;
+        NextButtonText: string;
+        BackButtonText: string;
+        PlatformsToTest: TArray<string>;
+        bInvertPlatformTest: boolean;
+        static StaticClass(): Class;
+    }
+    
+    class EditorTutorial extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Title: string;
+        SortOrder: number;
+        Icon: string;
+        Texture: UE.Texture2D;
+        Category: string;
+        SummaryContent: UE.TutorialContent;
+        Stages: TArray<UE.TutorialStage>;
+        PreviousTutorial: UE.SoftClassPath;
+        NextTutorial: UE.SoftClassPath;
+        bIsStandalone: boolean;
+        AssetToUse: UE.SoftObjectPath;
+        ImportPath: string;
+        bHideInBrowser: boolean;
+        SearchTags: string;
+        GetActorReference(PathToActor: string) : UE.Actor;
+        OnTutorialClosed() : void;
+        OnTutorialLaunched() : void;
+        OnTutorialStageEnded(StageName: string) : void;
+        OnTutorialStageStarted(StageName: string) : void;
+        static BeginTutorial(TutorialToStart: $Nullable<UE.EditorTutorial>, bRestart: boolean) : void;
+        static GetEngineFolderVisibilty() : boolean;
+        static GoToNextTutorialStage() : void;
+        static GoToPreviousTutorialStage() : void;
+        static OpenAsset(Asset: $Nullable<UE.Object>) : void;
+        static SetEngineFolderVisibilty(bNewVisibility: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EditorTutorial;
+        static Load(InName: string): EditorTutorial;
+    }
+    
+    namespace Engine.Tutorial.BlueprintTutorials.BlueprintEditorTutorial {
+        class BlueprintEditorTutorial_C extends UE.EditorTutorial {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): BlueprintEditorTutorial_C;
+            static Load(InName: string): BlueprintEditorTutorial_C;
+        }
+        
+    }
+
     class BlueprintFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ParentClass: UE.Class;
@@ -26899,90 +27004,6 @@ declare module "ue" {
         static Load(InName: string): EditorSubsystemBlueprintLibrary;
     }
     
-    enum ETutorialContent { None, Text, UDNExcerpt, RichText, ETutorialContent_MAX}
-    class TutorialContent {
-        constructor();
-        constructor(Type: UE.ETutorialContent, Content: string, ExcerptName: string, Text: string);
-        Type: UE.ETutorialContent;
-        Content: string;
-        ExcerptName: string;
-        Text: string;
-        static StaticClass(): Class;
-    }
-    
-    enum ETutorialAnchorIdentifier { None, NamedWidget, Asset, ETutorialAnchorIdentifier_MAX}
-    class TutorialContentAnchor {
-        constructor();
-        constructor(Type: UE.ETutorialAnchorIdentifier, WrapperIdentifier: string, Asset: UE.SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
-        Type: UE.ETutorialAnchorIdentifier;
-        WrapperIdentifier: string;
-        Asset: UE.SoftObjectPath;
-        bDrawHighlight: boolean;
-        TabToFocusOrOpen: string;
-        FriendlyName: string;
-        GUIDString: string;
-        OuterName: string;
-        static StaticClass(): Class;
-    }
-    
-    class TutorialWidgetContent {
-        constructor();
-        constructor(Content: UE.TutorialContent, WidgetAnchor: UE.TutorialContentAnchor, HorizontalAlignment: UE.EHorizontalAlignment, VerticalAlignment: UE.EVerticalAlignment, Offset: UE.Vector2D, ContentWidth: number, bAutoFocus: boolean);
-        Content: UE.TutorialContent;
-        WidgetAnchor: UE.TutorialContentAnchor;
-        HorizontalAlignment: UE.EHorizontalAlignment;
-        VerticalAlignment: UE.EVerticalAlignment;
-        Offset: UE.Vector2D;
-        ContentWidth: number;
-        bAutoFocus: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class TutorialStage {
-        constructor();
-        constructor(Name: string, Content: UE.TutorialContent, WidgetContent: TArray<UE.TutorialWidgetContent>, NextButtonText: string, BackButtonText: string, PlatformsToTest: TArray<string>, bInvertPlatformTest: boolean);
-        Name: string;
-        Content: UE.TutorialContent;
-        WidgetContent: TArray<UE.TutorialWidgetContent>;
-        NextButtonText: string;
-        BackButtonText: string;
-        PlatformsToTest: TArray<string>;
-        bInvertPlatformTest: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class EditorTutorial extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Title: string;
-        SortOrder: number;
-        Icon: string;
-        Texture: UE.Texture2D;
-        Category: string;
-        SummaryContent: UE.TutorialContent;
-        Stages: TArray<UE.TutorialStage>;
-        PreviousTutorial: UE.SoftClassPath;
-        NextTutorial: UE.SoftClassPath;
-        bIsStandalone: boolean;
-        AssetToUse: UE.SoftObjectPath;
-        ImportPath: string;
-        bHideInBrowser: boolean;
-        SearchTags: string;
-        GetActorReference(PathToActor: string) : UE.Actor;
-        OnTutorialClosed() : void;
-        OnTutorialLaunched() : void;
-        OnTutorialStageEnded(StageName: string) : void;
-        OnTutorialStageStarted(StageName: string) : void;
-        static BeginTutorial(TutorialToStart: $Nullable<UE.EditorTutorial>, bRestart: boolean) : void;
-        static GetEngineFolderVisibilty() : boolean;
-        static GoToNextTutorialStage() : void;
-        static GoToPreviousTutorialStage() : void;
-        static OpenAsset(Asset: $Nullable<UE.Object>) : void;
-        static SetEngineFolderVisibilty(bNewVisibility: boolean) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EditorTutorial;
-        static Load(InName: string): EditorTutorial;
-    }
-    
     class EditorTutorialFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -28171,6 +28192,16 @@ declare module "ue" {
         static Load(InName: string): FbxFactory;
     }
     
+    namespace DatasmithContent.Blueprints.FBXImporter.FBXImporterUtils {
+        class FBXImporterUtils_C extends UE.BlueprintFunctionLibrary {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): FBXImporterUtils_C;
+            static Load(InName: string): FBXImporterUtils_C;
+        }
+        
+    }
+
     class SceneImportFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -38102,11 +38133,13 @@ declare module "ue" {
         Bar3(V: $Ref<UE.Vector>) : UE.Vector;
         Callback__DelegateSignature(A: string) : boolean;
         DefaultTest(Str?: string /* = "i am default" */, I?: number /* = 10 */, Vec?: UE.Vector /* = 1.100000,2.200000,3.300000 */) : void;
+        Div(a: number, b: number) : number;
         EnumTest(E: UE.EToTest) : void;
         Foo() : string;
         GetData() : TArray<number>;
         GetInts() : TArray<number>;
         GetStrings() : TArray<string>;
+        Mult(a: number, b: number) : number;
         NameTest(Name: string) : void;
         PassJsFunctionAsDelegate(Callback: $Delegate<(A: string) => boolean>) : void;
         PrintState() : void;
@@ -40985,6 +41018,21 @@ declare module "ue" {
         static Load(InName: string): MicroTransactionBase;
     }
     
+    namespace Game.StarterContent.MixinTest {
+        class MixinTest_C extends UE.Actor {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            UberGraphFrame: UE.PointerToUberGraphFrame;
+            DefaultSceneRoot: UE.SceneComponent;
+            ExecuteUbergraph_MixinTest(EntryPoint: number) : void;
+            Log(P: string) : void;
+            ReceiveBeginPlay() : void;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): MixinTest_C;
+            static Load(InName: string): MixinTest_C;
+        }
+        
+    }
+
     class MobileInstalledContent extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         GetDiskFreeSpace() : number;
@@ -43260,38 +43308,6 @@ declare module "ue" {
         static Load(InName: string): NetworkSettings;
     }
     
-    namespace Game.NewBlueprint1 {
-        class NewBlueprint1_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            UberGraphFrame: UE.PointerToUberGraphFrame;
-            MyTestActorComp: UE.Game.Blueprints.TypeScript.MyTestActorComp.MyTestActorComp_C;
-            DefaultSceneRoot: UE.SceneComponent;
-            NewVar_0: UE.Transform;
-            ExecuteUbergraph_NewBlueprint1(EntryPoint: number) : void;
-            ReceiveBeginPlay() : void;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): NewBlueprint1_C;
-            static Load(InName: string): NewBlueprint1_C;
-        }
-        
-    }
-
-    namespace Game.NewBlueprint {
-        class NewBlueprint_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            DefaultSceneRoot: UE.SceneComponent;
-            ["()[]"]: boolean;
-            ["["]: boolean;
-            ["\""]: boolean;
-            ["?/ --"]() : void;
-            Add(NewParam: number, NewParam1: number) : number;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): NewBlueprint_C;
-            static Load(InName: string): NewBlueprint_C;
-        }
-        
-    }
-
     class NewPluginDescriptorData extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CreatedBy: string;
@@ -47910,6 +47926,31 @@ declare module "ue" {
         static Load(InName: string): PropertyValueVisibility;
     }
     
+    namespace Engine.Transient {
+        class PROTO_BP_AnimBlueprint_0_C extends UE.AnimInstance {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            UberGraphFrame: UE.PointerToUberGraphFrame;
+            AnimGraphNode_Root_827987894E7298EAFAA556879A0CB732: UE.AnimNode_Root;
+            AnimGraph(AnimGraph: $Ref<UE.PoseLink>) : void;
+            ExecuteUbergraph_PROTO_BP_AnimBlueprint_0(EntryPoint: number) : void;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): PROTO_BP_AnimBlueprint_0_C;
+            static Load(InName: string): PROTO_BP_AnimBlueprint_0_C;
+        }
+        
+    }
+
+    namespace Engine.Transient {
+        class PROTO_BP_Blueprint_0_C extends UE.Actor {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            DefaultSceneRoot: UE.SceneComponent;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): PROTO_BP_Blueprint_0_C;
+            static Load(InName: string): PROTO_BP_Blueprint_0_C;
+        }
+        
+    }
+
     class ProxyLODMeshSimplificationSettings extends UE.DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ProxyLODMeshReductionModuleName: string;
@@ -48458,6 +48499,32 @@ declare module "ue" {
         static Load(InName: string): RenderTargetExporterHDR;
     }
     
+    namespace Engine.ArtTools.RenderToTexture.Enums.EIntTypes {
+        enum EIntTypes { int, int2, int3, int4, EIntTypes_MAX}
+    }
+
+    namespace Engine.ArtTools.RenderToTexture.Macros.RenderToTextureFunctionLibrary {
+        class RenderToTextureFunctionLibrary_C extends UE.BlueprintFunctionLibrary {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static ["Array to HLSL Int Array"](Type: UE.Engine.ArtTools.RenderToTexture.Enums.EIntTypes.EIntTypes, VariableName: $Ref<string>, int: $Ref<TArray<number>>, int2: $Ref<TArray<UE.Vector2D>>, int3: $Ref<TArray<UE.Vector>>, int4: $Ref<TArray<UE.LinearColor>>, __WorldContext: $Nullable<UE.Object>, String: $Ref<string>) : void;
+            static ["Set Canvas Material Scale and Position"](Size: UE.Vector2D, Position: UE.Vector2D, Scale: number, __WorldContext: $Nullable<UE.Object>, ScreenPosition: $Ref<UE.Vector2D>, ScreenSize: $Ref<UE.Vector2D>) : void;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): RenderToTextureFunctionLibrary_C;
+            static Load(InName: string): RenderToTextureFunctionLibrary_C;
+        }
+        
+    }
+
+    namespace Engine.ArtTools.RenderToTexture.Macros.RenderToTextureMacros {
+        class RenderToTextureMacros_C extends UE.Actor {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): RenderToTextureMacros_C;
+            static Load(InName: string): RenderToTextureMacros_C;
+        }
+        
+    }
+
     class ReplaceActorCommandlet extends UE.Commandlet {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -51645,17 +51712,30 @@ declare module "ue" {
         static Load(InName: string): TextureStats;
     }
     
+    class CustomStruct {
+        constructor();
+        static StaticClass(): Class;
+    }
+    
     class TGUnitTestCallee extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         VP: UE.Vector;
+        ConstTArrayRefIntRet(Data: TArray<UE.Vector>) : number;
+        CustomStructRefNoRet(Data: $Ref<UE.CustomStruct>) : void;
         IntArgIntRet(Arg: number) : number;
         NoArgNoRet() : void;
         RetInt() : number;
+        sConstTArrayRefIntRet(p0: TArray<UE.Vector>) : number;
+        sCustomStructRefNoRet(p0: $Ref<CustomStruct>) : void;
         sIntArgIntRet(p0: number) : number;
         sNoArgNoRet() : void;
         sRetInt() : number;
         sStrArgIntRet(p0: string) : number;
+        sTArrayRefIntRet(p0: $Ref<TArray<UE.Vector>>) : number;
+        sTArrayRet() : TArray<number>;
         StrArgIntRet(Str: string) : number;
+        TArrayRefIntRet(Data: $Ref<TArray<UE.Vector>>) : number;
+        TArrayRet() : TArray<number>;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): TGUnitTestCallee;
         static Load(InName: string): TGUnitTestCallee;
@@ -52464,6 +52544,16 @@ declare module "ue" {
         static Load(InName: string): TurnBasedBlueprintLibrary;
     }
     
+    namespace Engine.Tutorial.BlueprintTutorials.TutorialAssets.Tutorial_BP_MacroLib {
+        class Tutorial_BP_MacroLib_C extends UE.EditorTutorial {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): Tutorial_BP_MacroLib_C;
+            static Load(InName: string): Tutorial_BP_MacroLib_C;
+        }
+        
+    }
+
     class TutorialSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Categories: TArray<UE.TutorialCategory>;

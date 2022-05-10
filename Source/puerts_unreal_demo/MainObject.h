@@ -78,6 +78,13 @@ public:
     UFUNCTION(BlueprintCallable, meta = (DisplayName = "DefaultTest", ScriptName = "DefaultTest", Keywords = "test"), Category = "Test")
     void DefaultTest(FString Str = TEXT("i am default"), int I = 10, FVector Vec = FVector(1.1, 2.2, 3.3));
 
+	UFUNCTION(BlueprintNativeEvent)
+	int32 Mult(int32 a, int32 b) const;
+
+
+	UFUNCTION(BlueprintImplementableEvent)
+	int32 Div(int32 a, int32 b) const;
+
     UPROPERTY()
     FSomeData SomeData;
 
