@@ -6,6 +6,10 @@ let ucls = UE.Class.Load('/Game/StarterContent/MixinTest.MixinTest_C');
 //MixinTest是根据ucls生成的类，两者需要生命周期保持同步，慎防只拿着MixinTest用，ucls释放了，然后进而这个蓝图被UE给GC了
 const MixinTest = blueprint.tojs<typeof UE.Game.StarterContent.MixinTest.MixinTest_C>(ucls);
 
+
+//这句可以让Loggable能调用到MixinTest_C其它方法
+interface Loggable extends UE.Game.StarterContent.MixinTest.MixinTest_C {};
+
 class Loggable {
     //不注释后可以接收到ReceiveBeginPlay回调
     //ReceiveBeginPlay():void {
@@ -32,9 +36,6 @@ class Loggable {
     //   对象不会阻止UE GC对对应蓝图对象的回收
     //tsdata: number;
 }
-
-//这句可以让Loggable能调用到MixinTest_C其它方法
-interface Loggable extends UE.Game.StarterContent.MixinTest.MixinTest_C {};
 
 const MixinTestWithMixin = blueprint.mixin(MixinTest, Loggable);
 

@@ -5,6 +5,7 @@ const puerts_1 = require("puerts");
 let ucls = UE.Class.Load('/Game/StarterContent/MixinTest.MixinTest_C');
 //MixinTest是根据ucls生成的类，两者需要生命周期保持同步，慎防只拿着MixinTest用，ucls释放了，然后进而这个蓝图被UE给GC了
 const MixinTest = puerts_1.blueprint.tojs(ucls);
+;
 class Loggable {
     //不注释后可以接收到ReceiveBeginPlay回调
     //ReceiveBeginPlay():void {
@@ -21,7 +22,6 @@ class Loggable {
         return x + y;
     }
 }
-;
 const MixinTestWithMixin = puerts_1.blueprint.mixin(MixinTest, Loggable);
 let world = puerts_1.argv.getByName("GameInstance").GetWorld();
 let o = world.SpawnActor(MixinTestWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
