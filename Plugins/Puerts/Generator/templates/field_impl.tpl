@@ -41,6 +41,7 @@ static void _{{type.spelling}}{{field.spelling}}Get_(const v8::FunctionCallbackI
     {%- elif field.v8_type != "" -%}
     v8::{{field.v8_type}}::New(Isolate, {%if field.is_enum%}int32(Self->{{field.spelling}}){%else%}Self->{{field.spelling}}{%endif%});
     {%- endif %}
+    puerts::DataTransfer::LinkOuter<{{type.spelling}}, {{field.variable_decl_type}}>(Context, Info.Holder(), V8Result);
     Info.GetReturnValue().Set(V8Result);
 }
 
