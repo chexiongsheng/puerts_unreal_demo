@@ -1,6 +1,10 @@
 import * as UE from 'ue'
 import {argv, blueprint} from 'puerts';
 
+//-----------------------------------------------------------------
+//基础演示
+//-----------------------------------------------------------------
+
 let ucls = UE.Class.Load('/Game/StarterContent/MixinTest.MixinTest_C');
 
 //MixinTest是根据ucls生成的类，两者需要生命周期保持同步，慎防只拿着MixinTest用，ucls释放了，然后进而这个蓝图被UE给GC了
@@ -44,7 +48,39 @@ let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 let o = world.SpawnActor(MixinTestWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as Loggable;
 o.Log("msg from ts");
 
-//原生类mixin测试
+//-----------------------------------------------------------------
+//super关键字演示
+//-----------------------------------------------------------------
+
+let ucls_base = UE.Class.Load('/Game/StarterContent/MixinSuperTestBase.MixinSuperTestBase_C');
+const MixinSuperTestBase = blueprint.tojs<typeof UE.Game.StarterContent.MixinSuperTestBase.MixinSuperTestBase_C>(ucls_base);
+
+//关键代码，建立个空类让mixin类继承，如果基类本身已经有mixin类，可以选择继承基类的mixin类
+interface MixinSuperTestBasePlaceHold extends UE.Game.StarterContent.MixinSuperTestBase.MixinSuperTestBase_C {};
+class MixinSuperTestBasePlaceHold {}
+Object.setPrototypeOf(MixinSuperTestBasePlaceHold.prototype, MixinSuperTestBase.prototype);
+
+let ucls_child = UE.Class.Load('/Game/StarterContent/MixinSuperTestDerived.MixinSuperTestDerived_C');
+
+const MixinSuperTestDerived = blueprint.tojs<typeof UE.Game.StarterContent.MixinSuperTestDerived.MixinSuperTestDerived_C>(ucls_child);
+
+interface DerivedClassMixin extends UE.Game.StarterContent.MixinSuperTestDerived.MixinSuperTestDerived_C {};
+
+class DerivedClassMixin extends MixinSuperTestBasePlaceHold {
+    Foo():void {
+        console.log("i am ts mixin");
+        super.Foo();
+    }
+}
+
+const MixinSuperTestDerivedWithMixin = blueprint.mixin(MixinSuperTestDerived, DerivedClassMixin);
+world.SpawnActor(MixinSuperTestDerivedWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined)
+
+
+//-----------------------------------------------------------------
+//原生类mixin演示
+//-----------------------------------------------------------------
+
 let obj = new UE.MainObject();
 
 console.log('before mixin start....')

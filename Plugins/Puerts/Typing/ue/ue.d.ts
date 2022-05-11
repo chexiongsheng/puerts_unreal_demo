@@ -41018,6 +41018,32 @@ declare module "ue" {
         static Load(InName: string): MicroTransactionBase;
     }
     
+    namespace Game.StarterContent.MixinSuperTestBase {
+        class MixinSuperTestBase_C extends UE.Actor {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            UberGraphFrame: UE.PointerToUberGraphFrame;
+            DefaultSceneRoot: UE.SceneComponent;
+            ExecuteUbergraph_MixinSuperTestBase(EntryPoint: number) : void;
+            Foo() : void;
+            ReceiveBeginPlay() : void;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): MixinSuperTestBase_C;
+            static Load(InName: string): MixinSuperTestBase_C;
+        }
+        
+    }
+
+    namespace Game.StarterContent.MixinSuperTestDerived {
+        class MixinSuperTestDerived_C extends UE.Game.StarterContent.MixinSuperTestBase.MixinSuperTestBase_C {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            Foo() : void;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): MixinSuperTestDerived_C;
+            static Load(InName: string): MixinSuperTestDerived_C;
+        }
+        
+    }
+
     namespace Game.StarterContent.MixinTest {
         class MixinTest_C extends UE.Actor {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -47930,7 +47956,7 @@ declare module "ue" {
         class PROTO_BP_AnimBlueprint_0_C extends UE.AnimInstance {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             UberGraphFrame: UE.PointerToUberGraphFrame;
-            AnimGraphNode_Root_827987894E7298EAFAA556879A0CB732: UE.AnimNode_Root;
+            AnimGraphNode_Root_9C67F174426DD4468F0D8DB0BCFC2A1F: UE.AnimNode_Root;
             AnimGraph(AnimGraph: $Ref<UE.PoseLink>) : void;
             ExecuteUbergraph_PROTO_BP_AnimBlueprint_0(EntryPoint: number) : void;
             static StaticClass(): Class;
