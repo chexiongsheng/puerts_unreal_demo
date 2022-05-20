@@ -47,6 +47,8 @@ declare module "ue" {
          */
         static StaticClass(): ScriptStruct;
         static StaticStruct(): ScriptStruct;
+        
+        private __tid_{{((type.ts_type or type.spelling) if not type.namespaces else type.innerist).replace("<", "").replace(">", "")}}__: boolean;
         {% endif %}
     }
     {%- for namespace in type.namespaces %}
