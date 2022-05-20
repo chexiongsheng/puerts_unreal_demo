@@ -42,7 +42,11 @@ declare module "ue" {
         {%- endfor %}
         {%- endfor %}
         {% if not type.is_cdata %}
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
         {% endif %}
     }
     {%- for namespace in type.namespaces %}

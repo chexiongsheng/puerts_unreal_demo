@@ -21,7 +21,11 @@ declare module "ue" {
     
     class AssetImportInfo {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetImportData extends UE.Object {
@@ -46,7 +50,11 @@ declare module "ue" {
         FrameStart: number;
         FrameEnd: number;
         bSkipEmpty: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AbcAssetImportData extends UE.AssetImportData {
@@ -66,7 +74,11 @@ declare module "ue" {
         HardEdgeAngleThreshold: number;
         bRecomputeNormals: boolean;
         bIgnoreDegenerateTriangles: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AbcMaterialSettings {
@@ -74,7 +86,11 @@ declare module "ue" {
         constructor(bCreateMaterials: boolean, bFindMaterials: boolean);
         bCreateMaterials: boolean;
         bFindMaterials: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBaseCalculationType { None, PercentageBased, FixedNumber, EBaseCalculationType_MAX}
@@ -87,7 +103,11 @@ declare module "ue" {
         PercentageOfTotalBases: number;
         MaxNumberOfBases: number;
         MinimumNumberOfVertexInfluencePercentage: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AbcStaticMeshSettings {
@@ -96,7 +116,11 @@ declare module "ue" {
         bMergeMeshes: boolean;
         bPropagateMatrixTransformations: boolean;
         bGenerateLightmapUVs: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AbcGeometryCacheSettings {
@@ -108,7 +132,11 @@ declare module "ue" {
         bOptimizeIndexBuffers: boolean;
         CompressedPositionPrecision: number;
         CompressedTextureCoordinatesNumberOfBits: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAbcConversionPreset { Maya, Max, Custom, EAbcConversionPreset_MAX}
@@ -120,7 +148,11 @@ declare module "ue" {
         bFlipV: boolean;
         Scale: UE.Vector;
         Rotation: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AbcImportSettings extends UE.Object {
@@ -149,12 +181,20 @@ declare module "ue" {
         bStartWithTickEnabled: boolean;
         bAllowTickOnDedicatedServer: boolean;
         TickInterval: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ActorTickFunction extends UE.TickFunction {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EActorUpdateOverlapsMethod { UseConfigDefault, AlwaysUpdate, OnlyUpdateMovable, NeverUpdate, EActorUpdateOverlapsMethod_MAX}
@@ -173,17 +213,29 @@ declare module "ue" {
         LocationQuantizationLevel: UE.EVectorQuantization;
         VelocityQuantizationLevel: UE.EVectorQuantization;
         RotationQuantizationLevel: UE.ERotatorQuantization;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Vector_NetQuantize100 extends UE.Vector {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ActorComponentTickFunction extends UE.TickFunction {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetUserData extends UE.Object {
@@ -200,7 +252,11 @@ declare module "ue" {
         MemberParent: UE.Object;
         MemberName: string;
         MemberGuid: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EEndPlayReason { Destroyed, LevelTransition, EndPlayInEditor, RemovedFromWorld, Quit, EEndPlayReason_MAX}
@@ -273,7 +329,11 @@ declare module "ue" {
         bChannel0: boolean;
         bChannel1: boolean;
         bChannel2: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERendererStencilMask { ERSM_Default, ERSM_255, ERSM_1, ERSM_2, ERSM_4, ERSM_8, ERSM_16, ERSM_32, ERSM_64, ERSM_128, ERSM_MAX}
@@ -281,7 +341,11 @@ declare module "ue" {
         constructor();
         constructor(Data: TArray<number>);
         Data: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERuntimeVirtualTextureMaterialType { BaseColor, BaseColor_Normal_DEPRECATED, BaseColor_Normal_Specular, BaseColor_Normal_Specular_YCoCg, WorldHeight, Count, ERuntimeVirtualTextureMaterialType_MAX}
@@ -315,7 +379,11 @@ declare module "ue" {
         SizeY: number;
         NumSlices: number;
         NumMips: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TextureSource {
@@ -334,7 +402,11 @@ declare module "ue" {
         Format: UE.ETextureSourceFormat;
         LayerFormat: TArray<UE.ETextureSourceFormat>;
         Blocks: TArray<UE.TextureSourceBlock>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETextureLossyCompressionAmount { TLCA_Default, TLCA_None, TLCA_Lowest, TLCA_Low, TLCA_Medium, TLCA_High, TLCA_Highest, TLCA_MAX}
@@ -351,7 +423,11 @@ declare module "ue" {
         CompressionNone: boolean;
         CompressionYCoCg: boolean;
         SRGB: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum TextureFilter { TF_Nearest, TF_Bilinear, TF_Trilinear, TF_Default, TF_MAX}
@@ -433,7 +509,11 @@ declare module "ue" {
         TileBorderSize: number;
         bEnableCompressCrunch: boolean;
         bEnableCompressZlib: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RuntimeVirtualTextureStreamingProxy extends UE.Texture2D {
@@ -508,7 +588,11 @@ declare module "ue" {
         GameTraceChannel16: UE.ECollisionResponse;
         GameTraceChannel17: UE.ECollisionResponse;
         GameTraceChannel18: UE.ECollisionResponse;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ResponseChannel {
@@ -516,7 +600,11 @@ declare module "ue" {
         constructor(Channel: string, Response: UE.ECollisionResponse);
         Channel: string;
         Response: UE.ECollisionResponse;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CollisionResponse {
@@ -524,7 +612,11 @@ declare module "ue" {
         constructor(ResponseToChannels: UE.CollisionResponseContainer, ResponseArray: TArray<UE.ResponseChannel>);
         ResponseToChannels: UE.CollisionResponseContainer;
         ResponseArray: TArray<UE.ResponseChannel>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EWalkableSlopeBehavior { WalkableSlope_Default, WalkableSlope_Increase, WalkableSlope_Decrease, WalkableSlope_Unwalkable, WalkableSlope_Max, WalkableSlope_MAX}
@@ -533,7 +625,11 @@ declare module "ue" {
         constructor(WalkableSlopeBehavior: UE.EWalkableSlopeBehavior, WalkableSlopeAngle: number);
         WalkableSlopeBehavior: UE.EWalkableSlopeBehavior;
         WalkableSlopeAngle: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EFrictionCombineMode { Average, Min, Multiply, Max, EFrictionCombineMode_MAX}
@@ -554,6 +650,7 @@ declare module "ue" {
     
     class Struct extends UE.Field {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        IsChildOf(p0: $Nullable<Struct>) : boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): Struct;
         static Load(InName: string): Struct;
@@ -587,7 +684,11 @@ declare module "ue" {
         constructor(TireType: UE.TireType, FrictionScale: number);
         TireType: UE.TireType;
         FrictionScale: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PhysicalMaterial extends UE.Object {
@@ -657,17 +758,29 @@ declare module "ue" {
         CustomSleepThresholdMultiplier: number;
         StabilizationThresholdMultiplier: number;
         PhysicsBlendWeight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Vector_NetQuantize extends UE.Vector {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Vector_NetQuantizeNormal extends UE.Vector {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class HitResult {
@@ -691,14 +804,22 @@ declare module "ue" {
         Component: TWeakObjectPtr<UE.PrimitiveComponent>;
         BoneName: string;
         MyBoneName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Key {
         constructor();
         constructor(KeyName: string);
         KeyName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETouchIndex { Touch1, Touch2, Touch3, Touch4, Touch5, Touch6, Touch7, Touch8, Touch9, Touch10, CursorPointerIndex, MAX_TOUCHES, ETouchIndex_MAX}
@@ -722,7 +843,11 @@ declare module "ue" {
         Roughness1: number;
         LobeMix: number;
         TransmissionTintColor: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubsurfaceProfile extends UE.Object {
@@ -744,7 +869,11 @@ declare module "ue" {
         bOverrideEmissiveBoost: boolean;
         bOverrideDiffuseBoost: boolean;
         bOverrideExportResolutionScale: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoftObjectPath {
@@ -752,7 +881,11 @@ declare module "ue" {
         constructor(AssetPathName: string, SubPathString: string);
         AssetPathName: string;
         SubPathString: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialTextureInfo {
@@ -763,7 +896,11 @@ declare module "ue" {
         TextureName: string;
         TextureReference: UE.SoftObjectPath;
         TextureIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ThumbnailInfo extends UE.Object {
@@ -782,7 +919,11 @@ declare module "ue" {
         TerminalSubCategoryObject: TWeakObjectPtr<UE.Object>;
         bTerminalIsConst: boolean;
         bTerminalIsWeakPointer: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPinContainerType { None, Array, Set, Map, EPinContainerType_MAX}
@@ -799,7 +940,11 @@ declare module "ue" {
         bIsReference: boolean;
         bIsConst: boolean;
         bIsWeakPointer: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EdGraphPin_Deprecated extends UE.Object {
@@ -911,7 +1056,11 @@ declare module "ue" {
         MaskG: number;
         MaskB: number;
         MaskA: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialExpression extends UE.Object {
@@ -953,7 +1102,11 @@ declare module "ue" {
         MaskB: number;
         MaskA: number;
         ExpressionName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ColorMaterialInput extends UE.MaterialInput {
@@ -961,7 +1114,11 @@ declare module "ue" {
         constructor(UseConstant: boolean, Constant: UE.Color);
         UseConstant: boolean;
         Constant: UE.Color;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ScalarMaterialInput extends UE.MaterialInput {
@@ -969,7 +1126,11 @@ declare module "ue" {
         constructor(UseConstant: boolean, Constant: number);
         UseConstant: boolean;
         Constant: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VectorMaterialInput extends UE.MaterialInput {
@@ -977,7 +1138,11 @@ declare module "ue" {
         constructor(UseConstant: boolean, Constant: UE.Vector);
         UseConstant: boolean;
         Constant: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMaterialDomain { MD_Surface, MD_DeferredDecal, MD_LightFunction, MD_Volume, MD_PostProcess, MD_UI, MD_RuntimeVirtualTexture, MD_MAX}
@@ -989,7 +1154,11 @@ declare module "ue" {
         constructor();
         constructor(ShadingModelField: number);
         ShadingModelField: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Vector2MaterialInput extends UE.MaterialInput {
@@ -998,7 +1167,11 @@ declare module "ue" {
         UseConstant: boolean;
         ConstantX: number;
         ConstantY: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ExpressionInput {
@@ -1013,19 +1186,31 @@ declare module "ue" {
         MaskB: number;
         MaskA: number;
         ExpressionName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialAttributesInput extends UE.ExpressionInput {
         constructor();
         constructor(PropertyConnectedBitmask: number);
         PropertyConnectedBitmask: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ShadingModelMaterialInput extends UE.MaterialInput {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETranslucencyLightingMode { TLM_VolumetricNonDirectional, TLM_VolumetricDirectional, TLM_VolumetricPerVertexNonDirectional, TLM_VolumetricPerVertexDirectional, TLM_Surface, TLM_SurfacePerPixelLighting, TLM_MAX}
@@ -1035,7 +1220,11 @@ declare module "ue" {
         constructor(GroupName: string, GroupSortPriority: number);
         GroupName: string;
         GroupSortPriority: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialFunctionInfo {
@@ -1043,7 +1232,11 @@ declare module "ue" {
         constructor(StateId: UE.Guid, Function: UE.MaterialFunctionInterface);
         StateId: UE.Guid;
         Function: UE.MaterialFunctionInterface;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CollectionParameterBase {
@@ -1051,21 +1244,33 @@ declare module "ue" {
         constructor(ParameterName: string, Id: UE.Guid);
         ParameterName: string;
         Id: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CollectionScalarParameter extends UE.CollectionParameterBase {
         constructor();
         constructor(DefaultValue: number);
         DefaultValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CollectionVectorParameter extends UE.CollectionParameterBase {
         constructor();
         constructor(DefaultValue: UE.LinearColor);
         DefaultValue: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialParameterCollection extends UE.Object {
@@ -1083,7 +1288,11 @@ declare module "ue" {
         constructor(StateId: UE.Guid, ParameterCollection: UE.MaterialParameterCollection);
         StateId: UE.Guid;
         ParameterCollection: UE.MaterialParameterCollection;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBlendableLocation { BL_AfterTonemapping, BL_BeforeTonemapping, BL_BeforeTranslucency, BL_ReplacingTonemapper, BL_SSRInput, BL_MAX}
@@ -1250,7 +1459,11 @@ declare module "ue" {
         Min: UE.Vector;
         Max: UE.Vector;
         IsValid: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CurveBase extends UE.Object {
@@ -1266,14 +1479,22 @@ declare module "ue" {
     
     class KeyHandleMap {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class IndexedCurve {
         constructor();
         constructor(KeyHandlesToIndices: UE.KeyHandleMap);
         KeyHandlesToIndices: UE.KeyHandleMap;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERichCurveExtrapolation { RCCE_Cycle, RCCE_CycleWithOffset, RCCE_Oscillate, RCCE_Linear, RCCE_Constant, RCCE_None, RCCE_MAX}
@@ -1283,7 +1504,11 @@ declare module "ue" {
         DefaultValue: number;
         PreInfinityExtrap: UE.ERichCurveExtrapolation;
         PostInfinityExtrap: UE.ERichCurveExtrapolation;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERichCurveInterpMode { RCIM_Linear, RCIM_Constant, RCIM_Cubic, RCIM_None, RCIM_MAX}
@@ -1301,14 +1526,22 @@ declare module "ue" {
         ArriveTangentWeight: number;
         LeaveTangent: number;
         LeaveTangentWeight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RichCurve extends UE.RealCurve {
         constructor();
         constructor(Keys: TArray<UE.RichCurveKey>);
         Keys: TArray<UE.RichCurveKey>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CurveLinearColor extends UE.CurveBase {
@@ -1345,7 +1578,11 @@ declare module "ue" {
         bIsUsedAsAtlasPosition: boolean;
         Curve: TSoftObjectPtr<UE.CurveLinearColor>;
         Atlas: TSoftObjectPtr<UE.CurveLinearColorAtlas>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMaterialParameterAssociation { LayerParameter, BlendParameter, GlobalParameter, EMaterialParameterAssociation_MAX}
@@ -1356,7 +1593,11 @@ declare module "ue" {
         Association: UE.EMaterialParameterAssociation;
         Index: number;
         ParameterLocation: UE.SoftObjectPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ScalarParameterValue {
@@ -1367,7 +1608,11 @@ declare module "ue" {
         ParameterInfo: UE.MaterialParameterInfo;
         ParameterValue: number;
         ExpressionGUID: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VectorParameterValue {
@@ -1377,7 +1622,11 @@ declare module "ue" {
         ParameterInfo: UE.MaterialParameterInfo;
         ParameterValue: UE.LinearColor;
         ExpressionGUID: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TextureParameterValue {
@@ -1387,7 +1636,11 @@ declare module "ue" {
         ParameterInfo: UE.MaterialParameterInfo;
         ParameterValue: UE.Texture;
         ExpressionGUID: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RuntimeVirtualTextureParameterValue {
@@ -1396,7 +1649,11 @@ declare module "ue" {
         ParameterInfo: UE.MaterialParameterInfo;
         ParameterValue: UE.RuntimeVirtualTexture;
         ExpressionGUID: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EFontCacheType { Offline, Runtime, EFontCacheType_MAX}
@@ -1409,7 +1666,11 @@ declare module "ue" {
         VSize: number;
         TextureIndex: number;
         VerticalOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EFontImportCharacterSet { FontICS_Default, FontICS_Ansi, FontICS_Symbol, FontICS_MAX}
@@ -1445,7 +1706,11 @@ declare module "ue" {
         bUseDistanceFieldAlpha: boolean;
         DistanceFieldScaleFactor: number;
         DistanceFieldScanRadiusScale: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EFontHinting { Default, Auto, AutoLight, Monochrome, None, EFontHinting_MAX}
@@ -1467,7 +1732,11 @@ declare module "ue" {
         FontFaceAsset: UE.Object;
         BulkDataPtr: UE.FontBulkData;
         FontData: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TypefaceEntry {
@@ -1475,14 +1744,22 @@ declare module "ue" {
         constructor(Name: string, Font: UE.FontData);
         Name: string;
         Font: UE.FontData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Typeface {
         constructor();
         constructor(Fonts: TArray<UE.TypefaceEntry>);
         Fonts: TArray<UE.TypefaceEntry>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CompositeFallbackFont {
@@ -1490,7 +1767,11 @@ declare module "ue" {
         constructor(Typeface: UE.Typeface, ScalingFactor: number);
         Typeface: UE.Typeface;
         ScalingFactor: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERangeBoundTypes { Exclusive, Inclusive, Open, ERangeBoundTypes_MAX}
@@ -1499,7 +1780,11 @@ declare module "ue" {
         constructor(Type: UE.ERangeBoundTypes, Value: number);
         Type: UE.ERangeBoundTypes;
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Int32Range {
@@ -1507,7 +1792,11 @@ declare module "ue" {
         constructor(LowerBound: UE.Int32RangeBound, UpperBound: UE.Int32RangeBound);
         LowerBound: UE.Int32RangeBound;
         UpperBound: UE.Int32RangeBound;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CompositeSubFont extends UE.CompositeFallbackFont {
@@ -1516,7 +1805,11 @@ declare module "ue" {
         CharacterRanges: TArray<UE.Int32Range>;
         Cultures: string;
         EditorName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CompositeFont {
@@ -1525,7 +1818,11 @@ declare module "ue" {
         DefaultTypeface: UE.Typeface;
         FallbackTypeface: UE.CompositeFallbackFont;
         SubTypefaces: TArray<UE.CompositeSubFont>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Font extends UE.Object {
@@ -1559,7 +1856,11 @@ declare module "ue" {
         FontValue: UE.Font;
         FontPage: number;
         ExpressionGUID: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialInstanceBasePropertyOverrides {
@@ -1577,7 +1878,11 @@ declare module "ue" {
         BlendMode: UE.EBlendMode;
         ShadingModel: UE.EMaterialShadingModel;
         OpacityMaskClipValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticParameterBase {
@@ -1586,14 +1891,22 @@ declare module "ue" {
         ParameterInfo: UE.MaterialParameterInfo;
         bOverride: boolean;
         ExpressionGUID: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticSwitchParameter extends UE.StaticParameterBase {
         constructor();
         constructor(Value: boolean);
         Value: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticComponentMaskParameter extends UE.StaticParameterBase {
@@ -1603,7 +1916,11 @@ declare module "ue" {
         G: boolean;
         B: boolean;
         A: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticTerrainLayerWeightParameter extends UE.StaticParameterBase {
@@ -1611,7 +1928,11 @@ declare module "ue" {
         constructor(WeightmapIndex: number, bWeightBasedBlend: boolean);
         WeightmapIndex: number;
         bWeightBasedBlend: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialLayersFunctions {
@@ -1624,14 +1945,22 @@ declare module "ue" {
         RestrictToBlendRelatives: TArray<boolean>;
         LayerStates: TArray<boolean>;
         KeyString: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticMaterialLayersParameter extends UE.StaticParameterBase {
         constructor();
         constructor(Value: UE.MaterialLayersFunctions);
         Value: UE.MaterialLayersFunctions;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticParameterSet {
@@ -1641,7 +1970,11 @@ declare module "ue" {
         StaticComponentMaskParameters: TArray<UE.StaticComponentMaskParameter>;
         TerrainLayerWeightParameters: TArray<UE.StaticTerrainLayerWeightParameter>;
         MaterialLayersParameters: TArray<UE.StaticMaterialLayersParameter>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialInstance extends UE.MaterialInterface {
@@ -1690,7 +2023,11 @@ declare module "ue" {
         Category: string;
         DisplayName: string;
         Description: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BillboardComponent extends UE.PrimitiveComponent {
@@ -1723,14 +2060,22 @@ declare module "ue" {
     
     class UniqueNetIdWrapper {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UniqueNetIdRepl extends UE.UniqueNetIdWrapper {
         constructor();
         constructor(ReplicationBytes: TArray<number>);
         ReplicationBytes: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PlayerState extends UE.Info {
@@ -1801,7 +2146,11 @@ declare module "ue" {
         Name: string;
         ParentIndex: number;
         TranslationRetargetingMode: UE.EBoneTranslationRetargetingMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VirtualBone {
@@ -1810,7 +2159,11 @@ declare module "ue" {
         SourceBoneName: string;
         TargetBoneName: string;
         VirtualBoneName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshSocket extends UE.Object {
@@ -1830,14 +2183,22 @@ declare module "ue" {
     
     class SmartNameContainer {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BoneReference {
         constructor();
         constructor(BoneName: string);
         BoneName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlendProfileBoneEntry {
@@ -1845,7 +2206,11 @@ declare module "ue" {
         constructor(BoneReference: UE.BoneReference, BlendScale: number);
         BoneReference: UE.BoneReference;
         BlendScale: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlendProfile extends UE.Object {
@@ -1862,7 +2227,11 @@ declare module "ue" {
         constructor(GroupName: string, SlotNames: TArray<string>);
         GroupName: string;
         SlotNames: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EConstraintTransform { Absolute, Relative, EConstraintTransform_MAX}
@@ -1872,14 +2241,22 @@ declare module "ue" {
         TranformType: UE.EConstraintTransform;
         ParentSpace: string;
         Weight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TransformBaseConstraint {
         constructor();
         constructor(TransformConstraints: TArray<UE.RigTransformConstraint>);
         TransformConstraints: TArray<UE.RigTransformConstraint>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TransformBase {
@@ -1887,7 +2264,11 @@ declare module "ue" {
         constructor(Node: string, Constraints: FixSizeArray<UE.TransformBaseConstraint>);
         Node: string;
         Constraints: FixSizeArray<UE.TransformBaseConstraint>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Node {
@@ -1898,7 +2279,11 @@ declare module "ue" {
         Transform: UE.Transform;
         DisplayName: string;
         bAdvanced: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Rig extends UE.Object {
@@ -1915,7 +2300,11 @@ declare module "ue" {
         constructor(NodeName: string, BoneName: string);
         NodeName: string;
         BoneName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RigConfiguration {
@@ -1923,7 +2312,11 @@ declare module "ue" {
         constructor(Rig: UE.Rig, BoneMappingTable: TArray<UE.NameMapping>);
         Rig: UE.Rig;
         BoneMappingTable: TArray<UE.NameMapping>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PreviewAttachedObjectPair {
@@ -1932,14 +2325,22 @@ declare module "ue" {
         AttachedObject: TSoftObjectPtr<UE.Object>;
         Object: UE.Object;
         AttachedTo: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PreviewAssetAttachContainer {
         constructor();
         constructor(AttachedObjects: TArray<UE.PreviewAttachedObjectPair>);
         AttachedObjects: TArray<UE.PreviewAttachedObjectPair>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Skeleton extends UE.Object {
@@ -1969,7 +2370,11 @@ declare module "ue" {
         Origin: UE.Vector;
         BoxExtent: UE.Vector;
         SphereRadius: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshUVChannelInfo {
@@ -1978,7 +2383,11 @@ declare module "ue" {
         bInitialized: boolean;
         bOverrideDensities: boolean;
         LocalUVDensities: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMaterial {
@@ -1990,7 +2399,11 @@ declare module "ue" {
         bRecomputeTangent: boolean;
         ImportedMaterialSlotName: string;
         UVChannelData: UE.MeshUVChannelInfo;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAxis { None, X, Y, Z, EAxis_MAX}
@@ -1999,7 +2412,11 @@ declare module "ue" {
         constructor(SourceIndex: number, BoneFlipAxis: UE.EAxis);
         SourceIndex: number;
         BoneFlipAxis: UE.EAxis;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PerPlatformFloat {
@@ -2007,7 +2424,11 @@ declare module "ue" {
         constructor(Default: number, PerPlatform: TMap<string, number>);
         Default: number;
         PerPlatform: TMap<string, number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshBuildSettings {
@@ -2024,7 +2445,11 @@ declare module "ue" {
         ThresholdPosition: number;
         ThresholdTangentNormal: number;
         ThresholdUV: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum SkeletalMeshTerminationCriterion { SMTC_NumOfTriangles, SMTC_NumOfVerts, SMTC_TriangleOrVert, SMTC_AbsNumOfTriangles, SMTC_AbsNumOfVerts, SMTC_AbsTriangleOrVert, SMTC_MAX}
@@ -2042,7 +2467,11 @@ declare module "ue" {
         constructor(SourceAsset: UE.AnimationAsset, TargetAsset: UE.AnimationAsset);
         SourceAsset: UE.AnimationAsset;
         TargetAsset: UE.AnimationAsset;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetMappingTable extends UE.Object {
@@ -2057,7 +2486,11 @@ declare module "ue" {
         constructor();
         constructor(DisplayName: string);
         DisplayName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PoseData {
@@ -2068,7 +2501,11 @@ declare module "ue" {
         LocalSpacePose: TArray<UE.Transform>;
         TrackToBufferIndex: TMap<number, number>;
         CurveData: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimCurveBase {
@@ -2077,7 +2514,11 @@ declare module "ue" {
         LastObservedName: string;
         Name: UE.SmartName;
         CurveTypeFlags: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PoseDataContainer {
@@ -2088,7 +2529,11 @@ declare module "ue" {
         TrackMap: TMap<string, number>;
         Poses: TArray<UE.PoseData>;
         Curves: TArray<UE.AnimCurveBase>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PoseAsset extends UE.AnimationAsset {
@@ -2143,7 +2588,11 @@ declare module "ue" {
         CustomCurve: UE.CurveFloat;
         BlendTime: number;
         BlendOption: UE.EAlphaBlendOption;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimSyncMarker {
@@ -2152,14 +2601,22 @@ declare module "ue" {
         MarkerName: string;
         Time: number;
         TrackIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MarkerSyncData {
         constructor();
         constructor(AuthoredSyncMarkers: TArray<UE.AnimSyncMarker>);
         AuthoredSyncMarkers: TArray<UE.AnimSyncMarker>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CompositeSection extends UE.AnimLinkableElement {
@@ -2169,7 +2626,11 @@ declare module "ue" {
         StartTime: number;
         NextSectionName: string;
         MetaData: TArray<UE.AnimMetaData>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimSegment {
@@ -2181,14 +2642,22 @@ declare module "ue" {
         AnimEndTime: number;
         AnimPlayRate: number;
         LoopingCount: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimTrack {
         constructor();
         constructor(AnimSegments: TArray<UE.AnimSegment>);
         AnimSegments: TArray<UE.AnimSegment>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SlotAnimationTrack {
@@ -2196,7 +2665,11 @@ declare module "ue" {
         constructor(SlotName: string, AnimTrack: UE.AnimTrack);
         SlotName: string;
         AnimTrack: UE.AnimTrack;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BranchingPoint extends UE.AnimLinkableElement {
@@ -2205,7 +2678,11 @@ declare module "ue" {
         EventName: string;
         DisplayTime: number;
         TriggerTimeOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERootMotionRootLock { RefPose, AnimFirstFrame, Zero, ERootMotionRootLock_MAX}
@@ -2216,7 +2693,11 @@ declare module "ue" {
         NotifyIndex: number;
         TriggerTime: number;
         NotifyEventType: UE.EAnimNotifyEventType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TimeStretchCurveMarker {
@@ -2224,7 +2705,11 @@ declare module "ue" {
         constructor(Time: FixSizeArray<number>, Alpha: number);
         Time: FixSizeArray<number>;
         Alpha: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TimeStretchCurve {
@@ -2234,7 +2719,11 @@ declare module "ue" {
         CurveValueMinPrecision: number;
         Markers: TArray<UE.TimeStretchCurveMarker>;
         Sum_dT_i_by_C_i: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimMontage extends UE.AnimCompositeBase {
@@ -2278,7 +2767,11 @@ declare module "ue" {
         SegmentLength: number;
         LinkValue: number;
         LinkedSequence: UE.AnimSequenceBase;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNotify extends UE.Object {
@@ -2326,21 +2819,33 @@ declare module "ue" {
         bTriggerOnFollower: boolean;
         NotifyColor: UE.Color;
         TrackIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FloatCurve extends UE.AnimCurveBase {
         constructor();
         constructor(FloatCurve: UE.RichCurve);
         FloatCurve: UE.RichCurve;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VectorCurve extends UE.AnimCurveBase {
         constructor();
         constructor(FloatCurves: FixSizeArray<UE.RichCurve>);
         FloatCurves: FixSizeArray<UE.RichCurve>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TransformCurve extends UE.AnimCurveBase {
@@ -2349,7 +2854,11 @@ declare module "ue" {
         TranslationCurve: UE.VectorCurve;
         RotationCurve: UE.VectorCurve;
         ScaleCurve: UE.VectorCurve;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RawCurveTracks {
@@ -2358,7 +2867,11 @@ declare module "ue" {
         FloatCurves: TArray<UE.FloatCurve>;
         VectorCurves: TArray<UE.VectorCurve>;
         TransformCurves: TArray<UE.TransformCurve>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNotifyTrack {
@@ -2366,7 +2879,11 @@ declare module "ue" {
         constructor(TrackName: string, TrackColor: UE.LinearColor);
         TrackName: string;
         TrackColor: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimSequenceBase extends UE.AnimationAsset {
@@ -2386,7 +2903,11 @@ declare module "ue" {
         constructor();
         constructor(BoneTreeIndex: number);
         BoneTreeIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum AnimationCompressionFormat { ACF_None, ACF_Float96NoW, ACF_Fixed48NoW, ACF_IntervalFixed32NoW, ACF_Fixed32NoW, ACF_Float32NoW, ACF_Identity, ACF_MAX}
@@ -2484,7 +3005,11 @@ declare module "ue" {
         BaseLOD: number;
         BonesToRemove: TArray<UE.BoneReference>;
         BakePose: UE.AnimSequence;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshLODInfo {
@@ -2508,7 +3033,11 @@ declare module "ue" {
         bAllowCPUAccess: boolean;
         bSupportUniformlyDistributedSampling: boolean;
         bImportWithBaseMesh: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PerPlatformInt {
@@ -2516,7 +3045,11 @@ declare module "ue" {
         constructor(Default: number, PerPlatform: TMap<string, number>);
         Default: number;
         PerPlatform: TMap<string, number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PerPlatformBool {
@@ -2524,7 +3057,11 @@ declare module "ue" {
         constructor(Default: boolean, PerPlatform: TMap<string, boolean>);
         Default: boolean;
         PerPlatform: TMap<string, boolean>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBoneFilterActionOption { Remove, Keep, Invalid, EBoneFilterActionOption_MAX}
@@ -2533,7 +3070,11 @@ declare module "ue" {
         constructor(bExcludeSelf: boolean, BoneName: string);
         bExcludeSelf: boolean;
         BoneName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshLODGroupSettings {
@@ -2547,7 +3088,11 @@ declare module "ue" {
         WeightOfPrioritization: number;
         BakePose: UE.AnimSequence;
         ReductionSettings: UE.SkeletalMeshOptimizationSettings;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshLODSettings extends UE.DataAsset {
@@ -2569,14 +3114,22 @@ declare module "ue" {
         RestOffset: number;
         Name: string;
         bContributeToMass: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Plane extends UE.Vector {
         constructor();
         constructor(W: number);
         W: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Matrix {
@@ -2586,7 +3139,11 @@ declare module "ue" {
         YPlane: UE.Plane;
         ZPlane: UE.Plane;
         WPlane: UE.Plane;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KSphereElem extends UE.KShapeElem {
@@ -2595,7 +3152,11 @@ declare module "ue" {
         TM: UE.Matrix;
         Center: UE.Vector;
         Radius: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KBoxElem extends UE.KShapeElem {
@@ -2608,7 +3169,11 @@ declare module "ue" {
         X: number;
         Y: number;
         Z: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KSphylElem extends UE.KShapeElem {
@@ -2620,7 +3185,11 @@ declare module "ue" {
         Rotation: UE.Rotator;
         Radius: number;
         Length: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KConvexElem extends UE.KShapeElem {
@@ -2629,7 +3198,11 @@ declare module "ue" {
         VertexData: TArray<UE.Vector>;
         ElemBox: UE.Box;
         Transform: UE.Transform;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KTaperedCapsuleElem extends UE.KShapeElem {
@@ -2640,7 +3213,11 @@ declare module "ue" {
         Radius0: number;
         Radius1: number;
         Length: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KAggregateGeom {
@@ -2651,7 +3228,11 @@ declare module "ue" {
         SphylElems: TArray<UE.KSphylElem>;
         ConvexElems: TArray<UE.KConvexElem>;
         TaperedCapsuleElems: TArray<UE.KTaperedCapsuleElem>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPhysicsType { PhysType_Default, PhysType_Kinematic, PhysType_Simulated, PhysType_MAX}
@@ -2692,7 +3273,11 @@ declare module "ue" {
         VelocityStrength: number;
         MaxLinearForce: number;
         MaxAngularForce: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PhysicalAnimationProfile {
@@ -2700,7 +3285,11 @@ declare module "ue" {
         constructor(ProfileName: string, PhysicalAnimationData: UE.PhysicalAnimationData);
         ProfileName: string;
         PhysicalAnimationData: UE.PhysicalAnimationData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalBodySetup extends UE.BodySetup {
@@ -2721,7 +3310,11 @@ declare module "ue" {
         Restitution: number;
         ContactDistance: number;
         bSoftConstraint: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ELinearConstraintMotion { LCM_Free, LCM_Limited, LCM_Locked, LCM_MAX}
@@ -2732,7 +3325,11 @@ declare module "ue" {
         XMotion: UE.ELinearConstraintMotion;
         YMotion: UE.ELinearConstraintMotion;
         ZMotion: UE.ELinearConstraintMotion;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAngularConstraintMotion { ACM_Free, ACM_Limited, ACM_Locked, ACM_MAX}
@@ -2743,7 +3340,11 @@ declare module "ue" {
         Swing2LimitDegrees: number;
         Swing1Motion: UE.EAngularConstraintMotion;
         Swing2Motion: UE.EAngularConstraintMotion;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TwistConstraint extends UE.ConstraintBaseParams {
@@ -2751,7 +3352,11 @@ declare module "ue" {
         constructor(TwistLimitDegrees: number, TwistMotion: UE.EAngularConstraintMotion);
         TwistLimitDegrees: number;
         TwistMotion: UE.EAngularConstraintMotion;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ConstraintDrive {
@@ -2762,7 +3367,11 @@ declare module "ue" {
         MaxForce: number;
         bEnablePositionDrive: boolean;
         bEnableVelocityDrive: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LinearDriveConstraint {
@@ -2774,7 +3383,11 @@ declare module "ue" {
         YDrive: UE.ConstraintDrive;
         ZDrive: UE.ConstraintDrive;
         bEnablePositionDrive: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAngularDriveMode { SLERP, TwistAndSwing, EAngularDriveMode_MAX}
@@ -2787,7 +3400,11 @@ declare module "ue" {
         OrientationTarget: UE.Rotator;
         AngularVelocityTarget: UE.Vector;
         AngularDriveMode: UE.EAngularDriveMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ConstraintProfileProperties {
@@ -2807,7 +3424,11 @@ declare module "ue" {
         bEnableProjection: boolean;
         bAngularBreakable: boolean;
         bLinearBreakable: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ConstraintInstance {
@@ -2881,7 +3502,11 @@ declare module "ue" {
         AngularDriveSpring: number;
         AngularDriveDamping: number;
         AngularDriveForceLimit: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PhysicsConstraintProfileHandle {
@@ -2889,7 +3514,11 @@ declare module "ue" {
         constructor(ProfileProperties: UE.ConstraintProfileProperties, ProfileName: string);
         ProfileProperties: UE.ConstraintProfileProperties;
         ProfileName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PhysicsConstraintTemplate extends UE.Object {
@@ -2961,7 +3590,11 @@ declare module "ue" {
         constructor(ParentName: string, Transform: UE.Transform);
         ParentName: string;
         Transform: UE.Transform;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NodeMappingContainer extends UE.Object {
@@ -3007,7 +3640,11 @@ declare module "ue" {
         FiberCompression: number;
         FiberExpansion: number;
         FiberResistance: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothingAssetData_Legacy {
@@ -3017,7 +3654,11 @@ declare module "ue" {
         ApexFileName: string;
         bClothPropertiesChanged: boolean;
         PhysicsProperties: UE.ClothPhysicsProperties_Legacy;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothingAssetBase extends UE.Object {
@@ -3033,7 +3674,11 @@ declare module "ue" {
         constructor();
         constructor(MaterialName: string);
         MaterialName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshSamplingRegionBoneFilter {
@@ -3042,7 +3687,11 @@ declare module "ue" {
         BoneName: string;
         bIncludeOrExclude: boolean;
         bApplyToChildren: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshSamplingRegion {
@@ -3053,17 +3702,29 @@ declare module "ue" {
         bSupportUniformlyDistributedSampling: boolean;
         MaterialFilters: TArray<UE.SkeletalMeshSamplingRegionMaterialFilter>;
         BoneFilters: TArray<UE.SkeletalMeshSamplingRegionBoneFilter>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshSamplingLODBuiltData {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshSamplingRegionBuiltData {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshSamplingBuiltData {
@@ -3071,7 +3732,11 @@ declare module "ue" {
         constructor(WholeMeshBuiltData: TArray<UE.SkeletalMeshSamplingLODBuiltData>, RegionBuiltData: TArray<UE.SkeletalMeshSamplingRegionBuiltData>);
         WholeMeshBuiltData: TArray<UE.SkeletalMeshSamplingLODBuiltData>;
         RegionBuiltData: TArray<UE.SkeletalMeshSamplingRegionBuiltData>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkeletalMeshSamplingInfo {
@@ -3079,7 +3744,11 @@ declare module "ue" {
         constructor(Regions: TArray<UE.SkeletalMeshSamplingRegion>, BuiltData: UE.SkeletalMeshSamplingBuiltData);
         Regions: TArray<UE.SkeletalMeshSamplingRegion>;
         BuiltData: UE.SkeletalMeshSamplingBuiltData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkinWeightProfileInfo {
@@ -3089,7 +3758,11 @@ declare module "ue" {
         DefaultProfile: UE.PerPlatformBool;
         DefaultProfileFromLODIndex: UE.PerPlatformInt;
         PerLODSourceFiles: TMap<number, string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintCore extends UE.Object {
@@ -3113,7 +3786,11 @@ declare module "ue" {
         PropertyName: string;
         ArrayIndex: number;
         PropertyScope: UE.Struct;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintCookedComponentInstancingData {
@@ -3121,7 +3798,11 @@ declare module "ue" {
         constructor(ChangedPropertyList: TArray<UE.BlueprintComponentChangedPropertyInfo>, bHasValidCookedData: boolean);
         ChangedPropertyList: TArray<UE.BlueprintComponentChangedPropertyInfo>;
         bHasValidCookedData: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BPVariableMetaDataEntry {
@@ -3129,7 +3810,11 @@ declare module "ue" {
         constructor(DataKey: string, DataValue: string);
         DataKey: string;
         DataValue: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SCS_Node extends UE.Object {
@@ -3183,7 +3868,11 @@ declare module "ue" {
     
     class BlueprintMacroCosmeticInfo {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETimelineLengthMode { TL_TimelineLength, TL_LastKeyFrame, TL_MAX}
@@ -3192,7 +3881,11 @@ declare module "ue" {
         constructor(TrackName: string, bIsExternalCurve: boolean);
         TrackName: string;
         bIsExternalCurve: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TTEventTrack extends UE.TTTrackBase {
@@ -3200,21 +3893,33 @@ declare module "ue" {
         constructor(FunctionName: string, CurveKeys: UE.CurveFloat);
         FunctionName: string;
         CurveKeys: UE.CurveFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TTPropertyTrack extends UE.TTTrackBase {
         constructor();
         constructor(PropertyName: string);
         PropertyName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TTFloatTrack extends UE.TTPropertyTrack {
         constructor();
         constructor(CurveFloat: UE.CurveFloat);
         CurveFloat: UE.CurveFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CurveVector extends UE.CurveBase {
@@ -3230,14 +3935,22 @@ declare module "ue" {
         constructor();
         constructor(CurveVector: UE.CurveVector);
         CurveVector: UE.CurveVector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TTLinearColorTrack extends UE.TTPropertyTrack {
         constructor();
         constructor(CurveLinearColor: UE.CurveLinearColor);
         CurveLinearColor: UE.CurveLinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TimelineTemplate extends UE.Object {
@@ -3268,7 +3981,11 @@ declare module "ue" {
         constructor(ComponentName: string, ComponentClass: UE.Class);
         ComponentName: string;
         ComponentClass: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ComponentKey {
@@ -3277,7 +3994,11 @@ declare module "ue" {
         OwnerClass: UE.Class;
         SCSVariableName: string;
         AssociatedGuid: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ComponentOverrideRecord {
@@ -3287,7 +4008,11 @@ declare module "ue" {
         ComponentTemplate: UE.ActorComponent;
         ComponentKey: UE.ComponentKey;
         CookedComponentInstancingData: UE.BlueprintCookedComponentInstancingData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InheritableComponentHandler extends UE.Object {
@@ -3313,7 +4038,11 @@ declare module "ue" {
         ReplicationCondition: UE.ELifetimeCondition;
         MetaDataArray: TArray<UE.BPVariableMetaDataEntry>;
         DefaultValue: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BPInterfaceDescription {
@@ -3321,7 +4050,11 @@ declare module "ue" {
         constructor(Interface: UE.Class, Graphs: TArray<UE.EdGraph>);
         Interface: UE.Class;
         Graphs: TArray<UE.EdGraph>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditedDocumentInfo {
@@ -3331,7 +4064,11 @@ declare module "ue" {
         SavedViewOffset: UE.Vector2D;
         SavedZoomAmount: number;
         EditedObject: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BPEditorBookmarkNode {
@@ -3340,7 +4077,11 @@ declare module "ue" {
         NodeGuid: UE.Guid;
         ParentGuid: UE.Guid;
         DisplayName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Breakpoint extends UE.Object {
@@ -3360,7 +4101,11 @@ declare module "ue" {
         constructor(OwningNode: TWeakObjectPtr<UE.EdGraphNode>, PinId: UE.Guid);
         OwningNode: TWeakObjectPtr<UE.EdGraphNode>;
         PinId: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintExtension extends UE.Object {
@@ -3499,7 +4244,11 @@ declare module "ue" {
         constructor();
         constructor(HiddenMaterials: TArray<boolean>);
         HiddenMaterials: TArray<boolean>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EVisibilityBasedAnimTickOption { AlwaysTickPoseAndRefreshBones, AlwaysTickPose, OnlyTickMontagesWhenNotRendered, OnlyTickPoseWhenRendered, EVisibilityBasedAnimTickOption_MAX}
@@ -3508,7 +4257,11 @@ declare module "ue" {
         constructor(Bones: FixSizeArray<number>, Weights: FixSizeArray<number>);
         Bones: FixSizeArray<number>;
         Weights: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPhysBodyOp { PBO_None, PBO_Term, PBO_MAX}
@@ -3595,7 +4348,11 @@ declare module "ue" {
         constructor(Name: string, Color: UE.LinearColor);
         Name: string;
         Color: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimParentNodeAssetOverride {
@@ -3603,7 +4360,11 @@ declare module "ue" {
         constructor(NewAsset: UE.AnimationAsset, ParentNodeGuid: UE.Guid);
         NewAsset: UE.AnimationAsset;
         ParentNodeGuid: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PoseWatch extends UE.Object {
@@ -3666,7 +4427,11 @@ declare module "ue" {
         constructor(FunctionToPatch: UE.Function, EventGraphCallOffset: number);
         FunctionToPatch: UE.Function;
         EventGraphCallOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintGeneratedClass extends UE.Class {
@@ -3702,7 +4467,11 @@ declare module "ue" {
         bDesiredTransitionReturnValue: boolean;
         bAutomaticRemainingTimeRule: boolean;
         PoseEvaluatorLinks: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BakedAnimationState {
@@ -3719,14 +4488,22 @@ declare module "ue" {
         PlayerNodeIndices: TArray<number>;
         LayerNodeIndices: TArray<number>;
         bAlwaysResetOnEntry: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimationStateBase {
         constructor();
         constructor(StateName: string);
         StateName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETransitionLogicType { TLT_StandardBlend, TLT_Inertialization, TLT_Custom, TLT_MAX}
@@ -3743,7 +4520,11 @@ declare module "ue" {
         CustomCurve: UE.CurveFloat;
         BlendProfile: UE.BlendProfile;
         LogicType: UE.ETransitionLogicType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BakedAnimationStateMachine {
@@ -3753,14 +4534,22 @@ declare module "ue" {
         InitialState: number;
         States: TArray<UE.BakedAnimationState>;
         Transitions: TArray<UE.AnimationTransitionBetweenStates>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CachedPoseIndices {
         constructor();
         constructor(OrderedSavedPoseNodeIndices: TArray<number>);
         OrderedSavedPoseNodeIndices: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPostCopyOperation { None, LogicalNegateBool, EPostCopyOperation_MAX}
@@ -3780,7 +4569,11 @@ declare module "ue" {
         Size: number;
         CachedSourceProperty: UE.Property;
         CachedSourceStructSubProperty: UE.Property;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ExposedValueHandler {
@@ -3790,14 +4583,22 @@ declare module "ue" {
         CopyRecords: TArray<UE.ExposedValueCopyRecord>;
         Function: UE.Function;
         ValueHandlerNodeProperty: UE.StructProperty;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GraphAssetPlayerInformation {
         constructor();
         constructor(PlayerNodeIndices: TArray<number>);
         PlayerNodeIndices: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphBlendOptions {
@@ -3805,7 +4606,11 @@ declare module "ue" {
         constructor(BlendInTime: number, BlendOutTime: number);
         BlendInTime: number;
         BlendOutTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimBlueprintGeneratedClass extends UE.BlueprintGeneratedClass {
@@ -3826,21 +4631,33 @@ declare module "ue" {
     enum ERootMotionMode { NoRootMotionExtraction, IgnoreRootMotion, RootMotionFromEverything, RootMotionFromMontagesOnly, ERootMotionMode_MAX}
     class SoftClassPath extends UE.SoftObjectPath {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNotifyEventReference {
         constructor();
         constructor(NotifySource: UE.Object);
         NotifySource: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNotifyArray {
         constructor();
         constructor(Notifies: TArray<UE.AnimNotifyEventReference>);
         Notifies: TArray<UE.AnimNotifyEventReference>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNotifyQueue {
@@ -3848,7 +4665,11 @@ declare module "ue" {
         constructor(AnimNotifies: TArray<UE.AnimNotifyEventReference>, UnfilteredMontageAnimNotifies: TMap<string, UE.AnimNotifyArray>);
         AnimNotifies: TArray<UE.AnimNotifyEventReference>;
         UnfilteredMontageAnimNotifies: TMap<string, UE.AnimNotifyArray>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PoseSnapshot {
@@ -3859,7 +4680,11 @@ declare module "ue" {
         SkeletalMeshName: string;
         SnapshotName: string;
         bIsValid: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETeleportType { None, TeleportPhysics, ResetPhysics, ETeleportType_MAX}
@@ -3870,7 +4695,11 @@ declare module "ue" {
         PreviousMarkerName: string;
         NextMarkerName: string;
         PositionBetweenMarkers: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAnimCurveType { AttributeCurve, MaterialCurve, MorphTargetCurve, MaxAnimCurveType, EAnimCurveType_MAX}
@@ -3974,7 +4803,11 @@ declare module "ue" {
         bSavedPlaying: boolean;
         SavedPosition: number;
         SavedPlayRate: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EKinematicBonesUpdateToPhysics { SkipSimulatingBones, SkipAllBones, EKinematicBonesUpdateToPhysics_MAX}
@@ -4213,7 +5046,11 @@ declare module "ue" {
         bCanWalk: boolean;
         bCanSwim: boolean;
         bCanFly: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavAgentProperties extends UE.MovementProperties {
@@ -4224,7 +5061,11 @@ declare module "ue" {
         AgentStepHeight: number;
         NavWalkingSearchHeightScale: number;
         PreferredNavData: UE.SoftClassPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavMovementComponent extends UE.MovementComponent {
@@ -4274,7 +5115,11 @@ declare module "ue" {
         FloorDist: number;
         LineDist: number;
         HitResult: UE.HitResult;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavAvoidanceMask {
@@ -4312,24 +5157,40 @@ declare module "ue" {
         bGroup29: boolean;
         bGroup30: boolean;
         bGroup31: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CharacterMovementComponentPostPhysicsTickFunction extends UE.TickFunction {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RootMotionSourceSettings {
         constructor();
         constructor(Flags: number);
         Flags: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Vector_NetQuantize10 extends UE.Vector {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RootMotionSourceGroup {
@@ -4340,7 +5201,11 @@ declare module "ue" {
         bIsAdditiveVelocityApplied: boolean;
         LastAccumulatedSettings: UE.RootMotionSourceSettings;
         LastPreAdditiveVelocity: UE.Vector_NetQuantize10;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RootMotionMovementParams {
@@ -4349,7 +5214,11 @@ declare module "ue" {
         bHasRootMotion: boolean;
         BlendWeight: number;
         RootMotionTransform: UE.Transform;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CharacterMovementComponent extends UE.PawnMovementComponent {
@@ -4615,7 +5484,11 @@ declare module "ue" {
         bServerHasBaseComponent: boolean;
         bRelativeRotation: boolean;
         bServerHasVelocity: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RepRootMotionMontage {
@@ -4633,7 +5506,11 @@ declare module "ue" {
         AuthoritativeRootMotion: UE.RootMotionSourceGroup;
         Acceleration: UE.Vector_NetQuantize10;
         LinearVelocity: UE.Vector_NetQuantize10;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SimulatedRootMotionReplicatedMove {
@@ -4641,7 +5518,11 @@ declare module "ue" {
         constructor(Time: number, RootMotion: UE.RepRootMotionMontage);
         Time: number;
         RootMotion: UE.RepRootMotionMontage;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Character extends UE.Pawn {
@@ -4787,7 +5668,11 @@ declare module "ue" {
         V2_Pos: UE.Vector2D;
         V2_UV: UE.Vector2D;
         V2_Color: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Canvas extends UE.Object {
@@ -4840,7 +5725,11 @@ declare module "ue" {
         OrigActorLocation: UE.Vector;
         Font: UE.Font;
         FontScale: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class HUD extends UE.Actor {
@@ -4915,14 +5804,22 @@ declare module "ue" {
         constructor(Weight: number, Object: UE.Object);
         Weight: number;
         Object: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WeightedBlendables {
         constructor();
         constructor(Array: TArray<UE.WeightedBlendable>);
         Array: TArray<UE.WeightedBlendable>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PostProcessSettings {
@@ -5282,7 +6179,11 @@ declare module "ue" {
         ScreenPercentage: number;
         WeightedBlendables: UE.WeightedBlendables;
         Blendables: TArray<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MinimalViewInfo {
@@ -5302,7 +6203,11 @@ declare module "ue" {
         PostProcessBlendWeight: number;
         PostProcessSettings: UE.PostProcessSettings;
         OffCenterProjectionOffset: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CameraCacheEntry {
@@ -5310,7 +6215,11 @@ declare module "ue" {
         constructor(TimeStamp: number, POV: UE.MinimalViewInfo);
         TimeStamp: number;
         POV: UE.MinimalViewInfo;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TViewTarget {
@@ -5319,7 +6228,11 @@ declare module "ue" {
         Target: UE.Actor;
         POV: UE.MinimalViewInfo;
         PlayerState: UE.PlayerState;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CameraModifier extends UE.Object {
@@ -5404,14 +6317,22 @@ declare module "ue" {
         EntryStride: number;
         SubEntryStride: number;
         LockFlag: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RawDistribution {
         constructor();
         constructor(Table: UE.DistributionLookupTable);
         Table: UE.DistributionLookupTable;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Distribution extends UE.Object {
@@ -5436,7 +6357,11 @@ declare module "ue" {
         MinValue: number;
         MaxValue: number;
         Distribution: UE.DistributionFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleBurst {
@@ -5445,7 +6370,11 @@ declare module "ue" {
         Count: number;
         CountLow: number;
         Time: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EParticleSubUVInterpMethod { PSUVIM_None, PSUVIM_Linear, PSUVIM_Linear_Blend, PSUVIM_Random, PSUVIM_Random_Blend, PSUVIM_MAX}
@@ -5562,7 +6491,11 @@ declare module "ue" {
         bUseOrbitOffset: boolean;
         CustomName: string;
         ParticleModuleEventsToSendToGame: TArray<UE.ParticleModuleEventSendToGame>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleModuleEventGenerator extends UE.ParticleModuleEventBase {
@@ -5600,7 +6533,11 @@ declare module "ue" {
         MinValueVec: UE.Vector;
         MaxValueVec: UE.Vector;
         Distribution: UE.DistributionVector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OrbitOptions {
@@ -5609,7 +6546,11 @@ declare module "ue" {
         bProcessDuringSpawn: boolean;
         bProcessDuringUpdate: boolean;
         bUseEmitterTime: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleModuleOrbit extends UE.ParticleModuleOrbitBase {
@@ -5694,7 +6635,11 @@ declare module "ue" {
         bClamp: number;
         ClampLow: number;
         ClampHigh: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CurveEdTab {
@@ -5706,7 +6651,11 @@ declare module "ue" {
         ViewEndInput: number;
         ViewStartOutput: number;
         ViewEndOutput: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurveEdSetup extends UE.Object {
@@ -5720,7 +6669,11 @@ declare module "ue" {
     
     class ParticleSystemLOD {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EParticleSystemUpdateMode { EPSUM_RealTime, EPSUM_FixedTime, EPSUM_MAX}
@@ -5731,7 +6684,11 @@ declare module "ue" {
         constructor();
         constructor(SoloEnableSetting: TArray<number>);
         SoloEnableSetting: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NamedEmitterMaterial {
@@ -5739,7 +6696,11 @@ declare module "ue" {
         constructor(Name: string, Material: UE.MaterialInterface);
         Name: string;
         Material: UE.MaterialInterface;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleSystem extends UE.FXSystemAsset {
@@ -5810,7 +6771,11 @@ declare module "ue" {
         Color: UE.Color;
         Actor: UE.Actor;
         Material: UE.MaterialInterface;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleSystemReplay extends UE.Object {
@@ -5942,7 +6907,11 @@ declare module "ue" {
         Frequency: number;
         InitialOffset: UE.EInitialOscillatorOffset;
         Waveform: UE.EOscillatorWaveform;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ROscillator {
@@ -5951,7 +6920,11 @@ declare module "ue" {
         Pitch: UE.FOscillator;
         Yaw: UE.FOscillator;
         Roll: UE.FOscillator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VOscillator {
@@ -5960,7 +6933,11 @@ declare module "ue" {
         X: UE.FOscillator;
         Y: UE.FOscillator;
         Z: UE.FOscillator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubTrackGroup {
@@ -5970,7 +6947,11 @@ declare module "ue" {
         TrackIndices: TArray<number>;
         bIsCollapsed: boolean;
         bIsSelected: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SupportedSubTrackInfo {
@@ -5979,7 +6960,11 @@ declare module "ue" {
         SupportedClass: UE.Class;
         SubTrackName: string;
         GroupIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETrackActiveCondition { ETAC_Always, ETAC_GoreEnabled, ETAC_GoreDisabled, ETAC_MAX}
@@ -6056,7 +7041,11 @@ declare module "ue" {
         ArriveTangent: UE.Vector;
         LeaveTangent: UE.Vector;
         InterpMode: UE.EInterpCurveMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurveVector {
@@ -6065,7 +7054,11 @@ declare module "ue" {
         Points: TArray<UE.InterpCurvePointVector>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpLookupPoint {
@@ -6073,14 +7066,22 @@ declare module "ue" {
         constructor(GroupName: string, Time: number);
         GroupName: string;
         Time: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpLookupTrack {
         constructor();
         constructor(Points: TArray<UE.InterpLookupPoint>);
         Points: TArray<UE.InterpLookupPoint>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EInterpTrackMoveRotMode { IMR_Keyframed, IMR_LookAtGroup, IMR_Ignore, IMR_MAX}
@@ -6163,7 +7164,11 @@ declare module "ue" {
         constructor();
         constructor(PooledShakes: TArray<UE.CameraShake>);
         PooledShakes: TArray<UE.CameraShake>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CameraModifier_CameraShake extends UE.CameraModifier {
@@ -6198,7 +7203,11 @@ declare module "ue" {
         DistanceFieldResolutionScale: number;
         DistanceFieldBias: number;
         DistanceFieldReplacementMesh: UE.StaticMesh;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMeshFeatureImportance { Off, Lowest, Low, Normal, High, Highest, EMeshFeatureImportance_MAX}
@@ -6224,7 +7233,11 @@ declare module "ue" {
         TerminationCriterion: UE.EStaticMeshReductionTerimationCriterion;
         VisibilityAggressiveness: UE.EMeshFeatureImportance;
         VertexColorImportance: UE.EMeshFeatureImportance;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticMeshSourceModel {
@@ -6236,7 +7249,11 @@ declare module "ue" {
         ScreenSize: UE.PerPlatformFloat;
         SourceImportFilename: string;
         bImportWithBaseMesh: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshSectionInfo {
@@ -6245,14 +7262,22 @@ declare module "ue" {
         MaterialIndex: number;
         bEnableCollision: boolean;
         bCastShadow: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshSectionInfoMap {
         constructor();
         constructor(Map: TMap<number, UE.MeshSectionInfo>);
         Map: TMap<number, UE.MeshSectionInfo>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialRemapIndex {
@@ -6260,7 +7285,11 @@ declare module "ue" {
         constructor(ImportVersionKey: number, MaterialRemap: TArray<number>);
         ImportVersionKey: number;
         MaterialRemap: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticMaterial {
@@ -6270,7 +7299,11 @@ declare module "ue" {
         MaterialSlotName: string;
         ImportedMaterialSlotName: string;
         UVChannelData: UE.MeshUVChannelInfo;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetEditorOrbitCameraPosition {
@@ -6280,7 +7313,11 @@ declare module "ue" {
         CamOrbitPoint: UE.Vector;
         CamOrbitZoom: UE.Vector;
         CamOrbitRotation: UE.Rotator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticMeshSocket extends UE.Object {
@@ -6309,37 +7346,65 @@ declare module "ue" {
         constructor();
         constructor(IDValue: number);
         IDValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexID extends UE.ElementID {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PolygonID extends UE.ElementID {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexInstanceID extends UE.ElementID {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PolygonGroupID extends UE.ElementID {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TriangleID extends UE.ElementID {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EdgeID extends UE.ElementID {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshDescriptionBase extends UE.Object {
@@ -6769,7 +7834,11 @@ declare module "ue" {
         bIgnoreAlt: boolean;
         bIgnoreCmd: boolean;
         bDisabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PlayerInput extends UE.Object {
@@ -6791,7 +7860,11 @@ declare module "ue" {
         constructor(EditorCurveData: UE.RichCurve, ExternalCurve: UE.CurveFloat);
         EditorCurveData: UE.RichCurve;
         ExternalCurve: UE.CurveFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ForceFeedbackChannelDetails {
@@ -6802,7 +7875,11 @@ declare module "ue" {
         bAffectsRightLarge: boolean;
         bAffectsRightSmall: boolean;
         Curve: UE.RuntimeFloatCurve;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ForceFeedbackEffect extends UE.Object {
@@ -6818,7 +7895,11 @@ declare module "ue" {
         constructor();
         constructor(ForceFeedbackEffect: UE.ForceFeedbackEffect);
         ForceFeedbackEffect: UE.ForceFeedbackEffect;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChildConnection extends UE.NetConnection {
@@ -6834,7 +7915,11 @@ declare module "ue" {
         constructor(Type: UE.Class, Total: number);
         Type: UE.Class;
         Total: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Layer extends UE.Object {
@@ -6945,7 +8030,11 @@ declare module "ue" {
         OpacityTextureSize: UE.IntPoint;
         OpacityMaskTextureSize: UE.IntPoint;
         AmbientOcclusionTextureSize: UE.IntPoint;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSimplificationDetails {
@@ -6967,7 +8056,11 @@ declare module "ue" {
         bGenerateLandscapeMetallicMap: boolean;
         bGenerateLandscapeRoughnessMap: boolean;
         bGenerateLandscapeSpecularMap: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EVisibilityAggressiveness { VIS_LeastAggressive, VIS_ModeratelyAggressive, VIS_MostAggressive, VIS_Max, VIS_MAX}
@@ -6990,7 +8083,11 @@ declare module "ue" {
         bSupportsAgent13: boolean;
         bSupportsAgent14: boolean;
         bSupportsAgent15: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavigationSystemConfig extends UE.Object {
@@ -7032,7 +8129,11 @@ declare module "ue" {
         OcclusionExponent: number;
         FullyOccludedSamplesFraction: number;
         MaxOcclusionDistance: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ReverbPreset { REVERB_Default, REVERB_Bathroom, REVERB_StoneRoom, REVERB_Auditorium, REVERB_ConcertHall, REVERB_Cave, REVERB_Hallway, REVERB_StoneCorridor, REVERB_Alley, REVERB_Forest, REVERB_City, REVERB_Mountains, REVERB_Quarry, REVERB_Plain, REVERB_ParkingLot, REVERB_SewerPipe, REVERB_Underwater, REVERB_SmallRoom, REVERB_MediumRoom, REVERB_LargeRoom, REVERB_MediumHall, REVERB_LargeHall, REVERB_Plate, REVERB_MAX}
@@ -7079,7 +8180,11 @@ declare module "ue" {
         ReverbPluginEffect: UE.SoundEffectSubmixPreset;
         Volume: number;
         FadeTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InteriorSettings {
@@ -7094,7 +8199,11 @@ declare module "ue" {
         InteriorTime: number;
         InteriorLPF: number;
         InteriorLPFTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AudioEQEffect {
@@ -7112,7 +8221,11 @@ declare module "ue" {
         FrequencyCenter3: number;
         Gain3: number;
         Bandwidth3: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAudioOutputTarget { Speaker, Controller, ControllerFallbackToSpeaker, EAudioOutputTarget_MAX}
@@ -7138,7 +8251,11 @@ declare module "ue" {
         bApplyAmbientVolumes: boolean;
         OutputTarget: UE.EAudioOutputTarget;
         LoadingBehavior: UE.ESoundWaveLoadingBehavior;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PassiveSoundMixModifier {
@@ -7147,7 +8264,11 @@ declare module "ue" {
         SoundMix: UE.SoundMix;
         MinVolumeThreshold: number;
         MaxVolumeThreshold: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundModulationPluginSourceSettingsBase extends UE.Object {
@@ -7161,7 +8282,11 @@ declare module "ue" {
         constructor();
         constructor(Settings: TArray<UE.SoundModulationPluginSourceSettingsBase>);
         Settings: TArray<UE.SoundModulationPluginSourceSettingsBase>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundClass extends UE.Object {
@@ -7185,7 +8310,11 @@ declare module "ue" {
         LowPassFilterFrequency: number;
         bApplyToChildren: boolean;
         VoiceCenterChannelVolumeAdjuster: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundMix extends UE.Object {
@@ -7239,7 +8368,11 @@ declare module "ue" {
         bCreateCollision: boolean;
         bAllowVertexColors: boolean;
         bGenerateLightmapUVs: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EUVOutput { DoNotOutputChannel, OutputChannel, EUVOutput_MAX}
@@ -7275,7 +8408,11 @@ declare module "ue" {
         bExportSpecularMap: boolean;
         MergedMaterialAtlasResolution: number;
         ExportSpecificLOD: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class HierarchicalSimplification {
@@ -7293,7 +8430,11 @@ declare module "ue" {
         DesiredBoundRadius: number;
         DesiredFillingPercentage: number;
         MinNumberOfActorsToBuild: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BookmarkBase extends UE.Object {
@@ -7322,7 +8463,11 @@ declare module "ue" {
         MBPBounds: UE.Box;
         MBPOuterBounds: UE.Box;
         MBPNumSubdivs: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NetViewer {
@@ -7333,7 +8478,11 @@ declare module "ue" {
         ViewTarget: UE.Actor;
         ViewLocation: UE.Vector;
         ViewDir: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WorldSettings extends UE.Info {
@@ -7409,7 +8558,11 @@ declare module "ue" {
         constructor();
         constructor(ObjClass: UE.Class);
         ObjClass: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Level extends UE.Object {
@@ -7520,7 +8673,11 @@ declare module "ue" {
         bVolumeScaleCanRelease: boolean;
         VolumeScaleReleaseTime: number;
         VoiceStealReleaseTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundConcurrency extends UE.Object {
@@ -7543,7 +8700,11 @@ declare module "ue" {
         ConeOffset: number;
         FalloffDistance: number;
         CustomAttenuationCurve: UE.RuntimeFloatCurve;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESoundSpatializationAlgorithm { SPATIALIZATION_Default, SPATIALIZATION_HRTF, SPATIALIZATION_MAX}
@@ -7577,7 +8738,11 @@ declare module "ue" {
         SpatializationPluginSettingsArray: TArray<UE.SpatializationPluginSourceSettingsBase>;
         OcclusionPluginSettingsArray: TArray<UE.OcclusionPluginSourceSettingsBase>;
         ReverbPluginSettingsArray: TArray<UE.ReverbPluginSourceSettingsBase>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundAttenuationSettings extends UE.BaseAttenuationSettings {
@@ -7634,7 +8799,11 @@ declare module "ue" {
         ManualReverbSendLevel: number;
         CustomReverbSendCurve: UE.RuntimeFloatCurve;
         PluginSettings: UE.SoundAttenuationPluginSettings;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundAttenuation extends UE.Object {
@@ -7661,7 +8830,11 @@ declare module "ue" {
         constructor(Magnitude: number, NormalizedMagnitude: number);
         Magnitude: number;
         NormalizedMagnitude: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundWaveSpectralTimeData {
@@ -7669,7 +8842,11 @@ declare module "ue" {
         constructor(Data: TArray<UE.SoundWaveSpectralDataEntry>, TimeSec: number);
         Data: TArray<UE.SoundWaveSpectralDataEntry>;
         TimeSec: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundWaveEnvelopeTimeData {
@@ -7677,7 +8854,11 @@ declare module "ue" {
         constructor(Amplitude: number, TimeSec: number);
         Amplitude: number;
         TimeSec: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubtitleCue {
@@ -7685,7 +8866,11 @@ declare module "ue" {
         constructor(Text: string, Time: number);
         Text: string;
         Time: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CurveTable extends UE.Object {
@@ -7783,7 +8968,11 @@ declare module "ue" {
         MinSendDistance: number;
         MaxSendDistance: number;
         CustomSendLevelCurve: UE.RuntimeFloatCurve;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundEffectSourcePreset extends UE.SoundEffectPreset {
@@ -7798,7 +8987,11 @@ declare module "ue" {
         constructor(Preset: UE.SoundEffectSourcePreset, bBypass: boolean);
         Preset: UE.SoundEffectSourcePreset;
         bBypass: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundEffectSourcePresetChain extends UE.Object {
@@ -7833,7 +9026,11 @@ declare module "ue" {
         MinSendDistance: number;
         MaxSendDistance: number;
         CustomSendLevelCurve: UE.RuntimeFloatCurve;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundBase extends UE.Object {
@@ -7942,14 +9139,22 @@ declare module "ue" {
         constructor();
         constructor(StreamingLevel: UE.LevelStreaming);
         StreamingLevel: UE.LevelStreaming;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StreamingLevelsToConsider {
         constructor();
         constructor(StreamingLevels: TArray<UE.LevelStreamingWrapper>);
         StreamingLevels: TArray<UE.LevelStreamingWrapper>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RollbackNetStartupActorInfo {
@@ -7958,7 +9163,11 @@ declare module "ue" {
         Archetype: UE.Object;
         Level: UE.Level;
         ObjReferences: TArray<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MulticastRecordOptions {
@@ -7967,7 +9176,11 @@ declare module "ue" {
         FuncPathName: string;
         bServerSkip: boolean;
         bClientSkip: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DemoNetDriver extends UE.NetDriver {
@@ -8178,7 +9391,11 @@ declare module "ue" {
         DemoNetDriver: UE.DemoNetDriver;
         PersistentLevel: UE.Level;
         Levels: TSet<UE.Level>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ScriptViewportClient extends UE.Object {
@@ -8204,7 +9421,11 @@ declare module "ue" {
         constructor(Obj: UE.Object, WithinClass: UE.Class);
         Obj: UE.Object;
         WithinClass: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameViewportClient extends UE.ScriptViewportClient {
@@ -8274,7 +9495,11 @@ declare module "ue" {
         CamRotation: UE.Rotator;
         CamOrthoZoom: number;
         CamUpdated: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WorldComposition extends UE.Object {
@@ -8294,7 +9519,11 @@ declare module "ue" {
         constructor();
         constructor(PSC: UE.ParticleSystemComponent);
         PSC: UE.ParticleSystemComponent;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PSCPool {
@@ -8303,14 +9532,22 @@ declare module "ue" {
         FreeElements: TArray<UE.PSCPoolElem>;
         InUseComponents_Auto: TArray<UE.ParticleSystemComponent>;
         InUseComponents_Manual: TArray<UE.ParticleSystemComponent>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WorldPSCPool {
         constructor();
         constructor(WorldParticleSystemPools: TMap<UE.ParticleSystem, UE.PSCPool>);
         WorldParticleSystemPools: TMap<UE.ParticleSystem, UE.PSCPool>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESpawnActorCollisionHandlingMethod { Undefined, AlwaysSpawn, AdjustIfPossibleButAlwaysSpawn, AdjustIfPossibleButDontSpawnIfColliding, DontSpawnIfColliding, ESpawnActorCollisionHandlingMethod_MAX}
@@ -8383,7 +9620,11 @@ declare module "ue" {
         bClientOpen: boolean;
         bInitialServer: boolean;
         bInitialClient: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Channel extends UE.Object {
@@ -8472,7 +9713,11 @@ declare module "ue" {
         constructor();
         constructor(PlayerInput: UE.PlayerInput);
         PlayerInput: UE.PlayerInput;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EControllerAnalogStick { CAS_LeftStick, CAS_RightStick, CAS_MAX}
@@ -8505,7 +9750,11 @@ declare module "ue" {
         InputScale: UE.Vector2D;
         MainInputKey: UE.Key;
         AltInputKey: UE.Key;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TouchInterface extends UE.Object {
@@ -8537,7 +9786,11 @@ declare module "ue" {
     
     class StaticMeshComponentLODInfo {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StreamingTextureBuildInfo {
@@ -8546,7 +9799,11 @@ declare module "ue" {
         PackedRelativeBox: number;
         TextureLevelIndex: number;
         TexelFactor: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LightmassPrimitiveSettings {
@@ -8561,7 +9818,11 @@ declare module "ue" {
         EmissiveBoost: number;
         DiffuseBoost: number;
         FullyOccludedSamplesFraction: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StaticMeshComponent extends UE.MeshComponent {
@@ -8682,7 +9943,11 @@ declare module "ue" {
         Scale: UE.Vector2D;
         Shear: UE.Vector2D;
         Angle: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESlateAccessibleBehavior { NotAccessible, Auto, Summary, Custom, ToolTip, ESlateAccessibleBehavior_MAX}
@@ -8711,7 +9976,11 @@ declare module "ue" {
         WidgetToFocus: string;
         Widget: TWeakObjectPtr<UE.Widget>;
         CustomDelegate: $Delegate<(Navigation: UE.EUINavigation) => UE.Widget>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WidgetNavigation extends UE.Object {
@@ -8735,7 +10004,11 @@ declare module "ue" {
         ArrayIndex: number;
         Struct: UE.Struct;
         Field: UE.Field;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CachedPropertyPath {
@@ -8743,12 +10016,20 @@ declare module "ue" {
         constructor(Segments: TArray<UE.PropertyPathSegment>, CachedFunction: UE.Function);
         Segments: TArray<UE.PropertyPathSegment>;
         CachedFunction: UE.Function;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DynamicPropertyPath extends UE.CachedPropertyPath {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PropertyBinding extends UE.Object {
@@ -8763,22 +10044,38 @@ declare module "ue" {
     
     class EventReply {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Geometry {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PointerEvent extends UE.InputEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESlateColorStylingMode { UseColor_Specified, UseColor_Specified_Link, UseColor_Foreground, UseColor_Foreground_Subdued, UseColor_MAX}
@@ -8787,7 +10084,11 @@ declare module "ue" {
         constructor(SpecifiedColor: UE.LinearColor, ColorUseRule: UE.ESlateColorStylingMode);
         SpecifiedColor: UE.LinearColor;
         ColorUseRule: UE.ESlateColorStylingMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Margin {
@@ -8797,7 +10098,11 @@ declare module "ue" {
         Top: number;
         Right: number;
         Bottom: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESlateBrushDrawType { NoDrawType, Box, Border, Image, ESlateBrushDrawType_MAX}
@@ -8820,7 +10125,11 @@ declare module "ue" {
         ImageType: UE.ESlateBrushImageType;
         bIsDynamicallyLoaded: boolean;
         bHasUObject: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ECheckBoxState { Unchecked, Checked, Undetermined, ECheckBoxState_MAX}
@@ -8943,13 +10252,21 @@ declare module "ue" {
         constructor();
         constructor(Value: number);
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EEvaluationMethod { Static, Swept, EEvaluationMethod_MAX}
     class MovieSceneSegment {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationTrackSegments {
@@ -8957,7 +10274,11 @@ declare module "ue" {
         constructor(SegmentIdentifierToIndex: TArray<number>, SortedSegments: TArray<UE.MovieSceneSegment>);
         SegmentIdentifierToIndex: TArray<number>;
         SortedSegments: TArray<UE.MovieSceneSegment>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTrackEvalOptions {
@@ -8968,14 +10289,22 @@ declare module "ue" {
         bEvaluateInPreroll: boolean;
         bEvaluateInPostroll: boolean;
         bEvaluateNearestSection: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTrackDisplayOptions {
         constructor();
         constructor(bShowVerticalFrames: boolean);
         bShowVerticalFrames: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTrack extends UE.MovieSceneSignedObject {
@@ -8993,17 +10322,29 @@ declare module "ue" {
     
     class SectionEvaluationDataTree {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvalTemplatePtr {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTrackImplementationPtr {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationTrack {
@@ -9021,12 +10362,20 @@ declare module "ue" {
         bEvaluateInPreroll: boolean;
         bEvaluateInPostroll: boolean;
         bTearDownPriority: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneFrameRange {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationGroupLUTIndex {
@@ -9035,14 +10384,22 @@ declare module "ue" {
         LUTOffset: number;
         NumInitPtrs: number;
         NumEvalPtrs: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequenceID {
         constructor();
         constructor(Value: number);
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationFieldTrackPtr {
@@ -9050,21 +10407,33 @@ declare module "ue" {
         constructor(SequenceID: UE.MovieSceneSequenceID, TrackIdentifier: UE.MovieSceneTrackIdentifier);
         SequenceID: UE.MovieSceneSequenceID;
         TrackIdentifier: UE.MovieSceneTrackIdentifier;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSegmentIdentifier {
         constructor();
         constructor(IdentifierIndex: number);
         IdentifierIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationFieldSegmentPtr extends UE.MovieSceneEvaluationFieldTrackPtr {
         constructor();
         constructor(SegmentID: UE.MovieSceneSegmentIdentifier);
         SegmentID: UE.MovieSceneSegmentIdentifier;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationGroup {
@@ -9072,7 +10441,11 @@ declare module "ue" {
         constructor(LUTIndices: TArray<UE.MovieSceneEvaluationGroupLUTIndex>, SegmentPtrLUT: TArray<UE.MovieSceneEvaluationFieldSegmentPtr>);
         LUTIndices: TArray<UE.MovieSceneEvaluationGroupLUTIndex>;
         SegmentPtrLUT: TArray<UE.MovieSceneEvaluationFieldSegmentPtr>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationKey {
@@ -9081,7 +10454,11 @@ declare module "ue" {
         SequenceID: UE.MovieSceneSequenceID;
         TrackIdentifier: UE.MovieSceneTrackIdentifier;
         SectionIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneOrderedEvaluationKey {
@@ -9090,7 +10467,11 @@ declare module "ue" {
         Key: UE.MovieSceneEvaluationKey;
         SetupIndex: number;
         TearDownIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationMetaData {
@@ -9099,7 +10480,11 @@ declare module "ue" {
         ActiveSequences: TArray<UE.MovieSceneSequenceID>;
         ActiveEntities: TArray<UE.MovieSceneOrderedEvaluationKey>;
         SubTemplateSerialNumbers: TMap<UE.MovieSceneSequenceID, number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationField {
@@ -9109,14 +10494,22 @@ declare module "ue" {
         Ranges: TArray<UE.MovieSceneFrameRange>;
         Groups: TArray<UE.MovieSceneEvaluationGroup>;
         MetaData: TArray<UE.MovieSceneEvaluationMetaData>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FrameNumber {
         constructor();
         constructor(Value: number);
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FrameTime {
@@ -9124,7 +10517,11 @@ declare module "ue" {
         constructor(FrameNumber: UE.FrameNumber, SubFrame: number);
         FrameNumber: UE.FrameNumber;
         SubFrame: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequenceTransform {
@@ -9132,7 +10529,11 @@ declare module "ue" {
         constructor(TimeScale: number, Offset: UE.FrameTime);
         TimeScale: number;
         Offset: UE.FrameTime;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FrameRate {
@@ -9140,12 +10541,20 @@ declare module "ue" {
         constructor(Numerator: number, Denominator: number);
         Numerator: number;
         Denominator: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequenceInstanceDataPtr {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSubSequenceData {
@@ -9163,7 +10572,11 @@ declare module "ue" {
         SectionPath: string;
         SubSectionSignature: UE.Guid;
         OuterToInnerTransform: UE.MovieSceneSequenceTransform;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequenceHierarchyNode {
@@ -9171,7 +10584,11 @@ declare module "ue" {
         constructor(ParentID: UE.MovieSceneSequenceID, Children: TArray<UE.MovieSceneSequenceID>);
         ParentID: UE.MovieSceneSequenceID;
         Children: TArray<UE.MovieSceneSequenceID>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequenceHierarchy {
@@ -9179,14 +10596,22 @@ declare module "ue" {
         constructor(SubSequences: TMap<UE.MovieSceneSequenceID, UE.MovieSceneSubSequenceData>, Hierarchy: TMap<UE.MovieSceneSequenceID, UE.MovieSceneSequenceHierarchyNode>);
         SubSequences: TMap<UE.MovieSceneSequenceID, UE.MovieSceneSubSequenceData>;
         Hierarchy: TMap<UE.MovieSceneSequenceID, UE.MovieSceneSequenceHierarchyNode>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationTemplateSerialNumber {
         constructor();
         constructor(Value: number);
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTemplateGenerationLedger {
@@ -9195,17 +10620,29 @@ declare module "ue" {
         LastTrackIdentifier: UE.MovieSceneTrackIdentifier;
         TrackSignatureToTrackIdentifier: TMap<UE.Guid, UE.MovieSceneTrackIdentifier>;
         SubSectionRanges: TMap<UE.Guid, UE.MovieSceneFrameRange>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTrackFieldData {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSubSectionFieldData {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvaluationTemplate {
@@ -9219,7 +10656,11 @@ declare module "ue" {
         TemplateLedger: UE.MovieSceneTemplateGenerationLedger;
         TrackFieldData: UE.MovieSceneTrackFieldData;
         SubSectionFieldData: UE.MovieSceneSubSectionFieldData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMovieSceneCompletionMode { KeepState, RestoreState, ProjectDefault, EMovieSceneCompletionMode_MAX}
@@ -9230,7 +10671,11 @@ declare module "ue" {
         SequenceID: number;
         Space: UE.EMovieSceneObjectBindingSpace;
         Guid: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequence extends UE.MovieSceneSignedObject {
@@ -9254,7 +10699,11 @@ declare module "ue" {
         Seconds: number;
         Frames: number;
         bDropFrameFormat: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTimecodeSource {
@@ -9262,7 +10711,11 @@ declare module "ue" {
         constructor(Timecode: UE.Timecode, DeltaFrame: UE.FrameNumber);
         Timecode: UE.Timecode;
         DeltaFrame: UE.FrameNumber;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESpawnOwnership { InnerSequence, MasterSequence, External, ESpawnOwnership_MAX}
@@ -9279,7 +10732,11 @@ declare module "ue" {
         Ownership: UE.ESpawnOwnership;
         GeneratedClass: UE.Class;
         LevelName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieScenePossessable {
@@ -9290,7 +10747,11 @@ declare module "ue" {
         Name: string;
         PossessedObjectClass: UE.Class;
         ParentGuid: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneBinding {
@@ -9300,14 +10761,22 @@ declare module "ue" {
         BindingName: string;
         Tracks: TArray<UE.MovieSceneTrack>;
         SortingOrder: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneObjectBindingIDs {
         constructor();
         constructor(IDs: TArray<UE.MovieSceneObjectBindingID>);
         IDs: TArray<UE.MovieSceneObjectBindingID>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMovieSceneEvaluationType { FrameLocked, WithSubFrames, EMovieSceneEvaluationType_MAX}
@@ -9318,21 +10787,33 @@ declare module "ue" {
         FrameNumber: UE.FrameNumber;
         Label: string;
         Color: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneTrackLabels {
         constructor();
         constructor(Strings: TArray<string>);
         Strings: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneExpansionState {
         constructor();
         constructor(bExpanded: boolean);
         bExpanded: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FloatRangeBound {
@@ -9340,7 +10821,11 @@ declare module "ue" {
         constructor(Type: UE.ERangeBoundTypes, Value: number);
         Type: UE.ERangeBoundTypes;
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FloatRange {
@@ -9348,7 +10833,11 @@ declare module "ue" {
         constructor(LowerBound: UE.FloatRangeBound, UpperBound: UE.FloatRangeBound);
         LowerBound: UE.FloatRangeBound;
         UpperBound: UE.FloatRangeBound;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEditorData {
@@ -9363,7 +10852,11 @@ declare module "ue" {
         MarkedFrames: TSet<UE.FrameNumber>;
         WorkingRange: UE.FloatRange;
         ViewRange: UE.FloatRange;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneFolder extends UE.Object {
@@ -9384,7 +10877,11 @@ declare module "ue" {
         constructor(bCanEditCompletionMode: boolean, CompletionMode: UE.EMovieSceneCompletionMode);
         bCanEditCompletionMode: boolean;
         CompletionMode: UE.EMovieSceneCompletionMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEasingFunction extends UE.Interface {
@@ -9410,7 +10907,11 @@ declare module "ue" {
         AutoEaseOutTime: number;
         ManualEaseInTime: number;
         ManualEaseOutTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMovieSceneBlendType { Invalid, Absolute, Additive, Relative, EMovieSceneBlendType_MAX}
@@ -9419,7 +10920,11 @@ declare module "ue" {
         constructor(BlendType: UE.EMovieSceneBlendType, bIsValid: boolean);
         BlendType: UE.EMovieSceneBlendType;
         bIsValid: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSection extends UE.MovieSceneSignedObject {
@@ -9466,7 +10971,11 @@ declare module "ue" {
         constructor();
         constructor(Sections: TArray<TWeakObjectPtr<UE.MovieSceneSection>>);
         Sections: TArray<TWeakObjectPtr<UE.MovieSceneSection>>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieScene extends UE.MovieSceneSignedObject {
@@ -9512,7 +11021,11 @@ declare module "ue" {
         SlotWidgetName: string;
         AnimationGuid: UE.Guid;
         bIsRootWidget: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WidgetAnimation extends UE.MovieSceneSequence {
@@ -9551,7 +11064,11 @@ declare module "ue" {
         constructor(Name: string, Content: UE.Widget);
         Name: string;
         Content: UE.Widget;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WidgetTree extends UE.Object {
@@ -9573,7 +11090,11 @@ declare module "ue" {
         Delegate: $Delegate<() => void>;
         AnimationEvent: UE.EWidgetAnimationEvent;
         UserTag: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EInputEvent { IE_Pressed, IE_Released, IE_Repeat, IE_DoubleClick, IE_Axis, IE_MAX}
@@ -9582,33 +11103,57 @@ declare module "ue" {
         constructor(Minimum: UE.Vector2D, Maximum: UE.Vector2D);
         Minimum: UE.Vector2D;
         Maximum: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EUMGSequencePlayMode { Forward, Reverse, PingPong, EUMGSequencePlayMode_MAX}
     class FocusEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KeyEvent extends UE.InputEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaintContext {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MotionEvent extends UE.InputEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CharacterEvent extends UE.InputEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EDragPivot { MouseDown, TopLeft, TopCenter, TopRight, CenterLeft, CenterCenter, CenterRight, BottomLeft, BottomCenter, BottomRight, EDragPivot_MAX}
@@ -9632,7 +11177,11 @@ declare module "ue" {
     
     class AnalogInputEvent extends UE.KeyEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UserWidget extends UE.Widget {
@@ -9760,7 +11309,11 @@ declare module "ue" {
         BlendFunction: UE.EViewTargetBlendFunction;
         BlendExp: number;
         bLockOutgoing: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UpdateLevelVisibilityLevelInfo {
@@ -9769,7 +11322,11 @@ declare module "ue" {
         PackageName: string;
         FileName: string;
         bIsVisible: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class HapticFeedbackEffect_Base extends UE.Object {
@@ -9787,7 +11344,11 @@ declare module "ue" {
         UUID: number;
         ExecutionFunction: string;
         CallbackTarget: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EObjectTypeQuery { ObjectTypeQuery1, ObjectTypeQuery2, ObjectTypeQuery3, ObjectTypeQuery4, ObjectTypeQuery5, ObjectTypeQuery6, ObjectTypeQuery7, ObjectTypeQuery8, ObjectTypeQuery9, ObjectTypeQuery10, ObjectTypeQuery11, ObjectTypeQuery12, ObjectTypeQuery13, ObjectTypeQuery14, ObjectTypeQuery15, ObjectTypeQuery16, ObjectTypeQuery17, ObjectTypeQuery18, ObjectTypeQuery19, ObjectTypeQuery20, ObjectTypeQuery21, ObjectTypeQuery22, ObjectTypeQuery23, ObjectTypeQuery24, ObjectTypeQuery25, ObjectTypeQuery26, ObjectTypeQuery27, ObjectTypeQuery28, ObjectTypeQuery29, ObjectTypeQuery30, ObjectTypeQuery31, ObjectTypeQuery32, ObjectTypeQuery_MAX, EObjectTypeQuery_MAX, WorldStatic = 0, WorldDynamic = 1, Pawn = 2, PhysicsBody = 3, Vehicle = 4, Destructible = 5}
@@ -9800,7 +11361,11 @@ declare module "ue" {
         bNewShouldBeLoaded: boolean;
         bNewShouldBeVisible: boolean;
         bNewShouldBlockOnLoad: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETravelType { TRAVEL_Absolute, TRAVEL_Partial, TRAVEL_Relative, TRAVEL_MAX}
@@ -9811,7 +11376,11 @@ declare module "ue" {
         bLooping: boolean;
         bIgnoreTimeDilation: boolean;
         bPlayWhilePaused: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PlayerController extends UE.Controller {
@@ -10321,7 +11890,11 @@ declare module "ue" {
         Direction: number;
         ItemName: string;
         PolyFlags: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BrushBuilder extends UE.Object {
@@ -10344,7 +11917,11 @@ declare module "ue" {
         Type: number;
         Index: number;
         SelectionIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Brush extends UE.Actor {
@@ -10491,7 +12068,11 @@ declare module "ue" {
         RotationOffset: UE.Rotator;
         AttachSocket: string;
         AttachComponent: UE.SceneComponent;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ENetDormancy { DORM_Never, DORM_Awake, DORM_DormantAll, DORM_DormantPartial, DORM_Initial, DORM_MAX}
@@ -10534,7 +12115,11 @@ declare module "ue" {
         constructor(ObjectName: string, Actors: TArray<UE.Actor>);
         ObjectName: string;
         Actors: TArray<UE.Actor>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CameraCutInfo {
@@ -10542,7 +12127,11 @@ declare module "ue" {
         constructor(Location: UE.Vector, TimeStamp: number);
         Location: UE.Vector;
         TimeStamp: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MatineeActor extends UE.Actor {
@@ -10850,7 +12439,11 @@ declare module "ue" {
         DefaultQueryExtent: UE.Vector;
         NavigationDataClass: UE.Class;
         NavDataClass: TSoftClassPtr<UE.Actor>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERuntimeGenerationType { Static, DynamicModifiersOnly, Dynamic, LegacyGeneration, ERuntimeGenerationType_MAX}
@@ -10860,7 +12453,11 @@ declare module "ue" {
         AreaClassName: string;
         AreaID: number;
         AreaClass: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavigationData extends UE.Actor {
@@ -10961,7 +12558,11 @@ declare module "ue" {
     
     class PointerToUberGraphFrame {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     namespace Game.ActorComp {
@@ -11325,16 +12926,6 @@ declare module "ue" {
         static Load(InName: string): ActorGroupingUtils;
     }
     
-    namespace Engine.EditorBlueprintResources.ActorMacros {
-        class ActorMacros_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): ActorMacros_C;
-            static Load(InName: string): ActorMacros_C;
-        }
-        
-    }
-
     class SequenceRecordingBase extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -11346,12 +12937,20 @@ declare module "ue" {
         constructor();
         constructor(Settings: TArray<UE.Object>);
         Settings: TArray<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceObjectReferenceMap {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceBindingReference {
@@ -11360,14 +12959,22 @@ declare module "ue" {
         PackageName: string;
         ExternalObjectPath: UE.SoftObjectPath;
         ObjectPath: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceBindingReferenceArray {
         constructor();
         constructor(References: TArray<UE.LevelSequenceBindingReference>);
         References: TArray<UE.LevelSequenceBindingReference>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceBindingReferences {
@@ -11375,7 +12982,11 @@ declare module "ue" {
         constructor(BindingIdToReferences: TMap<UE.Guid, UE.LevelSequenceBindingReferenceArray>, AnimSequenceInstances: TSet<UE.Guid>);
         BindingIdToReferences: TMap<UE.Guid, UE.LevelSequenceBindingReferenceArray>;
         AnimSequenceInstances: TSet<UE.Guid>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceObject {
@@ -11384,7 +12995,11 @@ declare module "ue" {
         ObjectOrOwner: TLazyObjectPtr<UE.Object>;
         ComponentName: string;
         CachedComponent: TWeakObjectPtr<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequence extends UE.MovieSceneSequence {
@@ -11415,7 +13030,11 @@ declare module "ue" {
         Length: number;
         InterpMode: UE.ERichCurveInterpMode;
         TangentMode: UE.ERichCurveTangentMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ActorRecording extends UE.SequenceRecordingBase {
@@ -11443,14 +13062,22 @@ declare module "ue" {
         Type: UE.EActorSequenceObjectReferenceType;
         ActorId: UE.Guid;
         PathToComponent: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ActorSequenceObjectReferences {
         constructor();
         constructor(Array: TArray<UE.ActorSequenceObjectReference>);
         Array: TArray<UE.ActorSequenceObjectReference>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ActorSequenceObjectReferenceMap {
@@ -11458,7 +13085,11 @@ declare module "ue" {
         constructor(BindingIds: TArray<UE.Guid>, References: TArray<UE.ActorSequenceObjectReferences>);
         BindingIds: TArray<UE.Guid>;
         References: TArray<UE.ActorSequenceObjectReferences>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ActorSequence extends UE.MovieSceneSequence {
@@ -11475,7 +13106,11 @@ declare module "ue" {
         constructor();
         constructor(Value: number);
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequencePlaybackSettings {
@@ -11493,7 +13128,11 @@ declare module "ue" {
         bHideHud: boolean;
         bDisableCameraCuts: boolean;
         bPauseAtEnd: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMovieScenePlayerStatus { Stopped, Playing, Recording, Scrubbing, Jumping, Stepping, Paused, MAX}
@@ -11501,7 +13140,11 @@ declare module "ue" {
         constructor();
         constructor(DirectorInstances: TMap<UE.MovieSceneSequenceID, UE.Object>);
         DirectorInstances: TMap<UE.MovieSceneSequenceID, UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequenceReplProperties {
@@ -11510,7 +13153,11 @@ declare module "ue" {
         LastKnownPosition: UE.FrameTime;
         LastKnownStatus: UE.EMovieScenePlayerStatus;
         LastKnownNumLoops: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieScenePlaybackClient extends UE.Interface {
@@ -11526,7 +13173,11 @@ declare module "ue" {
         constructor(Time: UE.FrameTime, Rate: UE.FrameRate);
         Time: UE.FrameTime;
         Rate: UE.FrameRate;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSequencePlayer extends UE.Object {
@@ -11618,7 +13269,11 @@ declare module "ue" {
         constructor(Actor: UE.Actor, bValidForPIE: boolean);
         Actor: UE.Actor;
         bValidForPIE: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorWorldExtension extends UE.Object {
@@ -11635,7 +13290,11 @@ declare module "ue" {
         ActionType: string;
         Event: UE.EInputEvent;
         bIsInputCaptured: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EHitResultGizmoFilterMode { All, NoGizmos, GizmosOnly, EHitResultGizmoFilterMode_MAX}
@@ -11672,7 +13331,11 @@ declare module "ue" {
     
     class GizmoHandle {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ViewportDragOperation extends UE.Object {
@@ -11810,7 +13473,11 @@ declare module "ue" {
         constructor();
         constructor(RequestID: number);
         RequestID: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AIAsyncTaskBlueprintProxy extends UE.Object {
@@ -11876,7 +13543,11 @@ declare module "ue" {
         constructor(Operation: UE.EBTDecoratorLogic, Number: number);
         Operation: UE.EBTDecoratorLogic;
         Number: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BTCompositeChild {
@@ -11886,7 +13557,11 @@ declare module "ue" {
         ChildTask: UE.BTTaskNode;
         Decorators: TArray<UE.BTDecorator>;
         DecoratorOps: TArray<UE.BTDecoratorLogic>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BTCompositeNode extends UE.BTNode {
@@ -11913,7 +13588,11 @@ declare module "ue" {
         EntryDescription: string;
         KeyType: UE.BlackboardKeyType;
         bInstanceSynced: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlackboardData extends UE.DataAsset {
@@ -11994,7 +13673,11 @@ declare module "ue" {
         ReceiverLocation: UE.Vector;
         Tag: string;
         bSuccessfullySensed: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ActorPerceptionBlueprintInfo {
@@ -12003,7 +13686,11 @@ declare module "ue" {
         Target: UE.Actor;
         LastSensedStimuli: TArray<UE.AIStimulus>;
         bIsHostile: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AIPerceptionComponent extends UE.ActorComponent {
@@ -12051,14 +13738,22 @@ declare module "ue" {
         constructor();
         constructor(TopAction: UE.PawnAction);
         TopAction: UE.PawnAction;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PawnActionEvent {
         constructor();
         constructor(Action: UE.PawnAction);
         Action: UE.PawnAction;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPawnActionAbortState { NeverStarted, NotBeingAborted, MarkPendingAbort, LatentAbortInProgress, AbortDone, MAX}
@@ -12093,7 +13788,11 @@ declare module "ue" {
     
     class GameplayResourceSet {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTaskOwnerInterface extends UE.Interface {
@@ -12273,7 +13972,11 @@ declare module "ue" {
         GeneratedClassPackage: string;
         ClassName: string;
         Category: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AIGraphNode extends UE.EdGraphNode {
@@ -12318,7 +14021,11 @@ declare module "ue" {
         constructor(InterpolationTime: number, InterpolationType: UE.EFilterInterpolationType);
         InterpolationTime: number;
         InterpolationType: UE.EFilterInterpolationType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ENotifyTriggerMode { AllAnimations, HighestWeightedAnimation, None, ENotifyTriggerMode_MAX}
@@ -12327,7 +14034,11 @@ declare module "ue" {
         constructor(BoneReference: UE.BoneReference, InterpolationSpeedPerSec: number);
         BoneReference: UE.BoneReference;
         InterpolationSpeedPerSec: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlendSample {
@@ -12338,7 +14049,11 @@ declare module "ue" {
         RateScale: number;
         bSnapToGrid: boolean;
         bIsValid: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorElement {
@@ -12346,7 +14061,11 @@ declare module "ue" {
         constructor(Indices: FixSizeArray<number>, Weights: FixSizeArray<number>);
         Indices: FixSizeArray<number>;
         Weights: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlendParameter {
@@ -12356,7 +14075,11 @@ declare module "ue" {
         Min: number;
         Max: number;
         GridNum: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlendSpaceBase extends UE.AnimationAsset {
@@ -12518,14 +14241,22 @@ declare module "ue" {
         constructor(Asset: UE.BehaviorTree, Template: UE.BTCompositeNode);
         Asset: UE.BehaviorTree;
         Template: UE.BTCompositeNode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTag {
         constructor();
         constructor(TagName: string);
         TagName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BehaviorTreeComponent extends UE.BrainComponent {
@@ -12577,28 +14308,44 @@ declare module "ue" {
         CachedProperty: UE.Property;
         DataBinding: UE.AIDataProvider;
         DataField: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AIDataProviderTypedValue extends UE.AIDataProviderValue {
         constructor();
         constructor(PropertyType: UE.Class);
         PropertyType: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AIDataProviderBoolValue extends UE.AIDataProviderTypedValue {
         constructor();
         constructor(DefaultValue: boolean);
         DefaultValue: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AIDataProviderFloatValue extends UE.AIDataProviderTypedValue {
         constructor();
         constructor(DefaultValue: number);
         DefaultValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EEnvTestScoreEquation { Linear, Square, InverseLinear, SquareRoot, Constant, EEnvTestScoreEquation_MAX}
@@ -12653,7 +14400,11 @@ declare module "ue" {
         constructor();
         constructor(Template: UE.EnvQuery);
         Template: UE.EnvQuery;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EnvQueryContext extends UE.Object {
@@ -12837,7 +14588,11 @@ declare module "ue" {
         HitLocation: UE.Vector;
         DamagedActor: UE.Actor;
         Instigator: UE.Actor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AISense_Damage extends UE.AISense {
@@ -12857,7 +14612,11 @@ declare module "ue" {
         MaxRange: number;
         Instigator: UE.Actor;
         Tag: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AISense_Hearing extends UE.AISense {
@@ -12875,7 +14634,11 @@ declare module "ue" {
         constructor(Requestor: UE.Actor, PredictedActor: UE.Actor);
         Requestor: UE.Actor;
         PredictedActor: UE.Actor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AISense_Prediction extends UE.AISense {
@@ -12906,7 +14669,11 @@ declare module "ue" {
         constructor(Broadcaster: UE.Actor, Enemy: UE.Actor);
         Broadcaster: UE.Actor;
         Enemy: UE.Actor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AISense_Team extends UE.AISense {
@@ -12922,7 +14689,11 @@ declare module "ue" {
         constructor(TouchReceiver: UE.Actor, OtherActor: UE.Actor);
         TouchReceiver: UE.Actor;
         OtherActor: UE.Actor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AISense_Touch extends UE.AISense {
@@ -12982,7 +14753,11 @@ declare module "ue" {
         bDetectEnemies: boolean;
         bDetectNeutrals: boolean;
         bDetectFriendlies: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AISenseConfig_Hearing extends UE.AISenseConfig {
@@ -13073,7 +14848,11 @@ declare module "ue" {
         constructor();
         constructor(GoalActor: UE.Actor);
         GoalActor: UE.Actor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAIOptionFlag { Default, Enable, Disable, MAX}
@@ -13138,7 +14917,11 @@ declare module "ue" {
         BoolParam: boolean;
         IntParam: number;
         SoundWaveParam: UE.SoundWave;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAudioComponentPlayState { Playing, Stopped, Paused, FadingIn, FadingOut, Count, EAudioComponentPlayState_MAX}
@@ -13148,7 +14931,11 @@ declare module "ue" {
         FrequencyHz: number;
         Magnitude: number;
         NormalizedMagnitude: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundWaveSpectralDataPerSound {
@@ -13157,7 +14944,11 @@ declare module "ue" {
         SpectralData: TArray<UE.SoundWaveSpectralData>;
         PlaybackTime: number;
         SoundWave: UE.SoundWave;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundWaveEnvelopeDataPerSound {
@@ -13166,7 +14957,11 @@ declare module "ue" {
         Envelope: number;
         PlaybackTime: number;
         SoundWave: UE.SoundWave;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAudioFaderCurve { Linear, Logarithmic, SCurve, Sin, Count, EAudioFaderCurve_MAX}
@@ -13314,7 +15109,11 @@ declare module "ue" {
         constructor(Name: string, AchievementID: string);
         Name: string;
         AchievementID: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GooglePlayLeaderboardMapping {
@@ -13322,7 +15121,11 @@ declare module "ue" {
         constructor(Name: string, LeaderboardID: string);
         Name: string;
         LeaderboardID: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAndroidAudio { Default, OGG, ADPCM, EAndroidAudio_MAX}
@@ -13333,7 +15136,11 @@ declare module "ue" {
         DurationThreshold: number;
         MaxNumRandomBranches: number;
         SoundCueQualityIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAndroidGraphicsDebugger { None, Mali, Adreno, EAndroidGraphicsDebugger_MAX}
@@ -13341,7 +15148,11 @@ declare module "ue" {
         constructor();
         constructor(Path: string);
         Path: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AndroidRuntimeSettings extends UE.Object {
@@ -13596,7 +15407,11 @@ declare module "ue" {
         NewFunctionName: string;
         BlueprintParamName: string;
         ClassParamName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EdGraphSchema_K2 extends UE.EdGraphSchema {
@@ -13644,7 +15459,11 @@ declare module "ue" {
         bIsOverrideEnabled: boolean;
         bIsSetValuePinVisible: boolean;
         bIsOverridePinVisible: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBlueprintUsage { NoProperties, DoesNotUseBlueprint, UsesBlueprint, EBlueprintUsage_MAX}
@@ -13659,7 +15478,11 @@ declare module "ue" {
     
     class AnimNode_Base {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PoseLinkBase {
@@ -13667,12 +15490,20 @@ declare module "ue" {
         constructor(LinkID: number, SourceLinkID: number);
         LinkID: number;
         SourceLinkID: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PoseLink extends UE.PoseLinkBase {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_Root extends UE.AnimNode_Base {
@@ -13681,12 +15512,20 @@ declare module "ue" {
         Result: UE.PoseLink;
         Name: string;
         Group: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_StateResult extends UE.AnimNode_Root {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_StateResult extends UE.AnimGraphNode_Base {
@@ -13837,7 +15676,11 @@ declare module "ue" {
         AnimBlueprint: UE.Class;
         NumRandomizedInstances: UE.PerPlatformInt;
         Enabled: UE.PerPlatformBool;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimationStateEntry {
@@ -13854,7 +15697,11 @@ declare module "ue" {
         MaximumNumberOfConcurrentInstances: UE.PerPlatformInt;
         WiggleTimePercentage: number;
         bRequiresCurves: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PerSkeletonAnimationSharingSetup {
@@ -13866,7 +15713,11 @@ declare module "ue" {
         AdditiveAnimBlueprint: UE.Class;
         StateProcessorClass: UE.Class;
         AnimationStates: TArray<UE.AnimationStateEntry>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimationSharingScalability {
@@ -13876,7 +15727,11 @@ declare module "ue" {
         BlendSignificanceValue: UE.PerPlatformFloat;
         MaximumNumberConcurrentBlends: UE.PerPlatformInt;
         TickSignificanceValue: UE.PerPlatformFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimationSharingSetup extends UE.Object {
@@ -13983,7 +15838,11 @@ declare module "ue" {
         constructor();
         constructor(bCanEnterTransition: boolean);
         bCanEnterTransition: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_TransitionResult extends UE.AnimGraphNode_Base {
@@ -14062,7 +15921,11 @@ declare module "ue" {
         InputPoseNodeProperties: TArray<UE.StructProperty>;
         InputProperties: TArray<UE.Property>;
         bImplemented: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimClassData extends UE.Object {
@@ -14252,7 +16115,11 @@ declare module "ue" {
         constructor(GroupName: string, GroupRole: UE.EAnimGroupRole);
         GroupName: string;
         GroupRole: UE.EAnimGroupRole;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_AssetPlayerBase extends UE.AnimGraphNode_Base {
@@ -14278,7 +16145,11 @@ declare module "ue" {
         bIgnoreForRelevancyTest: boolean;
         BlendWeight: number;
         InternalTimeAccumulator: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_BlendSpacePlayer extends UE.AnimNode_AssetPlayerBase {
@@ -14293,7 +16164,11 @@ declare module "ue" {
         StartPosition: number;
         BlendSpace: UE.BlendSpaceBase;
         PreviousBlendSpace: UE.BlendSpaceBase;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_AimOffsetLookAt extends UE.AnimNode_BlendSpacePlayer {
@@ -14306,7 +16181,11 @@ declare module "ue" {
         LookAtLocation: UE.Vector;
         SocketAxis: UE.Vector;
         Alpha: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_AimOffsetLookAt extends UE.AnimGraphNode_BlendSpaceBase {
@@ -14326,7 +16205,11 @@ declare module "ue" {
     
     class ComponentSpacePoseLink extends UE.PoseLinkBase {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EAnimAlphaInputType { Float, Bool, Curve, EAnimAlphaInputType_MAX}
@@ -14335,7 +16218,11 @@ declare module "ue" {
         constructor(Scale: number, Bias: number);
         Scale: number;
         Bias: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputAlphaBoolBlend {
@@ -14347,7 +16234,11 @@ declare module "ue" {
         bInitialized: boolean;
         CustomCurve: UE.CurveFloat;
         AlphaBlend: UE.AlphaBlend;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputRange {
@@ -14355,7 +16246,11 @@ declare module "ue" {
         constructor(Min: number, Max: number);
         Min: number;
         Max: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputScaleBiasClamp {
@@ -14372,7 +16267,11 @@ declare module "ue" {
         ClampMax: number;
         InterpSpeedIncreasing: number;
         InterpSpeedDecreasing: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_SkeletalControlBase extends UE.AnimNode_Base {
@@ -14388,7 +16287,11 @@ declare module "ue" {
         AlphaBoolBlend: UE.InputAlphaBoolBlend;
         AlphaCurveName: string;
         AlphaScaleBiasClamp: UE.InputScaleBiasClamp;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum AnimPhysLinearConstraintType { Free, Limited, AnimPhysLinearConstraintType_MAX}
@@ -14412,7 +16315,11 @@ declare module "ue" {
         AngularLimitsMin: UE.Vector;
         AngularLimitsMax: UE.Vector;
         AngularTarget: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESphericalLimitType { Inner, Outer, ESphericalLimitType_MAX}
@@ -14423,7 +16330,11 @@ declare module "ue" {
         SphereLocalOffset: UE.Vector;
         LimitRadius: number;
         LimitType: UE.ESphericalLimitType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimPhysPlanarLimit {
@@ -14431,7 +16342,11 @@ declare module "ue" {
         constructor(DrivingBone: UE.BoneReference, PlaneTransform: UE.Transform);
         DrivingBone: UE.BoneReference;
         PlaneTransform: UE.Transform;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum AnimPhysCollisionType { CoM, CustomSphere, InnerSphere, OuterSphere, AnimPhysCollisionType_MAX}
@@ -14456,7 +16371,11 @@ declare module "ue" {
         bFlipEasing: boolean;
         EasingWeight: number;
         bClamp: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_AnimDynamics extends UE.AnimNode_SkeletalControlBase {
@@ -14500,7 +16419,11 @@ declare module "ue" {
         bAngularSpring: boolean;
         bChain: boolean;
         RetargetingSettings: UE.RotationRetargetingInfo;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_AnimDynamics extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14531,7 +16454,11 @@ declare module "ue" {
         AlphaScaleBiasClamp: UE.InputScaleBiasClamp;
         AlphaInputType: UE.EAnimAlphaInputType;
         bAlphaBoolEnabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ApplyAdditive extends UE.AnimGraphNode_Base {
@@ -14548,7 +16475,11 @@ declare module "ue" {
         LimitMin: UE.Vector;
         LimitMax: UE.Vector;
         Bone: UE.BoneReference;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_ApplyLimits extends UE.AnimNode_SkeletalControlBase {
@@ -14556,7 +16487,11 @@ declare module "ue" {
         constructor(AngularRangeLimits: TArray<UE.AngularRangeLimit>, AngularOffsets: TArray<UE.Vector>);
         AngularRangeLimits: TArray<UE.AngularRangeLimit>;
         AngularOffsets: TArray<UE.Vector>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ApplyLimits extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14575,7 +16510,11 @@ declare module "ue" {
         Alpha: number;
         AlphaScaleBias: UE.InputScaleBias;
         LODThreshold: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ApplyMeshSpaceAdditive extends UE.AnimGraphNode_Base {
@@ -14594,7 +16533,11 @@ declare module "ue" {
         bBlendTranslation: boolean;
         bBlendRotation: boolean;
         bBlendScale: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBoneControlSpace { BCS_WorldSpace, BCS_ComponentSpace, BCS_ParentBoneSpace, BCS_BoneSpace, BCS_MAX}
@@ -14607,7 +16550,11 @@ declare module "ue" {
         Alpha: number;
         AlphaScaleBias: UE.InputScaleBias;
         TransformsSpace: UE.EBoneControlSpace;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_BlendBoneByChannel extends UE.AnimGraphNode_Base {
@@ -14636,14 +16583,22 @@ declare module "ue" {
         bResetChildOnActivation: boolean;
         CustomBlendCurve: UE.CurveFloat;
         BlendProfile: UE.BlendProfile;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_BlendListByBool extends UE.AnimNode_BlendListBase {
         constructor();
         constructor(bActiveValue: boolean);
         bActiveValue: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_BlendListByBool extends UE.AnimGraphNode_BlendListBase {
@@ -14659,7 +16614,11 @@ declare module "ue" {
         constructor(EnumToPoseIndex: TArray<number>, ActiveEnumValue: number);
         EnumToPoseIndex: TArray<number>;
         ActiveEnumValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_BlendListByEnum extends UE.AnimGraphNode_BlendListBase {
@@ -14676,7 +16635,11 @@ declare module "ue" {
         constructor();
         constructor(ActiveChildIndex: number);
         ActiveChildIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_BlendListByInt extends UE.AnimGraphNode_BlendListBase {
@@ -14691,7 +16654,11 @@ declare module "ue" {
         constructor();
         constructor(NormalizedTime: number);
         NormalizedTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_BlendSpaceEvaluator extends UE.AnimGraphNode_BlendSpaceBase {
@@ -14739,7 +16706,11 @@ declare module "ue" {
         bAffectTargetScaleX: boolean;
         bAffectTargetScaleY: boolean;
         bAffectTargetScaleZ: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_BoneDrivenController extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14754,7 +16725,11 @@ declare module "ue" {
         constructor();
         constructor(SocketName: string);
         SocketName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BoneSocketTarget {
@@ -14763,7 +16738,11 @@ declare module "ue" {
         bUseSocket: boolean;
         BoneReference: UE.BoneReference;
         SocketReference: UE.SocketReference;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_CCDIK extends UE.AnimNode_SkeletalControlBase {
@@ -14779,7 +16758,11 @@ declare module "ue" {
         bStartFromTail: boolean;
         bEnableRotationLimit: boolean;
         RotationLimitPerJoints: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_CCDIK extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14794,7 +16777,11 @@ declare module "ue" {
         constructor();
         constructor(ComponentPose: UE.ComponentSpacePoseLink);
         ComponentPose: UE.ComponentSpacePoseLink;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ComponentToLocalSpace extends UE.AnimGraphNode_Base {
@@ -14813,7 +16800,11 @@ declare module "ue" {
         bX: boolean;
         bY: boolean;
         bZ: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Constraint {
@@ -14823,7 +16814,11 @@ declare module "ue" {
         OffsetOption: UE.EConstraintOffsetOption;
         TransformType: UE.ETransformConstraintType;
         PerAxis: UE.FilterOptionPerAxis;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_Constraint extends UE.AnimNode_SkeletalControlBase {
@@ -14832,7 +16827,11 @@ declare module "ue" {
         BoneToModify: UE.BoneReference;
         ConstraintSetup: TArray<UE.Constraint>;
         ConstraintWeights: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_Constraint extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14852,7 +16851,11 @@ declare module "ue" {
         bCopyRotation: boolean;
         bCopyScale: boolean;
         ControlSpace: UE.EBoneControlSpace;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_CopyBone extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14876,7 +16879,11 @@ declare module "ue" {
         TranslationMultiplier: number;
         RotationMultiplier: number;
         ScaleMultiplier: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_CopyBoneDelta extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14893,7 +16900,11 @@ declare module "ue" {
         SourceMeshComponent: TWeakObjectPtr<UE.SkeletalMeshComponent>;
         bUseAttachedParent: boolean;
         bCopyCurves: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_CopyPoseFromMesh extends UE.AnimGraphNode_Base {
@@ -14909,7 +16920,11 @@ declare module "ue" {
         constructor(Name: string, Value: number);
         Name: string;
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CurveSourceInterface extends UE.Interface {
@@ -14929,7 +16944,11 @@ declare module "ue" {
         SourceBinding: string;
         Alpha: number;
         CurveSource: CurveSourceInterface;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_CurveSource extends UE.AnimGraphNode_Base {
@@ -14963,7 +16982,11 @@ declare module "ue" {
         EffectorRotationSource: UE.EBoneRotationSource;
         bEnableDebugDraw: boolean;
         EffectorTransformBone: UE.BoneReference;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_Fabrik extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14983,7 +17006,11 @@ declare module "ue" {
         LeftHandIK: UE.BoneReference;
         IKBonesToMove: TArray<UE.BoneReference>;
         HandFKWeight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_HandIKRetargeting extends UE.AnimGraphNode_SkeletalControlBase {
@@ -14999,7 +17026,11 @@ declare module "ue" {
         constructor();
         constructor(RefPoseType: UE.ERefPoseType);
         RefPoseType: UE.ERefPoseType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_RefPoseBase extends UE.AnimGraphNode_Base {
@@ -15021,7 +17052,11 @@ declare module "ue" {
         constructor();
         constructor(Source: UE.PoseLink);
         Source: UE.PoseLink;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_Inertialization extends UE.AnimGraphNode_Base {
@@ -15037,14 +17072,22 @@ declare module "ue" {
         constructor(BoneName: string, BlendDepth: number);
         BoneName: string;
         BlendDepth: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputBlendPose {
         constructor();
         constructor(BranchFilters: TArray<UE.BranchFilter>);
         BranchFilters: TArray<UE.BranchFilter>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ECurveBlendOption { MaxWeight, NormalizeByWeight, BlendByWeight, ECurveBlendOption_MAX}
@@ -15053,7 +17096,11 @@ declare module "ue" {
         constructor(SourceIndex: number, BlendWeight: number);
         SourceIndex: number;
         BlendWeight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_LayeredBoneBlend extends UE.AnimNode_Base {
@@ -15071,7 +17118,11 @@ declare module "ue" {
         PerBoneBlendWeights: TArray<UE.PerBoneBlendWeight>;
         SkeletonGuid: UE.Guid;
         VirtualBoneGuid: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_LayeredBoneBlend extends UE.AnimGraphNode_BlendListBase {
@@ -15093,7 +17144,11 @@ declare module "ue" {
         HingeRotationAxis: UE.EAxis;
         bEnableRotationLimit: boolean;
         bEnableKneeTwistCorrection: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_LegIK extends UE.AnimNode_SkeletalControlBase {
@@ -15102,7 +17157,11 @@ declare module "ue" {
         ReachPrecision: number;
         MaxIterations: number;
         LegsDefinition: TArray<UE.AnimLegIKDefinition>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_LegIK extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15128,7 +17187,11 @@ declare module "ue" {
         TargetInstance: UE.Object;
         SourceProperties: TArray<UE.Property>;
         DestProperties: TArray<UE.Property>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_LinkedAnimGraph extends UE.AnimNode_CustomProperty {
@@ -15138,7 +17201,11 @@ declare module "ue" {
         InputPoseNames: TArray<string>;
         InstanceClass: UE.Class;
         Tag: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_LinkedAnimGraph extends UE.AnimGraphNode_LinkedAnimGraphBase {
@@ -15154,7 +17221,11 @@ declare module "ue" {
         constructor(Interface: UE.Class, Layer: string);
         Interface: UE.Class;
         Layer: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_LinkedAnimLayer extends UE.AnimGraphNode_LinkedAnimGraphBase {
@@ -15172,7 +17243,11 @@ declare module "ue" {
         Name: string;
         Graph: string;
         InputPose: UE.PoseLink;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimBlueprintFunctionPinInfo {
@@ -15180,7 +17255,11 @@ declare module "ue" {
         constructor(Name: string, Type: UE.EdGraphPinType);
         Name: string;
         Type: UE.EdGraphPinType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MemberReference {
@@ -15192,7 +17271,11 @@ declare module "ue" {
         MemberGuid: UE.Guid;
         bSelfContext: boolean;
         bWasDeprecated: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_LinkedInputPose extends UE.AnimGraphNode_Base {
@@ -15217,7 +17300,11 @@ declare module "ue" {
         constructor();
         constructor(LocalPose: UE.PoseLink);
         LocalPose: UE.PoseLink;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_LocalToComponentSpace extends UE.AnimGraphNode_Base {
@@ -15233,7 +17320,11 @@ declare module "ue" {
         constructor(Axis: UE.Vector, bInLocalSpace: boolean);
         Axis: UE.Vector;
         bInLocalSpace: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EInterpolationBlend { Linear, Cubic, Sinusoidal, EaseInOutExponent2, EaseInOutExponent3, EaseInOutExponent4, EaseInOutExponent5, MAX}
@@ -15257,7 +17348,11 @@ declare module "ue" {
         CustomLookAtAxis: UE.Vector;
         LookUpAxis: UE.EAxisOption;
         CustomLookUpAxis: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_LookAt extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15274,7 +17369,11 @@ declare module "ue" {
         Base: UE.PoseLink;
         Additive: UE.PoseLink;
         bMeshSpaceAdditive: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_MakeDynamicAdditive extends UE.AnimGraphNode_Base {
@@ -15287,7 +17386,11 @@ declare module "ue" {
     
     class AnimNode_MeshSpaceRefPose extends UE.AnimNode_Base {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_MeshRefPose extends UE.AnimGraphNode_Base {
@@ -15312,7 +17415,11 @@ declare module "ue" {
         TranslationSpace: UE.EBoneControlSpace;
         RotationSpace: UE.EBoneControlSpace;
         ScaleSpace: UE.EBoneControlSpace;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ModifyBone extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15332,7 +17439,11 @@ declare module "ue" {
         CurveNames: TArray<string>;
         Alpha: number;
         ApplyMode: UE.EModifyCurveApplyMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ModifyCurve extends UE.AnimGraphNode_Base {
@@ -15351,7 +17462,11 @@ declare module "ue" {
         AlphaScaleBias: UE.InputScaleBias;
         bAdditiveNode: boolean;
         bNormalizeAlpha: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_MultiWayBlend extends UE.AnimGraphNode_Base {
@@ -15371,7 +17486,11 @@ declare module "ue" {
         Translation: UE.Vector;
         Rotation: UE.Rotator;
         Scale: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ObserveBone extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15393,7 +17512,11 @@ declare module "ue" {
         constructor();
         constructor(PoseAsset: UE.PoseAsset);
         PoseAsset: UE.PoseAsset;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_PoseBlendNode extends UE.AnimNode_PoseHandler {
@@ -15402,7 +17525,11 @@ declare module "ue" {
         SourcePose: UE.PoseLink;
         BlendOption: UE.EAlphaBlendOption;
         CustomCurve: UE.CurveFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_PoseBlendNode extends UE.AnimGraphNode_PoseHandler {
@@ -15418,7 +17545,11 @@ declare module "ue" {
         constructor(PoseName: string, PoseWeight: number);
         PoseName: string;
         PoseWeight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_PoseByName extends UE.AnimGraphNode_AssetPlayerBase {
@@ -15434,7 +17565,11 @@ declare module "ue" {
         constructor(TargetTranslation: UE.Vector, TargetRotation: UE.Rotator);
         TargetTranslation: UE.Vector;
         TargetRotation: UE.Rotator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERBFDistanceMethod { Euclidean, Quaternion, SwingAngle, DefaultMethod, ERBFDistanceMethod_MAX}
@@ -15451,7 +17586,11 @@ declare module "ue" {
         CustomCurve: UE.RichCurve;
         DrivenName: string;
         bIsHidden: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBoneAxis { BA_X, BA_Y, BA_Z, BA_MAX}
@@ -15469,7 +17608,11 @@ declare module "ue" {
         MedianReference: UE.Vector;
         MedianMin: number;
         MedianMax: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPoseDriverType { SwingAndTwist, SwingOnly, Translation, EPoseDriverType_MAX}
@@ -15491,7 +17634,11 @@ declare module "ue" {
         DriveSource: UE.EPoseDriverSource;
         DriveOutput: UE.EPoseDriverOutput;
         bOnlyDriveSelectedBones: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_PoseDriver extends UE.AnimGraphNode_PoseHandler {
@@ -15513,7 +17660,11 @@ declare module "ue" {
         SnapshotName: string;
         Snapshot: UE.PoseSnapshot;
         Mode: UE.ESnapshotSourceMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_PoseSnapshot extends UE.AnimGraphNode_Base {
@@ -15534,7 +17685,11 @@ declare module "ue" {
         MinPlayRate: number;
         MaxPlayRate: number;
         BlendIn: UE.AlphaBlend;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_RandomPlayer extends UE.AnimNode_Base {
@@ -15542,7 +17697,11 @@ declare module "ue" {
         constructor(Entries: TArray<UE.RandomPlayerSequenceEntry>, bShuffleMode: boolean);
         Entries: TArray<UE.RandomPlayerSequenceEntry>;
         bShuffleMode: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_RandomPlayer extends UE.AnimGraphNode_Base {
@@ -15555,7 +17714,11 @@ declare module "ue" {
     
     class AnimNode_ResetRoot extends UE.AnimNode_SkeletalControlBase {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ResetRoot extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15587,7 +17750,11 @@ declare module "ue" {
         bFreezeIncomingPoseOnStart: boolean;
         bClampLinearTranslationLimitToRefPose: boolean;
         bComponentSpaceSimulation: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_RigidBody extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15618,7 +17785,11 @@ declare module "ue" {
         bFreezeIncomingPoseOnStart: boolean;
         bClampLinearTranslationLimitToRefPose: boolean;
         bComponentSpaceSimulation: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_RigidBody_Chaos extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15646,7 +17817,11 @@ declare module "ue" {
         PitchScaleBiasClamp: UE.InputScaleBiasClamp;
         YawScaleBiasClamp: UE.InputScaleBiasClamp;
         MeshToComponent: UE.Rotator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_RotateRootBone extends UE.AnimGraphNode_Base {
@@ -15665,7 +17840,11 @@ declare module "ue" {
         Multiplier: number;
         RotationAxisToRefer: UE.EBoneAxis;
         bIsAdditive: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_RotationMultiplier extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15688,7 +17867,11 @@ declare module "ue" {
         AlphaScaleBiasClamp: UE.InputScaleBiasClamp;
         AlphaInputType: UE.EAnimAlphaInputType;
         bAlphaBoolEnabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_RotationOffsetBlendSpace extends UE.AnimGraphNode_BlendSpaceBase {
@@ -15704,7 +17887,11 @@ declare module "ue" {
         constructor(Pose: UE.PoseLink, CachePoseName: string);
         Pose: UE.PoseLink;
         CachePoseName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_SaveCachedPose extends UE.AnimGraphNode_Base {
@@ -15728,7 +17915,11 @@ declare module "ue" {
         Alpha: number;
         AlphaScaleBias: UE.InputScaleBias;
         ChainInitialLength: UE.EScaleChainInitialLength;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_ScaleChainLength extends UE.AnimGraphNode_Base {
@@ -15749,7 +17940,11 @@ declare module "ue" {
         bTeleportToExplicitTime: boolean;
         ReinitializationBehavior: UE.ESequenceEvalReinit;
         StartPosition: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_SequenceEvaluator extends UE.AnimGraphNode_AssetPlayerBase {
@@ -15769,7 +17964,11 @@ declare module "ue" {
         PlayRateScaleBiasClamp: UE.InputScaleBiasClamp;
         StartPosition: number;
         bLoopAnimation: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_SequencePlayer extends UE.AnimGraphNode_AssetPlayerBase {
@@ -15786,7 +17985,11 @@ declare module "ue" {
         Source: UE.PoseLink;
         SlotName: string;
         bAlwaysUpdateSourcePose: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_Slot extends UE.AnimGraphNode_Base {
@@ -15813,7 +18016,11 @@ declare module "ue" {
         TwistBlend: UE.AlphaBlend;
         Stretch: number;
         Offset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_SplineIK extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15840,7 +18047,11 @@ declare module "ue" {
         bRotateX: boolean;
         bRotateY: boolean;
         bRotateZ: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_SpringBone extends UE.AnimGraphNode_SkeletalControlBase {
@@ -15858,7 +18069,11 @@ declare module "ue" {
         MaxTransitionsPerFrame: number;
         bSkipFirstUpdateTransition: boolean;
         bReinitializeOnBecomingRelevant: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_StateMachine extends UE.AnimGraphNode_StateMachineBase {
@@ -15906,7 +18121,11 @@ declare module "ue" {
         Aux_Middle: UE.Transform;
         Aux_Ring: UE.Transform;
         Aux_Pinky: UE.Transform;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UE4RetargettingRefs {
@@ -15917,7 +18136,11 @@ declare module "ue" {
         KnuckleAverageMS_UE4: UE.Vector;
         WristSideDirectionLS_UE4: UE.Vector;
         WristForwardLS_UE4: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_SteamVRInputAnimPose extends UE.AnimNode_Base {
@@ -15929,7 +18152,11 @@ declare module "ue" {
         Mirror: boolean;
         SteamVRSkeletalTransform: UE.SteamVRSkeletonTransform;
         UE4RetargettingRefs: UE.UE4RetargettingRefs;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_SteamVRInputAnimPose extends UE.AnimGraphNode_Base {
@@ -15946,7 +18173,11 @@ declare module "ue" {
         ReferencePose: UE.PoseLink;
         HandSkeleton: UE.EHandSkeleton;
         TargetPose: UE.PoseLink;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_SteamVRSetWristTransform extends UE.AnimGraphNode_Base {
@@ -15962,7 +18193,11 @@ declare module "ue" {
         constructor(LimitMin: UE.Vector, LimitMax: UE.Vector);
         LimitMin: UE.Vector;
         LimitMax: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_Trail extends UE.AnimNode_SkeletalControlBase {
@@ -15995,7 +18230,11 @@ declare module "ue" {
         BaseJoint: UE.BoneReference;
         TrailBoneRotationBlendAlpha: number;
         LastBoneRotationAnimAlphaBlend: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_Trail extends UE.AnimGraphNode_SkeletalControlBase {
@@ -16014,7 +18253,11 @@ declare module "ue" {
         FramesToCachePose: number;
         DataSource: UE.EEvaluatorDataSource;
         EvaluatorMode: UE.EEvaluatorMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_TransitionPoseEvaluator extends UE.AnimGraphNode_Base {
@@ -16030,14 +18273,22 @@ declare module "ue" {
         constructor(Bone: UE.BoneReference, Axis: UE.Axis);
         Bone: UE.BoneReference;
         Axis: UE.Axis;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimCurveParam {
         constructor();
         constructor(Name: string);
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimNode_TwistCorrectiveNode extends UE.AnimNode_SkeletalControlBase {
@@ -16050,7 +18301,11 @@ declare module "ue" {
         RemappedMin: number;
         RemappedMax: number;
         Curve: UE.AnimCurveParam;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_TwistCorrectiveNode extends UE.AnimGraphNode_SkeletalControlBase {
@@ -16082,7 +18337,11 @@ declare module "ue" {
         bTakeRotationFromEffectorSpace: boolean;
         bMaintainEffectorRelRot: boolean;
         bAllowTwist: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_TwoBoneIK extends UE.AnimGraphNode_SkeletalControlBase {
@@ -16107,7 +18366,11 @@ declare module "ue" {
         AlphaBoolBlend: UE.InputAlphaBoolBlend;
         AlphaCurveName: string;
         AlphaScaleBiasClamp: UE.InputScaleBiasClamp;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_TwoWayBlend extends UE.AnimGraphNode_Base {
@@ -16123,7 +18386,11 @@ declare module "ue" {
         constructor(LinkToCachingNode: UE.PoseLink, CachePoseName: string);
         LinkToCachingNode: UE.PoseLink;
         CachePoseName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_UseCachedPose extends UE.AnimGraphNode_Base {
@@ -16138,7 +18405,11 @@ declare module "ue" {
     
     class AnimNode_WheelHandler extends UE.AnimNode_SkeletalControlBase {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimGraphNode_WheelHandler extends UE.AnimGraphNode_SkeletalControlBase {
@@ -16400,7 +18671,11 @@ declare module "ue" {
         constructor();
         constructor(BoneToTrackTable: TArray<number>);
         BoneToTrackTable: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimSet extends UE.Object {
@@ -16527,7 +18802,11 @@ declare module "ue" {
         PosKeys: TArray<UE.Vector>;
         RotKeys: TArray<UE.Quat>;
         ScaleKeys: TArray<UE.Vector>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AnimStreamable extends UE.AnimSequenceBase {
@@ -16601,7 +18880,11 @@ declare module "ue" {
         constructor(Error: string, ImageData: TArray<number>);
         Error: string;
         ImageData: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETextureRotationDirection { None, Left, Right, Down, ETextureRotationDirection_MAX}
@@ -16721,7 +19004,11 @@ declare module "ue" {
         FPS: number;
         Width: number;
         Height: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EARFaceTrackingDirection { FaceRelative, FaceMirrored, EARFaceTrackingDirection_MAX}
@@ -16865,7 +19152,11 @@ declare module "ue" {
         TraceChannel: UE.EARLineTraceChannels;
         LocalToTrackingTransform: UE.Transform;
         TrackedGeometry: UE.ARTrackedGeometry;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EARWorldMappingState { NotAvailable, StillMappingNotRelocalizable, StillMappingRelocalizable, Mapped, EARWorldMappingState_MAX}
@@ -16908,7 +19199,11 @@ declare module "ue" {
         constructor(AdditionalInfo: string, Status: UE.EARSessionStatus);
         AdditionalInfo: string;
         Status: UE.EARSessionStatus;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ARSkeletonDefinition {
@@ -16917,7 +19212,11 @@ declare module "ue" {
         NumJoints: number;
         JointNames: TArray<string>;
         ParentIndices: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EARJointTransformSpace { Model, ParentJoint, EARJointTransformSpace_MAX}
@@ -16928,7 +19227,11 @@ declare module "ue" {
         JointTransforms: TArray<UE.Transform>;
         IsJointTracked: TArray<boolean>;
         JointTransformSpace: UE.EARJointTransformSpace;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ARTrackedPose extends UE.ARTrackedGeometry {
@@ -17001,7 +19304,11 @@ declare module "ue" {
         SkeletonDefinition: UE.ARSkeletonDefinition;
         JointLocations: TArray<UE.Vector2D>;
         IsJointTracked: TArray<boolean>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ARBlueprintLibrary extends UE.BlueprintFunctionLibrary {
@@ -17475,7 +19782,11 @@ declare module "ue" {
         ChunkId: number;
         bApplyRecursively: boolean;
         CookRule: UE.EPrimaryAssetCookRule;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PrimaryAssetTypeInfo {
@@ -17492,14 +19803,22 @@ declare module "ue" {
         AssetScanPaths: TArray<string>;
         bIsDynamicAsset: boolean;
         NumberOfAssets: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PrimaryAssetType {
         constructor();
         constructor(Name: string);
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PrimaryAssetId {
@@ -17507,7 +19826,11 @@ declare module "ue" {
         constructor(PrimaryAssetType: UE.PrimaryAssetType, PrimaryAssetName: string);
         PrimaryAssetType: UE.PrimaryAssetType;
         PrimaryAssetName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PrimaryAssetRulesOverride {
@@ -17515,7 +19838,11 @@ declare module "ue" {
         constructor(PrimaryAssetId: UE.PrimaryAssetId, Rules: UE.PrimaryAssetRules);
         PrimaryAssetId: UE.PrimaryAssetId;
         Rules: UE.PrimaryAssetRules;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PrimaryAssetRulesCustomOverride {
@@ -17525,7 +19852,11 @@ declare module "ue" {
         FilterDirectory: UE.DirectoryPath;
         FilterString: string;
         Rules: UE.PrimaryAssetRules;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetManagerRedirect {
@@ -17533,7 +19864,11 @@ declare module "ue" {
         constructor(Old: string, New: string);
         Old: string;
         New: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetManagerSettings extends UE.DeveloperSettings {
@@ -17563,7 +19898,11 @@ declare module "ue" {
         PackagePath: string;
         AssetName: string;
         AssetClass: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ARFilter {
@@ -17577,7 +19916,11 @@ declare module "ue" {
         bRecursivePaths: boolean;
         bRecursiveClasses: boolean;
         bIncludeOnlyOnDiskAssets: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetRegistryDependencyOptions {
@@ -17588,7 +19931,11 @@ declare module "ue" {
         bIncludeSearchableNames: boolean;
         bIncludeSoftManagementReferences: boolean;
         bIncludeHardManagementReferences: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetRegistry extends UE.Interface {
@@ -17622,7 +19969,11 @@ declare module "ue" {
         constructor(Tag: string, Value: string);
         Tag: string;
         Value: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetRegistryHelpers extends UE.Object {
@@ -17706,7 +20057,11 @@ declare module "ue" {
         OldObjectPath: UE.SoftObjectPath;
         NewObjectPath: UE.SoftObjectPath;
         bOnlyFixSoftReferences: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetTools extends UE.Interface {
@@ -17751,7 +20106,11 @@ declare module "ue" {
         constructor(ClassToCopy: UE.SoftClassPath, AdvancedCopyCustomization: UE.SoftClassPath);
         ClassToCopy: UE.SoftClassPath;
         AdvancedCopyCustomization: UE.SoftClassPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetToolsSettings extends UE.DeveloperSettings {
@@ -17783,7 +20142,11 @@ declare module "ue" {
         LightingRigRotation: number;
         RotationSpeed: number;
         DirectionalLightRotation: UE.Rotator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetViewerSettings extends UE.Object {
@@ -17879,7 +20242,11 @@ declare module "ue" {
         constructor(SystemName: string, DeviceId: number);
         SystemName: string;
         DeviceId: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AsyncTask_LoadXRDeviceVisComponent extends UE.BlueprintAsyncActionBase {
@@ -17927,7 +20294,11 @@ declare module "ue" {
         InscatterMuNum: number;
         InscatterMuSNum: number;
         InscatterNuNum: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AtmosphericFogComponent extends UE.SceneComponent {
@@ -17991,7 +20362,11 @@ declare module "ue" {
         DeviceName: string;
         NumInputChannels: number;
         SampleRate: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AudioCapture extends UE.AudioGenerator {
@@ -18148,7 +20523,11 @@ declare module "ue" {
         constructor(DisplayName: string, MaxChannels: number);
         DisplayName: string;
         MaxChannels: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPanningMethod { Linear, EqualPower, EPanningMethod_MAX}
@@ -18233,7 +20612,11 @@ declare module "ue" {
         constructor(ResX: number, ResY: number);
         ResX: number;
         ResY: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneCaptureSettings {
@@ -18260,7 +20643,11 @@ declare module "ue" {
         bShowHUD: boolean;
         bUsePathTracer: boolean;
         PathTracerSamplePerPixel: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneCapture extends UE.Object {
@@ -18316,7 +20703,11 @@ declare module "ue" {
         constructor(bOverrideAspectRatioAxisConstraint: boolean, AspectRatioAxisConstraint: UE.EAspectRatioAxisConstraint);
         bOverrideAspectRatioAxisConstraint: boolean;
         AspectRatioAxisConstraint: UE.EAspectRatioAxisConstraint;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneBindingOverrideData {
@@ -18325,7 +20716,11 @@ declare module "ue" {
         ObjectBindingId: UE.MovieSceneObjectBindingID;
         Object: TWeakObjectPtr<UE.Object>;
         bOverridesDefault: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneBindingOverrides extends UE.Object {
@@ -18341,7 +20736,11 @@ declare module "ue" {
         constructor(ZeroPadAmount: number, FrameRate: UE.FrameRate);
         ZeroPadAmount: number;
         FrameRate: UE.FrameRate;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequencePlayerSnapshot {
@@ -18358,7 +20757,11 @@ declare module "ue" {
         Settings: UE.LevelSequenceSnapshotSettings;
         ActiveShot: UE.LevelSequence;
         ShotID: UE.MovieSceneSequenceID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceBurnIn extends UE.UserWidget {
@@ -18467,7 +20870,11 @@ declare module "ue" {
         Alpha: number;
         MinBrightness: number;
         MaxBrightness: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AutomationScreenshotOptions {
@@ -18487,7 +20894,11 @@ declare module "ue" {
         MaximumGlobalError: number;
         bIgnoreAntiAliasing: boolean;
         bIgnoreColors: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AutomationBlueprintFunctionLibrary extends UE.BlueprintFunctionLibrary {
@@ -18521,7 +20932,11 @@ declare module "ue" {
         constructor(Contains: string, MatchFromStart: boolean);
         Contains: string;
         MatchFromStart: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AutomatedTestGroup {
@@ -18529,7 +20944,11 @@ declare module "ue" {
         constructor(Name: string, Filters: TArray<UE.AutomatedTestFilter>);
         Name: string;
         Filters: TArray<UE.AutomatedTestFilter>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AutomationControllerSettings extends UE.Object {
@@ -18572,14 +20991,22 @@ declare module "ue" {
         constructor(PerformanceTestmap: UE.SoftObjectPath, TestTimer: number);
         PerformanceTestmap: UE.SoftObjectPath;
         TestTimer: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FilePath {
         constructor();
         constructor(FilePath: string);
         FilePath: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ImportFactorySettingValues {
@@ -18587,7 +21014,11 @@ declare module "ue" {
         constructor(SettingName: string, Value: string);
         SettingName: string;
         Value: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorImportWorkflowDefinition {
@@ -18595,7 +21026,11 @@ declare module "ue" {
         constructor(ImportFilePath: UE.FilePath, FactorySettings: TArray<UE.ImportFactorySettingValues>);
         ImportFilePath: UE.FilePath;
         FactorySettings: TArray<UE.ImportFactorySettingValues>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BuildPromotionImportWorkflowSettings {
@@ -18612,7 +21047,11 @@ declare module "ue" {
         Sound: UE.EditorImportWorkflowDefinition;
         SurroundSound: UE.EditorImportWorkflowDefinition;
         OtherAssetsToImport: TArray<UE.EditorImportWorkflowDefinition>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BuildPromotionOpenAssetSettings {
@@ -18624,7 +21063,11 @@ declare module "ue" {
         SkeletalMeshAsset: UE.FilePath;
         StaticMeshAsset: UE.FilePath;
         TextureAsset: UE.FilePath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BuildPromotionNewProjectSettings {
@@ -18632,7 +21075,11 @@ declare module "ue" {
         constructor(NewProjectFolderOverride: UE.DirectoryPath, NewProjectNameOverride: string);
         NewProjectFolderOverride: UE.DirectoryPath;
         NewProjectNameOverride: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BuildPromotionTestSettings {
@@ -18643,7 +21090,11 @@ declare module "ue" {
         OpenAssets: UE.BuildPromotionOpenAssetSettings;
         NewProjectSettings: UE.BuildPromotionNewProjectSettings;
         SourceControlMaterial: UE.FilePath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialEditorPromotionSettings {
@@ -18652,14 +21103,22 @@ declare module "ue" {
         DefaultMaterialAsset: UE.FilePath;
         DefaultDiffuseTexture: UE.FilePath;
         DefaultNormalTexture: UE.FilePath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleEditorPromotionSettings {
         constructor();
         constructor(DefaultParticleAsset: UE.FilePath);
         DefaultParticleAsset: UE.FilePath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintEditorPromotionSettings {
@@ -18668,7 +21127,11 @@ declare module "ue" {
         FirstMeshPath: UE.FilePath;
         SecondMeshPath: UE.FilePath;
         DefaultParticleAsset: UE.FilePath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ExternalToolDefinition {
@@ -18680,7 +21143,11 @@ declare module "ue" {
         WorkingDirectory: UE.DirectoryPath;
         ScriptExtension: string;
         ScriptDirectory: UE.DirectoryPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorImportExportTestDefinition {
@@ -18690,7 +21157,11 @@ declare module "ue" {
         ExportFileExtension: string;
         bSkipExport: boolean;
         FactorySettings: TArray<UE.ImportFactorySettingValues>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LaunchOnTestSettings {
@@ -18698,7 +21169,11 @@ declare module "ue" {
         constructor(LaunchOnTestmap: UE.FilePath, DeviceID: string);
         LaunchOnTestmap: UE.FilePath;
         DeviceID: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AutomationTestSettings extends UE.Object {
@@ -18756,7 +21231,11 @@ declare module "ue" {
         constructor();
         constructor(Behavior: UE.InputBehavior);
         Behavior: UE.InputBehavior;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputBehaviorSet extends UE.Object {
@@ -18931,14 +21410,22 @@ declare module "ue" {
         constructor();
         constructor(Kilobyte: TArray<number>);
         Kilobyte: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BandwidthTestGenerator {
         constructor();
         constructor(ReplicatedBuffers: TArray<UE.BandwidthTestItem>);
         ReplicatedBuffers: TArray<UE.BandwidthTestItem>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BandwidthTestActor extends UE.Actor {
@@ -18988,7 +21475,11 @@ declare module "ue" {
     
     class Timespan {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OverlayItem {
@@ -18998,7 +21489,11 @@ declare module "ue" {
         EndTime: UE.Timespan;
         Text: string;
         Position: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BasicOverlays extends UE.Overlays {
@@ -19396,100 +21891,6 @@ declare module "ue" {
         static Load(InName: string): BlueprintEditorSettings;
     }
     
-    enum ETutorialContent { None, Text, UDNExcerpt, RichText, ETutorialContent_MAX}
-    class TutorialContent {
-        constructor();
-        constructor(Type: UE.ETutorialContent, Content: string, ExcerptName: string, Text: string);
-        Type: UE.ETutorialContent;
-        Content: string;
-        ExcerptName: string;
-        Text: string;
-        static StaticClass(): Class;
-    }
-    
-    enum ETutorialAnchorIdentifier { None, NamedWidget, Asset, ETutorialAnchorIdentifier_MAX}
-    class TutorialContentAnchor {
-        constructor();
-        constructor(Type: UE.ETutorialAnchorIdentifier, WrapperIdentifier: string, Asset: UE.SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
-        Type: UE.ETutorialAnchorIdentifier;
-        WrapperIdentifier: string;
-        Asset: UE.SoftObjectPath;
-        bDrawHighlight: boolean;
-        TabToFocusOrOpen: string;
-        FriendlyName: string;
-        GUIDString: string;
-        OuterName: string;
-        static StaticClass(): Class;
-    }
-    
-    class TutorialWidgetContent {
-        constructor();
-        constructor(Content: UE.TutorialContent, WidgetAnchor: UE.TutorialContentAnchor, HorizontalAlignment: UE.EHorizontalAlignment, VerticalAlignment: UE.EVerticalAlignment, Offset: UE.Vector2D, ContentWidth: number, bAutoFocus: boolean);
-        Content: UE.TutorialContent;
-        WidgetAnchor: UE.TutorialContentAnchor;
-        HorizontalAlignment: UE.EHorizontalAlignment;
-        VerticalAlignment: UE.EVerticalAlignment;
-        Offset: UE.Vector2D;
-        ContentWidth: number;
-        bAutoFocus: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class TutorialStage {
-        constructor();
-        constructor(Name: string, Content: UE.TutorialContent, WidgetContent: TArray<UE.TutorialWidgetContent>, NextButtonText: string, BackButtonText: string, PlatformsToTest: TArray<string>, bInvertPlatformTest: boolean);
-        Name: string;
-        Content: UE.TutorialContent;
-        WidgetContent: TArray<UE.TutorialWidgetContent>;
-        NextButtonText: string;
-        BackButtonText: string;
-        PlatformsToTest: TArray<string>;
-        bInvertPlatformTest: boolean;
-        static StaticClass(): Class;
-    }
-    
-    class EditorTutorial extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Title: string;
-        SortOrder: number;
-        Icon: string;
-        Texture: UE.Texture2D;
-        Category: string;
-        SummaryContent: UE.TutorialContent;
-        Stages: TArray<UE.TutorialStage>;
-        PreviousTutorial: UE.SoftClassPath;
-        NextTutorial: UE.SoftClassPath;
-        bIsStandalone: boolean;
-        AssetToUse: UE.SoftObjectPath;
-        ImportPath: string;
-        bHideInBrowser: boolean;
-        SearchTags: string;
-        GetActorReference(PathToActor: string) : UE.Actor;
-        OnTutorialClosed() : void;
-        OnTutorialLaunched() : void;
-        OnTutorialStageEnded(StageName: string) : void;
-        OnTutorialStageStarted(StageName: string) : void;
-        static BeginTutorial(TutorialToStart: $Nullable<UE.EditorTutorial>, bRestart: boolean) : void;
-        static GetEngineFolderVisibilty() : boolean;
-        static GoToNextTutorialStage() : void;
-        static GoToPreviousTutorialStage() : void;
-        static OpenAsset(Asset: $Nullable<UE.Object>) : void;
-        static SetEngineFolderVisibilty(bNewVisibility: boolean) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EditorTutorial;
-        static Load(InName: string): EditorTutorial;
-    }
-    
-    namespace Engine.Tutorial.BlueprintTutorials.BlueprintEditorTutorial {
-        class BlueprintEditorTutorial_C extends UE.EditorTutorial {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): BlueprintEditorTutorial_C;
-            static Load(InName: string): BlueprintEditorTutorial_C;
-        }
-        
-    }
-
     class BlueprintFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ParentClass: UE.Class;
@@ -19517,7 +21918,11 @@ declare module "ue" {
         constructor(GameplayTags: TArray<UE.GameplayTag>, ParentTags: TArray<UE.GameplayTag>);
         GameplayTags: TArray<UE.GameplayTag>;
         ParentTags: TArray<UE.GameplayTag>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTagQuery {
@@ -19528,7 +21933,11 @@ declare module "ue" {
         QueryTokenStream: TArray<number>;
         UserDescription: string;
         AutoDescription: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTagAssetInterface extends UE.Interface {
@@ -19611,7 +22020,11 @@ declare module "ue" {
     
     class FavoritedBlueprintPaletteItem {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintPaletteFavorites extends UE.Object {
@@ -19715,7 +22128,11 @@ declare module "ue" {
     
     class DateTime {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EScreenOrientation { Unknown, Portrait, PortraitUpsideDown, LandscapeLeft, LandscapeRight, FaceUp, FaceDown, EScreenOrientation_MAX}
@@ -20042,14 +22459,22 @@ declare module "ue" {
         IndirectLightingSaturation: number;
         ShadowExponent: number;
         bUseAreaShadowsForStationaryLight: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LightmassDirectionalLightSettings extends UE.LightmassLightSettings {
         constructor();
         constructor(LightSourceAngle: number);
         LightSourceAngle: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DirectionalLightComponent extends UE.LightComponent {
@@ -20181,7 +22606,11 @@ declare module "ue" {
         SelectedKeyType: UE.Class;
         SelectedKeyID: number;
         bNoneIsAllowedValue: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BTDecorator_BlackboardBase extends UE.BTDecorator {
@@ -20467,7 +22896,11 @@ declare module "ue" {
         ParamType: UE.EAIParamType;
         Value: number;
         BBKey: UE.BlackboardKeySelector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EQSParametrizedQueryExecutionRequest {
@@ -20478,7 +22911,11 @@ declare module "ue" {
         EQSQueryBlackboardKey: UE.BlackboardKeySelector;
         RunMode: UE.EEnvQueryRunMode;
         bUseBBKeyForQueryTemplate: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BTService_RunEQS extends UE.BTService_BlackboardBase {
@@ -20501,7 +22938,11 @@ declare module "ue" {
         constructor();
         constructor(Interval: number);
         Interval: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BTTask_BlueprintBase extends UE.BTTaskNode {
@@ -20647,7 +23088,11 @@ declare module "ue" {
         ParamName: string;
         ParamType: UE.EAIParamType;
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BTTask_RunEQSQuery extends UE.BTTask_BlackboardBase {
@@ -20695,7 +23140,11 @@ declare module "ue" {
         constructor();
         constructor(Hash: FixSizeArray<number>);
         Hash: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChunkPartData {
@@ -20704,7 +23153,11 @@ declare module "ue" {
         Guid: UE.Guid;
         Offset: number;
         Size: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FileManifestData {
@@ -20718,7 +23171,11 @@ declare module "ue" {
         SymlinkTarget: string;
         bIsReadOnly: boolean;
         bIsCompressed: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChunkInfoData {
@@ -20729,7 +23186,11 @@ declare module "ue" {
         ShaHash: UE.SHAHashData;
         FileSize: bigint;
         GroupNumber: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CustomFieldData {
@@ -20737,7 +23198,11 @@ declare module "ue" {
         constructor(Key: string, Value: string);
         Key: string;
         Value: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BuildPatchManifest extends UE.Object {
@@ -20778,14 +23243,22 @@ declare module "ue" {
     
     class SlateWidgetStyle {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SlateSound {
         constructor();
         constructor(ResourceObject: UE.Object);
         ResourceObject: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ButtonStyle extends UE.SlateWidgetStyle {
@@ -20801,7 +23274,11 @@ declare module "ue" {
         HoveredSlateSound: UE.SlateSound;
         PressedSound: string;
         HoveredSound: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EButtonClickMethod { DownAndUp, MouseDown, MouseUp, PreciseClick, EButtonClickMethod_MAX}
@@ -20883,7 +23360,11 @@ declare module "ue" {
         OtherActor: UE.Actor;
         ComponentProperty: string;
         PathToComponent: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CableComponent extends UE.MeshComponent {
@@ -20965,7 +23446,11 @@ declare module "ue" {
         ArriveTangent: UE.Quat;
         LeaveTangent: UE.Quat;
         InterpMode: UE.EInterpCurveMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurveQuat {
@@ -20974,7 +23459,11 @@ declare module "ue" {
         Points: TArray<UE.InterpCurvePointQuat>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurvePointFloat {
@@ -20985,7 +23474,11 @@ declare module "ue" {
         ArriveTangent: number;
         LeaveTangent: number;
         InterpMode: UE.EInterpCurveMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurveFloat {
@@ -20994,7 +23487,11 @@ declare module "ue" {
         Points: TArray<UE.InterpCurvePointFloat>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SplineMetadata extends UE.Object {
@@ -21012,7 +23509,11 @@ declare module "ue" {
         Scale: UE.InterpCurveVector;
         ReparamTable: UE.InterpCurveFloat;
         Metadata: UE.SplineMetadata;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESplineCoordinateSpace { Local, World, ESplineCoordinateSpace_MAX}
@@ -21027,7 +23528,11 @@ declare module "ue" {
         Rotation: UE.Rotator;
         Scale: UE.Vector;
         Type: UE.ESplinePointType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SplineComponent extends UE.PrimitiveComponent {
@@ -21166,7 +23671,11 @@ declare module "ue" {
         EndTangent: UE.Vector;
         EndRoll: number;
         EndOffset: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESplineMeshAxis { X, Y, Z, ESplineMeshAxis_MAX}
@@ -21244,7 +23753,11 @@ declare module "ue" {
         Offsets: UE.Margin;
         Anchors: UE.Anchors;
         Alignment: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CanvasPanelSlot extends UE.PanelSlot {
@@ -21410,7 +23923,11 @@ declare module "ue" {
         MinImpulse: number;
         MaxDistance: number;
         SortMethod: UE.EChaosCollisionSortMethod;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EChaosBreakingSortMethod { SortNone, SortByHighestMass, SortByHighestSpeed, SortByNearestFirst, Count, EChaosBreakingSortMethod_MAX}
@@ -21423,7 +23940,11 @@ declare module "ue" {
         MinMass: number;
         MaxDistance: number;
         SortMethod: UE.EChaosBreakingSortMethod;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EChaosTrailingSortMethod { SortNone, SortByHighestMass, SortByHighestSpeed, SortByNearestFirst, Count, EChaosTrailingSortMethod_MAX}
@@ -21436,7 +23957,11 @@ declare module "ue" {
         MinAngularSpeed: number;
         MaxDistance: number;
         SortMethod: UE.EChaosTrailingSortMethod;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EClusterConnectionTypeEnum { Chaos_PointImplicit, Chaos_DelaunayTriangulation, Chaos_MinimalSpanningSubsetDelaunayTriangulation, Chaos_PointImplicitAugmentedWithMinimalDelaunay, Chaos_None, Chaos_EClsuterCreationParameters_Max, Chaos_MAX}
@@ -21447,7 +23972,11 @@ declare module "ue" {
         MinMass: number;
         MinSpeed: number;
         MinImpulse: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SolverBreakingFilterSettings {
@@ -21457,7 +23986,11 @@ declare module "ue" {
         MinMass: number;
         MinSpeed: number;
         MinVolume: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SolverTrailingFilterSettings {
@@ -21467,7 +24000,11 @@ declare module "ue" {
         MinMass: number;
         MinSpeed: number;
         MinVolume: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosDebugSubstepControl {
@@ -21476,7 +24013,11 @@ declare module "ue" {
         bPause: boolean;
         bSubstep: boolean;
         bStep: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosEventListenerComponent extends UE.ActorComponent {
@@ -21490,12 +24031,20 @@ declare module "ue" {
         constructor();
         constructor(ChaosHandlers: TSet<UE.Object>);
         ChaosHandlers: TSet<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BreakEventCallbackWrapper {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosGameplayEventDispatcher extends UE.ChaosEventListenerComponent {
@@ -21549,7 +24098,11 @@ declare module "ue" {
         CollisionObjectReductionPercentage: number;
         CollisionParticlesFraction: number;
         MaximumCollisionParticles: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GeometryCollection extends UE.Object {
@@ -21650,7 +24203,11 @@ declare module "ue" {
         LevelsetIndex: number;
         ParticleIndexMesh: number;
         LevelsetIndexMesh: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SolverBreakingData {
@@ -21662,7 +24219,11 @@ declare module "ue" {
         Mass: number;
         ParticleIndex: number;
         ParticleIndexMesh: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SolverTrailingData {
@@ -21674,7 +24235,11 @@ declare module "ue" {
         Mass: number;
         ParticleIndex: number;
         ParticleIndexMesh: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RecordedFrame {
@@ -21688,14 +24253,22 @@ declare module "ue" {
         Breakings: TArray<UE.SolverBreakingData>;
         Trailings: TSet<UE.SolverTrailingData>;
         Timestamp: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RecordedTransformTrack {
         constructor();
         constructor(Records: TArray<UE.RecordedFrame>);
         Records: TArray<UE.RecordedFrame>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GeometryCollectionCache extends UE.Object {
@@ -21731,7 +24304,11 @@ declare module "ue" {
         TrailingDataSizeMax: number;
         TrailingMinSpeedThreshold: number;
         TrailingMinVolumeThreshold: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosBreakEvent {
@@ -21742,7 +24319,11 @@ declare module "ue" {
         Velocity: UE.Vector;
         AngularVelocity: UE.Vector;
         Mass: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosPhysicsCollisionInfo {
@@ -21759,7 +24340,11 @@ declare module "ue" {
         OtherAngularVelocity: UE.Vector;
         Mass: number;
         OtherMass: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EGeometryCollectionPhysicsTypeEnum { Chaos_AngularVelocity, Chaos_DynamicState, Chaos_LinearVelocity, Chaos_InitialAngularVelocity, Chaos_InitialLinearVelocity, Chaos_CollisionGroup, Chaos_LinearForce, Chaos_AngularTorque, Chaos_Max, Chaos_MAX}
@@ -21807,7 +24392,11 @@ declare module "ue" {
     
     class GeometryCollectionDebugDrawWarningMessage {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GeometryCollectionDebugDrawActorSelectedRigidBody {
@@ -21816,7 +24405,11 @@ declare module "ue" {
         Id: number;
         Solver: UE.ChaosSolverActor;
         GeometryCollection: UE.GeometryCollectionActor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EGeometryCollectionDebugDrawActorHideGeometry { HideNone, HideWithCollision, HideSelected, HideWholeCollection, HideAll, EGeometryCollectionDebugDrawActorHideGeometry_MAX}
@@ -21941,7 +24534,11 @@ declare module "ue" {
         Mass1: number;
         Mass2: number;
         Impulse: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosBreakingEventData {
@@ -21951,7 +24548,11 @@ declare module "ue" {
         Velocity: UE.Vector;
         Mass: number;
         ParticleIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosTrailingEventData {
@@ -21962,7 +24563,11 @@ declare module "ue" {
         AngularVelocity: UE.Vector;
         Mass: number;
         ParticleIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChaosDestructionListener extends UE.SceneComponent {
@@ -22057,7 +24662,11 @@ declare module "ue" {
         CheckedSound: string;
         UncheckedSound: string;
         HoveredSound: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CheckBox extends UE.ContentWidget {
@@ -22119,7 +24728,11 @@ declare module "ue" {
         constructor(ChunkID: number, ParentChunkID: number);
         ChunkID: number;
         ParentChunkID: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChunkDependencyInfo extends UE.Object {
@@ -22139,7 +24752,11 @@ declare module "ue" {
         ActorToTrack: TSoftObjectPtr<UE.Actor>;
         RelativeOffset: UE.Vector;
         bAllowRoll: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CameraFilmbackSettings {
@@ -22148,7 +24765,11 @@ declare module "ue" {
         SensorWidth: number;
         SensorHeight: number;
         SensorAspectRatio: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CameraLensSettings {
@@ -22160,7 +24781,11 @@ declare module "ue" {
         MaxFStop: number;
         MinimumFocusDistance: number;
         DiaphragmBladeCount: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ECameraFocusMethod { None, Manual, Tracking, ECameraFocusMethod_MAX}
@@ -22170,7 +24795,11 @@ declare module "ue" {
         ActorToTrack: TSoftObjectPtr<UE.Actor>;
         RelativeOffset: UE.Vector;
         bDrawDebugTrackingFocusPoint: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CameraFocusSettings {
@@ -22184,7 +24813,11 @@ declare module "ue" {
         bSmoothFocusChanges: boolean;
         FocusSmoothingInterpSpeed: number;
         FocusOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NamedFilmbackPreset {
@@ -22192,7 +24825,11 @@ declare module "ue" {
         constructor(Name: string, FilmbackSettings: UE.CameraFilmbackSettings);
         Name: string;
         FilmbackSettings: UE.CameraFilmbackSettings;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NamedLensPreset {
@@ -22200,7 +24837,11 @@ declare module "ue" {
         constructor(Name: string, LensSettings: UE.CameraLensSettings);
         Name: string;
         LensSettings: UE.CameraLensSettings;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CineCameraComponent extends UE.CameraComponent {
@@ -22423,7 +25064,11 @@ declare module "ue" {
         StiffnessMultiplier: number;
         StretchLimit: number;
         CompressionLimit: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothConfigNv extends UE.ClothConfigBase {
@@ -22466,7 +25111,11 @@ declare module "ue" {
         NumInfluences: number;
         BoneIndices: FixSizeArray<number>;
         BoneWeights: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothPhysicalMeshDataBase extends UE.Object {
@@ -22491,14 +25140,22 @@ declare module "ue" {
         BoneIndex: number;
         Radius: number;
         LocalPosition: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothCollisionPrim_SphereConnection {
         constructor();
         constructor(SphereIndices: FixSizeArray<number>);
         SphereIndices: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothCollisionPrim_Convex {
@@ -22506,7 +25163,11 @@ declare module "ue" {
         constructor(Planes: TArray<UE.Plane>, BoneIndex: number);
         Planes: TArray<UE.Plane>;
         BoneIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothCollisionPrim_Box {
@@ -22515,7 +25176,11 @@ declare module "ue" {
         BoneIndex: number;
         LocalMin: UE.Vector;
         LocalMax: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothCollisionData {
@@ -22525,7 +25190,11 @@ declare module "ue" {
         SphereConnections: TArray<UE.ClothCollisionPrim_SphereConnection>;
         Convexes: TArray<UE.ClothCollisionPrim_Convex>;
         Boxes: TArray<UE.ClothCollisionPrim_Box>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PointWeightMap {
@@ -22535,7 +25204,11 @@ declare module "ue" {
         CurrentTarget: number;
         Values: TArray<number>;
         bEnabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothLODDataBase extends UE.Object {
@@ -22614,7 +25287,11 @@ declare module "ue" {
         CollisionThickness: number;
         AnimDriveSpringStiffness: number;
         AnimDriveDamperStiffness: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothPhysicalMeshData {
@@ -22633,7 +25310,11 @@ declare module "ue" {
         MaxBoneWeights: number;
         NumFixedVerts: number;
         SelfCollisionIndices: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum MaskTarget_PhysMesh { None, MaxDistance, BackstopDistance, BackstopRadius, AnimDriveMultiplier, MaskTarget_MAX}
@@ -22646,7 +25327,11 @@ declare module "ue" {
         MinValue: number;
         Values: TArray<number>;
         bEnabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothLODData {
@@ -22655,7 +25340,11 @@ declare module "ue" {
         PhysicalMeshData: UE.ClothPhysicalMeshData;
         CollisionData: UE.ClothCollisionData;
         ParameterMasks: TArray<UE.ClothParameterMask_PhysMesh>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClothingAssetNv extends UE.ClothingAssetCommon {
@@ -22779,7 +25468,11 @@ declare module "ue" {
         FloatValue: number;
         StringValue: string;
         ObjectValue: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PlatformInterfaceDelegateResult {
@@ -22787,14 +25480,22 @@ declare module "ue" {
         constructor(bSuccessful: boolean, Data: UE.PlatformInterfaceData);
         bSuccessful: boolean;
         Data: UE.PlatformInterfaceData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DelegateArray {
         constructor();
         constructor(Delegates: TArray<$Delegate<(Result: UE.PlatformInterfaceDelegateResult) => void>>);
         Delegates: TArray<$Delegate<(Result: UE.PlatformInterfaceDelegateResult) => void>>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PlatformInterfaceBase extends UE.Object {
@@ -22831,7 +25532,11 @@ declare module "ue" {
         ObjectTypeName: string;
         CustomResponses: TArray<UE.ResponseChannel>;
         HelpMessage: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CustomChannelSetup {
@@ -22842,7 +25547,11 @@ declare module "ue" {
         bTraceType: boolean;
         bStaticObject: boolean;
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CustomProfile {
@@ -22850,7 +25559,11 @@ declare module "ue" {
         constructor(Name: string, CustomResponses: TArray<UE.ResponseChannel>);
         Name: string;
         CustomResponses: TArray<UE.ResponseChannel>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Redirector {
@@ -22858,7 +25571,11 @@ declare module "ue" {
         constructor(OldName: string, NewName: string);
         OldName: string;
         NewName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CollisionProfile extends UE.DeveloperSettings {
@@ -22899,7 +25616,11 @@ declare module "ue" {
         DownArrowImage: UE.SlateBrush;
         MenuBorderBrush: UE.SlateBrush;
         MenuBorderPadding: UE.Margin;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ComboBoxStyle extends UE.SlateWidgetStyle {
@@ -22910,7 +25631,11 @@ declare module "ue" {
         SelectionChangeSlateSound: UE.SlateSound;
         PressedSound: string;
         SelectionChangeSound: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TableRowStyle extends UE.SlateWidgetStyle {
@@ -22932,7 +25657,11 @@ declare module "ue" {
         DropIndicator_Below: UE.SlateBrush;
         ActiveHighlightedBrush: UE.SlateBrush;
         InactiveHighlightedBrush: UE.SlateBrush;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FontOutlineSettings {
@@ -22943,7 +25672,11 @@ declare module "ue" {
         bApplyOutlineToDropShadows: boolean;
         OutlineMaterial: UE.Object;
         OutlineColor: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SlateFontInfo {
@@ -22956,7 +25689,11 @@ declare module "ue" {
         Size: number;
         FontName: string;
         Hinting: UE.EFontHinting;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESelectInfo { OnKeyPress, OnNavigation, OnMouseClick, Direct, ESelectInfo_MAX}
@@ -23025,7 +25762,11 @@ declare module "ue" {
         ComponentPropertyName: string;
         DelegatePropertyName: string;
         FunctionNameToBind: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ComponentDelegateBinding extends UE.DynamicBlueprintBinding {
@@ -23097,7 +25838,11 @@ declare module "ue" {
         constructor();
         constructor(Value: TArray<string>);
         Value: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EHDRCaptureGamut { HCGM_Rec709, HCGM_P3DCI, HCGM_Rec2020, HCGM_ACES, HCGM_ACEScg, HCGM_Linear, HCGM_MAX}
@@ -23208,7 +25953,11 @@ declare module "ue" {
         constructor(Command: string, Desc: string);
         Command: string;
         Desc: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ConsoleSettings extends UE.Object {
@@ -23446,7 +26195,11 @@ declare module "ue" {
         AdaptiveDivisions: number;
         AdaptiveRings: number;
         AdaptiveDepth: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CrowdAvoidanceSamplingPattern {
@@ -23454,7 +26207,11 @@ declare module "ue" {
         constructor(Angles: TArray<number>, Radii: TArray<number>);
         Angles: TArray<number>;
         Radii: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CrowdManager extends UE.CrowdManagerBase {
@@ -23489,7 +26246,11 @@ declare module "ue" {
         Guid: UE.Guid;
         Name: string;
         Key: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CryptoKeysSettings extends UE.Object {
@@ -23516,7 +26277,11 @@ declare module "ue" {
         ImportRowStruct: UE.ScriptStruct;
         ImportType: UE.ECSVImportType;
         ImportCurveInterpMode: UE.ERichCurveInterpMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CSVImportFactory extends UE.Factory {
@@ -23547,7 +26312,11 @@ declare module "ue" {
         constructor(Size: number, CullDistance: number);
         Size: number;
         CullDistance: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CullDistanceVolume extends UE.Volume {
@@ -23642,7 +26411,11 @@ declare module "ue" {
         constructor(ValueInSeconds: number, bIsSelected: boolean);
         ValueInSeconds: number;
         bIsSelected: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CurveEditorRetimeToolData extends UE.Object {
@@ -23748,7 +26521,11 @@ declare module "ue" {
         Vertex0: UE.Vector;
         Vertex1: UE.Vector;
         Vertex2: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CustomMeshComponent extends UE.MeshComponent {
@@ -23857,7 +26634,11 @@ declare module "ue" {
         constructor();
         constructor(PackagePath: string);
         PackagePath: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithAssetImportData extends UE.AssetImportData {
@@ -23888,7 +26669,11 @@ declare module "ue" {
         MaxLightmapResolution: UE.EDatasmithImportLightmapMax;
         bGenerateLightmapUVs: boolean;
         bRemoveDegenerates: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithImportBaseOptions {
@@ -23902,7 +26687,11 @@ declare module "ue" {
         bIncludeAnimation: boolean;
         AssetOptions: UE.DatasmithAssetImportOptions;
         StaticMeshOptions: UE.DatasmithStaticMeshImportOptions;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithSceneImportData extends UE.AssetImportData {
@@ -23921,7 +26710,11 @@ declare module "ue" {
         MaxEdgeLength: number;
         NormalTolerance: number;
         StitchingTechnique: UE.EDatasmithCADStitchingTechnique;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithCADImportSceneData extends UE.DatasmithSceneImportData {
@@ -23938,7 +26731,11 @@ declare module "ue" {
         bEnableLookAtTracking: boolean;
         bAllowRoll: boolean;
         ActorToTrack: TSoftObjectPtr<UE.Actor>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithCineCameraActorTemplate extends UE.DatasmithObjectTemplate {
@@ -23954,14 +26751,22 @@ declare module "ue" {
         constructor(SensorWidth: number, SensorHeight: number);
         SensorWidth: number;
         SensorHeight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithCameraLensSettingsTemplate {
         constructor();
         constructor(MaxFStop: number);
         MaxFStop: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithCameraFocusSettingsTemplate {
@@ -23969,7 +26774,11 @@ declare module "ue" {
         constructor(FocusMethod: UE.ECameraFocusMethod, ManualFocusDistance: number);
         FocusMethod: UE.ECameraFocusMethod;
         ManualFocusDistance: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithPostProcessSettingsTemplate {
@@ -23991,7 +26800,11 @@ declare module "ue" {
         CameraISO: number;
         CameraShutterSpeed: number;
         DepthOfFieldFstop: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithCineCameraComponentTemplate extends UE.DatasmithObjectTemplate {
@@ -24106,7 +26919,11 @@ declare module "ue" {
         constructor(bUpdateActors: boolean, bRespawnDeletedActors: boolean);
         bUpdateActors: boolean;
         bRespawnDeletedActors: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithImportOptions extends UE.Object {
@@ -24158,7 +26975,11 @@ declare module "ue" {
         constructor();
         constructor(StaticSwitchParameters: TMap<string, boolean>);
         StaticSwitchParameters: TMap<string, boolean>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithMaterialInstanceTemplate extends UE.DatasmithObjectTemplate {
@@ -24206,7 +27027,11 @@ declare module "ue" {
         PropertyName: string;
         PropertyIndex: number;
         ComponentName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPropertyValueCategory { Undefined, Generic, RelativeLocation, RelativeRotation, RelativeScale3D, Visibility, Material, Color, Option, EPropertyValueCategory_MAX}
@@ -24235,7 +27060,11 @@ declare module "ue" {
         constructor(FunctionName: string, FunctionEntry: TWeakObjectPtr<UE.Object>);
         FunctionName: string;
         FunctionEntry: TWeakObjectPtr<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VariantObjectBinding extends UE.Object {
@@ -24396,14 +27225,22 @@ declare module "ue" {
         constructor();
         constructor(MaterialIndex: number);
         MaterialIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithMeshSectionInfoMapTemplate {
         constructor();
         constructor(Map: TMap<number, UE.DatasmithMeshSectionInfoTemplate>);
         Map: TMap<number, UE.DatasmithMeshSectionInfoTemplate>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithMeshBuildSettingsTemplate {
@@ -24420,7 +27257,11 @@ declare module "ue" {
         MinLightmapResolution: number;
         SrcLightmapIndex: number;
         DstLightmapIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithStaticMaterialTemplate {
@@ -24428,7 +27269,11 @@ declare module "ue" {
         constructor(MaterialSlotName: string, MaterialInterface: UE.MaterialInterface);
         MaterialSlotName: string;
         MaterialInterface: UE.MaterialInterface;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DatasmithStaticMeshTemplate extends UE.DatasmithObjectTemplate {
@@ -24478,7 +27323,11 @@ declare module "ue" {
     
     class TableRowBase {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EEvaluateCurveTableResult { RowFound, RowNotFound, EEvaluateCurveTableResult_MAX}
@@ -24527,7 +27376,11 @@ declare module "ue" {
         constructor();
         constructor(ViewModeIndex: UE.EViewModeIndex);
         ViewModeIndex: UE.EViewModeIndex;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DebugCameraControllerSettings extends UE.DeveloperSettings {
@@ -24650,7 +27503,11 @@ declare module "ue" {
         constructor(FontValue: UE.Font, FontPage: number);
         FontValue: UE.Font;
         FontPage: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DEditorFontParameterValue extends UE.DEditorParameterValue {
@@ -24683,7 +27540,11 @@ declare module "ue" {
         bIsUsedAsAtlasPosition: boolean;
         Curve: TSoftObjectPtr<UE.CurveLinearColor>;
         Atlas: TSoftObjectPtr<UE.CurveLinearColorAtlas>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DEditorScalarParameterValue extends UE.DEditorParameterValue {
@@ -24702,7 +27563,11 @@ declare module "ue" {
         G: boolean;
         B: boolean;
         A: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DEditorStaticComponentMaskParameterValue extends UE.DEditorParameterValue {
@@ -24728,7 +27593,11 @@ declare module "ue" {
         G: string;
         B: string;
         A: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DEditorTextureParameterValue extends UE.DEditorParameterValue {
@@ -24771,7 +27640,11 @@ declare module "ue" {
         constructor(Language: string, Text: string);
         Language: string;
         Text: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TemplateFolderRename {
@@ -24779,7 +27652,11 @@ declare module "ue" {
         constructor(From: string, To: string);
         From: string;
         To: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TemplateReplacement {
@@ -24789,7 +27666,11 @@ declare module "ue" {
         From: string;
         To: string;
         bCaseSensitive: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETemplateSetting { Languages, HardwareTarget, GraphicsPreset, StarterContent, XR, Raytracing, All, ETemplateSetting_MAX}
@@ -24799,7 +27680,11 @@ declare module "ue" {
         constructor(DetailLevels: TArray<UE.EFeaturePackDetailLevel>, MountName: string);
         DetailLevels: TArray<UE.EFeaturePackDetailLevel>;
         MountName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TemplateProjectDefs extends UE.Object {
@@ -24953,7 +27838,11 @@ declare module "ue" {
         MipFilter: string;
         MipLoadOptions: UE.ETextureMipLoadOptions;
         DuplicateNonOptionalMips: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TextureLODSettings extends UE.Object {
@@ -25014,7 +27903,11 @@ declare module "ue" {
         constructor(Speaker: UE.DialogueVoice, Targets: TArray<UE.DialogueVoice>);
         Speaker: UE.DialogueVoice;
         Targets: TArray<UE.DialogueVoice>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DialogueContextMapping {
@@ -25024,7 +27917,11 @@ declare module "ue" {
         SoundWave: UE.SoundWave;
         LocalizationKeyFormat: string;
         Proxy: UE.DialogueSoundWaveProxy;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DialogueWave extends UE.Object {
@@ -25142,7 +28039,11 @@ declare module "ue" {
         ArriveTangent: UE.Vector2D;
         LeaveTangent: UE.Vector2D;
         InterpMode: UE.EInterpCurveMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurveVector2D {
@@ -25151,7 +28052,11 @@ declare module "ue" {
         Points: TArray<UE.InterpCurvePointVector2D>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DistributionFloatUniformCurve extends UE.DistributionFloat {
@@ -25222,7 +28127,11 @@ declare module "ue" {
         constructor(v1: UE.Vector, v2: UE.Vector);
         v1: UE.Vector;
         v2: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurvePointTwoVectors {
@@ -25233,7 +28142,11 @@ declare module "ue" {
         ArriveTangent: UE.TwoVectors;
         LeaveTangent: UE.TwoVectors;
         InterpMode: UE.EInterpCurveMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurveTwoVectors {
@@ -25242,7 +28155,11 @@ declare module "ue" {
         Points: TArray<UE.InterpCurvePointTwoVectors>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DistributionVectorUniformCurve extends UE.DistributionVector {
@@ -25284,7 +28201,11 @@ declare module "ue" {
         BaseSizeX: number;
         BaseSizeY: number;
         DistanceToSizeCurve: UE.CurveFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialBillboardComponent extends UE.PrimitiveComponent {
@@ -25363,7 +28284,11 @@ declare module "ue" {
         constructor(Value: number, SizeRule: UE.ESlateSizeRule);
         Value: number;
         SizeRule: UE.ESlateSizeRule;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UserWidgetPool {
@@ -25371,7 +28296,11 @@ declare module "ue" {
         constructor(ActiveWidgets: TArray<UE.UserWidget>, InactiveWidgets: TArray<UE.UserWidget>);
         ActiveWidgets: TArray<UE.UserWidget>;
         InactiveWidgets: TArray<UE.UserWidget>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DynamicEntryBoxBase extends UE.Widget {
@@ -25547,7 +28476,11 @@ declare module "ue" {
         constructor(VertexID0: UE.VertexID, VertexID1: UE.VertexID);
         VertexID0: UE.VertexID;
         VertexID1: UE.VertexID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PolygonToSplit {
@@ -25555,12 +28488,20 @@ declare module "ue" {
         constructor(PolygonID: UE.PolygonID, VertexPairsToSplitAt: TArray<UE.VertexPair>);
         PolygonID: UE.PolygonID;
         VertexPairsToSplitAt: TArray<UE.VertexPair>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshElementAttributeValue {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshElementAttributeData {
@@ -25569,14 +28510,22 @@ declare module "ue" {
         AttributeName: string;
         AttributeIndex: number;
         AttributeValue: UE.MeshElementAttributeValue;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshElementAttributeList {
         constructor();
         constructor(Attributes: TArray<UE.MeshElementAttributeData>);
         Attributes: TArray<UE.MeshElementAttributeData>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AttributesForVertex {
@@ -25584,7 +28533,11 @@ declare module "ue" {
         constructor(VertexID: UE.VertexID, VertexAttributes: UE.MeshElementAttributeList);
         VertexID: UE.VertexID;
         VertexAttributes: UE.MeshElementAttributeList;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AttributesForVertexInstance {
@@ -25592,14 +28545,22 @@ declare module "ue" {
         constructor(VertexInstanceID: UE.VertexInstanceID, VertexInstanceAttributes: UE.MeshElementAttributeList);
         VertexInstanceID: UE.VertexInstanceID;
         VertexInstanceAttributes: UE.MeshElementAttributeList;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexAttributesForPolygonHole {
         constructor();
         constructor(VertexAttributeList: TArray<UE.MeshElementAttributeList>);
         VertexAttributeList: TArray<UE.MeshElementAttributeList>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexAttributesForPolygon {
@@ -25608,7 +28569,11 @@ declare module "ue" {
         PolygonID: UE.PolygonID;
         PerimeterVertexAttributeLists: TArray<UE.MeshElementAttributeList>;
         VertexAttributeListsForEachHole: TArray<UE.VertexAttributesForPolygonHole>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AttributesForEdge {
@@ -25616,7 +28581,11 @@ declare module "ue" {
         constructor(EdgeID: UE.EdgeID, EdgeAttributes: UE.MeshElementAttributeList);
         EdgeID: UE.EdgeID;
         EdgeAttributes: UE.MeshElementAttributeList;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexToMove {
@@ -25624,7 +28593,11 @@ declare module "ue" {
         constructor(VertexID: UE.VertexID, NewVertexPosition: UE.Vector);
         VertexID: UE.VertexID;
         NewVertexPosition: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EInsetPolygonsMode { All, CenterPolygonOnly, SidePolygonsOnly, EInsetPolygonsMode_MAX}
@@ -25638,7 +28611,11 @@ declare module "ue" {
         VertexNormal: UE.Vector;
         VertexTangent: UE.Vector;
         VertexBinormalSign: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubdividedQuad {
@@ -25648,14 +28625,22 @@ declare module "ue" {
         QuadVertex1: UE.SubdividedQuadVertex;
         QuadVertex2: UE.SubdividedQuadVertex;
         QuadVertex3: UE.SubdividedQuadVertex;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubdivisionLimitSection {
         constructor();
         constructor(SubdividedQuads: TArray<UE.SubdividedQuad>);
         SubdividedQuads: TArray<UE.SubdividedQuad>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubdividedWireEdge {
@@ -25663,7 +28648,11 @@ declare module "ue" {
         constructor(EdgeVertex0PositionIndex: number, EdgeVertex1PositionIndex: number);
         EdgeVertex0PositionIndex: number;
         EdgeVertex1PositionIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubdivisionLimitData {
@@ -25672,7 +28661,11 @@ declare module "ue" {
         VertexPositions: TArray<UE.Vector>;
         Sections: TArray<UE.SubdivisionLimitSection>;
         SubdividedWireEdges: TArray<UE.SubdividedWireEdge>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexToCreate {
@@ -25680,7 +28673,11 @@ declare module "ue" {
         constructor(VertexAttributes: UE.MeshElementAttributeList, OriginalVertexID: UE.VertexID);
         VertexAttributes: UE.MeshElementAttributeList;
         OriginalVertexID: UE.VertexID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexInstanceToCreate {
@@ -25689,7 +28686,11 @@ declare module "ue" {
         VertexID: UE.VertexID;
         VertexInstanceAttributes: UE.MeshElementAttributeList;
         OriginalVertexInstanceID: UE.VertexInstanceID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexAndAttributes {
@@ -25698,7 +28699,11 @@ declare module "ue" {
         VertexInstanceID: UE.VertexInstanceID;
         VertexID: UE.VertexID;
         PolygonVertexAttributes: UE.MeshElementAttributeList;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPolygonEdgeHardness { NewEdgesSoft, NewEdgesHard, AllEdgesSoft, AllEdgesHard, EPolygonEdgeHardness_MAX}
@@ -25709,7 +28714,11 @@ declare module "ue" {
         PerimeterVertices: TArray<UE.VertexAndAttributes>;
         OriginalPolygonID: UE.PolygonID;
         PolygonEdgeHardness: UE.EPolygonEdgeHardness;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PolygonGroupToCreate {
@@ -25717,7 +28726,11 @@ declare module "ue" {
         constructor(PolygonGroupAttributes: UE.MeshElementAttributeList, OriginalPolygonGroupID: UE.PolygonGroupID);
         PolygonGroupAttributes: UE.MeshElementAttributeList;
         OriginalPolygonGroupID: UE.PolygonGroupID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EdgeToCreate {
@@ -25727,7 +28740,11 @@ declare module "ue" {
         VertexID1: UE.VertexID;
         EdgeAttributes: UE.MeshElementAttributeList;
         OriginalEdgeID: UE.EdgeID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexIndexAndInstanceID {
@@ -25735,14 +28752,22 @@ declare module "ue" {
         constructor(ContourIndex: number, VertexInstanceID: UE.VertexInstanceID);
         ContourIndex: number;
         VertexInstanceID: UE.VertexInstanceID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VertexInstancesForPolygonHole {
         constructor();
         constructor(VertexIndicesAndInstanceIDs: TArray<UE.VertexIndexAndInstanceID>);
         VertexIndicesAndInstanceIDs: TArray<UE.VertexIndexAndInstanceID>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ChangeVertexInstancesForPolygon {
@@ -25751,7 +28776,11 @@ declare module "ue" {
         PolygonID: UE.PolygonID;
         PerimeterVertexIndicesAndInstanceIDs: TArray<UE.VertexIndexAndInstanceID>;
         VertexIndicesAndInstanceIDsForEachHole: TArray<UE.VertexInstancesForPolygonHole>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PolygonGroupForPolygon {
@@ -25759,7 +28788,11 @@ declare module "ue" {
         constructor(PolygonID: UE.PolygonID, PolygonGroupID: UE.PolygonGroupID);
         PolygonID: UE.PolygonID;
         PolygonGroupID: UE.PolygonGroupID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditableMesh extends UE.Object {
@@ -25928,7 +28961,11 @@ declare module "ue" {
         BackgroundImageSelected: UE.SlateBrush;
         BackgroundImageComposing: UE.SlateBrush;
         CaretImage: UE.SlateBrush;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EVirtualKeyboardType { Default, Number, Web, Email, Password, AlphaNumeric, EVirtualKeyboardType_MAX}
@@ -25936,7 +28973,11 @@ declare module "ue" {
         constructor();
         constructor(bEnableAutocorrect: boolean);
         bEnableAutocorrect: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EVirtualKeyboardDismissAction { TextChangeOnDismiss, TextCommitOnAccept, TextCommitOnDismiss, EVirtualKeyboardDismissAction_MAX}
@@ -25950,7 +28991,11 @@ declare module "ue" {
         bOverride_TextFlowDirection: boolean;
         TextShapingMethod: UE.ETextShapingMethod;
         TextFlowDirection: UE.ETextFlowDirection;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ETextCommit { Default, OnEnter, OnUserMovedFocus, OnCleared, ETextCommit_MAX}
@@ -26008,7 +29053,11 @@ declare module "ue" {
         NormalThumbImage: UE.SlateBrush;
         HoveredThumbImage: UE.SlateBrush;
         DraggedThumbImage: UE.SlateBrush;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditableTextBoxStyle extends UE.SlateWidgetStyle {
@@ -26026,7 +29075,11 @@ declare module "ue" {
         HScrollBarPadding: UE.Margin;
         VScrollBarPadding: UE.Margin;
         ScrollBarStyle: UE.ScrollBarStyle;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditableTextBox extends UE.Widget {
@@ -26265,7 +29318,11 @@ declare module "ue" {
         constructor(In: number, Out: UE.Color);
         In: number;
         Out: UE.Color;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StatColorMapping {
@@ -26274,7 +29331,11 @@ declare module "ue" {
         StatName: string;
         ColorMap: TArray<UE.StatColorMapEntry>;
         DisableBlend: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameNameRedirect {
@@ -26282,7 +29343,11 @@ declare module "ue" {
         constructor(OldGameName: string, NewGameName: string);
         OldGameName: string;
         NewGameName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ClassRedirect {
@@ -26296,7 +29361,11 @@ declare module "ue" {
         NewClassClass: string;
         NewClassPackage: string;
         InstanceOnly: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PluginRedirect {
@@ -26304,7 +29373,11 @@ declare module "ue" {
         constructor(OldPluginName: string, NewPluginName: string);
         OldPluginName: string;
         NewPluginName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class StructRedirect {
@@ -26312,7 +29385,11 @@ declare module "ue" {
         constructor(OldStructName: string, NewStructName: string);
         OldStructName: string;
         NewStructName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EngineCustomTimeStep extends UE.Object {
@@ -26342,7 +29419,11 @@ declare module "ue" {
         Location: UE.Vector;
         Rotation: UE.Rotator;
         Comment: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NetDriverDefinition {
@@ -26351,7 +29432,11 @@ declare module "ue" {
         DefName: string;
         DriverClassName: string;
         DriverClassNameFallback: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Engine extends UE.Object {
@@ -26778,7 +29863,11 @@ declare module "ue" {
         constructor(Wildcard: string, bInclude: boolean);
         Wildcard: string;
         bInclude: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AutoReimportDirectoryConfig {
@@ -26787,7 +29876,11 @@ declare module "ue" {
         SourceDirectory: string;
         MountPoint: string;
         Wildcards: TArray<UE.AutoReimportWildcard>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorLoadingSavingSettings extends UE.Object {
@@ -27004,6 +30097,106 @@ declare module "ue" {
         static Load(InName: string): EditorSubsystemBlueprintLibrary;
     }
     
+    enum ETutorialContent { None, Text, UDNExcerpt, RichText, ETutorialContent_MAX}
+    class TutorialContent {
+        constructor();
+        constructor(Type: UE.ETutorialContent, Content: string, ExcerptName: string, Text: string);
+        Type: UE.ETutorialContent;
+        Content: string;
+        ExcerptName: string;
+        Text: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+    }
+    
+    enum ETutorialAnchorIdentifier { None, NamedWidget, Asset, ETutorialAnchorIdentifier_MAX}
+    class TutorialContentAnchor {
+        constructor();
+        constructor(Type: UE.ETutorialAnchorIdentifier, WrapperIdentifier: string, Asset: UE.SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
+        Type: UE.ETutorialAnchorIdentifier;
+        WrapperIdentifier: string;
+        Asset: UE.SoftObjectPath;
+        bDrawHighlight: boolean;
+        TabToFocusOrOpen: string;
+        FriendlyName: string;
+        GUIDString: string;
+        OuterName: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+    }
+    
+    class TutorialWidgetContent {
+        constructor();
+        constructor(Content: UE.TutorialContent, WidgetAnchor: UE.TutorialContentAnchor, HorizontalAlignment: UE.EHorizontalAlignment, VerticalAlignment: UE.EVerticalAlignment, Offset: UE.Vector2D, ContentWidth: number, bAutoFocus: boolean);
+        Content: UE.TutorialContent;
+        WidgetAnchor: UE.TutorialContentAnchor;
+        HorizontalAlignment: UE.EHorizontalAlignment;
+        VerticalAlignment: UE.EVerticalAlignment;
+        Offset: UE.Vector2D;
+        ContentWidth: number;
+        bAutoFocus: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+    }
+    
+    class TutorialStage {
+        constructor();
+        constructor(Name: string, Content: UE.TutorialContent, WidgetContent: TArray<UE.TutorialWidgetContent>, NextButtonText: string, BackButtonText: string, PlatformsToTest: TArray<string>, bInvertPlatformTest: boolean);
+        Name: string;
+        Content: UE.TutorialContent;
+        WidgetContent: TArray<UE.TutorialWidgetContent>;
+        NextButtonText: string;
+        BackButtonText: string;
+        PlatformsToTest: TArray<string>;
+        bInvertPlatformTest: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+    }
+    
+    class EditorTutorial extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Title: string;
+        SortOrder: number;
+        Icon: string;
+        Texture: UE.Texture2D;
+        Category: string;
+        SummaryContent: UE.TutorialContent;
+        Stages: TArray<UE.TutorialStage>;
+        PreviousTutorial: UE.SoftClassPath;
+        NextTutorial: UE.SoftClassPath;
+        bIsStandalone: boolean;
+        AssetToUse: UE.SoftObjectPath;
+        ImportPath: string;
+        bHideInBrowser: boolean;
+        SearchTags: string;
+        GetActorReference(PathToActor: string) : UE.Actor;
+        OnTutorialClosed() : void;
+        OnTutorialLaunched() : void;
+        OnTutorialStageEnded(StageName: string) : void;
+        OnTutorialStageStarted(StageName: string) : void;
+        static BeginTutorial(TutorialToStart: $Nullable<UE.EditorTutorial>, bRestart: boolean) : void;
+        static GetEngineFolderVisibilty() : boolean;
+        static GoToNextTutorialStage() : void;
+        static GoToPreviousTutorialStage() : void;
+        static OpenAsset(Asset: $Nullable<UE.Object>) : void;
+        static SetEngineFolderVisibilty(bNewVisibility: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EditorTutorial;
+        static Load(InName: string): EditorTutorial;
+    }
+    
     class EditorTutorialFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -27027,7 +30220,11 @@ declare module "ue" {
         Description: string;
         Icon: string;
         Texture: UE.SoftObjectPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TutorialContext {
@@ -27037,7 +30234,11 @@ declare module "ue" {
         BrowserFilter: string;
         AttractTutorial: UE.SoftClassPath;
         LaunchTutorial: UE.SoftClassPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorTutorialSettings extends UE.Object {
@@ -27116,14 +30317,22 @@ declare module "ue" {
         MemberName: string;
         MemberGuid: UE.Guid;
         IsProperty: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorPropertyPath {
         constructor();
         constructor(Segments: TArray<UE.EditorPropertyPathSegment>);
         Segments: TArray<UE.EditorPropertyPathSegment>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBindingKind { Function, Property, EBindingKind_MAX}
@@ -27137,7 +30346,11 @@ declare module "ue" {
         SourcePath: UE.EditorPropertyPath;
         MemberGuid: UE.Guid;
         Kind: UE.EBindingKind;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WidgetAnimation_DEPRECATED {
@@ -27145,7 +30358,11 @@ declare module "ue" {
         constructor(MovieScene: UE.MovieScene, AnimationBindings: TArray<UE.WidgetAnimationBinding>);
         MovieScene: UE.MovieScene;
         AnimationBindings: TArray<UE.WidgetAnimationBinding>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EWidgetSupportsDynamicCreation { Default, Yes, No, EWidgetSupportsDynamicCreation_MAX}
@@ -27270,7 +30487,11 @@ declare module "ue" {
     
     class ActiveGizmo {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InteractiveGizmoManager extends UE.Object {
@@ -27498,7 +30719,11 @@ declare module "ue" {
         bCanTraceOnGeometry: boolean;
         bCanDisableTrace: boolean;
         bCanProjectDown: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EnvQueryGenerator_ProjectedPoints extends UE.EnvQueryGenerator {
@@ -27534,7 +30759,11 @@ declare module "ue" {
         constructor();
         constructor(DefaultValue: number);
         DefaultValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EEnvDirection { TwoPoints, Rotation, EEnvDirection_MAX}
@@ -27545,7 +30774,11 @@ declare module "ue" {
         LineTo: UE.Class;
         Rotation: UE.Class;
         DirMode: UE.EEnvDirection;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EnvQueryGenerator_Donut extends UE.EnvQueryGenerator_ProjectedPoints {
@@ -27692,7 +30925,11 @@ declare module "ue" {
         bOnlyBlockingHits: boolean;
         bOverlapComplex: boolean;
         bSkipOverlapQuerier: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EnvQueryTest_Overlap extends UE.EnvQueryTest {
@@ -27810,7 +31047,11 @@ declare module "ue" {
         CollapsedImage: UE.SlateBrush;
         ExpandedImage: UE.SlateBrush;
         RolloutAnimationSeconds: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ExpandableArea extends UE.Widget {
@@ -27839,7 +31080,11 @@ declare module "ue" {
         FogDensity: number;
         FogHeightFalloff: number;
         FogHeightOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ExponentialHeightFogComponent extends UE.SceneComponent {
@@ -27947,7 +31192,11 @@ declare module "ue" {
         RightEyeDirection: UE.Vector;
         FixationPoint: UE.Vector;
         ConfidenceValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EyeTrackerGazeData {
@@ -27957,7 +31206,11 @@ declare module "ue" {
         GazeDirection: UE.Vector;
         FixationPoint: UE.Vector;
         ConfidenceValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EyeTrackerFunctionLibrary extends UE.BlueprintFunctionLibrary {
@@ -28011,7 +31264,11 @@ declare module "ue" {
         constructor(Min: number, Max: number);
         Min: number;
         Max: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FbxAnimSequenceImportData extends UE.FbxAssetImportData {
@@ -28063,7 +31320,11 @@ declare module "ue" {
         constructor();
         constructor(SectionOriginalMaterialName: TArray<string>);
         SectionOriginalMaterialName: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FbxMeshImportData extends UE.FbxAssetImportData {
@@ -28192,16 +31453,6 @@ declare module "ue" {
         static Load(InName: string): FbxFactory;
     }
     
-    namespace DatasmithContent.Blueprints.FBXImporter.FBXImporterUtils {
-        class FBXImporterUtils_C extends UE.BlueprintFunctionLibrary {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): FBXImporterUtils_C;
-            static Load(InName: string): FBXImporterUtils_C;
-        }
-        
-    }
-
     class SceneImportFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -28300,7 +31551,11 @@ declare module "ue" {
         ExpectedPresetsDataFloat: TArray<number>;
         ExpectedPresetsDataDouble: TArray<number>;
         ExpectedPresetsDataString: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FbxTestPlan extends UE.Object {
@@ -28400,7 +31655,11 @@ declare module "ue" {
     
     class BlueprintSessionResult {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FindSessionsCallbackProxy extends UE.OnlineBlueprintCallProxyBase {
@@ -28481,7 +31740,11 @@ declare module "ue" {
         TangentWeightMode: UE.ERichCurveTangentWeightMode;
         ArriveTangentWeight: number;
         LeaveTangentWeight: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneFloatValue {
@@ -28491,7 +31754,11 @@ declare module "ue" {
         InterpMode: UE.ERichCurveInterpMode;
         TangentMode: UE.ERichCurveTangentMode;
         Tangent: UE.MovieSceneTangentData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FloatChannelKeyProxy extends UE.Object {
@@ -28578,12 +31845,20 @@ declare module "ue" {
         constructor();
         constructor(Transform: UE.Matrix);
         Transform: UE.Matrix;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InstancedStaticMeshMappingInfo {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InstancedStaticMeshComponent extends UE.StaticMeshComponent {
@@ -28655,7 +31930,11 @@ declare module "ue" {
         constructor(Min: number, Max: number);
         Min: number;
         Max: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FoliageVertexColorChannelMask {
@@ -28664,7 +31943,11 @@ declare module "ue" {
         UseMask: boolean;
         MaskThreshold: number;
         InvertMask: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum FoliageVertexColorMask { FOLIAGEVERTEXCOLORMASK_Disabled, FOLIAGEVERTEXCOLORMASK_Red, FOLIAGEVERTEXCOLORMASK_Green, FOLIAGEVERTEXCOLORMASK_Blue, FOLIAGEVERTEXCOLORMASK_Alpha, FOLIAGEVERTEXCOLORMASK_MAX}
@@ -28896,7 +32179,11 @@ declare module "ue" {
     
     class ForceFeedbackAttenuationSettings extends UE.BaseAttenuationSettings {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ForceFeedbackAttenuation extends UE.Object {
@@ -28964,7 +32251,11 @@ declare module "ue" {
         constructor(InitialSeed: number, Seed: number);
         InitialSeed: number;
         Seed: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EFunctionalTestResult { Default, Invalid, Error, Running, Failed, Succeeded, EFunctionalTestResult_MAX}
@@ -28975,7 +32266,11 @@ declare module "ue" {
         ComponentName: string;
         PhysicalMaterialName: string;
         ActorName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TraceQueryTestResultsInnerMost {
@@ -28987,7 +32282,11 @@ declare module "ue" {
         MultiHits: TArray<UE.HitResult>;
         MultiNames: TArray<UE.TraceQueryTestNames>;
         bMultiResult: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TraceQueryTestResultsInner {
@@ -28997,7 +32296,11 @@ declare module "ue" {
         SphereResults: UE.TraceQueryTestResultsInnerMost;
         CapsuleResults: UE.TraceQueryTestResultsInnerMost;
         BoxResults: UE.TraceQueryTestResultsInnerMost;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TraceChannelTestBatchOptions {
@@ -29010,7 +32313,11 @@ declare module "ue" {
         bChannelTrace: boolean;
         bObjectsTrace: boolean;
         bProfileTrace: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TraceQueryTestResults extends UE.Object {
@@ -29092,7 +32399,11 @@ declare module "ue" {
         constructor();
         constructor(TeamID: number);
         TeamID: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AITestSpawnInfo {
@@ -29106,7 +32417,11 @@ declare module "ue" {
         NumberToSpawn: number;
         SpawnDelay: number;
         PreSpawnDelay: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AITestSpawnSet {
@@ -29116,12 +32431,20 @@ declare module "ue" {
         Name: string;
         bEnabled: boolean;
         FallbackSpawnLocation: UE.Actor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PendingDelayedSpawn extends UE.AITestSpawnInfo {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FunctionalAITest extends UE.FunctionalTest {
@@ -29227,7 +32550,11 @@ declare module "ue" {
         constructor(Name: string, GameMode: UE.SoftClassPath);
         Name: string;
         GameMode: UE.SoftClassPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameMapsSettings extends UE.Object {
@@ -29275,7 +32602,11 @@ declare module "ue" {
     
     class GameplayDebuggerNetPack {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayDebuggerDebugActor {
@@ -29284,14 +32615,22 @@ declare module "ue" {
         Actor: UE.Actor;
         ActorName: string;
         SyncCounter: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayDebuggerVisLogSync {
         constructor();
         constructor(DeviceIDs: string);
         DeviceIDs: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayDebuggerRenderingComponent extends UE.PrimitiveComponent {
@@ -29329,7 +32668,11 @@ declare module "ue" {
         bModCtrl: boolean;
         bModAlt: boolean;
         bModCmd: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayDebuggerCategoryConfig {
@@ -29342,7 +32685,11 @@ declare module "ue" {
         Hidden: UE.EGameplayDebuggerOverrideMode;
         bOverrideSlotIdx: boolean;
         InputHandlers: TArray<UE.GameplayDebuggerInputConfig>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayDebuggerExtensionConfig {
@@ -29351,7 +32698,11 @@ declare module "ue" {
         ExtensionName: string;
         UseExtension: UE.EGameplayDebuggerOverrideMode;
         InputHandlers: TArray<UE.GameplayDebuggerInputConfig>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayDebuggerConfig extends UE.Object {
@@ -29386,7 +32737,11 @@ declare module "ue" {
         Controller: UE.GameplayDebuggerLocalController;
         InputComponent: UE.InputComponent;
         Replicator: UE.GameplayDebuggerCategoryReplicator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayDebuggerPlayerManager extends UE.Actor {
@@ -29428,7 +32783,11 @@ declare module "ue" {
         DrawDebugType: UE.EDrawDebugTrace;
         DrawDebugTime: number;
         bTraceComplex: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PredictProjectilePathPointData {
@@ -29437,7 +32796,11 @@ declare module "ue" {
         Location: UE.Vector;
         Velocity: UE.Vector;
         Time: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PredictProjectilePathResult {
@@ -29446,7 +32809,11 @@ declare module "ue" {
         PathData: TArray<UE.PredictProjectilePathPointData>;
         LastTraceDestination: UE.PredictProjectilePathPointData;
         HitResult: UE.HitResult;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayStatics extends UE.BlueprintFunctionLibrary {
@@ -29664,7 +33031,11 @@ declare module "ue" {
         constructor(Tag: string, DevComment: string);
         Tag: string;
         DevComment: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTagsList extends UE.Object {
@@ -29681,7 +33052,11 @@ declare module "ue" {
         constructor();
         constructor(bAllowNonRestrictedChildren: boolean);
         bAllowNonRestrictedChildren: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RestrictedGameplayTagsList extends UE.Object {
@@ -29700,7 +33075,11 @@ declare module "ue" {
         SourceType: UE.EGameplayTagSourceType;
         SourceTagList: UE.GameplayTagsList;
         SourceRestrictedTagList: UE.RestrictedGameplayTagsList;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTagsManager extends UE.Object {
@@ -29717,7 +33096,11 @@ declare module "ue" {
         constructor(BaseCategory: string, RemapCategories: TArray<string>);
         BaseCategory: string;
         RemapCategories: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTagRedirect {
@@ -29725,7 +33108,11 @@ declare module "ue" {
         constructor(OldTagName: string, NewTagName: string);
         OldTagName: string;
         NewTagName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class RestrictedConfigInfo {
@@ -29733,7 +33120,11 @@ declare module "ue" {
         constructor(RestrictedConfigName: string, Owners: TArray<string>);
         RestrictedConfigName: string;
         Owners: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GameplayTagsSettings extends UE.GameplayTagsList {
@@ -29923,7 +33314,11 @@ declare module "ue" {
     
     class LightmassPointLightSettings extends UE.LightmassLightSettings {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LocalLightComponent extends UE.LightComponent {
@@ -30119,7 +33514,11 @@ declare module "ue" {
     
     class GeometryCacheMeshData {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GeometryCacheTrack_FlipbookAnimation extends UE.GeometryCacheTrack {
@@ -30342,7 +33741,11 @@ declare module "ue" {
         constructor(InitialValue: number, CurrentValue: number);
         InitialValue: number;
         CurrentValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GizmoAxisRotationParameterSource extends UE.GizmoBaseFloatParameterSource {
@@ -30471,7 +33874,11 @@ declare module "ue" {
         constructor(InitialValue: UE.Vector2D, CurrentValue: UE.Vector2D);
         InitialValue: UE.Vector2D;
         CurrentValue: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GizmoLocalVec2ParameterSource extends UE.GizmoBaseVec2ParameterSource {
@@ -30778,7 +34185,11 @@ declare module "ue" {
         constructor(Frequency: UE.RuntimeFloatCurve, Amplitude: UE.RuntimeFloatCurve);
         Frequency: UE.RuntimeFloatCurve;
         Amplitude: UE.RuntimeFloatCurve;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class HapticFeedbackEffect_Curve extends UE.HapticFeedbackEffect_Base {
@@ -30945,7 +34356,11 @@ declare module "ue" {
         LODActor: TLazyObjectPtr<UE.LODActor>;
         StaticMesh: UE.StaticMesh;
         Key: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class HLODProxy extends UE.Object {
@@ -31063,7 +34478,11 @@ declare module "ue" {
         CompressionQuality: number;
         bOverwriteFile: boolean;
         bAsync: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ImageWriteBlueprintLibrary extends UE.BlueprintFunctionLibrary {
@@ -31129,7 +34548,11 @@ declare module "ue" {
         TextureData: TArray<UE.Color>;
         Texture: TWeakObjectPtr<UE.Texture2D>;
         Weighting: UE.EImportanceWeight;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ImportanceSamplingLibrary extends UE.BlueprintFunctionLibrary {
@@ -31208,7 +34631,11 @@ declare module "ue" {
         DecimalSeparator: string;
         GroupingSeparator: string;
         ReceiptData: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InAppPurchaseProductRequest {
@@ -31216,7 +34643,11 @@ declare module "ue" {
         constructor(ProductIdentifier: string, bIsConsumable: boolean);
         ProductIdentifier: string;
         bIsConsumable: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InAppPurchaseCallbackProxy extends UE.Object {
@@ -31236,7 +34667,11 @@ declare module "ue" {
         Price: string;
         Name: string;
         Type: UE.PurchaseType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PurchaseConfirmation {
@@ -31244,7 +34679,11 @@ declare module "ue" {
         constructor(PackageName: string, Type: UE.PurchaseType);
         PackageName: string;
         Type: UE.PurchaseType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InAppPurchaseComponent extends UE.ActorComponent {
@@ -31287,7 +34726,11 @@ declare module "ue" {
         Identifier: string;
         ReceiptData: string;
         TransactionIdentifier: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InAppPurchaseRestoreCallbackProxy extends UE.Object {
@@ -31323,7 +34766,11 @@ declare module "ue" {
         bConsumeInput: boolean;
         bExecuteWhenPaused: boolean;
         bOverrideParentBinding: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintInputActionDelegateBinding extends UE.BlueprintInputDelegateBinding {
@@ -31332,7 +34779,11 @@ declare module "ue" {
         InputActionName: string;
         InputKeyEvent: UE.EInputEvent;
         FunctionNameToBind: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputActionDelegateBinding extends UE.InputDelegateBinding {
@@ -31348,7 +34799,11 @@ declare module "ue" {
         constructor(InputAxisName: string, FunctionNameToBind: string);
         InputAxisName: string;
         FunctionNameToBind: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputAxisDelegateBinding extends UE.InputDelegateBinding {
@@ -31364,7 +34819,11 @@ declare module "ue" {
         constructor(AxisKey: UE.Key, FunctionNameToBind: string);
         AxisKey: UE.Key;
         FunctionNameToBind: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputAxisKeyDelegateBinding extends UE.InputDelegateBinding {
@@ -31397,7 +34856,11 @@ declare module "ue" {
         bCtrl: boolean;
         bAlt: boolean;
         bCmd: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class BlueprintInputKeyDelegateBinding extends UE.BlueprintInputDelegateBinding {
@@ -31406,7 +34869,11 @@ declare module "ue" {
         InputChord: UE.InputChord;
         InputKeyEvent: UE.EInputEvent;
         FunctionNameToBind: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputKeyDelegateBinding extends UE.InputDelegateBinding {
@@ -31429,7 +34896,11 @@ declare module "ue" {
         HighlightShape: UE.SlateBrush;
         StrikeBrush: UE.SlateBrush;
         UnderlineBrush: UE.SlateBrush;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputKeySelector extends UE.Widget {
@@ -31469,7 +34940,11 @@ declare module "ue" {
         Sensitivity: number;
         Exponent: number;
         bInvert: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputAxisConfigEntry {
@@ -31477,7 +34952,11 @@ declare module "ue" {
         constructor(AxisKeyName: string, AxisProperties: UE.InputAxisProperties);
         AxisKeyName: string;
         AxisProperties: UE.InputAxisProperties;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMouseLockMode { DoNotLock, LockOnCapture, LockAlways, LockInFullscreen, EMouseLockMode_MAX}
@@ -31490,7 +34969,11 @@ declare module "ue" {
         bAlt: boolean;
         bCmd: boolean;
         Key: UE.Key;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputAxisKeyMapping {
@@ -31499,7 +34982,11 @@ declare module "ue" {
         AxisName: string;
         Scale: number;
         Key: UE.Key;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputActionSpeechMapping {
@@ -31507,7 +34994,11 @@ declare module "ue" {
         constructor(ActionName: string, SpeechKeyword: string);
         ActionName: string;
         SpeechKeyword: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputSettings extends UE.Object {
@@ -31558,7 +35049,11 @@ declare module "ue" {
         constructor(InputKeyEvent: UE.EInputEvent, FunctionNameToBind: string);
         InputKeyEvent: UE.EInputEvent;
         FunctionNameToBind: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InputTouchDelegateBinding extends UE.InputDelegateBinding {
@@ -31768,7 +35263,11 @@ declare module "ue" {
         Location: UE.Vector;
         Rotation: UE.Rotator;
         PawnInst: UE.Pawn;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpGroupCamera extends UE.InterpGroup {
@@ -31801,7 +35300,11 @@ declare module "ue" {
         constructor(PositionControlPoint: UE.Vector, bPositionIsRelative: boolean);
         PositionControlPoint: UE.Vector;
         bPositionIsRelative: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpToMovementComponent extends UE.MovementComponent {
@@ -31853,7 +35356,11 @@ declare module "ue" {
         AnimPlayRate: number;
         bLooping: boolean;
         bReverse: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackAnimControl extends UE.InterpTrackFloatBase {
@@ -31887,7 +35394,11 @@ declare module "ue" {
         constructor(Time: number, Value: boolean);
         Time: number;
         Value: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackBoolProp extends UE.InterpTrack {
@@ -31921,7 +35432,11 @@ declare module "ue" {
         TransitionTime: number;
         TargetCamGroup: string;
         ShotNumber: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackDirector extends UE.InterpTrack {
@@ -31939,7 +35454,11 @@ declare module "ue" {
         constructor(Time: number, EventName: string);
         Time: number;
         EventName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackEvent extends UE.InterpTrack {
@@ -32079,7 +35598,11 @@ declare module "ue" {
         Primitive: UE.PrimitiveComponent;
         Decal: UE.DecalComponent;
         ElementIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackInstFloatMaterialParam extends UE.InterpTrackInst {
@@ -32199,7 +35722,11 @@ declare module "ue" {
         ArriveTangent: UE.LinearColor;
         LeaveTangent: UE.LinearColor;
         InterpMode: UE.EInterpCurveMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpCurveLinearColor {
@@ -32208,7 +35735,11 @@ declare module "ue" {
         Points: TArray<UE.InterpCurvePointLinearColor>;
         bIsLooped: boolean;
         LoopKeyOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackLinearColorBase extends UE.InterpTrack {
@@ -32244,7 +35775,11 @@ declare module "ue" {
         Time: number;
         Duration: number;
         ClipIDNumber: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackParticleReplay extends UE.InterpTrack {
@@ -32271,7 +35806,11 @@ declare module "ue" {
         Volume: number;
         Pitch: number;
         Sound: UE.SoundBase;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackSound extends UE.InterpTrackVectorBase {
@@ -32292,7 +35831,11 @@ declare module "ue" {
         constructor(Time: number, ToggleAction: UE.ETrackToggleAction);
         Time: number;
         ToggleAction: UE.ETrackToggleAction;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackToggle extends UE.InterpTrack {
@@ -32323,7 +35866,11 @@ declare module "ue" {
         Time: number;
         Action: UE.EVisibilityTrackAction;
         ActiveCondition: UE.EVisibilityTrackCondition;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class InterpTrackVisibility extends UE.InterpTrack {
@@ -32376,14 +35923,22 @@ declare module "ue" {
         constructor();
         constructor(Path: string);
         Path: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class IOSBuildResourceFilePath {
         constructor();
         constructor(FilePath: string);
         FilePath: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EIOSLandscapeOrientation { LandscapeLeft, LandscapeRight, EIOSLandscapeOrientation_MAX}
@@ -32570,7 +36125,11 @@ declare module "ue" {
         FunctionName: string;
         SourcePath: UE.DynamicPropertyPath;
         Kind: UE.EBindingKind;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WidgetBlueprintGeneratedClass extends UE.BlueprintGeneratedClass {
@@ -32885,7 +36444,11 @@ declare module "ue" {
         bIsDeprecated: boolean;
         bCallInEditor: boolean;
         HasLatentFunctions: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class K2Node_Tunnel extends UE.K2Node_EditablePinBase {
@@ -33435,7 +36998,11 @@ declare module "ue" {
         MacroGraph: UE.EdGraph;
         GraphBlueprint: UE.Blueprint;
         GraphGuid: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class K2Node_MacroInstance extends UE.K2Node_Tunnel {
@@ -33737,7 +37304,11 @@ declare module "ue" {
         constructor(Positions: TArray<UE.Vector>, Range: number);
         Positions: TArray<UE.Vector>;
         Range: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KismetAnimationLibrary extends UE.BlueprintFunctionLibrary {
@@ -33887,14 +37458,22 @@ declare module "ue" {
     
     class VectorSpringState {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EEasingFunc { Linear, Step, SinusoidalIn, SinusoidalOut, SinusoidalInOut, EaseIn, EaseOut, EaseInOut, ExpoIn, ExpoOut, ExpoInOut, CircularIn, CircularOut, CircularInOut, EEasingFunc_MAX}
     enum ELerpInterpolationMode { QuatInterp, EulerInterp, DualQuatInterp, ELerpInterpolationMode_MAX}
     class FloatSpringState {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMatrixColumns { First, Second, Third, Fourth, EMatrixColumns_MAX}
@@ -34580,7 +38159,11 @@ declare module "ue" {
         constructor(TangentX: UE.Vector, bFlipTangentY: boolean);
         TangentX: UE.Vector;
         bFlipTangentY: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ProcMeshVertex {
@@ -34594,7 +38177,11 @@ declare module "ue" {
         UV1: UE.Vector2D;
         UV2: UE.Vector2D;
         UV3: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ProcMeshSection {
@@ -34605,7 +38192,11 @@ declare module "ue" {
         SectionLocalBox: UE.Box;
         bEnableCollision: boolean;
         bSectionVisible: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ProceduralMeshComponent extends UE.MeshComponent {
@@ -34655,7 +38246,11 @@ declare module "ue" {
         constructor();
         constructor(RenderTarget: UE.TextureRenderTarget2D);
         RenderTarget: UE.TextureRenderTarget2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KismetRenderingLibrary extends UE.BlueprintFunctionLibrary {
@@ -34776,21 +38371,33 @@ declare module "ue" {
         constructor();
         constructor(ActionName: string);
         ActionName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GenericStruct {
         constructor();
         constructor(Data: number);
         Data: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CollisionProfileName {
         constructor();
         constructor(Name: string);
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EQuitPreference { Quit, Background, EQuitPreference_MAX}
@@ -34799,7 +38406,11 @@ declare module "ue" {
         constructor();
         constructor(Handle: bigint);
         Handle: bigint;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DebugFloatHistory {
@@ -34810,7 +38421,11 @@ declare module "ue" {
         MinValue: number;
         MaxValue: number;
         bAutoAdjustMinMax: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KismetSystemLibrary extends UE.BlueprintFunctionLibrary {
@@ -35072,7 +38687,11 @@ declare module "ue" {
         LocalizedStrings: TMap<string, string>;
         bIsMinimalPatch: boolean;
         CachedText: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EFormatArgumentType { Int, UInt, Float, Double, Text, Gender, EFormatArgumentType_MAX}
@@ -35086,7 +38705,11 @@ declare module "ue" {
         ArgumentValueInt: number;
         ArgumentValueFloat: number;
         ArgumentValueGender: UE.ETextGender;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERoundingMode { HalfToEven, HalfFromZero, HalfToZero, FromZero, ToZero, ToNegativeInfinity, ToPositiveInfinity, ERoundingMode_MAX}
@@ -35148,7 +38771,11 @@ declare module "ue" {
         ControlPoint: UE.LandscapeSplineControlPoint;
         TangentLen: number;
         SocketName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum LandscapeSplineMeshOrientation { LSMO_XUp, LSMO_YUp, LSMO_MAX}
@@ -35164,7 +38791,11 @@ declare module "ue" {
         Orientation: UE.LandscapeSplineMeshOrientation;
         ForwardAxis: UE.ESplineMeshAxis;
         UpAxis: UE.ESplineMeshAxis;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeSplineInterpPoint {
@@ -35180,7 +38811,11 @@ declare module "ue" {
         LayerFalloffLeft: UE.Vector;
         LayerFalloffRight: UE.Vector;
         StartEndFalloff: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeSplineSegment extends UE.Object {
@@ -35222,7 +38857,11 @@ declare module "ue" {
         constructor(Segment: UE.LandscapeSplineSegment, End: boolean);
         Segment: UE.LandscapeSplineSegment;
         End: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeSplineControlPoint extends UE.Object {
@@ -35276,7 +38915,11 @@ declare module "ue" {
         ModificationKey: UE.Guid;
         MeshComponent: UE.ControlPointMeshComponent;
         Identifier: TLazyObjectPtr<UE.LandscapeSplineControlPoint>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ForeignSplineSegmentData {
@@ -35285,7 +38928,11 @@ declare module "ue" {
         ModificationKey: UE.Guid;
         MeshComponents: TArray<UE.SplineMeshComponent>;
         Identifier: TLazyObjectPtr<UE.LandscapeSplineSegment>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ForeignWorldSplineData {
@@ -35295,7 +38942,11 @@ declare module "ue" {
         ForeignControlPointData: TArray<UE.ForeignControlPointData>;
         ForeignSplineSegmentDataMap: TMap<TLazyObjectPtr<UE.LandscapeSplineSegment>, UE.ForeignSplineSegmentData>;
         ForeignSplineSegmentData: TArray<UE.ForeignSplineSegmentData>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeSplinesComponent extends UE.PrimitiveComponent {
@@ -35322,7 +38973,11 @@ declare module "ue" {
         constructor(LODIndex: UE.PerPlatformInt, Material: UE.MaterialInterface);
         LODIndex: UE.PerPlatformInt;
         Material: UE.MaterialInterface;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeComponentMaterialOverride {
@@ -35330,7 +38985,11 @@ declare module "ue" {
         constructor(LODIndex: UE.PerPlatformInt, Material: UE.MaterialInterface);
         LODIndex: UE.PerPlatformInt;
         Material: UE.MaterialInterface;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialInstanceConstant extends UE.MaterialInstance {
@@ -35386,7 +39045,11 @@ declare module "ue" {
         constructor();
         constructor(Texture: UE.Texture2D);
         Texture: UE.Texture2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WeightmapLayerAllocationInfo {
@@ -35395,7 +39058,11 @@ declare module "ue" {
         LayerInfo: UE.LandscapeLayerInfoObject;
         WeightmapTextureIndex: number;
         WeightmapTextureChannel: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeWeightmapUsage extends UE.Object {
@@ -35413,7 +39080,11 @@ declare module "ue" {
         Textures: TArray<UE.Texture2D>;
         LayerAllocations: TArray<UE.WeightmapLayerAllocationInfo>;
         TextureUsages: TArray<UE.LandscapeWeightmapUsage>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeLayerComponentData {
@@ -35421,7 +39092,11 @@ declare module "ue" {
         constructor(HeightmapData: UE.HeightmapData, WeightmapData: UE.WeightmapData);
         HeightmapData: UE.HeightmapData;
         WeightmapData: UE.WeightmapData;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeEditToolRenderData {
@@ -35436,7 +39111,11 @@ declare module "ue" {
         DataTexture: UE.Texture2D;
         LayerContributionTexture: UE.Texture2D;
         DirtyTexture: UE.Texture2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeComponent extends UE.PrimitiveComponent {
@@ -35504,7 +39183,11 @@ declare module "ue" {
         constructor(LayerInfoObj: UE.LandscapeLayerInfoObject, ReimportLayerFilePath: string);
         LayerInfoObj: UE.LandscapeLayerInfoObject;
         ReimportLayerFilePath: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeProxy extends UE.Actor {
@@ -35617,7 +39300,11 @@ declare module "ue" {
         constructor();
         constructor(BlueprintBrush: UE.LandscapeBlueprintBrushBase);
         BlueprintBrush: UE.LandscapeBlueprintBrushBase;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeLayer {
@@ -35632,7 +39319,11 @@ declare module "ue" {
         BlendMode: UE.ELandscapeBlendMode;
         Brushes: TArray<UE.LandscapeLayerBrush>;
         WeightmapLayerAllocationBlend: TMap<UE.LandscapeLayerInfoObject, boolean>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Landscape extends UE.LandscapeProxy {
@@ -35670,7 +39361,11 @@ declare module "ue" {
         LayerFilename: string;
         LayerName: string;
         bNoImport: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ELandscapeMirrorOperation { MinusXToPlusX, PlusXToMinusX, MinusYToPlusY, PlusYToMinusY, RotateMinusXToPlusX, RotatePlusXToMinusX, RotateMinusYToPlusY, RotatePlusYToMinusY, ELandscapeMirrorOperation_MAX}
@@ -35683,7 +39378,11 @@ declare module "ue" {
         LayerName: string;
         LayerInfo: UE.LandscapeLayerInfoObject;
         SourceFilePath: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeMaterialInstanceConstant extends UE.MaterialInstanceConstant {
@@ -35703,7 +39402,11 @@ declare module "ue" {
         ThumbnailMIC: UE.LandscapeMaterialInstanceConstant;
         ImportResult: UE.ELandscapeImportResult;
         ErrorMessage: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapePatternBrushWorldSpaceSettings {
@@ -35713,7 +39416,11 @@ declare module "ue" {
         Rotation: number;
         bCenterTextureOnOrigin: boolean;
         RepeatSize: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EColorChannel { Red, Green, Blue, Alpha, EColorChannel_MAX}
@@ -35821,7 +39528,11 @@ declare module "ue" {
         Owner: UE.LandscapeProxy;
         DebugColorChannel: number;
         bValid: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeStreamingProxy extends UE.LandscapeProxy {
@@ -35916,7 +39627,11 @@ declare module "ue" {
         bReceivesDecals: boolean;
         bCastDynamicShadow: boolean;
         bKeepInstanceBufferCPUCopy: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LandscapeGrassType extends UE.Object {
@@ -36004,7 +39719,11 @@ declare module "ue" {
         constructor();
         constructor(Name: string);
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LayersBlueprintLibrary extends UE.BlueprintFunctionLibrary {
@@ -36138,7 +39857,11 @@ declare module "ue" {
         constructor(Name: string, Depth: number);
         Name: string;
         Depth: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelEditor2DSettings extends UE.DeveloperSettings {
@@ -36220,7 +39943,11 @@ declare module "ue" {
         MinLatency: number;
         MaxLatency: number;
         PacketLossPercentage: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelEditorPlayNetworkEmulationSettings {
@@ -36231,7 +39958,11 @@ declare module "ue" {
         CurrentProfile: string;
         OutPackets: UE.NetworkEmulationPacketSettings;
         InPackets: UE.NetworkEmulationPacketSettings;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ELaunchModeType { LaunchMode_OnDevice, LaunchMode_MAX}
@@ -36246,7 +39977,11 @@ declare module "ue" {
         AspectRatio: string;
         bCanSwapAspectRatio: boolean;
         ProfileName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelEditorPlaySettings extends UE.Object {
@@ -36321,7 +40056,11 @@ declare module "ue" {
         bEnabled: boolean;
         SnapOffsetExtent: number;
         bSnapRotation: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ERotationGridMode { GridMode_DivisionsOf360, GridMode_Common, GridMode_MAX}
@@ -36332,7 +40071,11 @@ declare module "ue" {
         constructor(FixedEV100: number, bFixed: boolean);
         FixedEV100: number;
         bFixed: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelEditorViewportInstanceSettings {
@@ -36353,7 +40096,11 @@ declare module "ue" {
         bShowOnScreenStats: boolean;
         EnabledStats: TArray<string>;
         bShowFullToolbar: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelEditorViewportInstanceSettingsKeyValuePair {
@@ -36361,7 +40108,11 @@ declare module "ue" {
         constructor(ConfigName: string, ConfigSettings: UE.LevelEditorViewportInstanceSettings);
         ConfigName: string;
         ConfigSettings: UE.LevelEditorViewportInstanceSettings;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelEditorViewportSettings extends UE.Object {
@@ -36513,7 +40264,11 @@ declare module "ue" {
         constructor(ComponentPath: string, PropertyPath: string);
         ComponentPath: string;
         PropertyPath: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceTrackSettings {
@@ -36524,7 +40279,11 @@ declare module "ue" {
         ExcludeDefaultTracks: TArray<UE.SoftClassPath>;
         DefaultPropertyTracks: TArray<UE.LevelSequencePropertyTrackSettings>;
         ExcludeDefaultPropertyTracks: TArray<UE.LevelSequencePropertyTrackSettings>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LevelSequenceEditorSettings extends UE.Object {
@@ -36707,7 +40466,11 @@ declare module "ue" {
         bColorBordersGreen: boolean;
         bColorByExecutionTime: boolean;
         ExecutionTimeDivisor: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SwarmDebugOptions {
@@ -36716,7 +40479,11 @@ declare module "ue" {
         bDistributionEnabled: boolean;
         bForceContentExport: boolean;
         bInitialized: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LightmassOptionsObject extends UE.Object {
@@ -36784,7 +40551,11 @@ declare module "ue" {
         LPVSpecularOcclusionIntensity: number;
         LPVFadeRange: number;
         LPVDirectionalOcclusionFadeRange: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LightPropagationVolumeBlendable extends UE.Object {
@@ -37011,14 +40782,22 @@ declare module "ue" {
         LatestOffset: number;
         MaxNumberOfFrameToBuffered: number;
         bKeepAtLeastOneFrame: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LiveLinkSubjectName {
         constructor();
         constructor(Name: string);
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LiveLinkSourceDebugInfo {
@@ -37027,7 +40806,11 @@ declare module "ue" {
         SubjectName: UE.LiveLinkSubjectName;
         SnapshotIndex: number;
         NumberOfBufferAtSnapshot: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LiveLinkSourceSettings extends UE.Object {
@@ -37046,7 +40829,11 @@ declare module "ue" {
         constructor();
         constructor(CurveConversionAssetMap: TMap<string, UE.SoftObjectPath>);
         CurveConversionAssetMap: TMap<string, UE.SoftObjectPath>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LiveLinkCurveRemapSettings extends UE.LiveLinkSourceSettings {
@@ -37141,7 +40928,11 @@ declare module "ue" {
         constructor(PathRoot: UE.ELocalizationGatherPathRoot, Path: string);
         PathRoot: UE.ELocalizationGatherPathRoot;
         Path: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GatherTextExcludePath {
@@ -37149,14 +40940,22 @@ declare module "ue" {
         constructor(PathRoot: UE.ELocalizationGatherPathRoot, Pattern: string);
         PathRoot: UE.ELocalizationGatherPathRoot;
         Pattern: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GatherTextFileExtension {
         constructor();
         constructor(Pattern: string);
         Pattern: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GatherTextFromTextFilesConfiguration {
@@ -37167,7 +40966,11 @@ declare module "ue" {
         ExcludePathWildcards: TArray<UE.GatherTextExcludePath>;
         FileExtensions: TArray<UE.GatherTextFileExtension>;
         ShouldGatherFromEditorOnlyData: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GatherTextIncludePath {
@@ -37175,7 +40978,11 @@ declare module "ue" {
         constructor(PathRoot: UE.ELocalizationGatherPathRoot, Pattern: string);
         PathRoot: UE.ELocalizationGatherPathRoot;
         Pattern: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GatherTextFromPackagesConfiguration {
@@ -37188,21 +40995,33 @@ declare module "ue" {
         Collections: TArray<string>;
         ShouldGatherFromEditorOnlyData: boolean;
         SkipGatherCache: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MetaDataKeyName {
         constructor();
         constructor(Name: string);
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MetaDataTextKeyPattern {
         constructor();
         constructor(Pattern: string);
         Pattern: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MetaDataKeyGatherSpecification {
@@ -37211,7 +41030,11 @@ declare module "ue" {
         MetaDataKey: UE.MetaDataKeyName;
         TextNamespace: string;
         TextKeyPattern: UE.MetaDataTextKeyPattern;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GatherTextFromMetaDataConfiguration {
@@ -37222,7 +41045,11 @@ declare module "ue" {
         ExcludePathWildcards: TArray<UE.GatherTextExcludePath>;
         KeySpecifications: TArray<UE.MetaDataKeyGatherSpecification>;
         ShouldGatherFromEditorOnlyData: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ELocalizedTextCollapseMode { IdenticalTextIdAndSource, IdenticalPackageIdTextIdAndSource, IdenticalNamespaceAndSource, ELocalizedTextCollapseMode_MAX}
@@ -37232,7 +41059,11 @@ declare module "ue" {
         CollapseMode: UE.ELocalizedTextCollapseMode;
         ShouldPersistCommentsOnExport: boolean;
         ShouldAddSourceLocationsAsComments: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LocalizationCompilationSettings {
@@ -37241,7 +41072,11 @@ declare module "ue" {
         SkipSourceCheck: boolean;
         ValidateFormatPatterns: boolean;
         ValidateSafeWhitespace: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LocalizationImportDialogueSettings {
@@ -37250,7 +41085,11 @@ declare module "ue" {
         RawAudioPath: UE.DirectoryPath;
         ImportedDialogueFolder: string;
         bImportNativeAsSource: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CultureStatistics {
@@ -37258,7 +41097,11 @@ declare module "ue" {
         constructor(CultureName: string, WordCount: number);
         CultureName: string;
         WordCount: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LocalizationTargetSettings {
@@ -37278,7 +41121,11 @@ declare module "ue" {
         ImportDialogueSettings: UE.LocalizationImportDialogueSettings;
         NativeCultureIndex: number;
         SupportedCulturesStatistics: TArray<UE.CultureStatistics>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LocalizationTarget extends UE.Object {
@@ -37350,7 +41197,11 @@ declare module "ue" {
         HorizontalAccuracy: number;
         VerticalAccuracy: number;
         Altitude: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LocationServicesImpl extends UE.Object {
@@ -37407,7 +41258,11 @@ declare module "ue" {
         CategoryName: string;
         LogVerbosity: number;
         Enabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VisualLoggerFiltersData {
@@ -37417,7 +41272,11 @@ declare module "ue" {
         ObjectNameFilter: string;
         Categories: TArray<UE.CategoryFilter>;
         SelectedClasses: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LogVisualizerSettings extends UE.Object {
@@ -37462,7 +41321,11 @@ declare module "ue" {
         bIsValid: boolean;
         PixelIntensity: number;
         RGBScaleFactor: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LuminARFrameFunctionLibrary extends UE.BlueprintFunctionLibrary {
@@ -37513,7 +41376,11 @@ declare module "ue" {
         constructor(ElementType: UE.ELuminComponentSubElementType, Value: string);
         ElementType: UE.ELuminComponentSubElementType;
         Value: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ELuminComponentType { Universe, Fullscreen, SearchProvider, MusicService, Screens, ScreensImmersive, Console, SystemUI, ELuminComponentType_MAX}
@@ -37525,7 +41392,11 @@ declare module "ue" {
         ExecutableName: string;
         ComponentType: UE.ELuminComponentType;
         ExtraComponentSubElements: TArray<UE.LuminComponentSubElement>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LuminRuntimeSettings extends UE.Object {
@@ -37656,7 +41527,11 @@ declare module "ue" {
         FixationDepthIsUncomfortable: boolean;
         FixationDepthViolationHasOccurred: boolean;
         RemainingTimeAtUncomfortableDepth: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapEyeBlinkState {
@@ -37664,7 +41539,11 @@ declare module "ue" {
         constructor(LeftEyeBlinked: boolean, RightEyeBlinked: boolean);
         LeftEyeBlinked: boolean;
         RightEyeBlinked: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMagicLeapEyeTrackingCalibrationStatus { None, Bad, Good, EMagicLeapEyeTrackingCalibrationStatus_MAX}
@@ -37710,7 +41589,11 @@ declare module "ue" {
     enum EMagicLeapHandTrackingGestureFilterLevel { NoFilter, SlightRobustnessToFlicker, MoreRobustnessToFlicker, EMagicLeapHandTrackingGestureFilterLevel_MAX}
     class LiveLinkSourceHandle {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMagicLeapGestureTransformSpace { World, Hand, Tracking, EMagicLeapGestureTransformSpace_MAX}
@@ -37771,7 +41654,11 @@ declare module "ue" {
         Mode: UE.EMagicLeapHeadTrackingMode;
         Error: UE.EMagicLeapHeadTrackingError;
         Confidence: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMagicLeapHeadTrackingMapEvent { Lost, Recovered, RecoveryFailed, NewSession, EMagicLeapHeadTrackingMapEvent_MAX}
@@ -37802,7 +41689,11 @@ declare module "ue" {
         constructor(Attribute: UE.EMagicLeapIdentityKey, Value: string);
         Attribute: UE.EMagicLeapIdentityKey;
         Value: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapIdentity extends UE.Object {
@@ -37859,7 +41750,11 @@ declare module "ue" {
         BlockDimensions: UE.Vector;
         Timestamp: UE.Timespan;
         BlockState: UE.EMagicLeapMeshState;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapTrackingMeshInfo {
@@ -37867,7 +41762,11 @@ declare module "ue" {
         constructor(Timestamp: UE.Timespan, BlockData: TArray<UE.MagicLeapMeshBlockInfo>);
         Timestamp: UE.Timespan;
         BlockData: TArray<UE.MagicLeapMeshBlockInfo>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMagicLeapMeshLOD { Minimum, Medium, Maximum, EMagicLeapMeshLOD_MAX}
@@ -37876,7 +41775,11 @@ declare module "ue" {
         constructor(BlockID: UE.Guid, LevelOfDetail: UE.EMagicLeapMeshLOD);
         BlockID: UE.Guid;
         LevelOfDetail: UE.EMagicLeapMeshLOD;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapMeshBlockSelectorInterface extends UE.Interface {
@@ -37896,14 +41799,22 @@ declare module "ue" {
         PlaneDimensions: UE.Vector2D;
         PlaneFlags: TArray<UE.EMagicLeapPlaneQueryFlags>;
         ID: UE.Guid;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapPolygon {
         constructor();
         constructor(Vertices: TArray<UE.Vector>);
         Vertices: TArray<UE.Vector>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapPlaneBoundary {
@@ -37911,7 +41822,11 @@ declare module "ue" {
         constructor(Polygon: UE.MagicLeapPolygon, Holes: TArray<UE.MagicLeapPolygon>);
         Polygon: UE.MagicLeapPolygon;
         Holes: TArray<UE.MagicLeapPolygon>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapPlaneBoundaries {
@@ -37919,7 +41834,11 @@ declare module "ue" {
         constructor(ID: UE.Guid, Boundaries: TArray<UE.MagicLeapPlaneBoundary>);
         ID: UE.Guid;
         Boundaries: TArray<UE.MagicLeapPlaneBoundary>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapPlanesComponent extends UE.SceneComponent {
@@ -37947,7 +41866,11 @@ declare module "ue" {
         SearchVolumePosition: UE.Vector;
         SearchVolumeOrientation: UE.Quat;
         SearchVolumeExtents: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapPlanesFunctionLibrary extends UE.BlueprintFunctionLibrary {
@@ -37984,7 +41907,11 @@ declare module "ue" {
         Normal: UE.Vector;
         Confidence: number;
         UserData: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapRaycastQueryParams {
@@ -37998,7 +41925,11 @@ declare module "ue" {
         HorizontalFovDegrees: number;
         CollideWithUnobserved: boolean;
         UserData: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapRaycastComponent extends UE.ActorComponent {
@@ -38081,7 +42012,11 @@ declare module "ue" {
         FingerGap: number;
         Radius: number;
         Angle: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MagicLeapTouchpadGesturesComponent extends UE.ActorComponent {
@@ -38112,7 +42047,11 @@ declare module "ue" {
         constructor(Alignment: UE.Vector2D, WillSerialize: number);
         Alignment: UE.Vector2D;
         WillSerialize: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EToTest { V0, V1, V13, EToTest_MAX}
@@ -38228,7 +42167,11 @@ declare module "ue" {
         GroupAssociation: UE.EMaterialParameterAssociation;
         Parameters: TArray<UE.DEditorParameterValue>;
         GroupSortPriority: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialFunctionInstance extends UE.MaterialFunctionInterface {
@@ -38252,21 +42195,33 @@ declare module "ue" {
         constructor();
         constructor(bOverride: boolean);
         bOverride: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LightmassBooleanParameterValue extends UE.LightmassParameterValue {
         constructor();
         constructor(ParameterValue: boolean);
         ParameterValue: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LightmassScalarParameterValue extends UE.LightmassParameterValue {
         constructor();
         constructor(ParameterValue: number);
         ParameterValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class LightmassParameterizedMaterialSettings {
@@ -38276,7 +42231,11 @@ declare module "ue" {
         EmissiveBoost: UE.LightmassScalarParameterValue;
         DiffuseBoost: UE.LightmassScalarParameterValue;
         ExportResolutionScale: UE.LightmassScalarParameterValue;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialEditorInstanceConstant extends UE.Object {
@@ -38774,7 +42733,11 @@ declare module "ue" {
         constructor(InputName: string, Input: UE.ExpressionInput);
         InputName: string;
         Input: UE.ExpressionInput;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialExpressionCustom extends UE.MaterialExpression {
@@ -39086,7 +43049,11 @@ declare module "ue" {
         Name: string;
         GrassType: UE.LandscapeGrassType;
         Input: UE.ExpressionInput;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialExpressionLandscapeGrassOutput extends UE.MaterialExpressionCustomOutput {
@@ -39108,7 +43075,11 @@ declare module "ue" {
         PreviewWeight: number;
         ConstLayerInput: UE.Vector;
         ConstHeightInput: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialExpressionLandscapeLayerBlend extends UE.MaterialExpression {
@@ -39270,7 +43241,11 @@ declare module "ue" {
         ExpressionInput: UE.MaterialExpressionFunctionInput;
         ExpressionInputId: UE.Guid;
         Input: UE.ExpressionInput;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FunctionExpressionOutput {
@@ -39279,7 +43254,11 @@ declare module "ue" {
         ExpressionOutput: UE.MaterialExpressionFunctionOutput;
         ExpressionOutputId: UE.Guid;
         Output: UE.ExpressionOutput;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialExpressionMaterialFunctionCall extends UE.MaterialExpression {
@@ -40418,7 +44397,11 @@ declare module "ue" {
         CustomSize: UE.IntPoint;
         bUseConstantValue: boolean;
         ConstantValue: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MaterialOptions extends UE.Object {
@@ -40453,7 +44436,11 @@ declare module "ue" {
         bForceLQReflections: boolean;
         bDisableMaterialNormalCalculation: boolean;
         MobileCSMQuality: UE.EMobileCSMQuality;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ShaderPlatformQualitySettings extends UE.Object {
@@ -40508,7 +44495,11 @@ declare module "ue" {
         constructor(DisplayName: string, Url: string);
         DisplayName: string;
         Url: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MediaBlueprintFunctionLibrary extends UE.BlueprintFunctionLibrary {
@@ -40552,7 +44543,11 @@ declare module "ue" {
         Subtitle: number;
         Text: number;
         Video: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMediaPlayerOptionBooleanOverride { UseMediaPlayerSetting, Enabled, Disabled, EMediaPlayerOptionBooleanOverride_MAX}
@@ -40563,7 +44558,11 @@ declare module "ue" {
         SeekTime: UE.Timespan;
         PlayOnOpen: UE.EMediaPlayerOptionBooleanOverride;
         Loop: UE.EMediaPlayerOptionBooleanOverride;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MediaPlayer extends UE.Object {
@@ -40714,7 +44713,11 @@ declare module "ue" {
         ImageFormat: UE.EMediaPlayerRecordingImageFormat;
         CompressionQuality: number;
         bResetAlpha: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MediaPlayerRecording extends UE.SequenceRecordingBase {
@@ -40749,7 +44752,11 @@ declare module "ue" {
         constructor(FrequencyHz: number, Magnitude: number);
         FrequencyHz: number;
         Magnitude: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MediaSoundComponent extends UE.SynthComponent {
@@ -40845,7 +44852,11 @@ declare module "ue" {
         bSkipMeshesWithVertexColors: boolean;
         bUseHLODVolumes: boolean;
         ISMComponentToUse: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MeshInstancingSettingsObject extends UE.Object {
@@ -41005,7 +45016,11 @@ declare module "ue" {
         DisplayName: string;
         DisplayDescription: string;
         DisplayPrice: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MicroTransactionBase extends UE.PlatformInterfaceBase {
@@ -41254,22 +45269,38 @@ declare module "ue" {
         constructor();
         constructor(Mask: number);
         Mask: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneChannel {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class KeyHandleLookupTable {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneKeyHandleMap extends UE.KeyHandleLookupTable {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneFloatChannel extends UE.MovieSceneChannel {
@@ -41283,7 +45314,11 @@ declare module "ue" {
         bHasDefaultValue: boolean;
         KeyHandles: UE.MovieSceneKeyHandleMap;
         TickResolution: UE.FrameRate;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieScene2DTransformSection extends UE.MovieSceneSection {
@@ -41393,7 +45428,11 @@ declare module "ue" {
         constructor();
         constructor(Mask: number);
         Mask: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EShow3DTrajectory { EST_OnlyWhenSelected, EST_Always, EST_Never, EST_MAX}
@@ -41430,7 +45469,11 @@ declare module "ue" {
         constructor();
         constructor(Object: UE.MovieSceneObjectBindingID);
         Object: UE.MovieSceneObjectBindingID;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneActorReferenceData extends UE.MovieSceneChannel {
@@ -41438,7 +45481,11 @@ declare module "ue" {
         constructor(KeyTimes: TArray<UE.FrameNumber>, KeyValues: TArray<UE.MovieSceneActorReferenceKey>);
         KeyTimes: TArray<UE.FrameNumber>;
         KeyValues: TArray<UE.MovieSceneActorReferenceKey>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class IntegralKey {
@@ -41446,7 +45493,11 @@ declare module "ue" {
         constructor(Time: number, Value: number);
         Time: number;
         Value: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class IntegralCurve extends UE.IndexedCurve {
@@ -41455,7 +45506,11 @@ declare module "ue" {
         Keys: TArray<UE.IntegralKey>;
         DefaultValue: number;
         bUseDefaultValueBeforeFirstKey: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneActorReferenceSection extends UE.MovieSceneSection {
@@ -41523,7 +45578,11 @@ declare module "ue" {
         DefaultValue: boolean;
         bHasDefaultValue: boolean;
         Values: TArray<boolean>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneBoolSection extends UE.MovieSceneSection {
@@ -41560,7 +45619,11 @@ declare module "ue" {
         bHasDefaultValue: boolean;
         Values: TArray<number>;
         Enum: UE.Enum;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneByteSection extends UE.MovieSceneSection {
@@ -41588,7 +45651,11 @@ declare module "ue" {
         BlendInTime: number;
         BlendOutTime: number;
         bLooping: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneCameraAnimSection extends UE.MovieSceneSection {
@@ -41640,7 +45707,11 @@ declare module "ue" {
         PlayScale: number;
         PlaySpace: UE.ECameraAnimPlaySpace;
         UserDefinedPlaySpace: UE.Rotator;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneCameraShakeSection extends UE.MovieSceneSection {
@@ -41691,7 +45762,11 @@ declare module "ue" {
         StartOffset: number;
         PrerollTime: number;
         PostrollTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSubSection extends UE.MovieSceneSection {
@@ -41846,14 +45921,22 @@ declare module "ue" {
         constructor(Function: UE.Function, BoundObjectProperty: UE.Property);
         Function: UE.Function;
         BoundObjectProperty: UE.Property;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEventPayloadVariable {
         constructor();
         constructor(Value: string);
         Value: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEvent {
@@ -41867,7 +45950,11 @@ declare module "ue" {
         NodeGuid: UE.Guid;
         WeakCachedEndpoint: TWeakObjectPtr<UE.Object>;
         FunctionEntry: TWeakObjectPtr<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEventRepeaterSection extends UE.MovieSceneEventSectionBase {
@@ -41883,19 +45970,31 @@ declare module "ue" {
         constructor(Time: number, Value: string);
         Time: number;
         Value: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NameCurve extends UE.IndexedCurve {
         constructor();
         constructor(Keys: TArray<UE.NameCurveKey>);
         Keys: TArray<UE.NameCurveKey>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEventParameters {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EventPayload {
@@ -41903,7 +46002,11 @@ declare module "ue" {
         constructor(EventName: string, Parameters: UE.MovieSceneEventParameters);
         EventName: string;
         Parameters: UE.MovieSceneEventParameters;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEventSectionData extends UE.MovieSceneChannel {
@@ -41912,7 +46015,11 @@ declare module "ue" {
         Times: TArray<UE.FrameNumber>;
         KeyValues: TArray<UE.EventPayload>;
         KeyTimes: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEventSection extends UE.MovieSceneSection {
@@ -41942,7 +46049,11 @@ declare module "ue" {
         constructor(KeyTimes: TArray<UE.FrameNumber>, KeyValues: TArray<UE.MovieSceneEvent>);
         KeyTimes: TArray<UE.FrameNumber>;
         KeyValues: TArray<UE.MovieSceneEvent>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneEventTriggerSection extends UE.MovieSceneEventSectionBase {
@@ -41996,7 +46107,11 @@ declare module "ue" {
         StartOffset: number;
         EndOffset: number;
         GeometryCache: UE.SoftObjectPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneGeometryCacheSection extends UE.MovieSceneSection {
@@ -42022,7 +46137,11 @@ declare module "ue" {
         DefaultValue: number;
         bHasDefaultValue: boolean;
         Values: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneIntegerSection extends UE.MovieSceneSection {
@@ -42134,7 +46253,11 @@ declare module "ue" {
         constructor(SoftPtr: TSoftObjectPtr<UE.Object>, HardPtr: UE.Object);
         SoftPtr: TSoftObjectPtr<UE.Object>;
         HardPtr: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneObjectPathChannel extends UE.MovieSceneChannel {
@@ -42144,7 +46267,11 @@ declare module "ue" {
         Times: TArray<UE.FrameNumber>;
         Values: TArray<UE.MovieSceneObjectPathChannelKeyValue>;
         DefaultValue: UE.MovieSceneObjectPathChannelKeyValue;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneObjectPropertySection extends UE.MovieSceneSection {
@@ -42168,7 +46295,11 @@ declare module "ue" {
         constructor(ParameterName: string, ParameterCurve: UE.MovieSceneFloatChannel);
         ParameterName: string;
         ParameterCurve: UE.MovieSceneFloatChannel;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VectorParameterNameAndCurves {
@@ -42178,7 +46309,11 @@ declare module "ue" {
         XCurve: UE.MovieSceneFloatChannel;
         YCurve: UE.MovieSceneFloatChannel;
         ZCurve: UE.MovieSceneFloatChannel;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ColorParameterNameAndCurves {
@@ -42189,7 +46324,11 @@ declare module "ue" {
         GreenCurve: UE.MovieSceneFloatChannel;
         BlueCurve: UE.MovieSceneFloatChannel;
         AlphaCurve: UE.MovieSceneFloatChannel;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TransformParameterNameAndCurves {
@@ -42199,7 +46338,11 @@ declare module "ue" {
         Translation: FixSizeArray<UE.MovieSceneFloatChannel>;
         Rotation: FixSizeArray<UE.MovieSceneFloatChannel>;
         Scale: FixSizeArray<UE.MovieSceneFloatChannel>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneParameterSection extends UE.MovieSceneSection {
@@ -42223,7 +46366,11 @@ declare module "ue" {
     
     class MovieSceneParticleChannel extends UE.MovieSceneByteChannel {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneParticleSection extends UE.MovieSceneSection {
@@ -42281,7 +46428,11 @@ declare module "ue" {
         bForceCustomMode: boolean;
         StartOffset: number;
         EndOffset: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneSkeletalAnimationSection extends UE.MovieSceneSection {
@@ -42345,7 +46496,11 @@ declare module "ue" {
         Values: TArray<string>;
         DefaultValue: string;
         bHasDefaultValue: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneStringSection extends UE.MovieSceneSection {
@@ -42368,7 +46523,11 @@ declare module "ue" {
         constructor(ComponentName: string, PropertyName: string);
         ComponentName: string;
         PropertyName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneToolsFbxSettings {
@@ -42376,7 +46535,11 @@ declare module "ue" {
         constructor(FbxPropertyName: string, PropertyPath: UE.MovieSceneToolsPropertyTrackSettings);
         FbxPropertyName: string;
         PropertyPath: UE.MovieSceneToolsPropertyTrackSettings;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MovieSceneToolsProjectSettings extends UE.Object {
@@ -42588,7 +46751,11 @@ declare module "ue" {
         constructor();
         constructor(TestString: string);
         TestString: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class MyPluginObject extends UE.Object {
@@ -42643,7 +46810,11 @@ declare module "ue" {
         constructor(InterfaceName: string, InterfaceObject: UE.Object);
         InterfaceName: string;
         InterfaceObject: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NamedInterfaceDef {
@@ -42651,7 +46822,11 @@ declare module "ue" {
         constructor(InterfaceName: string, InterfaceClassName: string);
         InterfaceName: string;
         InterfaceClassName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NamedInterfaces extends UE.Object {
@@ -42803,7 +46978,11 @@ declare module "ue" {
         Offset: UE.Vector;
         Radius: number;
         Height: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavCollisionBox {
@@ -42811,7 +46990,11 @@ declare module "ue" {
         constructor(Offset: UE.Vector, Extent: UE.Vector);
         Offset: UE.Vector;
         Extent: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavCollision extends UE.NavCollisionBase {
@@ -42842,7 +47025,11 @@ declare module "ue" {
         bIsExcluded: boolean;
         bOverrideTravelCost: boolean;
         bOverrideEnteringCost: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavigationFilterFlags {
@@ -42864,7 +47051,11 @@ declare module "ue" {
         bNavFlag13: boolean;
         bNavFlag14: boolean;
         bNavFlag15: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavigationQueryFilter extends UE.Object {
@@ -42909,7 +47100,11 @@ declare module "ue" {
         constructor();
         constructor(Owner: UE.Object);
         Owner: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavigationGraphNodeComponent extends UE.SceneComponent {
@@ -43097,7 +47292,11 @@ declare module "ue" {
         bCustomFlag6: boolean;
         bCustomFlag7: boolean;
         AreaClass: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavigationLink extends UE.NavigationLinkBase {
@@ -43105,7 +47304,11 @@ declare module "ue" {
         constructor(Left: UE.Vector, Right: UE.Vector);
         Left: UE.Vector;
         Right: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavLinkComponent extends UE.PrimitiveComponent {
@@ -43164,7 +47367,11 @@ declare module "ue" {
         LeftEnd: UE.Vector;
         RightStart: UE.Vector;
         RightEnd: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NavLinkDefinition extends UE.Object {
@@ -43282,7 +47489,11 @@ declare module "ue" {
         constructor(DataName: string, bEnabled: boolean);
         DataName: string;
         bEnabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NetAnalyticsAggregatorConfig extends UE.Object {
@@ -43319,7 +47530,11 @@ declare module "ue" {
         constructor(ProfileName: string, ToolTip: string);
         ProfileName: string;
         ToolTip: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class NetworkSettings extends UE.DeveloperSettings {
@@ -43486,7 +47701,11 @@ declare module "ue" {
         constructor(FieldName: string, FieldValue: string);
         FieldName: string;
         FieldValue: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class HmdUserProfile {
@@ -43499,7 +47718,11 @@ declare module "ue" {
         IPD: number;
         NeckToEyeDistance: UE.Vector2D;
         ExtraFields: TArray<UE.HmdUserProfileField>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EBoundaryType { Boundary_Outer, Boundary_PlayArea, Boundary_MAX}
@@ -43511,7 +47734,11 @@ declare module "ue" {
         ClosestDistance: number;
         ClosestPoint: UE.Vector;
         ClosestPointNormal: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OculusFunctionLibrary extends UE.BlueprintFunctionLibrary {
@@ -43574,7 +47801,11 @@ declare module "ue" {
         TextureOffset: UE.Vector2D;
         TextureScale: UE.Vector2D;
         bNoAlphaChannel: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OculusHMDRuntimeSettings extends UE.Object {
@@ -43613,7 +47844,11 @@ declare module "ue" {
         constructor(ShowFlagName: string, Enabled: boolean);
         ShowFlagName: string;
         Enabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SceneCaptureComponent extends UE.SceneComponent {
@@ -43691,7 +47926,11 @@ declare module "ue" {
         UV1: UE.Vector2D;
         Vertex2: UE.Vector;
         UV2: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OculusMR_PlaneMeshComponent extends UE.MeshComponent {
@@ -43766,7 +48005,11 @@ declare module "ue" {
         UserOffset: UE.Vector;
         RawRotation: UE.Rotator;
         RawOffset: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OculusMR_State extends UE.Object {
@@ -43844,7 +48087,11 @@ declare module "ue" {
         Included: boolean;
         Name: string;
         Id: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EOculusPlatformTarget { Rift, Quest, Mobile, Length, EOculusPlatformTarget_MAX}
@@ -43857,14 +48104,22 @@ declare module "ue" {
         Required: boolean;
         Name: string;
         Sku: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetConfigArray {
         constructor();
         constructor(ConfigArray: TArray<UE.AssetConfig>);
         ConfigArray: TArray<UE.AssetConfig>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OculusPlatformToolSettings extends UE.Object {
@@ -43962,7 +48217,11 @@ declare module "ue" {
         Token: string;
         Type: string;
         TokenBytes: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class OnlinePIESettings extends UE.DeveloperSettings {
@@ -44108,7 +48367,11 @@ declare module "ue" {
         EraseTextureWeightIndex: UE.ETexturePaintIndex;
         bPaintOnSpecificLOD: boolean;
         LODIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TexturePaintSettings {
@@ -44123,7 +48386,11 @@ declare module "ue" {
         UVChannel: number;
         bEnableSeamPainting: boolean;
         PaintTexture: UE.Texture2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaintModeSettings extends UE.MeshPaintSettings {
@@ -44141,7 +48408,11 @@ declare module "ue" {
         constructor(LocalTransform: UE.Transform, SocketName: string);
         LocalTransform: UE.Transform;
         SocketName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESpriteCollisionMode { None, Use2DPhysics, Use3DPhysics, ESpriteCollisionMode_MAX}
@@ -44156,7 +48427,11 @@ declare module "ue" {
         BoxPosition: UE.Vector2D;
         Rotation: number;
         bNegativeWinding: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESpritePolygonMode { SourceBoundingBox, TightBoundingBox, ShrinkWrapped, FullyCustom, Diced, ESpritePolygonMode_MAX}
@@ -44171,7 +48446,11 @@ declare module "ue" {
         AlphaThreshold: number;
         DetailAmount: number;
         SimplifyEpsilon: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EPaperSpriteAtlasPadding { DilateBorder, PadWithZero, EPaperSpriteAtlasPadding_MAX}
@@ -44184,7 +48463,11 @@ declare module "ue" {
         Y: number;
         Width: number;
         Height: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaperSpriteAtlas extends UE.Object {
@@ -44250,7 +48533,11 @@ declare module "ue" {
         constructor(Sprite: UE.PaperSprite, FrameRun: number);
         Sprite: UE.PaperSprite;
         FrameRun: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EFlipbookCollisionMode { NoCollision, FirstFrameCollision, EachFrameCollision, EFlipbookCollisionMode_MAX}
@@ -44393,7 +48680,11 @@ declare module "ue" {
         SourceSprite: UE.PaperSprite;
         VertexColor: UE.Color;
         MaterialIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaperGroupedSpriteComponent extends UE.MeshComponent {
@@ -44550,7 +48841,11 @@ declare module "ue" {
         CollisionOffset: number;
         DrawOrder: number;
         Description: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaperTerrainMaterial extends UE.DataAsset {
@@ -44605,7 +48900,11 @@ declare module "ue" {
         Top: number;
         Right: number;
         Bottom: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaperTileMetadata {
@@ -44614,7 +48913,11 @@ declare module "ue" {
         UserDataName: string;
         CollisionData: UE.SpriteGeometryCollection;
         TerrainMembership: FixSizeArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaperTileSetTerrain {
@@ -44622,7 +48925,11 @@ declare module "ue" {
         constructor(TerrainName: string, CenterTileIndex: number);
         TerrainName: string;
         CenterTileIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaperTileSet extends UE.Object {
@@ -44654,7 +48961,11 @@ declare module "ue" {
         constructor(TileSet: UE.PaperTileSet, PackedTileIndex: number);
         TileSet: UE.PaperTileSet;
         PackedTileIndex: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PaperTileLayer extends UE.Object {
@@ -44925,7 +49236,11 @@ declare module "ue" {
         bModify: boolean;
         bScale: boolean;
         bLock: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleModuleBeamModifier extends UE.ParticleModuleBeamBase {
@@ -45101,7 +49416,11 @@ declare module "ue" {
         bResetSeedOnEmitterLooping: boolean;
         bRandomlySelectSeedArray: boolean;
         RandomSeeds: TArray<number>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleModuleColor_Seeded extends UE.ParticleModuleColor {
@@ -45272,7 +49591,11 @@ declare module "ue" {
         constructor(BoneSocketName: string, Offset: UE.Vector);
         BoneSocketName: string;
         Offset: UE.Vector;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ELocationBoneSocketSelectionMethod { BONESOCKETSEL_Sequential, BONESOCKETSEL_Random, BONESOCKETSEL_MAX}
@@ -45543,7 +49866,11 @@ declare module "ue" {
         ValueMethod: UE.EEmitterDynamicParameterValue;
         bScaleVelocityByParamValue: boolean;
         ParamValue: UE.RawDistributionFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleModuleParameterDynamic extends UE.ParticleModuleParameterBase {
@@ -45827,14 +50154,22 @@ declare module "ue" {
         bTileY: boolean;
         bTileZ: boolean;
         bUseFixDT: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FloatDistribution {
         constructor();
         constructor(Table: UE.DistributionLookupTable);
         Table: UE.DistributionLookupTable;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GPUSpriteEmitterInfo {
@@ -45869,7 +50204,11 @@ declare module "ue" {
         DynamicAlpha: UE.RawDistributionFloat;
         DynamicColorScale: UE.RawDistributionVector;
         DynamicAlphaScale: UE.RawDistributionFloat;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class GPUSpriteResourceData {
@@ -45915,7 +50254,11 @@ declare module "ue" {
         bRemoveHMDRoll: boolean;
         MinFacingCameraBlendDistance: number;
         MaxFacingCameraBlendDistance: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ParticleModuleTypeDataGpu extends UE.ParticleModuleTypeDataBase {
@@ -46147,7 +50490,11 @@ declare module "ue" {
         Platform: string;
         bAllowCrossplay: boolean;
         ElapsedTime: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PartyReservation {
@@ -46157,7 +50504,11 @@ declare module "ue" {
         PartyLeader: UE.UniqueNetIdRepl;
         PartyMembers: TArray<UE.PlayerReservation>;
         RemovedPartyMembers: TArray<UE.PlayerReservation>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ReservationRemoveMembers, EClientRequestType_MAX}
@@ -46355,7 +50706,11 @@ declare module "ue" {
         PinContainerType: number;
         bIsReference: boolean;
         bIn: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PEGraphTerminalType {
@@ -46363,7 +50718,11 @@ declare module "ue" {
         constructor(PinCategory: string, PinSubCategoryObject: UE.Object);
         PinCategory: string;
         PinSubCategoryObject: UE.Object;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PEParamMetaData extends UE.Object {
@@ -46444,7 +50803,11 @@ declare module "ue" {
         ViewFOV: number;
         CameraFollowMode: UE.EAnimationViewportCameraFollowMode;
         CameraFollowBoneName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetEditorOptions {
@@ -46452,7 +50815,11 @@ declare module "ue" {
         constructor(Context: string, ViewportConfigs: FixSizeArray<UE.ViewportConfigOptions>);
         Context: string;
         ViewportConfigs: FixSizeArray<UE.ViewportConfigOptions>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PersonaOptions extends UE.Object {
@@ -46507,7 +50874,11 @@ declare module "ue" {
         constructor();
         constructor(SkeletalMesh: TSoftObjectPtr<UE.SkeletalMesh>);
         SkeletalMesh: TSoftObjectPtr<UE.SkeletalMesh>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PreviewMeshCollection extends UE.DataAsset {
@@ -46636,7 +51007,11 @@ declare module "ue" {
         AngularConstraintMode: UE.EAngularConstraintMotion;
         HullCount: number;
         MaxHullVerts: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PhysicsAssetGenerationSettings extends UE.Object {
@@ -46665,7 +51040,11 @@ declare module "ue" {
         constructor();
         constructor(ComponentName: string);
         ComponentName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EConstraintFrame { Frame1, Frame2, EConstraintFrame_MAX}
@@ -46774,7 +51153,11 @@ declare module "ue" {
         ErrorAccumulationSeconds: number;
         ErrorAccumulationDistanceSq: number;
         ErrorAccumulationSimilarity: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESettingsLockedAxis { None, X, Y, Z, Invalid, ESettingsLockedAxis_MAX}
@@ -46784,7 +51167,11 @@ declare module "ue" {
         constructor(Type: UE.EPhysicalSurface, Name: string);
         Type: UE.EPhysicalSurface;
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EChaosThreadingMode { DedicatedThread, TaskGraph, SingleThread, Num, Invalid, EChaosThreadingMode_MAX}
@@ -46796,7 +51183,11 @@ declare module "ue" {
         DefaultThreadingModel: UE.EChaosThreadingMode;
         DedicatedThreadTickMode: UE.EChaosSolverTickMode;
         DedicatedThreadBufferMode: UE.EChaosBufferMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PhysicsSettings extends UE.DeveloperSettings {
@@ -46922,7 +51313,11 @@ declare module "ue" {
         Name: string;
         Binding: string;
         Type: UE.EPinnedCommandListType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PinnedCommandListContext {
@@ -46930,7 +51325,11 @@ declare module "ue" {
         constructor(Name: string, Commands: TArray<UE.PinnedCommandListCommand>);
         Name: string;
         Commands: TArray<UE.PinnedCommandListCommand>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PinnedCommandListSettings extends UE.Object {
@@ -47249,7 +51648,11 @@ declare module "ue" {
     
     class BranchingPointNotifyPayload {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PlayMontageCallbackProxy extends UE.Object {
@@ -47435,14 +51838,22 @@ declare module "ue" {
         BundleScope: UE.PrimaryAssetId;
         BundleName: string;
         BundleAssets: TArray<UE.SoftObjectPath>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class AssetBundleData {
         constructor();
         constructor(Bundles: TArray<UE.AssetBundleEntry>);
         Bundles: TArray<UE.AssetBundleEntry>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PrimaryDataAsset extends UE.DataAsset {
@@ -47457,7 +51868,11 @@ declare module "ue" {
         constructor();
         constructor(CollectionName: string);
         CollectionName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PrimaryAssetLabel extends UE.PrimaryDataAsset {
@@ -47508,7 +51923,11 @@ declare module "ue" {
         TypeInstance: UE.FoliageType;
         bIsAsset: boolean;
         Type: UE.Class;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ProceduralFoliageSpawner extends UE.Object {
@@ -47574,7 +51993,11 @@ declare module "ue" {
         Age: number;
         Scale: number;
         Type: UE.FoliageType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ProceduralFoliageTile extends UE.Object {
@@ -47592,7 +52015,11 @@ declare module "ue" {
         BackgroundImage: UE.SlateBrush;
         FillImage: UE.SlateBrush;
         MarqueeImage: UE.SlateBrush;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EProgressBarFillType { LeftToRight, RightToLeft, FillFromCenter, TopToBottom, BottomToTop, EProgressBarFillType_MAX}
@@ -47749,7 +52176,11 @@ declare module "ue" {
         SecondProperty: number;
         CustomizedStructInsideUncustomizedStruct: UE.LinearColor;
         CustomizedStructInsideUncustomizedStruct2: UE.SoftObjectPath;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PropertyEditorTestBasicStruct {
@@ -47759,14 +52190,22 @@ declare module "ue" {
         FloatPropertyInsideAStruct: number;
         ObjectPropertyInsideAStruct: UE.Object;
         InnerStruct: UE.PropertyEditorTestSubStruct;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PropertyEditTestTextStruct {
         constructor();
         constructor(NormalProperty: string);
         NormalProperty: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PropertyEditorTestObject extends UE.Object {
@@ -47952,31 +52391,6 @@ declare module "ue" {
         static Load(InName: string): PropertyValueVisibility;
     }
     
-    namespace Engine.Transient {
-        class PROTO_BP_AnimBlueprint_0_C extends UE.AnimInstance {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            UberGraphFrame: UE.PointerToUberGraphFrame;
-            AnimGraphNode_Root_9C67F174426DD4468F0D8DB0BCFC2A1F: UE.AnimNode_Root;
-            AnimGraph(AnimGraph: $Ref<UE.PoseLink>) : void;
-            ExecuteUbergraph_PROTO_BP_AnimBlueprint_0(EntryPoint: number) : void;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): PROTO_BP_AnimBlueprint_0_C;
-            static Load(InName: string): PROTO_BP_AnimBlueprint_0_C;
-        }
-        
-    }
-
-    namespace Engine.Transient {
-        class PROTO_BP_Blueprint_0_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            DefaultSceneRoot: UE.SceneComponent;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): PROTO_BP_Blueprint_0_C;
-            static Load(InName: string): PROTO_BP_Blueprint_0_C;
-        }
-        
-    }
-
     class ProxyLODMeshSimplificationSettings extends UE.DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ProxyLODMeshReductionModuleName: string;
@@ -48525,32 +52939,6 @@ declare module "ue" {
         static Load(InName: string): RenderTargetExporterHDR;
     }
     
-    namespace Engine.ArtTools.RenderToTexture.Enums.EIntTypes {
-        enum EIntTypes { int, int2, int3, int4, EIntTypes_MAX}
-    }
-
-    namespace Engine.ArtTools.RenderToTexture.Macros.RenderToTextureFunctionLibrary {
-        class RenderToTextureFunctionLibrary_C extends UE.BlueprintFunctionLibrary {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static ["Array to HLSL Int Array"](Type: UE.Engine.ArtTools.RenderToTexture.Enums.EIntTypes.EIntTypes, VariableName: $Ref<string>, int: $Ref<TArray<number>>, int2: $Ref<TArray<UE.Vector2D>>, int3: $Ref<TArray<UE.Vector>>, int4: $Ref<TArray<UE.LinearColor>>, __WorldContext: $Nullable<UE.Object>, String: $Ref<string>) : void;
-            static ["Set Canvas Material Scale and Position"](Size: UE.Vector2D, Position: UE.Vector2D, Scale: number, __WorldContext: $Nullable<UE.Object>, ScreenPosition: $Ref<UE.Vector2D>, ScreenSize: $Ref<UE.Vector2D>) : void;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): RenderToTextureFunctionLibrary_C;
-            static Load(InName: string): RenderToTextureFunctionLibrary_C;
-        }
-        
-    }
-
-    namespace Engine.ArtTools.RenderToTexture.Macros.RenderToTextureMacros {
-        class RenderToTextureMacros_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): RenderToTextureMacros_C;
-            static Load(InName: string): RenderToTextureMacros_C;
-        }
-        
-    }
-
     class ReplaceActorCommandlet extends UE.Commandlet {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -48907,7 +53295,11 @@ declare module "ue" {
         BottomShadowBrush: UE.SlateBrush;
         LeftShadowBrush: UE.SlateBrush;
         RightShadowBrush: UE.SlateBrush;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EDescendantScrollDestination { IntoView, TopOrLeft, Center, EDescendantScrollDestination_MAX}
@@ -49026,7 +53418,11 @@ declare module "ue" {
         constructor();
         constructor(ActorClassesToRecord: TArray<UE.Class>);
         ActorClassesToRecord: TArray<UE.Class>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PropertiesToRecordForClass {
@@ -49034,7 +53430,11 @@ declare module "ue" {
         constructor(Class: UE.Class, Properties: TArray<string>);
         Class: UE.Class;
         Properties: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class PropertiesToRecordForActorClass {
@@ -49042,7 +53442,11 @@ declare module "ue" {
         constructor(Class: UE.Class, Properties: TArray<string>);
         Class: UE.Class;
         Properties: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SettingsForActorClass {
@@ -49050,7 +53454,11 @@ declare module "ue" {
         constructor(Class: UE.Class, bRecordToPossessable: boolean);
         Class: UE.Class;
         bRecordToPossessable: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SequenceRecorderSettings extends UE.Object {
@@ -49264,7 +53672,11 @@ declare module "ue" {
         BoneName: string;
         AdditionalOffset: UE.Vector;
         bDisableSteering: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TireConfigMaterialFriction {
@@ -49272,7 +53684,11 @@ declare module "ue" {
         constructor(PhysicalMaterial: UE.PhysicalMaterial, FrictionScale: number);
         PhysicalMaterial: UE.PhysicalMaterial;
         FrictionScale: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TireConfig extends UE.DataAsset {
@@ -49338,7 +53754,11 @@ declare module "ue" {
         BrakeInput: number;
         HandbrakeInput: number;
         CurrentGear: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VehicleInputRate {
@@ -49346,7 +53766,11 @@ declare module "ue" {
         constructor(RiseRate: number, FallRate: number);
         RiseRate: number;
         FallRate: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WheeledVehicleMovementComponent extends UE.PawnMovementComponent {
@@ -49619,7 +54043,11 @@ declare module "ue" {
         TipAltitude: number;
         TipValue: number;
         Width: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SkyAtmosphereComponent extends UE.SceneComponent {
@@ -49745,7 +54173,11 @@ declare module "ue" {
         UV3: UE.Vector2D;
         UV4: UE.Vector2D;
         UV5: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SlateVectorArtData extends UE.Object {
@@ -49794,7 +54226,11 @@ declare module "ue" {
         HoveredThumbImage: UE.SlateBrush;
         DisabledThumbImage: UE.SlateBrush;
         BarThickness: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Slider extends UE.Widget {
@@ -49985,7 +54421,11 @@ declare module "ue" {
         DisplayName: string;
         bAlwaysDecompressOnLoad: boolean;
         DecompressedDuration: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundGroups extends UE.Object {
@@ -50050,7 +54490,11 @@ declare module "ue" {
         constructor(DialogueWave: UE.DialogueWave, Context: UE.DialogueContext);
         DialogueWave: UE.DialogueWave;
         Context: UE.DialogueContext;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundNodeDialoguePlayer extends UE.SoundNode {
@@ -50070,7 +54514,11 @@ declare module "ue" {
         FadeOutDistanceStart: number;
         FadeOutDistanceEnd: number;
         Volume: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundNodeDistanceCrossFade extends UE.SoundNode {
@@ -50166,7 +54614,11 @@ declare module "ue" {
         MinOutput: number;
         MaxOutput: number;
         ParamMode: UE.ModulationParamMode;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SoundNodeModulatorContinuous extends UE.SoundNode {
@@ -50362,7 +54814,11 @@ declare module "ue" {
         bCanRevert: boolean;
         bIsCheckedOutOther: boolean;
         CheckedOutOther: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SourceControlHelpers extends UE.Object {
@@ -50411,7 +54867,11 @@ declare module "ue" {
         constructor(SpectatorId: UE.UniqueNetIdRepl, Spectator: UE.PlayerReservation);
         SpectatorId: UE.UniqueNetIdRepl;
         Spectator: UE.PlayerReservation;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESpectatorClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ESpectatorClientRequestType_MAX}
@@ -50517,7 +54977,11 @@ declare module "ue" {
         ArrowsImage: UE.SlateBrush;
         ForegroundColor: UE.SlateColor;
         TextPadding: UE.Margin;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SpinBox extends UE.Widget {
@@ -50779,14 +55243,22 @@ declare module "ue" {
         constructor(Name: string, Path: string);
         Name: string;
         Path: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SteamVRActionSet {
         constructor();
         constructor(Path: string);
         Path: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESteamVRHand { VR_Left, VR_Right, VR_MAX}
@@ -50796,7 +55268,11 @@ declare module "ue" {
         TrackedDeviceIndex: number;
         RenderModelComponentName: string;
         TrackedDeviceModel: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESteamVRInputStringBits { VR_InputString_Hand, VR_InputString_ControllerType, VR_InputString_InputSource, VR_InputString_All, VR_InputString_MAX}
@@ -50807,7 +55283,11 @@ declare module "ue" {
         InputPathName: string;
         ModeName: string;
         SlotName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SteamVRFingerCurls {
@@ -50818,7 +55298,11 @@ declare module "ue" {
         Middle: number;
         Ring: number;
         Pinky: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SteamVRFingerSplays {
@@ -50828,7 +55312,11 @@ declare module "ue" {
         Index_Middle: number;
         Middle_Ring: number;
         Ring_Pinky: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum ESkeletalSummaryDataType { VR_SummaryType_FromAnimation, VR_SummaryType_FromDevice, VR_SummaryType_MAX}
@@ -50890,7 +55378,11 @@ declare module "ue" {
         RightScale: UE.Vector2D;
         LeftBias: UE.Vector2D;
         RightBias: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EStereoLayerType { SLT_WorldLocked, SLT_TrackerLocked, SLT_FaceLocked, SLT_MAX}
@@ -51049,7 +55541,11 @@ declare module "ue" {
         OutputGainDb: number;
         bChannelLinked: boolean;
         bAnalogMode: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubmixEffectDynamicsProcessorPreset extends UE.SoundEffectSubmixPreset {
@@ -51077,7 +55573,11 @@ declare module "ue" {
         AirAbsorptionGainHF: number;
         WetLevel: number;
         DryLevel: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubmixEffectReverbFastPreset extends UE.SoundEffectSubmixPreset {
@@ -51106,7 +55606,11 @@ declare module "ue" {
         AirAbsorptionGainHF: number;
         WetLevel: number;
         DryLevel: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubmixEffectReverbPreset extends UE.SoundEffectSubmixPreset {
@@ -51126,14 +55630,22 @@ declare module "ue" {
         Bandwidth: number;
         GainDb: number;
         bEnabled: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubmixEffectSubmixEQSettings {
         constructor();
         constructor(EQBands: TArray<UE.SubmixEffectEQBand>);
         EQBands: TArray<UE.SubmixEffectEQBand>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class SubmixEffectSubmixEQPreset extends UE.SoundEffectSubmixPreset {
@@ -51249,7 +55761,11 @@ declare module "ue" {
         LocalizedDescriptions: TArray<UE.LocalizedTemplateString>;
         Icon: string;
         IsMajorCategory: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TemplateCategories extends UE.Object {
@@ -51305,7 +55821,11 @@ declare module "ue" {
             constructor(speed: number, age: number);
             speed: number;
             age: number;
-            static StaticClass(): Class;
+            /**
+             * @deprecated use StaticStruct instead.
+             */
+            static StaticClass(): ScriptStruct;
+            static StaticStruct(): ScriptStruct;
         }
         
     }
@@ -51740,7 +56260,11 @@ declare module "ue" {
     
     class CustomStruct {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TGUnitTestCallee extends UE.Object {
@@ -51791,7 +56315,11 @@ declare module "ue" {
         ClassNeedingThumbnail: UE.Class;
         RendererClassName: string;
         Renderer: UE.ThumbnailRenderer;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ThumbnailManager extends UE.Object {
@@ -51839,7 +56367,11 @@ declare module "ue" {
         SourceName: string;
         ImportedTileSet: TWeakObjectPtr<UE.PaperTileSet>;
         ImportedTexture: TWeakObjectPtr<UE.Texture>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TileMapAssetImportData extends UE.AssetImportData {
@@ -51919,7 +56451,11 @@ declare module "ue" {
         constructor(Time: number, EventFunc: $Delegate<() => void>);
         Time: number;
         EventFunc: $Delegate<() => void>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TimelineVectorTrack {
@@ -51930,7 +56466,11 @@ declare module "ue" {
         TrackName: string;
         VectorPropertyName: string;
         VectorProperty: UE.StructProperty;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TimelineFloatTrack {
@@ -51941,7 +56481,11 @@ declare module "ue" {
         TrackName: string;
         FloatPropertyName: string;
         FloatProperty: UE.FloatProperty;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TimelineLinearColorTrack {
@@ -51952,7 +56496,11 @@ declare module "ue" {
         TrackName: string;
         LinearColorPropertyName: string;
         LinearColorProperty: UE.StructProperty;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class Timeline {
@@ -51974,7 +56522,11 @@ declare module "ue" {
         PropertySetObject: TWeakObjectPtr<UE.Object>;
         DirectionPropertyName: string;
         DirectionProperty: UE.Property;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TimelineComponent extends UE.ActorComponent {
@@ -52087,14 +56639,22 @@ declare module "ue" {
     enum EMultiBoxType { MenuBar, ToolBar, VerticalToolBar, Menu, ButtonRow, ToolMenuBar, EMultiBoxType_MAX}
     class ToolMenuOwner {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenuContext {
         constructor();
         constructor(ContextObjects: TArray<UE.Object>);
         ContextObjects: TArray<UE.Object>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EMultiBlockType { None, ButtonRow, EditableText, Heading, MenuEntry, MenuSeparator, ToolBarButton, ToolBarComboButton, ToolBarSeparator, Widget, EMultiBlockType_MAX}
@@ -52105,7 +56665,11 @@ declare module "ue" {
         constructor(Name: string, Position: UE.EToolMenuInsertType);
         Name: string;
         Position: UE.EToolMenuInsertType;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ScriptSlateIcon {
@@ -52114,7 +56678,11 @@ declare module "ue" {
         StyleSetName: string;
         StyleName: string;
         SmallStyleName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenuEntryScriptDataAdvanced {
@@ -52127,7 +56695,11 @@ declare module "ue" {
         bOpenSubMenuOnClick: boolean;
         bShouldCloseWindowAfterMenuSelection: boolean;
         bSimpleComboBox: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenuEntryScriptData {
@@ -52142,7 +56714,11 @@ declare module "ue" {
         OwnerName: string;
         InsertPosition: UE.ToolMenuInsert;
         Advanced: UE.ToolMenuEntryScriptDataAdvanced;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenuEntryScript extends UE.Object {
@@ -52174,7 +56750,11 @@ declare module "ue" {
         InsertPosition: UE.ToolMenuInsert;
         bShouldCloseWindowAfterMenuSelection: boolean;
         ScriptObject: UE.ToolMenuEntryScript;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenuSectionDynamic extends UE.Object {
@@ -52193,7 +56773,11 @@ declare module "ue" {
         InsertPosition: UE.ToolMenuInsert;
         Context: UE.ToolMenuContext;
         ToolMenuSectionDynamic: UE.ToolMenuSectionDynamic;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenu extends UE.ToolMenuBase {
@@ -52240,7 +56824,11 @@ declare module "ue" {
         Type: UE.EToolMenuStringCommandType;
         CustomType: string;
         String: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenuEntryExtensions extends UE.Object {
@@ -52268,21 +56856,33 @@ declare module "ue" {
         constructor();
         constructor(Visibility: UE.ECustomizedToolMenuVisibility);
         Visibility: UE.ECustomizedToolMenuVisibility;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CustomizedToolMenuSection {
         constructor();
         constructor(Visibility: UE.ECustomizedToolMenuVisibility);
         Visibility: UE.ECustomizedToolMenuVisibility;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CustomizedToolMenuNameArray {
         constructor();
         constructor(Names: TArray<string>);
         Names: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CustomizedToolMenu {
@@ -52293,7 +56893,11 @@ declare module "ue" {
         Sections: TMap<string, UE.CustomizedToolMenuSection>;
         EntryOrder: TMap<string, UE.CustomizedToolMenuNameArray>;
         SectionOrder: TArray<string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class ToolMenus extends UE.Object {
@@ -52404,7 +57008,11 @@ declare module "ue" {
         DateAndTime: UE.DateTime;
         Source: string;
         Translation: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TranslationContextInfo {
@@ -52413,7 +57021,11 @@ declare module "ue" {
         Key: string;
         Context: string;
         Changes: TArray<UE.TranslationChange>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TranslationUnit extends UE.Object {
@@ -52570,16 +57182,6 @@ declare module "ue" {
         static Load(InName: string): TurnBasedBlueprintLibrary;
     }
     
-    namespace Engine.Tutorial.BlueprintTutorials.TutorialAssets.Tutorial_BP_MacroLib {
-        class Tutorial_BP_MacroLib_C extends UE.EditorTutorial {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): Tutorial_BP_MacroLib_C;
-            static Load(InName: string): Tutorial_BP_MacroLib_C;
-        }
-        
-    }
-
     class TutorialSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Categories: TArray<UE.TutorialCategory>;
@@ -52595,7 +57197,11 @@ declare module "ue" {
         Tutorial: UE.SoftClassPath;
         CurrentStage: number;
         bUserDismissed: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class TutorialStateSettings extends UE.Object {
@@ -52701,7 +57307,11 @@ declare module "ue" {
         bAllowBlueprintPaint: boolean;
         PropertyBindingRule: UE.EPropertyBindingPermissionLevel;
         Rules: TArray<TSoftClassPtr<UE.WidgetCompilerRule>>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DirectoryWidgetCompilerOptions {
@@ -52710,7 +57320,11 @@ declare module "ue" {
         Directory: UE.DirectoryPath;
         IgnoredWidgets: TArray<TSoftObjectPtr<UE.WidgetBlueprint>>;
         Options: UE.WidgetCompilerOptions;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class DebugResolution {
@@ -52720,7 +57334,11 @@ declare module "ue" {
         Height: number;
         Description: string;
         Color: UE.LinearColor;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UMGEditorProjectSettings extends UE.DeveloperSettings {
@@ -52875,7 +57493,11 @@ declare module "ue" {
         constructor(Parent: string, Name: string);
         Parent: string;
         Name: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorCommand {
@@ -52885,7 +57507,11 @@ declare module "ue" {
         CommandName: string;
         ExecCommand: string;
         Description: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class EditorKeyBinding {
@@ -52896,7 +57522,11 @@ declare module "ue" {
         bShiftDown: boolean;
         Key: UE.Key;
         CommandName: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UnrealEdKeyBindings extends UE.Object {
@@ -52912,7 +57542,11 @@ declare module "ue" {
         constructor(ClassName: string, AssetClass: string);
         ClassName: string;
         AssetClass: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UnrealEdOptions extends UE.Object {
@@ -52932,7 +57566,11 @@ declare module "ue" {
         constructor(ThumbnailTexture: UE.Texture2D, Map: string);
         ThumbnailTexture: UE.Texture2D;
         Map: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UnrealEdEngine extends UE.EditorEngine {
@@ -52980,12 +57618,20 @@ declare module "ue" {
         constructor();
         constructor(Identifiers: TMap<string, string>);
         Identifiers: TMap<string, string>;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class CapturedPixels {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class FrameMetrics {
@@ -52995,7 +57641,11 @@ declare module "ue" {
         FrameDelta: number;
         FrameNumber: number;
         NumDroppedFrames: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UserDefinedCaptureProtocol extends UE.MovieSceneImageCaptureProtocolBase {
@@ -53067,7 +57717,11 @@ declare module "ue" {
         bEnable3dWidget: boolean;
         CurrentDefaultValue: string;
         ToolTip: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class UserDefinedStructEditorData extends UE.Object {
@@ -53086,7 +57740,11 @@ declare module "ue" {
         constructor(CursorPath: string, HotSpot: UE.Vector2D);
         CursorPath: string;
         HotSpot: UE.Vector2D;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EUIScalingRule { ShortestSide, LongestSide, Horizontal, Vertical, Custom, EUIScalingRule_MAX}
@@ -53354,7 +58012,11 @@ declare module "ue" {
         Formats: TArray<UE.EPixelFormat>;
         SizeInMegabyte: number;
         bAllowSizeScale: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VirtualTexturePoolConfig extends UE.Object {
@@ -53539,7 +58201,11 @@ declare module "ue" {
         ComponentToAttachTo: UE.SceneComponent;
         AttenuationSettings: UE.SoundAttenuation;
         SourceEffectChain: UE.SoundEffectSourcePresetChain;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VOIPTalker extends UE.ActorComponent {
@@ -53683,7 +58349,11 @@ declare module "ue" {
         bHideWindowHandles: boolean;
         bMaskOutWidgetBackground: boolean;
         bNoCloseButton: boolean;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EWidgetSpace { World, Screen, EWidgetSpace_MAX}
@@ -53896,7 +58566,11 @@ declare module "ue" {
         constructor();
         constructor(ButtonWidget: UE.VREditorWidgetComponent);
         ButtonWidget: UE.VREditorWidgetComponent;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VRRadialMenuHandler extends UE.Object {
@@ -54053,7 +58727,11 @@ declare module "ue" {
         DampingRateFullThrottle: number;
         DampingRateZeroThrottleClutchEngaged: number;
         DampingRateZeroThrottleClutchDisengaged: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     enum EVehicleDifferential4W { LimitedSlip_4W, LimitedSlip_FrontDrive, LimitedSlip_RearDrive, Open_4W, Open_FrontDrive, Open_RearDrive, EVehicleDifferential4W_MAX}
@@ -54067,7 +58745,11 @@ declare module "ue" {
         CentreBias: number;
         FrontBias: number;
         RearBias: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VehicleGearData {
@@ -54076,7 +58758,11 @@ declare module "ue" {
         Ratio: number;
         DownRatio: number;
         UpRatio: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class VehicleTransmissionData {
@@ -54090,7 +58776,11 @@ declare module "ue" {
         ReverseGearRatio: number;
         NeutralGearUpRatio: number;
         ClutchStrength: number;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WheeledVehicleMovementComponent4W extends UE.WheeledVehicleMovementComponent {
@@ -54112,7 +58802,11 @@ declare module "ue" {
         AnimationToBind: string;
         FunctionNameToBind: string;
         UserTag: string;
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WidgetAnimationDelegateBinding extends UE.DynamicBlueprintBinding {
@@ -54153,7 +58847,11 @@ declare module "ue" {
     enum EWindowTitleBarMode { Overlay, VerticalBox, EWindowTitleBarMode_MAX}
     class NavigationEvent extends UE.InputEvent {
         constructor();
-        static StaticClass(): Class;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
     }
     
     class WidgetBlueprintLibrary extends UE.BlueprintFunctionLibrary {
