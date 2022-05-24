@@ -13962,18 +13962,6 @@ declare module "ue" {
         private __tid_ActorGroupingUtils__: boolean;
     }
     
-    namespace Engine.EditorBlueprintResources.ActorMacros {
-        class ActorMacros_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): ActorMacros_C;
-            static Load(InName: string): ActorMacros_C;
-        
-            private __tid_ActorMacros_C__: boolean;
-        }
-        
-    }
-
     class SequenceRecordingBase extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -16970,6 +16958,7 @@ declare module "ue" {
         private __tid_AnimationEditorPreviewActor__: boolean;
     }
     
+    enum AnimationKeyFormat { AKF_ConstantKeyLerp, AKF_VariableKeyLerp, AKF_PerTrackCompression, AKF_MAX, __typeKeyDoNoAccess}
     class AnimationModifier extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RevisionGuid: UE.Guid;
@@ -21309,6 +21298,7 @@ declare module "ue" {
         private __tid_AROriginActor__: boolean;
     }
     
+    enum ArrayLabelEnum { ArrayIndex0, ArrayIndex1, ArrayIndex2, ArrayIndex3, ArrayIndex4, ArrayIndex5, ArrayIndex_MAX, ArrayLabelEnum_MAX, __typeKeyDoNoAccess}
     class ArrayProperty extends UE.Property {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -23655,6 +23645,9 @@ declare module "ue" {
         private __tid_BasicOverlaysFactoryNew__: boolean;
     }
     
+    enum Beam2SourceTargetMethod { PEB2STM_Default, PEB2STM_UserSet, PEB2STM_Emitter, PEB2STM_Particle, PEB2STM_Actor, PEB2STM_MAX, __typeKeyDoNoAccess}
+    enum Beam2SourceTargetTangentMethod { PEB2STTM_Direct, PEB2STTM_UserSet, PEB2STTM_Distribution, PEB2STTM_Emitter, PEB2STTM_MAX, __typeKeyDoNoAccess}
+    enum BeamModifierType { PEB2MT_Source, PEB2MT_Target, PEB2MT_MAX, __typeKeyDoNoAccess}
     class BehaviorTreeDecoratorGraph extends UE.EdGraph {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -24113,124 +24106,6 @@ declare module "ue" {
         private __tid_BlueprintEditorSettings__: boolean;
     }
     
-    enum ETutorialContent { None, Text, UDNExcerpt, RichText, ETutorialContent_MAX, __typeKeyDoNoAccess}
-    class TutorialContent {
-        constructor();
-        constructor(Type: UE.ETutorialContent, Content: string, ExcerptName: string, Text: string);
-        Type: UE.ETutorialContent;
-        Content: string;
-        ExcerptName: string;
-        Text: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        private __tid_TutorialContent__: boolean;
-    }
-    
-    enum ETutorialAnchorIdentifier { None, NamedWidget, Asset, ETutorialAnchorIdentifier_MAX, __typeKeyDoNoAccess}
-    class TutorialContentAnchor {
-        constructor();
-        constructor(Type: UE.ETutorialAnchorIdentifier, WrapperIdentifier: string, Asset: UE.SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
-        Type: UE.ETutorialAnchorIdentifier;
-        WrapperIdentifier: string;
-        Asset: UE.SoftObjectPath;
-        bDrawHighlight: boolean;
-        TabToFocusOrOpen: string;
-        FriendlyName: string;
-        GUIDString: string;
-        OuterName: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        private __tid_TutorialContentAnchor__: boolean;
-    }
-    
-    class TutorialWidgetContent {
-        constructor();
-        constructor(Content: UE.TutorialContent, WidgetAnchor: UE.TutorialContentAnchor, HorizontalAlignment: UE.EHorizontalAlignment, VerticalAlignment: UE.EVerticalAlignment, Offset: UE.Vector2D, ContentWidth: number, bAutoFocus: boolean);
-        Content: UE.TutorialContent;
-        WidgetAnchor: UE.TutorialContentAnchor;
-        HorizontalAlignment: UE.EHorizontalAlignment;
-        VerticalAlignment: UE.EVerticalAlignment;
-        Offset: UE.Vector2D;
-        ContentWidth: number;
-        bAutoFocus: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        private __tid_TutorialWidgetContent__: boolean;
-    }
-    
-    class TutorialStage {
-        constructor();
-        constructor(Name: string, Content: UE.TutorialContent, WidgetContent: TArray<UE.TutorialWidgetContent>, NextButtonText: string, BackButtonText: string, PlatformsToTest: TArray<string>, bInvertPlatformTest: boolean);
-        Name: string;
-        Content: UE.TutorialContent;
-        WidgetContent: TArray<UE.TutorialWidgetContent>;
-        NextButtonText: string;
-        BackButtonText: string;
-        PlatformsToTest: TArray<string>;
-        bInvertPlatformTest: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        private __tid_TutorialStage__: boolean;
-    }
-    
-    class EditorTutorial extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Title: string;
-        SortOrder: number;
-        Icon: string;
-        Texture: UE.Texture2D;
-        Category: string;
-        SummaryContent: UE.TutorialContent;
-        Stages: TArray<UE.TutorialStage>;
-        PreviousTutorial: UE.SoftClassPath;
-        NextTutorial: UE.SoftClassPath;
-        bIsStandalone: boolean;
-        AssetToUse: UE.SoftObjectPath;
-        ImportPath: string;
-        bHideInBrowser: boolean;
-        SearchTags: string;
-        GetActorReference(PathToActor: string) : UE.Actor;
-        OnTutorialClosed() : void;
-        OnTutorialLaunched() : void;
-        OnTutorialStageEnded(StageName: string) : void;
-        OnTutorialStageStarted(StageName: string) : void;
-        static BeginTutorial(TutorialToStart: $Nullable<UE.EditorTutorial>, bRestart: boolean) : void;
-        static GetEngineFolderVisibilty() : boolean;
-        static GoToNextTutorialStage() : void;
-        static GoToPreviousTutorialStage() : void;
-        static OpenAsset(Asset: $Nullable<UE.Object>) : void;
-        static SetEngineFolderVisibilty(bNewVisibility: boolean) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EditorTutorial;
-        static Load(InName: string): EditorTutorial;
-    
-        private __tid_EditorTutorial__: boolean;
-    }
-    
-    namespace Engine.Tutorial.BlueprintTutorials.BlueprintEditorTutorial {
-        class BlueprintEditorTutorial_C extends UE.EditorTutorial {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): BlueprintEditorTutorial_C;
-            static Load(InName: string): BlueprintEditorTutorial_C;
-        
-            private __tid_BlueprintEditorTutorial_C__: boolean;
-        }
-        
-    }
-
     class BlueprintFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ParentClass: UE.Class;
@@ -28220,6 +28095,7 @@ declare module "ue" {
         private __tid_ClothPhysicalMeshDataNv__: boolean;
     }
     
+    enum CloudStatus { CloudStatus_NotDone, CloudStatus_Done, CloudStatus_MAX, __typeKeyDoNoAccess}
     enum EPlatformInterfaceDataType { PIDT_None, PIDT_Int, PIDT_Float, PIDT_String, PIDT_Object, PIDT_Custom, PIDT_MAX, __typeKeyDoNoAccess}
     class PlatformInterfaceData {
         constructor();
@@ -29482,6 +29358,7 @@ declare module "ue" {
         private __tid_CylinderBuilder__: boolean;
     }
     
+    enum CylinderHeightAxis { PMLPC_HEIGHTAXIS_X, PMLPC_HEIGHTAXIS_Y, PMLPC_HEIGHTAXIS_Z, PMLPC_HEIGHTAXIS_MAX, __typeKeyDoNoAccess}
     class DataAssetFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DataAssetClass: UE.Class;
@@ -31538,6 +31415,85 @@ declare module "ue" {
         private __tid_DynamicEntryBox__: boolean;
     }
     
+    enum EAdManagerDelegate { AMD_ClickedBanner, AMD_UserClosedAd, AMD_MAX, __typeKeyDoNoAccess}
+    enum EAILockSource { Animation, Logic, Script, Gameplay, MAX, __typeKeyDoNoAccess}
+    enum EAITaskPriority { Lowest, Low, AutonomousAI, High, Ultimate, EAITaskPriority_MAX, __typeKeyDoNoAccess}
+    enum EAllowEditsMode { AllEdits, AllowSequencerEditsOnly, AllowLevelEditsOnly, EAllowEditsMode_MAX, __typeKeyDoNoAccess}
+    enum EAlphaChannelMode { Disabled, LinearColorSpaceOnly, AllowThroughTonemapper, EAlphaChannelMode_MAX, __typeKeyDoNoAccess}
+    enum EAnimAssetCurveFlags { AACF_NONE, AACF_DriveMorphTarget_DEPRECATED, AACF_DriveAttribute_DEPRECATED, AACF_Editable, AACF_DriveMaterial_DEPRECATED, AACF_Metadata, AACF_DriveTrack, AACF_Disabled, AACF_MAX, __typeKeyDoNoAccess}
+    enum EAnimationViewportCameraFollowMode { None, Bounds, Bone, EAnimationViewportCameraFollowMode_MAX, __typeKeyDoNoAccess}
+    enum EAntiAliasingMethod { AAM_None, AAM_FXAA, AAM_TemporalAA, AAM_MSAA, AAM_MAX, __typeKeyDoNoAccess}
+    enum EAppleTextureType { Unknown, Image, PixelBuffer, Surface, MetalTexture, EAppleTextureType_MAX, __typeKeyDoNoAccess}
+    enum EApplicationState { Unknown, Inactive, Background, Active, EApplicationState_MAX, __typeKeyDoNoAccess}
+    enum EAssetEditorOpenLocation { Default, NewWindow, MainWindow, ContentBrowser, LastDockedWindowOrNewWindow, LastDockedWindowOrMainWindow, LastDockedWindowOrContentBrowser, EAssetEditorOpenLocation_MAX, __typeKeyDoNoAccess}
+    enum EAttractorParticleSelectionMethod { EAPSM_Random, EAPSM_Sequential, EAPSM_MAX, __typeKeyDoNoAccess}
+    enum EAudioRecordingMode { None, AudioTrack, EAudioRecordingMode_MAX, __typeKeyDoNoAccess}
+    enum EAudioSpectrumType { MagnitudeSpectrum, PowerSpectrum, EAudioSpectrumType_MAX, __typeKeyDoNoAccess}
+    enum EAutoChangeMode { AutoKey, AutoTrack, All, None, EAutoChangeMode_MAX, __typeKeyDoNoAccess}
+    enum EAutoExposureMethodUI { AEM_Histogram, AEM_Basic, AEM_Manual, AEM_MAX, __typeKeyDoNoAccess}
+    enum EAutomationArtifactType { None, Image, Comparison, EAutomationArtifactType_MAX, __typeKeyDoNoAccess}
+    enum EAutomationEventType { Info, Warning, Error, EAutomationEventType_MAX, __typeKeyDoNoAccess}
+    enum EAutomationState { NotRun, InProcess, Fail, Success, NotEnoughParticipants, EAutomationState_MAX, __typeKeyDoNoAccess}
+    enum EBeaconConnectionState { Invalid, Closed, Pending, Open, EBeaconConnectionState_MAX, __typeKeyDoNoAccess}
+    enum EBeam2Method { PEB2M_Distance, PEB2M_Target, PEB2M_Branch, PEB2M_MAX, __typeKeyDoNoAccess}
+    enum EBeamTaperMethod { PEBTM_None, PEBTM_Full, PEBTM_Partial, PEBTM_MAX, __typeKeyDoNoAccess}
+    enum EBindingKind { Function, Property, EBindingKind_MAX, __typeKeyDoNoAccess}
+    enum EBitmapCSType { BCST_BLCS_CALIBRATED_RGB, BCST_LCS_sRGB, BCST_LCS_WINDOWS_COLOR_SPACE, BCST_PROFILE_LINKED, BCST_PROFILE_EMBEDDED, BCST_MAX, __typeKeyDoNoAccess}
+    enum EBitmapHeaderVersion { BHV_BITMAPINFOHEADER, BHV_BITMAPV2INFOHEADER, BHV_BITMAPV3INFOHEADER, BHV_BITMAPV4HEADER, BHV_BITMAPV5HEADER, BHV_MAX, __typeKeyDoNoAccess}
+    enum EBlueprintPinStyleType { BPST_Original, BPST_VariantA, BPST_MAX, __typeKeyDoNoAccess}
+    enum EBoneSpaces { WorldSpace, ComponentSpace, EBoneSpaces_MAX, __typeKeyDoNoAccess}
+    enum EBoneVisibilityStatus { BVS_HiddenByParent, BVS_Visible, BVS_ExplicitlyHidden, BVS_MAX, __typeKeyDoNoAccess}
+    enum EBoundaryType { Boundary_Outer, Boundary_PlayArea, Boundary_MAX, __typeKeyDoNoAccess}
+    enum EBTChildIndex { FirstNode, TaskNode, EBTChildIndex_MAX, __typeKeyDoNoAccess}
+    enum ECameraAlphaBlendMode { CABM_Linear, CABM_Cubic, CABM_MAX, __typeKeyDoNoAccess}
+    enum ECanCreateConnectionResponse { CONNECT_RESPONSE_MAKE, CONNECT_RESPONSE_DISALLOW, CONNECT_RESPONSE_BREAK_OTHERS_A, CONNECT_RESPONSE_BREAK_OTHERS_B, CONNECT_RESPONSE_BREAK_OTHERS_AB, CONNECT_RESPONSE_MAKE_WITH_CONVERSION_NODE, CONNECT_RESPONSE_MAX, __typeKeyDoNoAccess}
+    enum EChannelMaskParameterColor { Red, Green, Blue, Alpha, EChannelMaskParameterColor_MAX, __typeKeyDoNoAccess}
+    enum EChaosBufferMode { Double, Triple, Num, Invalid, EChaosBufferMode_MAX, __typeKeyDoNoAccess}
+    enum EChaosSolverTickMode { Fixed, Variable, VariableCapped, VariableCappedWithTarget, EChaosSolverTickMode_MAX, __typeKeyDoNoAccess}
+    enum EChaosThreadingMode { DedicatedThread, TaskGraph, SingleThread, Num, Invalid, EChaosThreadingMode_MAX, __typeKeyDoNoAccess}
+    enum EClampMode { CMODE_Clamp, CMODE_ClampMin, CMODE_ClampMax, CMODE_MAX, __typeKeyDoNoAccess}
+    enum EClearSceneOptions { NoClear, HardwareClear, QuadAtMaxZ, EClearSceneOptions_MAX, __typeKeyDoNoAccess}
+    enum EClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ReservationRemoveMembers, EClientRequestType_MAX, __typeKeyDoNoAccess}
+    enum ECloudStorageDelegate { CSD_KeyValueReadComplete, CSD_KeyValueWriteComplete, CSD_ValueChanged, CSD_DocumentQueryComplete, CSD_DocumentReadComplete, CSD_DocumentWriteComplete, CSD_DocumentConflictDetected, CSD_MAX, __typeKeyDoNoAccess}
+    enum ECollectionAttributeEnum { Chaos_Active, Chaos_DynamicState, Chaos_CollisionGroup, Chaos_Max, Chaos_MAX, __typeKeyDoNoAccess}
+    enum ECollectionGroupEnum { Chaos_Traansform, Chaos_Max, Chaos_MAX, __typeKeyDoNoAccess}
+    enum EColorChannel { Red, Green, Blue, Alpha, EColorChannel_MAX, __typeKeyDoNoAccess}
+    enum EColorVisionDeficiency { NormalVision, Deuteranope, Protanope, Tritanope, EColorVisionDeficiency_MAX, __typeKeyDoNoAccess}
+    enum ECommentBoxMode { GroupMovement, NoGroupMovement, ECommentBoxMode_MAX, __typeKeyDoNoAccess}
+    enum EComparisonMethod { Equal_To, Not_Equal_To, Greater_Than_Or_Equal_To, Less_Than_Or_Equal_To, Greater_Than, Less_Than, EComparisonMethod_MAX, __typeKeyDoNoAccess}
+    enum ECompilerVersion { Default, VisualStudio2015, VisualStudio2017, VisualStudio2019, ECompilerVersion_MAX, __typeKeyDoNoAccess}
+    enum EComponentSocketType { Invalid, Bone, Socket, EComponentSocketType_MAX, __typeKeyDoNoAccess}
+    enum ECompositingSampleCount { One, Two, Four, Eight, ECompositingSampleCount_MAX, __typeKeyDoNoAccess}
+    enum EComputeNTBsOptions { None, Normals, Tangents, WeightedNTBs, EComputeNTBsOptions_MAX, __typeKeyDoNoAccess}
+    enum EConfigFileSourceControlStatus { CFSCS_Unknown, CFSCS_Writable, CFSCS_Locked, CFSCS_MAX, __typeKeyDoNoAccess}
+    enum EConsoleForGamepadLabels { None, XBoxOne, PS4, EConsoleForGamepadLabels_MAX, __typeKeyDoNoAccess}
+    enum EConstraintFrame { Frame1, Frame2, EConstraintFrame_MAX, __typeKeyDoNoAccess}
+    enum EConstraintType { Transform, Aim, MAX, __typeKeyDoNoAccess}
+    enum EConsumeMouseWheel { WhenScrollingPossible, Always, Never, EConsumeMouseWheel_MAX, __typeKeyDoNoAccess}
+    enum EContentSourceCategory { BlueprintFeature, CodeFeature, EnterpriseFeature, Content, EnterpriseContent, SharedPack, Unknown, EContentSourceCategory_MAX, __typeKeyDoNoAccess}
+    enum EContextTargetFlags { TARGET_Blueprint, TARGET_SubComponents, TARGET_NodeTarget, TARGET_PinObject, TARGET_SiblingPinObjects, TARGET_BlueprintLibraries, ContextTargetFlagsEnd, EContextTargetFlags_MAX, __typeKeyDoNoAccess}
+    enum EControlConstraint { Orientation, Translation, MAX, __typeKeyDoNoAccess}
+    enum EControllerFidelity { VR_ControllerFidelity_Estimated, VR_ControllerFidelity_Full, VR_ControllerFidelity_Partial, VR_ControllerFidelity_MAX, __typeKeyDoNoAccess}
+    enum EControllerType { Laser, AssistingLaser, UI, Navigation, Unknown, EControllerType_MAX, __typeKeyDoNoAccess}
+    enum ECookerStatsObjectSets { CookerStatsObjectSets_Default, CookerStatsObjectSets_MAX, __typeKeyDoNoAccess}
+    enum ECookMode { CookOnTheFly, CookOnTheFlyFromTheEditor, CookByTheBookFromTheEditor, CookByTheBook, ECookMode_MAX, __typeKeyDoNoAccess}
+    enum ECookTickFlags { None, MarkupInUsePackages, HideProgressDisplay, ECookTickFlags_MAX, __typeKeyDoNoAccess}
+    enum ECsgOper { CSG_Active, CSG_Add, CSG_Subtract, CSG_Intersect, CSG_Deintersect, CSG_None, CSG_MAX, __typeKeyDoNoAccess}
+    enum ECurveTableMode { Empty, SimpleCurves, RichCurves, ECurveTableMode_MAX, __typeKeyDoNoAccess}
+    enum ECustomDepthStencil { Disabled, Enabled, EnabledOnDemand, EnabledWithStencil, ECustomDepthStencil_MAX, __typeKeyDoNoAccess}
+    enum ECustomizedToolMenuVisibility { None, Visible, Hidden, ECustomizedToolMenuVisibility_MAX, __typeKeyDoNoAccess}
+    enum ECustomMaterialOutputType { CMOT_Float1, CMOT_Float2, CMOT_Float3, CMOT_Float4, CMOT_MAX, __typeKeyDoNoAccess}
+    enum ECustomTimeStepSynchronizationState { Closed, Error, Synchronized, Synchronizing, ECustomTimeStepSynchronizationState_MAX, __typeKeyDoNoAccess}
+    enum EDatasmithImportHierarchy { UseMultipleActors, UseSingleActor, UseOneBlueprint, EDatasmithImportHierarchy_MAX, __typeKeyDoNoAccess}
+    enum EDataValidationResult { Invalid, Valid, NotValidated, EDataValidationResult_MAX, __typeKeyDoNoAccess}
+    enum EDecompressionType { DTYPE_Setup, DTYPE_Invalid, DTYPE_Preview, DTYPE_Native, DTYPE_RealTime, DTYPE_Procedural, DTYPE_Xenon, DTYPE_Streaming, DTYPE_MAX, __typeKeyDoNoAccess}
+    enum EDefaultBackBufferPixelFormat { DBBPF_B8G8R8A8, DBBPF_A16B16G16R16_DEPRECATED, DBBPF_FloatRGB_DEPRECATED, DBBPF_FloatRGBA, DBBPF_A2B10G10R10, DBBPF_MAX, __typeKeyDoNoAccess}
+    enum EDefaultGraphicsRHI { DefaultGraphicsRHI_Default, DefaultGraphicsRHI_DX11, DefaultGraphicsRHI_DX12, DefaultGraphicsRHI_Vulkan, DefaultGraphicsRHI_MAX, __typeKeyDoNoAccess}
+    enum EDefaultLocationUnit { Micrometers, Millimeters, Centimeters, Meters, Kilometers, Inches, Feet, Yards, Miles, Invalid, EDefaultLocationUnit_MAX, __typeKeyDoNoAccess}
+    enum EDemoPlayFailure { Generic, DemoNotFound, Corrupt, InvalidVersion, InitBase, GameSpecificHeader, ReplayStreamerInternal, LoadMap, Serialization, EDemoPlayFailure_MAX, __typeKeyDoNoAccess}
+    enum EDepthOfFieldFunctionValue { TDOF_NearAndFarMask, TDOF_NearMask, TDOF_FarMask, TDOF_CircleOfConfusionRadius, TDOF_MAX, __typeKeyDoNoAccess}
+    enum EDescendantScrollDestination { IntoView, TopOrLeft, Center, EDescendantScrollDestination_MAX, __typeKeyDoNoAccess}
+    enum EDesiredImageFormat { PNG, JPG, BMP, EXR, EDesiredImageFormat_MAX, __typeKeyDoNoAccess}
     class EdGraph_ReferenceViewer extends UE.EdGraph {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -31547,7 +31503,6 @@ declare module "ue" {
         private __tid_EdGraph_ReferenceViewer__: boolean;
     }
     
-    enum ECommentBoxMode { GroupMovement, NoGroupMovement, ECommentBoxMode_MAX, __typeKeyDoNoAccess}
     class EdGraphNode_Comment extends UE.EdGraphNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CommentColor: UE.LinearColor;
@@ -32424,8 +32379,9 @@ declare module "ue" {
         private __tid_EditableTextWidgetStyle__: boolean;
     }
     
-    enum EditConditionTestEnum { First, Second, EditConditionTestEnum_MAX, __typeKeyDoNoAccess}
+    enum EditColor { Red, Orange, Yellow, Green, Blue, Indigo, Violet, Pink, Magenta, Cyan, EditColor_MAX, __typeKeyDoNoAccess}
     enum EditConditionByteEnum { First, Second, EditConditionByteEnum_MAX, __typeKeyDoNoAccess}
+    enum EditConditionTestEnum { First, Second, EditConditionTestEnum_MAX, __typeKeyDoNoAccess}
     class EditConditionTestObject extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BoolProperty: boolean;
@@ -33096,7 +33052,6 @@ declare module "ue" {
         private __tid_EditorEngine__: boolean;
     }
     
-    enum EConsoleForGamepadLabels { None, XBoxOne, PS4, EConsoleForGamepadLabels_MAX, __typeKeyDoNoAccess}
     class EditorExperimentalSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bHDREditor: boolean;
@@ -33338,7 +33293,6 @@ declare module "ue" {
     
     enum EUnit { Micrometers, Millimeters, Centimeters, Meters, Kilometers, Inches, Feet, Yards, Miles, Lightyears, Degrees, Radians, MetersPerSecond, KilometersPerHour, MilesPerHour, Celsius, Farenheit, Kelvin, Micrograms, Milligrams, Grams, Kilograms, MetricTons, Ounces, Pounds, Stones, Newtons, PoundsForce, KilogramsForce, Hertz, Kilohertz, Megahertz, Gigahertz, RevolutionsPerMinute, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Lumens, Milliseconds, Seconds, Minutes, Hours, Days, Months, Years, Multiplier, Percentage, Unspecified, EUnit_MAX, __typeKeyDoNoAccess}
     enum EUnitDisplay { None, Metric, Imperial, Invalid, EUnitDisplay_MAX, __typeKeyDoNoAccess}
-    enum EDefaultLocationUnit { Micrometers, Millimeters, Centimeters, Meters, Kilometers, Inches, Feet, Yards, Miles, Invalid, EDefaultLocationUnit_MAX, __typeKeyDoNoAccess}
     class EditorProjectAppearanceSettings extends UE.DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bDisplayUnits: boolean;
@@ -33388,9 +33342,7 @@ declare module "ue" {
         private __tid_EditorSkeletonNotifyObj__: boolean;
     }
     
-    enum EColorVisionDeficiency { NormalVision, Deuteranope, Protanope, Tritanope, EColorVisionDeficiency_MAX, __typeKeyDoNoAccess}
     enum ELogTimes { None, UTC, SinceGStartTime, Local, ELogTimes_MAX, __typeKeyDoNoAccess}
-    enum EAssetEditorOpenLocation { Default, NewWindow, MainWindow, ContentBrowser, LastDockedWindowOrNewWindow, LastDockedWindowOrMainWindow, LastDockedWindowOrContentBrowser, EAssetEditorOpenLocation_MAX, __typeKeyDoNoAccess}
     class EditorStyleSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bEnableHighDPIAwareness: boolean;
@@ -33446,6 +33398,112 @@ declare module "ue" {
         static Load(InName: string): EditorSubsystemBlueprintLibrary;
     
         private __tid_EditorSubsystemBlueprintLibrary__: boolean;
+    }
+    
+    enum ETutorialContent { None, Text, UDNExcerpt, RichText, ETutorialContent_MAX, __typeKeyDoNoAccess}
+    class TutorialContent {
+        constructor();
+        constructor(Type: UE.ETutorialContent, Content: string, ExcerptName: string, Text: string);
+        Type: UE.ETutorialContent;
+        Content: string;
+        ExcerptName: string;
+        Text: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        private __tid_TutorialContent__: boolean;
+    }
+    
+    enum ETutorialAnchorIdentifier { None, NamedWidget, Asset, ETutorialAnchorIdentifier_MAX, __typeKeyDoNoAccess}
+    class TutorialContentAnchor {
+        constructor();
+        constructor(Type: UE.ETutorialAnchorIdentifier, WrapperIdentifier: string, Asset: UE.SoftObjectPath, bDrawHighlight: boolean, TabToFocusOrOpen: string, FriendlyName: string, GUIDString: string, OuterName: string);
+        Type: UE.ETutorialAnchorIdentifier;
+        WrapperIdentifier: string;
+        Asset: UE.SoftObjectPath;
+        bDrawHighlight: boolean;
+        TabToFocusOrOpen: string;
+        FriendlyName: string;
+        GUIDString: string;
+        OuterName: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        private __tid_TutorialContentAnchor__: boolean;
+    }
+    
+    class TutorialWidgetContent {
+        constructor();
+        constructor(Content: UE.TutorialContent, WidgetAnchor: UE.TutorialContentAnchor, HorizontalAlignment: UE.EHorizontalAlignment, VerticalAlignment: UE.EVerticalAlignment, Offset: UE.Vector2D, ContentWidth: number, bAutoFocus: boolean);
+        Content: UE.TutorialContent;
+        WidgetAnchor: UE.TutorialContentAnchor;
+        HorizontalAlignment: UE.EHorizontalAlignment;
+        VerticalAlignment: UE.EVerticalAlignment;
+        Offset: UE.Vector2D;
+        ContentWidth: number;
+        bAutoFocus: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        private __tid_TutorialWidgetContent__: boolean;
+    }
+    
+    class TutorialStage {
+        constructor();
+        constructor(Name: string, Content: UE.TutorialContent, WidgetContent: TArray<UE.TutorialWidgetContent>, NextButtonText: string, BackButtonText: string, PlatformsToTest: TArray<string>, bInvertPlatformTest: boolean);
+        Name: string;
+        Content: UE.TutorialContent;
+        WidgetContent: TArray<UE.TutorialWidgetContent>;
+        NextButtonText: string;
+        BackButtonText: string;
+        PlatformsToTest: TArray<string>;
+        bInvertPlatformTest: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        private __tid_TutorialStage__: boolean;
+    }
+    
+    class EditorTutorial extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Title: string;
+        SortOrder: number;
+        Icon: string;
+        Texture: UE.Texture2D;
+        Category: string;
+        SummaryContent: UE.TutorialContent;
+        Stages: TArray<UE.TutorialStage>;
+        PreviousTutorial: UE.SoftClassPath;
+        NextTutorial: UE.SoftClassPath;
+        bIsStandalone: boolean;
+        AssetToUse: UE.SoftObjectPath;
+        ImportPath: string;
+        bHideInBrowser: boolean;
+        SearchTags: string;
+        GetActorReference(PathToActor: string) : UE.Actor;
+        OnTutorialClosed() : void;
+        OnTutorialLaunched() : void;
+        OnTutorialStageEnded(StageName: string) : void;
+        OnTutorialStageStarted(StageName: string) : void;
+        static BeginTutorial(TutorialToStart: $Nullable<UE.EditorTutorial>, bRestart: boolean) : void;
+        static GetEngineFolderVisibilty() : boolean;
+        static GoToNextTutorialStage() : void;
+        static GoToPreviousTutorialStage() : void;
+        static OpenAsset(Asset: $Nullable<UE.Object>) : void;
+        static SetEngineFolderVisibilty(bNewVisibility: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EditorTutorial;
+        static Load(InName: string): EditorTutorial;
+    
+        private __tid_EditorTutorial__: boolean;
     }
     
     class EditorTutorialFactory extends UE.Factory {
@@ -33610,7 +33668,6 @@ declare module "ue" {
         private __tid_EditorPropertyPath__: boolean;
     }
     
-    enum EBindingKind { Function, Property, EBindingKind_MAX, __typeKeyDoNoAccess}
     class DelegateEditorBinding {
         constructor();
         constructor(ObjectName: string, PropertyName: string, FunctionName: string, SourceProperty: string, SourcePath: UE.EditorPropertyPath, MemberGuid: UE.Guid, Kind: UE.EBindingKind);
@@ -33714,7 +33771,6 @@ declare module "ue" {
         private __tid_EditorUtilityWidgetBlueprintFactory__: boolean;
     }
     
-    enum EDataValidationResult { Invalid, Valid, NotValidated, EDataValidationResult_MAX, __typeKeyDoNoAccess}
     class EditorValidatorBase extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bIsEnabled: boolean;
@@ -33825,6 +33881,133 @@ declare module "ue" {
         private __tid_EdModeInteractiveToolsContext__: boolean;
     }
     
+    enum EDrawDebugItemType { DirectionalArrow, Sphere, Line, OnScreenMessage, CoordinateSystem, EDrawDebugItemType_MAX, __typeKeyDoNoAccess}
+    enum EDrawDebugTrace { None, ForOneFrame, ForDuration, Persistent, EDrawDebugTrace_MAX, __typeKeyDoNoAccess}
+    enum EEarlyZPass { None, OpaqueOnly, OpaqueAndMasked, Auto, EEarlyZPass_MAX, __typeKeyDoNoAccess}
+    enum EEasingFunc { Linear, Step, SinusoidalIn, SinusoidalOut, SinusoidalInOut, EaseIn, EaseOut, EaseInOut, ExpoIn, ExpoOut, ExpoInOut, CircularIn, CircularOut, CircularInOut, EEasingFunc_MAX, __typeKeyDoNoAccess}
+    enum EEdGraphSchemaAction_K2Graph { Graph, Subgraph, Function, Interface, Macro, MAX, __typeKeyDoNoAccess}
+    enum EEmissionPatternTypeEnum { Chaos_Emission_Pattern_First_Frame, Chaos_Emission_Pattern_On_Demand, Chaos_Max, Chaos_MAX, __typeKeyDoNoAccess}
+    enum EEmitterDynamicParameterValue { EDPV_UserSet, EDPV_AutoSet, EDPV_VelocityX, EDPV_VelocityY, EDPV_VelocityZ, EDPV_VelocityMag, EDPV_MAX, __typeKeyDoNoAccess}
+    enum EEntitlementCacheLevelRequest { Memory, Disk, EEntitlementCacheLevelRequest_MAX, __typeKeyDoNoAccess}
+    enum EEntitlementCacheLevelRetrieved { None, Memory, Disk, EEntitlementCacheLevelRetrieved_MAX, __typeKeyDoNoAccess}
+    enum EEnvDirection { TwoPoints, Rotation, EEnvDirection_MAX, __typeKeyDoNoAccess}
+    enum EEnvOverlapShape { Box, Sphere, Capsule, EEnvOverlapShape_MAX, __typeKeyDoNoAccess}
+    enum EEnvQueryHightlightMode { All, Best5Pct, Best25Pct, EEnvQueryHightlightMode_MAX, __typeKeyDoNoAccess}
+    enum EEnvQueryParam { Float, Int, Bool, EEnvQueryParam_MAX, __typeKeyDoNoAccess}
+    enum EEnvQueryTrace { None, Navigation, Geometry, NavigationOverLedges, EEnvQueryTrace_MAX, __typeKeyDoNoAccess}
+    enum EEnvTestCost { Low, Medium, High, EEnvTestCost_MAX, __typeKeyDoNoAccess}
+    enum EEnvTestDistance { Distance3D, Distance2D, DistanceZ, DistanceAbsoluteZ, EEnvTestDistance_MAX, __typeKeyDoNoAccess}
+    enum EEnvTestDot { Dot3D, Dot2D, EEnvTestDot_MAX, __typeKeyDoNoAccess}
+    enum EEnvTestPathfinding { PathExist, PathCost, PathLength, EEnvTestPathfinding_MAX, __typeKeyDoNoAccess}
+    enum EEnvTestWeight { None, Square, Inverse, Unused, Constant, Skip, EEnvTestWeight_MAX, __typeKeyDoNoAccess}
+    enum EEnvTraceShape { Line, Box, Sphere, Capsule, EEnvTraceShape_MAX, __typeKeyDoNoAccess}
+    enum EEyeTrackerStatus { NotConnected, NotTracking, Tracking, EEyeTrackerStatus_MAX, __typeKeyDoNoAccess}
+    enum EFastArraySerializerDeltaFlags { None, HasBeenSerialized, HasDeltaBeenRequested, IsUsingDeltaSerialization, EFastArraySerializerDeltaFlags_MAX, __typeKeyDoNoAccess}
+    enum EFBXAnimationLengthImportType { FBXALIT_ExportedTime, FBXALIT_AnimatedKey, FBXALIT_SetRange, FBXALIT_MAX, __typeKeyDoNoAccess}
+    enum EFBXExpectedResultPreset { Error_Number, Warning_Number, Created_Staticmesh_Number, Created_Skeletalmesh_Number, Materials_Created_Number, Material_Slot_Imported_Name, Vertex_Number, Lod_Number, Vertex_Number_Lod, Mesh_Materials_Number, Mesh_LOD_Section_Number, Mesh_LOD_Section_Vertex_Number, Mesh_LOD_Section_Triangle_Number, Mesh_LOD_Section_Material_Name, Mesh_LOD_Section_Material_Index, Mesh_LOD_Section_Material_Imported_Name, Mesh_LOD_Vertex_Position, Mesh_LOD_Vertex_Normal, LOD_UV_Channel_Number, Bone_Number, Bone_Position, Animation_Frame_Number, Animation_Length, EFBXExpectedResultPreset_MAX, __typeKeyDoNoAccess}
+    enum EFbxExportCompatibility { FBX_2011, FBX_2012, FBX_2013, FBX_2014, FBX_2016, FBX_2018, FBX_MAX, __typeKeyDoNoAccess}
+    enum EFBXImportContentType { FBXICT_All, FBXICT_Geometry, FBXICT_SkinningWeights, FBXICT_MAX, __typeKeyDoNoAccess}
+    enum EFBXImportType { FBXIT_StaticMesh, FBXIT_SkeletalMesh, FBXIT_Animation, FBXIT_MAX, __typeKeyDoNoAccess}
+    enum EFBXNormalGenerationMethod { BuiltIn, MikkTSpace, EFBXNormalGenerationMethod_MAX, __typeKeyDoNoAccess}
+    enum EFBXNormalImportMethod { FBXNIM_ComputeNormals, FBXNIM_ImportNormals, FBXNIM_ImportNormalsAndTangents, FBXNIM_MAX, __typeKeyDoNoAccess}
+    enum EFBXSceneNormalGenerationMethod { BuiltIn, MikkTSpace, EFBXSceneNormalGenerationMethod_MAX, __typeKeyDoNoAccess}
+    enum EFBXSceneNormalImportMethod { FBXSceneNIM_ComputeNormals, FBXSceneNIM_ImportNormals, FBXSceneNIM_ImportNormalsAndTangents, FBXSceneNIM_MAX, __typeKeyDoNoAccess}
+    enum EFBXSceneOptionsCreateHierarchyType { FBXSOCHT_CreateLevelActors, FBXSOCHT_CreateActorComponents, FBXSOCHT_CreateBlueprint, FBXSOCHT_MAX, __typeKeyDoNoAccess}
+    enum EFbxSceneReimportStatusFlags { None, Added, Removed, Same, FoundContentBrowserAsset, ReimportAsset, EFbxSceneReimportStatusFlags_MAX, __typeKeyDoNoAccess}
+    enum EFbxSceneVertexColorImportOption { Replace, Ignore, Override, EFbxSceneVertexColorImportOption_MAX, __typeKeyDoNoAccess}
+    enum EFBXTestPlanActionType { Import, Reimport, AddLOD, ReimportLOD, ImportReload, EFBXTestPlanActionType_MAX, __typeKeyDoNoAccess}
+    enum EFieldOperationType { Field_Multiply, Field_Divide, Field_Add, Field_Substract, Field_Operation_Max, __typeKeyDoNoAccess}
+    enum EFieldPhysicsDefaultFields { Field_RadialIntMask, Field_RadialFalloff, Field_UniformVector, Field_RadialVector, Field_RadialVectorFalloff, Field_EFieldPhysicsDefaultFields_Max, Field_MAX, __typeKeyDoNoAccess}
+    enum EFieldResolutionType { Field_Resolution_Minimal, Field_Resolution_DisabledParents, Field_Resolution_Maximum, Field_Resolution_Max, Field_Resolution_MAX, __typeKeyDoNoAccess}
+    enum EFireEventsAtPosition { AtStartOfEvaluation, AtEndOfEvaluation, AfterSpawn, EFireEventsAtPosition_MAX, __typeKeyDoNoAccess}
+    enum EFixedFoveatedRenderingLevel { FFR_Off, FFR_Low, FFR_Medium, FFR_High, FFR_HighTop, FFR_MAX, __typeKeyDoNoAccess}
+    enum EFlattenMaterialProperties { Diffuse, Metallic, Specular, Roughness, Normal, Opacity, Emissive, SubSurface, OpacityMask, AmbientOcclusion, NumFlattenMaterialProperties, EFlattenMaterialProperties_MAX, __typeKeyDoNoAccess}
+    enum EFlipbookCollisionMode { NoCollision, FirstFrameCollision, EachFrameCollision, EFlipbookCollisionMode_MAX, __typeKeyDoNoAccess}
+    enum EFocusCause { Mouse, Navigation, SetDirectly, Cleared, OtherWidgetLostFocus, WindowActivate, EFocusCause_MAX, __typeKeyDoNoAccess}
+    enum EFoliageScaling { Uniform, Free, LockXY, LockXZ, LockYZ, EFoliageScaling_MAX, __typeKeyDoNoAccess}
+    enum EFontLayoutMethod { Metrics, BoundingBox, EFontLayoutMethod_MAX, __typeKeyDoNoAccess}
+    enum EFormatArgumentType { Int, UInt, Float, Double, Text, Gender, EFormatArgumentType_MAX, __typeKeyDoNoAccess}
+    enum EFourPlayerSplitScreenType { Grid, Vertical, Horizontal, EFourPlayerSplitScreenType_MAX, __typeKeyDoNoAccess}
+    enum EFrameNumberDisplayFormats { NonDropFrameTimecode, DropFrameTimecode, Seconds, Frames, MAX_Count, EFrameNumberDisplayFormats_MAX, __typeKeyDoNoAccess}
+    enum EFullyLoadPackageType { FULLYLOAD_Map, FULLYLOAD_Game_PreLoadClass, FULLYLOAD_Game_PostLoadClass, FULLYLOAD_Always, FULLYLOAD_Mutator, FULLYLOAD_MAX, __typeKeyDoNoAccess}
+    enum EFunctionalTestLogHandling { ProjectDefault, OutputIsError, OutputIgnored, EFunctionalTestLogHandling_MAX, __typeKeyDoNoAccess}
+    enum EFunctionalTestResult { Default, Invalid, Error, Running, Failed, Succeeded, EFunctionalTestResult_MAX, __typeKeyDoNoAccess}
+    enum EFunctionInputType { FunctionInput_Scalar, FunctionInput_Vector2, FunctionInput_Vector3, FunctionInput_Vector4, FunctionInput_Texture2D, FunctionInput_TextureCube, FunctionInput_Texture2DArray, FunctionInput_VolumeTexture, FunctionInput_StaticBool, FunctionInput_MaterialAttributes, FunctionInput_TextureExternal, FunctionInput_MAX, __typeKeyDoNoAccess}
+    enum EGameplayDebuggerOverrideMode { Enable, Disable, UseDefault, EGameplayDebuggerOverrideMode_MAX, __typeKeyDoNoAccess}
+    enum EGameplayTagMatchType { Explicit, IncludeParentTags, EGameplayTagMatchType_MAX, __typeKeyDoNoAccess}
+    enum EGameplayTagQueryExprType { Undefined, AnyTagsMatch, AllTagsMatch, NoTagsMatch, AnyExprMatch, AllExprMatch, NoExprMatch, EGameplayTagQueryExprType_MAX, __typeKeyDoNoAccess}
+    enum EGameplayTagSelectionType { None, NonRestrictedOnly, RestrictedOnly, All, EGameplayTagSelectionType_MAX, __typeKeyDoNoAccess}
+    enum EGameplayTagSourceType { Native, DefaultTagList, TagList, RestrictedTagList, DataTable, Invalid, EGameplayTagSourceType_MAX, __typeKeyDoNoAccess}
+    enum EGameplayTaskState { Uninitialized, AwaitingActivation, Paused, Active, Finished, EGameplayTaskState_MAX, __typeKeyDoNoAccess}
+    enum EGBufferFormat { Force8BitsPerChannel, Default, HighPrecisionNormals, Force16BitsPerChannel, EGBufferFormat_MAX, __typeKeyDoNoAccess}
+    enum EGenericAICheck { Less, LessOrEqual, Equal, NotEqual, GreaterOrEqual, Greater, IsTrue, MAX, __typeKeyDoNoAccess}
+    enum EGizmoHandleTypes { All, Translate, Rotate, Scale, EGizmoHandleTypes_MAX, __typeKeyDoNoAccess}
+    enum EGoogleVRMode { Cardboard, Daydream, DaydreamAndCardboard, EGoogleVRMode_MAX, __typeKeyDoNoAccess}
+    enum EGraphAxisStyle { Lines, Notches, Grid, EGraphAxisStyle_MAX, __typeKeyDoNoAccess}
+    enum EGraphDataStyle { Lines, Filled, EGraphDataStyle_MAX, __typeKeyDoNoAccess}
+    enum EGraphicsPreset { Unspecified, Maximum, Scalable, EGraphicsPreset_MAX, __typeKeyDoNoAccess}
+    enum EGraphPanningMouseButton { Right, Middle, Both, EGraphPanningMouseButton_MAX, __typeKeyDoNoAccess}
+    enum EGraphType { GT_Function, GT_Ubergraph, GT_Macro, GT_Animation, GT_StateMachine, GT_MAX, __typeKeyDoNoAccess}
+    enum EGrassScaling { Uniform, Free, LockXY, EGrassScaling_MAX, __typeKeyDoNoAccess}
+    enum EHardwareClass { Unspecified, Desktop, Mobile, EHardwareClass_MAX, __typeKeyDoNoAccess}
+    enum EHierarchicalLODActionType { InvalidAction, CreateCluster, AddActorToCluster, MoveActorToCluster, RemoveActorFromCluster, MergeClusters, ChildCluster, MAX, __typeKeyDoNoAccess}
+    enum EHMDTrackingOrigin { Floor, Eye, Stage, EHMDTrackingOrigin_MAX, __typeKeyDoNoAccess}
+    enum EHMDWornState { Unknown, Worn, NotWorn, EHMDWornState_MAX, __typeKeyDoNoAccess}
+    enum EHorizTextAligment { EHTA_Left, EHTA_Center, EHTA_Right, EHTA_MAX, __typeKeyDoNoAccess}
+    enum EImportanceLevel { IL_Off, IL_Lowest, IL_Low, IL_Normal, IL_High, IL_Highest, TEMP_BROKEN2, EImportanceLevel_MAX, __typeKeyDoNoAccess}
+    enum EImportanceWeight { Luminance, Red, Green, Blue, Alpha, EImportanceWeight_MAX, __typeKeyDoNoAccess}
+    enum EImportGeometryType { IGT_3D, IGT_Billboards, IGT_Both, IGT_MAX, __typeKeyDoNoAccess}
+    enum EImportLODType { ILT_PaintedFoliage, ILT_IndividualActors, ILT_MAX, __typeKeyDoNoAccess}
+    enum EInAppPurchaseState { Unknown, Success, Failed, Cancelled, Invalid, NotAllowed, Restored, AlreadyOwned, EInAppPurchaseState_MAX, __typeKeyDoNoAccess}
+    enum EInertializationBoneState { Invalid, Valid, Excluded, EInertializationBoneState_MAX, __typeKeyDoNoAccess}
+    enum EInertializationSpace { Default, WorldSpace, WorldRotation, EInertializationSpace_MAX, __typeKeyDoNoAccess}
+    enum EInertializationState { Inactive, Pending, Active, EInertializationState_MAX, __typeKeyDoNoAccess}
+    enum EInputCaptureRequestType { Begin, Ignore, EInputCaptureRequestType_MAX, __typeKeyDoNoAccess}
+    enum EInputCaptureSide { None, Left, Right, Both, Any, EInputCaptureSide_MAX, __typeKeyDoNoAccess}
+    enum EInputCaptureState { Begin, Continue, End, Ignore, EInputCaptureState_MAX, __typeKeyDoNoAccess}
+    enum EInputDevices { None, Keyboard, Mouse, Gamepad, OculusTouch, HTCViveWands, AnySpatialDevice, TabletFingers, EInputDevices_MAX, __typeKeyDoNoAccess}
+    enum EInteractorHand { Right, Left, EInteractorHand_MAX, __typeKeyDoNoAccess}
+    enum EInterpMoveAxis { AXIS_TranslationX, AXIS_TranslationY, AXIS_TranslationZ, AXIS_RotationX, AXIS_RotationY, AXIS_RotationZ, AXIS_MAX, __typeKeyDoNoAccess}
+    enum EInterpToBehaviourType { OneShot, OneShot_Reverse, Loop_Reset, PingPong, EInterpToBehaviourType_MAX, __typeKeyDoNoAccess}
+    enum EIOSCloudKitSyncStrategy { None, OnlyAtGameStart, Always, EIOSCloudKitSyncStrategy_MAX, __typeKeyDoNoAccess}
+    enum EIOSLandscapeOrientation { LandscapeLeft, LandscapeRight, EIOSLandscapeOrientation_MAX, __typeKeyDoNoAccess}
+    enum EIOSMetalShaderStandard { IOSMetalSLStandard_1_2, IOSMetalSLStandard_2_0, IOSMetalSLStandard_2_1, IOSMetalSLStandard_MAX, __typeKeyDoNoAccess}
+    enum EIOSVersion { IOS_61, IOS_7, IOS_8, IOS_9, IOS_10, IOS_11, IOS_12, IOS_MAX, __typeKeyDoNoAccess}
+    enum EKeyGroupMode { KeyChanged, KeyGroup, KeyAll, EKeyGroupMode_MAX, __typeKeyDoNoAccess}
+    enum ELabelAnchorMode { LabelAnchorMode_TopLeft, LabelAnchorMode_TopCenter, LabelAnchorMode_TopRight, LabelAnchorMode_CenterLeft, LabelAnchorMode_Centered, LabelAnchorMode_CenterRight, LabelAnchorMode_BottomLeft, LabelAnchorMode_BottomCenter, LabelAnchorMode_BottomRight, LabelAnchorMode_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeBlendMode { LSBM_AdditiveBlend, LSBM_AlphaBlend, LSBM_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeClearMode { Clear_Weightmap, Clear_Heightmap, Clear_All, Clear_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeConvertMode { Invalid, Expand, Clip, Resample, ELandscapeConvertMode_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeCustomizedCoordType { LCCT_None, LCCT_CustomUV0, LCCT_CustomUV1, LCCT_CustomUV2, LCCT_WeightMapUV, LCCT_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeFoliageEditorControlType { IgnoreCtrl, RequireCtrl, RequireNoCtrl, ELandscapeFoliageEditorControlType_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeGizmoType { LGT_None, LGT_Height, LGT_Weight, LGT_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeImportAlphamapType { Additive, Layered, ELandscapeImportAlphamapType_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeImportHeightmapError { None, FileNotFound, InvalidSize, CorruptFile, ColorPng, LowBitDepth, ELandscapeImportHeightmapError_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeImportLayerError { None, MissingLayerInfo, FileNotFound, FileSizeMismatch, CorruptFile, ColorPng, ELandscapeImportLayerError_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeImportResult { Success, Warning, Error, ELandscapeImportResult_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeLayerBlendType { LB_WeightBlend, LB_AlphaBlend, LB_HeightBlend, LB_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeLayerDisplayMode { Default, Alphabetical, UserSpecific, ELandscapeLayerDisplayMode_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeLayerPaintingRestriction { None, UseMaxLayers, ExistingOnly, UseComponentWhitelist, ELandscapeLayerPaintingRestriction_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeLODFalloff { Linear, SquareRoot, ELandscapeLODFalloff_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeMirrorOperation { MinusXToPlusX, PlusXToMinusX, MinusYToPlusY, PlusYToMinusY, RotateMinusXToPlusX, RotatePlusXToMinusX, RotateMinusYToPlusY, RotatePlusYToMinusY, ELandscapeMirrorOperation_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeSetupErrors { LSE_None, LSE_NoLandscapeInfo, LSE_CollsionXY, LSE_NoLayerInfo, LSE_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeToolErosionMode { Invalid, Both, Raise, Lower, ELandscapeToolErosionMode_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeToolFlattenMode { Invalid, Both, Raise, Lower, Interval, Terrace, ELandscapeToolFlattenMode_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeToolHydroErosionMode { Invalid, Both, Positive, ELandscapeToolHydroErosionMode_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeToolNoiseMode { Invalid, Both, Add, Sub, ELandscapeToolNoiseMode_MAX, __typeKeyDoNoAccess}
+    enum ELandscapeToolPasteMode { Invalid, Both, Raise, Lower, ELandscapeToolPasteMode_MAX, __typeKeyDoNoAccess}
+    enum ELaunchModeType { LaunchMode_OnDevice, LaunchMode_MAX, __typeKeyDoNoAccess}
+    enum ELegendPosition { Outside, Inside, ELegendPosition_MAX, __typeKeyDoNoAccess}
+    enum ELerpInterpolationMode { QuatInterp, EulerInterp, DualQuatInterp, ELerpInterpolationMode_MAX, __typeKeyDoNoAccess}
+    enum ELevelEditor2DAxis { X, Y, Z, ELevelEditor2DAxis_MAX, __typeKeyDoNoAccess}
+    enum ELevelViewportType { LVT_OrthoXY, LVT_OrthoXZ, LVT_OrthoYZ, LVT_Perspective, LVT_OrthoFreelook, LVT_OrthoNegativeXY, LVT_OrthoNegativeXZ, LVT_OrthoNegativeYZ, LVT_MAX, LVT_None, __typeKeyDoNoAccess}
+    enum ELevelVisibility { Visible, Hidden, ELevelVisibility_MAX, __typeKeyDoNoAccess}
+    enum ELightingBuildInfoObjectSets { LightingBuildInfoObjectSets_Default, LightingBuildInfoObjectSets_MAX, __typeKeyDoNoAccess}
+    enum ELightMapPaddingType { LMPT_NormalPadding, LMPT_PrePadding, LMPT_NoPadding, LMPT_MAX, __typeKeyDoNoAccess}
+    enum EListItemAlignment { EvenlyDistributed, EvenlySize, EvenlyWide, LeftAligned, RightAligned, CenterAligned, Fill, EListItemAlignment_MAX, __typeKeyDoNoAccess}
+    enum ELiveCodingStartupMode { Automatic, AutomaticButHidden, Manual, ELiveCodingStartupMode_MAX, __typeKeyDoNoAccess}
+    enum ELiveLinkCameraProjectionMode { Perspective, Orthographic, ELiveLinkCameraProjectionMode_MAX, __typeKeyDoNoAccess}
+    enum ELiveLinkSourceMode { Latest, EngineTime, Timecode, ELiveLinkSourceMode_MAX, __typeKeyDoNoAccess}
     class EllipseSplineGenerator extends UE.SplineGeneratorBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         NumberOfPoints: number;
@@ -33840,6 +34023,120 @@ declare module "ue" {
         private __tid_EllipseSplineGenerator__: boolean;
     }
     
+    enum ELocalizationGatherPathRoot { Auto, Engine, Project, ELocalizationGatherPathRoot_MAX, __typeKeyDoNoAccess}
+    enum ELocalizationTargetConflictStatus { Unknown, ConflictsPresent, Clear, ELocalizationTargetConflictStatus_MAX, __typeKeyDoNoAccess}
+    enum ELocalizationTargetLoadingPolicy { Never, Always, Editor, Game, PropertyNames, ToolTips, ELocalizationTargetLoadingPolicy_MAX, __typeKeyDoNoAccess}
+    enum ELocalizedTextCollapseMode { IdenticalTextIdAndSource, IdenticalPackageIdTextIdAndSource, IdenticalNamespaceAndSource, ELocalizedTextCollapseMode_MAX, __typeKeyDoNoAccess}
+    enum ELocalizedTextSourceCategory { Game, Engine, Editor, ELocalizedTextSourceCategory_MAX, __typeKeyDoNoAccess}
+    enum ELocationAccuracy { LA_ThreeKilometers, LA_OneKilometer, LA_HundredMeters, LA_TenMeters, LA_Best, LA_Navigation, LA_MAX, __typeKeyDoNoAccess}
+    enum ELocationBoneSocketSelectionMethod { BONESOCKETSEL_Sequential, BONESOCKETSEL_Random, BONESOCKETSEL_MAX, __typeKeyDoNoAccess}
+    enum ELocationBoneSocketSource { BONESOCKETSOURCE_Bones, BONESOCKETSOURCE_Sockets, BONESOCKETSOURCE_MAX, __typeKeyDoNoAccess}
+    enum ELocationEmitterSelectionMethod { ELESM_Random, ELESM_Sequential, ELESM_MAX, __typeKeyDoNoAccess}
+    enum ELocationSkelVertSurfaceSource { VERTSURFACESOURCE_Vert, VERTSURFACESOURCE_Surface, VERTSURFACESOURCE_MAX, __typeKeyDoNoAccess}
+    enum ELocTextPlatformSplitMode { None, Restricted, All, ELocTextPlatformSplitMode_MAX, __typeKeyDoNoAccess}
+    enum ELuminARAvailability { UnknownError, SupportedInstalled, ELuminARAvailability_MAX, __typeKeyDoNoAccess}
+    enum ELuminARFunctionStatus { Success, Fatal, SessionPaused, NotTracking, ResourceExhausted, NotAvailable, InvalidType, Unknown, ELuminARFunctionStatus_MAX, __typeKeyDoNoAccess}
+    enum ELuminARLineTraceChannel { None, FeaturePoint, InfinitePlane, PlaneUsingExtent, PlaneUsingBoundaryPolygon, FeaturePointWithSurfaceNormal, ELuminARLineTraceChannel_MAX, __typeKeyDoNoAccess}
+    enum ELuminARTrackingState { Tracking, NotTracking, StoppedTracking, ELuminARTrackingState_MAX, __typeKeyDoNoAccess}
+    enum ELuminComponentSubElementType { FileExtension, MimeType, Mode, MusicAttribute, Schema, ELuminComponentSubElementType_MAX, __typeKeyDoNoAccess}
+    enum ELuminComponentType { Universe, Fullscreen, SearchProvider, MusicService, Screens, ScreensImmersive, Console, SystemUI, ELuminComponentType_MAX, __typeKeyDoNoAccess}
+    enum ELuminFrameTimingHint { Unspecified, Maximum, FPS_60, FPS_120, ELuminFrameTimingHint_MAX, __typeKeyDoNoAccess}
+    enum ELuminPrivilege { Invalid, BatteryInfo, CameraCapture, WorldReconstruction, InAppPurchase, AudioCaptureMic, DrmCertificates, Occlusion, LowLatencyLightwear, Internet, IdentityRead, BackgroundDownload, BackgroundUpload, MediaDrm, Media, MediaMetadata, PowerInfo, LocalAreaNetwork, VoiceInput, Documents, ConnectBackgroundMusicService, RegisterBackgroundMusicService, PwFoundObjRead, NormalNotificationsUsage, MusicService, ControllerPose, ScreensProvider, GesturesSubscribe, GesturesConfig, AddressBookRead, AddressBookWrite, CoarseLocation, HandMesh, WifiStatusRead, ELuminPrivilege_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapAutoPinType { OnlyOnDataRestoration, Always, Never, EMagicLeapAutoPinType_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerHapticIntensity { Low, Medium, High, EMagicLeapControllerHapticIntensity_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerHapticPattern { None, Click, Bump, DoubleClick, Buzz, Tick, ForceDown, ForceUp, ForceDwell, SecondForceDown, EMagicLeapControllerHapticPattern_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerLEDColor { BrightMissionRed, PastelMissionRed, BrightFloridaOrange, PastelFloridaOrange, BrightLunaYellow, PastelLunaYellow, BrightNebulaPink, PastelNebulaPink, BrightCosmicPurple, PastelCosmicPurple, BrightMysticBlue, PastelMysticBlue, BrightCelestialBlue, PastelCelestialBlue, BrightShaggleGreen, PastelShaggleGreen, EMagicLeapControllerLEDColor_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerLEDEffect { RotateCW, RotateCCW, Pulse, PaintCW, PaintCCW, Blink, EMagicLeapControllerLEDEffect_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerLEDPattern { None, Clock01, Clock02, Clock03, Clock04, Clock05, Clock06, Clock07, Clock08, Clock09, Clock10, Clock11, Clock12, Clock01_07, Clock02_08, Clock03_09, Clock04_10, Clock05_11, Clock06_12, EMagicLeapControllerLEDPattern_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerLEDSpeed { Slow, Medium, Fast, EMagicLeapControllerLEDSpeed_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerTrackingMode { InputService, CoordinateFrameUID, EMagicLeapControllerTrackingMode_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapControllerType { None, Device, MobileApp, EMagicLeapControllerType_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapEyeTrackingCalibrationStatus { None, Bad, Good, EMagicLeapEyeTrackingCalibrationStatus_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapEyeTrackingStatus { NotConnected, Disabled, UserNotPresent, UserPresent, UserPresentAndWatchingWindow, EMagicLeapEyeTrackingStatus_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapGestureTransformSpace { World, Hand, Tracking, EMagicLeapGestureTransformSpace_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapHandTrackingGesture { Finger, Fist, Pinch, Thumb, L, OpenHand, OpenHandBack, Ok, C, NoPose, NoHand, EMagicLeapHandTrackingGesture_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapHandTrackingGestureFilterLevel { NoFilter, SlightRobustnessToFlicker, MoreRobustnessToFlicker, EMagicLeapHandTrackingGestureFilterLevel_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapHandTrackingKeypoint { Thumb_Tip, Thumb_IP, Thumb_MCP, Thumb_CMC, Index_Tip, Index_DIP, Index_PIP, Index_MCP, Middle_Tip, Middle_DIP, Middle_PIP, Middle_MCP, Ring_Tip, Ring_DIP, Ring_PIP, Ring_MCP, Pinky_Tip, Pinky_DIP, Pinky_PIP, Pinky_MCP, Wrist_Center, Wrist_Ulnar, Wrist_Radial, Hand_Center, EMagicLeapHandTrackingKeypoint_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapHandTrackingKeypointFilterLevel { NoFilter, SimpleSmoothing, PredictiveSmoothing, EMagicLeapHandTrackingKeypointFilterLevel_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapHeadTrackingError { None, NotEnoughFeatures, LowLight, Unknown, EMagicLeapHeadTrackingError_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapHeadTrackingMapEvent { Lost, Recovered, RecoveryFailed, NewSession, EMagicLeapHeadTrackingMapEvent_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapHeadTrackingMode { PositionAndOrientation, Unavailable, Unknown, EMagicLeapHeadTrackingMode_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapIdentityError { Ok, InvalidParam, AllocFailed, PrivilegeDenied, FailedToConnectToLocalService, FailedToConnectToCloudService, CloudAuthentication, InvalidInformationFromCloud, NotLoggedIn, ExpiredCredentials, FailedToGetUserProfile, Unauthorized, CertificateError, RejectedByCloud, AlreadyLoggedIn, ModifyIsNotSupported, NetworkError, UnspecifiedFailure, EMagicLeapIdentityError_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapIdentityKey { GivenName, FamilyName, Email, Bio, PhoneNumber, Avatar2D, Avatar3D, Unknown, EMagicLeapIdentityKey_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapMeshLOD { Minimum, Medium, Maximum, EMagicLeapMeshLOD_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapMeshState { New, Updated, Deleted, Unchanged, EMagicLeapMeshState_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapMeshType { Triangles, PointCloud, EMagicLeapMeshType_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapMeshVertexColorMode { None, Confidence, Block, LOD, EMagicLeapMeshVertexColorMode_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapPassableWorldError { None, LowMapQuality, UnableToLocalize, Unavailable, PrivilegeDenied, InvalidParam, UnspecifiedFailure, PrivilegeRequestPending, EMagicLeapPassableWorldError_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapPlaneQueryFlags { Vertical, Horizontal, Arbitrary, OrientToGravity, PreferInner, Ceiling, Floor, Wall, Polygons, EMagicLeapPlaneQueryFlags_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapPrivilege { Invalid, BatteryInfo, CameraCapture, WorldReconstruction, InAppPurchase, AudioCaptureMic, DrmCertificates, Occlusion, LowLatencyLightwear, Internet, IdentityRead, BackgroundDownload, BackgroundUpload, MediaDrm, Media, MediaMetadata, PowerInfo, LocalAreaNetwork, VoiceInput, Documents, ConnectBackgroundMusicService, RegisterBackgroundMusicService, PwFoundObjRead, NormalNotificationsUsage, MusicService, ControllerPose, ScreensProvider, GesturesSubscribe, GesturesConfig, AddressBookRead, AddressBookWrite, CoarseLocation, HandMesh, WifiStatusRead, EMagicLeapPrivilege_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapRaycastResultState { RequestFailed, NoCollision, HitUnobserved, HitObserved, EMagicLeapRaycastResultState_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapTouchpadGestureDirection { None, Up, Down, Left, Right, In, Out, Clockwise, CounterClockwise, EMagicLeapTouchpadGestureDirection_MAX, __typeKeyDoNoAccess}
+    enum EMagicLeapTouchpadGestureType { None, Tap, ForceTapDown, ForceTapUp, ForceDwell, SecondForceDown, LongHold, RadialScroll, Swipe, Scroll, Pinch, EMagicLeapTouchpadGestureType_MAX, __typeKeyDoNoAccess}
+    enum EMapSetBrushFlags { MSB_BrushColor, MSB_Group, MSB_PolyFlags, MSB_BrushType, MSB_MAX, __typeKeyDoNoAccess}
+    enum EMaterialAttributeBlend { Blend, UseA, UseB, EMaterialAttributeBlend_MAX, __typeKeyDoNoAccess}
+    enum EMaterialBakeMethod { IndividualMaterial, AtlasMaterial, BinnedMaterial, EMaterialBakeMethod_MAX, __typeKeyDoNoAccess}
+    enum EMaterialExposedTextureProperty { TMTM_TextureSize, TMTM_TexelSize, TMTM_MAX, __typeKeyDoNoAccess}
+    enum EMaterialExposedViewProperty { MEVP_BufferSize, MEVP_FieldOfView, MEVP_TanHalfFieldOfView, MEVP_ViewSize, MEVP_WorldSpaceViewPosition, MEVP_WorldSpaceCameraPosition, MEVP_ViewportOffset, MEVP_TemporalSampleCount, MEVP_TemporalSampleIndex, MEVP_TemporalSampleOffset, MEVP_RuntimeVirtualTextureOutputLevel, MEVP_RuntimeVirtualTextureOutputDerivative, MEVP_PreExposure, MEVP_MAX, __typeKeyDoNoAccess}
+    enum EMaterialPositionTransformSource { TRANSFORMPOSSOURCE_Local, TRANSFORMPOSSOURCE_World, TRANSFORMPOSSOURCE_TranslatedWorld, TRANSFORMPOSSOURCE_View, TRANSFORMPOSSOURCE_Camera, TRANSFORMPOSSOURCE_Particle, TRANSFORMPOSSOURCE_MAX, __typeKeyDoNoAccess}
+    enum EMaterialProperty { MP_EmissiveColor, MP_Opacity, MP_OpacityMask, MP_DiffuseColor, MP_SpecularColor, MP_BaseColor, MP_Metallic, MP_Specular, MP_Roughness, MP_Normal, MP_WorldPositionOffset, MP_WorldDisplacement, MP_TessellationMultiplier, MP_SubsurfaceColor, MP_CustomData0, MP_CustomData1, MP_AmbientOcclusion, MP_Refraction, MP_CustomizedUVs0, MP_CustomizedUVs1, MP_CustomizedUVs2, MP_CustomizedUVs3, MP_CustomizedUVs4, MP_CustomizedUVs5, MP_CustomizedUVs6, MP_CustomizedUVs7, MP_PixelDepthOffset, MP_ShadingModel, MP_MaterialAttributes, MP_CustomOutput, MP_MAX, __typeKeyDoNoAccess}
+    enum EMaterialSamplerType { SAMPLERTYPE_Color, SAMPLERTYPE_Grayscale, SAMPLERTYPE_Alpha, SAMPLERTYPE_Normal, SAMPLERTYPE_Masks, SAMPLERTYPE_DistanceFieldFont, SAMPLERTYPE_LinearColor, SAMPLERTYPE_LinearGrayscale, SAMPLERTYPE_Data, SAMPLERTYPE_External, SAMPLERTYPE_VirtualColor, SAMPLERTYPE_VirtualGrayscale, SAMPLERTYPE_VirtualAlpha, SAMPLERTYPE_VirtualNormal, SAMPLERTYPE_VirtualMasks, SAMPLERTYPE_VirtualLinearColor, SAMPLERTYPE_VirtualLinearGrayscale, SAMPLERTYPE_MAX, __typeKeyDoNoAccess}
+    enum EMaterialSceneAttributeInputMode { Coordinates, OffsetFraction, EMaterialSceneAttributeInputMode_MAX, __typeKeyDoNoAccess}
+    enum EMaterialSearchLocation { Local, UnderParent, UnderRoot, AllAssets, EMaterialSearchLocation_MAX, __typeKeyDoNoAccess}
+    enum EMaterialUsage { MATUSAGE_SkeletalMesh, MATUSAGE_ParticleSprites, MATUSAGE_BeamTrails, MATUSAGE_MeshParticles, MATUSAGE_StaticLighting, MATUSAGE_MorphTargets, MATUSAGE_SplineMesh, MATUSAGE_InstancedStaticMeshes, MATUSAGE_GeometryCollections, MATUSAGE_Clothing, MATUSAGE_NiagaraSprites, MATUSAGE_NiagaraRibbons, MATUSAGE_NiagaraMeshParticles, MATUSAGE_GeometryCache, MATUSAGE_Water, MATUSAGE_HairStrands, MATUSAGE_MAX, __typeKeyDoNoAccess}
+    enum EMaterialVectorCoordTransform { TRANSFORM_Tangent, TRANSFORM_Local, TRANSFORM_World, TRANSFORM_View, TRANSFORM_Camera, TRANSFORM_ParticleWorld, TRANSFORM_MAX, __typeKeyDoNoAccess}
+    enum EMaterialVectorCoordTransformSource { TRANSFORMSOURCE_Tangent, TRANSFORMSOURCE_Local, TRANSFORMSOURCE_World, TRANSFORMSOURCE_View, TRANSFORMSOURCE_Camera, TRANSFORMSOURCE_ParticleWorld, TRANSFORMSOURCE_MAX, __typeKeyDoNoAccess}
+    enum EMatrixColumns { First, Second, Third, Fourth, EMatrixColumns_MAX, __typeKeyDoNoAccess}
+    enum EMeasuringToolUnits { MeasureUnits_Centimeters, MeasureUnits_Meters, MeasureUnits_Kilometers, MeasureUnits_MAX, __typeKeyDoNoAccess}
+    enum EMediaAudioCaptureDeviceFilter { None, Card, Microphone, Software, Unknown, EMediaAudioCaptureDeviceFilter_MAX, __typeKeyDoNoAccess}
+    enum EMediaPlayerEditorScale { Fill, Fit, Original, EMediaPlayerEditorScale_MAX, __typeKeyDoNoAccess}
+    enum EMediaPlayerOptionBooleanOverride { UseMediaPlayerSetting, Enabled, Disabled, EMediaPlayerOptionBooleanOverride_MAX, __typeKeyDoNoAccess}
+    enum EMediaPlayerRecordingImageFormat { PNG, JPEG, BMP, EXR, EMediaPlayerRecordingImageFormat_MAX, __typeKeyDoNoAccess}
+    enum EMediaPlayerRecordingNumerationStyle { AppendFrameNumber, AppendSampleTime, EMediaPlayerRecordingNumerationStyle_MAX, __typeKeyDoNoAccess}
+    enum EMediaPlayerTrack { Audio, Caption, Metadata, Script, Subtitle, Text, Video, EMediaPlayerTrack_MAX, __typeKeyDoNoAccess}
+    enum EMediaSoundChannels { Mono, Stereo, Surround, EMediaSoundChannels_MAX, __typeKeyDoNoAccess}
+    enum EMediaSoundComponentFFTSize { Min_64, Small_256, Medium_512, Large_1024, EMediaSoundComponentFFTSize_MAX, __typeKeyDoNoAccess}
+    enum EMediaVideoCaptureDeviceFilter { None, Card, Software, Unknown, Webcam, EMediaVideoCaptureDeviceFilter_MAX, __typeKeyDoNoAccess}
+    enum EMediaWebcamCaptureDeviceFilter { None, DepthSensor, Front, Rear, Unknown, EMediaWebcamCaptureDeviceFilter_MAX, __typeKeyDoNoAccess}
+    enum EMenuPlacement { MenuPlacement_BelowAnchor, MenuPlacement_CenteredBelowAnchor, MenuPlacement_BelowRightAnchor, MenuPlacement_ComboBox, MenuPlacement_ComboBoxRight, MenuPlacement_MenuRight, MenuPlacement_AboveAnchor, MenuPlacement_CenteredAboveAnchor, MenuPlacement_AboveRightAnchor, MenuPlacement_MenuLeft, MenuPlacement_Center, MenuPlacement_RightLeftCenter, MenuPlacement_MatchBottomLeft, MenuPlacement_MAX, __typeKeyDoNoAccess}
+    enum EMeshBufferAccess { Default, ForceCPUAndGPU, EMeshBufferAccess_MAX, __typeKeyDoNoAccess}
+    enum EMeshCameraFacingOptions { XAxisFacing_NoUp, XAxisFacing_ZUp, XAxisFacing_NegativeZUp, XAxisFacing_YUp, XAxisFacing_NegativeYUp, LockedAxis_ZAxisFacing, LockedAxis_NegativeZAxisFacing, LockedAxis_YAxisFacing, LockedAxis_NegativeYAxisFacing, VelocityAligned_ZAxisFacing, VelocityAligned_NegativeZAxisFacing, VelocityAligned_YAxisFacing, VelocityAligned_NegativeYAxisFacing, EMeshCameraFacingOptions_MAX, __typeKeyDoNoAccess}
+    enum EMeshCameraFacingUpAxis { CameraFacing_NoneUP, CameraFacing_ZUp, CameraFacing_NegativeZUp, CameraFacing_YUp, CameraFacing_NegativeYUp, CameraFacing_MAX, __typeKeyDoNoAccess}
+    enum EMeshElementAttributeType { None, FVector4, FVector, FVector2D, Float, Int, Bool, FName, EMeshElementAttributeType_MAX, __typeKeyDoNoAccess}
+    enum EMeshInstancingReplacementMethod { RemoveOriginalActors, KeepOriginalActorsAsEditorOnly, EMeshInstancingReplacementMethod_MAX, __typeKeyDoNoAccess}
+    enum EMeshMergeType { MeshMergeType_Default, MeshMergeType_MergeActor, MeshMergeType_MAX, __typeKeyDoNoAccess}
+    enum EMeshPaintColorViewMode { Normal, RGB, Alpha, Red, Green, Blue, EMeshPaintColorViewMode_MAX, __typeKeyDoNoAccess}
+    enum EMeshPaintMode { PaintColors, PaintWeights, EMeshPaintMode_MAX, __typeKeyDoNoAccess}
+    enum EMeshScreenAlignment { PSMA_MeshFaceCameraWithRoll, PSMA_MeshFaceCameraWithSpin, PSMA_MeshFaceCameraWithLockedAxis, PSMA_MAX, __typeKeyDoNoAccess}
+    enum EMeshTrackerVertexColorMode { None, Confidence, Block, EMeshTrackerVertexColorMode_MAX, __typeKeyDoNoAccess}
+    enum EMeshVertexPaintTarget { ComponentInstance, Mesh, EMeshVertexPaintTarget_MAX, __typeKeyDoNoAccess}
+    enum EMicroTransactionDelegate { MTD_PurchaseQueryComplete, MTD_PurchaseComplete, MTD_MAX, __typeKeyDoNoAccess}
+    enum EMicroTransactionResult { MTR_Succeeded, MTR_Failed, MTR_Canceled, MTR_RestoredFromServer, MTR_MAX, __typeKeyDoNoAccess}
+    enum EMinClientFlags { None, AcceptActors, AcceptRPCs, SendRPCs, SkipControlJoin, BeaconConnect, NotifyNetActors, NotifyProcessNetEvent, DumpReceivedRaw, DumpSendRaw, DumpReceivedRPC, DumpSendRPC, EMinClientFlags_MAX, __typeKeyDoNoAccess}
+    enum EMinimumSupportedOS { MSOS_Vista, MSOS_MAX, __typeKeyDoNoAccess}
+    enum EMobileCSMQuality { NoFiltering, PCF_1x1, PCF_2x2, EMobileCSMQuality_MAX, __typeKeyDoNoAccess}
+    enum EMobileMSAASampleCount { One, Two, Four, Eight, EMobileMSAASampleCount_MAX, __typeKeyDoNoAccess}
+    enum EModuleType { EPMT_General, EPMT_TypeData, EPMT_Beam, EPMT_Trail, EPMT_Spawn, EPMT_Required, EPMT_Event, EPMT_Light, EPMT_SubUV, EPMT_MAX, __typeKeyDoNoAccess}
+    enum EMontageSubStepResult { Moved, NotMoved, InvalidSection, InvalidMontage, EMontageSubStepResult_MAX, __typeKeyDoNoAccess}
+    enum EMouseCaptureMode { NoCapture, CapturePermanently, CapturePermanently_IncludingInitialMouseDown, CaptureDuringMouseDown, CaptureDuringRightMouseDown, EMouseCaptureMode_MAX, __typeKeyDoNoAccess}
+    enum EMouseLockMode { DoNotLock, LockOnCapture, LockAlways, LockInFullscreen, EMouseLockMode_MAX, __typeKeyDoNoAccess}
+    enum EMoveComponentAction { Move, Stop, Return, EMoveComponentAction_MAX, __typeKeyDoNoAccess}
+    enum EMoviePlaybackType { MT_Normal, MT_Looped, MT_LoadingLoop, MT_MAX, __typeKeyDoNoAccess}
+    enum EMovieSceneBuiltInEasing { Linear, SinIn, SinOut, SinInOut, QuadIn, QuadOut, QuadInOut, CubicIn, CubicOut, CubicInOut, QuartIn, QuartOut, QuartInOut, QuintIn, QuintOut, QuintInOut, ExpoIn, ExpoOut, ExpoInOut, CircIn, CircOut, CircInOut, EMovieSceneBuiltInEasing_MAX, __typeKeyDoNoAccess}
+    enum EMovieSceneKeyInterpolation { Auto, User, Break, Linear, Constant, EMovieSceneKeyInterpolation_MAX, __typeKeyDoNoAccess}
+    enum EMPMatchOutcome { None, Quit, Won, Lost, Tied, TimeExpired, First, Second, Third, Fourth, EMPMatchOutcome_MAX, __typeKeyDoNoAccess}
+    enum EMultiBlockType { None, ButtonRow, EditableText, Heading, MenuEntry, MenuSeparator, ToolBarButton, ToolBarComboButton, ToolBarSeparator, Widget, EMultiBlockType_MAX, __typeKeyDoNoAccess}
+    enum EMultiBoxType { MenuBar, ToolBar, VerticalToolBar, Menu, ButtonRow, ToolMenuBar, EMultiBoxType_MAX, __typeKeyDoNoAccess}
+    enum EMultipleKeyBindingIndex { Primary, Secondary, NumChords, EMultipleKeyBindingIndex_MAX, __typeKeyDoNoAccess}
+    enum EMultiScalePivotType { Average, BoundCenter, FirstKey, LastKey, EMultiScalePivotType_MAX, __typeKeyDoNoAccess}
+    enum ENavCostDisplay { TotalCost, HeuristicOnly, RealCostOnly, ENavCostDisplay_MAX, __typeKeyDoNoAccess}
+    enum ENavDataGatheringMode { Default, Instant, Lazy, ENavDataGatheringMode_MAX, __typeKeyDoNoAccess}
+    enum ENavDataGatheringModeConfig { Invalid, Instant, Lazy, ENavDataGatheringModeConfig_MAX, __typeKeyDoNoAccess}
+    enum ENavigationGenesis { Keyboard, Controller, User, ENavigationGenesis_MAX, __typeKeyDoNoAccess}
+    enum ENavigationQueryResult { Invalid, Error, Fail, Success, ENavigationQueryResult_MAX, __typeKeyDoNoAccess}
+    enum ENavigationSource { FocusedWidget, WidgetUnderCursor, ENavigationSource_MAX, __typeKeyDoNoAccess}
+    enum ENavLinkDirection { BothWays, LeftToRight, RightToLeft, ENavLinkDirection_MAX, __typeKeyDoNoAccess}
+    enum ENavSystemOverridePolicy { Override, Append, Skip, ENavSystemOverridePolicy_MAX, __typeKeyDoNoAccess}
     class TurnBasedMatchInterface extends UE.Interface {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnMatchEnded(Match: string) : void;
@@ -33851,7 +34148,6 @@ declare module "ue" {
         private __tid_TurnBasedMatchInterface__: boolean;
     }
     
-    enum EMPMatchOutcome { None, Quit, Won, Lost, Tied, TimeExpired, First, Second, Third, Fourth, EMPMatchOutcome_MAX, __typeKeyDoNoAccess}
     class EndMatchCallbackProxy extends UE.OnlineBlueprintCallProxyBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnSuccess: $MulticastDelegate<() => void>;
@@ -33876,6 +34172,7 @@ declare module "ue" {
         private __tid_EndTurnCallbackProxy__: boolean;
     }
     
+    enum ENetworkLagState { NotLagging, Lagging, ENetworkLagState_MAX, __typeKeyDoNoAccess}
     class EngineBaseTypes extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -33938,6 +34235,9 @@ declare module "ue" {
         private __tid_EngineTypes__: boolean;
     }
     
+    enum ENodeTitleType { FullTitle, ListView, EditableTitle, MenuTitle, MAX_TitleTypes, ENodeTitleType_MAX, __typeKeyDoNoAccess}
+    enum ENoiseFunction { NOISEFUNCTION_SimplexTex, NOISEFUNCTION_GradientTex, NOISEFUNCTION_GradientTex3D, NOISEFUNCTION_GradientALU, NOISEFUNCTION_ValueALU, NOISEFUNCTION_VoronoiALU, NOISEFUNCTION_MAX, __typeKeyDoNoAccess}
+    enum ENormalMode { NM_PreserveSmoothingGroups, NM_RecalculateNormals, NM_RecalculateNormalsSmooth, NM_RecalculateNormalsHard, TEMP_BROKEN, ENormalMode_MAX, __typeKeyDoNoAccess}
     class EnumFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -34038,8 +34338,6 @@ declare module "ue" {
         private __tid_EnvQueryGenerator_Composite__: boolean;
     }
     
-    enum EEnvTraceShape { Line, Box, Sphere, Capsule, EEnvTraceShape_MAX, __typeKeyDoNoAccess}
-    enum EEnvQueryTrace { None, Navigation, Geometry, NavigationOverLedges, EEnvQueryTrace_MAX, __typeKeyDoNoAccess}
     class EnvTraceData {
         constructor();
         constructor(VersionNum: number, NavigationFilter: UE.Class, ProjectDown: number, ProjectUp: number, ExtentX: number, ExtentY: number, ExtentZ: number, PostProjectionVerticalOffset: number, TraceChannel: UE.ETraceTypeQuery, SerializedChannel: UE.ECollisionChannel, TraceShape: UE.EEnvTraceShape, TraceMode: UE.EEnvQueryTrace, bTraceComplex: boolean, bOnlyBlockingHits: boolean, bCanTraceOnNavMesh: boolean, bCanTraceOnGeometry: boolean, bCanDisableTrace: boolean, bCanProjectDown: boolean);
@@ -34116,7 +34414,6 @@ declare module "ue" {
         private __tid_AIDataProviderIntValue__: boolean;
     }
     
-    enum EEnvDirection { TwoPoints, Rotation, EEnvDirection_MAX, __typeKeyDoNoAccess}
     class EnvDirection {
         constructor();
         constructor(LineFrom: UE.Class, LineTo: UE.Class, Rotation: UE.Class, DirMode: UE.EEnvDirection);
@@ -34250,7 +34547,6 @@ declare module "ue" {
         private __tid_EnvQueryItemType_Point__: boolean;
     }
     
-    enum EEnvTestDistance { Distance3D, Distance2D, DistanceZ, DistanceAbsoluteZ, EEnvTestDistance_MAX, __typeKeyDoNoAccess}
     class EnvQueryTest_Distance extends UE.EnvQueryTest {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TestMode: UE.EEnvTestDistance;
@@ -34262,7 +34558,6 @@ declare module "ue" {
         private __tid_EnvQueryTest_Distance__: boolean;
     }
     
-    enum EEnvTestDot { Dot3D, Dot2D, EEnvTestDot_MAX, __typeKeyDoNoAccess}
     class EnvQueryTest_Dot extends UE.EnvQueryTest {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         LineA: UE.EnvDirection;
@@ -34289,7 +34584,6 @@ declare module "ue" {
         private __tid_EnvQueryTest_GameplayTags__: boolean;
     }
     
-    enum EEnvOverlapShape { Box, Sphere, Capsule, EEnvOverlapShape_MAX, __typeKeyDoNoAccess}
     class EnvOverlapData {
         constructor();
         constructor(ExtentX: number, ExtentY: number, ExtentZ: number, ShapeOffset: UE.Vector, OverlapChannel: UE.ECollisionChannel, OverlapShape: UE.EEnvOverlapShape, bOnlyBlockingHits: boolean, bOverlapComplex: boolean, bSkipOverlapQuerier: boolean);
@@ -34320,7 +34614,6 @@ declare module "ue" {
         private __tid_EnvQueryTest_Overlap__: boolean;
     }
     
-    enum EEnvTestPathfinding { PathExist, PathCost, PathLength, EEnvTestPathfinding_MAX, __typeKeyDoNoAccess}
     class EnvQueryTest_Pathfinding extends UE.EnvQueryTest {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TestMode: UE.EEnvTestPathfinding;
@@ -34399,6 +34692,62 @@ declare module "ue" {
         private __tid_EnvQueryTypes__: boolean;
     }
     
+    enum EOculusAssetType { Default, Store, Language_Pack, Length, EOculusAssetType_MAX, __typeKeyDoNoAccess}
+    enum EOculusGamepadEmulation { Off, Twinstick, RightDPad, LeftDPad, Length, EOculusGamepadEmulation_MAX, __typeKeyDoNoAccess}
+    enum EOculusMR_BoundaryType { BT_OuterBoundary, BT_PlayArea, BT_MAX, __typeKeyDoNoAccess}
+    enum EOculusMR_CameraDeviceEnum { CD_None, CD_WebCamera0, CD_WebCamera1, CD_ZEDCamera, CD_MAX, __typeKeyDoNoAccess}
+    enum EOculusMR_ClippingReference { CR_TrackingReference, CR_Head, CR_MAX, __typeKeyDoNoAccess}
+    enum EOculusMR_CompositionMethod { ExternalComposition, DirectComposition, EOculusMR_MAX, __typeKeyDoNoAccess}
+    enum EOculusMR_DepthQuality { DQ_Low, DQ_Medium, DQ_High, DQ_MAX, __typeKeyDoNoAccess}
+    enum EOculusMR_PostProcessEffects { PPE_Off, PPE_On, PPE_MAX, __typeKeyDoNoAccess}
+    enum EOculusMR_VirtualGreenScreenType { VGS_Off, VGS_OuterBoundary, VGS_PlayArea, VGS_MAX, __typeKeyDoNoAccess}
+    enum EOculusPlatform { PC, Mobile, Length, EOculusPlatform_MAX, __typeKeyDoNoAccess}
+    enum EOculusPlatformTarget { Rift, Quest, Mobile, Length, EOculusPlatformTarget_MAX, __typeKeyDoNoAccess}
+    enum EOptimizationType { OT_NumOfTriangles, OT_MaxDeviation, OT_MAX, __typeKeyDoNoAccess}
+    enum EOrientation { Orient_Horizontal, Orient_Vertical, Orient_MAX, __typeKeyDoNoAccess}
+    enum EOrientPositionSelector { Orientation, Position, OrientationAndPosition, EOrientPositionSelector_MAX, __typeKeyDoNoAccess}
+    enum EOrthoThumbnailDirection { Top, Bottom, Left, Right, Front, Back, EOrthoThumbnailDirection_MAX, __typeKeyDoNoAccess}
+    enum EOverlapFilterOption { OverlapFilter_All, OverlapFilter_DynamicOnly, OverlapFilter_StaticOnly, OverlapFilter_MAX, __typeKeyDoNoAccess}
+    enum EPackageNotifyState { NS_Updating, NS_BalloonPrompted, NS_DialogPrompted, NS_PendingPrompt, NS_PendingWarning, NS_MAX, __typeKeyDoNoAccess}
+    enum EPaintableClothProperty { MaxDistances, BackstopDistances, BackstopRadius, EPaintableClothProperty_MAX, __typeKeyDoNoAccess}
+    enum EPaintMode { Vertices, Textures, EPaintMode_MAX, __typeKeyDoNoAccess}
+    enum EPaperSpriteAtlasPadding { DilateBorder, PadWithZero, EPaperSpriteAtlasPadding_MAX, __typeKeyDoNoAccess}
+    enum EParticleAxisLock { EPAL_NONE, EPAL_X, EPAL_Y, EPAL_Z, EPAL_NEGATIVE_X, EPAL_NEGATIVE_Y, EPAL_NEGATIVE_Z, EPAL_ROTATE_X, EPAL_ROTATE_Y, EPAL_ROTATE_Z, EPAL_MAX, __typeKeyDoNoAccess}
+    enum EParticleCameraOffsetUpdateMethod { EPCOUM_DirectSet, EPCOUM_Additive, EPCOUM_Scalar, EPCOUM_MAX, __typeKeyDoNoAccess}
+    enum EParticleCollisionComplete { EPCC_Kill, EPCC_Freeze, EPCC_HaltCollisions, EPCC_FreezeTranslation, EPCC_FreezeRotation, EPCC_FreezeMovement, EPCC_MAX, __typeKeyDoNoAccess}
+    enum EParticleCollisionMode { SceneDepth, DistanceField, EParticleCollisionMode_MAX, __typeKeyDoNoAccess}
+    enum EParticleCollisionResponse { Bounce, Stop, Kill, EParticleCollisionResponse_MAX, __typeKeyDoNoAccess}
+    enum EParticleDetailMode { PDM_Low, PDM_Medium, PDM_High, PDM_MAX, __typeKeyDoNoAccess}
+    enum EParticleKey { Activate, Deactivate, Trigger, EParticleKey_MAX, __typeKeyDoNoAccess}
+    enum EParticleSourceSelectionMethod { EPSSM_Random, EPSSM_Sequential, EPSSM_MAX, __typeKeyDoNoAccess}
+    enum EPartyReservationResult { NoResult, RequestPending, GeneralError, PartyLimitReached, IncorrectPlayerCount, RequestTimedOut, ReservationDuplicate, ReservationNotFound, ReservationAccepted, ReservationDenied, ReservationDenied_CrossPlayRestriction, ReservationDenied_Banned, ReservationRequestCanceled, ReservationInvalid, BadSessionId, ReservationDenied_ContainsExistingPlayers, EPartyReservationResult_MAX, __typeKeyDoNoAccess}
+    enum EPasteTo { PT_OriginalLocation, PT_Here, PT_WorldOrigin, PT_MAX, __typeKeyDoNoAccess}
+    enum EPawnActionEventType { Invalid, FailedToStart, InstantAbort, FinishedAborting, FinishedExecution, Push, EPawnActionEventType_MAX, __typeKeyDoNoAccess}
+    enum EPawnActionFailHandling { RequireSuccess, IgnoreFailure, EPawnActionFailHandling_MAX, __typeKeyDoNoAccess}
+    enum EPawnActionMoveMode { UsePathfinding, StraightLine, EPawnActionMoveMode_MAX, __typeKeyDoNoAccess}
+    enum EPawnSubActionTriggeringPolicy { CopyBeforeTriggering, ReuseInstances, EPawnSubActionTriggeringPolicy_MAX, __typeKeyDoNoAccess}
+    enum EPhysAssetFitGeomType { EFG_Box, EFG_Sphyl, EFG_Sphere, EFG_TaperedCapsule, EFG_SingleConvexHull, EFG_MultiConvexHull, EFG_MAX, __typeKeyDoNoAccess}
+    enum EPhysAssetFitVertWeight { EVW_AnyWeight, EVW_DominantWeight, EVW_MAX, __typeKeyDoNoAccess}
+    enum EPhysicsAssetEditorConstraintViewMode { None, AllPositions, AllLimits, EPhysicsAssetEditorConstraintViewMode_MAX, __typeKeyDoNoAccess}
+    enum EPhysicsAssetEditorRenderMode { Solid, Wireframe, None, EPhysicsAssetEditorRenderMode_MAX, __typeKeyDoNoAccess}
+    enum EPIEPreviewDeviceType { Unset, Android, IOS, TVOS, Switch, MAX, __typeKeyDoNoAccess}
+    enum EPinHidingMode { NeverAsPin, PinHiddenByDefault, PinShownByDefault, AlwaysAsPin, EPinHidingMode_MAX, __typeKeyDoNoAccess}
+    enum EPinnedCommandListType { Command, CustomWidget, EPinnedCommandListType_MAX, __typeKeyDoNoAccess}
+    enum EPlayModeLocations { PlayLocation_CurrentCameraLocation, PlayLocation_DefaultPlayerStart, PlayLocation_MAX, __typeKeyDoNoAccess}
+    enum EPlayModeType { PlayMode_InViewPort, PlayMode_InEditorFloating, PlayMode_InMobilePreview, PlayMode_InTargetedMobilePreview, PlayMode_InVulkanPreview, PlayMode_InNewProcess, PlayMode_InVR, PlayMode_Simulate, PlayMode_Count, PlayMode_MAX, __typeKeyDoNoAccess}
+    enum EPlayNetMode { PIE_Standalone, PIE_ListenServer, PIE_Client, PIE_StandaloneWithServer, PIE_MAX, __typeKeyDoNoAccess}
+    enum EPlayOnBuildMode { PlayOnBuild_Always, PlayOnBuild_Never, PlayOnBuild_Default, PlayOnBuild_IfEditorBuiltLocally, PlayOnBuild_MAX, __typeKeyDoNoAccess}
+    enum EPlayOnLaunchConfiguration { LaunchConfig_Default, LaunchConfig_Debug, LaunchConfig_Development, LaunchConfig_Test, LaunchConfig_Shipping, LaunchConfig_MAX, __typeKeyDoNoAccess}
+    enum EPowerUsageFrameRateLock { PUFRL_None, PUFRL_20, PUFRL_30, PUFRL_60, PUFRL_MAX, __typeKeyDoNoAccess}
+    enum EPrimitiveObjectSets { PrimitiveObjectSets_AllObjects, PrimitiveObjectSets_CurrentLevel, PrimitiveObjectSets_SelectedObjects, PrimitiveObjectSets_MAX, __typeKeyDoNoAccess}
+    enum EProcMeshSliceCapOption { NoCap, CreateNewSectionForCap, UseLastSectionForCap, EProcMeshSliceCapOption_MAX, __typeKeyDoNoAccess}
+    enum EProgressBarFillType { LeftToRight, RightToLeft, FillFromCenter, TopToBottom, BottomToTop, EProgressBarFillType_MAX, __typeKeyDoNoAccess}
+    enum EProjectPackagingBlueprintNativizationMethod { Disabled, Inclusive, Exclusive, EProjectPackagingBlueprintNativizationMethod_MAX, __typeKeyDoNoAccess}
+    enum EProjectPackagingBuild { Always, Never, IfProjectHasCode, IfEditorWasBuiltLocally, EProjectPackagingBuild_MAX, __typeKeyDoNoAccess}
+    enum EProjectPackagingBuildConfigurations { PPBC_Debug, PPBC_DebugGame, PPBC_Development, PPBC_Test, PPBC_Shipping, PPBC_MAX, __typeKeyDoNoAccess}
+    enum EProjectPackagingInternationalizationPresets { English, EFIGS, EFIGSCJK, CJK, All, EProjectPackagingInternationalizationPresets_MAX, __typeKeyDoNoAccess}
+    enum EPropertyBindingPermissionLevel { Allow, Prevent, PreventAndWarn, PreventAndError, EPropertyBindingPermissionLevel_MAX, __typeKeyDoNoAccess}
+    enum EPSCPoolMethod { None, AutoRelease, ManualRelease, ManualRelease_OnComplete, FreeInPool, EPSCPoolMethod_MAX, __typeKeyDoNoAccess}
     class EQSQueryResultSourceInterface extends UE.Interface {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -34417,7 +34766,6 @@ declare module "ue" {
         private __tid_EQSRenderingComponent__: boolean;
     }
     
-    enum EEnvQueryHightlightMode { All, Best5Pct, Best25Pct, EEnvQueryHightlightMode_MAX, __typeKeyDoNoAccess}
     class EQSTestingPawn extends UE.Character {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         QueryTemplate: UE.EnvQuery;
@@ -34441,6 +34789,163 @@ declare module "ue" {
         private __tid_EQSTestingPawn__: boolean;
     }
     
+    enum EQuitPreference { Quit, Background, EQuitPreference_MAX, __typeKeyDoNoAccess}
+    enum ERecastPartitioning { Monotone, Watershed, ChunkyMonotone, ERecastPartitioning_MAX, __typeKeyDoNoAccess}
+    enum ERenderFocusRule { Always, NonPointer, NavigationOnly, Never, ERenderFocusRule_MAX, __typeKeyDoNoAccess}
+    enum EReporterLineStyle { Line, Dash, EReporterLineStyle_MAX, __typeKeyDoNoAccess}
+    enum ERichCurveCompressionFormat { RCCF_Empty, RCCF_Constant, RCCF_Linear, RCCF_Cubic, RCCF_Mixed, RCCF_MAX, __typeKeyDoNoAccess}
+    enum ERichCurveKeyTimeCompressionFormat { RCKTCF_uint16, RCKTCF_float32, RCKTCF_MAX, __typeKeyDoNoAccess}
+    enum ERootMotionAccumulateMode { Override, Additive, ERootMotionAccumulateMode_MAX, __typeKeyDoNoAccess}
+    enum ERootMotionFinishVelocityMode { MaintainLastRootMotionVelocity, SetVelocity, ClampVelocity, ERootMotionFinishVelocityMode_MAX, __typeKeyDoNoAccess}
+    enum ERootMotionSourceSettingsFlags { UseSensitiveLiftoffCheck, DisablePartialEndTick, ERootMotionSourceSettingsFlags_MAX, __typeKeyDoNoAccess}
+    enum ERootMotionSourceStatusFlags { Prepared, Finished, MarkedForRemoval, ERootMotionSourceStatusFlags_MAX, __typeKeyDoNoAccess}
+    enum ERotationGridMode { GridMode_DivisionsOf360, GridMode_Common, GridMode_MAX, __typeKeyDoNoAccess}
+    enum ERoundingMode { HalfToEven, HalfFromZero, HalfToZero, FromZero, ToZero, ToNegativeInfinity, ToPositiveInfinity, ERoundingMode_MAX, __typeKeyDoNoAccess}
+    enum ERuntimeVirtualTextureDebugType { None, Debug, ERuntimeVirtualTextureDebugType_MAX, __typeKeyDoNoAccess}
+    enum ERuntimeVirtualTextureMipValueMode { RVTMVM_None, RVTMVM_MipLevel, RVTMVM_MipBias, RVTMVM_MAX, __typeKeyDoNoAccess}
+    enum ESamplerSourceMode { SSM_FromTextureAsset, SSM_Wrap_WorldGroupSettings, SSM_Clamp_WorldGroupSettings, SSM_MAX, __typeKeyDoNoAccess}
+    enum ESceneCaptureCompositeMode { SCCM_Overwrite, SCCM_Additive, SCCM_Composite, SCCM_MAX, __typeKeyDoNoAccess}
+    enum ESceneCapturePrimitiveRenderMode { PRM_LegacySceneCapture, PRM_RenderScenePrimitives, PRM_UseShowOnlyList, PRM_MAX, __typeKeyDoNoAccess}
+    enum ESceneCaptureSource { SCS_SceneColorHDR, SCS_SceneColorHDRNoAlpha, SCS_FinalColorLDR, SCS_SceneColorSceneDepth, SCS_SceneDepth, SCS_DeviceDepth, SCS_Normal, SCS_BaseColor, SCS_FinalColorHDR, SCS_MAX, __typeKeyDoNoAccess}
+    enum ESceneSnapQueryTargetType { None, MeshVertex, MeshEdge, All, ESceneSnapQueryTargetType_MAX, __typeKeyDoNoAccess}
+    enum ESceneSnapQueryType { Position, ESceneSnapQueryType_MAX, __typeKeyDoNoAccess}
+    enum ESceneTextureId { PPI_SceneColor, PPI_SceneDepth, PPI_DiffuseColor, PPI_SpecularColor, PPI_SubsurfaceColor, PPI_BaseColor, PPI_Specular, PPI_Metallic, PPI_WorldNormal, PPI_SeparateTranslucency, PPI_Opacity, PPI_Roughness, PPI_MaterialAO, PPI_CustomDepth, PPI_PostProcessInput0, PPI_PostProcessInput1, PPI_PostProcessInput2, PPI_PostProcessInput3, PPI_PostProcessInput4, PPI_PostProcessInput5, PPI_PostProcessInput6, PPI_DecalMask, PPI_ShadingModelColor, PPI_ShadingModelID, PPI_AmbientOcclusion, PPI_CustomStencil, PPI_StoredBaseColor, PPI_StoredSpecular, PPI_Velocity, PPI_MAX, __typeKeyDoNoAccess}
+    enum EScrollDirection { Scroll_Down, Scroll_Up, Scroll_MAX, __typeKeyDoNoAccess}
+    enum EScrollGestureDirection { UseSystemSetting, Standard, Natural, EScrollGestureDirection_MAX, __typeKeyDoNoAccess}
+    enum ESearchCase { CaseSensitive, IgnoreCase, ESearchCase_MAX, __typeKeyDoNoAccess}
+    enum ESearchDir { FromStart, FromEnd, ESearchDir_MAX, __typeKeyDoNoAccess}
+    enum ESectionEvaluationFlags { None, PreRoll, PostRoll, ESectionEvaluationFlags_MAX, __typeKeyDoNoAccess}
+    enum ESelectedObjectsModificationType { Replace, Add, Remove, Clear, ESelectedObjectsModificationType_MAX, __typeKeyDoNoAccess}
+    enum ESelectionMode { None, Single, SingleToggle, Multi, ESelectionMode_MAX, __typeKeyDoNoAccess}
+    enum ESelfContextInfo { Unspecified, NotSelfContext, ESelfContextInfo_MAX, __typeKeyDoNoAccess}
+    enum ESequencerLoopMode { SLM_NoLoop, SLM_Loop, SLM_LoopSelectionRange, SLM_MAX, __typeKeyDoNoAccess}
+    enum ESequencerSectionResizeMode { SSRM_LeadingEdge, SSRM_TrailingEdge, SSRM_MAX, __typeKeyDoNoAccess}
+    enum ESequencerSpawnPosition { SSP_Origin, SSP_PlaceInFrontOfCamera, SSP_MAX, __typeKeyDoNoAccess}
+    enum ESequencerZoomPosition { SZP_CurrentTime, SZP_MousePosition, SZP_MAX, __typeKeyDoNoAccess}
+    enum ESetMaskConditionType { Field_Set_Always, Field_Set_IFF_NOT_Interior, Field_Set_IFF_NOT_Exterior, Field_MaskCondition_Max, __typeKeyDoNoAccess}
+    enum ESettingsDOF { Full3D, YZPlane, XZPlane, XYPlane, ESettingsDOF_MAX, __typeKeyDoNoAccess}
+    enum ESettingsLockedAxis { None, X, Y, Z, Invalid, ESettingsLockedAxis_MAX, __typeKeyDoNoAccess}
+    enum EShadowMapFlags { SMF_None, SMF_Streamed, SMF_MAX, __typeKeyDoNoAccess}
+    enum ESheetAxis { AX_Horizontal, AX_XAxis, AX_YAxis, AX_MAX, __typeKeyDoNoAccess}
+    enum EShow3DTrajectory { EST_OnlyWhenSelected, EST_Always, EST_Never, EST_MAX, __typeKeyDoNoAccess}
+    enum ESimulationOverlap { CollisionOverlap, ShadeOverlap, None, ESimulationOverlap_MAX, __typeKeyDoNoAccess}
+    enum ESimulationQuery { None, CollisionOverlap, ShadeOverlap, AnyOverlap, ESimulationQuery_MAX, __typeKeyDoNoAccess}
+    enum ESkeletalMeshGeoImportVersions { Before_Versionning, SkeletalMeshBuildRefactor, VersionPlusOne, LatestVersion, ESkeletalMeshGeoImportVersions_MAX, __typeKeyDoNoAccess}
+    enum ESkeletalMeshSkinningImportVersions { Before_Versionning, SkeletalMeshBuildRefactor, VersionPlusOne, LatestVersion, ESkeletalMeshSkinningImportVersions_MAX, __typeKeyDoNoAccess}
+    enum ESkeletalSummaryDataType { VR_SummaryType_FromAnimation, VR_SummaryType_FromDevice, VR_SummaryType_MAX, __typeKeyDoNoAccess}
+    enum ESlateDebuggingFocusEvent { FocusChanging, FocusLost, FocusReceived, ESlateDebuggingFocusEvent_MAX, __typeKeyDoNoAccess}
+    enum ESlateDebuggingInputEvent { MouseMove, MouseEnter, MouseLeave, MouseButtonDown, MouseButtonUp, MouseButtonDoubleClick, MouseWheel, TouchStart, TouchEnd, DragDetected, DragEnter, DragLeave, DragOver, DragDrop, DropMessage, KeyDown, KeyUp, KeyChar, AnalogInput, TouchGesture, COUNT, ESlateDebuggingInputEvent_MAX, __typeKeyDoNoAccess}
+    enum ESlateDebuggingNavigationMethod { Unknown, Explicit, CustomDelegateBound, CustomDelegateUnbound, NextOrPrevious, HitTestGrid, ESlateDebuggingNavigationMethod_MAX, __typeKeyDoNoAccess}
+    enum ESlateDebuggingStateChangeEvent { MouseCaptureGained, MouseCaptureLost, ESlateDebuggingStateChangeEvent_MAX, __typeKeyDoNoAccess}
+    enum ESlateGesture { None, Scroll, Magnify, Swipe, Rotate, LongPress, ESlateGesture_MAX, __typeKeyDoNoAccess}
+    enum ESlateParentWindowSearchMethod { ActiveWindow, MainWindow, ESlateParentWindowSearchMethod_MAX, __typeKeyDoNoAccess}
+    enum ESmartNameContainerType { SNCT_CurveMapping, SNCT_TrackCurveMapping, SNCT_MAX, __typeKeyDoNoAccess}
+    enum ESourceColorChannel { Red, Green, Blue, Alpha, ESourceColorChannel_MAX, __typeKeyDoNoAccess}
+    enum ESpectatorClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ESpectatorClientRequestType_MAX, __typeKeyDoNoAccess}
+    enum ESpectatorReservationResult { NoResult, RequestPending, GeneralError, SpectatorLimitReached, IncorrectPlayerCount, RequestTimedOut, ReservationDuplicate, ReservationNotFound, ReservationAccepted, ReservationDenied, ReservationDenied_CrossPlayRestriction, ReservationDenied_Banned, ReservationRequestCanceled, ReservationInvalid, BadSessionId, ReservationDenied_ContainsExistingPlayers, ESpectatorReservationResult_MAX, __typeKeyDoNoAccess}
+    enum ESpectatorScreenMode { Disabled, SingleEyeLetterboxed, Undistorted, Distorted, SingleEye, SingleEyeCroppedToFill, Texture, TexturePlusEye, ESpectatorScreenMode_MAX, __typeKeyDoNoAccess}
+    enum ESpeedTreeGeometryType { STG_Branch, STG_Frond, STG_Leaf, STG_FacingLeaf, STG_Billboard, STG_MAX, __typeKeyDoNoAccess}
+    enum ESpeedTreeLODType { STLOD_Pop, STLOD_Smooth, STLOD_MAX, __typeKeyDoNoAccess}
+    enum ESpeedTreeWindType { STW_None, STW_Fastest, STW_Fast, STW_Better, STW_Best, STW_Palm, STW_BestPlus, STW_MAX, __typeKeyDoNoAccess}
+    enum ESplineModulationColorMask { Red, Green, Blue, Alpha, ESplineModulationColorMask_MAX, __typeKeyDoNoAccess}
+    enum ESpriteCollisionMode { None, Use2DPhysics, Use3DPhysics, ESpriteCollisionMode_MAX, __typeKeyDoNoAccess}
+    enum ESpriteExtractMode { Auto, Grid, ESpriteExtractMode_MAX, __typeKeyDoNoAccess}
+    enum ESpritePivotMode { Top_Left, Top_Center, Top_Right, Center_Left, Center_Center, Center_Right, Bottom_Left, Bottom_Center, Bottom_Right, Custom, ESpritePivotMode_MAX, __typeKeyDoNoAccess}
+    enum ESpritePolygonMode { SourceBoundingBox, TightBoundingBox, ShrinkWrapped, FullyCustom, Diced, ESpritePolygonMode_MAX, __typeKeyDoNoAccess}
+    enum ESpriteShapeType { Box, Circle, Polygon, ESpriteShapeType_MAX, __typeKeyDoNoAccess}
+    enum EStandardToolContextMaterials { VertexColorMaterial, EStandardToolContextMaterials_MAX, __typeKeyDoNoAccess}
+    enum EStandbyType { STDBY_Rx, STDBY_Tx, STDBY_BadPing, STDBY_MAX, __typeKeyDoNoAccess}
+    enum EStaticMeshLightingInfoObjectSets { StaticMeshLightingInfoObjectSets_CurrentLevel, StaticMeshLightingInfoObjectSets_SelectedLevels, StaticMeshLightingInfoObjectSets_AllLevels, StaticMeshLightingInfoObjectSets_MAX, __typeKeyDoNoAccess}
+    enum ESteamVRHand { VR_Left, VR_Right, VR_MAX, __typeKeyDoNoAccess}
+    enum ESteamVRInputStringBits { VR_InputString_Hand, VR_InputString_ControllerType, VR_InputString_InputSource, VR_InputString_All, VR_InputString_MAX, __typeKeyDoNoAccess}
+    enum ESteamVRTrackedDeviceType { Controller, TrackingReference, Other, Invalid, ESteamVRTrackedDeviceType_MAX, __typeKeyDoNoAccess}
+    enum EStereoLayerShape { SLSH_QuadLayer, SLSH_CylinderLayer, SLSH_CubemapLayer, SLSH_EquirectLayer, SLSH_MAX, __typeKeyDoNoAccess}
+    enum EStereoLayerType { SLT_WorldLocked, SLT_TrackerLocked, SLT_FaceLocked, SLT_MAX, __typeKeyDoNoAccess}
+    enum EStretch { None, Fill, ScaleToFit, ScaleToFitX, ScaleToFitY, ScaleToFill, ScaleBySafeZone, UserSpecified, EStretch_MAX, __typeKeyDoNoAccess}
+    enum EStretchDirection { Both, DownOnly, UpOnly, EStretchDirection_MAX, __typeKeyDoNoAccess}
+    enum EStructViewerDeveloperType { SVDT_None, SVDT_CurrentUser, SVDT_All, SVDT_Max, SVDT_MAX, __typeKeyDoNoAccess}
+    enum ESubLevelStripMode { ExactClass, IsChildOf, ESubLevelStripMode_MAX, __typeKeyDoNoAccess}
+    enum ESubmixEffectDynamicsPeakMode { MeanSquared, RootMeanSquared, Peak, Count, ESubmixEffectDynamicsPeakMode_MAX, __typeKeyDoNoAccess}
+    enum ESubmixEffectDynamicsProcessorType { Compressor, Limiter, Expander, Gate, Count, ESubmixEffectDynamicsProcessorType_MAX, __typeKeyDoNoAccess}
+    enum ESuggestProjVelocityTraceOption { DoNotTrace, TraceFullPath, OnlyTraceWhileAscending, ESuggestProjVelocityTraceOption_MAX, __typeKeyDoNoAccess}
+    enum ETableViewMode { List, Tile, Tree, ETableViewMode_MAX, __typeKeyDoNoAccess}
+    enum ETeamAttitude { Friendly, Neutral, Hostile, ETeamAttitude_MAX, __typeKeyDoNoAccess}
+    enum ETerrainCoordMappingType { TCMT_Auto, TCMT_XY, TCMT_XZ, TCMT_YZ, TCMT_MAX, __typeKeyDoNoAccess}
+    enum ETexAlign { TEXALIGN_None, TEXALIGN_Default, TEXALIGN_Box, TEXALIGN_Planar, TEXALIGN_Fit, TEXALIGN_PlanarAuto, TEXALIGN_PlanarWall, TEXALIGN_PlanarFloor, TEXALIGN_MAX, __typeKeyDoNoAccess}
+    enum ETextGender { Masculine, Feminine, Neuter, ETextGender_MAX, __typeKeyDoNoAccess}
+    enum ETextureColorChannel { TCC_Red, TCC_Green, TCC_Blue, TCC_Alpha, TCC_MAX, __typeKeyDoNoAccess}
+    enum ETextureMipCount { TMC_ResidentMips, TMC_AllMips, TMC_AllMipsBiased, TMC_MAX, __typeKeyDoNoAccess}
+    enum ETextureMipValueMode { TMVM_None, TMVM_MipLevel, TMVM_MipBias, TMVM_Derivative, TMVM_MAX, __typeKeyDoNoAccess}
+    enum ETextureObjectSets { TextureObjectSet_CurrentStreamingLevel, TextureObjectSet_AllStreamingLevels, TextureObjectSet_SelectedActors, TextureObjectSet_SelectedMaterials, TextureObjectSet_MAX, __typeKeyDoNoAccess}
+    enum ETexturePaintIndex { TextureOne, TextureTwo, TextureThree, TextureFour, TextureFive, ETexturePaintIndex_MAX, __typeKeyDoNoAccess}
+    enum ETextureSamplerFilter { Point, Bilinear, Trilinear, AnisotropicPoint, AnisotropicLinear, ETextureSamplerFilter_MAX, __typeKeyDoNoAccess}
+    enum ETextureSourceArtType { TSAT_Uncompressed, TSAT_PNGCompressed, TSAT_DDSFile, TSAT_MAX, __typeKeyDoNoAccess}
+    enum ETextureWeightTypes { AlphaLerp, RGB, ARGB, OneMinusARGB, ETextureWeightTypes_MAX, __typeKeyDoNoAccess}
+    enum ETextWrappingPolicy { DefaultWrapping, AllowPerCharacterWrapping, ETextWrappingPolicy_MAX, __typeKeyDoNoAccess}
+    enum EThreePlayerSplitScreenType { FavorTop, FavorBottom, Vertical, Horizontal, EThreePlayerSplitScreenType_MAX, __typeKeyDoNoAccess}
+    enum EThumbnailPrimType { TPT_None, TPT_Sphere, TPT_Cube, TPT_Plane, TPT_Cylinder, TPT_MAX, __typeKeyDoNoAccess}
+    enum EThumbnailQuality { Draft, Normal, Best, EThumbnailQuality_MAX, __typeKeyDoNoAccess}
+    enum ETileMapProjectionMode { Orthogonal, IsometricDiamond, IsometricStaggered, HexagonalStaggered, ETileMapProjectionMode_MAX, __typeKeyDoNoAccess}
+    enum ETimelineDirection { Forward, Backward, ETimelineDirection_MAX, __typeKeyDoNoAccess}
+    enum ETimelineSigType { ETS_EventSignature, ETS_FloatSignature, ETS_VectorSignature, ETS_LinearColorSignature, ETS_InvalidSignature, ETS_MAX, __typeKeyDoNoAccess}
+    enum ETimeStretchCurveMapping { T_Original, T_TargetMin, T_TargetMax, MAX, __typeKeyDoNoAccess}
+    enum ETimezoneSetting { InternationalDateLineWest, CoordinatedUniversalTimeNeg11, Samoa, Hawaii, Alaska, PacificTime_USCAN, BajaCalifornia, MountainTime_USCAN, Chihuahua_LaPaz_Mazatlan, Arizona, Saskatchewan, CentralAmerica, CentralTime_USCAN, Guadalajara_MexicoCity_Monterrey, EasternTime_USCAN, Bogota_Lima_Quito, Indiana_US, Caracas, AtlanticTime_Canada, Cuiaba, Santiago, Georgetown_LaPaz_Manaus_SanJuan, Asuncion, Newfoundland, Brasilia, Greenland, Montevideo, Cayenne_Fortaleza, BuenosAires, MidAtlantic, CoordinatedUniversalTimeNeg02, Azores, CaboVerdeIs, Dublin_Edinburgh_Lisbon_London, Monrovia_Reykjavik, Casablanca, UTC, Belgrade_Bratislava_Budapest_Ljubljana_Prague, Sarajevo_Skopje_Warsaw_Zagreb, Brussels_Copenhagen_Madrid_Paris, WestCentralAfrica, Amsterdam_Berlin_Bern_Rome_Stockholm_Vienna, Windhoek, Minsk, Cairo, Helsinki_Kyiv_Riga_Sofia_Tallinn_Vilnius, Athens_Bucharest, Jerusalem, Amman, Beirut, Harare_Pretoria, Damascus, Istanbul, Kuwait_Riyadh, Baghdad, Nairobi, Kaliningrad, Tehran, Moscow_StPetersburg_Volgograd, AbuDhabi_Muscat, Baku, Yerevan, Tbilisi, PortLouis, Kabul, Tashkent, Islamabad_Karachi, Chennai_Kolkata_Mumbai_NewDelhi, SriJayawardenepura, Kathmandu, Ekaterinburg, Astana, Dhaka, Yangon_Rangoon, Novosibirsk, Bangkok_Hanoi_Jakarta, Krasnoyarsk, Beijing_Chongqing_HongKong_Urumqi, KualaLumpur_Singapore, Taipei, Perth, Ulaanbaatar, Irkutsk, Seoul, Osaka_Sapporo_Tokyo, Darwin, Adelaide, Yakutsk, Canberra_Melbourne_Sydney, Brisbane, Hobart, Guam_PortMoresby, Vladivostok, SolomonIs_NewCaledonia, Magadan, Fiji, Auckland_Wellington, CoordinatedUniversalTime12, Nukualofa, LocalTime, ETimezoneSetting_MAX, __typeKeyDoNoAccess}
+    enum EToolContextCoordinateSystem { World, Local, EToolContextCoordinateSystem_MAX, __typeKeyDoNoAccess}
+    enum EToolMenuInsertType { Default, Before, After, First, EToolMenuInsertType_MAX, __typeKeyDoNoAccess}
+    enum EToolMenuStringCommandType { Command, Python, Custom, EToolMenuStringCommandType_MAX, __typeKeyDoNoAccess}
+    enum EToolMessageLevel { Internal, UserMessage, UserNotification, UserWarning, UserError, EToolMessageLevel_MAX, __typeKeyDoNoAccess}
+    enum EToolSide { Left, Mouse, Right, EToolSide_MAX, __typeKeyDoNoAccess}
+    enum EToolTransformInterpType { Linear, Sinusoidal, Cubic, CircularIn, CircularOut, ExpIn, ExpOut, EToolTransformInterpType_MAX, __typeKeyDoNoAccess}
+    enum EToTest { V0, V1, V13, EToTest_MAX, __typeKeyDoNoAccess}
+    enum ETouchSwipeDirection { None, Left, Right, Up, Down, ETouchSwipeDirection_MAX, __typeKeyDoNoAccess}
+    enum ETouchType { Began, Moved, Stationary, ForceChanged, FirstMove, Ended, NumTypes, ETouchType_MAX, __typeKeyDoNoAccess}
+    enum ETrackedDeviceType { None, HMD, LTouch, RTouch, Touch, DeviceObjectZero, All, ETrackedDeviceType_MAX, __typeKeyDoNoAccess}
+    enum ETrackingStatus { NotTracked, InertialOnly, Tracked, ETrackingStatus_MAX, __typeKeyDoNoAccess}
+    enum ETrackToggleAction { ETTA_Off, ETTA_On, ETTA_Toggle, ETTA_Trigger, ETTA_MAX, __typeKeyDoNoAccess}
+    enum ETrail2SourceMethod { PET2SRCM_Default, PET2SRCM_Particle, PET2SRCM_Actor, PET2SRCM_MAX, __typeKeyDoNoAccess}
+    enum ETrailsRenderAxisOption { Trails_CameraUp, Trails_SourceUp, Trails_WorldUp, Trails_MAX, __typeKeyDoNoAccess}
+    enum ETransformGizmoSubElements { None, TranslateAxisX, TranslateAxisY, TranslateAxisZ, TranslateAllAxes, TranslatePlaneXY, TranslatePlaneXZ, TranslatePlaneYZ, TranslateAllPlanes, RotateAxisX, RotateAxisY, RotateAxisZ, RotateAllAxes, StanedardTranslateRotate, ETransformGizmoSubElements_MAX, __typeKeyDoNoAccess}
+    enum ETransitionGetter { AnimationAsset_GetCurrentTime, AnimationAsset_GetLength, AnimationAsset_GetCurrentTimeFraction, AnimationAsset_GetTimeFromEnd, AnimationAsset_GetTimeFromEndFraction, CurrentState_ElapsedTime, CurrentState_GetBlendWeight, CurrentTransitionDuration, ArbitraryState_GetBlendWeight, ETransitionGetter_MAX, __typeKeyDoNoAccess}
+    enum ETranslucentSortPolicy { SortByDistance, SortByProjectedZ, SortAlongAxis, ETranslucentSortPolicy_MAX, __typeKeyDoNoAccess}
+    enum ETunnelBoundaryType { Unknown, EntrySite, InputSite, OutputSite, ETunnelBoundaryType_MAX, __typeKeyDoNoAccess}
+    enum ETwitterIntegrationDelegate { TID_AuthorizeComplete, TID_TweetUIComplete, TID_RequestComplete, TID_MAX, __typeKeyDoNoAccess}
+    enum ETwitterRequestMethod { TRM_Get, TRM_Post, TRM_Delete, TRM_MAX, __typeKeyDoNoAccess}
+    enum ETwoPlayerSplitScreenType { Horizontal, Vertical, ETwoPlayerSplitScreenType_MAX, __typeKeyDoNoAccess}
+    enum ETypeAdvanceAnim { ETAA_Default, ETAA_Finished, ETAA_Looped, ETAA_MAX, __typeKeyDoNoAccess}
+    enum EUINavigationAction { Accept, Back, Num, Invalid, EUINavigationAction_MAX, __typeKeyDoNoAccess}
+    enum EUIScalingRule { ShortestSide, LongestSide, Horizontal, Vertical, Custom, EUIScalingRule_MAX, __typeKeyDoNoAccess}
+    enum EUnitTestResetStage { None, FullReset, ResetConnection, ResetExecute, EUnitTestResetStage_MAX, __typeKeyDoNoAccess}
+    enum EUpdateRateShiftBucket { ShiftBucket0, ShiftBucket1, ShiftBucket2, ShiftBucket3, ShiftBucket4, ShiftBucket5, ShiftBucketMax, EUpdateRateShiftBucket_MAX, __typeKeyDoNoAccess}
+    enum EUserInterfaceActionType { None, Button, ToggleButton, RadioButton, Check, CollapsedButton, EUserInterfaceActionType_MAX, __typeKeyDoNoAccess}
+    enum EVariantManagerTestEnum { None, FirstOption, SecondOption, ThirdOption, EVariantManagerTestEnum_MAX, __typeKeyDoNoAccess}
+    enum EVectorFieldConstructionOp { VFCO_Extrude, VFCO_Revolve, VFCO_MAX, __typeKeyDoNoAccess}
+    enum EVectorNoiseFunction { VNF_CellnoiseALU, VNF_VectorALU, VNF_GradientALU, VNF_CurlALU, VNF_VoronoiALU, VNF_MAX, __typeKeyDoNoAccess}
+    enum EVectorVMBaseTypes { Float, Int, Bool, Num, EVectorVMBaseTypes_MAX, __typeKeyDoNoAccess}
+    enum EVectorVMOp { done, add, sub, mul, div, mad, lerp, rcp, rsq, sqrt, neg, abs, exp, exp2, log, log2, sin, cos, tan, asin, acos, atan, atan2, ceil, floor, fmod, frac, trunc, clamp, min, max, pow, round, sign, step, random, noise, cmplt, cmple, cmpgt, cmpge, cmpeq, cmpneq, select, addi, subi, muli, divi, clampi, mini, maxi, absi, negi, signi, randomi, cmplti, cmplei, cmpgti, cmpgei, cmpeqi, cmpneqi, bit_and, bit_or, bit_xor, bit_not, bit_lshift, bit_rshift, logic_and, logic_or, logic_xor, logic_not, f2i, i2f, f2b, b2f, i2b, b2i, inputdata_32bit, inputdata_noadvance_32bit, outputdata_32bit, acquireindex, external_func_call, exec_index, noise2D, noise3D, enter_stat_scope, exit_stat_scope, update_id, acquire_id, NumOpcodes, EVectorVMOp_MAX, __typeKeyDoNoAccess}
+    enum EVectorVMOperandLocation { Register, Constant, Num, EVectorVMOperandLocation_MAX, __typeKeyDoNoAccess}
+    enum EVehicleDifferential4W { LimitedSlip_4W, LimitedSlip_FrontDrive, LimitedSlip_RearDrive, Open_4W, Open_FrontDrive, Open_RearDrive, EVehicleDifferential4W_MAX, __typeKeyDoNoAccess}
+    enum EVertexColorImportOption { Replace, Ignore, Override, EVertexColorImportOption_MAX, __typeKeyDoNoAccess}
+    enum EVertexColorMaskChannel { Red, Green, Blue, Alpha, MAX_None, EVertexColorMaskChannel_MAX, __typeKeyDoNoAccess}
+    enum EVertexPaintAxis { X, Y, Z, EVertexPaintAxis_MAX, __typeKeyDoNoAccess}
+    enum EVerticalTextAligment { EVRTA_TextTop, EVRTA_TextCenter, EVRTA_TextBottom, EVRTA_QuadTop, EVRTA_MAX, __typeKeyDoNoAccess}
+    enum EViewportWorldInteractionType { VR, Legacy, EViewportWorldInteractionType_MAX, __typeKeyDoNoAccess}
+    enum EVisibilityTrackAction { EVTA_Hide, EVTA_Show, EVTA_Toggle, EVTA_MAX, __typeKeyDoNoAccess}
+    enum EVisibilityTrackCondition { EVTC_Always, EVTC_GoreEnabled, EVTC_GoreDisabled, EVTC_MAX, __typeKeyDoNoAccess}
+    enum EVREditorWidgetDrawingPolicy { Always, Hovering, EVREditorWidgetDrawingPolicy_MAX, __typeKeyDoNoAccess}
+    enum EWASDType { WASD_Always, WASD_RMBOnly, WASD_Never, WASD_MAX, __typeKeyDoNoAccess}
+    enum EWheelSweepType { SimpleAndComplex, Simple, Complex, EWheelSweepType_MAX, __typeKeyDoNoAccess}
+    enum EWidgetBlendMode { Opaque, Masked, Transparent, EWidgetBlendMode_MAX, __typeKeyDoNoAccess}
+    enum EWidgetDesignFlags { None, Designing, ShowOutline, ExecutePreConstruct, EWidgetDesignFlags_MAX, __typeKeyDoNoAccess}
+    enum EWidgetGeometryMode { Plane, Cylinder, EWidgetGeometryMode_MAX, __typeKeyDoNoAccess}
+    enum EWidgetInteractionSource { World, Mouse, CenterScreen, Custom, EWidgetInteractionSource_MAX, __typeKeyDoNoAccess}
+    enum EWidgetSpace { World, Screen, EWidgetSpace_MAX, __typeKeyDoNoAccess}
+    enum EWidgetTestAppearLocation { Viewport, PlayerScreen, EWidgetTestAppearLocation_MAX, __typeKeyDoNoAccess}
+    enum EWidgetTimingPolicy { RealTime, GameTime, EWidgetTimingPolicy_MAX, __typeKeyDoNoAccess}
+    enum EWindowTitleBarMode { Overlay, VerticalBox, EWindowTitleBarMode_MAX, __typeKeyDoNoAccess}
+    enum EWindowVisibility { Visible, SelfHitTestInvisible, EWindowVisibility_MAX, __typeKeyDoNoAccess}
+    enum EWindSourceType { Directional, Point, EWindSourceType_MAX, __typeKeyDoNoAccess}
+    enum EWorldPositionIncludedOffsets { WPT_Default, WPT_ExcludeAllShaderOffsets, WPT_CameraRelative, WPT_CameraRelativeNoOffsets, WPT_MAX, __typeKeyDoNoAccess}
+    enum EWriteDisallowedWarningState { WDWS_PendingWarn, WDWS_Warned, WDWS_WarningUnnecessary, WDWS_MAX, __typeKeyDoNoAccess}
     class ExpandableAreaStyle extends UE.SlateWidgetStyle {
         constructor();
         constructor(CollapsedImage: UE.SlateBrush, ExpandedImage: UE.SlateBrush, RolloutAnimationSeconds: number);
@@ -34592,6 +35097,7 @@ declare module "ue" {
         private __tid_ExportTextContainer__: boolean;
     }
     
+    enum EXRTrackedDeviceType { HeadMountedDisplay, Controller, TrackingReference, Other, Invalid, Any, EXRTrackedDeviceType_MAX, __typeKeyDoNoAccess}
     class ExtensionMethods extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -34686,7 +35192,6 @@ declare module "ue" {
         private __tid_FbxAssetImportData__: boolean;
     }
     
-    enum EFBXAnimationLengthImportType { FBXALIT_ExportedTime, FBXALIT_AnimatedKey, FBXALIT_SetRange, FBXALIT_MAX, __typeKeyDoNoAccess}
     class Int32Interval {
         constructor();
         constructor(Min: number, Max: number);
@@ -34726,7 +35231,6 @@ declare module "ue" {
         private __tid_FbxAnimSequenceImportData__: boolean;
     }
     
-    enum EFbxExportCompatibility { FBX_2011, FBX_2012, FBX_2013, FBX_2014, FBX_2016, FBX_2018, FBX_MAX, __typeKeyDoNoAccess}
     class FbxExportOption extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         FbxExportCompatibility: UE.EFbxExportCompatibility;
@@ -34746,9 +35250,6 @@ declare module "ue" {
         private __tid_FbxExportOption__: boolean;
     }
     
-    enum EFBXImportType { FBXIT_StaticMesh, FBXIT_SkeletalMesh, FBXIT_Animation, FBXIT_MAX, __typeKeyDoNoAccess}
-    enum EFBXNormalImportMethod { FBXNIM_ComputeNormals, FBXNIM_ImportNormals, FBXNIM_ImportNormalsAndTangents, FBXNIM_MAX, __typeKeyDoNoAccess}
-    enum EFBXNormalGenerationMethod { BuiltIn, MikkTSpace, EFBXNormalGenerationMethod_MAX, __typeKeyDoNoAccess}
     class ImportMeshLodSectionsData {
         constructor();
         constructor(SectionOriginalMaterialName: TArray<string>);
@@ -34779,7 +35280,6 @@ declare module "ue" {
         private __tid_FbxMeshImportData__: boolean;
     }
     
-    enum EVertexColorImportOption { Replace, Ignore, Override, EVertexColorImportOption_MAX, __typeKeyDoNoAccess}
     class FbxStaticMeshImportData extends UE.FbxMeshImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         StaticMeshLODGroup: string;
@@ -34799,7 +35299,6 @@ declare module "ue" {
         private __tid_FbxStaticMeshImportData__: boolean;
     }
     
-    enum EFBXImportContentType { FBXICT_All, FBXICT_Geometry, FBXICT_SkinningWeights, FBXICT_MAX, __typeKeyDoNoAccess}
     class FbxSkeletalMeshImportData extends UE.FbxMeshImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ImportContentType: UE.EFBXImportContentType;
@@ -34821,7 +35320,6 @@ declare module "ue" {
         private __tid_FbxSkeletalMeshImportData__: boolean;
     }
     
-    enum EMaterialSearchLocation { Local, UnderParent, UnderRoot, AllAssets, EMaterialSearchLocation_MAX, __typeKeyDoNoAccess}
     class FbxTextureImportData extends UE.FbxAssetImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bInvertNormalMaps: boolean;
@@ -34899,18 +35397,6 @@ declare module "ue" {
         private __tid_FbxFactory__: boolean;
     }
     
-    namespace DatasmithContent.Blueprints.FBXImporter.FBXImporterUtils {
-        class FBXImporterUtils_C extends UE.BlueprintFunctionLibrary {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): FBXImporterUtils_C;
-            static Load(InName: string): FBXImporterUtils_C;
-        
-            private __tid_FBXImporterUtils_C__: boolean;
-        }
-        
-    }
-
     class SceneImportFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -34920,7 +35406,6 @@ declare module "ue" {
         private __tid_SceneImportFactory__: boolean;
     }
     
-    enum EFBXSceneOptionsCreateHierarchyType { FBXSOCHT_CreateLevelActors, FBXSOCHT_CreateActorComponents, FBXSOCHT_CreateBlueprint, FBXSOCHT_MAX, __typeKeyDoNoAccess}
     class FbxSceneImportOptions extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bCreateContentFolderHierarchy: boolean;
@@ -34942,9 +35427,6 @@ declare module "ue" {
         private __tid_FbxSceneImportOptions__: boolean;
     }
     
-    enum EFbxSceneVertexColorImportOption { Replace, Ignore, Override, EFbxSceneVertexColorImportOption_MAX, __typeKeyDoNoAccess}
-    enum EFBXSceneNormalImportMethod { FBXSceneNIM_ComputeNormals, FBXSceneNIM_ImportNormals, FBXSceneNIM_ImportNormalsAndTangents, FBXSceneNIM_MAX, __typeKeyDoNoAccess}
-    enum EFBXSceneNormalGenerationMethod { BuiltIn, MikkTSpace, EFBXSceneNormalGenerationMethod_MAX, __typeKeyDoNoAccess}
     class FbxSceneImportOptionsStaticMesh extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         StaticMeshLODGroup: string;
@@ -35009,8 +35491,6 @@ declare module "ue" {
         private __tid_FbxSceneImportFactory__: boolean;
     }
     
-    enum EFBXTestPlanActionType { Import, Reimport, AddLOD, ReimportLOD, ImportReload, EFBXTestPlanActionType_MAX, __typeKeyDoNoAccess}
-    enum EFBXExpectedResultPreset { Error_Number, Warning_Number, Created_Staticmesh_Number, Created_Skeletalmesh_Number, Materials_Created_Number, Material_Slot_Imported_Name, Vertex_Number, Lod_Number, Vertex_Number_Lod, Mesh_Materials_Number, Mesh_LOD_Section_Number, Mesh_LOD_Section_Vertex_Number, Mesh_LOD_Section_Triangle_Number, Mesh_LOD_Section_Material_Name, Mesh_LOD_Section_Material_Index, Mesh_LOD_Section_Material_Imported_Name, Mesh_LOD_Vertex_Position, Mesh_LOD_Vertex_Normal, LOD_UV_Channel_Number, Bone_Number, Bone_Position, Animation_Frame_Number, Animation_Length, EFBXExpectedResultPreset_MAX, __typeKeyDoNoAccess}
     class FbxTestPlanExpectedResult {
         constructor();
         constructor(ExpectedPresetsType: UE.EFBXExpectedResultPreset, ExpectedPresetsDataInteger: TArray<number>, ExpectedPresetsDataFloat: TArray<number>, ExpectedPresetsDataDouble: TArray<number>, ExpectedPresetsDataString: TArray<string>);
@@ -35080,7 +35560,6 @@ declare module "ue" {
         private __tid_FieldSystemMetaDataIteration__: boolean;
     }
     
-    enum EFieldResolutionType { Field_Resolution_Minimal, Field_Resolution_DisabledParents, Field_Resolution_Maximum, Field_Resolution_Max, Field_Resolution_MAX, __typeKeyDoNoAccess}
     class FieldSystemMetaDataProcessingResolution extends UE.FieldSystemMetaData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ResolutionType: UE.EFieldResolutionType;
@@ -35294,8 +35773,6 @@ declare module "ue" {
         private __tid_FloatingPawnMovement__: boolean;
     }
     
-    enum EHorizTextAligment { EHTA_Left, EHTA_Center, EHTA_Right, EHTA_MAX, __typeKeyDoNoAccess}
-    enum EVerticalTextAligment { EVRTA_TextTop, EVRTA_TextCenter, EVRTA_TextBottom, EVRTA_QuadTop, EVRTA_MAX, __typeKeyDoNoAccess}
     class TextRenderComponent extends UE.PrimitiveComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Text: string;
@@ -35359,6 +35836,7 @@ declare module "ue" {
         private __tid_FloatProperty__: boolean;
     }
     
+    enum FNavigationSystemRunMode { InvalidMode, GameMode, EditorMode, SimulationMode, PIEMode, FNavigationSystemRunMode_MAX, __typeKeyDoNoAccess}
     class InstancedStaticMeshInstanceData {
         constructor();
         constructor(Transform: UE.Matrix);
@@ -35452,7 +35930,6 @@ declare module "ue" {
         private __tid_FoliageStatistics__: boolean;
     }
     
-    enum EFoliageScaling { Uniform, Free, LockXY, LockXZ, LockYZ, EFoliageScaling_MAX, __typeKeyDoNoAccess}
     class FloatInterval {
         constructor();
         constructor(Min: number, Max: number);
@@ -35657,7 +36134,6 @@ declare module "ue" {
         private __tid_FoliageType_ISMThumbnailRenderer__: boolean;
     }
     
-    enum EFontLayoutMethod { Metrics, BoundingBox, EFontLayoutMethod_MAX, __typeKeyDoNoAccess}
     class FontFace extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SourceFilename: string;
@@ -35818,7 +36294,6 @@ declare module "ue" {
         private __tid_FuncTestRenderingComponent__: boolean;
     }
     
-    enum EFunctionalTestLogHandling { ProjectDefault, OutputIsError, OutputIgnored, EFunctionalTestLogHandling_MAX, __typeKeyDoNoAccess}
     class RandomStream {
         constructor();
         constructor(InitialSeed: number, Seed: number);
@@ -35832,8 +36307,6 @@ declare module "ue" {
         private __tid_RandomStream__: boolean;
     }
     
-    enum EFunctionalTestResult { Default, Invalid, Error, Running, Failed, Succeeded, EFunctionalTestResult_MAX, __typeKeyDoNoAccess}
-    enum EComparisonMethod { Equal_To, Not_Equal_To, Greater_Than_Or_Equal_To, Less_Than_Or_Equal_To, Greater_Than, Less_Than, EComparisonMethod_MAX, __typeKeyDoNoAccess}
     class TraceQueryTestNames {
         constructor();
         constructor(ComponentName: string, PhysicalMaterialName: string, ActorName: string);
@@ -36088,7 +36561,6 @@ declare module "ue" {
         private __tid_FunctionalTestLevelScript__: boolean;
     }
     
-    enum EDrawDebugTrace { None, ForOneFrame, ForDuration, Persistent, EDrawDebugTrace_MAX, __typeKeyDoNoAccess}
     class FunctionalTestUtilityLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static TraceChannelTestUtil(WorldContextObject: $Nullable<UE.Object>, BatchOptions: UE.TraceChannelTestBatchOptions, Start: UE.Vector, End: UE.Vector, SphereCapsuleRadius: number, CapsuleHalfHeight: number, BoxHalfSize: UE.Vector, Orientation: UE.Rotator, TraceChannel: UE.ETraceTypeQuery, ObjectTypes: TArray<UE.EObjectTypeQuery>, ProfileName: string, bTraceComplex: boolean, ActorsToIgnore: TArray<UE.Actor>, bIgnoreSelf: boolean, DrawDebugType: UE.EDrawDebugTrace, TraceColor?: UE.LinearColor /* = (R=1.000000,G=0.000000,B=0.000000,A=1.000000) */, TraceHitColor?: UE.LinearColor /* = (R=0.000000,G=1.000000,B=0.000000,A=1.000000) */, DrawTime?: number /* = 5.000000 */) : UE.TraceQueryTestResults;
@@ -36111,7 +36583,6 @@ declare module "ue" {
         private __tid_ScreenshotFunctionalTestBase__: boolean;
     }
     
-    enum EWidgetTestAppearLocation { Viewport, PlayerScreen, EWidgetTestAppearLocation_MAX, __typeKeyDoNoAccess}
     class FunctionalUIScreenshotTest extends UE.ScreenshotFunctionalTestBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         WidgetClass: UE.Class;
@@ -36146,9 +36617,6 @@ declare module "ue" {
         private __tid_GameInstanceSubsystem__: boolean;
     }
     
-    enum ETwoPlayerSplitScreenType { Horizontal, Vertical, ETwoPlayerSplitScreenType_MAX, __typeKeyDoNoAccess}
-    enum EThreePlayerSplitScreenType { FavorTop, FavorBottom, Vertical, Horizontal, EThreePlayerSplitScreenType_MAX, __typeKeyDoNoAccess}
-    enum EFourPlayerSplitScreenType { Grid, Vertical, Horizontal, EFourPlayerSplitScreenType_MAX, __typeKeyDoNoAccess}
     class GameModeName {
         constructor();
         constructor(Name: string, GameMode: UE.SoftClassPath);
@@ -36274,7 +36742,6 @@ declare module "ue" {
         private __tid_GameplayDebuggerCategoryReplicator__: boolean;
     }
     
-    enum EGameplayDebuggerOverrideMode { Enable, Disable, UseDefault, EGameplayDebuggerOverrideMode_MAX, __typeKeyDoNoAccess}
     class GameplayDebuggerInputConfig {
         constructor();
         constructor(ConfigName: string, Key: UE.Key, bModShift: boolean, bModCtrl: boolean, bModAlt: boolean, bModCmd: boolean);
@@ -36389,9 +36856,6 @@ declare module "ue" {
         private __tid_GameplayDebuggerLocalController__: boolean;
     }
     
-    enum EPSCPoolMethod { None, AutoRelease, ManualRelease, ManualRelease_OnComplete, FreeInPool, EPSCPoolMethod_MAX, __typeKeyDoNoAccess}
-    enum EMouseCaptureMode { NoCapture, CapturePermanently, CapturePermanently_IncludingInitialMouseDown, CaptureDuringMouseDown, CaptureDuringRightMouseDown, EMouseCaptureMode_MAX, __typeKeyDoNoAccess}
-    enum ESuggestProjVelocityTraceOption { DoNotTrace, TraceFullPath, OnlyTraceWhileAscending, ESuggestProjVelocityTraceOption_MAX, __typeKeyDoNoAccess}
     class PredictProjectilePathParams {
         constructor();
         constructor(StartLocation: UE.Vector, LaunchVelocity: UE.Vector, bTraceWithCollision: boolean, ProjectileRadius: number, MaxSimTime: number, bTraceWithChannel: boolean, TraceChannel: UE.ECollisionChannel, ObjectTypes: TArray<UE.EObjectTypeQuery>, ActorsToIgnore: TArray<UE.Actor>, SimFrequency: number, OverrideGravityZ: number, DrawDebugType: UE.EDrawDebugTrace, DrawDebugTime: number, bTraceComplex: boolean);
@@ -36703,7 +37167,6 @@ declare module "ue" {
         private __tid_GameplayTagsList__: boolean;
     }
     
-    enum EGameplayTagSourceType { Native, DefaultTagList, TagList, RestrictedTagList, DataTable, Invalid, EGameplayTagSourceType_MAX, __typeKeyDoNoAccess}
     class RestrictedGameplayTagTableRow extends UE.GameplayTagTableRow {
         constructor();
         constructor(bAllowNonRestrictedChildren: boolean);
@@ -37851,8 +38314,6 @@ declare module "ue" {
         private __tid_GlobalEditorUtilityBase__: boolean;
     }
     
-    enum EBlueprintPinStyleType { BPST_Original, BPST_VariantA, BPST_MAX, __typeKeyDoNoAccess}
-    enum EGraphPanningMouseButton { Right, Middle, Both, EGraphPanningMouseButton_MAX, __typeKeyDoNoAccess}
     class GraphEditorSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DataPinStyle: UE.EBlueprintPinStyleType;
@@ -38097,8 +38558,6 @@ declare module "ue" {
         private __tid_HapticFeedbackEffectSoundWaveFactory__: boolean;
     }
     
-    enum EHardwareClass { Unspecified, Desktop, Mobile, EHardwareClass_MAX, __typeKeyDoNoAccess}
-    enum EGraphicsPreset { Unspecified, Maximum, Scalable, EGraphicsPreset_MAX, __typeKeyDoNoAccess}
     class HardwareTargetingSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TargetedHardwareClass: UE.EHardwareClass;
@@ -38112,11 +38571,6 @@ declare module "ue" {
         private __tid_HardwareTargetingSettings__: boolean;
     }
     
-    enum EHMDTrackingOrigin { Floor, Eye, Stage, EHMDTrackingOrigin_MAX, __typeKeyDoNoAccess}
-    enum ESpectatorScreenMode { Disabled, SingleEyeLetterboxed, Undistorted, Distorted, SingleEye, SingleEyeCroppedToFill, Texture, TexturePlusEye, ESpectatorScreenMode_MAX, __typeKeyDoNoAccess}
-    enum EOrientPositionSelector { Orientation, Position, OrientationAndPosition, EOrientPositionSelector_MAX, __typeKeyDoNoAccess}
-    enum EHMDWornState { Unknown, Worn, NotWorn, EHMDWornState_MAX, __typeKeyDoNoAccess}
-    enum EXRTrackedDeviceType { HeadMountedDisplay, Controller, TrackingReference, Other, Invalid, Any, EXRTrackedDeviceType_MAX, __typeKeyDoNoAccess}
     class HeadMountedDisplayFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static CalibrateExternalTrackingToHMD(ExternalTrackingTransform: UE.Transform) : void;
@@ -38372,7 +38826,6 @@ declare module "ue" {
         private __tid_ImageSequenceProtocol_PNG__: boolean;
     }
     
-    enum EDesiredImageFormat { PNG, JPG, BMP, EXR, EDesiredImageFormat_MAX, __typeKeyDoNoAccess}
     class ImageWriteOptions {
         constructor();
         constructor(Format: UE.EDesiredImageFormat, OnComplete: $Delegate<(bSuccess: boolean) => void>, CompressionQuality: number, bOverwriteFile: boolean, bAsync: boolean);
@@ -38451,7 +38904,6 @@ declare module "ue" {
         private __tid_ImgMediaSourceFactoryNew__: boolean;
     }
     
-    enum EImportanceWeight { Luminance, Red, Green, Blue, Alpha, EImportanceWeight_MAX, __typeKeyDoNoAccess}
     class ImportanceTexture {
         constructor();
         constructor(Size: UE.IntPoint, NumMips: number, MarginalCDF: TArray<number>, ConditionalCDF: TArray<number>, TextureData: TArray<UE.Color>, Texture: TWeakObjectPtr<UE.Texture2D>, Weighting: UE.EImportanceWeight);
@@ -38543,7 +38995,6 @@ declare module "ue" {
         private __tid_ImportSubsystem__: boolean;
     }
     
-    enum EInAppPurchaseState { Unknown, Success, Failed, Cancelled, Invalid, NotAllowed, Restored, AlreadyOwned, EInAppPurchaseState_MAX, __typeKeyDoNoAccess}
     class InAppPurchaseProductInfo {
         constructor();
         constructor(Identifier: string, TransactionIdentifier: string, DisplayName: string, DisplayDescription: string, DisplayPrice: string, RawPrice: number, CurrencyCode: string, CurrencySymbol: string, DecimalSeparator: string, GroupingSeparator: string, ReceiptData: string);
@@ -38926,7 +39377,6 @@ declare module "ue" {
         private __tid_InputAxisConfigEntry__: boolean;
     }
     
-    enum EMouseLockMode { DoNotLock, LockOnCapture, LockAlways, LockInFullscreen, EMouseLockMode_MAX, __typeKeyDoNoAccess}
     class InputActionKeyMapping {
         constructor();
         constructor(ActionName: string, bShift: boolean, bCtrl: boolean, bAlt: boolean, bCmd: boolean, Key: UE.Key);
@@ -39094,7 +39544,6 @@ declare module "ue" {
         private __tid_Int8Property__: boolean;
     }
     
-    enum ENavDataGatheringMode { Default, Instant, Lazy, ENavDataGatheringMode_MAX, __typeKeyDoNoAccess}
     class StaticMeshActor extends UE.Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         StaticMeshComponent: UE.StaticMeshComponent;
@@ -39233,7 +39682,6 @@ declare module "ue" {
         private __tid_InternationalizationExportSettings__: boolean;
     }
     
-    enum ETimezoneSetting { InternationalDateLineWest, CoordinatedUniversalTimeNeg11, Samoa, Hawaii, Alaska, PacificTime_USCAN, BajaCalifornia, MountainTime_USCAN, Chihuahua_LaPaz_Mazatlan, Arizona, Saskatchewan, CentralAmerica, CentralTime_USCAN, Guadalajara_MexicoCity_Monterrey, EasternTime_USCAN, Bogota_Lima_Quito, Indiana_US, Caracas, AtlanticTime_Canada, Cuiaba, Santiago, Georgetown_LaPaz_Manaus_SanJuan, Asuncion, Newfoundland, Brasilia, Greenland, Montevideo, Cayenne_Fortaleza, BuenosAires, MidAtlantic, CoordinatedUniversalTimeNeg02, Azores, CaboVerdeIs, Dublin_Edinburgh_Lisbon_London, Monrovia_Reykjavik, Casablanca, UTC, Belgrade_Bratislava_Budapest_Ljubljana_Prague, Sarajevo_Skopje_Warsaw_Zagreb, Brussels_Copenhagen_Madrid_Paris, WestCentralAfrica, Amsterdam_Berlin_Bern_Rome_Stockholm_Vienna, Windhoek, Minsk, Cairo, Helsinki_Kyiv_Riga_Sofia_Tallinn_Vilnius, Athens_Bucharest, Jerusalem, Amman, Beirut, Harare_Pretoria, Damascus, Istanbul, Kuwait_Riyadh, Baghdad, Nairobi, Kaliningrad, Tehran, Moscow_StPetersburg_Volgograd, AbuDhabi_Muscat, Baku, Yerevan, Tbilisi, PortLouis, Kabul, Tashkent, Islamabad_Karachi, Chennai_Kolkata_Mumbai_NewDelhi, SriJayawardenepura, Kathmandu, Ekaterinburg, Astana, Dhaka, Yangon_Rangoon, Novosibirsk, Bangkok_Hanoi_Jakarta, Krasnoyarsk, Beijing_Chongqing_HongKong_Urumqi, KualaLumpur_Singapore, Taipei, Perth, Ulaanbaatar, Irkutsk, Seoul, Osaka_Sapporo_Tokyo, Darwin, Adelaide, Yakutsk, Canberra_Melbourne_Sydney, Brisbane, Hobart, Guam_PortMoresby, Vladivostok, SolomonIs_NewCaledonia, Magadan, Fiji, Auckland_Wellington, CoordinatedUniversalTime12, Nukualofa, LocalTime, ETimezoneSetting_MAX, __typeKeyDoNoAccess}
     class InternationalizationSettingsModel extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DisplayTimezone: UE.ETimezoneSetting;
@@ -39320,7 +39768,6 @@ declare module "ue" {
         private __tid_InterpGroupInstDirector__: boolean;
     }
     
-    enum EInterpToBehaviourType { OneShot, OneShot_Reverse, Loop_Reset, PingPong, EInterpToBehaviourType_MAX, __typeKeyDoNoAccess}
     class InterpControlPoint {
         constructor();
         constructor(PositionControlPoint: UE.Vector, bPositionIsRelative: boolean);
@@ -39759,7 +40206,6 @@ declare module "ue" {
         private __tid_InterpTrackInstSound__: boolean;
     }
     
-    enum ETrackToggleAction { ETTA_Off, ETTA_On, ETTA_Toggle, ETTA_Trigger, ETTA_MAX, __typeKeyDoNoAccess}
     class InterpTrackInstToggle extends UE.InterpTrackInst {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Action: UE.ETrackToggleAction;
@@ -39806,7 +40252,6 @@ declare module "ue" {
         private __tid_InterpTrackInstVectorProp__: boolean;
     }
     
-    enum EVisibilityTrackAction { EVTA_Hide, EVTA_Show, EVTA_Toggle, EVTA_MAX, __typeKeyDoNoAccess}
     class InterpTrackInstVisibility extends UE.InterpTrackInst {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Action: UE.EVisibilityTrackAction;
@@ -39869,7 +40314,6 @@ declare module "ue" {
         private __tid_InterpTrackLinearColorProp__: boolean;
     }
     
-    enum EInterpMoveAxis { AXIS_TranslationX, AXIS_TranslationY, AXIS_TranslationZ, AXIS_RotationX, AXIS_RotationY, AXIS_RotationZ, AXIS_MAX, __typeKeyDoNoAccess}
     class InterpTrackMoveAxis extends UE.InterpTrackFloatBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MoveAxis: UE.EInterpMoveAxis;
@@ -39984,7 +40428,6 @@ declare module "ue" {
         private __tid_InterpTrackVectorProp__: boolean;
     }
     
-    enum EVisibilityTrackCondition { EVTC_Always, EVTC_GoreEnabled, EVTC_GoreDisabled, EVTC_MAX, __typeKeyDoNoAccess}
     class VisibilityTrackKey {
         constructor();
         constructor(Time: number, Action: UE.EVisibilityTrackAction, ActiveCondition: UE.EVisibilityTrackCondition);
@@ -40052,7 +40495,6 @@ declare module "ue" {
         private __tid_InvalidationBox__: boolean;
     }
     
-    enum EIOSCloudKitSyncStrategy { None, OnlyAtGameStart, Always, EIOSCloudKitSyncStrategy_MAX, __typeKeyDoNoAccess}
     class IOSBuildResourceDirectory {
         constructor();
         constructor(Path: string);
@@ -40077,9 +40519,6 @@ declare module "ue" {
         private __tid_IOSBuildResourceFilePath__: boolean;
     }
     
-    enum EIOSLandscapeOrientation { LandscapeLeft, LandscapeRight, EIOSLandscapeOrientation_MAX, __typeKeyDoNoAccess}
-    enum EPowerUsageFrameRateLock { PUFRL_None, PUFRL_20, PUFRL_30, PUFRL_60, PUFRL_MAX, __typeKeyDoNoAccess}
-    enum EIOSVersion { IOS_61, IOS_7, IOS_8, IOS_9, IOS_10, IOS_11, IOS_12, IOS_MAX, __typeKeyDoNoAccess}
     class IOSRuntimeSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bEnableGameCenterSupport: boolean;
@@ -40492,7 +40931,6 @@ declare module "ue" {
         private __tid_K2Node_BitmaskLiteral__: boolean;
     }
     
-    enum ESelfContextInfo { Unspecified, NotSelfContext, ESelfContextInfo_MAX, __typeKeyDoNoAccess}
     class K2Node_Variable extends UE.K2Node {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         VariableReference: UE.MemberReference;
@@ -41642,7 +42080,6 @@ declare module "ue" {
         private __tid_K2Node_Timeline__: boolean;
     }
     
-    enum ETransitionGetter { AnimationAsset_GetCurrentTime, AnimationAsset_GetLength, AnimationAsset_GetCurrentTimeFraction, AnimationAsset_GetTimeFromEnd, AnimationAsset_GetTimeFromEndFraction, CurrentState_ElapsedTime, CurrentState_GetBlendWeight, CurrentTransitionDuration, ArbitraryState_GetBlendWeight, ETransitionGetter_MAX, __typeKeyDoNoAccess}
     class K2Node_TransitionRuleGetter extends UE.K2Node {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         GetterType: UE.ETransitionGetter;
@@ -41655,7 +42092,6 @@ declare module "ue" {
         private __tid_K2Node_TransitionRuleGetter__: boolean;
     }
     
-    enum ETunnelBoundaryType { Unknown, EntrySite, InputSite, OutputSite, ETunnelBoundaryType_MAX, __typeKeyDoNoAccess}
     class K2Node_TunnelBoundary extends UE.K2Node {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BaseName: string;
@@ -41803,8 +42239,6 @@ declare module "ue" {
         private __tid_KismetGuidLibrary__: boolean;
     }
     
-    enum ESlateGesture { None, Scroll, Magnify, Swipe, Rotate, LongPress, ESlateGesture_MAX, __typeKeyDoNoAccess}
-    enum EUINavigationAction { Accept, Back, Num, Invalid, EUINavigationAction_MAX, __typeKeyDoNoAccess}
     class KismetInputLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static CalibrateTilt() : void;
@@ -41858,7 +42292,6 @@ declare module "ue" {
         private __tid_KismetInputLibrary__: boolean;
     }
     
-    enum ELocalizedTextSourceCategory { Game, Engine, Editor, ELocalizedTextSourceCategory_MAX, __typeKeyDoNoAccess}
     class KismetInternationalizationLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static ClearCurrentAssetGroupCulture(AssetGroup: string, SaveToConfig?: boolean /* = false */) : void;
@@ -41906,8 +42339,6 @@ declare module "ue" {
         private __tid_VectorSpringState__: boolean;
     }
     
-    enum EEasingFunc { Linear, Step, SinusoidalIn, SinusoidalOut, SinusoidalInOut, EaseIn, EaseOut, EaseInOut, ExpoIn, ExpoOut, ExpoInOut, CircularIn, CircularOut, CircularInOut, EEasingFunc_MAX, __typeKeyDoNoAccess}
-    enum ELerpInterpolationMode { QuatInterp, EulerInterp, DualQuatInterp, ELerpInterpolationMode_MAX, __typeKeyDoNoAccess}
     class FloatSpringState {
         constructor();
         /**
@@ -41918,7 +42349,6 @@ declare module "ue" {
         private __tid_FloatSpringState__: boolean;
     }
     
-    enum EMatrixColumns { First, Second, Third, Fourth, EMatrixColumns_MAX, __typeKeyDoNoAccess}
     class KismetMathLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static Abs(A: number) : number;
@@ -42675,7 +43105,6 @@ declare module "ue" {
         private __tid_ProceduralMeshComponent__: boolean;
     }
     
-    enum EProcMeshSliceCapOption { NoCap, CreateNewSectionForCap, UseLastSectionForCap, EProcMeshSliceCapOption_MAX, __typeKeyDoNoAccess}
     class KismetProceduralMeshLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static CalculateTangentsForMesh(Vertices: TArray<UE.Vector>, Triangles: TArray<number>, UVs: TArray<UE.Vector2D>, Normals: $Ref<TArray<UE.Vector>>, Tangents: $Ref<TArray<UE.ProcMeshTangent>>) : void;
@@ -42735,8 +43164,6 @@ declare module "ue" {
         private __tid_KismetRenderingLibrary__: boolean;
     }
     
-    enum ESearchCase { CaseSensitive, IgnoreCase, ESearchCase_MAX, __typeKeyDoNoAccess}
-    enum ESearchDir { FromStart, FromEnd, ESearchDir_MAX, __typeKeyDoNoAccess}
     class KismetStringLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static BuildString_Bool(AppendTo: string, Prefix: string, InBool: boolean, Suffix: string) : string;
@@ -42863,8 +43290,6 @@ declare module "ue" {
         private __tid_CollisionProfileName__: boolean;
     }
     
-    enum EQuitPreference { Quit, Background, EQuitPreference_MAX, __typeKeyDoNoAccess}
-    enum EMoveComponentAction { Move, Stop, Return, EMoveComponentAction_MAX, __typeKeyDoNoAccess}
     class TimerHandle {
         constructor();
         constructor(Handle: bigint);
@@ -43162,8 +43587,6 @@ declare module "ue" {
         private __tid_PolyglotTextData__: boolean;
     }
     
-    enum EFormatArgumentType { Int, UInt, Float, Double, Text, Gender, EFormatArgumentType_MAX, __typeKeyDoNoAccess}
-    enum ETextGender { Masculine, Feminine, Neuter, ETextGender_MAX, __typeKeyDoNoAccess}
     class FormatArgumentData {
         constructor();
         constructor(ArgumentName: string, ArgumentValueType: UE.EFormatArgumentType, ArgumentValue: string, ArgumentValueInt: number, ArgumentValueFloat: number, ArgumentValueGender: UE.ETextGender);
@@ -43181,7 +43604,6 @@ declare module "ue" {
         private __tid_FormatArgumentData__: boolean;
     }
     
-    enum ERoundingMode { HalfToEven, HalfFromZero, HalfToZero, FromZero, ToZero, ToNegativeInfinity, ToPositiveInfinity, ERoundingMode_MAX, __typeKeyDoNoAccess}
     class KismetTextLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static AsCurrency_Float(Value: number, RoundingMode: UE.ERoundingMode, bAlwaysSign?: boolean /* = false */, bUseGrouping?: boolean /* = true */, MinimumIntegralDigits?: number /* = 1 */, MaximumIntegralDigits?: number /* = 324 */, MinimumFractionalDigits?: number /* = 0 */, MaximumFractionalDigits?: number /* = 3 */, CurrencyCode?: string /* = "" */) : string;
@@ -43450,8 +43872,6 @@ declare module "ue" {
         private __tid_LandscapeSplinesComponent__: boolean;
     }
     
-    enum ELandscapeLODFalloff { Linear, SquareRoot, ELandscapeLODFalloff_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeLayerDisplayMode { Default, Alphabetical, UserSpecific, ELandscapeLayerDisplayMode_MAX, __typeKeyDoNoAccess}
     class LandscapeProxyMaterialOverride {
         constructor();
         constructor(LODIndex: UE.PerPlatformInt, Material: UE.MaterialInterface);
@@ -43491,7 +43911,6 @@ declare module "ue" {
         private __tid_MaterialInstanceConstant__: boolean;
     }
     
-    enum ESplineModulationColorMask { Red, Green, Blue, Alpha, ESplineModulationColorMask_MAX, __typeKeyDoNoAccess}
     class LandscapeLayerInfoObject extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         LayerName: string;
@@ -43783,7 +44202,6 @@ declare module "ue" {
         private __tid_LandscapeProxy__: boolean;
     }
     
-    enum ELandscapeBlendMode { LSBM_AdditiveBlend, LSBM_AlphaBlend, LSBM_MAX, __typeKeyDoNoAccess}
     class LandscapeBlueprintBrushBase extends UE.Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OwningLandscape: UE.Landscape;
@@ -43862,11 +44280,6 @@ declare module "ue" {
         private __tid_LandscapeBlueprintBrush__: boolean;
     }
     
-    enum ELandscapeToolFlattenMode { Invalid, Both, Raise, Lower, Interval, Terrace, ELandscapeToolFlattenMode_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeToolErosionMode { Invalid, Both, Raise, Lower, ELandscapeToolErosionMode_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeToolHydroErosionMode { Invalid, Both, Positive, ELandscapeToolHydroErosionMode_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeToolNoiseMode { Invalid, Both, Add, Sub, ELandscapeToolNoiseMode_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeToolPasteMode { Invalid, Both, Raise, Lower, ELandscapeToolPasteMode_MAX, __typeKeyDoNoAccess}
     class GizmoImportLayer {
         constructor();
         constructor(LayerFilename: string, LayerName: string, bNoImport: boolean);
@@ -43881,10 +44294,6 @@ declare module "ue" {
         private __tid_GizmoImportLayer__: boolean;
     }
     
-    enum ELandscapeMirrorOperation { MinusXToPlusX, PlusXToMinusX, MinusYToPlusY, PlusYToMinusY, RotateMinusXToPlusX, RotatePlusXToMinusX, RotateMinusYToPlusY, RotatePlusYToMinusY, ELandscapeMirrorOperation_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeConvertMode { Invalid, Expand, Clip, Resample, ELandscapeConvertMode_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeImportResult { Success, Warning, Error, ELandscapeImportResult_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeImportAlphamapType { Additive, Layered, ELandscapeImportAlphamapType_MAX, __typeKeyDoNoAccess}
     class LandscapeImportLayerInfo {
         constructor();
         constructor(LayerName: string, LayerInfo: UE.LandscapeLayerInfoObject, SourceFilePath: string);
@@ -43941,8 +44350,6 @@ declare module "ue" {
         private __tid_LandscapePatternBrushWorldSpaceSettings__: boolean;
     }
     
-    enum EColorChannel { Red, Green, Blue, Alpha, EColorChannel_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeLayerPaintingRestriction { None, UseMaxLayers, ExistingOnly, UseComponentWhitelist, ELandscapeLayerPaintingRestriction_MAX, __typeKeyDoNoAccess}
     class LandscapeEditorObject extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ToolStrength: number;
@@ -44100,7 +44507,6 @@ declare module "ue" {
         private __tid_LandscapeGizmoActor__: boolean;
     }
     
-    enum ELandscapeGizmoType { LGT_None, LGT_Height, LGT_Weight, LGT_MAX, __typeKeyDoNoAccess}
     class LandscapeGizmoActiveActor extends UE.LandscapeGizmoActor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DataType: UE.ELandscapeGizmoType;
@@ -44136,7 +44542,6 @@ declare module "ue" {
         private __tid_LandscapeGizmoRenderComponent__: boolean;
     }
     
-    enum EGrassScaling { Uniform, Free, LockXY, EGrassScaling_MAX, __typeKeyDoNoAccess}
     class GrassVariety {
         constructor();
         constructor(GrassMesh: UE.StaticMesh, GrassDensity: UE.PerPlatformFloat, bUseGrid: boolean, PlacementJitter: number, StartCullDistance: UE.PerPlatformInt, EndCullDistance: UE.PerPlatformInt, MinLOD: number, Scaling: UE.EGrassScaling, ScaleX: UE.FloatInterval, ScaleY: UE.FloatInterval, ScaleZ: UE.FloatInterval, RandomRotation: boolean, AlignToSurface: boolean, bUseLandscapeLightmap: boolean, LightingChannels: UE.LightingChannels, bReceivesDecals: boolean, bCastDynamicShadow: boolean, bKeepInstanceBufferCPUCopy: boolean);
@@ -44420,7 +44825,6 @@ declare module "ue" {
         private __tid_LevelCapture__: boolean;
     }
     
-    enum ELevelEditor2DAxis { X, Y, Z, ELevelEditor2DAxis_MAX, __typeKeyDoNoAccess}
     class Mode2DLayer {
         constructor();
         constructor(Name: string, Depth: number);
@@ -44514,10 +44918,6 @@ declare module "ue" {
         
     }
 
-    enum ELabelAnchorMode { LabelAnchorMode_TopLeft, LabelAnchorMode_TopCenter, LabelAnchorMode_TopRight, LabelAnchorMode_CenterLeft, LabelAnchorMode_Centered, LabelAnchorMode_CenterRight, LabelAnchorMode_BottomLeft, LabelAnchorMode_BottomCenter, LabelAnchorMode_BottomRight, LabelAnchorMode_MAX, __typeKeyDoNoAccess}
-    enum EPlayOnBuildMode { PlayOnBuild_Always, PlayOnBuild_Never, PlayOnBuild_Default, PlayOnBuild_IfEditorBuiltLocally, PlayOnBuild_MAX, __typeKeyDoNoAccess}
-    enum EPlayOnLaunchConfiguration { LaunchConfig_Default, LaunchConfig_Debug, LaunchConfig_Development, LaunchConfig_Test, LaunchConfig_Shipping, LaunchConfig_MAX, __typeKeyDoNoAccess}
-    enum EPlayNetMode { PIE_Standalone, PIE_ListenServer, PIE_Client, PIE_StandaloneWithServer, PIE_MAX, __typeKeyDoNoAccess}
     enum NetworkEmulationTarget { Server, Client, Any, NetworkEmulationTarget_MAX, __typeKeyDoNoAccess}
     class NetworkEmulationPacketSettings {
         constructor();
@@ -44549,9 +44949,6 @@ declare module "ue" {
         private __tid_LevelEditorPlayNetworkEmulationSettings__: boolean;
     }
     
-    enum ELaunchModeType { LaunchMode_OnDevice, LaunchMode_MAX, __typeKeyDoNoAccess}
-    enum EPlayModeLocations { PlayLocation_CurrentCameraLocation, PlayLocation_DefaultPlayerStart, PlayLocation_MAX, __typeKeyDoNoAccess}
-    enum EPlayModeType { PlayMode_InViewPort, PlayMode_InEditorFloating, PlayMode_InMobilePreview, PlayMode_InTargetedMobilePreview, PlayMode_InVulkanPreview, PlayMode_InNewProcess, PlayMode_InVR, PlayMode_Simulate, PlayMode_Count, PlayMode_MAX, __typeKeyDoNoAccess}
     class PlayScreenResolution {
         constructor();
         constructor(Description: string, Width: number, Height: number, AspectRatio: string, bCanSwapAspectRatio: boolean, ProfileName: string);
@@ -44634,9 +45031,6 @@ declare module "ue" {
         private __tid_LevelEditorPlaySettings__: boolean;
     }
     
-    enum EWASDType { WASD_Always, WASD_RMBOnly, WASD_Never, WASD_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeFoliageEditorControlType { IgnoreCtrl, RequireCtrl, RequireNoCtrl, ELandscapeFoliageEditorControlType_MAX, __typeKeyDoNoAccess}
-    enum EScrollGestureDirection { UseSystemSetting, Standard, Natural, EScrollGestureDirection_MAX, __typeKeyDoNoAccess}
     class SnapToSurfaceSettings {
         constructor();
         constructor(bEnabled: boolean, SnapOffsetExtent: number, bSnapRotation: boolean);
@@ -44651,9 +45045,6 @@ declare module "ue" {
         private __tid_SnapToSurfaceSettings__: boolean;
     }
     
-    enum ERotationGridMode { GridMode_DivisionsOf360, GridMode_Common, GridMode_MAX, __typeKeyDoNoAccess}
-    enum EMeasuringToolUnits { MeasureUnits_Centimeters, MeasureUnits_Meters, MeasureUnits_Kilometers, MeasureUnits_MAX, __typeKeyDoNoAccess}
-    enum ELevelViewportType { LVT_OrthoXY, LVT_OrthoXZ, LVT_OrthoYZ, LVT_Perspective, LVT_OrthoFreelook, LVT_OrthoNegativeXY, LVT_OrthoNegativeXZ, LVT_OrthoNegativeYZ, LVT_MAX, LVT_None, __typeKeyDoNoAccess}
     class ExposureSettings {
         constructor();
         constructor(FixedEV100: number, bFixed: boolean);
@@ -45337,9 +45728,6 @@ declare module "ue" {
         private __tid_ListViewBase__: boolean;
     }
     
-    enum EOrientation { Orient_Horizontal, Orient_Vertical, Orient_MAX, __typeKeyDoNoAccess}
-    enum ESelectionMode { None, Single, SingleToggle, Multi, ESelectionMode_MAX, __typeKeyDoNoAccess}
-    enum EConsumeMouseWheel { WhenScrollingPossible, Always, Never, EConsumeMouseWheel_MAX, __typeKeyDoNoAccess}
     class ListView extends UE.ListViewBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Orientation: UE.EOrientation;
@@ -45395,7 +45783,6 @@ declare module "ue" {
         private __tid_ListViewDesignerPreviewItem__: boolean;
     }
     
-    enum ELiveCodingStartupMode { Automatic, AutomaticButHidden, Manual, ELiveCodingStartupMode_MAX, __typeKeyDoNoAccess}
     class LiveCodingSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bEnabled: boolean;
@@ -45466,7 +45853,6 @@ declare module "ue" {
         private __tid_LiveLinkController__: boolean;
     }
     
-    enum ELiveLinkSourceMode { Latest, EngineTime, Timecode, ELiveLinkSourceMode_MAX, __typeKeyDoNoAccess}
     class LiveLinkSourceBufferManagementSettings {
         constructor();
         constructor(ValidEngineTime: number, EngineTimeOffset: number, TimecodeFrameRate: UE.FrameRate, bGenerateSubFrame: boolean, SourceTimecodeFrameRate: UE.FrameRate, ValidTimecodeFrame: number, TimecodeFrameOffset: number, LatestOffset: number, MaxNumberOfFrameToBuffered: number, bKeepAtLeastOneFrame: boolean);
@@ -45647,8 +46033,6 @@ declare module "ue" {
         private __tid_LocalizationDashboardSettings__: boolean;
     }
     
-    enum ELocalizationTargetConflictStatus { Unknown, ConflictsPresent, Clear, ELocalizationTargetConflictStatus_MAX, __typeKeyDoNoAccess}
-    enum ELocalizationGatherPathRoot { Auto, Engine, Project, ELocalizationGatherPathRoot_MAX, __typeKeyDoNoAccess}
     class GatherTextSearchDirectory {
         constructor();
         constructor(PathRoot: UE.ELocalizationGatherPathRoot, Path: string);
@@ -45788,7 +46172,6 @@ declare module "ue" {
         private __tid_GatherTextFromMetaDataConfiguration__: boolean;
     }
     
-    enum ELocalizedTextCollapseMode { IdenticalTextIdAndSource, IdenticalPackageIdTextIdAndSource, IdenticalNamespaceAndSource, ELocalizedTextCollapseMode_MAX, __typeKeyDoNoAccess}
     class LocalizationExportingSettings {
         constructor();
         constructor(CollapseMode: UE.ELocalizedTextCollapseMode, ShouldPersistCommentsOnExport: boolean, ShouldAddSourceLocationsAsComments: boolean);
@@ -45942,7 +46325,6 @@ declare module "ue" {
         private __tid_LocalProfiles__: boolean;
     }
     
-    enum ELocationAccuracy { LA_ThreeKilometers, LA_OneKilometer, LA_HundredMeters, LA_TenMeters, LA_Best, LA_Navigation, LA_MAX, __typeKeyDoNoAccess}
     class LocationServicesData {
         constructor();
         constructor(Timestamp: number, Longitude: number, Latitude: number, HorizontalAccuracy: number, VerticalAccuracy: number, Altitude: number);
@@ -46085,8 +46467,6 @@ declare module "ue" {
         private __tid_LuminApplicationLifecycleComponent__: boolean;
     }
     
-    enum ELuminARLineTraceChannel { None, FeaturePoint, InfinitePlane, PlaneUsingExtent, PlaneUsingBoundaryPolygon, FeaturePointWithSurfaceNormal, ELuminARLineTraceChannel_MAX, __typeKeyDoNoAccess}
-    enum ELuminARTrackingState { Tracking, NotTracking, StoppedTracking, ELuminARTrackingState_MAX, __typeKeyDoNoAccess}
     class LuminARLightEstimate {
         constructor();
         constructor(bIsValid: boolean, PixelIntensity: number, RGBScaleFactor: UE.Vector);
@@ -46113,7 +46493,6 @@ declare module "ue" {
         private __tid_LuminARFrameFunctionLibrary__: boolean;
     }
     
-    enum EMagicLeapPlaneQueryFlags { Vertical, Horizontal, Arbitrary, OrientToGravity, PreferInner, Ceiling, Floor, Wall, Polygons, EMagicLeapPlaneQueryFlags_MAX, __typeKeyDoNoAccess}
     class LuminARSessionConfig extends UE.ARSessionConfig {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MaxPlaneQueryResults: number;
@@ -46149,9 +46528,6 @@ declare module "ue" {
         private __tid_LuminARUObjectManager__: boolean;
     }
     
-    enum ELuminFrameTimingHint { Unspecified, Maximum, FPS_60, FPS_120, ELuminFrameTimingHint_MAX, __typeKeyDoNoAccess}
-    enum ELuminPrivilege { Invalid, BatteryInfo, CameraCapture, WorldReconstruction, InAppPurchase, AudioCaptureMic, DrmCertificates, Occlusion, LowLatencyLightwear, Internet, IdentityRead, BackgroundDownload, BackgroundUpload, MediaDrm, Media, MediaMetadata, PowerInfo, LocalAreaNetwork, VoiceInput, Documents, ConnectBackgroundMusicService, RegisterBackgroundMusicService, PwFoundObjRead, NormalNotificationsUsage, MusicService, ControllerPose, ScreensProvider, GesturesSubscribe, GesturesConfig, AddressBookRead, AddressBookWrite, CoarseLocation, HandMesh, WifiStatusRead, ELuminPrivilege_MAX, __typeKeyDoNoAccess}
-    enum ELuminComponentSubElementType { FileExtension, MimeType, Mode, MusicAttribute, Schema, ELuminComponentSubElementType_MAX, __typeKeyDoNoAccess}
     class LuminComponentSubElement {
         constructor();
         constructor(ElementType: UE.ELuminComponentSubElementType, Value: string);
@@ -46165,7 +46541,6 @@ declare module "ue" {
         private __tid_LuminComponentSubElement__: boolean;
     }
     
-    enum ELuminComponentType { Universe, Fullscreen, SearchProvider, MusicService, Screens, ScreensImmersive, Console, SystemUI, ELuminComponentType_MAX, __typeKeyDoNoAccess}
     class LuminComponentElement {
         constructor();
         constructor(Name: string, VisibleName: string, ExecutableName: string, ComponentType: UE.ELuminComponentType, ExtraComponentSubElements: TArray<UE.LuminComponentSubElement>);
@@ -46213,7 +46588,6 @@ declare module "ue" {
         private __tid_LuminRuntimeSettings__: boolean;
     }
     
-    enum EMagicLeapAutoPinType { OnlyOnDataRestoration, Always, Never, EMagicLeapAutoPinType_MAX, __typeKeyDoNoAccess}
     class MagicLeapARPinSaveGame extends UE.SaveGame {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PinnedID: UE.Guid;
@@ -46254,7 +46628,6 @@ declare module "ue" {
         private __tid_MagicLeapARPinComponent__: boolean;
     }
     
-    enum EMagicLeapPassableWorldError { None, LowMapQuality, UnableToLocalize, Unavailable, PrivilegeDenied, InvalidParam, UnspecifiedFailure, PrivilegeRequestPending, EMagicLeapPassableWorldError_MAX, __typeKeyDoNoAccess}
     class MagicLeapARPinFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static CreateTracker() : UE.EMagicLeapPassableWorldError;
@@ -46282,14 +46655,6 @@ declare module "ue" {
         private __tid_MagicLeapAudioFunctionLibrary__: boolean;
     }
     
-    enum EMagicLeapControllerTrackingMode { InputService, CoordinateFrameUID, EMagicLeapControllerTrackingMode_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapControllerLEDPattern { None, Clock01, Clock02, Clock03, Clock04, Clock05, Clock06, Clock07, Clock08, Clock09, Clock10, Clock11, Clock12, Clock01_07, Clock02_08, Clock03_09, Clock04_10, Clock05_11, Clock06_12, EMagicLeapControllerLEDPattern_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapControllerLEDColor { BrightMissionRed, PastelMissionRed, BrightFloridaOrange, PastelFloridaOrange, BrightLunaYellow, PastelLunaYellow, BrightNebulaPink, PastelNebulaPink, BrightCosmicPurple, PastelCosmicPurple, BrightMysticBlue, PastelMysticBlue, BrightCelestialBlue, PastelCelestialBlue, BrightShaggleGreen, PastelShaggleGreen, EMagicLeapControllerLEDColor_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapControllerLEDEffect { RotateCW, RotateCCW, Pulse, PaintCW, PaintCCW, Blink, EMagicLeapControllerLEDEffect_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapControllerLEDSpeed { Slow, Medium, Fast, EMagicLeapControllerLEDSpeed_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapControllerHapticPattern { None, Click, Bump, DoubleClick, Buzz, Tick, ForceDown, ForceUp, ForceDwell, SecondForceDown, EMagicLeapControllerHapticPattern_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapControllerHapticIntensity { Low, Medium, High, EMagicLeapControllerHapticIntensity_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapControllerType { None, Device, MobileApp, EMagicLeapControllerType_MAX, __typeKeyDoNoAccess}
     class MagicLeapControllerFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static GetControllerMapping(ControllerIndex: number, Hand: $Ref<UE.EControllerHand>) : boolean;
@@ -46343,7 +46708,6 @@ declare module "ue" {
         private __tid_MagicLeapEyeBlinkState__: boolean;
     }
     
-    enum EMagicLeapEyeTrackingCalibrationStatus { None, Bad, Good, EMagicLeapEyeTrackingCalibrationStatus_MAX, __typeKeyDoNoAccess}
     class MagicLeapEyeTrackerFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static GetCalibrationStatus() : UE.EMagicLeapEyeTrackingCalibrationStatus;
@@ -46389,9 +46753,6 @@ declare module "ue" {
         private __tid_MagicLeapHandMeshingFunctionLibrary__: boolean;
     }
     
-    enum EMagicLeapHandTrackingGesture { Finger, Fist, Pinch, Thumb, L, OpenHand, OpenHandBack, Ok, C, NoPose, NoHand, EMagicLeapHandTrackingGesture_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapHandTrackingKeypointFilterLevel { NoFilter, SimpleSmoothing, PredictiveSmoothing, EMagicLeapHandTrackingKeypointFilterLevel_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapHandTrackingGestureFilterLevel { NoFilter, SlightRobustnessToFlicker, MoreRobustnessToFlicker, EMagicLeapHandTrackingGestureFilterLevel_MAX, __typeKeyDoNoAccess}
     class LiveLinkSourceHandle {
         constructor();
         /**
@@ -46402,8 +46763,6 @@ declare module "ue" {
         private __tid_LiveLinkSourceHandle__: boolean;
     }
     
-    enum EMagicLeapGestureTransformSpace { World, Hand, Tracking, EMagicLeapGestureTransformSpace_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapHandTrackingKeypoint { Thumb_Tip, Thumb_IP, Thumb_MCP, Thumb_CMC, Index_Tip, Index_DIP, Index_PIP, Index_MCP, Middle_Tip, Middle_DIP, Middle_PIP, Middle_MCP, Ring_Tip, Ring_DIP, Ring_PIP, Ring_MCP, Pinky_Tip, Pinky_DIP, Pinky_PIP, Pinky_MCP, Wrist_Center, Wrist_Ulnar, Wrist_Radial, Hand_Center, EMagicLeapHandTrackingKeypoint_MAX, __typeKeyDoNoAccess}
     class MagicLeapHandTrackingFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static GetConfiguration(ActiveStaticGestures: $Ref<TArray<UE.EMagicLeapHandTrackingGesture>>, KeypointsFilterLevel: $Ref<UE.EMagicLeapHandTrackingKeypointFilterLevel>, GestureFilterLevel: $Ref<UE.EMagicLeapHandTrackingGestureFilterLevel>, bTrackingEnabled: $Ref<boolean>) : boolean;
@@ -46458,8 +46817,6 @@ declare module "ue" {
         private __tid_MagicLeapHeadTrackingNotificationsComponent__: boolean;
     }
     
-    enum EMagicLeapHeadTrackingMode { PositionAndOrientation, Unavailable, Unknown, EMagicLeapHeadTrackingMode_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapHeadTrackingError { None, NotEnoughFeatures, LowLight, Unknown, EMagicLeapHeadTrackingError_MAX, __typeKeyDoNoAccess}
     class MagicLeapHeadTrackingState {
         constructor();
         constructor(Mode: UE.EMagicLeapHeadTrackingMode, Error: UE.EMagicLeapHeadTrackingError, Confidence: number);
@@ -46474,7 +46831,6 @@ declare module "ue" {
         private __tid_MagicLeapHeadTrackingState__: boolean;
     }
     
-    enum EMagicLeapHeadTrackingMapEvent { Lost, Recovered, RecoveryFailed, NewSession, EMagicLeapHeadTrackingMapEvent_MAX, __typeKeyDoNoAccess}
     class MagicLeapHMDFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static GetHeadTrackingMapEvents(MapEvents: $Ref<TSet<UE.EMagicLeapHeadTrackingMapEvent>>) : boolean;
@@ -46497,8 +46853,6 @@ declare module "ue" {
         private __tid_MagicLeapHMDFunctionLibrary__: boolean;
     }
     
-    enum EMagicLeapIdentityError { Ok, InvalidParam, AllocFailed, PrivilegeDenied, FailedToConnectToLocalService, FailedToConnectToCloudService, CloudAuthentication, InvalidInformationFromCloud, NotLoggedIn, ExpiredCredentials, FailedToGetUserProfile, Unauthorized, CertificateError, RejectedByCloud, AlreadyLoggedIn, ModifyIsNotSupported, NetworkError, UnspecifiedFailure, EMagicLeapIdentityError_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapIdentityKey { GivenName, FamilyName, Email, Bio, PhoneNumber, Avatar2D, Avatar3D, Unknown, EMagicLeapIdentityKey_MAX, __typeKeyDoNoAccess}
     class MagicLeapIdentityAttribute {
         constructor();
         constructor(Attribute: UE.EMagicLeapIdentityKey, Value: string);
@@ -46562,7 +46916,6 @@ declare module "ue" {
         private __tid_MagicLeapImageTrackerFunctionLibrary__: boolean;
     }
     
-    enum EMagicLeapMeshState { New, Updated, Deleted, Unchanged, EMagicLeapMeshState_MAX, __typeKeyDoNoAccess}
     class MagicLeapMeshBlockInfo {
         constructor();
         constructor(BlockID: UE.Guid, BlockPosition: UE.Vector, BlockOrientation: UE.Rotator, BlockDimensions: UE.Vector, Timestamp: UE.Timespan, BlockState: UE.EMagicLeapMeshState);
@@ -46593,7 +46946,6 @@ declare module "ue" {
         private __tid_MagicLeapTrackingMeshInfo__: boolean;
     }
     
-    enum EMagicLeapMeshLOD { Minimum, Medium, Maximum, EMagicLeapMeshLOD_MAX, __typeKeyDoNoAccess}
     class MagicLeapMeshBlockRequest {
         constructor();
         constructor(BlockID: UE.Guid, LevelOfDetail: UE.EMagicLeapMeshLOD);
@@ -46723,7 +47075,6 @@ declare module "ue" {
         private __tid_MagicLeapPlanesFunctionLibrary__: boolean;
     }
     
-    enum EMagicLeapPrivilege { Invalid, BatteryInfo, CameraCapture, WorldReconstruction, InAppPurchase, AudioCaptureMic, DrmCertificates, Occlusion, LowLatencyLightwear, Internet, IdentityRead, BackgroundDownload, BackgroundUpload, MediaDrm, Media, MediaMetadata, PowerInfo, LocalAreaNetwork, VoiceInput, Documents, ConnectBackgroundMusicService, RegisterBackgroundMusicService, PwFoundObjRead, NormalNotificationsUsage, MusicService, ControllerPose, ScreensProvider, GesturesSubscribe, GesturesConfig, AddressBookRead, AddressBookWrite, CoarseLocation, HandMesh, WifiStatusRead, EMagicLeapPrivilege_MAX, __typeKeyDoNoAccess}
     class MagicLeapPrivilegesFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static CheckPrivilege(Privilege: UE.EMagicLeapPrivilege) : boolean;
@@ -46736,7 +47087,6 @@ declare module "ue" {
         private __tid_MagicLeapPrivilegesFunctionLibrary__: boolean;
     }
     
-    enum EMagicLeapRaycastResultState { RequestFailed, NoCollision, HitUnobserved, HitObserved, EMagicLeapRaycastResultState_MAX, __typeKeyDoNoAccess}
     class MagicLeapRaycastHitResult {
         constructor();
         constructor(HitState: UE.EMagicLeapRaycastResultState, HitPoint: UE.Vector, Normal: UE.Vector, Confidence: number, UserData: number);
@@ -46847,8 +47197,6 @@ declare module "ue" {
         private __tid_MagicLeapSettings__: boolean;
     }
     
-    enum EMagicLeapTouchpadGestureType { None, Tap, ForceTapDown, ForceTapUp, ForceDwell, SecondForceDown, LongHold, RadialScroll, Swipe, Scroll, Pinch, EMagicLeapTouchpadGestureType_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapTouchpadGestureDirection { None, Up, Down, Left, Right, In, Out, Clockwise, CounterClockwise, EMagicLeapTouchpadGestureDirection_MAX, __typeKeyDoNoAccess}
     class MagicLeapTouchpadGesture {
         constructor();
         constructor(Hand: UE.EControllerHand, MotionSource: string, Type: UE.EMagicLeapTouchpadGestureType, Direction: UE.EMagicLeapTouchpadGestureDirection, PositionAndForce: UE.Vector, Speed: number, Distance: number, FingerGap: number, Radius: number, Angle: number);
@@ -46910,7 +47258,6 @@ declare module "ue" {
         private __tid_SomeData__: boolean;
     }
     
-    enum EToTest { V0, V1, V13, EToTest_MAX, __typeKeyDoNoAccess}
     class MainObject extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SomeData: UE.SomeData;
@@ -46929,14 +47276,12 @@ declare module "ue" {
         Callback__DelegateSignature(A: string) : boolean;
         DefaultTest(Str?: string /* = "i am default" */, I?: number /* = 10 */, Vec?: UE.Vector /* = 1.100000,2.200000,3.300000 */) : void;
         Div(a: number, b: number) : number;
-        Div__puerts_mixin__(a: number, b: number) : number;
         EnumTest(E: UE.EToTest) : void;
         Foo() : string;
         GetData() : TArray<number>;
         GetInts() : TArray<number>;
         GetStrings() : TArray<string>;
         Mult(a: number, b: number) : number;
-        Mult__puerts_mixin__(a: number, b: number) : number;
         NameTest(Name: string) : void;
         PassJsFunctionAsDelegate(Callback: $Delegate<(A: string) => boolean>) : void;
         PrintState() : void;
@@ -46977,8 +47322,6 @@ declare module "ue" {
         private __tid_MasterAudioSubmixCaptureProtocol__: boolean;
     }
     
-    enum EMaterialUsage { MATUSAGE_SkeletalMesh, MATUSAGE_ParticleSprites, MATUSAGE_BeamTrails, MATUSAGE_MeshParticles, MATUSAGE_StaticLighting, MATUSAGE_MorphTargets, MATUSAGE_SplineMesh, MATUSAGE_InstancedStaticMeshes, MATUSAGE_GeometryCollections, MATUSAGE_Clothing, MATUSAGE_NiagaraSprites, MATUSAGE_NiagaraRibbons, MATUSAGE_NiagaraMeshParticles, MATUSAGE_GeometryCache, MATUSAGE_Water, MATUSAGE_HairStrands, MATUSAGE_MAX, __typeKeyDoNoAccess}
-    enum EMaterialProperty { MP_EmissiveColor, MP_Opacity, MP_OpacityMask, MP_DiffuseColor, MP_SpecularColor, MP_BaseColor, MP_Metallic, MP_Specular, MP_Roughness, MP_Normal, MP_WorldPositionOffset, MP_WorldDisplacement, MP_TessellationMultiplier, MP_SubsurfaceColor, MP_CustomData0, MP_CustomData1, MP_AmbientOcclusion, MP_Refraction, MP_CustomizedUVs0, MP_CustomizedUVs1, MP_CustomizedUVs2, MP_CustomizedUVs3, MP_CustomizedUVs4, MP_CustomizedUVs5, MP_CustomizedUVs6, MP_CustomizedUVs7, MP_PixelDepthOffset, MP_ShadingModel, MP_MaterialAttributes, MP_CustomOutput, MP_MAX, __typeKeyDoNoAccess}
     class MaterialEditingLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         GetScalarParameterSource(Material: $Nullable<UE.MaterialInterface>, ParameterName: string, ParameterSource: $Ref<UE.SoftObjectPath>) : boolean;
@@ -47223,7 +47566,6 @@ declare module "ue" {
         private __tid_MaterialExpressionAdd__: boolean;
     }
     
-    enum EMaterialSamplerType { SAMPLERTYPE_Color, SAMPLERTYPE_Grayscale, SAMPLERTYPE_Alpha, SAMPLERTYPE_Normal, SAMPLERTYPE_Masks, SAMPLERTYPE_DistanceFieldFont, SAMPLERTYPE_LinearColor, SAMPLERTYPE_LinearGrayscale, SAMPLERTYPE_Data, SAMPLERTYPE_External, SAMPLERTYPE_VirtualColor, SAMPLERTYPE_VirtualGrayscale, SAMPLERTYPE_VirtualAlpha, SAMPLERTYPE_VirtualNormal, SAMPLERTYPE_VirtualMasks, SAMPLERTYPE_VirtualLinearColor, SAMPLERTYPE_VirtualLinearGrayscale, SAMPLERTYPE_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionTextureBase extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Texture: UE.Texture;
@@ -47236,8 +47578,6 @@ declare module "ue" {
         private __tid_MaterialExpressionTextureBase__: boolean;
     }
     
-    enum ETextureMipValueMode { TMVM_None, TMVM_MipLevel, TMVM_MipBias, TMVM_Derivative, TMVM_MAX, __typeKeyDoNoAccess}
-    enum ESamplerSourceMode { SSM_FromTextureAsset, SSM_Wrap_WorldGroupSettings, SSM_Clamp_WorldGroupSettings, SSM_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionTextureSample extends UE.MaterialExpressionTextureBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Coordinates: UE.ExpressionInput;
@@ -47281,7 +47621,6 @@ declare module "ue" {
         private __tid_MaterialExpressionTextureSampleParameter2D__: boolean;
     }
     
-    enum ETextureColorChannel { TCC_Red, TCC_Green, TCC_Blue, TCC_Alpha, TCC_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionAntialiasedTextureMask extends UE.MaterialExpressionTextureSampleParameter2D {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Threshold: number;
@@ -47443,7 +47782,6 @@ declare module "ue" {
         private __tid_MaterialExpressionBlackBody__: boolean;
     }
     
-    enum EMaterialAttributeBlend { Blend, UseA, UseB, EMaterialAttributeBlend_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionBlendMaterialAttributes extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         A: UE.MaterialAttributesInput;
@@ -47537,7 +47875,6 @@ declare module "ue" {
         private __tid_MaterialExpressionVectorParameter__: boolean;
     }
     
-    enum EChannelMaskParameterColor { Red, Green, Blue, Alpha, EChannelMaskParameterColor_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionChannelMaskParameter extends UE.MaterialExpressionVectorParameter {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MaskChannel: UE.EChannelMaskParameterColor;
@@ -47549,7 +47886,6 @@ declare module "ue" {
         private __tid_MaterialExpressionChannelMaskParameter__: boolean;
     }
     
-    enum EClampMode { CMODE_Clamp, CMODE_ClampMin, CMODE_ClampMax, CMODE_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionClamp extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Input: UE.ExpressionInput;
@@ -47702,7 +48038,6 @@ declare module "ue" {
         private __tid_MaterialExpressionCurveAtlasRowParameter__: boolean;
     }
     
-    enum ECustomMaterialOutputType { CMOT_Float1, CMOT_Float2, CMOT_Float3, CMOT_Float4, CMOT_MAX, __typeKeyDoNoAccess}
     class CustomInput {
         constructor();
         constructor(InputName: string, Input: UE.ExpressionInput);
@@ -47801,7 +48136,6 @@ declare module "ue" {
         private __tid_MaterialExpressionDepthFade__: boolean;
     }
     
-    enum EDepthOfFieldFunctionValue { TDOF_NearAndFarMask, TDOF_NearMask, TDOF_FarMask, TDOF_CircleOfConfusionRadius, TDOF_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionDepthOfFieldFunction extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         FunctionValue: UE.EDepthOfFieldFunctionValue;
@@ -48000,7 +48334,6 @@ declare module "ue" {
         private __tid_MaterialExpressionFresnel__: boolean;
     }
     
-    enum EFunctionInputType { FunctionInput_Scalar, FunctionInput_Vector2, FunctionInput_Vector3, FunctionInput_Vector4, FunctionInput_Texture2D, FunctionInput_TextureCube, FunctionInput_Texture2DArray, FunctionInput_VolumeTexture, FunctionInput_StaticBool, FunctionInput_MaterialAttributes, FunctionInput_TextureExternal, FunctionInput_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionFunctionInput extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Preview: UE.ExpressionInput;
@@ -48107,7 +48440,6 @@ declare module "ue" {
         private __tid_MaterialExpressionLandscapeGrassOutput__: boolean;
     }
     
-    enum ELandscapeLayerBlendType { LB_WeightBlend, LB_AlphaBlend, LB_HeightBlend, LB_MAX, __typeKeyDoNoAccess}
     class LayerBlendInput {
         constructor();
         constructor(LayerName: string, BlendType: UE.ELandscapeLayerBlendType, LayerInput: UE.ExpressionInput, HeightInput: UE.ExpressionInput, PreviewWeight: number, ConstLayerInput: UE.Vector, ConstHeightInput: number);
@@ -48137,8 +48469,6 @@ declare module "ue" {
         private __tid_MaterialExpressionLandscapeLayerBlend__: boolean;
     }
     
-    enum ETerrainCoordMappingType { TCMT_Auto, TCMT_XY, TCMT_XZ, TCMT_YZ, TCMT_MAX, __typeKeyDoNoAccess}
-    enum ELandscapeCustomizedCoordType { LCCT_None, LCCT_CustomUV0, LCCT_CustomUV1, LCCT_CustomUV2, LCCT_WeightMapUV, LCCT_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionLandscapeLayerCoords extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MappingType: UE.ETerrainCoordMappingType;
@@ -48426,7 +48756,6 @@ declare module "ue" {
         private __tid_MaterialExpressionMultiply__: boolean;
     }
     
-    enum ENoiseFunction { NOISEFUNCTION_SimplexTex, NOISEFUNCTION_GradientTex, NOISEFUNCTION_GradientTex3D, NOISEFUNCTION_GradientALU, NOISEFUNCTION_ValueALU, NOISEFUNCTION_VoronoiALU, NOISEFUNCTION_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionNoise extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Position: UE.ExpressionInput;
@@ -48832,7 +49161,6 @@ declare module "ue" {
         private __tid_MaterialExpressionRuntimeVirtualTextureReplace__: boolean;
     }
     
-    enum ERuntimeVirtualTextureMipValueMode { RVTMVM_None, RVTMVM_MipLevel, RVTMVM_MipBias, RVTMVM_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionRuntimeVirtualTextureSample extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Coordinates: UE.ExpressionInput;
@@ -48871,7 +49199,6 @@ declare module "ue" {
         private __tid_MaterialExpressionSaturate__: boolean;
     }
     
-    enum EMaterialSceneAttributeInputMode { Coordinates, OffsetFraction, EMaterialSceneAttributeInputMode_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionSceneColor extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         InputMode: UE.EMaterialSceneAttributeInputMode;
@@ -48907,7 +49234,6 @@ declare module "ue" {
         private __tid_MaterialExpressionSceneTexelSize__: boolean;
     }
     
-    enum ESceneTextureId { PPI_SceneColor, PPI_SceneDepth, PPI_DiffuseColor, PPI_SpecularColor, PPI_SubsurfaceColor, PPI_BaseColor, PPI_Specular, PPI_Metallic, PPI_WorldNormal, PPI_SeparateTranslucency, PPI_Opacity, PPI_Roughness, PPI_MaterialAO, PPI_CustomDepth, PPI_PostProcessInput0, PPI_PostProcessInput1, PPI_PostProcessInput2, PPI_PostProcessInput3, PPI_PostProcessInput4, PPI_PostProcessInput5, PPI_PostProcessInput6, PPI_DecalMask, PPI_ShadingModelColor, PPI_ShadingModelID, PPI_AmbientOcclusion, PPI_CustomStencil, PPI_StoredBaseColor, PPI_StoredSpecular, PPI_Velocity, PPI_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionSceneTexture extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Coordinates: UE.ExpressionInput;
@@ -49089,9 +49415,6 @@ declare module "ue" {
         private __tid_MaterialExpressionSobol__: boolean;
     }
     
-    enum ESpeedTreeGeometryType { STG_Branch, STG_Frond, STG_Leaf, STG_FacingLeaf, STG_Billboard, STG_MAX, __typeKeyDoNoAccess}
-    enum ESpeedTreeWindType { STW_None, STW_Fastest, STW_Fast, STW_Better, STW_Best, STW_Palm, STW_BestPlus, STW_MAX, __typeKeyDoNoAccess}
-    enum ESpeedTreeLODType { STLOD_Pop, STLOD_Smooth, STLOD_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionSpeedTree extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         GeometryInput: UE.ExpressionInput;
@@ -49295,7 +49618,6 @@ declare module "ue" {
         private __tid_MaterialExpressionTextureObjectParameter__: boolean;
     }
     
-    enum EMaterialExposedTextureProperty { TMTM_TextureSize, TMTM_TexelSize, TMTM_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionTextureProperty extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TextureObject: UE.ExpressionInput;
@@ -49356,8 +49678,6 @@ declare module "ue" {
         private __tid_MaterialExpressionTime__: boolean;
     }
     
-    enum EMaterialVectorCoordTransformSource { TRANSFORMSOURCE_Tangent, TRANSFORMSOURCE_Local, TRANSFORMSOURCE_World, TRANSFORMSOURCE_View, TRANSFORMSOURCE_Camera, TRANSFORMSOURCE_ParticleWorld, TRANSFORMSOURCE_MAX, __typeKeyDoNoAccess}
-    enum EMaterialVectorCoordTransform { TRANSFORM_Tangent, TRANSFORM_Local, TRANSFORM_World, TRANSFORM_View, TRANSFORM_Camera, TRANSFORM_ParticleWorld, TRANSFORM_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionTransform extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Input: UE.ExpressionInput;
@@ -49370,7 +49690,6 @@ declare module "ue" {
         private __tid_MaterialExpressionTransform__: boolean;
     }
     
-    enum EMaterialPositionTransformSource { TRANSFORMPOSSOURCE_Local, TRANSFORMPOSSOURCE_World, TRANSFORMPOSSOURCE_TranslatedWorld, TRANSFORMPOSSOURCE_View, TRANSFORMPOSSOURCE_Camera, TRANSFORMPOSSOURCE_Particle, TRANSFORMPOSSOURCE_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionTransformPosition extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Input: UE.ExpressionInput;
@@ -49402,7 +49721,6 @@ declare module "ue" {
         private __tid_MaterialExpressionTwoSidedSign__: boolean;
     }
     
-    enum EVectorNoiseFunction { VNF_CellnoiseALU, VNF_VectorALU, VNF_GradientALU, VNF_CurlALU, VNF_VoronoiALU, VNF_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionVectorNoise extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Position: UE.ExpressionInput;
@@ -49445,7 +49763,6 @@ declare module "ue" {
         private __tid_MaterialExpressionVertexNormalWS__: boolean;
     }
     
-    enum EMaterialExposedViewProperty { MEVP_BufferSize, MEVP_FieldOfView, MEVP_TanHalfFieldOfView, MEVP_ViewSize, MEVP_WorldSpaceViewPosition, MEVP_WorldSpaceCameraPosition, MEVP_ViewportOffset, MEVP_TemporalSampleCount, MEVP_TemporalSampleIndex, MEVP_TemporalSampleOffset, MEVP_RuntimeVirtualTextureOutputLevel, MEVP_RuntimeVirtualTextureOutputDerivative, MEVP_PreExposure, MEVP_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionViewProperty extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Property: UE.EMaterialExposedViewProperty;
@@ -49476,7 +49793,6 @@ declare module "ue" {
         private __tid_MaterialExpressionVirtualTextureFeatureSwitch__: boolean;
     }
     
-    enum EWorldPositionIncludedOffsets { WPT_Default, WPT_ExcludeAllShaderOffsets, WPT_CameraRelative, WPT_CameraRelativeNoOffsets, WPT_MAX, __typeKeyDoNoAccess}
     class MaterialExpressionWorldPosition extends UE.MaterialExpression {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         WorldPositionShaderOffset: UE.EWorldPositionIncludedOffsets;
@@ -49707,7 +50023,6 @@ declare module "ue" {
         private __tid_MaterialInstanceThumbnailRenderer__: boolean;
     }
     
-    enum EMaterialBakeMethod { IndividualMaterial, AtlasMaterial, BinnedMaterial, EMaterialBakeMethod_MAX, __typeKeyDoNoAccess}
     class MaterialMergeOptions extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Method: UE.EMaterialBakeMethod;
@@ -49759,7 +50074,6 @@ declare module "ue" {
         private __tid_MaterialParameterCollectionFactoryNew__: boolean;
     }
     
-    enum EMobileCSMQuality { NoFiltering, PCF_1x1, PCF_2x2, EMobileCSMQuality_MAX, __typeKeyDoNoAccess}
     class MaterialQualityOverrides {
         constructor();
         constructor(bDiscardQualityDuringCook: boolean, bEnableOverride: boolean, bForceFullyRough: boolean, bForceNonMetal: boolean, bForceDisableLMDirectionality: boolean, bForceLQReflections: boolean, bDisableMaterialNormalCalculation: boolean, MobileCSMQuality: UE.EMobileCSMQuality);
@@ -49885,7 +50199,6 @@ declare module "ue" {
         private __tid_MediaPlaylist__: boolean;
     }
     
-    enum EMediaPlayerTrack { Audio, Caption, Metadata, Script, Subtitle, Text, Video, EMediaPlayerTrack_MAX, __typeKeyDoNoAccess}
     class MediaPlayerTrackOptions {
         constructor();
         constructor(Audio: number, Caption: number, Metadata: number, Script: number, Subtitle: number, Text: number, Video: number);
@@ -49904,7 +50217,6 @@ declare module "ue" {
         private __tid_MediaPlayerTrackOptions__: boolean;
     }
     
-    enum EMediaPlayerOptionBooleanOverride { UseMediaPlayerSetting, Enabled, Disabled, EMediaPlayerOptionBooleanOverride_MAX, __typeKeyDoNoAccess}
     class MediaPlayerOptions {
         constructor();
         constructor(Tracks: UE.MediaPlayerTrackOptions, SeekTime: UE.Timespan, PlayOnOpen: UE.EMediaPlayerOptionBooleanOverride, Loop: UE.EMediaPlayerOptionBooleanOverride);
@@ -50044,7 +50356,6 @@ declare module "ue" {
         private __tid_MediaPlayerEditorMediaContext__: boolean;
     }
     
-    enum EMediaPlayerEditorScale { Fill, Fit, Original, EMediaPlayerEditorScale_MAX, __typeKeyDoNoAccess}
     class MediaPlayerEditorSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DesiredPlayerName: string;
@@ -50066,8 +50377,6 @@ declare module "ue" {
         private __tid_MediaPlayerFactoryNew__: boolean;
     }
     
-    enum EMediaPlayerRecordingNumerationStyle { AppendFrameNumber, AppendSampleTime, EMediaPlayerRecordingNumerationStyle_MAX, __typeKeyDoNoAccess}
-    enum EMediaPlayerRecordingImageFormat { PNG, JPEG, BMP, EXR, EMediaPlayerRecordingImageFormat_MAX, __typeKeyDoNoAccess}
     class MediaPlayerRecordingSettings {
         constructor();
         constructor(bActive: boolean, bRecordMediaFrame: boolean, BaseFilename: string, NumerationStyle: UE.EMediaPlayerRecordingNumerationStyle, ImageFormat: UE.EMediaPlayerRecordingImageFormat, CompressionQuality: number, bResetAlpha: boolean);
@@ -50117,8 +50426,6 @@ declare module "ue" {
         private __tid_MediaSequenceRecorderSettings__: boolean;
     }
     
-    enum EMediaSoundChannels { Mono, Stereo, Surround, EMediaSoundChannels_MAX, __typeKeyDoNoAccess}
-    enum EMediaSoundComponentFFTSize { Min_64, Small_256, Medium_512, Large_1024, EMediaSoundComponentFFTSize_MAX, __typeKeyDoNoAccess}
     class MediaSoundComponentSpectralData {
         constructor();
         constructor(FrequencyHz: number, Magnitude: number);
@@ -50183,7 +50490,6 @@ declare module "ue" {
         private __tid_MediaTextureFactoryNew__: boolean;
     }
     
-    enum EMenuPlacement { MenuPlacement_BelowAnchor, MenuPlacement_CenteredBelowAnchor, MenuPlacement_BelowRightAnchor, MenuPlacement_ComboBox, MenuPlacement_ComboBoxRight, MenuPlacement_MenuRight, MenuPlacement_AboveAnchor, MenuPlacement_CenteredAboveAnchor, MenuPlacement_AboveRightAnchor, MenuPlacement_MenuLeft, MenuPlacement_Center, MenuPlacement_RightLeftCenter, MenuPlacement_MatchBottomLeft, MenuPlacement_MAX, __typeKeyDoNoAccess}
     class MenuAnchor extends UE.ContentWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MenuClass: UE.Class;
@@ -50227,7 +50533,6 @@ declare module "ue" {
         private __tid_MeshDescription__: boolean;
     }
     
-    enum EMeshInstancingReplacementMethod { RemoveOriginalActors, KeepOriginalActorsAsEditorOnly, EMeshInstancingReplacementMethod_MAX, __typeKeyDoNoAccess}
     class MeshInstancingSettings {
         constructor();
         constructor(ActorClassToUse: UE.Class, InstanceReplacementThreshold: number, MeshReplacementMethod: UE.EMeshInstancingReplacementMethod, bSkipMeshesWithVertexColors: boolean, bUseHLODVolumes: boolean, ISMComponentToUse: UE.Class);
@@ -50368,8 +50673,6 @@ declare module "ue" {
         private __tid_MeshSurfacePointToolMouseBehavior__: boolean;
     }
     
-    enum EMagicLeapMeshType { Triangles, PointCloud, EMagicLeapMeshType_MAX, __typeKeyDoNoAccess}
-    enum EMagicLeapMeshVertexColorMode { None, Confidence, Block, LOD, EMagicLeapMeshVertexColorMode_MAX, __typeKeyDoNoAccess}
     class MeshTrackerComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnMeshTrackerUpdated: $MulticastDelegate<(ID: UE.Guid, Vertices: TArray<UE.Vector>, Triangles: TArray<number>, Normals: TArray<UE.Vector>, Confidence: TArray<number>) => void>;
@@ -50403,7 +50706,6 @@ declare module "ue" {
         private __tid_MeshTrackerComponent__: boolean;
     }
     
-    enum EVertexPaintAxis { X, Y, Z, EVertexPaintAxis_MAX, __typeKeyDoNoAccess}
     class MeshVertexPainterKismetLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static PaintVerticesLerpAlongAxis(StaticMeshComponent: $Nullable<UE.StaticMeshComponent>, StartColor: UE.LinearColor, EndColor: UE.LinearColor, Axis: UE.EVertexPaintAxis, bConvertToSRGB?: boolean /* = true */) : void;
@@ -50473,7 +50775,6 @@ declare module "ue" {
         class MixinSuperTestDerived_C extends UE.Game.StarterContent.MixinSuperTestBase.MixinSuperTestBase_C {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             Foo() : void;
-            Foo__puerts_mixin__() : void;
             static StaticClass(): Class;
             static Find(OrigInName: string, Outer?: Object): MixinSuperTestDerived_C;
             static Load(InName: string): MixinSuperTestDerived_C;
@@ -50490,7 +50791,6 @@ declare module "ue" {
             DefaultSceneRoot: UE.SceneComponent;
             ExecuteUbergraph_MixinTest(EntryPoint: number) : void;
             Log(P: string) : void;
-            Log__puerts_mixin__(P: string) : void;
             ReceiveBeginPlay() : void;
             static StaticClass(): Class;
             static Find(OrigInName: string, Outer?: Object): MixinTest_C;
@@ -50566,7 +50866,6 @@ declare module "ue" {
         private __tid_MockAI_BT__: boolean;
     }
     
-    enum EMeshTrackerVertexColorMode { None, Confidence, Block, EMeshTrackerVertexColorMode_MAX, __typeKeyDoNoAccess}
     class MockDataMeshTrackerComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnMeshTrackerUpdated: $MulticastDelegate<(Index: number, Vertices: TArray<UE.Vector>, Triangles: TArray<number>, Normals: TArray<UE.Vector>, Confidence: TArray<number>) => void>;
@@ -50635,7 +50934,7 @@ declare module "ue" {
         private __tid_ModelFactory__: boolean;
     }
     
-    enum ETrackingStatus { NotTracked, InertialOnly, Tracked, ETrackingStatus_MAX, __typeKeyDoNoAccess}
+    enum ModulationParamMode { MPM_Normal, MPM_Abs, MPM_Direct, MPM_MAX, __typeKeyDoNoAccess}
     class MotionControllerComponent extends UE.PrimitiveComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PlayerIndex: number;
@@ -50920,7 +51219,6 @@ declare module "ue" {
         private __tid_MovieSceneTransformMask__: boolean;
     }
     
-    enum EShow3DTrajectory { EST_OnlyWhenSelected, EST_Always, EST_Never, EST_MAX, __typeKeyDoNoAccess}
     class MovieScene3DTransformSection extends UE.MovieSceneSection {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TransformMask: UE.MovieSceneTransformMask;
@@ -51112,7 +51410,6 @@ declare module "ue" {
         private __tid_MovieSceneBoolTrack__: boolean;
     }
     
-    enum EMovieSceneBuiltInEasing { Linear, SinIn, SinOut, SinInOut, QuadIn, QuadOut, QuadInOut, CubicIn, CubicOut, CubicInOut, QuartIn, QuartOut, QuartInOut, QuintIn, QuintOut, QuintInOut, ExpoIn, ExpoOut, ExpoInOut, CircIn, CircOut, CircInOut, EMovieSceneBuiltInEasing_MAX, __typeKeyDoNoAccess}
     class MovieSceneBuiltInEasingFunction extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Type: UE.EMovieSceneBuiltInEasing;
@@ -51611,7 +51908,6 @@ declare module "ue" {
         private __tid_MovieSceneEventSection__: boolean;
     }
     
-    enum EFireEventsAtPosition { AtStartOfEvaluation, AtEndOfEvaluation, AfterSpawn, EFireEventsAtPosition_MAX, __typeKeyDoNoAccess}
     class MovieSceneEventTrack extends UE.MovieSceneNameableTrack {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bFireEventsWhenForwards: boolean;
@@ -51784,7 +52080,6 @@ declare module "ue" {
         private __tid_MovieSceneKeyStructType__: boolean;
     }
     
-    enum ELevelVisibility { Visible, Hidden, ELevelVisibility_MAX, __typeKeyDoNoAccess}
     class MovieSceneLevelVisibilitySection extends UE.MovieSceneSection {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Visibility: UE.ELevelVisibility;
@@ -52262,7 +52557,6 @@ declare module "ue" {
         private __tid_MovieSceneUserImportFBXSettings__: boolean;
     }
     
-    enum EThumbnailQuality { Draft, Normal, Best, EThumbnailQuality_MAX, __typeKeyDoNoAccess}
     class MovieSceneUserThumbnailSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bDrawThumbnails: boolean;
@@ -52354,7 +52648,6 @@ declare module "ue" {
         private __tid_MultiClickSequenceInputBehavior__: boolean;
     }
     
-    enum ETextWrappingPolicy { DefaultWrapping, AllowPerCharacterWrapping, ETextWrappingPolicy_MAX, __typeKeyDoNoAccess}
     class TextLayoutWidget extends UE.Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ShapedTextOptions: UE.ShapedTextOptions;
@@ -52912,8 +53205,6 @@ declare module "ue" {
         private __tid_NavigationSystemModuleConfig__: boolean;
     }
     
-    enum ENavDataGatheringModeConfig { Invalid, Instant, Lazy, ENavDataGatheringModeConfig_MAX, __typeKeyDoNoAccess}
-    enum FNavigationSystemRunMode { InvalidMode, GameMode, EditorMode, SimulationMode, PIEMode, FNavigationSystemRunMode_MAX, __typeKeyDoNoAccess}
     class NavMeshBoundsVolume extends UE.Volume {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SupportedAgents: UE.NavAgentSelector;
@@ -52924,7 +53215,6 @@ declare module "ue" {
         private __tid_NavMeshBoundsVolume__: boolean;
     }
     
-    enum ENavigationQueryResult { Invalid, Error, Fail, Success, ENavigationQueryResult_MAX, __typeKeyDoNoAccess}
     class NavigationSystemV1 extends UE.NavigationSystemBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MainNavData: UE.NavigationData;
@@ -52990,7 +53280,6 @@ declare module "ue" {
         private __tid_NavTestRenderingComponent__: boolean;
     }
     
-    enum ENavCostDisplay { TotalCost, HeuristicOnly, RealCostOnly, ENavCostDisplay_MAX, __typeKeyDoNoAccess}
     class NavigationTestingActor extends UE.Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CapsuleComponent: UE.CapsuleComponent;
@@ -53030,7 +53319,6 @@ declare module "ue" {
         private __tid_NavigationTestingActor__: boolean;
     }
     
-    enum ENavLinkDirection { BothWays, LeftToRight, RightToLeft, ENavLinkDirection_MAX, __typeKeyDoNoAccess}
     class NavigationLinkBase {
         constructor();
         constructor(LeftProjectHeight: number, MaxFallDownLength: number, SnapRadius: number, SnapHeight: number, SupportedAgents: UE.NavAgentSelector, bSupportsAgent0: boolean, bSupportsAgent1: boolean, bSupportsAgent2: boolean, bSupportsAgent3: boolean, bSupportsAgent4: boolean, bSupportsAgent5: boolean, bSupportsAgent6: boolean, bSupportsAgent7: boolean, bSupportsAgent8: boolean, bSupportsAgent9: boolean, bSupportsAgent10: boolean, bSupportsAgent11: boolean, bSupportsAgent12: boolean, bSupportsAgent13: boolean, bSupportsAgent14: boolean, bSupportsAgent15: boolean, Description: string, Direction: UE.ENavLinkDirection, bUseSnapHeight: boolean, bSnapToCheapestArea: boolean, bCustomFlag0: boolean, bCustomFlag1: boolean, bCustomFlag2: boolean, bCustomFlag3: boolean, bCustomFlag4: boolean, bCustomFlag5: boolean, bCustomFlag6: boolean, bCustomFlag7: boolean, AreaClass: UE.Class);
@@ -53280,7 +53568,6 @@ declare module "ue" {
         private __tid_NavRelevantInterface__: boolean;
     }
     
-    enum ENavSystemOverridePolicy { Override, Append, Skip, ENavSystemOverridePolicy_MAX, __typeKeyDoNoAccess}
     class NavSystemConfigOverride extends UE.Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SpriteComponent: UE.BillboardComponent;
@@ -53534,7 +53821,6 @@ declare module "ue" {
         private __tid_ObjectReferencer__: boolean;
     }
     
-    enum EOculusPlatform { PC, Mobile, Length, EOculusPlatform_MAX, __typeKeyDoNoAccess}
     class OculusEditorSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PerfToolIgnoreList: TMap<string, boolean>;
@@ -53547,8 +53833,6 @@ declare module "ue" {
         private __tid_OculusEditorSettings__: boolean;
     }
     
-    enum EFixedFoveatedRenderingLevel { FFR_Off, FFR_Low, FFR_Medium, FFR_High, FFR_HighTop, FFR_MAX, __typeKeyDoNoAccess}
-    enum ETrackedDeviceType { None, HMD, LTouch, RTouch, Touch, DeviceObjectZero, All, ETrackedDeviceType_MAX, __typeKeyDoNoAccess}
     class HmdUserProfileField {
         constructor();
         constructor(FieldName: string, FieldValue: string);
@@ -53580,7 +53864,6 @@ declare module "ue" {
         private __tid_HmdUserProfile__: boolean;
     }
     
-    enum EBoundaryType { Boundary_Outer, Boundary_PlayArea, Boundary_MAX, __typeKeyDoNoAccess}
     class GuardianTestResult {
         constructor();
         constructor(IsTriggering: boolean, DeviceType: UE.ETrackedDeviceType, ClosestDistance: number, ClosestPoint: UE.Vector, ClosestPointNormal: UE.Vector);
@@ -53688,7 +53971,6 @@ declare module "ue" {
         private __tid_OculusHMDRuntimeSettings__: boolean;
     }
     
-    enum EOculusMR_BoundaryType { BT_OuterBoundary, BT_PlayArea, BT_MAX, __typeKeyDoNoAccess}
     class SceneCapture extends UE.Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MeshComp: UE.StaticMeshComponent;
@@ -53700,8 +53982,6 @@ declare module "ue" {
         private __tid_SceneCapture__: boolean;
     }
     
-    enum ESceneCapturePrimitiveRenderMode { PRM_LegacySceneCapture, PRM_RenderScenePrimitives, PRM_UseShowOnlyList, PRM_MAX, __typeKeyDoNoAccess}
-    enum ESceneCaptureSource { SCS_SceneColorHDR, SCS_SceneColorHDRNoAlpha, SCS_FinalColorLDR, SCS_SceneColorSceneDepth, SCS_SceneDepth, SCS_DeviceDepth, SCS_Normal, SCS_BaseColor, SCS_FinalColorHDR, SCS_MAX, __typeKeyDoNoAccess}
     class EngineShowFlagsSetting {
         constructor();
         constructor(ShowFlagName: string, Enabled: boolean);
@@ -53748,7 +54028,6 @@ declare module "ue" {
         private __tid_SceneCaptureComponent__: boolean;
     }
     
-    enum ESceneCaptureCompositeMode { SCCM_Overwrite, SCCM_Additive, SCCM_Composite, SCCM_MAX, __typeKeyDoNoAccess}
     class SceneCaptureComponent2D extends UE.SceneCaptureComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ProjectionType: UE.ECameraProjectionMode;
@@ -53816,12 +54095,6 @@ declare module "ue" {
         private __tid_OculusMR_PlaneMeshComponent__: boolean;
     }
     
-    enum EOculusMR_ClippingReference { CR_TrackingReference, CR_Head, CR_MAX, __typeKeyDoNoAccess}
-    enum EOculusMR_VirtualGreenScreenType { VGS_Off, VGS_OuterBoundary, VGS_PlayArea, VGS_MAX, __typeKeyDoNoAccess}
-    enum EOculusMR_PostProcessEffects { PPE_Off, PPE_On, PPE_MAX, __typeKeyDoNoAccess}
-    enum EOculusMR_CompositionMethod { ExternalComposition, DirectComposition, EOculusMR_MAX, __typeKeyDoNoAccess}
-    enum EOculusMR_CameraDeviceEnum { CD_None, CD_WebCamera0, CD_WebCamera1, CD_ZEDCamera, CD_MAX, __typeKeyDoNoAccess}
-    enum EOculusMR_DepthQuality { DQ_Low, DQ_Medium, DQ_High, DQ_MAX, __typeKeyDoNoAccess}
     class OculusMR_Settings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ClippingReference: UE.EOculusMR_ClippingReference;
@@ -53981,9 +54254,6 @@ declare module "ue" {
         private __tid_RedistPackage__: boolean;
     }
     
-    enum EOculusPlatformTarget { Rift, Quest, Mobile, Length, EOculusPlatformTarget_MAX, __typeKeyDoNoAccess}
-    enum EOculusGamepadEmulation { Off, Twinstick, RightDPad, LeftDPad, Length, EOculusGamepadEmulation_MAX, __typeKeyDoNoAccess}
-    enum EOculusAssetType { Default, Store, Language_Pack, Length, EOculusAssetType_MAX, __typeKeyDoNoAccess}
     class AssetConfig {
         constructor();
         constructor(AssetType: UE.EOculusAssetType, Required: boolean, Name: string, Sku: string);
@@ -54071,7 +54341,6 @@ declare module "ue" {
         private __tid_OnlineBeaconHostObject__: boolean;
     }
     
-    enum EBeaconConnectionState { Invalid, Closed, Pending, Open, EBeaconConnectionState_MAX, __typeKeyDoNoAccess}
     class OnlineBeaconClient extends UE.OnlineBeacon {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BeaconOwner: UE.OnlineBeaconHostObject;
@@ -54152,7 +54421,6 @@ declare module "ue" {
         private __tid_OnlineSessionClient__: boolean;
     }
     
-    enum EFieldOperationType { Field_Multiply, Field_Divide, Field_Add, Field_Substract, Field_Operation_Max, __typeKeyDoNoAccess}
     class OperatorField extends UE.FieldNodeBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Magnitude: number;
@@ -54264,7 +54532,6 @@ declare module "ue" {
         private __tid_PainCausingVolume__: boolean;
     }
     
-    enum EMeshPaintColorViewMode { Normal, RGB, Alpha, Red, Green, Blue, EMeshPaintColorViewMode_MAX, __typeKeyDoNoAccess}
     class PaintBrushSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BrushRadius: number;
@@ -54280,10 +54547,6 @@ declare module "ue" {
         private __tid_PaintBrushSettings__: boolean;
     }
     
-    enum EPaintMode { Vertices, Textures, EPaintMode_MAX, __typeKeyDoNoAccess}
-    enum EMeshPaintMode { PaintColors, PaintWeights, EMeshPaintMode_MAX, __typeKeyDoNoAccess}
-    enum ETextureWeightTypes { AlphaLerp, RGB, ARGB, OneMinusARGB, ETextureWeightTypes_MAX, __typeKeyDoNoAccess}
-    enum ETexturePaintIndex { TextureOne, TextureTwo, TextureThree, TextureFour, TextureFive, ETexturePaintIndex_MAX, __typeKeyDoNoAccess}
     class VertexPaintSettings {
         constructor();
         constructor(MeshPaintMode: UE.EMeshPaintMode, PaintColor: UE.LinearColor, EraseColor: UE.LinearColor, bWriteRed: boolean, bWriteGreen: boolean, bWriteBlue: boolean, bWriteAlpha: boolean, TextureWeightType: UE.ETextureWeightTypes, PaintTextureWeightIndex: UE.ETexturePaintIndex, EraseTextureWeightIndex: UE.ETexturePaintIndex, bPaintOnSpecificLOD: boolean, LODIndex: number);
@@ -54352,9 +54615,6 @@ declare module "ue" {
         private __tid_PaperSpriteSocket__: boolean;
     }
     
-    enum ESpriteCollisionMode { None, Use2DPhysics, Use3DPhysics, ESpriteCollisionMode_MAX, __typeKeyDoNoAccess}
-    enum ESpritePivotMode { Top_Left, Top_Center, Top_Right, Center_Left, Center_Center, Center_Right, Bottom_Left, Bottom_Center, Bottom_Right, Custom, ESpritePivotMode_MAX, __typeKeyDoNoAccess}
-    enum ESpriteShapeType { Box, Circle, Polygon, ESpriteShapeType_MAX, __typeKeyDoNoAccess}
     class SpriteGeometryShape {
         constructor();
         constructor(ShapeType: UE.ESpriteShapeType, Vertices: TArray<UE.Vector2D>, BoxSize: UE.Vector2D, BoxPosition: UE.Vector2D, Rotation: number, bNegativeWinding: boolean);
@@ -54372,7 +54632,6 @@ declare module "ue" {
         private __tid_SpriteGeometryShape__: boolean;
     }
     
-    enum ESpritePolygonMode { SourceBoundingBox, TightBoundingBox, ShrinkWrapped, FullyCustom, Diced, ESpritePolygonMode_MAX, __typeKeyDoNoAccess}
     class SpriteGeometryCollection {
         constructor();
         constructor(Shapes: TArray<UE.SpriteGeometryShape>, GeometryType: UE.ESpritePolygonMode, PixelsPerSubdivisionX: number, PixelsPerSubdivisionY: number, bAvoidVertexMerging: boolean, AlphaThreshold: number, DetailAmount: number, SimplifyEpsilon: number);
@@ -54392,7 +54651,6 @@ declare module "ue" {
         private __tid_SpriteGeometryCollection__: boolean;
     }
     
-    enum EPaperSpriteAtlasPadding { DilateBorder, PadWithZero, EPaperSpriteAtlasPadding_MAX, __typeKeyDoNoAccess}
     class PaperSpriteAtlasSlot {
         constructor();
         constructor(SpriteRef: TSoftObjectPtr<UE.PaperSprite>, AtlasIndex: number, X: number, Y: number, Width: number, Height: number);
@@ -54485,7 +54743,6 @@ declare module "ue" {
         private __tid_PaperFlipbookKeyFrame__: boolean;
     }
     
-    enum EFlipbookCollisionMode { NoCollision, FirstFrameCollision, EachFrameCollision, EFlipbookCollisionMode_MAX, __typeKeyDoNoAccess}
     class PaperFlipbook extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         FramesPerSecond: number;
@@ -54576,7 +54833,6 @@ declare module "ue" {
         private __tid_PaperExtractSpriteGridSettings__: boolean;
     }
     
-    enum ESpriteExtractMode { Auto, Grid, ESpriteExtractMode_MAX, __typeKeyDoNoAccess}
     class PaperExtractSpritesSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SpriteExtractMode: UE.ESpriteExtractMode;
@@ -55002,7 +55258,6 @@ declare module "ue" {
         private __tid_PaperTileLayer__: boolean;
     }
     
-    enum ETileMapProjectionMode { Orthogonal, IsometricDiamond, IsometricStaggered, HexagonalStaggered, ETileMapProjectionMode_MAX, __typeKeyDoNoAccess}
     class PaperTileMap extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MapWidth: number;
@@ -55215,7 +55470,6 @@ declare module "ue" {
         private __tid_ParticleModuleAttractorLine__: boolean;
     }
     
-    enum EAttractorParticleSelectionMethod { EAPSM_Random, EAPSM_Sequential, EAPSM_MAX, __typeKeyDoNoAccess}
     class ParticleModuleAttractorParticle extends UE.ParticleModuleAttractorBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         EmitterName: string;
@@ -55278,7 +55532,6 @@ declare module "ue" {
         private __tid_ParticleModuleBeamBase__: boolean;
     }
     
-    enum BeamModifierType { PEB2MT_Source, PEB2MT_Target, PEB2MT_MAX, __typeKeyDoNoAccess}
     class BeamModifierOptions {
         constructor();
         constructor(bModify: boolean, bScale: boolean, bLock: boolean);
@@ -55339,8 +55592,6 @@ declare module "ue" {
         private __tid_ParticleModuleBeamNoise__: boolean;
     }
     
-    enum Beam2SourceTargetMethod { PEB2STM_Default, PEB2STM_UserSet, PEB2STM_Emitter, PEB2STM_Particle, PEB2STM_Actor, PEB2STM_MAX, __typeKeyDoNoAccess}
-    enum Beam2SourceTargetTangentMethod { PEB2STTM_Direct, PEB2STTM_UserSet, PEB2STTM_Distribution, PEB2STTM_Emitter, PEB2STTM_MAX, __typeKeyDoNoAccess}
     class ParticleModuleBeamSource extends UE.ParticleModuleBeamBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SourceMethod: UE.Beam2SourceTargetMethod;
@@ -55389,7 +55640,6 @@ declare module "ue" {
         private __tid_ParticleModuleCameraBase__: boolean;
     }
     
-    enum EParticleCameraOffsetUpdateMethod { EPCOUM_DirectSet, EPCOUM_Additive, EPCOUM_Scalar, EPCOUM_MAX, __typeKeyDoNoAccess}
     class ParticleModuleCameraOffset extends UE.ParticleModuleCameraBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CameraOffset: UE.RawDistributionFloat;
@@ -55411,7 +55661,6 @@ declare module "ue" {
         private __tid_ParticleModuleCollisionBase__: boolean;
     }
     
-    enum EParticleCollisionComplete { EPCC_Kill, EPCC_Freeze, EPCC_HaltCollisions, EPCC_FreezeTranslation, EPCC_FreezeRotation, EPCC_FreezeMovement, EPCC_MAX, __typeKeyDoNoAccess}
     class ParticleModuleCollision extends UE.ParticleModuleCollisionBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DampingFactor: UE.RawDistributionVector;
@@ -55438,8 +55687,6 @@ declare module "ue" {
         private __tid_ParticleModuleCollision__: boolean;
     }
     
-    enum EParticleCollisionResponse { Bounce, Stop, Kill, EParticleCollisionResponse_MAX, __typeKeyDoNoAccess}
-    enum EParticleCollisionMode { SceneDepth, DistanceField, EParticleCollisionMode_MAX, __typeKeyDoNoAccess}
     class ParticleModuleCollisionGPU extends UE.ParticleModuleCollisionBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Resilience: UE.RawDistributionFloat;
@@ -55692,7 +55939,6 @@ declare module "ue" {
         private __tid_ParticleModuleLocation_Seeded__: boolean;
     }
     
-    enum ELocationBoneSocketSource { BONESOCKETSOURCE_Bones, BONESOCKETSOURCE_Sockets, BONESOCKETSOURCE_MAX, __typeKeyDoNoAccess}
     class LocationBoneSocketInfo {
         constructor();
         constructor(BoneSocketName: string, Offset: UE.Vector);
@@ -55706,7 +55952,6 @@ declare module "ue" {
         private __tid_LocationBoneSocketInfo__: boolean;
     }
     
-    enum ELocationBoneSocketSelectionMethod { BONESOCKETSEL_Sequential, BONESOCKETSEL_Random, BONESOCKETSEL_MAX, __typeKeyDoNoAccess}
     class ParticleModuleLocationBoneSocket extends UE.ParticleModuleLocationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SourceType: UE.ELocationBoneSocketSource;
@@ -55740,7 +55985,6 @@ declare module "ue" {
         private __tid_ParticleModuleLocationDirect__: boolean;
     }
     
-    enum ELocationEmitterSelectionMethod { ELESM_Random, ELESM_Sequential, ELESM_MAX, __typeKeyDoNoAccess}
     class ParticleModuleLocationEmitter extends UE.ParticleModuleLocationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         EmitterName: string;
@@ -55785,7 +56029,6 @@ declare module "ue" {
         private __tid_ParticleModuleLocationPrimitiveBase__: boolean;
     }
     
-    enum CylinderHeightAxis { PMLPC_HEIGHTAXIS_X, PMLPC_HEIGHTAXIS_Y, PMLPC_HEIGHTAXIS_Z, PMLPC_HEIGHTAXIS_MAX, __typeKeyDoNoAccess}
     class ParticleModuleLocationPrimitiveCylinder extends UE.ParticleModuleLocationPrimitiveBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RadialVelocity: boolean;
@@ -55842,7 +56085,6 @@ declare module "ue" {
         private __tid_ParticleModuleLocationPrimitiveTriangle__: boolean;
     }
     
-    enum ELocationSkelVertSurfaceSource { VERTSURFACESOURCE_Vert, VERTSURFACESOURCE_Surface, VERTSURFACESOURCE_MAX, __typeKeyDoNoAccess}
     class ParticleModuleLocationSkelVertSurface extends UE.ParticleModuleLocationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SourceType: UE.ELocationSkelVertSurfaceSource;
@@ -55996,7 +56238,6 @@ declare module "ue" {
         private __tid_ParticleModuleOrientationBase__: boolean;
     }
     
-    enum EParticleAxisLock { EPAL_NONE, EPAL_X, EPAL_Y, EPAL_Z, EPAL_NEGATIVE_X, EPAL_NEGATIVE_Y, EPAL_NEGATIVE_Z, EPAL_ROTATE_X, EPAL_ROTATE_Y, EPAL_ROTATE_Z, EPAL_MAX, __typeKeyDoNoAccess}
     class ParticleModuleOrientationAxisLock extends UE.ParticleModuleOrientationBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         LockAxisFlags: UE.EParticleAxisLock;
@@ -56016,7 +56257,6 @@ declare module "ue" {
         private __tid_ParticleModuleParameterBase__: boolean;
     }
     
-    enum EEmitterDynamicParameterValue { EDPV_UserSet, EDPV_AutoSet, EDPV_VelocityX, EDPV_VelocityY, EDPV_VelocityZ, EDPV_VelocityMag, EDPV_MAX, __typeKeyDoNoAccess}
     class EmitterDynamicParameter {
         constructor();
         constructor(ParamName: string, bUseEmitterTime: boolean, bSpawnTimeOnly: boolean, ValueMethod: UE.EEmitterDynamicParameterValue, bScaleVelocityByParamValue: boolean, ParamValue: UE.RawDistributionFloat);
@@ -56277,8 +56517,6 @@ declare module "ue" {
         private __tid_ParticleModuleTrailBase__: boolean;
     }
     
-    enum ETrail2SourceMethod { PET2SRCM_Default, PET2SRCM_Particle, PET2SRCM_Actor, PET2SRCM_MAX, __typeKeyDoNoAccess}
-    enum EParticleSourceSelectionMethod { EPSSM_Random, EPSSM_Sequential, EPSSM_MAX, __typeKeyDoNoAccess}
     class ParticleModuleTrailSource extends UE.ParticleModuleTrailBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SourceMethod: UE.ETrail2SourceMethod;
@@ -56312,8 +56550,6 @@ declare module "ue" {
         private __tid_ParticleModuleTypeDataAnimTrail__: boolean;
     }
     
-    enum EBeam2Method { PEB2M_Distance, PEB2M_Target, PEB2M_Branch, PEB2M_MAX, __typeKeyDoNoAccess}
-    enum EBeamTaperMethod { PEBTM_None, PEBTM_Full, PEBTM_Partial, PEBTM_MAX, __typeKeyDoNoAccess}
     class ParticleModuleTypeDataBeam2 extends UE.ParticleModuleTypeDataBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         BeamMethod: UE.EBeam2Method;
@@ -56491,9 +56727,6 @@ declare module "ue" {
         private __tid_ParticleModuleTypeDataGpu__: boolean;
     }
     
-    enum EMeshScreenAlignment { PSMA_MeshFaceCameraWithRoll, PSMA_MeshFaceCameraWithSpin, PSMA_MeshFaceCameraWithLockedAxis, PSMA_MAX, __typeKeyDoNoAccess}
-    enum EMeshCameraFacingUpAxis { CameraFacing_NoneUP, CameraFacing_ZUp, CameraFacing_NegativeZUp, CameraFacing_YUp, CameraFacing_NegativeYUp, CameraFacing_MAX, __typeKeyDoNoAccess}
-    enum EMeshCameraFacingOptions { XAxisFacing_NoUp, XAxisFacing_ZUp, XAxisFacing_NegativeZUp, XAxisFacing_YUp, XAxisFacing_NegativeYUp, LockedAxis_ZAxisFacing, LockedAxis_NegativeZAxisFacing, LockedAxis_YAxisFacing, LockedAxis_NegativeYAxisFacing, VelocityAligned_ZAxisFacing, VelocityAligned_NegativeZAxisFacing, VelocityAligned_YAxisFacing, VelocityAligned_NegativeYAxisFacing, EMeshCameraFacingOptions_MAX, __typeKeyDoNoAccess}
     class ParticleModuleTypeDataMesh extends UE.ParticleModuleTypeDataBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Mesh: UE.StaticMesh;
@@ -56520,7 +56753,6 @@ declare module "ue" {
         private __tid_ParticleModuleTypeDataMesh__: boolean;
     }
     
-    enum ETrailsRenderAxisOption { Trails_CameraUp, Trails_SourceUp, Trails_WorldUp, Trails_MAX, __typeKeyDoNoAccess}
     class ParticleModuleTypeDataRibbon extends UE.ParticleModuleTypeDataBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MaxTessellationBetweenParticles: number;
@@ -56699,6 +56931,7 @@ declare module "ue" {
         private __tid_ParticleModuleVelocityOverLifetime__: boolean;
     }
     
+    enum ParticleReplayState { PRS_Disabled, PRS_Capturing, PRS_Replaying, PRS_MAX, __typeKeyDoNoAccess}
     class ParticleSpriteEmitter extends UE.ParticleEmitter {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -56770,8 +57003,6 @@ declare module "ue" {
         private __tid_PartyReservation__: boolean;
     }
     
-    enum EClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ReservationRemoveMembers, EClientRequestType_MAX, __typeKeyDoNoAccess}
-    enum EPartyReservationResult { NoResult, RequestPending, GeneralError, PartyLimitReached, IncorrectPlayerCount, RequestTimedOut, ReservationDuplicate, ReservationNotFound, ReservationAccepted, ReservationDenied, ReservationDenied_CrossPlayRestriction, ReservationDenied_Banned, ReservationRequestCanceled, ReservationInvalid, BadSessionId, ReservationDenied_ContainsExistingPlayers, EPartyReservationResult_MAX, __typeKeyDoNoAccess}
     class PartyBeaconClient extends UE.OnlineBeaconClient {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DestSessionId: string;
@@ -56879,7 +57110,6 @@ declare module "ue" {
         private __tid_PawnAction_Move__: boolean;
     }
     
-    enum EPawnActionFailHandling { RequireSuccess, IgnoreFailure, EPawnActionFailHandling_MAX, __typeKeyDoNoAccess}
     class PawnAction_Repeat extends UE.PawnAction {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ActionToRepeat: UE.PawnAction;
@@ -57092,7 +57322,6 @@ declare module "ue" {
         private __tid_PEDirectoryWatcher__: boolean;
     }
     
-    enum EAnimationViewportCameraFollowMode { None, Bounds, Bone, EAnimationViewportCameraFollowMode_MAX, __typeKeyDoNoAccess}
     class ViewportConfigOptions {
         constructor();
         constructor(ViewModeIndex: UE.EViewModeIndex, ViewFOV: number, CameraFollowMode: UE.EAnimationViewportCameraFollowMode, CameraFollowBoneName: string);
@@ -57266,8 +57495,6 @@ declare module "ue" {
         private __tid_PhysicalMaterialFactoryNew__: boolean;
     }
     
-    enum EPhysicsAssetEditorRenderMode { Solid, Wireframe, None, EPhysicsAssetEditorRenderMode_MAX, __typeKeyDoNoAccess}
-    enum EPhysicsAssetEditorConstraintViewMode { None, AllPositions, AllLimits, EPhysicsAssetEditorConstraintViewMode_MAX, __typeKeyDoNoAccess}
     class PhysicsAssetEditorOptions extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PhysicsBlend: number;
@@ -57314,8 +57541,6 @@ declare module "ue" {
         private __tid_PhysicsAssetFactory__: boolean;
     }
     
-    enum EPhysAssetFitGeomType { EFG_Box, EFG_Sphyl, EFG_Sphere, EFG_TaperedCapsule, EFG_SingleConvexHull, EFG_MultiConvexHull, EFG_MAX, __typeKeyDoNoAccess}
-    enum EPhysAssetFitVertWeight { EVW_AnyWeight, EVW_DominantWeight, EVW_MAX, __typeKeyDoNoAccess}
     class PhysAssetCreateParams {
         constructor();
         constructor(MinBoneSize: number, MinWeldSize: number, GeomType: UE.EPhysAssetFitGeomType, VertWeight: UE.EPhysAssetFitVertWeight, bAutoOrientToBone: boolean, bCreateConstraints: boolean, bWalkPastSmall: boolean, bBodyForAll: boolean, bDisableCollisionsByDefault: boolean, AngularConstraintMode: UE.EAngularConstraintMotion, HullCount: number, MaxHullVerts: number);
@@ -57379,7 +57604,6 @@ declare module "ue" {
         private __tid_ConstrainComponentPropName__: boolean;
     }
     
-    enum EConstraintFrame { Frame1, Frame2, EConstraintFrame_MAX, __typeKeyDoNoAccess}
     class PhysicsConstraintComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ConstraintActor1: UE.Actor;
@@ -57499,8 +57723,6 @@ declare module "ue" {
         private __tid_RigidBodyErrorCorrection__: boolean;
     }
     
-    enum ESettingsLockedAxis { None, X, Y, Z, Invalid, ESettingsLockedAxis_MAX, __typeKeyDoNoAccess}
-    enum ESettingsDOF { Full3D, YZPlane, XZPlane, XYPlane, ESettingsDOF_MAX, __typeKeyDoNoAccess}
     class PhysicalSurfaceName {
         constructor();
         constructor(Type: UE.EPhysicalSurface, Name: string);
@@ -57514,9 +57736,6 @@ declare module "ue" {
         private __tid_PhysicalSurfaceName__: boolean;
     }
     
-    enum EChaosThreadingMode { DedicatedThread, TaskGraph, SingleThread, Num, Invalid, EChaosThreadingMode_MAX, __typeKeyDoNoAccess}
-    enum EChaosSolverTickMode { Fixed, Variable, VariableCapped, VariableCappedWithTarget, EChaosSolverTickMode_MAX, __typeKeyDoNoAccess}
-    enum EChaosBufferMode { Double, Triple, Num, Invalid, EChaosBufferMode_MAX, __typeKeyDoNoAccess}
     class ChaosPhysicsSettings {
         constructor();
         constructor(DefaultThreadingModel: UE.EChaosThreadingMode, DedicatedThreadTickMode: UE.EChaosSolverTickMode, DedicatedThreadBufferMode: UE.EChaosBufferMode);
@@ -57626,7 +57845,6 @@ declare module "ue" {
         private __tid_PhysicsThruster__: boolean;
     }
     
-    enum EPIEPreviewDeviceType { Unset, Android, IOS, TVOS, Switch, MAX, __typeKeyDoNoAccess}
     class PIEPreviewDeviceSpecification extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PreviewDeviceType: UE.EPIEPreviewDeviceType;
@@ -57659,7 +57877,6 @@ declare module "ue" {
         private __tid_PIEPreviewSettings__: boolean;
     }
     
-    enum EPinnedCommandListType { Command, CustomWidget, EPinnedCommandListType_MAX, __typeKeyDoNoAccess}
     class PinnedCommandListCommand {
         constructor();
         constructor(Name: string, Binding: string, Type: UE.EPinnedCommandListType);
@@ -57965,7 +58182,6 @@ declare module "ue" {
         private __tid_PlatformEventsComponent__: boolean;
     }
     
-    enum EApplicationState { Unknown, Inactive, Background, Active, EApplicationState_MAX, __typeKeyDoNoAccess}
     class PlatformGameInstance extends UE.GameInstance {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ApplicationWillDeactivateDelegate: $MulticastDelegate<() => void>;
@@ -58160,7 +58376,6 @@ declare module "ue" {
         private __tid_PopulateDialogueWaveFromCharacterSheetCommandlet__: boolean;
     }
     
-    enum EBoneSpaces { WorldSpace, ComponentSpace, EBoneSpaces_MAX, __typeKeyDoNoAccess}
     class PoseableMeshComponent extends UE.SkinnedMeshComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CopyPoseFromSkeletalComponent(InComponentToCopy: $Nullable<UE.SkeletalMeshComponent>) : void;
@@ -58488,7 +58703,6 @@ declare module "ue" {
         private __tid_ProgressBarStyle__: boolean;
     }
     
-    enum EProgressBarFillType { LeftToRight, RightToLeft, FillFromCenter, TopToBottom, BottomToTop, EProgressBarFillType_MAX, __typeKeyDoNoAccess}
     class ProgressBar extends UE.Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         WidgetStyle: UE.ProgressBarStyle;
@@ -58575,10 +58789,6 @@ declare module "ue" {
         private __tid_ProjectileMovementComponent__: boolean;
     }
     
-    enum EProjectPackagingBuild { Always, Never, IfProjectHasCode, IfEditorWasBuiltLocally, EProjectPackagingBuild_MAX, __typeKeyDoNoAccess}
-    enum EProjectPackagingBuildConfigurations { PPBC_Debug, PPBC_DebugGame, PPBC_Development, PPBC_Test, PPBC_Shipping, PPBC_MAX, __typeKeyDoNoAccess}
-    enum EProjectPackagingBlueprintNativizationMethod { Disabled, Inclusive, Exclusive, EProjectPackagingBlueprintNativizationMethod_MAX, __typeKeyDoNoAccess}
-    enum EProjectPackagingInternationalizationPresets { English, EFIGS, EFIGSCJK, CJK, All, EProjectPackagingInternationalizationPresets_MAX, __typeKeyDoNoAccess}
     class ProjectPackagingSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Build: UE.EProjectPackagingBuild;
@@ -58642,7 +58852,6 @@ declare module "ue" {
     }
     
     enum PropertyEditorTestEnum { PropertyEditorTest_Enum1, PropertyEditorTest_Enum2, PropertyEditorTest_Enum3, PropertyEditorTest_Enum4, PropertyEditorTest_Enum5, PropertyEditorTest_Enum6, PropertyEditorTest_MAX, __typeKeyDoNoAccess}
-    enum EditColor { Red, Orange, Yellow, Green, Blue, Indigo, Violet, Pink, Magenta, Cyan, EditColor_MAX, __typeKeyDoNoAccess}
     class PropertyEditorTestSubStruct {
         constructor();
         constructor(FirstProperty: number, SecondProperty: number, CustomizedStructInsideUncustomizedStruct: UE.LinearColor, CustomizedStructInsideUncustomizedStruct2: UE.SoftObjectPath);
@@ -58880,35 +59089,6 @@ declare module "ue" {
         private __tid_PropertyValueVisibility__: boolean;
     }
     
-    namespace Engine.Transient {
-        class PROTO_BP_AnimBlueprint_0_C extends UE.AnimInstance {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            UberGraphFrame: UE.PointerToUberGraphFrame;
-            AnimGraphNode_Root_EE4789C04F85405E748B7B8FE624EA28: UE.AnimNode_Root;
-            AnimGraph(AnimGraph: $Ref<UE.PoseLink>) : void;
-            ExecuteUbergraph_PROTO_BP_AnimBlueprint_0(EntryPoint: number) : void;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): PROTO_BP_AnimBlueprint_0_C;
-            static Load(InName: string): PROTO_BP_AnimBlueprint_0_C;
-        
-            private __tid_PROTO_BP_AnimBlueprint_0_C__: boolean;
-        }
-        
-    }
-
-    namespace Engine.Transient {
-        class PROTO_BP_Blueprint_0_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            DefaultSceneRoot: UE.SceneComponent;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): PROTO_BP_Blueprint_0_C;
-            static Load(InName: string): PROTO_BP_Blueprint_0_C;
-        
-            private __tid_PROTO_BP_Blueprint_0_C__: boolean;
-        }
-        
-    }
-
     class ProxyLODMeshSimplificationSettings extends UE.DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ProxyLODMeshReductionModuleName: string;
@@ -59008,7 +59188,6 @@ declare module "ue" {
         private __tid_RadialForceActor__: boolean;
     }
     
-    enum ESetMaskConditionType { Field_Set_Always, Field_Set_IFF_NOT_Interior, Field_Set_IFF_NOT_Exterior, Field_MaskCondition_Max, __typeKeyDoNoAccess}
     class RadialIntMask extends UE.FieldNodeInt {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Radius: number;
@@ -59077,7 +59256,6 @@ declare module "ue" {
         private __tid_RecastFilter_UseDefaultArea__: boolean;
     }
     
-    enum ERecastPartitioning { Monotone, Watershed, ChunkyMonotone, ERecastPartitioning_MAX, __typeKeyDoNoAccess}
     class RecastNavMesh extends UE.NavigationData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bDrawTriangleEdges: boolean;
@@ -59409,16 +59587,6 @@ declare module "ue" {
         private __tid_RendererOverrideSettings__: boolean;
     }
     
-    enum EMobileMSAASampleCount { One, Two, Four, Eight, EMobileMSAASampleCount_MAX, __typeKeyDoNoAccess}
-    enum ETranslucentSortPolicy { SortByDistance, SortByProjectedZ, SortAlongAxis, ETranslucentSortPolicy_MAX, __typeKeyDoNoAccess}
-    enum ECustomDepthStencil { Disabled, Enabled, EnabledOnDemand, EnabledWithStencil, ECustomDepthStencil_MAX, __typeKeyDoNoAccess}
-    enum EAlphaChannelMode { Disabled, LinearColorSpaceOnly, AllowThroughTonemapper, EAlphaChannelMode_MAX, __typeKeyDoNoAccess}
-    enum EAutoExposureMethodUI { AEM_Histogram, AEM_Basic, AEM_Manual, AEM_MAX, __typeKeyDoNoAccess}
-    enum EAntiAliasingMethod { AAM_None, AAM_FXAA, AAM_TemporalAA, AAM_MSAA, AAM_MAX, __typeKeyDoNoAccess}
-    enum EDefaultBackBufferPixelFormat { DBBPF_B8G8R8A8, DBBPF_A16B16G16R16_DEPRECATED, DBBPF_FloatRGB_DEPRECATED, DBBPF_FloatRGBA, DBBPF_A2B10G10R10, DBBPF_MAX, __typeKeyDoNoAccess}
-    enum EEarlyZPass { None, OpaqueOnly, OpaqueAndMasked, Auto, EEarlyZPass_MAX, __typeKeyDoNoAccess}
-    enum EClearSceneOptions { NoClear, HardwareClear, QuadAtMaxZ, EClearSceneOptions_MAX, __typeKeyDoNoAccess}
-    enum EGBufferFormat { Force8BitsPerChannel, Default, HighPrecisionNormals, Force16BitsPerChannel, EGBufferFormat_MAX, __typeKeyDoNoAccess}
     class RendererSettings extends UE.DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bMobileHDR: boolean;
@@ -59537,36 +59705,6 @@ declare module "ue" {
         private __tid_RenderTargetExporterHDR__: boolean;
     }
     
-    namespace Engine.ArtTools.RenderToTexture.Enums.EIntTypes {
-        enum EIntTypes { int, int2, int3, int4, EIntTypes_MAX, __typeKeyDoNoAccess}
-    }
-
-    namespace Engine.ArtTools.RenderToTexture.Macros.RenderToTextureFunctionLibrary {
-        class RenderToTextureFunctionLibrary_C extends UE.BlueprintFunctionLibrary {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static ["Array to HLSL Int Array"](Type: UE.Engine.ArtTools.RenderToTexture.Enums.EIntTypes.EIntTypes, VariableName: $Ref<string>, int: $Ref<TArray<number>>, int2: $Ref<TArray<UE.Vector2D>>, int3: $Ref<TArray<UE.Vector>>, int4: $Ref<TArray<UE.LinearColor>>, __WorldContext: $Nullable<UE.Object>, String: $Ref<string>) : void;
-            static ["Set Canvas Material Scale and Position"](Size: UE.Vector2D, Position: UE.Vector2D, Scale: number, __WorldContext: $Nullable<UE.Object>, ScreenPosition: $Ref<UE.Vector2D>, ScreenSize: $Ref<UE.Vector2D>) : void;
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): RenderToTextureFunctionLibrary_C;
-            static Load(InName: string): RenderToTextureFunctionLibrary_C;
-        
-            private __tid_RenderToTextureFunctionLibrary_C__: boolean;
-        }
-        
-    }
-
-    namespace Engine.ArtTools.RenderToTexture.Macros.RenderToTextureMacros {
-        class RenderToTextureMacros_C extends UE.Actor {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): RenderToTextureMacros_C;
-            static Load(InName: string): RenderToTextureMacros_C;
-        
-            private __tid_RenderToTextureMacros_C__: boolean;
-        }
-        
-    }
-
     class ReplaceActorCommandlet extends UE.Commandlet {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -59799,8 +59937,6 @@ declare module "ue" {
         private __tid_SafeZoneSlot__: boolean;
     }
     
-    enum EStretch { None, Fill, ScaleToFit, ScaleToFitX, ScaleToFitY, ScaleToFill, ScaleBySafeZone, UserSpecified, EStretch_MAX, __typeKeyDoNoAccess}
-    enum EStretchDirection { Both, DownOnly, UpOnly, EStretchDirection_MAX, __typeKeyDoNoAccess}
     class ScaleBox extends UE.ContentWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Stretch: UE.EStretch;
@@ -59927,7 +60063,6 @@ declare module "ue" {
         private __tid_SceneThumbnailInfo__: boolean;
     }
     
-    enum EThumbnailPrimType { TPT_None, TPT_Sphere, TPT_Cube, TPT_Plane, TPT_Cylinder, TPT_MAX, __typeKeyDoNoAccess}
     class SceneThumbnailInfoWithPrimitive extends UE.SceneThumbnailInfo {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         PrimitiveType: UE.EThumbnailPrimType;
@@ -60001,7 +60136,6 @@ declare module "ue" {
         private __tid_ScrollBoxStyle__: boolean;
     }
     
-    enum EDescendantScrollDestination { IntoView, TopOrLeft, Center, EDescendantScrollDestination_MAX, __typeKeyDoNoAccess}
     class ScrollBox extends UE.PanelWidget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         WidgetStyle: UE.ScrollBoxStyle;
@@ -60128,7 +60262,6 @@ declare module "ue" {
         private __tid_SequenceRecorderGroup__: boolean;
     }
     
-    enum EAudioRecordingMode { None, AudioTrack, EAudioRecordingMode_MAX, __typeKeyDoNoAccess}
     class SequenceRecorderActorFilter {
         constructor();
         constructor(ActorClassesToRecord: TArray<UE.Class>);
@@ -60247,14 +60380,6 @@ declare module "ue" {
         private __tid_SequencerMeshTrail__: boolean;
     }
     
-    enum EAutoChangeMode { AutoKey, AutoTrack, All, None, EAutoChangeMode_MAX, __typeKeyDoNoAccess}
-    enum EAllowEditsMode { AllEdits, AllowSequencerEditsOnly, AllowLevelEditsOnly, EAllowEditsMode_MAX, __typeKeyDoNoAccess}
-    enum EKeyGroupMode { KeyChanged, KeyGroup, KeyAll, EKeyGroupMode_MAX, __typeKeyDoNoAccess}
-    enum EMovieSceneKeyInterpolation { Auto, User, Break, Linear, Constant, EMovieSceneKeyInterpolation_MAX, __typeKeyDoNoAccess}
-    enum ESequencerSpawnPosition { SSP_Origin, SSP_PlaceInFrontOfCamera, SSP_MAX, __typeKeyDoNoAccess}
-    enum ESequencerZoomPosition { SZP_CurrentTime, SZP_MousePosition, SZP_MAX, __typeKeyDoNoAccess}
-    enum ESequencerLoopMode { SLM_NoLoop, SLM_Loop, SLM_LoopSelectionRange, SLM_MAX, __typeKeyDoNoAccess}
-    enum EFrameNumberDisplayFormats { NonDropFrameTimecode, DropFrameTimecode, Seconds, Frames, MAX_Count, EFrameNumberDisplayFormats_MAX, __typeKeyDoNoAccess}
     class SequencerSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         AutoChangeMode: UE.EAutoChangeMode;
@@ -60355,7 +60480,6 @@ declare module "ue" {
         private __tid_ShaderPipelineCacheToolsCommandlet__: boolean;
     }
     
-    enum EShadowMapFlags { SMF_None, SMF_Streamed, SMF_MAX, __typeKeyDoNoAccess}
     class ShadowMapTexture2D extends UE.Texture2D {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ShadowmapFlags: UE.EShadowMapFlags;
@@ -60376,7 +60500,6 @@ declare module "ue" {
         private __tid_SharedProfiles__: boolean;
     }
     
-    enum ESheetAxis { AX_Horizontal, AX_XAxis, AX_YAxis, AX_MAX, __typeKeyDoNoAccess}
     class SheetBuilder extends UE.EditorBrushBuilder {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         X: number;
@@ -60453,7 +60576,6 @@ declare module "ue" {
         private __tid_TireConfig__: boolean;
     }
     
-    enum EWheelSweepType { SimpleAndComplex, Simple, Complex, EWheelSweepType_MAX, __typeKeyDoNoAccess}
     class VehicleWheel extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CollisionMesh: UE.StaticMesh;
@@ -61496,7 +61618,6 @@ declare module "ue" {
         private __tid_SoundNodeModulator__: boolean;
     }
     
-    enum ModulationParamMode { MPM_Normal, MPM_Abs, MPM_Direct, MPM_MAX, __typeKeyDoNoAccess}
     class ModulatorContinuousParams {
         constructor();
         constructor(ParameterName: string, Default: number, MinInput: number, MaxInput: number, MinOutput: number, MaxOutput: number, ParamMode: UE.ModulationParamMode);
@@ -61816,8 +61937,6 @@ declare module "ue" {
         private __tid_SpectatorReservation__: boolean;
     }
     
-    enum ESpectatorClientRequestType { NonePending, ExistingSessionReservation, ReservationUpdate, EmptyServerReservation, Reconnect, Abandon, ESpectatorClientRequestType_MAX, __typeKeyDoNoAccess}
-    enum ESpectatorReservationResult { NoResult, RequestPending, GeneralError, SpectatorLimitReached, IncorrectPlayerCount, RequestTimedOut, ReservationDuplicate, ReservationNotFound, ReservationAccepted, ReservationDenied, ReservationDenied_CrossPlayRestriction, ReservationDenied_Banned, ReservationRequestCanceled, ReservationInvalid, BadSessionId, ReservationDenied_ContainsExistingPlayers, ESpectatorReservationResult_MAX, __typeKeyDoNoAccess}
     class SpectatorBeaconClient extends UE.OnlineBeaconClient {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DestSessionId: string;
@@ -61875,8 +61994,6 @@ declare module "ue" {
         private __tid_SpectatorPawnMovement__: boolean;
     }
     
-    enum EImportGeometryType { IGT_3D, IGT_Billboards, IGT_Both, IGT_MAX, __typeKeyDoNoAccess}
-    enum EImportLODType { ILT_PaintedFoliage, ILT_IndividualActors, ILT_MAX, __typeKeyDoNoAccess}
     class SpeedTreeImportData extends UE.AssetImportData {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TreeScale: number;
@@ -62220,7 +62337,6 @@ declare module "ue" {
         private __tid_SteamVRChaperoneComponent__: boolean;
     }
     
-    enum ESteamVRTrackedDeviceType { Controller, TrackingReference, Other, Invalid, ESteamVRTrackedDeviceType_MAX, __typeKeyDoNoAccess}
     class SteamVRFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static GetHandPositionAndOrientation(ControllerIndex: number, Hand: UE.EControllerHand, OutPosition: $Ref<UE.Vector>, OutOrientation: $Ref<UE.Rotator>) : boolean;
@@ -62258,7 +62374,6 @@ declare module "ue" {
         private __tid_SteamVRActionSet__: boolean;
     }
     
-    enum ESteamVRHand { VR_Left, VR_Right, VR_MAX, __typeKeyDoNoAccess}
     class SteamVRInputOriginInfo {
         constructor();
         constructor(TrackedDeviceIndex: number, RenderModelComponentName: string, TrackedDeviceModel: string);
@@ -62273,7 +62388,6 @@ declare module "ue" {
         private __tid_SteamVRInputOriginInfo__: boolean;
     }
     
-    enum ESteamVRInputStringBits { VR_InputString_Hand, VR_InputString_ControllerType, VR_InputString_InputSource, VR_InputString_All, VR_InputString_MAX, __typeKeyDoNoAccess}
     class SteamVRInputBindingInfo {
         constructor();
         constructor(DevicePathName: string, InputPathName: string, ModeName: string, SlotName: string);
@@ -62320,8 +62434,6 @@ declare module "ue" {
         private __tid_SteamVRFingerSplays__: boolean;
     }
     
-    enum ESkeletalSummaryDataType { VR_SummaryType_FromAnimation, VR_SummaryType_FromDevice, VR_SummaryType_MAX, __typeKeyDoNoAccess}
-    enum EControllerFidelity { VR_ControllerFidelity_Estimated, VR_ControllerFidelity_Full, VR_ControllerFidelity_Partial, VR_ControllerFidelity_MAX, __typeKeyDoNoAccess}
     class SteamVRInputDeviceFunctionLibrary extends UE.BlueprintFunctionLibrary {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static FindSteamVR_Action(ActionName: string, bResult: $Ref<boolean>, FoundAction: $Ref<UE.SteamVRAction>, FoundActionSet: $Ref<UE.SteamVRActionSet>, ActionSet?: string /* = "main" */) : void;
@@ -62391,8 +62503,6 @@ declare module "ue" {
         private __tid_EquirectProps__: boolean;
     }
     
-    enum EStereoLayerType { SLT_WorldLocked, SLT_TrackerLocked, SLT_FaceLocked, SLT_MAX, __typeKeyDoNoAccess}
-    enum EStereoLayerShape { SLSH_QuadLayer, SLSH_CylinderLayer, SLSH_CubemapLayer, SLSH_EquirectLayer, SLSH_MAX, __typeKeyDoNoAccess}
     class StereoLayerComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bLiveTexture: boolean;
@@ -62542,7 +62652,6 @@ declare module "ue" {
         private __tid_StructViewerProjectSettings__: boolean;
     }
     
-    enum EStructViewerDeveloperType { SVDT_None, SVDT_CurrentUser, SVDT_All, SVDT_Max, SVDT_MAX, __typeKeyDoNoAccess}
     class StructViewerSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DisplayInternalStructs: boolean;
@@ -62554,8 +62663,6 @@ declare module "ue" {
         private __tid_StructViewerSettings__: boolean;
     }
     
-    enum ESubmixEffectDynamicsProcessorType { Compressor, Limiter, Expander, Gate, Count, ESubmixEffectDynamicsProcessorType_MAX, __typeKeyDoNoAccess}
-    enum ESubmixEffectDynamicsPeakMode { MeanSquared, RootMeanSquared, Peak, Count, ESubmixEffectDynamicsPeakMode_MAX, __typeKeyDoNoAccess}
     class SubmixEffectDynamicsProcessorSettings {
         constructor();
         constructor(DynamicsProcessorType: UE.ESubmixEffectDynamicsProcessorType, PeakMode: UE.ESubmixEffectDynamicsPeakMode, LookAheadMsec: number, AttackTimeMsec: number, ReleaseTimeMsec: number, ThresholdDb: number, Ratio: number, KneeBandwidthDb: number, InputGainDb: number, OutputGainDb: number, bChannelLinked: boolean, bAnalogMode: boolean);
@@ -63016,6 +63123,10 @@ declare module "ue" {
         private __tid_TestBTTask_SetValue__: boolean;
     }
     
+    namespace Game.StarterContent.TestEnum {
+        enum TestEnum { Blue, Red, Green, TestEnum_MAX, __typeKeyDoNoAccess}
+    }
+
     class TestMovieSceneSection extends UE.MovieSceneSection {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -63099,7 +63210,6 @@ declare module "ue" {
         private __tid_TetrahedronBuilder__: boolean;
     }
     
-    enum ETexAlign { TEXALIGN_None, TEXALIGN_Default, TEXALIGN_Box, TEXALIGN_Planar, TEXALIGN_Fit, TEXALIGN_PlanarAuto, TEXALIGN_PlanarWall, TEXALIGN_PlanarFloor, TEXALIGN_MAX, __typeKeyDoNoAccess}
     class TexAligner extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DefTexAlign: UE.ETexAlign;
@@ -63624,7 +63734,6 @@ declare module "ue" {
         private __tid_TileSheetPaddingFactory__: boolean;
     }
     
-    enum EListItemAlignment { EvenlyDistributed, EvenlySize, EvenlyWide, LeftAligned, RightAligned, CenterAligned, Fill, EListItemAlignment_MAX, __typeKeyDoNoAccess}
     class TileView extends UE.ListView {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         EntryHeight: number;
@@ -63851,7 +63960,6 @@ declare module "ue" {
         private __tid_ToolMenuBase__: boolean;
     }
     
-    enum EMultiBoxType { MenuBar, ToolBar, VerticalToolBar, Menu, ButtonRow, ToolMenuBar, EMultiBoxType_MAX, __typeKeyDoNoAccess}
     class ToolMenuOwner {
         constructor();
         /**
@@ -63874,9 +63982,6 @@ declare module "ue" {
         private __tid_ToolMenuContext__: boolean;
     }
     
-    enum EMultiBlockType { None, ButtonRow, EditableText, Heading, MenuEntry, MenuSeparator, ToolBarButton, ToolBarComboButton, ToolBarSeparator, Widget, EMultiBlockType_MAX, __typeKeyDoNoAccess}
-    enum EUserInterfaceActionType { None, Button, ToggleButton, RadioButton, Check, CollapsedButton, EUserInterfaceActionType_MAX, __typeKeyDoNoAccess}
-    enum EToolMenuInsertType { Default, Before, After, First, EToolMenuInsertType_MAX, __typeKeyDoNoAccess}
     class ToolMenuInsert {
         constructor();
         constructor(Name: string, Position: UE.EToolMenuInsertType);
@@ -64048,7 +64153,6 @@ declare module "ue" {
         private __tid_ToolMenuContextExtensions__: boolean;
     }
     
-    enum EToolMenuStringCommandType { Command, Python, Custom, EToolMenuStringCommandType_MAX, __typeKeyDoNoAccess}
     class ToolMenuStringCommand {
         constructor();
         constructor(Type: UE.EToolMenuStringCommandType, CustomType: string, String: string);
@@ -64085,7 +64189,6 @@ declare module "ue" {
         private __tid_ToolMenuEntryExtensions__: boolean;
     }
     
-    enum ECustomizedToolMenuVisibility { None, Visible, Hidden, ECustomizedToolMenuVisibility_MAX, __typeKeyDoNoAccess}
     class CustomizedToolMenuEntry {
         constructor();
         constructor(Visibility: UE.ECustomizedToolMenuVisibility);
@@ -64466,18 +64569,6 @@ declare module "ue" {
         private __tid_TurnBasedBlueprintLibrary__: boolean;
     }
     
-    namespace Engine.Tutorial.BlueprintTutorials.TutorialAssets.Tutorial_BP_MacroLib {
-        class Tutorial_BP_MacroLib_C extends UE.EditorTutorial {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): Tutorial_BP_MacroLib_C;
-            static Load(InName: string): Tutorial_BP_MacroLib_C;
-        
-            private __tid_Tutorial_BP_MacroLib_C__: boolean;
-        }
-        
-    }
-
     class TutorialSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Categories: TArray<UE.TutorialCategory>;
@@ -64514,7 +64605,6 @@ declare module "ue" {
         private __tid_TutorialStateSettings__: boolean;
     }
     
-    enum ETwitterRequestMethod { TRM_Get, TRM_Post, TRM_Delete, TRM_MAX, __typeKeyDoNoAccess}
     class TwitterIntegrationBase extends UE.PlatformInterfaceBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         AuthorizeAccounts() : boolean;
@@ -64616,7 +64706,6 @@ declare module "ue" {
         private __tid_UInt64Property__: boolean;
     }
     
-    enum EPropertyBindingPermissionLevel { Allow, Prevent, PreventAndWarn, PreventAndError, EPropertyBindingPermissionLevel_MAX, __typeKeyDoNoAccess}
     class WidgetCompilerOptions {
         constructor();
         constructor(bCookSlowConstructionWidgetTree: boolean, bWidgetSupportsDynamicCreation: boolean, bAllowBlueprintTick: boolean, bAllowBlueprintPaint: boolean, PropertyBindingRule: UE.EPropertyBindingPermissionLevel, Rules: TArray<TSoftClassPtr<UE.WidgetCompilerRule>>);
@@ -65113,7 +65202,6 @@ declare module "ue" {
         private __tid_UserDefinedStructEditorData__: boolean;
     }
     
-    enum ERenderFocusRule { Always, NonPointer, NavigationOnly, Never, ERenderFocusRule_MAX, __typeKeyDoNoAccess}
     class HardwareCursorReference {
         constructor();
         constructor(CursorPath: string, HotSpot: UE.Vector2D);
@@ -65127,7 +65215,6 @@ declare module "ue" {
         private __tid_HardwareCursorReference__: boolean;
     }
     
-    enum EUIScalingRule { ShortestSide, LongestSide, Horizontal, Vertical, Custom, EUIScalingRule_MAX, __typeKeyDoNoAccess}
     class UserInterfaceSettings extends UE.DeveloperSettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         RenderFocusRule: UE.ERenderFocusRule;
@@ -65218,7 +65305,6 @@ declare module "ue" {
         private __tid_VariantManagerFactoryNew__: boolean;
     }
     
-    enum EVariantManagerTestEnum { None, FirstOption, SecondOption, ThirdOption, EVariantManagerTestEnum_MAX, __typeKeyDoNoAccess}
     class VariantManagerTestActor extends UE.Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         EnumWithNoDefault: UE.EVariantManagerTestEnum;
@@ -65260,7 +65346,6 @@ declare module "ue" {
         private __tid_VectorExtensionMethods__: boolean;
     }
     
-    enum EVectorFieldConstructionOp { VFCO_Extrude, VFCO_Revolve, VFCO_MAX, __typeKeyDoNoAccess}
     class VectorFieldStatic extends UE.VectorField {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SizeX: number;
@@ -65831,11 +65916,6 @@ declare module "ue" {
         private __tid_VREditorFloatingUICreationContext__: boolean;
     }
     
-    enum EWidgetSpace { World, Screen, EWidgetSpace_MAX, __typeKeyDoNoAccess}
-    enum EWidgetTimingPolicy { RealTime, GameTime, EWidgetTimingPolicy_MAX, __typeKeyDoNoAccess}
-    enum EWindowVisibility { Visible, SelfHitTestInvisible, EWindowVisibility_MAX, __typeKeyDoNoAccess}
-    enum EWidgetBlendMode { Opaque, Masked, Transparent, EWidgetBlendMode_MAX, __typeKeyDoNoAccess}
-    enum EWidgetGeometryMode { Plane, Cylinder, EWidgetGeometryMode_MAX, __typeKeyDoNoAccess}
     class WidgetComponent extends UE.MeshComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Space: UE.EWidgetSpace;
@@ -65916,7 +65996,6 @@ declare module "ue" {
         private __tid_WidgetComponent__: boolean;
     }
     
-    enum EVREditorWidgetDrawingPolicy { Always, Hovering, EVREditorWidgetDrawingPolicy_MAX, __typeKeyDoNoAccess}
     class VREditorWidgetComponent extends UE.WidgetComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DrawingPolicy: UE.EVREditorWidgetDrawingPolicy;
@@ -65974,7 +66053,6 @@ declare module "ue" {
         private __tid_VREditorDockableWindow__: boolean;
     }
     
-    enum EControllerType { Laser, AssistingLaser, UI, Navigation, Unknown, EControllerType_MAX, __typeKeyDoNoAccess}
     class VREditorTeleporter extends UE.Actor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         VRMode: UE.VREditorMode;
@@ -66172,7 +66250,6 @@ declare module "ue" {
         private __tid_VREditorFloatingCameraUI__: boolean;
     }
     
-    enum EInteractorHand { Right, Left, EInteractorHand_MAX, __typeKeyDoNoAccess}
     class VRModeSettings extends UE.VISettings {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bEnableAutoVREditMode: boolean;
@@ -66195,7 +66272,6 @@ declare module "ue" {
         private __tid_VRModeSettings__: boolean;
     }
     
-    enum EGizmoHandleTypes { All, Translate, Rotate, Scale, EGizmoHandleTypes_MAX, __typeKeyDoNoAccess}
     class VRScoutingInteractor extends UE.VREditorInteractor {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         FlyingIndicatorComponent: UE.StaticMeshComponent;
@@ -66253,7 +66329,6 @@ declare module "ue" {
         private __tid_VehicleEngineData__: boolean;
     }
     
-    enum EVehicleDifferential4W { LimitedSlip_4W, LimitedSlip_FrontDrive, LimitedSlip_RearDrive, Open_4W, Open_FrontDrive, Open_RearDrive, EVehicleDifferential4W_MAX, __typeKeyDoNoAccess}
     class VehicleDifferential4WData {
         constructor();
         constructor(DifferentialType: UE.EVehicleDifferential4W, FrontRearSplit: number, FrontLeftRightSplit: number, RearLeftRightSplit: number, CentreBias: number, FrontBias: number, RearBias: number);
@@ -66377,7 +66452,6 @@ declare module "ue" {
         private __tid_WidgetBlueprintFactory__: boolean;
     }
     
-    enum EWindowTitleBarMode { Overlay, VerticalBox, EWindowTitleBarMode_MAX, __typeKeyDoNoAccess}
     class NavigationEvent extends UE.InputEvent {
         constructor();
         /**
@@ -66497,7 +66571,6 @@ declare module "ue" {
         private __tid_WidgetGraphSchema__: boolean;
     }
     
-    enum EWidgetInteractionSource { World, Mouse, CenterScreen, Custom, EWidgetInteractionSource_MAX, __typeKeyDoNoAccess}
     class WidgetInteractionComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         OnHoveredWidgetChanged: $MulticastDelegate<(WidgetComponent: $Nullable<UE.WidgetComponent>, PreviousWidgetComponent: $Nullable<UE.WidgetComponent>) => void>;
@@ -66633,7 +66706,6 @@ declare module "ue" {
         private __tid_WidgetSwitcher__: boolean;
     }
     
-    enum EWindSourceType { Directional, Point, EWindSourceType_MAX, __typeKeyDoNoAccess}
     class WindDirectionalSourceComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Strength: number;
@@ -66666,9 +66738,6 @@ declare module "ue" {
         private __tid_WindDirectionalSource__: boolean;
     }
     
-    enum ECompilerVersion { Default, VisualStudio2015, VisualStudio2017, VisualStudio2019, ECompilerVersion_MAX, __typeKeyDoNoAccess}
-    enum EDefaultGraphicsRHI { DefaultGraphicsRHI_Default, DefaultGraphicsRHI_DX11, DefaultGraphicsRHI_DX12, DefaultGraphicsRHI_Vulkan, DefaultGraphicsRHI_MAX, __typeKeyDoNoAccess}
-    enum EMinimumSupportedOS { MSOS_Vista, MSOS_MAX, __typeKeyDoNoAccess}
     class WindowsTargetSettings extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Compiler: UE.ECompilerVersion;
@@ -66773,7 +66842,6 @@ declare module "ue" {
         private __tid_WorldFactory__: boolean;
     }
     
-    enum EOrthoThumbnailDirection { Top, Bottom, Left, Right, Front, Back, EOrthoThumbnailDirection_MAX, __typeKeyDoNoAccess}
     class WorldThumbnailInfo extends UE.SceneThumbnailInfo {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         CameraMode: UE.ECameraProjectionMode;
