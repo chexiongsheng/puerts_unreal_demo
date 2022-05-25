@@ -24,7 +24,7 @@ struct AutoRegisterForTestClass
             .Property("X", MakeProperty(&TestClass::X))
             .Property("Y", MakeProperty(&TestClass::Y))
             .Variable("StaticInt", MakeVariable(&TestClass::StaticInt))
-            .Variable("Ten", MakeConstVariable(&TestClass::Ten))
+            .Variable("Ten", MakeReadonlyVariable(&TestClass::Ten))
             .Function("Add", MakeFunction(&TestClass::Add))
             .Function("PrintInfo", MakeFunction(&TestClass::PrintInfo))
             .Method("GetSelf", MakeFunction(&TestClass::GetSelf))
