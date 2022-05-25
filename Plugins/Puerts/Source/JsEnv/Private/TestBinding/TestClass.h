@@ -46,4 +46,8 @@ public:
 	int Ref(int32_t & a);
 
 	void ConstRef(const int32_t & a);
+
+    static int StaticInt;
+
+    static const float Ten;
 };

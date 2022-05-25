@@ -27,6 +27,11 @@ obj.OverloadMethod();
 obj.Foo(888);
 //pass object
 TestClass.PrintInfo(obj.GetSelf());
+//static variable
+console.log(TestClass.StaticInt);
+TestClass.StaticInt = 789;
+console.log(TestClass.StaticInt);
+TestClass.PrintInfo(obj.GetSelf());
 //ref
 let r = puerts_1.$ref(999);
 let ret = obj.Ref(r);

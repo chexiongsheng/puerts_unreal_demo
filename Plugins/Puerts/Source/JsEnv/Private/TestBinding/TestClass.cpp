@@ -78,7 +78,7 @@ TestClass * TestClass::GetSelf()
 
 void TestClass::PrintInfo(TestClass * tc)
 {
-	UE_LOG(LogTemp, Warning, TEXT("0 TestClass::PrintInfo(), X = %d, Y = %d"), tc->X, tc->Y);
+	UE_LOG(LogTemp, Warning, TEXT("0 TestClass::PrintInfo(), X = %d, Y = %d, StaticInt=%d"), tc->X, tc->Y, StaticInt);
 }
 
 
@@ -93,3 +93,7 @@ void TestClass::ConstRef(const int32_t & a)
 {
 	UE_LOG(LogTemp, Warning, TEXT("TestClass::ConstRef(%d)"), a);
 }
+
+int TestClass::StaticInt = 0;
+
+const float TestClass::Ten = 10;

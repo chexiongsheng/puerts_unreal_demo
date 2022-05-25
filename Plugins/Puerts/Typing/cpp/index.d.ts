@@ -18,6 +18,8 @@ declare module "cpp" {
         constructor();
         X: number;
         Y: number;
+        static StaticInt: number;
+        static readonly Ten: number;
         static Add(p0: number, p1: number) :number;
         static PrintInfo(p0: $Nullable<TestClass>) :void;
         static Overload() :void;
