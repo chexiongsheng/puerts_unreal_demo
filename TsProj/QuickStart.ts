@@ -139,9 +139,6 @@ bpActor.Bar(testStruct);
 
 //蓝图枚举
 console.log("-------------------------15---------------------------");
-//对于每个枚举，整个程序只需要load一次即可
-blueprint.load(UE.Game.StarterContent.TestEnum.TestEnum);
-//load之后所有地方都可以这么用
 console.log(UE.Game.StarterContent.TestEnum.TestEnum.Blue);
 console.log(UE.Game.StarterContent.TestEnum.TestEnum.Red);
 console.log(UE.Game.StarterContent.TestEnum.TestEnum.Green);
