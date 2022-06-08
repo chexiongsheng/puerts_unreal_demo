@@ -40,11 +40,25 @@ TestClass.StaticInt = 789
 console.log(TestClass.StaticInt)
 TestClass.PrintInfo(obj.GetSelf())
 
-//ref
+//ref & pointer
 let r = $ref(999);
 let ret = obj.Ref(r);
 console.log("$unref:" + $unref(r) + ", ret:" + ret);
 obj.ConstRef(999);
+
+r = $ref(888);
+ret = obj.Ptr(r);
+console.log("$unref:" + $unref(r) + ", ret:" + ret);
+
+let sr = $ref("ts msg for ref");
+obj.StrRef(sr);
+console.log("$unref<string>:" + $unref(sr));
+
+console.log(obj.CStr("ts str"));
+
+sr = $ref("ts msg for ptr");
+obj.StrPtr(sr);
+console.log("$unref<string>:" + $unref(sr));
 
 //js object
 let obj2  = new cpp.AdvanceTestClass(100);

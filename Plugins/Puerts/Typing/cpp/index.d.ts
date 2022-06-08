@@ -28,6 +28,10 @@ declare module "cpp" {
         static Overload(p0: string, p1: number) :void;
         GetSelf() :TestClass;
         Ref(p0: $Ref<number>) :number;
+        StrRef(p0: $Ref<string>) :void;
+        Ptr(p0: $Ref<number>) :number;
+        CStr(p0: $Nullable<string>) :string;
+        StrPtr(p0: $Ref<string>) :void;
         ConstRef(p0: number) :void;
         OverloadMethod() :number;
         OverloadMethod(p0: number) :number;
