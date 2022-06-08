@@ -89,6 +89,30 @@ int TestClass::Ref(int32_t & a)
 	return a + 1;
 }
 
+void TestClass::StrRef(std::string & str)
+{
+    UE_LOG(LogTemp, Warning, TEXT("TestClass::StrRef(%s)"), UTF8_TO_TCHAR(str.c_str()));
+    str += " append by c++";
+}
+
+int TestClass::Ptr(int32_t * a)
+{
+    UE_LOG(LogTemp, Warning, TEXT("TestClass::Ptr(%d)"), *a);
+    ++(*a);
+    return *a + 1;
+}
+
+const char* TestClass::CStr(const char* str)
+{
+    return "hehe..";
+}
+
+void TestClass::StrPtr(std::string * str)
+{
+    UE_LOG(LogTemp, Warning, TEXT("TestClass::StrPtr(%s)"), UTF8_TO_TCHAR((*str).c_str()));
+    *str += " append by c++";
+}
+
 void TestClass::ConstRef(const int32_t & a)
 {
 	UE_LOG(LogTemp, Warning, TEXT("TestClass::ConstRef(%d)"), a);

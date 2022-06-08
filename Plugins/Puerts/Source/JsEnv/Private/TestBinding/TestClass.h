@@ -45,6 +45,14 @@ public:
 
 	int Ref(int32_t & a);
 
+    void StrRef(std::string & str);
+
+    int Ptr(int32_t * a);
+
+    const char* CStr(const char* str);
+
+    void StrPtr(std::string * str);
+
 	void ConstRef(const int32_t & a);
 
     static int StaticInt;
