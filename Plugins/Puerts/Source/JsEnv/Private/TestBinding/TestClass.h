@@ -11,6 +11,16 @@ public:
 	void Foo(int p);
 };
 
+class NoDeleteClass
+{
+public:
+    NoDeleteClass()
+    {
+        UE_LOG(LogTemp, Warning, TEXT("NoDeleteClass"));
+    }
+    ~NoDeleteClass() = delete;
+};
+
 class TestClass : public BaseClass
 {
 public:
@@ -46,6 +56,11 @@ public:
 	int Ref(int32_t & a);
 
     void StrRef(std::string & str);
+
+    void NoEmptyRef(NoDeleteClass & o) const
+    {
+        UE_LOG(LogTemp, Warning, TEXT("NoEmptyRef %p"), &o);
+    }
 
     int Ptr(int32_t * a);
 

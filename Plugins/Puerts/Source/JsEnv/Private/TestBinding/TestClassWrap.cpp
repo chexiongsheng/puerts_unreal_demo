@@ -2,14 +2,20 @@
 #include "Binding.hpp"
 #include "AdvanceTestClass.h"
 
+UsingCppType(NoDeleteClass);
 UsingCppType(BaseClass);
 UsingCppType(TestClass);
 UsingCppType(AdvanceTestClass);
+
 
 struct AutoRegisterForTestClass
 {
     AutoRegisterForTestClass()
     {
+        puerts::DefineClass<NoDeleteClass>()
+            .Constructor()
+            .Register();
+        
         puerts::DefineClass<BaseClass>()
             .Method("Foo", MakeFunction(&BaseClass::Foo))
             .Register();
@@ -28,6 +34,7 @@ struct AutoRegisterForTestClass
             .Function("Add", MakeFunction(&TestClass::Add))
             .Function("PrintInfo", MakeFunction(&TestClass::PrintInfo))
             .Method("GetSelf", MakeFunction(&TestClass::GetSelf))
+            .Method("NoEmptyRef", MakeFunction(&TestClass::NoEmptyRef))
             .Method("Ref", MakeFunction(&TestClass::Ref))
             .Method("StrRef", MakeFunction(&TestClass::StrRef))
             .Method("Ptr", MakeFunction(&TestClass::Ptr))
