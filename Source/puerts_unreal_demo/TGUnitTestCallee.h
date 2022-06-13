@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "TGUnitTestCallee.generated.h"
@@ -73,6 +75,26 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Puerts|TestCase")
 	void CustomStructRefNoRet(FCustomStruct& Data);
+    
+    void IntRef(int& A) const
+    {
+        A = 10;
+    }
+    
+    void IntPtr(int* A) const
+    {
+        *A = 11;
+    }
+    
+    void StdStringRef(std::string& A) const
+    {
+        A = "A";
+    }
+    
+    void StdStringPtr(std::string* A) const
+    {
+        *A = "Z";
+    }
 
     UPROPERTY()
     FVector VP;

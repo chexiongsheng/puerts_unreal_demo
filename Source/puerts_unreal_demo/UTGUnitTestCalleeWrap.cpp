@@ -125,6 +125,10 @@ struct AutoRegisterForUTGUnitTestCallee
             .Method("sConstTArrayRefIntRet", MakeFunction(&UTGUnitTestCallee::ConstTArrayRefIntRet))
             .Method("sTArrayRet", MakeFunction(&UTGUnitTestCallee::TArrayRet))
             .Method("sCustomStructRefNoRet", MakeFunction(&UTGUnitTestCallee::CustomStructRefNoRet))
+            .Method("IntRef", MakeFunction(&UTGUnitTestCallee::IntRef))
+            .Method("IntPtr", MakeFunction(&UTGUnitTestCallee::IntPtr))
+            .Method("StdStringRef", MakeFunction(&UTGUnitTestCallee::StdStringRef))
+            .Method("StdStringPtr", MakeFunction(&UTGUnitTestCallee::StdStringPtr))
             .Property("sVP", MakeProperty(&UTGUnitTestCallee::VP))
             //.Property("sVP", &VPGet, &VPSet)
             .Register();
