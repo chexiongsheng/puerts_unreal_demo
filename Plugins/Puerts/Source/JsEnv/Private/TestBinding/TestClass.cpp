@@ -97,19 +97,20 @@ void TestClass::StrRef(std::string & str)
 
 int TestClass::Ptr(int32_t * a)
 {
-    UE_LOG(LogTemp, Warning, TEXT("TestClass::Ptr(%d)"), *a);
+    UE_LOG(LogTemp, Warning, TEXT("TestClass::Ptr(%d), %p"), *a, a);
     ++(*a);
     return *a + 1;
 }
 
 const char* TestClass::CStr(const char* str)
 {
+    UE_LOG(LogTemp, Warning, TEXT("TestClass::CStr(%s)"), UTF8_TO_TCHAR(str));
     return "hehe..";
 }
 
 void TestClass::StrPtr(std::string * str)
 {
-    UE_LOG(LogTemp, Warning, TEXT("TestClass::StrPtr(%s)"), UTF8_TO_TCHAR((*str).c_str()));
+    UE_LOG(LogTemp, Warning, TEXT("TestClass::StrPtr(%s) %p"), UTF8_TO_TCHAR((*str).c_str()), str);
     *str += " append by c++";
 }
 
