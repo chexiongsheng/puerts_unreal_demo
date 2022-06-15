@@ -13,6 +13,22 @@ declare module "cpp" {
         Foo(p0: number) :void;
     }
 
+    class CppStruct {
+        constructor();
+    }
+
+    class FText {
+        constructor();
+        static FromStringTable(p0: string, p1: string, p2: number) :FText;
+        static FromString(p0: string) :FText;
+        static Format(Fmt: string | FText, ...InArguments: (string | number | FText) []) :FText;
+        ToString() :string;
+    }
+
+    class NoDeleteClass {
+        constructor();
+    }
+
     class TestClass extends BaseClass {
         constructor(p0: number, p1: number);
         constructor();
@@ -27,6 +43,7 @@ declare module "cpp" {
         static Overload(p0: number, p1: number) :void;
         static Overload(p0: string, p1: number) :void;
         GetSelf() :TestClass;
+        NoEmptyRef(p0: $Ref<NoDeleteClass>) :void;
         Ref(p0: $Ref<number>) :number;
         StrRef(p0: $Ref<string>) :void;
         Ptr(p0: $Ref<number>) :number;
