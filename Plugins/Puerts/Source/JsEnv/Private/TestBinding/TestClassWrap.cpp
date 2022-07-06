@@ -1,5 +1,6 @@
 #include "TestClass.h"
 #include "Binding.hpp"
+#include "Object.hpp"
 #include "AdvanceTestClass.h"
 
 UsingCppType(NoDeleteClass);
