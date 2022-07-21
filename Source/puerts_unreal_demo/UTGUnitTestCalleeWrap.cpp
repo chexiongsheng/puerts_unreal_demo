@@ -96,9 +96,8 @@ static void VPSet(const v8::FunctionCallbackInfo<v8::Value>& Info)
 UsingUClass(UTGUnitTestCallee);
 UsingUStruct(FVector);
 UsingUStruct(FCustomStruct);
-UsingTArrayWithName(FVector, "TArray<UE.Vector>");
-//TODO: ts名字得和typeid分开，否则TArray<int>, TArray<float>这些没法区分
-UsingTArrayWithName(int, "TArray<number>");
+UsingContainer(TArray<FVector>);
+UsingContainer(TArray<int>);
 
 struct AutoRegisterForUTGUnitTestCallee
 {
