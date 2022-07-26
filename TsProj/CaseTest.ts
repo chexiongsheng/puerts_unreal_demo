@@ -14,6 +14,10 @@ describe('Test Array', function() {
     });
 });
 
+declare global {
+    function require(name: string): any;
+}
+
 /*
  * 测试path模块，在mocha中使用
  */

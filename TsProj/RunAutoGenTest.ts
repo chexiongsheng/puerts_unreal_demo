@@ -44,4 +44,9 @@ function wrapCode(src: string) {
     return code;
 }
 
+
+declare global {
+    function require(name: string): any;
+}
+
 wrapCode(executeScript)(tgamejs.console, global, require);
