@@ -45,8 +45,4 @@ function wrapCode(src: string) {
 }
 
 
-declare global {
-    function require(name: string): any;
-}
-
-wrapCode(executeScript)(tgamejs.console, global, require);
+wrapCode(executeScript)(tgamejs.console, global, (globalThis as any).require);

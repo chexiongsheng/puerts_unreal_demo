@@ -14,14 +14,10 @@ describe('Test Array', function() {
     });
 });
 
-declare global {
-    function require(name: string): any;
-}
-
 /*
  * 测试path模块，在mocha中使用
  */
-let Path = require('path');
+let Path = (globalThis as any).require('path');
 
 describe('Path Module', function() {
     it('path.resolve should be a function', function() {

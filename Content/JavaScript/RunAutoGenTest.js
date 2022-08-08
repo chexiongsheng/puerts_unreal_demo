@@ -31,5 +31,5 @@ function wrapCode(src) {
     const code = new Function('console', 'global', 'require', src);
     return code;
 }
-wrapCode(executeScript)(tgamejs.console, global, require);
+wrapCode(executeScript)(tgamejs.console, global, globalThis.require);
 //# sourceMappingURL=RunAutoGenTest.js.map

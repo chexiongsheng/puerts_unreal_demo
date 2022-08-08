@@ -17,7 +17,7 @@ describe('Test Array', function () {
 /*
  * 测试path模块，在mocha中使用
  */
-let Path = require('path');
+let Path = globalThis.require('path');
 describe('Path Module', function () {
     it('path.resolve should be a function', function () {
         assert.equal(typeof Path.resolve, typeof function () { });

@@ -44,4 +44,4 @@ function wrapCode(src: string) {
     return code;
 }
 
-wrapCode(executeScript)(console, global, require);
+wrapCode(executeScript)(console, global, (globalThis as any).require);

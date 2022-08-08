@@ -31,5 +31,5 @@ function wrapCode(src) {
     const code = new Function('console', 'global', 'require', src);
     return code;
 }
-wrapCode(executeScript)(console, global, require);
+wrapCode(executeScript)(console, global, globalThis.require);
 //# sourceMappingURL=RunCaseTest.js.map
