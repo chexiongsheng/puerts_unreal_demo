@@ -34,7 +34,7 @@
         static v8::Local<v8::Value> toScript(v8::Local<v8::Context> context, CLS* value)          \
         {                                                                                         \
             return ::puerts::DataTransfer::FindOrAddCData(                                        \
-                context->GetIsolate(), context, puerts::StaticTypeId<CLS>::get(), value, true);   \
+                context->GetIsolate(), context, puerts::DynamicTypeId<CLS>::get(value), value, true);   \
         }                                                                                         \
         static CLS* toCpp(v8::Local<v8::Context> context, const v8::Local<v8::Value>& value)      \
         {                                                                                         \
@@ -555,7 +555,7 @@ struct Converter<T, typename std::enable_if<std::is_copy_constructible<T>::value
 {
     static v8::Local<v8::Value> toScript(v8::Local<v8::Context> context, T value)
     {
-        return DataTransfer::FindOrAddCData(context->GetIsolate(), context, StaticTypeId<T>::get(), new T(value), false);
+        return DataTransfer::FindOrAddCData(context->GetIsolate(), context, DynamicTypeId<T>::get(&value), new T(value), false);
     }
     static T toCpp(v8::Local<v8::Context> context, const v8::Local<v8::Value>& value)
     {
