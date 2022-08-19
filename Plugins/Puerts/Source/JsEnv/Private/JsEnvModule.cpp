@@ -137,7 +137,7 @@ public:
     }
 };
 
-#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX
+#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX || PLATFORM_LINUXARM64
 #pragma warning(push, 0)
 #include "v8.h"
 #include "libplatform/libplatform.h"
@@ -154,7 +154,7 @@ class FJsEnvModule : public IJsEnvModule
 
     FMallocWrapper* MallocWrapper = nullptr;
 
-#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX
+#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUXPLATFORM_LINUX || PLATFORM_LINUXARM64
 public:
     void* GetV8Platform() override;
 
@@ -177,7 +177,7 @@ void FJsEnvModule::StartupModule()
     delete[] Dummy;
 
     // This code will execute after your module is loaded into memory (but after global variables are initialized, of course.)
-#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX
+#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX || PLATFORM_LINUXARM64
 #if defined(WITH_NODEJS)
     platform_ = node::MultiIsolatePlatform::Create(4);
 #else
@@ -207,7 +207,7 @@ void FJsEnvModule::ShutdownModule()
 {
     // This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
     // we call this function before unloading the module.
-#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX
+#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX || PLATFORM_LINUXARM64
     v8::V8::Dispose();
     v8::V8::ShutdownPlatform();
 #endif
@@ -221,7 +221,7 @@ void FJsEnvModule::ShutdownModule()
     }
 }
 
-#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX
+#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX || PLATFORM_LINUXARM64
 void* FJsEnvModule::GetV8Platform()
 {
     return reinterpret_cast<void*>(platform_.get());
