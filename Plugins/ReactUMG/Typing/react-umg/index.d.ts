@@ -1,184 +1,149 @@
 declare module "react-umg" {
     import * as React from 'react';
     import * as UE from 'ue';
+    import * as cpp from 'cpp';
     type TArray<T> = UE.TArray<T>;
     type TSet<T> = UE.TSet<T>;
     type TMap<TKey, TValue> = UE.TMap<TKey, TValue>;
 
+    type RecursivePartial<T> = {
+        [P in keyof T]?:
+        T[P] extends (infer U)[] ? RecursivePartial<U>[] :
+        T[P] extends object ? RecursivePartial<T[P]> :
+        T[P];
+    };
+
     interface PanelSlot {
     }
 
-    interface Margin {
-        Left?: number;
-        Top?: number;
-        Right?: number;
-        Bottom?: number;
-    }
-
-    type EHorizontalAlignment = UE.EHorizontalAlignment;
-    type EVerticalAlignment = UE.EVerticalAlignment;
     interface BackgroundBlurSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface BorderSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface ButtonSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
-    }
-
-    interface Vector2D {
-        X?: number;
-        Y?: number;
-    }
-
-    interface Anchors {
-        Minimum?: Vector2D;
-        Maximum?: Vector2D;
-    }
-
-    interface AnchorData {
-        Offsets?: Margin;
-        Anchors?: Anchors;
-        Alignment?: Vector2D;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface CanvasPanelSlot extends PanelSlot {
-        LayoutData?: AnchorData;
+        LayoutData?: RecursivePartial<UE.AnchorData>;
         bAutoSize?: boolean;
         ZOrder?: number;
     }
 
     interface GridSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
         Row?: number;
         RowSpan?: number;
         Column?: number;
         ColumnSpan?: number;
         Layer?: number;
-        Nudge?: Vector2D;
-    }
-
-    type ESlateSizeRule = UE.ESlateSizeRule;
-    interface SlateChildSize {
-        Value?: number;
-        SizeRule?: ESlateSizeRule;
+        Nudge?: RecursivePartial<UE.Vector2D>;
     }
 
     interface HorizontalBoxSlot extends PanelSlot {
-        Padding?: Margin;
-        Size?: SlateChildSize;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        Size?: RecursivePartial<UE.SlateChildSize>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface OverlaySlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface SafeZoneSlot extends PanelSlot {
         bIsTitleSafe?: boolean;
-        SafeAreaScale?: Margin;
-        HAlign?: EHorizontalAlignment;
-        VAlign?: EVerticalAlignment;
-        Padding?: Margin;
+        SafeAreaScale?: RecursivePartial<UE.Margin>;
+        HAlign?: UE.EHorizontalAlignment;
+        VAlign?: UE.EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
     }
 
     interface ScaleBoxSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface ScrollBoxSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface SizeBoxSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface UniformGridSlot extends PanelSlot {
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
         Row?: number;
         Column?: number;
     }
 
     interface VerticalBoxSlot extends PanelSlot {
-        Size?: SlateChildSize;
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Size?: RecursivePartial<UE.SlateChildSize>;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface WidgetSwitcherSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface WindowTitleBarAreaSlot extends PanelSlot {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     interface WrapBoxSlot extends PanelSlot {
-        Padding?: Margin;
+        Padding?: RecursivePartial<UE.Margin>;
         bFillEmptySpace?: boolean;
         FillSpanWhenLessThan?: number;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
     }
 
     export interface Props {
         Slot ? : PanelSlot;
     }
 
-    type ESlateVisibility = UE.ESlateVisibility;
-    interface WidgetTransform {
-        Translation?: Vector2D;
-        Scale?: Vector2D;
-        Shear?: Vector2D;
-        Angle?: number;
-    }
-
-    type ESlateAccessibleBehavior = UE.ESlateAccessibleBehavior;
-    type EMouseCursor = UE.EMouseCursor;
-    type EWidgetClipping = UE.EWidgetClipping;
-    type EFlowDirectionPreference = UE.EFlowDirectionPreference;
     interface WidgetProps extends Props {
         bIsEnabledDelegate?: () => boolean;
         ToolTipText?: string;
         ToolTipTextDelegate?: () => string;
-        VisibilityDelegate?: () => ESlateVisibility;
-        RenderTransform?: WidgetTransform;
-        RenderTransformPivot?: Vector2D;
+        VisibilityDelegate?: () => UE.ESlateVisibility;
+        RenderTransform?: RecursivePartial<UE.WidgetTransform>;
+        RenderTransformPivot?: RecursivePartial<UE.Vector2D>;
         bIsVariable?: boolean;
         bCreatedByConstructionScript?: boolean;
         bIsEnabled?: boolean;
         bOverride_Cursor?: boolean;
         bOverrideAccessibleDefaults?: boolean;
         bCanChildrenBeAccessible?: boolean;
-        AccessibleBehavior?: ESlateAccessibleBehavior;
-        AccessibleSummaryBehavior?: ESlateAccessibleBehavior;
+        AccessibleBehavior?: UE.ESlateAccessibleBehavior;
+        AccessibleSummaryBehavior?: UE.ESlateAccessibleBehavior;
         AccessibleText?: string;
         AccessibleTextDelegate?: () => string;
         AccessibleSummaryText?: string;
@@ -187,11 +152,11 @@ declare module "react-umg" {
         bHiddenInDesigner?: boolean;
         bExpandedInDesigner?: boolean;
         bLockedInDesigner?: boolean;
-        Cursor?: EMouseCursor;
-        Clipping?: EWidgetClipping;
-        Visibility?: ESlateVisibility;
+        Cursor?: UE.EMouseCursor;
+        Clipping?: UE.EWidgetClipping;
+        Visibility?: UE.ESlateVisibility;
         RenderOpacity?: number;
-        FlowDirectionPreference?: EFlowDirectionPreference;
+        FlowDirectionPreference?: UE.EFlowDirectionPreference;
         DesignerFlags?: number;
         DisplayLabel?: string;
         CategoryName?: string;
@@ -201,40 +166,15 @@ declare module "react-umg" {
         nativePtr: UE.Widget;
     }
 
-    interface LinearColor {
-        R?: number;
-        G?: number;
-        B?: number;
-        A?: number;
-    }
-
-    type ESlateColorStylingMode = UE.ESlateColorStylingMode;
-    interface SlateColor {
-        SpecifiedColor?: LinearColor;
-        ColorUseRule?: ESlateColorStylingMode;
-    }
-
-    interface NamedSlotBinding {
-        Name?: string;
-    }
-
-    type EDesignPreviewSizeMode = UE.EDesignPreviewSizeMode;
-    type EWidgetTickFrequency = UE.EWidgetTickFrequency;
-    type EWidgetAnimationEvent = UE.EWidgetAnimationEvent;
-    interface AnimationEventBinding {
-        AnimationEvent?: EWidgetAnimationEvent;
-        UserTag?: string;
-    }
-
     interface UserWidgetProps extends WidgetProps {
-        ColorAndOpacity?: LinearColor;
-        ColorAndOpacityDelegate?: () => LinearColor;
-        ForegroundColor?: SlateColor;
-        ForegroundColorDelegate?: () => SlateColor;
-        Padding?: Margin;
-        NamedSlotBindings?: TArray<NamedSlotBinding>;
-        DesignTimeSize?: Vector2D;
-        DesignSizeMode?: EDesignPreviewSizeMode;
+        ColorAndOpacity?: RecursivePartial<UE.LinearColor>;
+        ColorAndOpacityDelegate?: () => UE.LinearColor;
+        ForegroundColor?: RecursivePartial<UE.SlateColor>;
+        ForegroundColorDelegate?: () => UE.SlateColor;
+        Padding?: RecursivePartial<UE.Margin>;
+        NamedSlotBindings?: TArray<UE.NamedSlotBinding>;
+        DesignTimeSize?: RecursivePartial<UE.Vector2D>;
+        DesignSizeMode?: UE.EDesignPreviewSizeMode;
         PaletteCategory?: string;
         Priority?: number;
         bSupportsKeyboardFocus?: boolean;
@@ -243,8 +183,8 @@ declare module "react-umg" {
         bHasScriptImplementedTick?: boolean;
         bHasScriptImplementedPaint?: boolean;
         bCookedWidgetTree?: boolean;
-        TickFrequency?: EWidgetTickFrequency;
-        AnimationCallbacks?: TArray<AnimationEventBinding>;
+        TickFrequency?: UE.EWidgetTickFrequency;
+        AnimationCallbacks?: TArray<UE.AnimationEventBinding>;
     }
 
     class UserWidget extends React.Component<UserWidgetProps> {
@@ -272,110 +212,51 @@ declare module "react-umg" {
         nativePtr: UE.ContentWidget;
     }
 
-    interface Box2D {
-        Min?: Vector2D;
-        Max?: Vector2D;
-        bIsValid?: number;
-    }
-
-    type ESlateBrushDrawType = UE.ESlateBrushDrawType;
-    type ESlateBrushTileType = UE.ESlateBrushTileType;
-    type ESlateBrushMirrorType = UE.ESlateBrushMirrorType;
-    type ESlateBrushImageType = UE.ESlateBrushImageType;
-    interface SlateBrush {
-        ImageSize?: Vector2D;
-        Margin?: Margin;
-        Tint?: LinearColor;
-        TintColor?: SlateColor;
-        ResourceName?: string;
-        UVRegion?: Box2D;
-        DrawAs?: ESlateBrushDrawType;
-        Tiling?: ESlateBrushTileType;
-        Mirroring?: ESlateBrushMirrorType;
-        ImageType?: ESlateBrushImageType;
-        bIsDynamicallyLoaded?: boolean;
-        bHasUObject?: boolean;
-    }
-
     interface BackgroundBlurProps extends ContentWidgetProps {
-        Padding?: Margin;
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
         bApplyAlphaToBlur?: boolean;
         BlurStrength?: number;
         bOverrideAutoRadiusCalculation?: boolean;
         BlurRadius?: number;
-        LowQualityFallbackBrush?: SlateBrush;
+        LowQualityFallbackBrush?: RecursivePartial<UE.SlateBrush>;
     }
 
     class BackgroundBlur extends React.Component<BackgroundBlurProps> {
         nativePtr: UE.BackgroundBlur;
     }
 
-    interface Geometry {
-    }
-
-    interface InputEvent {
-    }
-
-    interface PointerEvent extends InputEvent {
-    }
-
-    interface EventReply {
-    }
-
     interface BorderProps extends ContentWidgetProps {
-        HorizontalAlignment?: EHorizontalAlignment;
-        VerticalAlignment?: EVerticalAlignment;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        VerticalAlignment?: UE.EVerticalAlignment;
         bShowEffectWhenDisabled?: boolean;
-        ContentColorAndOpacity?: LinearColor;
-        ContentColorAndOpacityDelegate?: () => LinearColor;
-        Padding?: Margin;
-        Background?: SlateBrush;
-        BackgroundDelegate?: () => SlateBrush;
-        BrushColor?: LinearColor;
-        BrushColorDelegate?: () => LinearColor;
-        DesiredSizeScale?: Vector2D;
+        ContentColorAndOpacity?: RecursivePartial<UE.LinearColor>;
+        ContentColorAndOpacityDelegate?: () => UE.LinearColor;
+        Padding?: RecursivePartial<UE.Margin>;
+        Background?: RecursivePartial<UE.SlateBrush>;
+        BackgroundDelegate?: () => UE.SlateBrush;
+        BrushColor?: RecursivePartial<UE.LinearColor>;
+        BrushColorDelegate?: () => UE.LinearColor;
+        DesiredSizeScale?: RecursivePartial<UE.Vector2D>;
         bFlipForRightToLeftFlowDirection?: boolean;
-        OnMouseButtonDownEvent?: (MyGeometry: Geometry, MouseEvent: PointerEvent) => EventReply;
-        OnMouseButtonUpEvent?: (MyGeometry: Geometry, MouseEvent: PointerEvent) => EventReply;
-        OnMouseMoveEvent?: (MyGeometry: Geometry, MouseEvent: PointerEvent) => EventReply;
-        OnMouseDoubleClickEvent?: (MyGeometry: Geometry, MouseEvent: PointerEvent) => EventReply;
+        OnMouseButtonDownEvent?: (MyGeometry: UE.Geometry, MouseEvent: UE.PointerEvent) => UE.EventReply;
+        OnMouseButtonUpEvent?: (MyGeometry: UE.Geometry, MouseEvent: UE.PointerEvent) => UE.EventReply;
+        OnMouseMoveEvent?: (MyGeometry: UE.Geometry, MouseEvent: UE.PointerEvent) => UE.EventReply;
+        OnMouseDoubleClickEvent?: (MyGeometry: UE.Geometry, MouseEvent: UE.PointerEvent) => UE.EventReply;
     }
 
     class Border extends React.Component<BorderProps> {
         nativePtr: UE.Border;
     }
 
-    interface SlateWidgetStyle {
-    }
-
-    interface SlateSound {
-    }
-
-    interface ButtonStyle extends SlateWidgetStyle {
-        Normal?: SlateBrush;
-        Hovered?: SlateBrush;
-        Pressed?: SlateBrush;
-        Disabled?: SlateBrush;
-        NormalPadding?: Margin;
-        PressedPadding?: Margin;
-        PressedSlateSound?: SlateSound;
-        HoveredSlateSound?: SlateSound;
-        PressedSound?: string;
-        HoveredSound?: string;
-    }
-
-    type EButtonClickMethod = UE.EButtonClickMethod;
-    type EButtonTouchMethod = UE.EButtonTouchMethod;
-    type EButtonPressMethod = UE.EButtonPressMethod;
     interface ButtonProps extends ContentWidgetProps {
-        WidgetStyle?: ButtonStyle;
-        ColorAndOpacity?: LinearColor;
-        BackgroundColor?: LinearColor;
-        ClickMethod?: EButtonClickMethod;
-        TouchMethod?: EButtonTouchMethod;
-        PressMethod?: EButtonPressMethod;
+        WidgetStyle?: RecursivePartial<UE.ButtonStyle>;
+        ColorAndOpacity?: RecursivePartial<UE.LinearColor>;
+        BackgroundColor?: RecursivePartial<UE.LinearColor>;
+        ClickMethod?: UE.EButtonClickMethod;
+        TouchMethod?: UE.EButtonTouchMethod;
+        PressMethod?: UE.EButtonPressMethod;
         IsFocusable?: boolean;
         OnClicked?: () => void;
         OnPressed?: () => void;
@@ -395,37 +276,13 @@ declare module "react-umg" {
         nativePtr: UE.CanvasPanel;
     }
 
-    type ECheckBoxState = UE.ECheckBoxState;
-    type ESlateCheckBoxType = UE.ESlateCheckBoxType;
-    interface CheckBoxStyle extends SlateWidgetStyle {
-        CheckBoxType?: ESlateCheckBoxType;
-        UncheckedImage?: SlateBrush;
-        UncheckedHoveredImage?: SlateBrush;
-        UncheckedPressedImage?: SlateBrush;
-        CheckedImage?: SlateBrush;
-        CheckedHoveredImage?: SlateBrush;
-        CheckedPressedImage?: SlateBrush;
-        UndeterminedImage?: SlateBrush;
-        UndeterminedHoveredImage?: SlateBrush;
-        UndeterminedPressedImage?: SlateBrush;
-        Padding?: Margin;
-        ForegroundColor?: SlateColor;
-        BorderBackgroundColor?: SlateColor;
-        CheckedSlateSound?: SlateSound;
-        UncheckedSlateSound?: SlateSound;
-        HoveredSlateSound?: SlateSound;
-        CheckedSound?: string;
-        UncheckedSound?: string;
-        HoveredSound?: string;
-    }
-
     interface CheckBoxProps extends ContentWidgetProps {
-        CheckedState?: ECheckBoxState;
-        CheckedStateDelegate?: () => ECheckBoxState;
-        WidgetStyle?: CheckBoxStyle;
-        HorizontalAlignment?: EHorizontalAlignment;
-        Padding?: Margin;
-        BorderBackgroundColor?: SlateColor;
+        CheckedState?: UE.ECheckBoxState;
+        CheckedStateDelegate?: () => UE.ECheckBoxState;
+        WidgetStyle?: RecursivePartial<UE.CheckBoxStyle>;
+        HorizontalAlignment?: UE.EHorizontalAlignment;
+        Padding?: RecursivePartial<UE.Margin>;
+        BorderBackgroundColor?: RecursivePartial<UE.SlateColor>;
         IsFocusable?: boolean;
         OnCheckStateChanged?: (bIsChecked: boolean) => void;
     }
@@ -438,7 +295,7 @@ declare module "react-umg" {
         NumberOfPieces?: number;
         Period?: number;
         Radius?: number;
-        Image?: SlateBrush;
+        Image?: RecursivePartial<UE.SlateBrush>;
         bEnableRadius?: boolean;
     }
 
@@ -454,70 +311,19 @@ declare module "react-umg" {
         nativePtr: UE.ComboBox;
     }
 
-    interface ComboButtonStyle extends SlateWidgetStyle {
-        ButtonStyle?: ButtonStyle;
-        DownArrowImage?: SlateBrush;
-        MenuBorderBrush?: SlateBrush;
-        MenuBorderPadding?: Margin;
-    }
-
-    interface ComboBoxStyle extends SlateWidgetStyle {
-        ComboButtonStyle?: ComboButtonStyle;
-        PressedSlateSound?: SlateSound;
-        SelectionChangeSlateSound?: SlateSound;
-        PressedSound?: string;
-        SelectionChangeSound?: string;
-    }
-
-    interface TableRowStyle extends SlateWidgetStyle {
-        SelectorFocusedBrush?: SlateBrush;
-        ActiveHoveredBrush?: SlateBrush;
-        ActiveBrush?: SlateBrush;
-        InactiveHoveredBrush?: SlateBrush;
-        InactiveBrush?: SlateBrush;
-        EvenRowBackgroundHoveredBrush?: SlateBrush;
-        EvenRowBackgroundBrush?: SlateBrush;
-        OddRowBackgroundHoveredBrush?: SlateBrush;
-        OddRowBackgroundBrush?: SlateBrush;
-        TextColor?: SlateColor;
-        SelectedTextColor?: SlateColor;
-        DropIndicator_Above?: SlateBrush;
-        DropIndicator_Onto?: SlateBrush;
-        DropIndicator_Below?: SlateBrush;
-        ActiveHighlightedBrush?: SlateBrush;
-        InactiveHighlightedBrush?: SlateBrush;
-    }
-
-    interface FontOutlineSettings {
-        OutlineSize?: number;
-        bSeparateFillAlpha?: boolean;
-        bApplyOutlineToDropShadows?: boolean;
-        OutlineColor?: LinearColor;
-    }
-
-    type EFontHinting = UE.EFontHinting;
-    interface SlateFontInfo {
-        OutlineSettings?: FontOutlineSettings;
-        TypefaceFontName?: string;
-        Size?: number;
-        FontName?: string;
-        Hinting?: EFontHinting;
-    }
-
-    type ESelectInfo = UE.ESelectInfo;
     interface ComboBoxStringProps extends WidgetProps {
         DefaultOptions?: TArray<string>;
         SelectedOption?: string;
-        WidgetStyle?: ComboBoxStyle;
-        ItemStyle?: TableRowStyle;
-        ContentPadding?: Margin;
+        WidgetStyle?: RecursivePartial<UE.ComboBoxStyle>;
+        ItemStyle?: RecursivePartial<UE.TableRowStyle>;
+        ContentPadding?: RecursivePartial<UE.Margin>;
         MaxListHeight?: number;
         HasDownArrow?: boolean;
         EnableGamepadNavigationMode?: boolean;
-        Font?: SlateFontInfo;
-        ForegroundColor?: SlateColor;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
+        ForegroundColor?: RecursivePartial<UE.SlateColor>;
         bIsFocusable?: boolean;
-        OnSelectionChanged?: (SelectedItem: string, SelectionType: ESelectInfo) => void;
+        OnSelectionChanged?: (SelectedItem: string, SelectionType: UE.ESelectInfo) => void;
         OnOpening?: () => void;
     }
 
@@ -525,19 +331,15 @@ declare module "react-umg" {
         nativePtr: UE.ComboBoxString;
     }
 
-    type EDynamicBoxType = UE.EDynamicBoxType;
-    interface UserWidgetPool {
-    }
-
     interface DynamicEntryBoxBaseProps extends WidgetProps {
-        EntryBoxType?: EDynamicBoxType;
-        EntrySpacing?: Vector2D;
-        SpacingPattern?: TArray<Vector2D>;
-        EntrySizeRule?: SlateChildSize;
-        EntryHorizontalAlignment?: EHorizontalAlignment;
-        EntryVerticalAlignment?: EVerticalAlignment;
+        EntryBoxType?: UE.EDynamicBoxType;
+        EntrySpacing?: RecursivePartial<UE.Vector2D>;
+        SpacingPattern?: TArray<UE.Vector2D>;
+        EntrySizeRule?: RecursivePartial<UE.SlateChildSize>;
+        EntryHorizontalAlignment?: UE.EHorizontalAlignment;
+        EntryVerticalAlignment?: UE.EVerticalAlignment;
         MaxElementSize?: number;
-        EntryWidgetPool?: UserWidgetPool;
+        EntryWidgetPool?: RecursivePartial<UE.UserWidgetPool>;
     }
 
     class DynamicEntryBoxBase extends React.Component<DynamicEntryBoxBaseProps> {
@@ -552,39 +354,14 @@ declare module "react-umg" {
         nativePtr: UE.DynamicEntryBox;
     }
 
-    interface EditableTextStyle extends SlateWidgetStyle {
-        Font?: SlateFontInfo;
-        ColorAndOpacity?: SlateColor;
-        BackgroundImageSelected?: SlateBrush;
-        BackgroundImageComposing?: SlateBrush;
-        CaretImage?: SlateBrush;
-    }
-
-    type EVirtualKeyboardType = UE.EVirtualKeyboardType;
-    interface VirtualKeyboardOptions {
-        bEnableAutocorrect?: boolean;
-    }
-
-    type EVirtualKeyboardDismissAction = UE.EVirtualKeyboardDismissAction;
-    type ETextJustify = UE.ETextJustify;
-    type ETextShapingMethod = UE.ETextShapingMethod;
-    type ETextFlowDirection = UE.ETextFlowDirection;
-    interface ShapedTextOptions {
-        bOverride_TextShapingMethod?: boolean;
-        bOverride_TextFlowDirection?: boolean;
-        TextShapingMethod?: ETextShapingMethod;
-        TextFlowDirection?: ETextFlowDirection;
-    }
-
-    type ETextCommit = UE.ETextCommit;
     interface EditableTextProps extends WidgetProps {
         Text?: string;
         TextDelegate?: () => string;
         HintText?: string;
         HintTextDelegate?: () => string;
-        WidgetStyle?: EditableTextStyle;
-        Font?: SlateFontInfo;
-        ColorAndOpacity?: SlateColor;
+        WidgetStyle?: RecursivePartial<UE.EditableTextStyle>;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
+        ColorAndOpacity?: RecursivePartial<UE.SlateColor>;
         IsReadOnly?: boolean;
         IsPassword?: boolean;
         MinimumDesiredWidth?: number;
@@ -594,93 +371,60 @@ declare module "react-umg" {
         ClearKeyboardFocusOnCommit?: boolean;
         SelectAllTextOnCommit?: boolean;
         AllowContextMenu?: boolean;
-        KeyboardType?: EVirtualKeyboardType;
-        VirtualKeyboardOptions?: VirtualKeyboardOptions;
-        VirtualKeyboardDismissAction?: EVirtualKeyboardDismissAction;
-        Justification?: ETextJustify;
-        ShapedTextOptions?: ShapedTextOptions;
+        KeyboardType?: UE.EVirtualKeyboardType;
+        VirtualKeyboardOptions?: RecursivePartial<UE.VirtualKeyboardOptions>;
+        VirtualKeyboardDismissAction?: UE.EVirtualKeyboardDismissAction;
+        Justification?: UE.ETextJustify;
+        ShapedTextOptions?: RecursivePartial<UE.ShapedTextOptions>;
         OnTextChanged?: (Text: string) => void;
-        OnTextCommitted?: (Text: string, CommitMethod: ETextCommit) => void;
+        OnTextCommitted?: (Text: string, CommitMethod: UE.ETextCommit) => void;
     }
 
     class EditableText extends React.Component<EditableTextProps> {
         nativePtr: UE.EditableText;
     }
 
-    interface ScrollBarStyle extends SlateWidgetStyle {
-        HorizontalBackgroundImage?: SlateBrush;
-        VerticalBackgroundImage?: SlateBrush;
-        VerticalTopSlotImage?: SlateBrush;
-        HorizontalTopSlotImage?: SlateBrush;
-        VerticalBottomSlotImage?: SlateBrush;
-        HorizontalBottomSlotImage?: SlateBrush;
-        NormalThumbImage?: SlateBrush;
-        HoveredThumbImage?: SlateBrush;
-        DraggedThumbImage?: SlateBrush;
-    }
-
-    interface EditableTextBoxStyle extends SlateWidgetStyle {
-        BackgroundImageNormal?: SlateBrush;
-        BackgroundImageHovered?: SlateBrush;
-        BackgroundImageFocused?: SlateBrush;
-        BackgroundImageReadOnly?: SlateBrush;
-        Padding?: Margin;
-        Font?: SlateFontInfo;
-        ForegroundColor?: SlateColor;
-        BackgroundColor?: SlateColor;
-        ReadOnlyForegroundColor?: SlateColor;
-        HScrollBarPadding?: Margin;
-        VScrollBarPadding?: Margin;
-        ScrollBarStyle?: ScrollBarStyle;
-    }
-
     interface EditableTextBoxProps extends WidgetProps {
         Text?: string;
         TextDelegate?: () => string;
-        WidgetStyle?: EditableTextBoxStyle;
+        WidgetStyle?: RecursivePartial<UE.EditableTextBoxStyle>;
         HintText?: string;
         HintTextDelegate?: () => string;
-        Font?: SlateFontInfo;
-        ForegroundColor?: LinearColor;
-        BackgroundColor?: LinearColor;
-        ReadOnlyForegroundColor?: LinearColor;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
+        ForegroundColor?: RecursivePartial<UE.LinearColor>;
+        BackgroundColor?: RecursivePartial<UE.LinearColor>;
+        ReadOnlyForegroundColor?: RecursivePartial<UE.LinearColor>;
         IsReadOnly?: boolean;
         IsPassword?: boolean;
         MinimumDesiredWidth?: number;
-        Padding?: Margin;
+        Padding?: RecursivePartial<UE.Margin>;
         IsCaretMovedWhenGainFocus?: boolean;
         SelectAllTextWhenFocused?: boolean;
         RevertTextOnEscape?: boolean;
         ClearKeyboardFocusOnCommit?: boolean;
         SelectAllTextOnCommit?: boolean;
         AllowContextMenu?: boolean;
-        KeyboardType?: EVirtualKeyboardType;
-        VirtualKeyboardOptions?: VirtualKeyboardOptions;
-        VirtualKeyboardDismissAction?: EVirtualKeyboardDismissAction;
-        Justification?: ETextJustify;
-        ShapedTextOptions?: ShapedTextOptions;
+        KeyboardType?: UE.EVirtualKeyboardType;
+        VirtualKeyboardOptions?: RecursivePartial<UE.VirtualKeyboardOptions>;
+        VirtualKeyboardDismissAction?: UE.EVirtualKeyboardDismissAction;
+        Justification?: UE.ETextJustify;
+        ShapedTextOptions?: RecursivePartial<UE.ShapedTextOptions>;
         OnTextChanged?: (Text: string) => void;
-        OnTextCommitted?: (Text: string, CommitMethod: ETextCommit) => void;
+        OnTextCommitted?: (Text: string, CommitMethod: UE.ETextCommit) => void;
     }
 
     class EditableTextBox extends React.Component<EditableTextBoxProps> {
         nativePtr: UE.EditableTextBox;
     }
 
-    interface ExpandableAreaStyle extends SlateWidgetStyle {
-        CollapsedImage?: SlateBrush;
-        ExpandedImage?: SlateBrush;
-        RolloutAnimationSeconds?: number;
-    }
-
     interface ExpandableAreaProps extends WidgetProps {
-        Style?: ExpandableAreaStyle;
-        BorderBrush?: SlateBrush;
-        BorderColor?: SlateColor;
+        Style?: RecursivePartial<UE.ExpandableAreaStyle>;
+        BorderBrush?: RecursivePartial<UE.SlateBrush>;
+        BorderColor?: RecursivePartial<UE.SlateColor>;
         bIsExpanded?: boolean;
         MaxHeight?: number;
-        HeaderPadding?: Margin;
-        AreaPadding?: Margin;
+        HeaderPadding?: RecursivePartial<UE.Margin>;
+        AreaPadding?: RecursivePartial<UE.Margin>;
     }
 
     class ExpandableArea extends React.Component<ExpandableAreaProps> {
@@ -704,55 +448,31 @@ declare module "react-umg" {
     }
 
     interface ImageProps extends WidgetProps {
-        Brush?: SlateBrush;
-        BrushDelegate?: () => SlateBrush;
-        ColorAndOpacity?: LinearColor;
-        ColorAndOpacityDelegate?: () => LinearColor;
+        Brush?: RecursivePartial<UE.SlateBrush>;
+        BrushDelegate?: () => UE.SlateBrush;
+        ColorAndOpacity?: RecursivePartial<UE.LinearColor>;
+        ColorAndOpacityDelegate?: () => UE.LinearColor;
         bFlipForRightToLeftFlowDirection?: boolean;
-        OnMouseButtonDownEvent?: (MyGeometry: Geometry, MouseEvent: PointerEvent) => EventReply;
+        OnMouseButtonDownEvent?: (MyGeometry: UE.Geometry, MouseEvent: UE.PointerEvent) => UE.EventReply;
     }
 
     class Image extends React.Component<ImageProps> {
         nativePtr: UE.Image;
     }
 
-    interface TextBlockStyle extends SlateWidgetStyle {
-        Font?: SlateFontInfo;
-        ColorAndOpacity?: SlateColor;
-        ShadowOffset?: Vector2D;
-        ShadowColorAndOpacity?: LinearColor;
-        SelectedBackgroundColor?: SlateColor;
-        HighlightColor?: LinearColor;
-        HighlightShape?: SlateBrush;
-        StrikeBrush?: SlateBrush;
-        UnderlineBrush?: SlateBrush;
-    }
-
-    interface Key {
-        KeyName?: string;
-    }
-
-    interface InputChord {
-        Key?: Key;
-        bShift?: boolean;
-        bCtrl?: boolean;
-        bAlt?: boolean;
-        bCmd?: boolean;
-    }
-
     interface InputKeySelectorProps extends WidgetProps {
-        WidgetStyle?: ButtonStyle;
-        TextStyle?: TextBlockStyle;
-        SelectedKey?: InputChord;
-        Font?: SlateFontInfo;
-        Margin?: Margin;
-        ColorAndOpacity?: LinearColor;
+        WidgetStyle?: RecursivePartial<UE.ButtonStyle>;
+        TextStyle?: RecursivePartial<UE.TextBlockStyle>;
+        SelectedKey?: RecursivePartial<UE.InputChord>;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
+        Margin?: RecursivePartial<UE.Margin>;
+        ColorAndOpacity?: RecursivePartial<UE.LinearColor>;
         KeySelectionText?: string;
         NoKeySpecifiedText?: string;
         bAllowModifierKeys?: boolean;
         bAllowGamepadKeys?: boolean;
-        EscapeKeys?: TArray<Key>;
-        OnKeySelected?: (SelectedKey: InputChord) => void;
+        EscapeKeys?: TArray<UE.Key>;
+        OnKeySelected?: (SelectedKey: UE.InputChord) => void;
         OnIsSelectingKeyChanged?: () => void;
     }
 
@@ -775,20 +495,17 @@ declare module "react-umg" {
         bEnableFixedLineOffset?: boolean;
         FixedLineScrollOffset?: number;
         NumDesignerPreviewEntries?: number;
-        EntryWidgetPool?: UserWidgetPool;
+        EntryWidgetPool?: RecursivePartial<UE.UserWidgetPool>;
     }
 
     class ListViewBase extends React.Component<ListViewBaseProps> {
         nativePtr: UE.ListViewBase;
     }
 
-    type EOrientation = UE.EOrientation;
-    type ESelectionMode = UE.ESelectionMode;
-    type EConsumeMouseWheel = UE.EConsumeMouseWheel;
     interface ListViewProps extends ListViewBaseProps {
-        Orientation?: EOrientation;
-        SelectionMode?: ESelectionMode;
-        ConsumeMouseWheel?: EConsumeMouseWheel;
+        Orientation?: UE.EOrientation;
+        SelectionMode?: UE.ESelectionMode;
+        ConsumeMouseWheel?: UE.EConsumeMouseWheel;
         bClearSelectionOnClick?: boolean;
         bIsFocusable?: boolean;
         EntrySpacing?: number;
@@ -799,9 +516,8 @@ declare module "react-umg" {
         nativePtr: UE.ListView;
     }
 
-    type EMenuPlacement = UE.EMenuPlacement;
     interface MenuAnchorProps extends ContentWidgetProps {
-        Placement?: EMenuPlacement;
+        Placement?: UE.EMenuPlacement;
         bFitInWindow?: boolean;
         ShouldDeferPaintingAfterWindowContent?: boolean;
         UseApplicationMenuStack?: boolean;
@@ -812,14 +528,13 @@ declare module "react-umg" {
         nativePtr: UE.MenuAnchor;
     }
 
-    type ETextWrappingPolicy = UE.ETextWrappingPolicy;
     interface TextLayoutWidgetProps extends WidgetProps {
-        ShapedTextOptions?: ShapedTextOptions;
-        Justification?: ETextJustify;
-        WrappingPolicy?: ETextWrappingPolicy;
+        ShapedTextOptions?: RecursivePartial<UE.ShapedTextOptions>;
+        Justification?: UE.ETextJustify;
+        WrappingPolicy?: UE.ETextWrappingPolicy;
         AutoWrapText?: boolean;
         WrapTextAt?: number;
-        Margin?: Margin;
+        Margin?: RecursivePartial<UE.Margin>;
         LineHeightPercentage?: number;
     }
 
@@ -831,18 +546,18 @@ declare module "react-umg" {
         Text?: string;
         HintText?: string;
         HintTextDelegate?: () => string;
-        WidgetStyle?: TextBlockStyle;
+        WidgetStyle?: RecursivePartial<UE.TextBlockStyle>;
         bIsReadOnly?: boolean;
-        Font?: SlateFontInfo;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
         SelectAllTextWhenFocused?: boolean;
         ClearTextSelectionOnFocusLoss?: boolean;
         RevertTextOnEscape?: boolean;
         ClearKeyboardFocusOnCommit?: boolean;
         AllowContextMenu?: boolean;
-        VirtualKeyboardOptions?: VirtualKeyboardOptions;
-        VirtualKeyboardDismissAction?: EVirtualKeyboardDismissAction;
+        VirtualKeyboardOptions?: RecursivePartial<UE.VirtualKeyboardOptions>;
+        VirtualKeyboardDismissAction?: UE.EVirtualKeyboardDismissAction;
         OnTextChanged?: (Text: string) => void;
-        OnTextCommitted?: (Text: string, CommitMethod: ETextCommit) => void;
+        OnTextCommitted?: (Text: string, CommitMethod: UE.ETextCommit) => void;
     }
 
     class MultiLineEditableText extends React.Component<MultiLineEditableTextProps> {
@@ -853,18 +568,18 @@ declare module "react-umg" {
         Text?: string;
         HintText?: string;
         HintTextDelegate?: () => string;
-        WidgetStyle?: EditableTextBoxStyle;
-        TextStyle?: TextBlockStyle;
+        WidgetStyle?: RecursivePartial<UE.EditableTextBoxStyle>;
+        TextStyle?: RecursivePartial<UE.TextBlockStyle>;
         bIsReadOnly?: boolean;
         AllowContextMenu?: boolean;
-        VirtualKeyboardOptions?: VirtualKeyboardOptions;
-        VirtualKeyboardDismissAction?: EVirtualKeyboardDismissAction;
-        Font?: SlateFontInfo;
-        ForegroundColor?: LinearColor;
-        BackgroundColor?: LinearColor;
-        ReadOnlyForegroundColor?: LinearColor;
+        VirtualKeyboardOptions?: RecursivePartial<UE.VirtualKeyboardOptions>;
+        VirtualKeyboardDismissAction?: UE.EVirtualKeyboardDismissAction;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
+        ForegroundColor?: RecursivePartial<UE.LinearColor>;
+        BackgroundColor?: RecursivePartial<UE.LinearColor>;
+        ReadOnlyForegroundColor?: RecursivePartial<UE.LinearColor>;
         OnTextChanged?: (Text: string) => void;
-        OnTextCommitted?: (Text: string, CommitMethod: ETextCommit) => void;
+        OnTextCommitted?: (Text: string, CommitMethod: UE.ETextCommit) => void;
     }
 
     class MultiLineEditableTextBox extends React.Component<MultiLineEditableTextBoxProps> {
@@ -892,22 +607,15 @@ declare module "react-umg" {
         nativePtr: UE.Overlay;
     }
 
-    interface ProgressBarStyle extends SlateWidgetStyle {
-        BackgroundImage?: SlateBrush;
-        FillImage?: SlateBrush;
-        MarqueeImage?: SlateBrush;
-    }
-
-    type EProgressBarFillType = UE.EProgressBarFillType;
     interface ProgressBarProps extends WidgetProps {
-        WidgetStyle?: ProgressBarStyle;
+        WidgetStyle?: RecursivePartial<UE.ProgressBarStyle>;
         Percent?: number;
-        BarFillType?: EProgressBarFillType;
+        BarFillType?: UE.EProgressBarFillType;
         bIsMarquee?: boolean;
-        BorderPadding?: Vector2D;
+        BorderPadding?: RecursivePartial<UE.Vector2D>;
         PercentDelegate?: () => number;
-        FillColorAndOpacity?: LinearColor;
-        FillColorAndOpacityDelegate?: () => LinearColor;
+        FillColorAndOpacity?: RecursivePartial<UE.LinearColor>;
+        FillColorAndOpacityDelegate?: () => UE.LinearColor;
     }
 
     class ProgressBar extends React.Component<ProgressBarProps> {
@@ -929,7 +637,7 @@ declare module "react-umg" {
     interface RichTextBlockProps extends TextLayoutWidgetProps {
         Text?: string;
         bOverrideDefaultStyle?: boolean;
-        DefaultTextStyleOverride?: TextBlockStyle;
+        DefaultTextStyleOverride?: RecursivePartial<UE.TextBlockStyle>;
         MinDesiredWidth?: number;
     }
 
@@ -948,11 +656,9 @@ declare module "react-umg" {
         nativePtr: UE.SafeZone;
     }
 
-    type EStretch = UE.EStretch;
-    type EStretchDirection = UE.EStretchDirection;
     interface ScaleBoxProps extends ContentWidgetProps {
-        Stretch?: EStretch;
-        StretchDirection?: EStretchDirection;
+        Stretch?: UE.EStretch;
+        StretchDirection?: UE.EStretchDirection;
         UserSpecifiedScale?: number;
         IgnoreInheritedScale?: boolean;
     }
@@ -962,39 +668,31 @@ declare module "react-umg" {
     }
 
     interface ScrollBarProps extends WidgetProps {
-        WidgetStyle?: ScrollBarStyle;
+        WidgetStyle?: RecursivePartial<UE.ScrollBarStyle>;
         bAlwaysShowScrollbar?: boolean;
         bAlwaysShowScrollbarTrack?: boolean;
-        Orientation?: EOrientation;
-        Thickness?: Vector2D;
-        Padding?: Margin;
+        Orientation?: UE.EOrientation;
+        Thickness?: RecursivePartial<UE.Vector2D>;
+        Padding?: RecursivePartial<UE.Margin>;
     }
 
     class ScrollBar extends React.Component<ScrollBarProps> {
         nativePtr: UE.ScrollBar;
     }
 
-    interface ScrollBoxStyle extends SlateWidgetStyle {
-        TopShadowBrush?: SlateBrush;
-        BottomShadowBrush?: SlateBrush;
-        LeftShadowBrush?: SlateBrush;
-        RightShadowBrush?: SlateBrush;
-    }
-
-    type EDescendantScrollDestination = UE.EDescendantScrollDestination;
     interface ScrollBoxProps extends PanelWidgetProps {
-        WidgetStyle?: ScrollBoxStyle;
-        WidgetBarStyle?: ScrollBarStyle;
-        Orientation?: EOrientation;
-        ScrollBarVisibility?: ESlateVisibility;
-        ConsumeMouseWheel?: EConsumeMouseWheel;
-        ScrollbarThickness?: Vector2D;
-        ScrollbarPadding?: Margin;
+        WidgetStyle?: RecursivePartial<UE.ScrollBoxStyle>;
+        WidgetBarStyle?: RecursivePartial<UE.ScrollBarStyle>;
+        Orientation?: UE.EOrientation;
+        ScrollBarVisibility?: UE.ESlateVisibility;
+        ConsumeMouseWheel?: UE.EConsumeMouseWheel;
+        ScrollbarThickness?: RecursivePartial<UE.Vector2D>;
+        ScrollbarPadding?: RecursivePartial<UE.Margin>;
         AlwaysShowScrollbar?: boolean;
         AlwaysShowScrollbarTrack?: boolean;
         AllowOverscroll?: boolean;
         bAnimateWheelScrolling?: boolean;
-        NavigationDestination?: EDescendantScrollDestination;
+        NavigationDestination?: UE.EDescendantScrollDestination;
         NavigationScrollPadding?: number;
         bAllowRightClickDragScrolling?: boolean;
         WheelScrollMultiplier?: number;
@@ -1028,25 +726,15 @@ declare module "react-umg" {
         nativePtr: UE.SizeBox;
     }
 
-    interface SliderStyle extends SlateWidgetStyle {
-        NormalBarImage?: SlateBrush;
-        HoveredBarImage?: SlateBrush;
-        DisabledBarImage?: SlateBrush;
-        NormalThumbImage?: SlateBrush;
-        HoveredThumbImage?: SlateBrush;
-        DisabledThumbImage?: SlateBrush;
-        BarThickness?: number;
-    }
-
     interface SliderProps extends WidgetProps {
         Value?: number;
         ValueDelegate?: () => number;
         MinValue?: number;
         MaxValue?: number;
-        WidgetStyle?: SliderStyle;
-        Orientation?: EOrientation;
-        SliderBarColor?: LinearColor;
-        SliderHandleColor?: LinearColor;
+        WidgetStyle?: RecursivePartial<UE.SliderStyle>;
+        Orientation?: UE.EOrientation;
+        SliderBarColor?: RecursivePartial<UE.LinearColor>;
+        SliderHandleColor?: RecursivePartial<UE.LinearColor>;
         IndentHandle?: boolean;
         Locked?: boolean;
         MouseUsesStep?: boolean;
@@ -1065,37 +753,27 @@ declare module "react-umg" {
     }
 
     interface SpacerProps extends WidgetProps {
-        Size?: Vector2D;
+        Size?: RecursivePartial<UE.Vector2D>;
     }
 
     class Spacer extends React.Component<SpacerProps> {
         nativePtr: UE.Spacer;
     }
 
-    interface SpinBoxStyle extends SlateWidgetStyle {
-        BackgroundBrush?: SlateBrush;
-        HoveredBackgroundBrush?: SlateBrush;
-        ActiveFillBrush?: SlateBrush;
-        InactiveFillBrush?: SlateBrush;
-        ArrowsImage?: SlateBrush;
-        ForegroundColor?: SlateColor;
-        TextPadding?: Margin;
-    }
-
     interface SpinBoxProps extends WidgetProps {
         Value?: number;
         ValueDelegate?: () => number;
-        WidgetStyle?: SpinBoxStyle;
+        WidgetStyle?: RecursivePartial<UE.SpinBoxStyle>;
         Delta?: number;
         SliderExponent?: number;
-        Font?: SlateFontInfo;
-        Justification?: ETextJustify;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
+        Justification?: UE.ETextJustify;
         MinDesiredWidth?: number;
         ClearKeyboardFocusOnCommit?: boolean;
         SelectAllTextOnCommit?: boolean;
-        ForegroundColor?: SlateColor;
+        ForegroundColor?: RecursivePartial<UE.SlateColor>;
         OnValueChanged?: (InValue: number) => void;
-        OnValueCommitted?: (InValue: number, CommitMethod: ETextCommit) => void;
+        OnValueCommitted?: (InValue: number, CommitMethod: UE.ETextCommit) => void;
         OnBeginSliderMovement?: () => void;
         OnEndSliderMovement?: (InValue: number) => void;
         bOverride_MinValue?: boolean;
@@ -1115,13 +793,13 @@ declare module "react-umg" {
     interface TextBlockProps extends TextLayoutWidgetProps {
         Text?: string;
         TextDelegate?: () => string;
-        ColorAndOpacity?: SlateColor;
-        ColorAndOpacityDelegate?: () => SlateColor;
-        Font?: SlateFontInfo;
-        StrikeBrush?: SlateBrush;
-        ShadowOffset?: Vector2D;
-        ShadowColorAndOpacity?: LinearColor;
-        ShadowColorAndOpacityDelegate?: () => LinearColor;
+        ColorAndOpacity?: RecursivePartial<UE.SlateColor>;
+        ColorAndOpacityDelegate?: () => UE.SlateColor;
+        Font?: RecursivePartial<UE.SlateFontInfo>;
+        StrikeBrush?: RecursivePartial<UE.SlateBrush>;
+        ShadowOffset?: RecursivePartial<UE.Vector2D>;
+        ShadowColorAndOpacity?: RecursivePartial<UE.LinearColor>;
+        ShadowColorAndOpacityDelegate?: () => UE.LinearColor;
         MinDesiredWidth?: number;
         bWrapWithInvalidationPanel?: boolean;
         bAutoWrapText?: boolean;
@@ -1137,18 +815,17 @@ declare module "react-umg" {
         bAnimateHorizontally?: boolean;
         bAnimateVertically?: boolean;
         bAnimateOpacity?: boolean;
-        Image?: SlateBrush;
+        Image?: RecursivePartial<UE.SlateBrush>;
     }
 
     class Throbber extends React.Component<ThrobberProps> {
         nativePtr: UE.Throbber;
     }
 
-    type EListItemAlignment = UE.EListItemAlignment;
     interface TileViewProps extends ListViewProps {
         EntryHeight?: number;
         EntryWidth?: number;
-        TileAlignment?: EListItemAlignment;
+        TileAlignment?: UE.EListItemAlignment;
         bWrapHorizontalNavigation?: boolean;
     }
 
@@ -1164,7 +841,7 @@ declare module "react-umg" {
     }
 
     interface UniformGridPanelProps extends PanelWidgetProps {
-        SlotPadding?: Margin;
+        SlotPadding?: RecursivePartial<UE.Margin>;
         MinDesiredSlotWidth?: number;
         MinDesiredSlotHeight?: number;
     }
@@ -1181,7 +858,7 @@ declare module "react-umg" {
     }
 
     interface ViewportProps extends ContentWidgetProps {
-        BackgroundColor?: LinearColor;
+        BackgroundColor?: RecursivePartial<UE.LinearColor>;
     }
 
     class Viewport extends React.Component<ViewportProps> {
@@ -1206,7 +883,7 @@ declare module "react-umg" {
     }
 
     interface WrapBoxProps extends PanelWidgetProps {
-        InnerSlotPadding?: Vector2D;
+        InnerSlotPadding?: RecursivePartial<UE.Vector2D>;
         WrapWidth?: number;
         bExplicitWrapWidth?: boolean;
     }
@@ -1215,61 +892,16 @@ declare module "react-umg" {
         nativePtr: UE.WrapBox;
     }
 
-    interface FrameNumber {
-        Value?: number;
-    }
-
-    interface FrameTime {
-        FrameNumber?: FrameNumber;
-        SubFrame?: number;
-    }
-
-    interface FrameRate {
-        Numerator?: number;
-        Denominator?: number;
-    }
-
-    interface QualifiedFrameTime {
-        Time?: FrameTime;
-        Rate?: FrameRate;
-    }
-
-    interface LevelSequenceSnapshotSettings {
-        ZeroPadAmount?: number;
-        FrameRate?: FrameRate;
-    }
-
-    interface MovieSceneSequenceID {
-        Value?: number;
-    }
-
-    interface LevelSequencePlayerSnapshot {
-        MasterName?: string;
-        MasterTime?: QualifiedFrameTime;
-        SourceTime?: QualifiedFrameTime;
-        CurrentShotName?: string;
-        CurrentShotLocalTime?: QualifiedFrameTime;
-        CurrentShotSourceTime?: QualifiedFrameTime;
-        SourceTimecode?: string;
-        Settings?: LevelSequenceSnapshotSettings;
-        ShotID?: MovieSceneSequenceID;
-    }
-
     interface LevelSequenceBurnInProps extends UserWidgetProps {
-        FrameInformation?: LevelSequencePlayerSnapshot;
+        FrameInformation?: RecursivePartial<UE.LevelSequencePlayerSnapshot>;
     }
 
     class LevelSequenceBurnIn extends React.Component<LevelSequenceBurnInProps> {
         nativePtr: UE.LevelSequenceBurnIn;
     }
 
-    interface SoftObjectPath {
-        AssetPathName?: string;
-        SubPathString?: string;
-    }
-
     interface PropertyViewBaseProps extends WidgetProps {
-        SoftObjectPath?: SoftObjectPath;
+        SoftObjectPath?: RecursivePartial<UE.SoftObjectPath>;
         bAutoLoadAsset?: boolean;
         OnPropertyChanged?: (PropertyName: string) => void;
     }

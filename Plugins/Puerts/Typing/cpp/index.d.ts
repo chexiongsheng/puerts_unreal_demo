@@ -1,28 +1,17 @@
 declare module "cpp" {
     import * as UE from "ue"
-    import {$Ref, $Nullable} from "puerts"
+    import * as cpp from "cpp"
+    import {$Ref, $Nullable, cstring} from "puerts"
 
     class AdvanceTestClass {
         constructor(p0: number);
         JsObjectTest(p0: object) :void;
         CallJsObjectTest(p0: object) :void;
-        StdFunctionTest(p0: Function) :void;
+        StdFunctionTest(p0: (p0:number, p1:number) => number) :void;
     }
 
     class BaseClass {
         Foo(p0: number) :void;
-    }
-
-    class CppStruct {
-        constructor();
-    }
-
-    class FText {
-        constructor();
-        static FromStringTable(p0: string, p1: string, p2: number) :FText;
-        static FromString(p0: string) :FText;
-        static Format(Fmt: string | FText, ...InArguments: (string | number | FText) []) :FText;
-        ToString() :string;
     }
 
     class NoDeleteClass {
@@ -37,7 +26,7 @@ declare module "cpp" {
         static StaticInt: number;
         static readonly Ten: number;
         static Add(p0: number, p1: number) :number;
-        static PrintInfo(p0: $Nullable<TestClass>) :void;
+        static PrintInfo(p0: TestClass) :void;
         static Overload() :void;
         static Overload(p0: number) :void;
         static Overload(p0: number, p1: number) :void;
@@ -47,7 +36,7 @@ declare module "cpp" {
         Ref(p0: $Ref<number>) :number;
         StrRef(p0: $Ref<string>) :void;
         Ptr(p0: $Ref<number>) :number;
-        CStr(p0: $Nullable<string>) :string;
+        CStr(p0: cstring) :cstring;
         StrPtr(p0: $Ref<string>) :void;
         ConstRef(p0: number) :void;
         OverloadMethod() :number;

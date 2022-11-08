@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button, HorizontalBox, TextBlock, ProgressBar, HorizontalBoxSlot, LinearColor } from 'react-umg';
+import { Button, HorizontalBox, TextBlock, ProgressBar, HorizontalBoxSlot } from 'react-umg';
+import {LinearColor} from 'ue'
 
 export interface Props {
     name: string;
@@ -29,7 +30,7 @@ export class StatusBar extends React.Component<Props, State> {
       };
     }
 
-    get color(): LinearColor {
+    get color(): Partial<LinearColor> {
         return {R: 1 - this.state.percent , G: 0, B: this.state.percent};
     }
   
