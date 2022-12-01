@@ -58,7 +58,7 @@ struct DECLARATIONGENERATOR_API FTypeScriptDeclarationGenerator
 
     struct BlueprintTypeDeclInfo
     {
-        FString TypeDecl;
+        TMap<FName, FString> NameToDecl;
         FString FileVersionString;
         bool IsExist;
         bool Changed;
