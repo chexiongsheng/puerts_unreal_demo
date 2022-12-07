@@ -14,6 +14,10 @@ declare module "cpp" {
         Foo(p0: number) :void;
     }
 
+    class FPuertsEditorModule {
+        static SetCmdCallback(p0: (p0:string, p1:string) => void) :void;
+    }
+
     class NoDeleteClass {
         constructor();
     }
