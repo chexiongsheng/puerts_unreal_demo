@@ -49,6 +49,7 @@ static FString SafeName(const FString& Name)
 {
     auto Ret = Name.Replace(TEXT(" "), TEXT(""))
                    .Replace(TEXT("-"), TEXT("_"))
+                   .Replace(TEXT("+"), TEXT("_"))
                    .Replace(TEXT("/"), TEXT("_"))
                    .Replace(TEXT("("), TEXT("_"))
                    .Replace(TEXT(")"), TEXT("_"))
@@ -1113,6 +1114,11 @@ void FTypeScriptDeclarationGenerator::GenClass(UClass* Class)
     StringBuffer << "class " << SafeName(Class->GetName());
 
     auto Super = Class->GetSuperStruct();
+
+    while (Super && !PathIsValid(Super))
+    {
+        Super = Super->GetSuperStruct();
+    }
 
     if (Super)
     {
