@@ -2845,8 +2845,21 @@ v8::Local<v8::Function> FJsEnvImpl::GetJsClass(UStruct* InStruct, v8::Local<v8::
 
 bool FJsEnvImpl::IsInstanceOf(UStruct* Struct, v8::Local<v8::Object> JsObject)
 {
-    bool Dummy;
-    return GetTemplateInfoOfType(Struct, Dummy)->Template.Get(MainIsolate)->HasInstance(JsObject);
+    //这里如果外面传一个非uobject或者ustructsrcipt的object,可能会有问题
+    if (Cast<UScriptStruct>(Struct))
+    {
+        UScriptStruct* ObjectStruct = (UScriptStruct*) FV8Utils::GetPointer(JsObject, 1);
+        return ObjectStruct && ObjectStruct->IsChildOf(Struct);
+    }
+    else
+    {
+        UObject* Object = FV8Utils::GetUObject(JsObject);
+        if (!Object || Object == RELEASED_UOBJECT)
+        {
+            return false;
+        }
+        return Object->GetClass()->IsChildOf(Struct);
+    }
 }
 
 bool FJsEnvImpl::IsInstanceOfCppObject(const void* TypeId, v8::Local<v8::Object> JsObject)
@@ -2969,17 +2982,16 @@ void FJsEnvImpl::LoadUEType(const v8::FunctionCallbackInfo<v8::Value>& Info)
 
     const FString TypeName = FV8Utils::ToFString(Isolate, Info[0]);
 
-    UObject* ClassPackage = ANY_PACKAGE;
-    UField* Type = FindObject<UClass>(ClassPackage, *TypeName);
+    UField* Type = FindAnyType<UClass>(TypeName);
 
     if (!Type)
     {
-        Type = FindObject<UScriptStruct>(ClassPackage, *TypeName);
+        Type = FindAnyType<UScriptStruct>(TypeName);
     }
 
     if (!Type)
     {
-        Type = FindObject<UEnum>(ClassPackage, *TypeName);
+        Type = FindAnyType<UEnum>(TypeName);
     }
 
     if (!Type)
@@ -3825,14 +3837,12 @@ void FJsEnvImpl::MakeUClass(const v8::FunctionCallbackInfo<v8::Value>& Info)
         return;
     }
 
-    UObject* ClassPackage = ANY_PACKAGE;
-
     FString GenClassName;
     int i = 0;
     while (true)
     {
         GenClassName = FString::Printf(TEXT("%s%d"), *ClassName, i);
-        if (!FindObject<UClass>(ClassPackage, *GenClassName))
+        if (!FindAnyType<UClass>(GenClassName))
             break;
         i++;
     }
