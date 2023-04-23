@@ -22,7 +22,7 @@
       "Name": "ReactUMG",
       "Type": "Runtime",
       "LoadingPhase": "PreDefault",
-	  "WhitelistPlatforms": [ "Win64", "Android", "Mac", "IOS", "Linux" ]
+        "WhitelistPlatforms": [ "Win64", "Android", "Mac", "IOS", "Linux", "LinuxArm64" ]
     }
   ],
   "Plugins": [

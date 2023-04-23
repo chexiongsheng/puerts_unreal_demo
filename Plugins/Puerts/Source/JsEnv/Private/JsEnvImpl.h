@@ -484,7 +484,7 @@ private:
 
     FGraphEventRef LastJob;
 
-#if PLATFORM_LINUX
+#if PLATFORM_LINUX || PLATFORM_LINUXARM64
     int Epoll;
 #endif
 

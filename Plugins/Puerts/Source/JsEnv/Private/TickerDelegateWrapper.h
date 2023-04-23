@@ -9,7 +9,7 @@
 #pragma once
 #include "UECompatible.h"
 
-#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX
+#if PLATFORM_ANDROID || PLATFORM_WINDOWS || PLATFORM_IOS || PLATFORM_MAC || PLATFORM_LINUX || PLATFORM_LINUXARM64
 
 #include "CoreMinimal.h"
 #include <functional>

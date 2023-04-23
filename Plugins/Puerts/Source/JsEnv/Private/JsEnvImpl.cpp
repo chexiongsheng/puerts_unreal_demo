@@ -62,6 +62,9 @@
 #elif PLATFORM_LINUX
 #include "Blob/Linux/NativesBlob.h"
 #include "Blob/Linux/SnapshotBlob.h"
+#elif PLATFORM_LINUXARM64
+#include "Blob/Linux_arm64/NativesBlob.h"
+#include "Blob/Linux_arm64/SnapshotBlob.h"
 #endif
 
 #else
@@ -78,6 +81,8 @@
 #include "Blob/iOS/arm64/SnapshotBlob.h"
 #elif PLATFORM_LINUX
 #include "Blob/Linux/SnapshotBlob.h"
+#elif PLATFORM_LINUXARM64
+#include "Blob/Linux_arm64/SnapshotBlob.h"
 #endif
 
 #endif
@@ -85,7 +90,7 @@
 #else
 #if PLATFORM_WINDOWS
 #include <windows.h>
-#elif PLATFORM_LINUX
+#elif PLATFORM_LINUX || PLATFORM_LINUXARM64
 #include <sys/epoll.h>
 #elif PLATFORM_MAC
 #include <sys/select.h>
@@ -219,7 +224,7 @@ void FJsEnvImpl::StartPolling()
             CloseHandle(NodeUVLoop.iocp);
         NodeUVLoop.iocp = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 2);
     }
-#elif PLATFORM_LINUX
+#elif PLATFORM_LINUX || PLATFORM_LINUXARM64
     Epoll = epoll_create(1);
     int backend_fd = uv_backend_fd(&NodeUVLoop);
     struct epoll_event ev = {0};
@@ -281,7 +286,7 @@ void FJsEnvImpl::PollEvents()
     // Give the event back so libuv can deal with it.
     if (overlapped != NULL)
         PostQueuedCompletionStatus(NodeUVLoop.iocp, bytes, key, overlapped);
-#elif PLATFORM_LINUX
+#elif PLATFORM_LINUX || PLATFORM_LINUXARM64
     int timeout = uv_backend_timeout(&NodeUVLoop);
     timeout = (timeout > 100 || timeout < 0) ? 100 : timeout;
 

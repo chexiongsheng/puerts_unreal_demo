@@ -358,6 +358,11 @@ public class JsEnv : ModuleRules
             string V8LibraryPath = Path.Combine(LibraryPath, "Linux");
             PublicAdditionalLibraries.Add(Path.Combine(V8LibraryPath, "libwee8.a"));
         }
+        else if (Target.Platform == UnrealTargetPlatform.LinuxArm64)
+        {
+            string V8LibraryPath = Path.Combine(LibraryPath, "Linux_arm64");
+            PublicAdditionalLibraries.Add(Path.Combine(V8LibraryPath, "libwee8.a"));
+        }
 
         if (ForceStaticLibInEditor)
         {
