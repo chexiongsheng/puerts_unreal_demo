@@ -122,8 +122,9 @@ for (var i = 0; i < u8a2.length; i++) {
 
 //引擎方法
 console.log("--------------------------14--------------------------");
-//在FJsEnv启动，调用Start时传入的参数可以通过argv获取
+//在FJsEnv启动，调用Start时传入的参数可以通过argv获取。如果是继承ue类方式，这里的argv是空的
 let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
+//world的SpawnActor方法，默认没有，demo里自己扩展出来的，不扩展蓝图也自带一套：UE.GameplayStatics.BeginDeferredActorSpawnFromClass和UE.GameplayStatics.FinishSpawningActor
 let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.MainActor;
 console.log(actor.GetName());
 console.log(actor.K2_GetActorLocation().ToString());
