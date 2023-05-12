@@ -5,10 +5,12 @@
 
 void UTypeScriptGameInstance::OnStart()
 {
+    Super::OnStart();
     StartNotify.ExecuteIfBound();
 }
 
 void UTypeScriptGameInstance::Shutdown()
 {
+    Supuer::Shutdown();
     ShutdownNotify.ExecuteIfBound();
 }

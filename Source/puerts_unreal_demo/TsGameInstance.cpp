@@ -5,10 +5,12 @@
 
 void UTsGameInstance::Init()
 {
+    Super::Init();
 }
 
 void UTsGameInstance::OnStart()
 {
+    Super::OnStart();
     GameScript = MakeShared<puerts::FJsEnv>();
     //GameScript = MakeShared<puerts::FJsEnv>(std::make_unique<puerts::DefaultJSModuleLoader>(TEXT("JavaScript")), std::make_shared<puerts::FDefaultLogger>(), 8080);
     //GameScript->WaitDebugger();
@@ -19,5 +21,6 @@ void UTsGameInstance::OnStart()
 
 void UTsGameInstance::Shutdown()
 {
+    Super::Shutdown();
     GameScript.Reset();
 }
