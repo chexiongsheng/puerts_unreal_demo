@@ -36,6 +36,7 @@ FuncType GetFunc()
 
 void UFFITestGameInstance::OnStart()
 {
+	Super::OnStart();
 	static FuncPtr Funcs[] = {(FuncPtr)Add, (FuncPtr)qsort, (FuncPtr)printf, (FuncPtr)PrintTestDataByPtr, (FuncPtr)PrintTestDataByValue, (FuncPtr)GetFunc};
 	SetFunctionArray(Funcs,  sizeof (Funcs) / sizeof (Funcs[0]));
 	JsEnv = MakeShared<puerts::FJsEnv>();
@@ -46,5 +47,6 @@ void UFFITestGameInstance::OnStart()
 
 void UFFITestGameInstance::Shutdown()
 {
+	Super::Shutdown();
 	JsEnv.Reset();
 }
