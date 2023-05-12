@@ -11,6 +11,6 @@ void UTypeScriptGameInstance::OnStart()
 
 void UTypeScriptGameInstance::Shutdown()
 {
-    Supuer::Shutdown();
+    Super::Shutdown();
     ShutdownNotify.ExecuteIfBound();
 }
