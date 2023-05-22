@@ -357,7 +357,7 @@ void FTypeScriptDeclarationGenerator::GenTypeScriptDeclaration(bool InGenStruct,
             auto Asset = AssetData.GetAsset();
             if (auto Blueprint = Cast<UBlueprint>(Asset))
             {
-                if (Blueprint->GeneratedClass)
+                if (Blueprint->Status != BS_Error && Blueprint->GeneratedClass)
                 {
                     Gen(Blueprint->GeneratedClass);
                 }
@@ -1295,6 +1295,18 @@ void FTypeScriptDeclarationGenerator::GenStruct(UStruct* Struct)
     }
 
     StringBuffer << " {\n";
+
+    if (const auto UserDefinedStruct = Cast<UUserDefinedStruct>(Struct))
+    {
+        if (UserDefinedStruct->Status == UDSS_Error)
+        {
+            UE_LOG(LogTemp, Error, TEXT("User Defined Struct %s has error:%s"), *UserDefinedStruct->GetName(),
+                *UserDefinedStruct->ErrorMessage);
+            StringBuffer << "}\n\n";
+            WriteOutput(Struct, StringBuffer);
+            return;
+        }
+    }
 
     auto GenConstrutor = [&]()
     {
