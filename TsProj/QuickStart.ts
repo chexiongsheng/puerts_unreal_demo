@@ -193,7 +193,7 @@ releaseManualReleaseDelegate(IsJohn);
 
 //unhandledRejection
 on('unhandledRejection', function(reason: any) {
-    console.log('unhandledRejection~~~', reason.stack);
+    console.log('unhandledRejection~~~');
 });
 
 new Promise(()=>{

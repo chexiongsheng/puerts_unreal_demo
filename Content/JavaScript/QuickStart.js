@@ -19,9 +19,9 @@ console.log("------------------------2----------------------------");
 obj.Bar(new UE.Vector(1, 2, 3));
 //引用类型参数函数
 console.log("------------------------3----------------------------");
-let vectorRef = (0, puerts_1.$ref)(new UE.Vector(1, 2, 3));
+let vectorRef = puerts_1.$ref(new UE.Vector(1, 2, 3));
 obj.Bar2(vectorRef);
-obj.Bar((0, puerts_1.$unref)(vectorRef));
+obj.Bar(puerts_1.$unref(vectorRef));
 //静态方法
 console.log("-----------------------4-----------------------------");
 let str1 = UE.JSBlueprintFunctionLibrary.GetName();
@@ -142,8 +142,8 @@ console.log("NotifyWithString.IsBound", actor.NotifyWithString.IsBound());
 console.log("NotifyWithRefString.IsBound", actor.NotifyWithRefString.IsBound());
 actor.NotifyWithRefString.Bind((strRef) => {
     //console.error("NotifyWithRefString");
-    console.log("NotifyWithRefString", (0, puerts_1.$unref)(strRef));
-    (0, puerts_1.$set)(strRef, "out to NotifyWithRefString"); //引用参数输出
+    console.log("NotifyWithRefString", puerts_1.$unref(strRef));
+    puerts_1.$set(strRef, "out to NotifyWithRefString"); //引用参数输出
 });
 console.log("NotifyWithString.IsBound", actor.NotifyWithString.IsBound());
 console.log("NotifyWithRefString.IsBound", actor.NotifyWithRefString.IsBound());
@@ -151,9 +151,9 @@ actor.NotifyWithStringRet.Bind((inStr) => {
     return "////" + inStr;
 });
 actor.NotifyWithInt.Broadcast(888999);
-let strRef = (0, puerts_1.$ref)("666");
+let strRef = puerts_1.$ref("666");
 actor.NotifyWithRefString.Execute(strRef);
-console.log("out str:" + (0, puerts_1.$unref)(strRef));
+console.log("out str:" + puerts_1.$unref(strRef));
 let retStr = actor.NotifyWithStringRet.Execute("console.log('hello world')");
 console.log("ret str:" + retStr);
 console.log("waiting native call script...........");
@@ -161,12 +161,12 @@ console.log("waiting native call script...........");
 function IsJohn(str) {
     return str == "John";
 }
-obj.PassJsFunctionAsDelegate((0, puerts_1.toManualReleaseDelegate)(IsJohn));
+obj.PassJsFunctionAsDelegate(puerts_1.toManualReleaseDelegate(IsJohn));
 //release after using
-(0, puerts_1.releaseManualReleaseDelegate)(IsJohn);
+puerts_1.releaseManualReleaseDelegate(IsJohn);
 //unhandledRejection
-(0, puerts_1.on)('unhandledRejection', function (reason) {
-    console.log('unhandledRejection~~~', reason.stack);
+puerts_1.on('unhandledRejection', function (reason) {
+    console.log('unhandledRejection~~~');
 });
 new Promise(() => {
     throw new Error('unhandled rejection');
