@@ -11,6 +11,7 @@
             "protocol": "inspector",
             "port": 8080,
             "sourceMaps": true,
+            // you can comment out "remoteRoot" config or replace it's ${workspaceRoot} with ${workspaceFolder} when you use a new visual studio code
             "remoteRoot": "${workspaceRoot}Content/JavaScript"
         }
     ]
