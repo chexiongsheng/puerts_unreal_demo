@@ -1,7 +1,8 @@
 import * as UE from 'ue'
 import {argv, makeUClass, blueprint} from 'puerts';
 
-let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
+// let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
+let gameInstance = (argv.getByName("GameInstance") as UE.GameInstance);
 
 //JS继承一个原生类
 class MyActor extends UE.Actor {
@@ -35,7 +36,8 @@ class MyActor extends UE.Actor {
 
 //注意：makeUClass已经废弃，不推荐使用，而且功能也很有限，比如不支持rpc，建议使用mixin或者ts继承ue类功能
 let cls = makeUClass(MyActor);
-world.SpawnActor(cls, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.Actor;
+let actor =  UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, cls, undefined) as UE.Actor;
+UE.GameplayStatics.FinishSpawningActor(actor, undefined);
 
 let ucls = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
 
@@ -50,5 +52,6 @@ class MyBPActor extends TestBlueprint {
 }
 
 let clsBP = makeUClass(MyBPActor);
-let bpActor2 =  world.SpawnActor(clsBP, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
+let bpActor2 =  UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, clsBP, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
+UE.GameplayStatics.FinishSpawningActor(bpActor2, undefined);
 bpActor2.Foo(false, 8000, 9000);

@@ -174,8 +174,9 @@ describe('Test TMap', function() {
     });
 });
 
-let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
-let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.MainActor;
+let gameInstance = (argv.getByName("GameInstance") as UE.GameInstance);
+let actor =  UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined) as UE.MainActor;
+UE.GameplayStatics.FinishSpawningActor(actor, undefined);
 
 //引擎方法
 describe('Calling Engine Methods', function() {

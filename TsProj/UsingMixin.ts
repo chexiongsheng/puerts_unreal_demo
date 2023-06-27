@@ -43,9 +43,9 @@ class Loggable {
 
 const MixinTestWithMixin = blueprint.mixin(MixinTest, Loggable);
 
-let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
-
-let o = world.SpawnActor(MixinTestWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as Loggable;
+let gameInstance = (argv.getByName("GameInstance") as UE.GameInstance);
+let o =  UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, MixinTestWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined) as Loggable;
+UE.GameplayStatics.FinishSpawningActor(o, undefined);
 o.Log("msg from ts");
 
 //-----------------------------------------------------------------
@@ -74,7 +74,8 @@ class DerivedClassMixin extends MixinSuperTestBasePlaceHold {
 }
 
 const MixinSuperTestDerivedWithMixin = blueprint.mixin(MixinSuperTestDerived, DerivedClassMixin);
-world.SpawnActor(MixinSuperTestDerivedWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined)
+let mixinActor =  UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, MixinSuperTestDerivedWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined);
+UE.GameplayStatics.FinishSpawningActor(mixinActor, undefined);
 
 
 //-----------------------------------------------------------------
