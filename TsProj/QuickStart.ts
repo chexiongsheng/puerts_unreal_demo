@@ -123,23 +123,35 @@ for (var i = 0; i < u8a2.length; i++) {
 //引擎方法
 console.log("--------------------------14--------------------------");
 //在FJsEnv启动，调用Start时传入的参数可以通过argv获取。如果是继承ue类方式，这里的argv是空的
-let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
-//world的SpawnActor方法，默认没有，demo里自己扩展出来的，不扩展蓝图也自带一套：UE.GameplayStatics.BeginDeferredActorSpawnFromClass和UE.GameplayStatics.FinishSpawningActor
-let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.MainActor;
+let gameInstance = (argv.getByName("GameInstance") as UE.GameInstance);
+let actor =  UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, UE.MainActor.StaticClass(), undefined) as UE.MainActor;
+UE.GameplayStatics.FinishSpawningActor(actor, undefined);
 console.log(actor.GetName());
 console.log(actor.K2_GetActorLocation().ToString());
 
 //蓝图加载
-let bpClass = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C')
-let bpActor = world.SpawnActor(bpClass, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
+//UE.Class.Load方式
+//let bpClass = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C')
+//let bpActor = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, bpClass, undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
+blueprint.load(UE.Game.StarterContent.TestBlueprint.TestBlueprint_C);
+const TestBlueprint_C = UE.Game.StarterContent.TestBlueprint.TestBlueprint_C; //别名
+let bpActor = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, TestBlueprint_C.StaticClass(), undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
+UE.GameplayStatics.FinishSpawningActor(bpActor, undefined);
 bpActor.Foo(false, 8000, 9000);
+//如果确定后续不需要使用TestBlueprint_C了，应该unload节省内存
+blueprint.unload(TestBlueprint_C);
 
 //蓝图结构体加载
-let TestStruct = UE.UserDefinedStruct.Load("UserDefinedStruct'/Game/StarterContent/TestStruct.TestStruct'");
-let testStruct = UE.NewStruct(TestStruct) as UE.Game.StarterContent.TestStruct.TestStruct;
+//UE.UserDefinedStruct.Load方式
+//let TestStruct = UE.UserDefinedStruct.Load("UserDefinedStruct'/Game/StarterContent/TestStruct.TestStruct'");
+//let testStruct = UE.NewStruct(TestStruct) as UE.Game.StarterContent.TestStruct.TestStruct;
+blueprint.load(UE.Game.StarterContent.TestStruct.TestStruct);
+const TestStruct = UE.Game.StarterContent.TestStruct.TestStruct;
+let testStruct = new TestStruct();
 testStruct.age = 10;
 testStruct.speed = 5;
 bpActor.Bar(testStruct);
+blueprint.unload(TestStruct);
 
 //蓝图枚举
 console.log("-------------------------15---------------------------");

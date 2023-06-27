@@ -19,9 +19,9 @@ console.log("------------------------2----------------------------");
 obj.Bar(new UE.Vector(1, 2, 3));
 //引用类型参数函数
 console.log("------------------------3----------------------------");
-let vectorRef = puerts_1.$ref(new UE.Vector(1, 2, 3));
+let vectorRef = (0, puerts_1.$ref)(new UE.Vector(1, 2, 3));
 obj.Bar2(vectorRef);
-obj.Bar(puerts_1.$unref(vectorRef));
+obj.Bar((0, puerts_1.$unref)(vectorRef));
 //静态方法
 console.log("-----------------------4-----------------------------");
 let str1 = UE.JSBlueprintFunctionLibrary.GetName();
@@ -107,21 +107,33 @@ for (var i = 0; i < u8a2.length; i++) {
 //引擎方法
 console.log("--------------------------14--------------------------");
 //在FJsEnv启动，调用Start时传入的参数可以通过argv获取。如果是继承ue类方式，这里的argv是空的
-let world = puerts_1.argv.getByName("GameInstance").GetWorld();
-//world的SpawnActor方法，默认没有，demo里自己扩展出来的，不扩展蓝图也自带一套：UE.GameplayStatics.BeginDeferredActorSpawnFromClass和UE.GameplayStatics.FinishSpawningActor
-let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+let gameInstance = puerts_1.argv.getByName("GameInstance");
+let actor = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, UE.MainActor.StaticClass(), undefined);
+UE.GameplayStatics.FinishSpawningActor(actor, undefined);
 console.log(actor.GetName());
 console.log(actor.K2_GetActorLocation().ToString());
 //蓝图加载
-let bpClass = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C');
-let bpActor = world.SpawnActor(bpClass, undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+//UE.Class.Load方式
+//let bpClass = UE.Class.Load('/Game/StarterContent/TestBlueprint.TestBlueprint_C')
+//let bpActor = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, bpClass, undefined) as UE.Game.StarterContent.TestBlueprint.TestBlueprint_C;
+puerts_1.blueprint.load(UE.Game.StarterContent.TestBlueprint.TestBlueprint_C);
+const TestBlueprint_C = UE.Game.StarterContent.TestBlueprint.TestBlueprint_C; //别名
+let bpActor = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, TestBlueprint_C.StaticClass(), undefined);
+UE.GameplayStatics.FinishSpawningActor(bpActor, undefined);
 bpActor.Foo(false, 8000, 9000);
+//如果确定后续不需要使用TestBlueprint_C了，应该unload节省内存
+puerts_1.blueprint.unload(TestBlueprint_C);
 //蓝图结构体加载
-let TestStruct = UE.UserDefinedStruct.Load("UserDefinedStruct'/Game/StarterContent/TestStruct.TestStruct'");
-let testStruct = UE.NewStruct(TestStruct);
+//UE.UserDefinedStruct.Load方式
+//let TestStruct = UE.UserDefinedStruct.Load("UserDefinedStruct'/Game/StarterContent/TestStruct.TestStruct'");
+//let testStruct = UE.NewStruct(TestStruct) as UE.Game.StarterContent.TestStruct.TestStruct;
+puerts_1.blueprint.load(UE.Game.StarterContent.TestStruct.TestStruct);
+const TestStruct = UE.Game.StarterContent.TestStruct.TestStruct;
+let testStruct = new TestStruct();
 testStruct.age = 10;
 testStruct.speed = 5;
 bpActor.Bar(testStruct);
+puerts_1.blueprint.unload(TestStruct);
 //蓝图枚举
 console.log("-------------------------15---------------------------");
 console.log(UE.Game.StarterContent.TestEnum.TestEnum.Blue);
@@ -142,8 +154,8 @@ console.log("NotifyWithString.IsBound", actor.NotifyWithString.IsBound());
 console.log("NotifyWithRefString.IsBound", actor.NotifyWithRefString.IsBound());
 actor.NotifyWithRefString.Bind((strRef) => {
     //console.error("NotifyWithRefString");
-    console.log("NotifyWithRefString", puerts_1.$unref(strRef));
-    puerts_1.$set(strRef, "out to NotifyWithRefString"); //引用参数输出
+    console.log("NotifyWithRefString", (0, puerts_1.$unref)(strRef));
+    (0, puerts_1.$set)(strRef, "out to NotifyWithRefString"); //引用参数输出
 });
 console.log("NotifyWithString.IsBound", actor.NotifyWithString.IsBound());
 console.log("NotifyWithRefString.IsBound", actor.NotifyWithRefString.IsBound());
@@ -151,9 +163,9 @@ actor.NotifyWithStringRet.Bind((inStr) => {
     return "////" + inStr;
 });
 actor.NotifyWithInt.Broadcast(888999);
-let strRef = puerts_1.$ref("666");
+let strRef = (0, puerts_1.$ref)("666");
 actor.NotifyWithRefString.Execute(strRef);
-console.log("out str:" + puerts_1.$unref(strRef));
+console.log("out str:" + (0, puerts_1.$unref)(strRef));
 let retStr = actor.NotifyWithStringRet.Execute("console.log('hello world')");
 console.log("ret str:" + retStr);
 console.log("waiting native call script...........");
@@ -161,11 +173,11 @@ console.log("waiting native call script...........");
 function IsJohn(str) {
     return str == "John";
 }
-obj.PassJsFunctionAsDelegate(puerts_1.toManualReleaseDelegate(IsJohn));
+obj.PassJsFunctionAsDelegate((0, puerts_1.toManualReleaseDelegate)(IsJohn));
 //release after using
-puerts_1.releaseManualReleaseDelegate(IsJohn);
+(0, puerts_1.releaseManualReleaseDelegate)(IsJohn);
 //unhandledRejection
-puerts_1.on('unhandledRejection', function (reason) {
+(0, puerts_1.on)('unhandledRejection', function (reason) {
     console.log('unhandledRejection~~~');
 });
 new Promise(() => {
