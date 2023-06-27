@@ -1,7 +1,6 @@
 import * as UE from 'ue'
 import {argv, makeUClass, blueprint} from 'puerts';
 
-// let world = (argv.getByName("GameInstance") as UE.GameInstance).GetWorld();
 let gameInstance = (argv.getByName("GameInstance") as UE.GameInstance);
 
 //JS继承一个原生类
