@@ -56,12 +56,12 @@ describe('Function with Non-POD Type Parameters: obj.Bar()', function () {
 });
 //引用类型参数函数
 describe('Function with Reference Type Parameters: $ref()', function () {
-    let vectorRef = puerts_1.$ref(new UE.Vector(1, 2, 3));
+    let vectorRef = (0, puerts_1.$ref)(new UE.Vector(1, 2, 3));
     it('obj.Bar2($ref(new UE.Vector(1, 2, 3))) should return \'UMyObject::Bar2(X=1.000 Y=2.000 Z=3.000)\'', function () {
         assert.equal(obj.Bar2(vectorRef), 'UMyObject::Bar2(X=1.000 Y=2.000 Z=3.000)');
     });
     it('The X value of the argument passed to obj.Bar2() should be modified to 1024.000', function () {
-        assert.equal(obj.Bar(puerts_1.$unref(vectorRef)), 'UMyObject::Bar(X=1024.000 Y=2.000 Z=3.000)');
+        assert.equal(obj.Bar((0, puerts_1.$unref)(vectorRef)), 'UMyObject::Bar(X=1024.000 Y=2.000 Z=3.000)');
     });
 });
 //静态方法
@@ -158,8 +158,9 @@ describe('Test TMap', function () {
         assert.equal(obj.MyMap.Get("Che"), 10);
     });
 });
-let world = puerts_1.argv.getByName("GameInstance").GetWorld();
-let actor = world.SpawnActor(UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+let gameInstance = puerts_1.argv.getByName("GameInstance");
+let actor = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, UE.MainActor.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined);
+UE.GameplayStatics.FinishSpawningActor(actor, undefined);
 //引擎方法
 describe('Calling Engine Methods', function () {
     it('actor.GetName should be \'MainActor_0\'', function () {
@@ -194,17 +195,17 @@ describe('Test Delegate', function () {
     let outerStrRef;
     it('If the delegate is bound, IsBound() should return true', function () {
         actor.NotifyWithRefString.Bind((strRef) => {
-            outerStrRef = puerts_1.$unref(strRef);
-            puerts_1.$set(strRef, 'out to NotifyWithRefString'); //引用参数输出
+            outerStrRef = (0, puerts_1.$unref)(strRef);
+            (0, puerts_1.$set)(strRef, 'out to NotifyWithRefString'); //引用参数输出
         });
         assert.equal(actor.NotifyWithString.IsBound(), false);
         assert.equal(actor.NotifyWithRefString.IsBound(), true);
     });
     it('Executing NotifyWithRefString delegate', function () {
-        let strRef = puerts_1.$ref('666');
+        let strRef = (0, puerts_1.$ref)('666');
         actor.NotifyWithRefString.Execute(strRef);
         assert.equal(outerStrRef, '666');
-        assert.equal(puerts_1.$unref(strRef), 'out to NotifyWithRefString');
+        assert.equal((0, puerts_1.$unref)(strRef), 'out to NotifyWithRefString');
     });
     it('Executing a delegate with return value', function () {
         actor.NotifyWithStringRet.Bind((inStr) => {

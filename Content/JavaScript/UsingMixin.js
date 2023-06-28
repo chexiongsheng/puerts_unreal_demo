@@ -26,8 +26,9 @@ class Loggable {
     }
 }
 const MixinTestWithMixin = puerts_1.blueprint.mixin(MixinTest, Loggable);
-let world = puerts_1.argv.getByName("GameInstance").GetWorld();
-let o = world.SpawnActor(MixinTestWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+let gameInstance = puerts_1.argv.getByName("GameInstance");
+let o = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, MixinTestWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined);
+UE.GameplayStatics.FinishSpawningActor(o, undefined);
 o.Log("msg from ts");
 //-----------------------------------------------------------------
 //super关键字演示
@@ -48,7 +49,8 @@ class DerivedClassMixin extends MixinSuperTestBasePlaceHold {
     }
 }
 const MixinSuperTestDerivedWithMixin = puerts_1.blueprint.mixin(MixinSuperTestDerived, DerivedClassMixin);
-world.SpawnActor(MixinSuperTestDerivedWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined, undefined);
+let mixinActor = UE.GameplayStatics.BeginDeferredActorSpawnFromClass(gameInstance, MixinSuperTestDerivedWithMixin.StaticClass(), undefined, UE.ESpawnActorCollisionHandlingMethod.Undefined, undefined);
+UE.GameplayStatics.FinishSpawningActor(mixinActor, undefined);
 //-----------------------------------------------------------------
 //原生类mixin演示
 //-----------------------------------------------------------------
