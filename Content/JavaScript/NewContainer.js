@@ -26,6 +26,10 @@ printTArray(a2);
 a5.Add(new UE.Vector(7, 8, 9));
 printTArray(a5);
 console.log(a5.Get(0).ToString());
+a3.Add("hello");
+a3.Add("world");
+a3.Add("TArray<string>");
+printTArray(a3);
 //TSet
 console.log("----------------------------------------------------");
 s1.Add("John");
