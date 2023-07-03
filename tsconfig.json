@@ -13,6 +13,6 @@
     "outDir": "Content/JavaScript"
   },
   "include": [
-    "TsProj/**/*"
+    "TypeScript/**/*"
   ],
 }
