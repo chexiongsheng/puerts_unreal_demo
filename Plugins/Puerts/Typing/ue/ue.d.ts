@@ -57150,15 +57150,17 @@ declare module "ue" {
         ClearParameter() : void;
         LoadOrCreate(InName: string, InPath: string, ParentClass: $Nullable<UE.Class>, InSetFlags: number, InClearFlags: number) : boolean;
         LoadOrCreateWithMetaData(InName: string, InPath: string, InParentClass: $Nullable<UE.Class>, InSetFlags: number, InClearFlags: number, InMetaData: $Nullable<UE.PEClassMetaData>) : boolean;
+        RemoveNotExistedComponent() : void;
         RemoveNotExistedFunction() : void;
         RemoveNotExistedMemberVariable() : void;
         Save() : void;
+        SetupAttachments(InAttachments: TMap<string, string>) : void;
         static Existed(InName: string, InPath: string) : boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): PEBlueprintAsset;
         static Load(InName: string): PEBlueprintAsset;
     
-        __tid_PEBlueprintAsset__: boolean;
+        __tid_PEBlueprintAsset_0__: boolean;
     }
     
     class PEDirectoryWatcher extends UE.Object {
