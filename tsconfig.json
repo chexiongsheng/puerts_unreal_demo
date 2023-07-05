@@ -6,8 +6,7 @@
     "jsx": "react",
     "sourceMap": true,
     "typeRoots": [
-      "Plugins/Puerts/Typing",
-      "Plugins/ReactUMG/Typing",
+      "Typing",
       "./node_modules/@types"
     ],
     "outDir": "Content/JavaScript"
