@@ -997,13 +997,11 @@ private:
 
         if (GetArgsLen(info) != ArgsLength)
         {
-            ThrowException(info, "invalid parameter length");
             return nullptr;
         }
 
         if (!internal::ArgumentChecker<0, ArgsLength, Args...>::Check(info, context))
         {
-            ThrowException(info, "invalid parameter");
             return nullptr;
         }
 
@@ -1014,6 +1012,15 @@ public:
     static void* call(CallbackInfoType info)
     {
         return call(info, std::make_index_sequence<ArgsLength>());
+    }
+    static void* checkedCall(CallbackInfoType info)
+    {
+        auto ret = call(info);
+        if (!ret)
+        {
+            ThrowException(info, "invalid parameter!");
+        }
+        return ret;
     }
     static const CFunctionInfo* info(unsigned int defaultCount = 0)
     {
@@ -1308,7 +1315,7 @@ public:
     template <typename... Args>
     std::enable_if_t<internal::isArgsConvertible<std::tuple<Args...>>, ClassDefineBuilder<T>&> Constructor()
     {
-        InitializeFuncType constructor = ConstructorWrapper<T, Args...>::call;
+        InitializeFuncType constructor = ConstructorWrapper<T, Args...>::checkedCall;
         constructor_ = constructor;
         constructorInfos_.push_back(GeneralFunctionReflectionInfo{"constructor", ConstructorWrapper<T, Args...>::info()});
         return *this;
