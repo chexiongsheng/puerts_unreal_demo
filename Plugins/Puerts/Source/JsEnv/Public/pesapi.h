@@ -15,7 +15,7 @@
 
 // Portable Embedded Scripting API
 
-#define PESAPI_VERSION 6
+#define PESAPI_VERSION 8
 
 #define PESAPI_EXTERN
 
@@ -140,6 +140,7 @@ PESAPI_EXTERN pesapi_value pesapi_create_uint64(pesapi_env env, uint64_t value);
 PESAPI_EXTERN pesapi_value pesapi_create_double(pesapi_env env, double value);
 PESAPI_EXTERN pesapi_value pesapi_create_string_utf8(pesapi_env env, const char* str, size_t length);
 PESAPI_EXTERN pesapi_value pesapi_create_binary(pesapi_env env, void* str, size_t length);
+PESAPI_EXTERN pesapi_value pesapi_create_array(pesapi_env env);
 
 PESAPI_EXTERN bool pesapi_get_value_bool(pesapi_env env, pesapi_value value);
 PESAPI_EXTERN int32_t pesapi_get_value_int32(pesapi_env env, pesapi_value value);
@@ -149,6 +150,7 @@ PESAPI_EXTERN uint64_t pesapi_get_value_uint64(pesapi_env env, pesapi_value valu
 PESAPI_EXTERN double pesapi_get_value_double(pesapi_env env, pesapi_value value);
 PESAPI_EXTERN const char* pesapi_get_value_string_utf8(pesapi_env env, pesapi_value value, char* buf, size_t* bufsize);
 PESAPI_EXTERN void* pesapi_get_value_binary(pesapi_env env, pesapi_value pvalue, size_t* bufsize);
+PESAPI_EXTERN uint32_t pesapi_get_array_length(pesapi_env env, pesapi_value value);
 
 PESAPI_EXTERN bool pesapi_is_null(pesapi_env env, pesapi_value value);
 PESAPI_EXTERN bool pesapi_is_undefined(pesapi_env env, pesapi_value value);
@@ -162,6 +164,7 @@ PESAPI_EXTERN bool pesapi_is_string(pesapi_env env, pesapi_value value);
 PESAPI_EXTERN bool pesapi_is_object(pesapi_env env, pesapi_value value);
 PESAPI_EXTERN bool pesapi_is_function(pesapi_env env, pesapi_value value);
 PESAPI_EXTERN bool pesapi_is_binary(pesapi_env env, pesapi_value value);
+PESAPI_EXTERN bool pesapi_is_array(pesapi_env env, pesapi_value value);
 
 PESAPI_EXTERN pesapi_value pesapi_create_native_object(pesapi_env env, const void* class_id, void* object_ptr, bool copy);
 PESAPI_EXTERN void* pesapi_get_native_object_ptr(pesapi_env env, pesapi_value value);
