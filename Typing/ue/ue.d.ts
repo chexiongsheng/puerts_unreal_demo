@@ -14,6 +14,8 @@ declare module "ue" {
         GetName() : string;
         GetOuter() : Object;
         GetWorld() : World;
+        IsA(p0: Class) : boolean;
+        IsNative() : boolean;
         static StaticClass(): Class;
         static Find(OrigInName: string, Outer?: Object): Object;
         static Load(InName: string): Object;
