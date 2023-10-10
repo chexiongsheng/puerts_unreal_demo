@@ -2,17 +2,71 @@
 #include "Binding.hpp"
 #include "Object.hpp"
 #include "AdvanceTestClass.h"
+#include "CoreMinimal.h"
 
 UsingCppType(NoDeleteClass);
 UsingCppType(BaseClass);
 UsingCppType(TestClass);
 UsingCppType(AdvanceTestClass);
 
+class A
+{
+public:
+    A()
+    {
+        a = 10;
+        //printf("A constructor %p %d\n", this, a);
+        UE_LOG(LogTemp, Warning, TEXT("A constructor %p %d"), this, a);
+    }
+    void Print()
+    {
+        //printf("A print %p %d\n", this, a);
+        UE_LOG(LogTemp, Warning, TEXT("A print %p %d"), this, a);
+    }
+    int a;
+};
+
+class B: public virtual A
+{
+public:
+};
+
+class C: public virtual A
+{
+public:
+};
+
+class D: public B, public C
+{
+public:
+    D()
+    {
+        //printf("D constructor %p %d\n", this, a);
+        UE_LOG(LogTemp, Warning, TEXT("D constructor %p %d"), this, a);
+    }
+};
+
+UsingCppType(A);
+UsingCppType(D);
+
 
 struct AutoRegisterForTestClass
 {
     AutoRegisterForTestClass()
     {
+        puerts::DefineClass<A>()
+            .Method("Print", MakeFunction(&A::Print))
+            .Property("a", MakeProperty(&A::a))
+            .Constructor()
+            .Register();
+
+        puerts::DefineClass<D>()
+            .Extends<A>()
+            .Constructor()
+            .MethodProxy<decltype(&A::Print), &A::Print>("Print")
+            .PropertyProxy<decltype(&A::a), &A::a>("a")
+            .Register();
+        
         puerts::DefineClass<NoDeleteClass>()
             .Constructor()
             .Register();
