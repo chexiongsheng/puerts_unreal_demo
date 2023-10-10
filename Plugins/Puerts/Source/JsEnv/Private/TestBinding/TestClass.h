@@ -16,7 +16,7 @@ class NoDeleteClass
 public:
     NoDeleteClass()
     {
-        UE_LOG(LogTemp, Warning, TEXT("NoDeleteClass"));
+        //UE_LOG(LogTemp, Warning, TEXT("NoDeleteClass"));
     }
     ~NoDeleteClass() = delete;
 };
@@ -59,7 +59,7 @@ public:
 
     void NoEmptyRef(NoDeleteClass & o) const
     {
-        UE_LOG(LogTemp, Warning, TEXT("NoEmptyRef %p"), &o);
+        //UE_LOG(LogTemp, Warning, TEXT("NoEmptyRef %p"), &o);
     }
 
     int Ptr(int32_t * a);
