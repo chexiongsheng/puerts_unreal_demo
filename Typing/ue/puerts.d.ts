@@ -35,7 +35,7 @@ declare module "ue" {
     
     interface TArray<T> {
         Num(): number;
-        Add(Value: T): void;
+        Add(...args: T[]): void;
         Get(Index: number): T;
         GetRef(Index: number): T;
         Set(Index: number, Value: T): void;
@@ -44,6 +44,7 @@ declare module "ue" {
         RemoveAt(Index: number): void;
         IsValidIndex(Index: number): boolean;
         Empty(): void;
+        [Symbol.iterator](): IterableIterator<T>;
     }
     
     interface TSet<T> {
@@ -58,6 +59,7 @@ declare module "ue" {
         GetMaxIndex(): number;  // TODO - GetMaxIndex的返回值是InvalidIndex，合理吗？（GetMaxIndex的解释应该是：最大合法index+1），当调用Empty，返回值为0
         IsValidIndex(Index: number): boolean;
         Empty(): void;
+        [Symbol.iterator](): IterableIterator<T>;
     }
     
     interface TMap<TKey, TValue> {
@@ -71,6 +73,7 @@ declare module "ue" {
         IsValidIndex(Index: number): boolean;
         GetKey(Index: number): TKey;            // TODO - 对于非法index，是否应该返回undefined
         Empty(): void;
+        [Symbol.iterator](): IterableIterator<[TKey, TValue]>;
     }
 
     interface TSharedPtr<T> {
