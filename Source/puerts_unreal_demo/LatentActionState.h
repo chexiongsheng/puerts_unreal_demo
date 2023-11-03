@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Engine/LatentActionManager.h"
 #include "UObject/NoExportTypes.h"
 #include "LatentActionState.generated.h"
 
