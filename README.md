@@ -4,7 +4,7 @@
 
 * git clone https://github.com/chexiongsheng/puerts_unreal_demo.git 
 
-* ue4.25及以上版本，需要到这里下载[V8_8.4.371.19_0323](https://github.com/puerts/backend-v8/releases/tag/V8_8.4.371.19_0323)，解压到[Plugins/Puerts/ThirdParty](Plugins/Puerts/ThirdParty)
+* ue4.25及以上版本，需要根据[文档](https://puerts.github.io/docs/puerts/unreal/install)下载安装v8
 
 * 生成vs工程（window下，在mac下生成xcode工程），然后进入工程编译
 
