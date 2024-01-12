@@ -345,9 +345,9 @@ FJsEnvImpl::FJsEnvImpl(std::shared_ptr<IJSModuleLoader> InModuleLoader, std::sha
     if (!InFlags.IsEmpty())
     {
 #if !defined(WITH_NODEJS) && !defined(WITH_QUICKJS)
-        TArray<FString> Flags;
-        InFlags.ParseIntoArray(Flags, TEXT(" "));
-        for (auto& Flag : Flags)
+        TArray<FString> FlagArray;
+        InFlags.ParseIntoArray(FlagArray, TEXT(" "));
+        for (auto& Flag : FlagArray)
         {
             static FString Max_Old_Space_Size_Name(TEXT("--max-old-space-size="));
             if (Flag.StartsWith(Max_Old_Space_Size_Name))
@@ -356,9 +356,8 @@ FJsEnvImpl::FJsEnvImpl(std::shared_ptr<IJSModuleLoader> InModuleLoader, std::sha
                 CreateParams.constraints.set_max_old_generation_size_in_bytes(Val * 1024 * 1024);
             }
         }
-#else
-        v8::V8::SetFlagsFromString(TCHAR_TO_UTF8(*InFlags));
 #endif
+        v8::V8::SetFlagsFromString(TCHAR_TO_UTF8(*InFlags));
     }
 
     Started = false;
@@ -2540,7 +2539,7 @@ bool FJsEnvImpl::RemoveFromDelegate(
 
         __USE(RemoveListItem.Get(Isolate)->Call(Context, v8::Undefined(Isolate), 2, Args));
 
-        if (JsCallbacks->Length() == 0)
+        if (JsCallbacks->Length() == 0 && Iter->second.Proxy.IsValid())
         {
             auto DelegateProxy = Iter->second.Proxy.Get();
 

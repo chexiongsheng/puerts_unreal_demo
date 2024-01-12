@@ -1,4 +1,13 @@
 #include "TestClass.h"
+#include "Binding.hpp"
+
+struct ooops : std::exception
+{
+	const char* what() const noexcept override
+	{
+		return "ooops!";
+	}
+};
 
 void BaseClass::Foo(int p)
 {
@@ -10,6 +19,8 @@ TestClass::TestClass()
 	UE_LOG(LogTemp, Warning, TEXT("0 TestClass::TestClass()"));
 	X = 0;
 	Y = 0;
+	//throw ooops();
+	//puerts::ThrowException("exception in constructor");
 }
 
 TestClass::TestClass(int32_t InX, int32_t InY)
@@ -17,6 +28,8 @@ TestClass::TestClass(int32_t InX, int32_t InY)
 	UE_LOG(LogTemp, Warning, TEXT("1 TestClass::TestClass(%d, %d)"), InX, InY);
 	X = InX;
 	Y = InY;
+	//throw ooops();
+	//puerts::ThrowException("exception in constructor");
 }
 
 int32_t TestClass::Add(int32_t a, int32_t b)
@@ -117,6 +130,15 @@ void TestClass::StrPtr(std::string * str)
 void TestClass::ConstRef(const int32_t & a)
 {
 	UE_LOG(LogTemp, Warning, TEXT("TestClass::ConstRef(%d)"), a);
+}
+
+void TestClass::ThrowInCpp(bool bthrow)
+{
+	if(bthrow)
+	{
+		puerts::ThrowException("ooops");
+		//throw ooops();
+	}
 }
 
 int TestClass::StaticInt = 0;

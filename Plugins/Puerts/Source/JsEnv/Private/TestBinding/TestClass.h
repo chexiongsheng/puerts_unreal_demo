@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class BaseClass
 {
@@ -69,6 +70,19 @@ public:
     void StrPtr(std::string * str);
 
 	void ConstRef(const int32_t & a);
+
+	void ThrowInCpp(bool bthrow);
+
+	void TV(std::vector<int> v)
+	{
+		
+	}
+
+	void CallBase(BaseClass *b)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("CallBase"));
+		b->Foo(10);
+	}
 
     static int StaticInt;
 

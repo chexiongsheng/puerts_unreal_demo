@@ -48,6 +48,7 @@ public:
 
 UsingCppType(A);
 UsingCppType(D);
+UsingCppType(std::vector<int>);
 
 
 struct AutoRegisterForTestClass
@@ -96,6 +97,9 @@ struct AutoRegisterForTestClass
             .Method("CStr", MakeFunction(&TestClass::CStr))
             .Method("StrPtr", MakeFunction(&TestClass::StrPtr))
             .Method("ConstRef", MakeFunction(&TestClass::ConstRef))
+            .Method("ThrowInCpp", MakeFunction(&TestClass::ThrowInCpp))
+            .Method("CallBase", MakeCheckFunction(&TestClass::CallBase))
+        //.Method("TV", MakeFunction(&TestClass::TV))
             .Function("Overload", CombineOverloads(
                 MakeOverload(void(*)(), &TestClass::Overload),
                 MakeOverload(void(*)(int32_t), &TestClass::Overload),
