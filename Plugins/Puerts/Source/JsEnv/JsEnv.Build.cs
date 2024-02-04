@@ -40,6 +40,7 @@ public class JsEnv : ModuleRules
     {
 #if UE_5_3_OR_LATER
         PCHUsage = PCHUsageMode.NoPCHs;
+        CppStandard = CppStandardVersion.Cpp17;
 #endif
         PublicDefinitions.Add("USING_IN_UNREAL_ENGINE");
         //PublicDefinitions.Add("WITH_V8_FAST_CALL");

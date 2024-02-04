@@ -2353,38 +2353,87 @@ bool FJsEnvImpl::AddToDelegate(
 
     auto JsCallbacks = Iter->second.JsCallbacks.Get(Isolate);
 
-    (void) (JsCallbacks->Set(Context, JsCallbacks->Length(), JsFunction));    // push
-
+    UDynamicDelegateProxy* DelegateProxy = nullptr;
+    bool InitApplyFunc = false;
     if (Iter->second.Proxy.IsValid())
     {
-        return true;
+        DelegateProxy = Iter->second.Proxy.Get();
+        if (Iter->second.DelegateProperty)
+        {
+            if (!static_cast<FScriptDelegate*>(DelegatePtr)->IsBoundToObject(DelegateProxy))
+            {
+                InitApplyFunc = true;
+            }
+        }
+        else if (Iter->second.MulticastDelegateProperty)
+        {
+#if ENGINE_MINOR_VERSION >= 23 || ENGINE_MAJOR_VERSION > 4
+            if (Iter->second.MulticastDelegateProperty->IsA<MulticastSparseDelegatePropertyMacro>())
+            {
+                if (!FSparseDelegateStorage::Contains(
+                        Iter->second.Owner.Get(), Iter->second.MulticastDelegateProperty->GetFName(), DelegateProxy, NAME_Fire))
+                {
+                    InitApplyFunc = true;
+                }
+            }
+            else
+            {
+#endif
+                if (!static_cast<FMulticastScriptDelegate*>(DelegatePtr)->Contains(DelegateProxy, NAME_Fire))
+                {
+                    InitApplyFunc = true;
+                }
+            }
+        }
+        if (InitApplyFunc)
+        {
+            if (JsCallbacks->Length() > 0)
+            {
+                JsCallbacks = v8::Array::New(Isolate);
+                Iter->second.JsCallbacks.Reset(Isolate, JsCallbacks);
+            }
+            else
+            {
+                InitApplyFunc = false;
+            }
+        }
     }
-
-    UDynamicDelegateProxy* DelegateProxy = NewObject<UDynamicDelegateProxy>();
+    else
+    {
+        DelegateProxy = NewObject<UDynamicDelegateProxy>();
 
 #ifdef THREAD_SAFE
-    DelegateProxy->Isolate = Isolate;
+        DelegateProxy->Isolate = Isolate;
 #endif
-    DelegateProxy->Owner = Iter->second.Owner;
-    DelegateProxy->SignatureFunction = Iter->second.SignatureFunction;
-    DelegateProxy->DynamicInvoker = DynamicInvoker;
+        DelegateProxy->Owner = Iter->second.Owner;
+        DelegateProxy->SignatureFunction = Iter->second.SignatureFunction;
+        DelegateProxy->DynamicInvoker = DynamicInvoker;
 
-    v8::Local<v8::Value> Args[] = {JsCallbacks};
+        InitApplyFunc = true;
 
-    v8::Local<v8::Value> Apply;
-    if (!GenListApply.Get(Isolate)->Call(Context, v8::Undefined(Isolate), 1, Args).ToLocal(&Apply) || !Apply->IsFunction())
-    {
-        Logger->Error("gen callback apply fail!");
-        return false;
+        SysObjectRetainer.Retain(DelegateProxy);
+        Iter->second.Proxy = DelegateProxy;
     }
-    DelegateProxy->JsFunction = v8::UniquePersistent<v8::Function>(Isolate, v8::Local<v8::Function>::Cast(Apply));
 
-    SysObjectRetainer.Retain(DelegateProxy);
+    if (InitApplyFunc)
+    {
+        v8::Local<v8::Value> Args[] = {JsCallbacks};
+
+        v8::Local<v8::Value> Apply;
+        if (!GenListApply.Get(Isolate)->Call(Context, v8::Undefined(Isolate), 1, Args).ToLocal(&Apply) || !Apply->IsFunction())
+        {
+            Logger->Error("gen callback apply fail!");
+            return false;
+        }
+        DelegateProxy->JsFunction = v8::UniquePersistent<v8::Function>(Isolate, v8::Local<v8::Function>::Cast(Apply));
+    }
+
+    bool bSingleDelegate = Iter->second.DelegateProperty != nullptr;
+    (void) (JsCallbacks->Set(Context, bSingleDelegate ? 0 : JsCallbacks->Length(), JsFunction));    // push
 
     FScriptDelegate Delegate;
     Delegate.BindUFunction(DelegateProxy, NAME_Fire);
 
-    Iter->second.Proxy = DelegateProxy;
     if (Iter->second.DelegateProperty)
     {
         // UE_LOG(LogTemp, Warning, TEXT("bind to delegate"));
@@ -2603,8 +2652,8 @@ bool FJsEnvImpl::ClearDelegate(v8::Isolate* Isolate, v8::Local<v8::Context>& Con
     if (Iter->second.Proxy.IsValid())
     {
         Iter->second.Proxy->JsFunction.Reset();
-        Iter->second.Proxy.Reset();
         SysObjectRetainer.Release(Iter->second.Proxy.Get());
+        Iter->second.Proxy.Reset();
     }
 
     Iter->second.JsCallbacks.Reset(Isolate, v8::Array::New(Isolate));
