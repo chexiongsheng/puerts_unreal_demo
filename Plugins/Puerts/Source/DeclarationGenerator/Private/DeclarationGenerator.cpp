@@ -603,6 +603,7 @@ void FTypeScriptDeclarationGenerator::LoadAllWidgetBlueprint(FName InSearchPath,
 
     FARFilter BPFilter;
     BPFilter.PackagePaths.Add(PackagePath);
+    BPFilter.PackagePaths.Add(FName(TEXT("/Engine")));
     BPFilter.bRecursivePaths = true;
     BPFilter.bRecursiveClasses = true;
 #if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
@@ -1242,6 +1243,24 @@ void FTypeScriptDeclarationGenerator::GenClass(UClass* Class)
             continue;
         }
         TryToAddOverload(Outputs, FunctionIt->GetName(), (FunctionIt->FunctionFlags & FUNC_Static) != 0, TmpBuff.Buffer);
+    }
+
+    for (int i = 0; i < Class->Interfaces.Num(); i++)
+    {
+        for (TFieldIterator<UFunction> FunctionIt(Class->Interfaces[i].Class, EFieldIteratorFlags::IncludeSuper); FunctionIt;
+             ++FunctionIt)
+        {
+            FStringBuffer TmpBuff;
+            if (!GenFunction(TmpBuff, *FunctionIt))
+            {
+                continue;
+            }
+            if (FunctionIt->GetName().Contains("ExecuteUbergraph"))
+            {
+                continue;
+            }
+            TryToAddOverload(Outputs, FunctionIt->GetName(), (FunctionIt->FunctionFlags & FUNC_Static) != 0, TmpBuff.Buffer);
+        }
     }
 
     GatherExtensions(Class, StringBuffer);

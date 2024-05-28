@@ -106,8 +106,8 @@ bool UPEClassMetaData::Apply(UClass* InClass, UBlueprint* InBlueprint)
     MergeClassCategories(InClass);
     const bool bFlagsChanged = MergeAndValidateClassFlags(InClass);
     const bool bMetaDataChanged = SetClassMetaData(InClass);
-    SyncClassToBlueprint(InClass, InBlueprint);
-    return bFlagsChanged || bMetaDataChanged;
+    const bool bBlueprintMetaDataChange = SyncClassToBlueprint(InClass, InBlueprint);
+    return bFlagsChanged || bMetaDataChanged || bBlueprintMetaDataChange;
 }
 
 void UPEClassMetaData::MergeClassCategories(UClass* InParentClass)
@@ -117,16 +117,20 @@ void UPEClassMetaData::MergeClassCategories(UClass* InParentClass)
         return;
     }
 
-    TArray<FString> ParentHideCategories = GetClassMetaDataValues(InParentClass, NAME_HideCategories);
     TArray<FString> ParentShowCategories = GetClassMetaDataValues(InParentClass, NAME_ShowCategories);
     TArray<FString> ParentHideFunctions = GetClassMetaDataValues(InParentClass, NAME_HideFunctions);
     TArray<FString> ParentAutoExpandCategories = GetClassMetaDataValues(InParentClass, NAME_AutoExpandCategories);
     TArray<FString> ParentAutoCollapseCategories = GetClassMetaDataValues(InParentClass, NAME_AutoCollapseCategories);
 
     //	add parent categories
-    HideCategories.Append(MoveTemp(ParentHideCategories));
     ShowSubCategories.Append(MoveTemp(ParentShowCategories));
     HideFunctions.Append(MoveTemp(ParentHideFunctions));
+    // If metadata is collected from ts
+    FString* ExistingValue = MetaData.Find(NAME_HideCategories);
+    if (ExistingValue)
+    {
+        ExistingValue->ParseIntoArray(HideCategories, TEXT(" "), true);
+    }
 
     //	for show categories
     for (const FString& Value : ShowCategories)
@@ -204,10 +208,6 @@ void UPEClassMetaData::MergeClassCategories(UClass* InParentClass)
     {
         MetaData.Add(NAME_AutoExpandCategories, FString::Join(AutoExpandCategories, TEXT(" ")));
     }
-    if (HideCategories.Num() > 0)
-    {
-        MetaData.Add(NAME_HideCategories, FString::Join(HideCategories, TEXT(" ")));
-    }
     if (ShowSubCategories.Num() > 0)
     {
         MetaData.Add(NAME_ShowCategories, FString::Join(ShowSubCategories, TEXT(" ")));
@@ -245,11 +245,8 @@ bool UPEClassMetaData::MergeAndValidateClassFlags(UClass* InClass)
 
     InClass->ClassFlags |= ClassFlags;
     const auto OldWithInClass = InClass->ClassWithin;
-    const auto OldConfigName = InClass->ClassConfigName;
-    InClass->ClassConfigName = FName(*ConfigName);
 
     SetAndValidateWithinClass(InClass);
-    SetAndValidateConfigName(InClass);
 
     if (!!(InClass->ClassFlags & CLASS_EditInlineNew) && InClass->IsChildOf(AActor::StaticClass()))
     {
@@ -264,7 +261,7 @@ bool UPEClassMetaData::MergeAndValidateClassFlags(UClass* InClass)
         return false;
     }
 
-    return OldFlags != InClass->ClassFlags || OldWithInClass != InClass->ClassWithin || OldConfigName != InClass->ClassConfigName;
+    return OldFlags != InClass->ClassFlags || OldWithInClass != InClass->ClassWithin;
 }
 
 bool UPEClassMetaData::SetClassMetaData(UClass* InClass)
@@ -316,24 +313,56 @@ TArray<FString> UPEClassMetaData::GetClassMetaDataValues(
     return Result;
 }
 
-void UPEClassMetaData::SyncClassToBlueprint(UClass* InClass, UBlueprint* InBlueprint)
+bool UPEClassMetaData::SyncClassToBlueprint(UClass* InClass, UBlueprint* InBlueprint)
 {
     if (!IsValid(InClass) || !IsValid(InBlueprint))
     {
-        return;
+        return false;
     }
 
-    InBlueprint->bDeprecate = (bool) (InClass->ClassFlags & CLASS_Deprecated);
-    InBlueprint->bGenerateAbstractClass = (bool) (InClass->ClassFlags & CLASS_Abstract);
-    InBlueprint->BlueprintDescription = InClass->HasMetaData(TEXT("Tooltip")) ? InClass->GetMetaData(TEXT("Tooltip")) : FString{};
-    InBlueprint->BlueprintDisplayName =
-        InClass->HasMetaData(TEXT("DisplayName")) ? InClass->GetMetaData(TEXT("DisplayName")) : FString{};
-    InBlueprint->BlueprintType = (InClass->ClassFlags & CLASS_Const) ? BPTYPE_Const : BPTYPE_Normal;
-    InBlueprint->BlueprintCategory = InClass->HasMetaData(TEXT("Category")) ? InClass->GetMetaData(TEXT("Category")) : FString{};
-    if (InClass->HasMetaData(TEXT("HideCategories")))
+    bool onChange = false;
+
+    if (InBlueprint->bDeprecate != (bool) (InClass->ClassFlags & CLASS_Deprecated))
     {
-        InClass->GetMetaData(TEXT("HideCategories")).ParseIntoArray(InBlueprint->HideCategories, TEXT(" "), true);
+        InBlueprint->bDeprecate = (bool) (InClass->ClassFlags & CLASS_Deprecated);
+        onChange = true;
     }
+    if (InBlueprint->bGenerateAbstractClass != (bool) (InClass->ClassFlags & CLASS_Abstract))
+    {
+        InBlueprint->bGenerateAbstractClass = (bool) (InClass->ClassFlags & CLASS_Abstract);
+        onChange = true;
+    }
+    FString newDescription = InClass->HasMetaData(TEXT("Tooltip")) ? InClass->GetMetaData(TEXT("Tooltip")) : FString{};
+    if (InBlueprint->BlueprintDescription != newDescription)
+    {
+        InBlueprint->BlueprintDescription = newDescription;
+        onChange = true;
+    }
+    FString newDisplayName = InClass->HasMetaData(TEXT("DisplayName")) ? InClass->GetMetaData(TEXT("DisplayName")) : FString{};
+    if (InBlueprint->BlueprintDisplayName != newDisplayName)
+    {
+        InBlueprint->BlueprintDisplayName = newDisplayName;
+        onChange = true;
+    }
+    EBlueprintType newType = (InClass->ClassFlags & CLASS_Const) ? BPTYPE_Const : BPTYPE_Normal;
+    if (InBlueprint->BlueprintType != newType)
+    {
+        InBlueprint->BlueprintType = newType;
+        onChange = true;
+    }
+    FString newCategory = InClass->HasMetaData(TEXT("Category")) ? InClass->GetMetaData(TEXT("Category")) : FString{};
+    if (InBlueprint->BlueprintCategory != newCategory)
+    {
+        InBlueprint->BlueprintCategory = newCategory;
+        onChange = true;
+    }
+    if (InBlueprint->HideCategories != HideCategories)
+    {
+        InBlueprint->HideCategories = HideCategories;
+        onChange = true;
+    }
+
+    return onChange;
 }
 
 void UPEClassMetaData::SetAndValidateWithinClass(UClass* InClass)
