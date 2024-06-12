@@ -80,7 +80,7 @@ public:
 
 	void CallBase(BaseClass *b)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("CallBase"));
+		//UE_LOG(LogTemp, Warning, TEXT("CallBase"));
 		b->Foo(10);
 	}
 

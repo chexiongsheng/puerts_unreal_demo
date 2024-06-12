@@ -1,14 +1,17 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
 using System.Collections.Generic;
 
 public class puerts_unreal_demoTarget : TargetRules
 {
-	public puerts_unreal_demoTarget( TargetInfo Target) : base(Target)
+	public puerts_unreal_demoTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-
-		ExtraModuleNames.AddRange( new string[] { "puerts_unreal_demo" } );
+#if UE_5_4_OR_LATER
+		DefaultBuildSettings = BuildSettingsVersion.V5;
+		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_4;
+#endif
+		ExtraModuleNames.Add("puerts_unreal_demo");
 	}
 }
