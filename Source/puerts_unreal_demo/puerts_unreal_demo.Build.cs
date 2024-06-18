@@ -6,17 +6,11 @@ public class puerts_unreal_demo : ModuleRules
 {
 	public puerts_unreal_demo(ReadOnlyTargetRules Target) : base(Target)
 	{
-#if UE_5_3_OR_LATER
-        PCHUsage = PCHUsageMode.NoPCHs;
-#else
-        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-#endif
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "JsEnv", "UMG", "Puerts" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "JsEnv", "UMG", "Puerts" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
-        
-        bEnableUndefinedIdentifierWarnings = false;
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
