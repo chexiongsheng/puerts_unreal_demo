@@ -30,6 +30,10 @@ PRAGMA_ENABLE_UNDEFINED_IDENTIFIER_WARNINGS
 
 #include "TypeInfo.hpp"
 
+#if USING_IN_UNREAL_ENGINE
+static const FAnsiStringView EditorOnlyPropertySuffix = "_EditorOnly";
+#endif
+
 namespace PUERTS_NAMESPACE
 {
 class CFunctionInfo;
@@ -101,6 +105,9 @@ AddonRegisterFunc FindAddonRegisterFunc(const std::string& Name);
 void RegisterAddon(const char* Name, AddonRegisterFunc RegisterFunc);
 
 JSENV_API const JSClassDefinition* FindClassByType(UStruct* Type);
+
+JSENV_API bool IsEditorOnlyUFunction(const UFunction* Func);
+
 #endif
 
 }    // namespace PUERTS_NAMESPACE

@@ -34,7 +34,7 @@ void FPropertyTranslator::Getter(const v8::FunctionCallbackInfo<v8::Value>& Info
 void FPropertyTranslator::Getter(
     v8::Isolate* Isolate, v8::Local<v8::Context>& Context, const v8::FunctionCallbackInfo<v8::Value>& Info)
 {
-    if (!PropertyWeakPtr.IsValid())
+    if (!IsPropertyValid())
     {
         FV8Utils::ThrowException(Isolate, "Property is invalid!");
         return;
@@ -86,7 +86,7 @@ void FPropertyTranslator::Setter(const v8::FunctionCallbackInfo<v8::Value>& Info
 void FPropertyTranslator::Setter(v8::Isolate* Isolate, v8::Local<v8::Context>& Context, v8::Local<v8::Value> Value,
     const v8::FunctionCallbackInfo<v8::Value>& Info)
 {
-    if (!PropertyWeakPtr.IsValid())
+    if (!IsPropertyValid())
     {
         FV8Utils::ThrowException(Isolate, "Property is invalid!");
         return;
@@ -129,7 +129,7 @@ void FPropertyTranslator::DelegateGetter(const v8::FunctionCallbackInfo<v8::Valu
 
     FPropertyTranslator* PropertyTranslator =
         static_cast<FPropertyTranslator*>((v8::Local<v8::External>::Cast(Info.Data()))->Value());
-    if (!PropertyTranslator->PropertyWeakPtr.IsValid())
+    if (!PropertyTranslator->IsPropertyValid())
     {
         FV8Utils::ThrowException(Isolate, "Property is invalid!");
         return;
@@ -174,16 +174,22 @@ void FPropertyTranslator::SetAccessor(v8::Isolate* Isolate, v8::Local<v8::Functi
         auto GetterTemplate = v8::FunctionTemplate::New(Isolate, Getter, Self);
         auto SetterTemplate = v8::FunctionTemplate::New(Isolate, Setter, Self);
 #if !defined(ENGINE_INDEPENDENT_JSENV)
-        Template->PrototypeTemplate()->SetAccessorProperty(
-            FV8Utils::InternalString(Isolate, OwnerStruct && OwnerStruct->IsA<UUserDefinedStruct>() ?
+        FString PropertyName = OwnerStruct && OwnerStruct->IsA<UUserDefinedStruct>() ?
 #if ENGINE_MINOR_VERSION >= 23 || ENGINE_MAJOR_VERSION > 4
-                                                                                                    Property->GetAuthoredName()
+                                                                                     Property->GetAuthoredName()
 #else
-                                                                                                    Property->GetDisplayNameText()
-                                                                                                        .ToString()
+                                                                                     Property->GetDisplayNameText().ToString()
 #endif
-                                                                                                    : Property->GetName()),
-            GetterTemplate, SetterTemplate, v8::DontDelete);
+                                                                                     : Property->GetName();
+#ifdef PUERTS_WITH_EDITOR_SUFFIX
+        if (Property->IsEditorOnlyProperty())
+        {
+            PropertyName += EditorOnlyPropertySuffix;
+        }
+#endif
+
+        Template->PrototypeTemplate()->SetAccessorProperty(
+            FV8Utils::InternalString(Isolate, PropertyName), GetterTemplate, SetterTemplate, v8::DontDelete);
 #else
         Template->PrototypeTemplate()->SetAccessorProperty(
             FV8Utils::InternalString(Isolate, Property->GetName()), GetterTemplate, SetterTemplate, v8::DontDelete);

@@ -896,7 +896,14 @@ bool FTypeScriptDeclarationGenerator::GenFunction(
             OwnerBuffer << "static ";
         }
 
-        OwnerBuffer << SafeFieldName(Function->GetName());
+        FString FuncName = Function->GetName();
+#ifdef PUERTS_WITH_EDITOR_SUFFIX
+        if (puerts::IsEditorOnlyUFunction(Function))
+        {
+            FuncName += EditorOnlyPropertySuffix;
+        }
+#endif
+        OwnerBuffer << SafeFieldName(FuncName);
     }
     OwnerBuffer << "(";
     PropertyMacro* ReturnValue = nullptr;
@@ -1221,7 +1228,14 @@ void FTypeScriptDeclarationGenerator::GenClass(UClass* Class)
         AddedProperties.Add(Property->GetName());
 
         FStringBuffer TmpBuff;
-        TmpBuff << SafeFieldName(Property->GetName()) << ": ";
+        FString SN = Property->GetName();
+#ifdef PUERTS_WITH_EDITOR_SUFFIX
+        if (Property->IsEditorOnlyProperty())
+        {
+            SN += EditorOnlyPropertySuffix;
+        }
+#endif
+        TmpBuff << SafeFieldName(SN) << ": ";
         TArray<UObject*> RefTypesTmp;
         if (!GenTypeDecl(TmpBuff, Property, RefTypesTmp))
         {
