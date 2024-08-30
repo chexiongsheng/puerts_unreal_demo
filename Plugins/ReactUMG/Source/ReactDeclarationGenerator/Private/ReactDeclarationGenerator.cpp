@@ -209,6 +209,21 @@ void FReactDeclarationGenerator::GenClass(UClass* Class)
         auto Property = *PropertyIt;
         if (!IsReactSupportProperty(Property))
             continue;
+
+        //UE.27上遇到一个问题,
+        //引擎内置蓝图DefaultBurnIn有个FLinearColor类型的变量Foreground Color,
+        //并且父类UUserWidget有个FSlateColor类型的变量ForegroundColor
+        //此处SafeName去掉空格导致interface写入了父类变量名字,类型对不上,有报错,仅此一例
+        //PuerTS插件DeclarationGenerator.cpp中的SafeName存在同样隐患
+        FString PropertyNameSafe = SafeName(Property->GetName());
+        UClass* SuperClass = Class->GetSuperClass();
+        if (PropertyNameSafe != Property->GetName() &&
+            SuperClass != nullptr && SuperClass->FindPropertyByName(*PropertyNameSafe) != nullptr)
+        {
+            UE_LOG(LogTemp, Warning, TEXT("ReactUMG, invalid property name, origin name: %s, safe name %s in super class!"), *Property->GetName(), *PropertyNameSafe);
+            continue;
+        }
+
         FStringBuffer TmpBuff;
         TmpBuff << "    " << SafeName(Property->GetName()) << "?: ";
         TArray<UObject*> RefTypesTmp;

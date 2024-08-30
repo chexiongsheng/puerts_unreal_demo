@@ -8,9 +8,15 @@
 
 #pragma once
 
+//UE5.3已经去掉了IScriptGeneratorPluginInterface,改用C#实现UHT;
+//ReactUMG目前并没有用到UHT的代码生成,不需要引用;
+//另外 cstdio似乎也用不到,一并屏蔽
+#if ENGINE_MAJOR_VERSION < 5
 #include <cstdio>
 
 #include "IScriptGeneratorPluginInterface.h"
+#endif
+
 #include "Modules/ModuleManager.h"
 #include "CoreMinimal.h"
 
