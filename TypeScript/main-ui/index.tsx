@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { VerticalBox, CanvasPanel, ReactUMG, CanvasPanelSlot, Button, HorizontalBox, TextureImage } from 'react-umg';
+import { VerticalBox, CanvasPanel, ReactUMG, CanvasPanelSlot, Button, HorizontalBox/*, TextureImage*/ } from 'react-umg';
 import {StatusBar} from './ui-components'
 interface Props {
     names: string[];
@@ -7,7 +7,7 @@ interface Props {
 
 interface State {
     names: string[];
-    buttonTextureIndex: number;
+    buttonTextureIndex: 0 | 1;
 }
 
 let SlotOfVerticalBox: CanvasPanelSlot = {
@@ -41,7 +41,7 @@ class Hello extends React.Component<Props, State> {
                 <VerticalBox Slot={SlotOfVerticalBox}>
                     <HorizontalBox>
                     <Button OnHovered={() => this.setState({buttonTextureIndex: 1})} OnUnhovered={() => this.setState({buttonTextureIndex: 0})} >
-                        <TextureImage TextureName={this.buttonTextures[this.state.buttonTextureIndex]} bMatchSize={true}/>
+                        {this.state.buttonTextureIndex == 0 ? 'normal' : 'hovered'}
                     </Button>
                     </HorizontalBox>
                     {this.state.names.map((name, idx) => <StatusBar name={name} key={idx}/>)}
