@@ -26,7 +26,7 @@
 
 * 若采用较新版本的vscode进行调试，发现无法命中断点，则尝试将本demo目录根目录下".vscode"目录中的"launch.json"中的"remoteRoot"配置项的"${workspaceRoot}"修改为"${workspaceFolder}"，或者直接去除"remoteRoot"配置项。
 
-* UE版本如果>=5.3，ReactUMG插件不可用，需要修改puerts_unreal_demo.uproject禁用该plugin，否则会报编译错误。puerts_unreal_demo.uproject内的Plugins配置修改如下：
+* UE某些>=5.3, <5.4的版本，ReactUMG插件会编译报错，疑似这些版本ue的bug，如果碰到可以修改puerts_unreal_demo.uproject禁用该plugin。puerts_unreal_demo.uproject内的Plugins配置修改如下：
 
 ~~~json
 "Plugins": [
