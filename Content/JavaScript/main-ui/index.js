@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Load = void 0;
 const React = require("react");
 const react_umg_1 = require("react-umg");
 const ui_components_1 = require("./ui-components");
@@ -20,17 +21,12 @@ class Hello extends React.Component {
             names: props.names,
             buttonTextureIndex: 0,
         };
-        this.buttonTextures = [
-            "Texture2D'/Game/StarterContent/Textures/ImageButtonNormal.ImageButtonNormal'",
-            "Texture2D'/Game/StarterContent/Textures/ImageButtonActivated.ImageButtonActivated'"
-        ];
     }
     render() {
         return (React.createElement(react_umg_1.CanvasPanel, null,
             React.createElement(react_umg_1.VerticalBox, { Slot: SlotOfVerticalBox },
                 React.createElement(react_umg_1.HorizontalBox, null,
-                    React.createElement(react_umg_1.Button, { OnHovered: () => this.setState({ buttonTextureIndex: 1 }), OnUnhovered: () => this.setState({ buttonTextureIndex: 0 }) },
-                        React.createElement(react_umg_1.TextureImage, { TextureName: this.buttonTextures[this.state.buttonTextureIndex], bMatchSize: true }))),
+                    React.createElement(react_umg_1.Button, { OnHovered: () => this.setState({ buttonTextureIndex: 1 }), OnUnhovered: () => this.setState({ buttonTextureIndex: 0 }) }, this.state.buttonTextureIndex == 0 ? 'normal' : 'hovered')),
                 this.state.names.map((name, idx) => React.createElement(ui_components_1.StatusBar, { name: name, key: idx })))));
     }
 }
