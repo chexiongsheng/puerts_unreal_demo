@@ -1,0 +1,3 @@
+[submodule "Plugins/ReactUMG"]
+	path = Plugins/ReactUMG
+	url = https://github.com/puerts/ReactUMG.git
