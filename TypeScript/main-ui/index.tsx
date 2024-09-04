@@ -22,18 +22,12 @@ let SlotOfVerticalBox: CanvasPanelSlot = {
 }
 
 class Hello extends React.Component<Props, State> {
-    buttonTextures: string[];
-
     constructor(props: Props) {
       super(props);
       this.state = {
         names: props.names,
         buttonTextureIndex : 0,
       };
-      this.buttonTextures = [
-          "Texture2D'/Game/StarterContent/Textures/ImageButtonNormal.ImageButtonNormal'",
-          "Texture2D'/Game/StarterContent/Textures/ImageButtonActivated.ImageButtonActivated'"
-        ]
     }
     render() {
         return (
