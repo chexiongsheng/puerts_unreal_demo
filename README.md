@@ -2,7 +2,7 @@
 
 ## 怎么跑这demo？
 
-* git clone https://github.com/chexiongsheng/puerts_unreal_demo.git 
+* git clone --recursive https://github.com/chexiongsheng/puerts_unreal_demo.git 
 
 * ue4.25及以上版本，需要根据[文档](https://puerts.github.io/docs/puerts/unreal/install)下载安装v8
 
@@ -25,18 +25,3 @@
 * PerfTest.ts编辑器下在老版本v8以及quickjs后端不可用
 
 * 若采用较新版本的vscode进行调试，发现无法命中断点，则尝试将本demo目录根目录下".vscode"目录中的"launch.json"中的"remoteRoot"配置项的"${workspaceRoot}"修改为"${workspaceFolder}"，或者直接去除"remoteRoot"配置项。
-
-* UE某些>=5.3, <5.4的版本，ReactUMG插件会编译报错，疑似这些版本ue的bug，如果碰到可以修改puerts_unreal_demo.uproject禁用该plugin。puerts_unreal_demo.uproject内的Plugins配置修改如下：
-
-~~~json
-"Plugins": [
-		{
-			"Name": "Puerts",
-			"Enabled": true
-		},
-		{
-			"Name": "ReactUMG",
-			"Enabled": false
-		}
-	]
-~~~
