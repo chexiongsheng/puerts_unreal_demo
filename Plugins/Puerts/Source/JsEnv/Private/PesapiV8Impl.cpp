@@ -20,23 +20,33 @@
 struct pesapi_env_ref__
 {
     explicit pesapi_env_ref__(v8::Local<v8::Context> context)
-        : isolate(context->GetIsolate()), context_persistent(isolate, context), ref_count(1)
+        : context_persistent(context->GetIsolate(), context)
+        , isolate(context->GetIsolate())
+        , ref_count(1)
+        , env_life_cycle_tracker(puerts::DataTransfer::GetJsEnvLifeCycleTracker(context->GetIsolate()))
     {
     }
-    v8::Isolate* const isolate;
+
     v8::Persistent<v8::Context> context_persistent;
+    v8::Isolate* const isolate;
     int ref_count;
+    std::weak_ptr<int> env_life_cycle_tracker;
 };
 
 struct pesapi_value_ref__
 {
     explicit pesapi_value_ref__(v8::Local<v8::Context> context, v8::Local<v8::Value> value)
-        : isolate(context->GetIsolate()), value_persistent(isolate, value), ref_count(1)
+        : value_persistent(context->GetIsolate(), value)
+        , isolate(context->GetIsolate())
+        , ref_count(1)
+        , env_life_cycle_tracker(puerts::DataTransfer::GetJsEnvLifeCycleTracker(context->GetIsolate()))
     {
     }
-    v8::Isolate* const isolate;
+
     v8::Persistent<v8::Value> value_persistent;
+    v8::Isolate* const isolate;
     int ref_count;
+    std::weak_ptr<int> env_life_cycle_tracker;
 };
 
 struct pesapi_scope__
@@ -463,6 +473,10 @@ pesapi_env_ref pesapi_create_env_ref(pesapi_env env)
 
 pesapi_env pesapi_get_env_from_ref(pesapi_env_ref env_ref)
 {
+    if (env_ref->env_life_cycle_tracker.expired())
+    {
+        return nullptr;
+    }
     return v8impl::PesapiEnvFromV8LocalContext(env_ref->context_persistent.Get(env_ref->isolate));
 }
 
@@ -476,12 +490,28 @@ void pesapi_release_env_ref(pesapi_env_ref env_ref)
 {
     if (--env_ref->ref_count == 0)
     {
-        delete env_ref;
+        if (env_ref->env_life_cycle_tracker.expired())
+        {
+#if V8_MAJOR_VERSION < 11
+            env_ref->context_persistent.Empty();
+            delete env_ref;
+#else
+            ::operator delete(static_cast<void*>(env_ref));
+#endif
+        }
+        else
+        {
+            delete env_ref;
+        }
     }
 }
 
 pesapi_scope pesapi_open_scope(pesapi_env_ref env_ref)
 {
+    if (env_ref->env_life_cycle_tracker.expired())
+    {
+        return nullptr;
+    }
     env_ref->isolate->Enter();
     auto scope = new pesapi_scope__(env_ref->isolate);
     env_ref->context_persistent.Get(env_ref->isolate)->Enter();
@@ -490,11 +520,13 @@ pesapi_scope pesapi_open_scope(pesapi_env_ref env_ref)
 
 bool pesapi_has_caught(pesapi_scope scope)
 {
-    return scope->trycatch.HasCaught();
+    return scope && scope->trycatch.HasCaught();
 }
 
 const char* pesapi_get_exception_as_string(pesapi_scope scope, bool with_stack)
 {
+    if (!scope)
+        return nullptr;
     scope->errinfo = *v8::String::Utf8Value(scope->scope.GetIsolate(), scope->trycatch.Exception());
     if (with_stack)
     {
@@ -524,6 +556,8 @@ const char* pesapi_get_exception_as_string(pesapi_scope scope, bool with_stack)
 
 void pesapi_close_scope(pesapi_scope scope)
 {
+    if (!scope)
+        return;
     auto isolate = scope->scope.GetIsolate();
     isolate->GetCurrentContext()->Exit();
     delete (scope);
@@ -547,7 +581,19 @@ void pesapi_release_value_ref(pesapi_value_ref value_ref)
 {
     if (--value_ref->ref_count == 0)
     {
-        delete value_ref;
+        if (value_ref->env_life_cycle_tracker.expired())
+        {
+#if V8_MAJOR_VERSION < 11
+            value_ref->value_persistent.Empty();
+            delete value_ref;
+#else
+            ::operator delete(static_cast<void*>(value_ref));
+#endif
+        }
+        else
+        {
+            delete value_ref;
+        }
     }
 }
 
