@@ -60,6 +60,9 @@ void FCppObjectMapper::Initialize(v8::Isolate* InIsolate, v8::Local<v8::Context>
     auto LocalTemplate = v8::FunctionTemplate::New(InIsolate, PointerNew);
     LocalTemplate->InstanceTemplate()->SetInternalFieldCount(4);    // 0 Ptr, 1, CDataName
     PointerConstructor = v8::UniquePersistent<v8::Function>(InIsolate, LocalTemplate->GetFunction(InContext).ToLocalChecked());
+#ifndef WITH_QUICKJS
+    PrivateKey.Reset(InIsolate, v8::Symbol::New(InIsolate));
+#endif
 }
 
 v8::Local<v8::Value> FCppObjectMapper::FindOrAddCppObject(
@@ -318,6 +321,40 @@ void FCppObjectMapper::BindCppObject(
     }
 }
 
+#define QJS_PRIVATE_KEY_STR "__,kp@"
+
+void* FCppObjectMapper::GetPrivateData(v8::Local<v8::Context> Context, v8::Local<v8::Object> JSObject)
+{
+#ifndef WITH_QUICKJS
+    auto Key = PrivateKey.Get(Context->GetIsolate());
+#else
+    auto Key = FV8Utils::InternalString(Context->GetIsolate(), QJS_PRIVATE_KEY_STR);
+#endif
+    v8::MaybeLocal<v8::Value> maybeValue = JSObject->Get(Context, Key);
+    if (maybeValue.IsEmpty())
+    {
+        return nullptr;
+    }
+
+    v8::Local<v8::Value> maybeExternal = maybeValue.ToLocalChecked();
+    if (!maybeExternal->IsExternal())
+    {
+        return nullptr;
+    }
+
+    return v8::Local<v8::External>::Cast(maybeExternal)->Value();
+}
+
+void FCppObjectMapper::SetPrivateData(v8::Local<v8::Context> Context, v8::Local<v8::Object> JSObject, void* Ptr)
+{
+#ifndef WITH_QUICKJS
+    auto Key = PrivateKey.Get(Context->GetIsolate());
+#else
+    auto Key = FV8Utils::InternalString(Context->GetIsolate(), QJS_PRIVATE_KEY_STR);
+#endif
+    (void) (JSObject->Set(Context, Key, v8::External::New(Context->GetIsolate(), Ptr)));
+}
+
 void FCppObjectMapper::UnBindCppObject(JSClassDefinition* ClassDefinition, void* Ptr)
 {
     CDataFinalizeMap.erase(Ptr);
@@ -342,6 +379,9 @@ void FCppObjectMapper::UnInitialize(v8::Isolate* InIsolate)
     CDataCache.clear();
     CDataFinalizeMap.clear();
     CDataNameToTemplateMap.clear();
+#ifndef WITH_QUICKJS
+    PrivateKey.Reset();
+#endif
     PointerConstructor.Reset();
 }
 
