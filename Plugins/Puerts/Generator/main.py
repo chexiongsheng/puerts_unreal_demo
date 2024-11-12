@@ -226,8 +226,8 @@ function_blacklist = {
 def gen_selector_for_list(lst):
     def selector(root):
         for cursor in cursor_tree_filter(root):
-            if cursor.kind in [CursorKind.CLASS_DECL, CursorKind.STRUCT_DECL]:
-                if cursor.spelling in lst:
+            if cursor.spelling in lst:
+                if cursor.kind in [CursorKind.CLASS_DECL, CursorKind.STRUCT_DECL]:
                     yield cursor.get_definition()
     return selector
 

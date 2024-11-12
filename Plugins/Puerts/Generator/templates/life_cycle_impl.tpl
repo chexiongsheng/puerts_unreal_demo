@@ -15,7 +15,7 @@ static void* _{{type.spelling}}New_(const v8::FunctionCallbackInfo<v8::Value>& I
             {{ macros.gen_conditional(ctor.parameters, type) }}
             {%- endif %})
         {
-            {{ macros.gen_arguments(ctor.parameters) }}
+            {{ macros.gen_arguments(ctor.parameters.original_decl_type) }}
             {{type.spelling}}* Obj = new {{type.spelling}}({{ macros.gen_arguments_passing(ctor.parameters) }});
             {{ macros.gen_update_out_params(ctor.parameters) }}
             
