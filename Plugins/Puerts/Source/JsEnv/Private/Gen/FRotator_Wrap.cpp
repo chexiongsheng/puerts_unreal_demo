@@ -9,23 +9,21 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FRotator);
-UsingUStruct(FVector);
-UsingUStruct(FQuat);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFRotator
 {
     AutoRegisterForFRotator()
     {
         puerts::DefineClass<FRotator>()
+            .Constructor(CombineConstructors(MakeConstructor(FRotator), MakeConstructor(FRotator, float),
+                MakeConstructor(FRotator, float, float, float), MakeConstructor(FRotator, EForceInit),
+                MakeConstructor(FRotator, const FQuat&)))
             .Property("Pitch", MakeProperty(&FRotator::Pitch))
             .Property("Yaw", MakeProperty(&FRotator::Yaw))
             .Property("Roll", MakeProperty(&FRotator::Roll))
-            .Method("DiagnosticCheckNaN", CombineOverloads(MakeOverload(void(FRotator::*)() const, &FRotator::DiagnosticCheckNaN),
-                                              MakeOverload(void(FRotator::*)(const TCHAR*) const, &FRotator::DiagnosticCheckNaN)))
+            .Method("DiagnosticCheckNaN", CombineOverloads(MakeOverload(void (FRotator::*)() const, &FRotator::DiagnosticCheckNaN),
+                                              MakeOverload(void (FRotator::*)(const TCHAR*) const, &FRotator::DiagnosticCheckNaN)))
             .Method("op_Addition", MakeFunction(&FRotator::operator+))
             .Method("op_Subtraction", MakeFunction(&FRotator::operator-))
             .Method("op_Multiply", SelectFunction(FRotator(FRotator::*)(float Scale) const, &FRotator::operator*))

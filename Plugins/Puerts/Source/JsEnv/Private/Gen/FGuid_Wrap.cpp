@@ -9,16 +9,14 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FGuid);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFGuid
 {
     AutoRegisterForFGuid()
     {
         puerts::DefineClass<FGuid>()
+            .Constructor(CombineConstructors(MakeConstructor(FGuid), MakeConstructor(FGuid, uint32, uint32, uint32, uint32)))
             .Property("A", MakeProperty(&FGuid::A))
             .Property("B", MakeProperty(&FGuid::B))
             .Property("C", MakeProperty(&FGuid::C))
@@ -27,7 +25,12 @@ struct AutoRegisterForFGuid
             .Method("get_Item", SelectFunction(const uint32& (FGuid::*) (int32) const, &FGuid::operator[]))
             .Method("Invalidate", MakeFunction(&FGuid::Invalidate))
             .Method("IsValid", MakeFunction(&FGuid::IsValid))
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
             .Method("ToString", MakeFunction(&FGuid::ToString, EGuidFormats::Digits))
+#else
+            .Method("ToString", CombineOverloads(MakeOverload(FString(FGuid::*)() const, &FGuid::ToString),
+                                    MakeOverload(FString(FGuid::*)(EGuidFormats Format) const, &FGuid::ToString)))
+#endif
             .Function("NewGuid", MakeFunction(&FGuid::NewGuid))
             .Function("Parse", MakeFunction(&FGuid::Parse))
             .Function("ParseExact", MakeFunction(&FGuid::ParseExact))

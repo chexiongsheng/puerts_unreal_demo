@@ -9,16 +9,15 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FIntVector);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFIntVector
 {
     AutoRegisterForFIntVector()
     {
         puerts::DefineClass<FIntVector>()
+            .Constructor(CombineConstructors(MakeConstructor(FIntVector), MakeConstructor(FIntVector, int32, int32, int32),
+                MakeConstructor(FIntVector, int32), MakeConstructor(FIntVector, FVector), MakeConstructor(FIntVector, EForceInit)))
             .Property("X", MakeProperty(&FIntVector::X))
             .Property("Y", MakeProperty(&FIntVector::Y))
             .Property("Z", MakeProperty(&FIntVector::Z))

@@ -9,19 +9,17 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FVector2D);
-UsingUStruct(FVector);
-UsingUStruct(FVector4);
-UsingUStruct(FIntPoint);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFVector2D
 {
     AutoRegisterForFVector2D()
     {
         puerts::DefineClass<FVector2D>()
+            .Constructor(CombineConstructors(MakeConstructor(FVector2D), MakeConstructor(FVector2D, float, float),
+                MakeConstructor(FVector2D, float), MakeConstructor(FVector2D, FIntPoint), MakeConstructor(FVector2D, EForceInit),
+                MakeConstructor(FVector2D, ENoInit), MakeConstructor(FVector2D, const FVector&),
+                MakeConstructor(FVector2D, const FVector4&)))
             .Property("X", MakeProperty(&FVector2D::X))
             .Property("Y", MakeProperty(&FVector2D::Y))
             .Method("op_BitwiseOr", MakeFunction(&FVector2D::operator|))
@@ -41,9 +39,9 @@ struct AutoRegisterForFVector2D
             .Method("op_Division", CombineOverloads(MakeOverload(FVector2D(FVector2D::*)(double) const, &FVector2D::operator/),
                                        MakeOverload(FVector2D(FVector2D::*)(const FVector2D&) const, &FVector2D::operator/)))
             .Method("set_Item", SelectFunction(double& (FVector2D::*) (int32), &FVector2D::operator[]))
-            .Method("get_Item", SelectFunction(double(FVector2D::*)(int32) const, &FVector2D::operator[]))
+            .Method("get_Item", SelectFunction(double (FVector2D::*)(int32) const, &FVector2D::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(double& (FVector2D::*) (int32), &FVector2D::Component),
-                                     MakeOverload(double(FVector2D::*)(int32) const, &FVector2D::Component)))
+                                     MakeOverload(double (FVector2D::*)(int32) const, &FVector2D::Component)))
 #else
             .Method("op_Addition",
                 CombineOverloads(MakeOverload(FVector2D(FVector2D::*)(const FVector2D&) const, &FVector2D::operator+),
@@ -56,9 +54,9 @@ struct AutoRegisterForFVector2D
             .Method("op_Division", CombineOverloads(MakeOverload(FVector2D(FVector2D::*)(float) const, &FVector2D::operator/),
                                        MakeOverload(FVector2D(FVector2D::*)(const FVector2D&) const, &FVector2D::operator/)))
             .Method("set_Item", SelectFunction(float& (FVector2D::*) (int32), &FVector2D::operator[]))
-            .Method("get_Item", SelectFunction(float(FVector2D::*)(int32) const, &FVector2D::operator[]))
+            .Method("get_Item", SelectFunction(float (FVector2D::*)(int32) const, &FVector2D::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(float& (FVector2D::*) (int32), &FVector2D::Component),
-                                     MakeOverload(float(FVector2D::*)(int32) const, &FVector2D::Component)))
+                                     MakeOverload(float (FVector2D::*)(int32) const, &FVector2D::Component)))
 #endif
             .Function("DotProduct", MakeFunction(&FVector2D::DotProduct))
             .Function("DistSquared", MakeFunction(&FVector2D::DistSquared))
@@ -76,7 +74,7 @@ struct AutoRegisterForFVector2D
             .Method("Normalize", MakeFunction(&FVector2D::Normalize))
             .Method("IsNearlyZero", MakeFunction(&FVector2D::IsNearlyZero))
             .Method("ToDirectionAndLength",
-                SelectFunction(void(FVector2D::*)(FVector2D&, float&) const, &FVector2D::ToDirectionAndLength))
+                SelectFunction(void (FVector2D::*)(FVector2D&, float&) const, &FVector2D::ToDirectionAndLength))
             .Method("IsZero", MakeFunction(&FVector2D::IsZero))
             .Method("IntPoint", MakeFunction(&FVector2D::IntPoint))
             .Method("RoundToVector", MakeFunction(&FVector2D::RoundToVector))

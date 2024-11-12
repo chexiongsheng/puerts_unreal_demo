@@ -9,18 +9,17 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FLinearColor);
-UsingUStruct(FVector);
-UsingUStruct(FColor);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFLinearColor
 {
     AutoRegisterForFLinearColor()
     {
         puerts::DefineClass<FLinearColor>()
+            .Constructor(CombineConstructors(MakeConstructor(FLinearColor), MakeConstructor(FLinearColor, EForceInit),
+                MakeConstructor(FLinearColor, float, float, float, float), MakeConstructor(FLinearColor, const FColor&),
+                MakeConstructor(FLinearColor, const FVector&), MakeConstructor(FLinearColor, const FVector4&),
+                MakeConstructor(FLinearColor, const FFloat16Color&)))
             .Property("R", MakeProperty(&FLinearColor::R))
             .Property("G", MakeProperty(&FLinearColor::G))
             .Property("B", MakeProperty(&FLinearColor::B))

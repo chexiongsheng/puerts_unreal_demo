@@ -9,18 +9,15 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
+#include "UsingTypeDecl.hpp"
 
-UsingUStruct(FColor);
-UsingUStruct(FVector);
-UsingUStruct(FLinearColor)
-
-    struct AutoRegisterForFColor
+struct AutoRegisterForFColor
 {
     AutoRegisterForFColor()
     {
         puerts::DefineClass<FColor>()
+            .Constructor(CombineConstructors(MakeConstructor(FColor), MakeConstructor(FColor, EForceInit),
+                MakeConstructor(FColor, uint8, uint8, uint8, uint8), MakeConstructor(FColor, uint32)))
             .Method("DWColor", CombineOverloads(MakeOverload(uint32 & (FColor::*) (), &FColor::DWColor),
                                    MakeOverload(const uint32& (FColor::*) () const, &FColor::DWColor)))
             .Method("op_Equality", MakeFunction(&FColor::operator==))

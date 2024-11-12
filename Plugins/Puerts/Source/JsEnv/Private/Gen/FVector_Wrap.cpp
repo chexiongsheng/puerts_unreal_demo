@@ -9,25 +9,22 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FVector);
-UsingUStruct(FVector2D);
-UsingUStruct(FRotator);
-UsingUStruct(FQuat);
-UsingUStruct(FPlane);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFVector
 {
     AutoRegisterForFVector()
     {
         puerts::DefineClass<FVector>()
+            .Constructor(CombineConstructors(MakeConstructor(FVector), MakeConstructor(FVector, float),
+                MakeConstructor(FVector, float, float, float), MakeConstructor(FVector, const FVector2D, float),
+                MakeConstructor(FVector, const FVector4&), MakeConstructor(FVector, const FLinearColor&),
+                MakeConstructor(FVector, FIntVector), MakeConstructor(FVector, FIntPoint), MakeConstructor(FVector, EForceInit)))
             .Property("X", MakeProperty(&FVector::X))
             .Property("Y", MakeProperty(&FVector::Y))
             .Property("Z", MakeProperty(&FVector::Z))
-            .Method("DiagnosticCheckNaN", CombineOverloads(MakeOverload(void(FVector::*)() const, &FVector::DiagnosticCheckNaN),
-                                              MakeOverload(void(FVector::*)(const TCHAR*) const, &FVector::DiagnosticCheckNaN)))
+            .Method("DiagnosticCheckNaN", CombineOverloads(MakeOverload(void (FVector::*)() const, &FVector::DiagnosticCheckNaN),
+                                              MakeOverload(void (FVector::*)(const TCHAR*) const, &FVector::DiagnosticCheckNaN)))
             .Method("op_ExclusiveOr", MakeFunction(&FVector::operator^))
             .Function("CrossProduct", MakeFunction(&FVector::CrossProduct))
             .Method("op_BitwiseOr", MakeFunction(&FVector::operator|))
@@ -47,14 +44,14 @@ struct AutoRegisterForFVector
             .Method("op_UnaryNegation", SelectFunction(FVector(FVector::*)() const, &FVector::operator-))
 #if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
             .Method("set_Item", SelectFunction(double& (FVector::*) (int32), &FVector::operator[]))
-            .Method("get_Item", SelectFunction(double(FVector::*)(int32) const, &FVector::operator[]))
+            .Method("get_Item", SelectFunction(double (FVector::*)(int32) const, &FVector::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(double& (FVector::*) (int32), &FVector::Component),
-                                     MakeOverload(double(FVector::*)(int32) const, &FVector::Component)))
+                                     MakeOverload(double (FVector::*)(int32) const, &FVector::Component)))
 #else
             .Method("set_Item", SelectFunction(float& (FVector::*) (int32), &FVector::operator[]))
-            .Method("get_Item", SelectFunction(float(FVector::*)(int32) const, &FVector::operator[]))
+            .Method("get_Item", SelectFunction(float (FVector::*)(int32) const, &FVector::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(float& (FVector::*) (int32), &FVector::Component),
-                                     MakeOverload(float(FVector::*)(int32) const, &FVector::Component)))
+                                     MakeOverload(float (FVector::*)(int32) const, &FVector::Component)))
 #endif
             .Method("GetComponentForAxis", MakeFunction(&FVector::GetComponentForAxis))
             .Method("SetComponentForAxis", MakeFunction(&FVector::SetComponentForAxis))
@@ -79,7 +76,7 @@ struct AutoRegisterForFVector
             .Method("GetSafeNormal", MakeFunction(&FVector::GetSafeNormal))
             .Method("GetSafeNormal2D", MakeFunction(&FVector::GetSafeNormal2D))
             .Method(
-                "ToDirectionAndLength", SelectFunction(void(FVector::*)(FVector&, float&) const, &FVector::ToDirectionAndLength))
+                "ToDirectionAndLength", SelectFunction(void (FVector::*)(FVector&, float&) const, &FVector::ToDirectionAndLength))
             .Method("GetSignVector", MakeFunction(&FVector::GetSignVector))
             .Method("Projection", MakeFunction(&FVector::Projection))
             .Method("GetUnsafeNormal2D", MakeFunction(&FVector::GetUnsafeNormal2D))

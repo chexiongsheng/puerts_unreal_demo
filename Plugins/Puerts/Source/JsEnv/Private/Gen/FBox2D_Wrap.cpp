@@ -9,18 +9,16 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FBox2D);
-UsingUStruct(FVector2D);
-UsingUStruct(FLinearColor);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFBox2D
 {
     AutoRegisterForFBox2D()
     {
         puerts::DefineClass<FBox2D>()
+            .Constructor(CombineConstructors(MakeConstructor(FBox2D), MakeConstructor(FBox2D, EForceInit),
+                MakeConstructor(FBox2D, const FVector2D&, const FVector2D&), MakeConstructor(FBox2D, const FVector2D*, const int32),
+                MakeConstructor(FBox2D, const TArray<FVector2D>&)))
             .Property("Min", MakeProperty(&FBox2D::Min))
             .Property("Max", MakeProperty(&FBox2D::Max))
             .Property("bIsValid", MakeProperty(&FBox2D::bIsValid))
@@ -43,8 +41,8 @@ struct AutoRegisterForFBox2D
             .Method("GetSize", MakeFunction(&FBox2D::GetSize))
             .Method("Init", MakeFunction(&FBox2D::Init))
             .Method("Intersect", MakeFunction(&FBox2D::Intersect))
-            .Method("IsInside", CombineOverloads(MakeOverload(bool(FBox2D::*)(const FVector2D&) const, &FBox2D::IsInside),
-                                    MakeOverload(bool(FBox2D::*)(const FBox2D&) const, &FBox2D::IsInside)))
+            .Method("IsInside", CombineOverloads(MakeOverload(bool (FBox2D::*)(const FVector2D&) const, &FBox2D::IsInside),
+                                    MakeOverload(bool (FBox2D::*)(const FBox2D&) const, &FBox2D::IsInside)))
             .Method("ShiftBy", MakeFunction(&FBox2D::ShiftBy))
             .Method("ToString", MakeFunction(&FBox2D::ToString))
             .Register();

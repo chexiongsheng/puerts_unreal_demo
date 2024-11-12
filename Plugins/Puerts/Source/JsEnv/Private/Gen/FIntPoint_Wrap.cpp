@@ -9,16 +9,15 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FIntPoint);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFIntPoint
 {
     AutoRegisterForFIntPoint()
     {
         puerts::DefineClass<FIntPoint>()
+            .Constructor(CombineConstructors(
+                MakeConstructor(FIntPoint), MakeConstructor(FIntPoint, int32, int32), MakeConstructor(FIntPoint, EForceInit)))
             .Property("X", MakeProperty(&FIntPoint::X))
             .Property("Y", MakeProperty(&FIntPoint::Y))
             .Method("op_Equality", MakeFunction(&FIntPoint::operator==))

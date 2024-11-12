@@ -9,18 +9,16 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FQuat);
-UsingUStruct(FRotator);
-UsingUStruct(FVector);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFQuat
 {
     AutoRegisterForFQuat()
     {
         puerts::DefineClass<FQuat>()
+            .Constructor(CombineConstructors(MakeConstructor(FQuat), MakeConstructor(FQuat, EForceInit),
+                MakeConstructor(FQuat, float, float, float, float), MakeConstructor(FQuat, const FMatrix&),
+                MakeConstructor(FQuat, const FRotator&), MakeConstructor(FQuat, FVector, float)))
             .Property("X", MakeProperty(&FQuat::X))
             .Property("Y", MakeProperty(&FQuat::Y))
             .Property("Z", MakeProperty(&FQuat::Z))
@@ -44,7 +42,7 @@ struct AutoRegisterForFQuat
             .Method("Size", MakeFunction(&FQuat::Size))
             .Method("SizeSquared", MakeFunction(&FQuat::SizeSquared))
             .Method("GetAngle", MakeFunction(&FQuat::GetAngle))
-            .Method("ToAxisAndAngle", SelectFunction(void(FQuat::*)(FVector & Axis, float& Angle) const, &FQuat::ToAxisAndAngle))
+            .Method("ToAxisAndAngle", SelectFunction(void (FQuat::*)(FVector & Axis, float& Angle) const, &FQuat::ToAxisAndAngle))
             .Method("ToSwingTwist", MakeFunction(&FQuat::ToSwingTwist))
             .Method("RotateVector", MakeFunction(&FQuat::RotateVector))
             .Method("UnrotateVector", MakeFunction(&FQuat::UnrotateVector))
@@ -65,8 +63,8 @@ struct AutoRegisterForFQuat
             .Method("ContainsNaN", MakeFunction(&FQuat::ContainsNaN))
             .Method("ToString", MakeFunction(&FQuat::ToString))
             .Method("InitFromString", MakeFunction(&FQuat::InitFromString))
-            .Method("DiagnosticCheckNaN", CombineOverloads(MakeOverload(void(FQuat::*)() const, &FQuat::DiagnosticCheckNaN),
-                                              MakeOverload(void(FQuat::*)(const TCHAR*) const, &FQuat::DiagnosticCheckNaN)))
+            .Method("DiagnosticCheckNaN", CombineOverloads(MakeOverload(void (FQuat::*)() const, &FQuat::DiagnosticCheckNaN),
+                                              MakeOverload(void (FQuat::*)(const TCHAR*) const, &FQuat::DiagnosticCheckNaN)))
             .Function("FindBetween", MakeFunction(&FQuat::FindBetween))
             .Function("FindBetweenNormals", MakeFunction(&FQuat::FindBetweenNormals))
             .Function("FindBetweenVectors", MakeFunction(&FQuat::FindBetweenVectors))

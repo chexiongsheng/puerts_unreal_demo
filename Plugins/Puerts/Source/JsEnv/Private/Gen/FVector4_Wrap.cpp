@@ -9,21 +9,17 @@
 // gen by puerts gen tools
 
 #include "CoreMinimal.h"
-#include "Binding.hpp"
-#include "UEDataBinding.hpp"
-
-UsingUStruct(FVector4);
-UsingUStruct(FVector);
-UsingUStruct(FVector2D);
-UsingUStruct(FRotator);
-UsingUStruct(FQuat);
-UsingUStruct(FPlane);
+#include "UsingTypeDecl.hpp"
 
 struct AutoRegisterForFVector4
 {
     AutoRegisterForFVector4()
     {
         puerts::DefineClass<FVector4>()
+            .Constructor(CombineConstructors(MakeConstructor(FVector4, const FVector&, float),
+                MakeConstructor(FVector4, const FLinearColor&), MakeConstructor(FVector4, float, float, float, float),
+                MakeConstructor(FVector4, FVector2D, FVector2D), MakeConstructor(FVector4, const FIntVector4&),
+                MakeConstructor(FVector4, EForceInit)))
             .Property("X", MakeProperty(&FVector4::X))
             .Property("Y", MakeProperty(&FVector4::Y))
             .Property("Z", MakeProperty(&FVector4::Z))
@@ -40,12 +36,12 @@ struct AutoRegisterForFVector4
             .Method("op_ExclusiveOr", MakeFunction(&FVector4::operator^))
 #if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
             .Method("set_Item", SelectFunction(double& (FVector4::*) (int32), &FVector4::operator[]))
-            .Method("get_Item", SelectFunction(double(FVector4::*)(int32) const, &FVector4::operator[]))
+            .Method("get_Item", SelectFunction(double (FVector4::*)(int32) const, &FVector4::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(double& (FVector4::*) (int32), &FVector4::Component),
                                      MakeOverload(const double& (FVector4::*) (int32) const, &FVector4::Component)))
 #else
             .Method("set_Item", SelectFunction(float& (FVector4::*) (int32), &FVector4::operator[]))
-            .Method("get_Item", SelectFunction(float(FVector4::*)(int32) const, &FVector4::operator[]))
+            .Method("get_Item", SelectFunction(float (FVector4::*)(int32) const, &FVector4::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(float& (FVector4::*) (int32), &FVector4::Component),
                                      MakeOverload(const float& (FVector4::*) (int32) const, &FVector4::Component)))
 #endif
