@@ -7,10 +7,8 @@
 
 // gen by puerts gen tools
 
-{{'#include "GenHeaders.h"'}}
 {{'#include "CoreMinimal.h"'}}
-{{'#include "Binding.hpp"'}}
-{{'#include "UEDataBinding.hpp"'}}
+{{'#include "UsingTypeDecl.hpp"'}}
 
 UsingUStruct({{type.spelling}});
 

@@ -271,8 +271,8 @@ def main():
         f.close()
         
     generator.gen(lambda type_info:"struct_impl.tpl", lambda type_info, content: write_to_file(type_info["spelling"] + "_Wrap.cpp", content), function_blacklist)
-    generator.gen_exclude("exclude_header.tpl", lambda content: write_to_file("ExcludeStructs.h", content, '../Source/DeclarationGenerator/Private'))
-    generator.gen_declare("ts_declare.tpl", lambda content: write_to_file("ue_s.d.ts", content, '../Typing/ue'), ts_type_blacklist)
+    #generator.gen_exclude("exclude_header.tpl", lambda content: write_to_file("ExcludeStructs.h", content, '../Source/DeclarationGenerator/Private'))
+    #generator.gen_declare("ts_declare.tpl", lambda content: write_to_file("ue_s.d.ts", content, '../Typing/ue'), ts_type_blacklist)
 
 if __name__ == '__main__':
     main()
