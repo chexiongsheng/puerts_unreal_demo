@@ -9,71 +9,45 @@
 
 {{'#include "GenHeaders.h"'}}
 {{'#include "CoreMinimal.h"'}}
-{{'#include "DataTransfer.h"'}}
-{{'#include "JSClassRegister.h"'}}
+{{'#include "Binding.hpp"'}}
+{{'#include "UEDataBinding.hpp"'}}
 
-{% for unsupported_method in type.unsupported_methods %}
-// {{unsupported_method.location}}
-// unsupported method : {{unsupported_method.spelling}} {{unsupported_method.signature}}
-{% endfor %}
-
-{% include "life_cycle_impl.tpl" %}
-
-{%- for method in type.methods if not method.is_blocked %}
-{% include "method_impl.tpl" %}
-{% endfor %}
-
-{%- for field in type.fields %}
-{% include "field_impl.tpl" %}
-{%- endfor %}
+UsingUStruct({{type.spelling}});
 
 struct AutoRegisterFor{{type.spelling}}
 {
     AutoRegisterFor{{type.spelling}}()
     {
-        puerts::JSClassDefinition Def = JSClassEmptyDefinition;
-
-        static puerts::JSPropertyInfo Properties[] = {
+        puerts::DefineClass<{{type.spelling}}>()
+            .Constructor(CombineConstructors(
+            {%- for ctor in type.constructors %}
+            MakeConstructor({{type.spelling}}{% for parameter in ctor.parameters %}, {{parameter.original_decl_type}}{% endfor %}){% if not loop.last %},{% endif %}
+            {%- endfor %}
+            ))
             {%- for field in type.fields %}
             {%- if not field.is_const %}
-            {"{{field.spelling}}", _{{type.spelling}}{{field.spelling}}Get_, _{{type.spelling}}{{field.spelling}}Set_},
+            .Property("{{field.spelling}}", MakeProperty(&{{type.spelling}}::{{field.spelling}}))
             {%- else %}
-            {"{{field.spelling}}", _{{type.spelling}}{{field.spelling}}Get_, nullptr},
+            .Property("{{field.spelling}}", MakeReadonlyProperty(&{{type.spelling}}::{{field.spelling}}))
             {%- endif %}
             {%- endfor %}
-            {0, 0, 0}
-        };
-
-        static puerts::JSFunctionInfo Methods[] = {
+            
             {%- for method in type.methods if not method.is_blocked %}
-            {%- if not method.is_static %}
-            {"{{method.spelling}}", {{type.spelling}}{{method.method_key}}},
+            {%- if method.overloads | length == 1 %}
+            {%- if method.spelling in ['op_UnaryNegation', 'set_Item', 'get_Item', 'ToDirectionAndLength', 'GetSafeScaleReciprocal'] %}
+            .{%if method.is_static%}Function{%else%}Method{%endif%}("{{method.spelling}}", SelectFunction({{method.overloads[0].signature}}, &{{type.spelling}}::{{method.org_spelling}}))
+            {%- else %}
+            .{%if method.is_static%}Function{%else%}Method{%endif%}("{{method.spelling}}", MakeFunction(&{{type.spelling}}::{{method.org_spelling}}))
+            {%- endif %}
+            {%- else %}
+            .{%if method.is_static%}Function{%else%}Method{%endif%}("{{method.spelling}}", CombineOverloads(
+                {%- for overload in method.overloads %}
+                MakeOverload({{overload.signature}}, &{{type.spelling}}::{{overload.org_spelling}}){% if not loop.last %},{% endif %}
+                {%- endfor %}
+            ))
             {%- endif %}
             {%- endfor %}
-            {0, 0}
-        };
-
-        static puerts::JSFunctionInfo Functions[] = {
-            {%- for method in type.methods if not method.is_blocked %}
-            {%- if method.is_static %}
-            {"{{method.spelling}}", {{type.spelling}}{{method.method_key}}},
-            {%- endif %}
-            {%- endfor %}
-            {0, 0}
-        };
-{% if type.is_cdata %}
-        Def.CPPTypeName = "{{type.spelling}}";
-        {% if type.super_type %}Def.CPPSuperTypeName = "{{type.super_type.spelling[1:]}}";{% endif %}
-{% else %}
-        Def.UETypeName = "{{type.spelling[1:]}}";
-{% endif %}
-        Def.Initialize = _{{type.spelling}}New_;
-        Def.Finalize = _{{type.spelling}}Delete_;
-        Def.Properties = Properties;
-        Def.Methods = Methods;
-        Def.Functions = Functions;
-
-        puerts::RegisterJSClass(Def);
+            .Register();
         
     }
 };

@@ -401,7 +401,7 @@ class Generator:
             "spelling" : parameter.spelling,
             'out' : b_out,
             'variable_decl_type' : typename,
-            'original_decl_type' : parameter_type.spelling,
+            'original_decl_type' : parameter_type.spelling, #"{} {} {}".format("const" if parameter_type.is_const_qualified() else "", parameter_type.spelling, "*" if b_pointer else "&" if b_out else ""),
             'is_primitive_type': b_primitive_type,
             'is_pointer': b_pointer,
             'is_enum': b_enum,
@@ -454,7 +454,27 @@ class Generator:
             'innerist' : innerist
         }
         
-    def get_overload_info(self, method):
+    def get_member_function_signature(self, method, is_static):
+        # 获取方法的返回类型
+        return_type = method.result_type.spelling
+        
+        # 获取方法的参数类型
+        param_types = [arg.type.spelling for arg in method.get_arguments()]
+        
+        # 获取类名
+        class_name = method.semantic_parent.spelling
+        
+        # 检查是否是静态成员函数
+        if is_static:
+            # 静态成员函数的签名
+            signature = "{} (*) ({}) {}".format(return_type, ', '.join(param_types), ' const' if method.is_const_method() else '')
+        else:
+            # 普通成员函数的签名
+            signature = "{} ({}::*) ({}) {}".format(return_type, class_name, ', '.join(param_types), ' const' if method.is_const_method() else '')
+        
+        return signature
+        
+    def get_overload_info(self, method, typename):
         #if method_unsupported(method):
         #    return unsupported_method_info(method)
             
@@ -517,12 +537,14 @@ class Generator:
 
         return {
                    'spelling' : spelling,
+                   'org_spelling' : method.spelling,
                    'unsupported' : unsupported,
                    'is_static' : is_static,
                    'parameters' : parameters,
                    'return_type': result_type_info,
                    'location' : method.location,
-                   'signature' : method.type.spelling,
+                   #'signature' : re.sub(r'__attribute__\(\(thiscall\)\)', '(%s::*)' % typename, method.type.spelling),
+                   'signature' : self.get_member_function_signature(method, is_static),
                    'is_const': is_const,
                    'operator' : operator,
                    'binary_operator' : binary_operator,
@@ -565,7 +587,7 @@ class Generator:
                 static_fields.append(self.get_field_info(c))
                 continue
             
-            overload_info = self.get_overload_info(c)
+            overload_info = self.get_overload_info(c, cursor.spelling)
 
             # 过滤不支持的方法，它们可能会导致链接问题
             for class_name, method_names in self._unsupported_methods.items():
@@ -579,7 +601,7 @@ class Generator:
                     constructors.append(overload_info)
                 else:
                     method_key = ("S_" if overload_info["is_static"] else "M_") + overload_info["spelling"]
-                    method = method_map[method_key]  if method_key in method_map else {"method_key" : method_key, 'spelling': overload_info["spelling"], "overloads" : [], "is_static": overload_info["is_static"]}
+                    method = method_map[method_key]  if method_key in method_map else {"method_key" : method_key, 'spelling': overload_info["spelling"], 'org_spelling':  overload_info["org_spelling"], "overloads" : [], "is_static": overload_info["is_static"]}
                     if method_key not in method_map:
                         methods.append(method)
                         method_map[method_key] = method
