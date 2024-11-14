@@ -29,6 +29,13 @@ struct AutoRegisterFor{{type.spelling}}
             .Property("{{field.spelling}}", MakeReadonlyProperty(&{{type.spelling}}::{{field.spelling}}))
             {%- endif %}
             {%- endfor %}
+            {%- for field in type.static_fields %}
+            {%- if not field.is_const %}
+            .Variable("{{field.spelling}}", MakeVariable(&{{type.spelling}}::{{field.spelling}}))
+            {%- else %}
+            .Variable("{{field.spelling}}", MakeReadonlyVariable(&{{type.spelling}}::{{field.spelling}}))
+            {%- endif %}
+            {%- endfor %}
             
             {%- for method in type.methods if not method.is_blocked %}
             {%- if method.overloads | length == 1 %}
