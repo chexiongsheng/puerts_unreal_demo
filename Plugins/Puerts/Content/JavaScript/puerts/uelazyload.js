@@ -224,15 +224,25 @@ var global = global || (function () { return this; }());
     
     blueprint.unmixin = unmixin;
     
+    const bpns = new Set(['Game']);
+    
+    function blueprint_createNamespace(ns) {
+        if (!bpns.has(ns)) {
+            rawSet(UE, ns, createNamespaceOrClass(ns, undefined, TNAMESPACE));
+            bpns.add(ns);
+        }
+    }
+    
     function blueprint_load(cls) {
         if (cls.__path) {
             let c = cls
-            let path = `.${c.__path}`
+            let path = `.${c.__path}`;
             c = c.__parent;
             while (c && c.__path) {
                 path = `/${c.__path}${path}`
                 c = c.__parent;
             }
+            
             let ufield = UE.Field.Load(path, true);
             if (!ufield) {
                 throw new Error(`load ${path} fail!`);
@@ -252,6 +262,7 @@ var global = global || (function () { return this; }());
     }
     
     blueprint.load = blueprint_load;
+    blueprint.namespace = blueprint_createNamespace;
     
     function blueprint_unload(cls) {
         if (cls.__puerts_ufield) {
