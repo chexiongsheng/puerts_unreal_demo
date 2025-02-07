@@ -28,7 +28,11 @@
 #include "Widgets/Notifications/SNotificationList.h"
 // #include "Misc/MessageDialog.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
+#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 5)
+#include "StructUtils/UserDefinedStruct.h"
+#else
 #include "Engine/UserDefinedStruct.h"
+#endif
 #include "Engine/UserDefinedEnum.h"
 #include "Engine/Blueprint.h"
 #include "CodeGenerator.h"
@@ -1400,7 +1404,8 @@ void FTypeScriptDeclarationGenerator::GenStruct(UStruct* Struct)
     auto GenConstrutor = [&]()
     {
         auto ClassDefinition = PUERTS_NAMESPACE::FindClassByType(Struct);
-        if (ClassDefinition && ClassDefinition->ConstructorInfos)
+        if (ClassDefinition && ClassDefinition->ConstructorInfos && ClassDefinition->ConstructorInfos->Name &&
+            ClassDefinition->ConstructorInfos->Type)
         {
             PUERTS_NAMESPACE::NamedFunctionInfo* ConstructorInfo = ClassDefinition->ConstructorInfos;
             while (ConstructorInfo && ConstructorInfo->Name && ConstructorInfo->Type)
@@ -1582,7 +1587,7 @@ private:
 
         FName PackagePath = (InSearchPath == NAME_None) ? FName(TEXT("/Game")) : InSearchPath;
 
-        FString DialogMessage = FString::Printf(TEXT("genertate finish, %s store in %s, ([PATH=%s])"), TEXT("ue.d.ts"),
+        FString DialogMessage = FString::Printf(TEXT("generate finish, %s store in %s, ([PATH=%s])"), TEXT("ue.d.ts"),
             TEXT("Content/Typing/ue"), *PackagePath.ToString());
 
         FText DialogText = FText::Format(LOCTEXT("PluginButtonDialogText", "{0}"), FText::FromString(DialogMessage));
