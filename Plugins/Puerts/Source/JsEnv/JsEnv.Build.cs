@@ -17,7 +17,6 @@ public class JsEnv : ModuleRules
         VDeprecated, // for 4.24 or blow only
         V8_4_371_19,
         V9_4_146_24,
-        V10_6_194,
         V11_8_172
     }
 
@@ -416,10 +415,6 @@ public class JsEnv : ModuleRules
         else if (UseV8Version == SupportedV8Versions.V9_4_146_24)
         {
             v8LibSuffix = "_9.4.146.24";
-        }
-        else if (UseV8Version == SupportedV8Versions.V10_6_194)
-        {
-            v8LibSuffix = "_10.6.194";
         }
         else if (UseV8Version == SupportedV8Versions.V11_8_172)
         {
