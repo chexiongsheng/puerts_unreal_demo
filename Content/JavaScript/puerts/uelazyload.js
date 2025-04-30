@@ -50,6 +50,7 @@ var global = global || (function () { return this; }());
         }
     });
     Object.setPrototypeOf(UE, UE_proxy);
+    Object.defineProperty(UE, "__esModule", {value: false});
 
     const TNAMESPACE = 0;
     const TENUM = 1
@@ -113,6 +114,7 @@ var global = global || (function () { return this; }());
         }
     });
     Object.setPrototypeOf(CPP, CPP_proxy);
+    Object.defineProperty(CPP, "__esModule", {value: false});
     
     puerts.registerBuildinModule('cpp', CPP);
     global.CPP = CPP;
@@ -300,7 +302,7 @@ var global = global || (function () { return this; }());
     
     function translateType(t) {
         if (typeof t !== 'number') {
-            if (Object.hasOwn(t, '__puerts_ufield')) {
+            if (Object.hasOwnProperty(t, '__puerts_ufield')) {
                 return t.__puerts_ufield
             } else {
                 return t.StaticClass();
