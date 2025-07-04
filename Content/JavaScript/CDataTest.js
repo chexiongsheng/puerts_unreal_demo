@@ -33,20 +33,20 @@ TestClass.StaticInt = 789;
 console.log(TestClass.StaticInt);
 TestClass.PrintInfo(obj.GetSelf());
 //ref & pointer
-let r = puerts_1.$ref(999);
+let r = (0, puerts_1.$ref)(999);
 let ret = obj.Ref(r);
-console.log("$unref:" + puerts_1.$unref(r) + ", ret:" + ret);
+console.log("$unref:" + (0, puerts_1.$unref)(r) + ", ret:" + ret);
 obj.ConstRef(999);
-r = puerts_1.$ref(888);
+r = (0, puerts_1.$ref)(888);
 ret = obj.Ptr(r);
-console.log("$unref:" + puerts_1.$unref(r) + ", ret:" + ret);
-let sr = puerts_1.$ref("ts msg for ref");
+console.log("$unref:" + (0, puerts_1.$unref)(r) + ", ret:" + ret);
+let sr = (0, puerts_1.$ref)("ts msg for ref");
 obj.StrRef(sr);
-console.log("$unref<string>:" + puerts_1.$unref(sr));
+console.log("$unref<string>:" + (0, puerts_1.$unref)(sr));
 console.log(obj.CStr("ts str"));
-sr = puerts_1.$ref("ts msg for ptr");
+sr = (0, puerts_1.$ref)("ts msg for ptr");
 obj.StrPtr(sr);
-console.log("$unref<string>:" + puerts_1.$unref(sr));
+console.log("$unref<string>:" + (0, puerts_1.$unref)(sr));
 //js object
 let obj2 = new cpp.AdvanceTestClass(100);
 let j = { p: 100 };

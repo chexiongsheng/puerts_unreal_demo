@@ -57,7 +57,7 @@ let Positions = UE.NewArray(UE.Vector);
 for (let i = 0; i < 1024; i++) {
     Positions.Add(new UE.Vector(i, i, i));
 }
-let Positions_Ref = puerts_1.$ref(Positions);
+let Positions_Ref = (0, puerts_1.$ref)(Positions);
 beginTime = new Date();
 for (var i = 0; i < LOOP_COUNT; i++) {
     testobj.TArrayRefIntRet(Positions_Ref);
@@ -160,34 +160,34 @@ for (var i = 0; i < LOOP_COUNT; i++) {
 }
 endTime = new Date();
 console.log("1m sarr.Get using " + (endTime.getTime() - beginTime.getTime()) + "ms");
-let intRef = puerts_1.$ref(1024);
-let strRef = puerts_1.$ref("B");
+let intRef = (0, puerts_1.$ref)(1024);
+let strRef = (0, puerts_1.$ref)("B");
 beginTime = new Date();
 for (var i = 0; i < LOOP_COUNT; i++) {
     testobj.IntRef(intRef);
 }
 endTime = new Date();
 console.log("1m IntRef using " + (endTime.getTime() - beginTime.getTime()) + "ms");
-console.log("int ref return " + puerts_1.$unref(intRef));
+console.log("int ref return " + (0, puerts_1.$unref)(intRef));
 beginTime = new Date();
 for (var i = 0; i < LOOP_COUNT; i++) {
     testobj.IntPtr(intRef);
 }
 endTime = new Date();
 console.log("1m IntPtr using " + (endTime.getTime() - beginTime.getTime()) + "ms");
-console.log("int ptr return " + puerts_1.$unref(intRef));
+console.log("int ptr return " + (0, puerts_1.$unref)(intRef));
 beginTime = new Date();
 for (var i = 0; i < LOOP_COUNT; i++) {
     testobj.StdStringRef(strRef);
 }
 endTime = new Date();
 console.log("1m StdStringRef using " + (endTime.getTime() - beginTime.getTime()) + "ms");
-console.log("string ref return " + puerts_1.$unref(strRef));
+console.log("string ref return " + (0, puerts_1.$unref)(strRef));
 beginTime = new Date();
 for (var i = 0; i < LOOP_COUNT; i++) {
     testobj.StdStringPtr(strRef);
 }
 endTime = new Date();
 console.log("1m StdStringPtr using " + (endTime.getTime() - beginTime.getTime()) + "ms");
-console.log("string ptr return " + puerts_1.$unref(strRef));
+console.log("string ptr return " + (0, puerts_1.$unref)(strRef));
 //# sourceMappingURL=PerfTest.js.map

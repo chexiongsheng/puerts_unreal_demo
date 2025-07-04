@@ -1,5 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.WaitLatentActionState = WaitLatentActionState;
+exports.AsyncLoad = AsyncLoad;
 const UE = require("ue");
 function WaitLatentActionState(state) {
     return new Promise((resolve, reject) => {
@@ -9,7 +11,6 @@ function WaitLatentActionState(state) {
         });
     });
 }
-exports.WaitLatentActionState = WaitLatentActionState;
 function AsyncLoad(path) {
     return new Promise((resolve, reject) => {
         let asyncLoadObj = new UE.AsyncLoadState();
@@ -25,5 +26,4 @@ function AsyncLoad(path) {
         asyncLoadObj.StartLoad(path);
     });
 }
-exports.AsyncLoad = AsyncLoad;
 //# sourceMappingURL=AsyncUtils.js.map

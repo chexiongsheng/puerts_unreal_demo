@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Fib = Fib;
 function fib(n) {
     if (n <= 1)
         return n;
@@ -12,5 +13,4 @@ function Fib(n) {
     let endTime = new Date();
     return ("using " + (endTime.getTime() - beginTime.getTime()) + "ms, result = " + result); //+ result防止被优化
 }
-exports.Fib = Fib;
 //# sourceMappingURL=JitTest.js.map

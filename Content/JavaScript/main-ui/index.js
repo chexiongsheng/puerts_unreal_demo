@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Load = void 0;
+exports.Load = Load;
 const React = require("react");
 const react_umg_1 = require("react-umg");
 const ui_components_1 = require("./ui-components");
@@ -33,6 +33,5 @@ class Hello extends React.Component {
 function Load() {
     return react_umg_1.ReactUMG.render(React.createElement(Hello, { names: ["Health:", "Energy:"] }));
 }
-exports.Load = Load;
 ;
 //# sourceMappingURL=index.js.map

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReactUMG = void 0;
 const Reconciler = require("react-reconciler");
 const puerts = require("puerts");
 const UE = require("ue");
@@ -24,6 +25,11 @@ function deepEquals(x, y) {
     return true;
 }
 class UEWidget {
+    type;
+    callbackRemovers;
+    nativePtr;
+    slot;
+    nativeSlotPtr;
     constructor(type, props) {
         this.type = type;
         this.callbackRemovers = {};
@@ -141,6 +147,8 @@ class UEWidget {
     }
 }
 class UEWidgetRoot {
+    nativePtr;
+    Added;
     constructor(nativePtr) {
         this.nativePtr = nativePtr;
     }

@@ -3,6 +3,12 @@ declare module "cpp" {
     import * as cpp from "cpp"
     import {$Ref, $Nullable, cstring} from "puerts"
 
+    class A {
+        constructor();
+        a: number;
+        Print() :void;
+    }
+
     class AdvanceTestClass {
         constructor(p0: number);
         JsObjectTest(p0: object) :void;
@@ -12,6 +18,13 @@ declare module "cpp" {
 
     class BaseClass {
         Foo(p0: number) :void;
+    }
+
+    class D extends A {
+        constructor();
+    }
+
+    class FFloat16Color {
     }
 
     class FPuertsEditorModule {
@@ -43,6 +56,8 @@ declare module "cpp" {
         CStr(p0: cstring) :cstring;
         StrPtr(p0: $Ref<string>) :void;
         ConstRef(p0: number) :void;
+        ThrowInCpp(p0: boolean) :void;
+        CallBase(p0: BaseClass) :void;
         OverloadMethod() :number;
         OverloadMethod(p0: number) :number;
         OverloadMethod(p0: bigint) :bigint;
