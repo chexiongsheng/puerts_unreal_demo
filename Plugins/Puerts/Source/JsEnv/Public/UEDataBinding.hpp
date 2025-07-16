@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -418,8 +418,29 @@ struct ScriptTypeName<FArrayBufferValue>
 };
 
 template <typename T>
+struct is_ue_container : std::false_type
+{
+};
+
+template <typename T>
+struct is_ue_container<TArray<T>> : std::true_type
+{
+};
+
+template <typename T>
+struct is_ue_container<TSet<T>> : std::true_type
+{
+};
+
+template <typename TKey, typename TValue>
+struct is_ue_container<TMap<TKey, TValue>> : std::true_type
+{
+};
+
+template <typename T>
 struct ScriptTypeNameWithNamespace<T,
-    typename std::enable_if<is_objecttype<typename std::remove_pointer<typename std::decay<T>::type>::type>::value>::type>
+    typename std::enable_if<is_objecttype<typename std::remove_pointer<typename std::decay<T>::type>::type>::value &&
+                            !is_ue_container<typename std::remove_pointer<typename std::decay<T>::type>::type>::value>::type>
 {
     static constexpr auto value()
     {

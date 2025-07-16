@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -27,7 +27,7 @@ struct AutoRegisterForFVector2D
             .Method("op_Equality", MakeFunction(&FVector2D::operator==))
             .Method("op_Inequality", MakeFunction(&FVector2D::operator!=))
             .Method("op_UnaryNegation", SelectFunction(FVector2D(FVector2D::*)() const, &FVector2D::operator-))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
             .Method("op_Addition",
                 CombineOverloads(MakeOverload(FVector2D(FVector2D::*)(const FVector2D&) const, &FVector2D::operator+),
                     MakeOverload(FVector2D(FVector2D::*)(double) const, &FVector2D::operator+)))

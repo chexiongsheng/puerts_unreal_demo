@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -454,6 +454,10 @@ void FPuertsModule::Enable()
 {
     Enabled = true;
 
+    // 在MakeSharedJsEnv->RebindJs->load js 可能会有逻辑触发对象加载, 例如直接LoadClass
+    // AddUObjectCreateListener逻辑在rebindjs后则可能导致Inject缺漏导致 部分重写方法报错漏调用
+    GUObjectArray.AddUObjectCreateListener(static_cast<FUObjectArray::FUObjectCreateListener*>(this));
+    GUObjectArray.AddUObjectDeleteListener(static_cast<FUObjectArray::FUObjectDeleteListener*>(this));
 #if WITH_EDITOR
     if (IsRunningGame())
     {
@@ -463,9 +467,6 @@ void FPuertsModule::Enable()
 #else
     MakeSharedJsEnv();
 #endif
-
-    GUObjectArray.AddUObjectCreateListener(static_cast<FUObjectArray::FUObjectCreateListener*>(this));
-    GUObjectArray.AddUObjectDeleteListener(static_cast<FUObjectArray::FUObjectDeleteListener*>(this));
 }
 
 void FPuertsModule::Disable()

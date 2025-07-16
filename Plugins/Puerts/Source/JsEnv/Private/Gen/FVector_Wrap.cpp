@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -42,7 +42,7 @@ struct AutoRegisterForFVector
             .Method("Equals", MakeFunction(&FVector::Equals, KINDA_SMALL_NUMBER))
             .Method("AllComponentsEqual", MakeFunction(&FVector::AllComponentsEqual))
             .Method("op_UnaryNegation", SelectFunction(FVector(FVector::*)() const, &FVector::operator-))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
             .Method("set_Item", SelectFunction(double& (FVector::*) (int32), &FVector::operator[]))
             .Method("get_Item", SelectFunction(double (FVector::*)(int32) const, &FVector::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(double& (FVector::*) (int32), &FVector::Component),
@@ -73,7 +73,7 @@ struct AutoRegisterForFVector
             .Method("IsNormalized", MakeFunction(&FVector::IsNormalized))
             .Method("Normalize", MakeFunction(&FVector::Normalize, SMALL_NUMBER))
             .Method("GetUnsafeNormal", MakeFunction(&FVector::GetUnsafeNormal))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 3
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
             .Method("GetSafeNormal", MakeFunction(&FVector::GetSafeNormal, SMALL_NUMBER, FVector::ZeroVector))
             .Method("GetSafeNormal2D", MakeFunction(&FVector::GetSafeNormal2D, SMALL_NUMBER, FVector::ZeroVector))
 #else

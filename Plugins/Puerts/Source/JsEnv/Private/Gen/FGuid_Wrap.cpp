@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -25,7 +25,7 @@ struct AutoRegisterForFGuid
             .Method("get_Item", SelectFunction(const uint32& (FGuid::*) (int32) const, &FGuid::operator[]))
             .Method("Invalidate", MakeFunction(&FGuid::Invalidate))
             .Method("IsValid", MakeFunction(&FGuid::IsValid))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
             .Method("ToString", MakeFunction(&FGuid::ToString, EGuidFormats::Digits))
 #else
             .Method("ToString", CombineOverloads(MakeOverload(FString(FGuid::*)() const, &FGuid::ToString),

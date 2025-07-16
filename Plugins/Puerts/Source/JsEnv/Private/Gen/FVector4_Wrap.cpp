@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
+ * Copyright (C) 2020 Tencent.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -38,7 +38,7 @@ struct AutoRegisterForFVector4
             .Method("op_Equality", MakeFunction(&FVector4::operator==))
             .Method("op_Inequality", MakeFunction(&FVector4::operator!=))
             .Method("op_ExclusiveOr", MakeFunction(&FVector4::operator^))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
             .Method("set_Item", SelectFunction(double& (FVector4::*) (int32), &FVector4::operator[]))
             .Method("get_Item", SelectFunction(double (FVector4::*)(int32) const, &FVector4::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(double& (FVector4::*) (int32), &FVector4::Component),
