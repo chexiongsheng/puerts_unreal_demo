@@ -112,8 +112,8 @@ for (var i = 0; i < u8a1.length; i++) {
     console.log(i, u8a1[i]);
 }
 obj.ArrayBufferTest(ab);
-obj.ArrayBufferTest(new Uint8Array(ab));
-let ab2 = obj.ArrayBufferTest(new Uint8Array(ab, 5));
+obj.ArrayBufferTest(new Uint8Array(ab).buffer);
+let ab2 = obj.ArrayBufferTest(new Uint8Array(ab, 5).buffer);
 let u8a2 = new Uint8Array(ab2);
 console.log(u8a2.length);
 for (var i = 0; i < u8a2.length; i++) {
