@@ -800,6 +800,59 @@ describe('Test TArray<FName>', function() {
 // （UScriptStruct、UClass、UObject、UInterface。UE到JS的类型对应关系见FPropertyTranslator::Create）
 // （还有复合类型，Array内嵌Array等，也就是元素类型为UScriptArray）
 
+/*
+ * 测试 TArray<UScriptStruct>
+ */
+describe('Test TArray<FVector>', function() {
+    it('Add & Get FVector', function() {
+        testObj.VectorArray.Empty();
+        testObj.VectorArray.Add(new UE.Vector(1, 2, 3));
+        testObj.VectorArray.Add(new UE.Vector(10, 20, 30));
+        assert.equal(testObj.VectorArray.Num(), 2);
+        assert.equal(testObj.VectorArray.Get(0).ToString(), "X=1.000 Y=2.000 Z=3.000");
+        assert.equal(testObj.VectorArray.Get(1).ToString(), "X=10.000 Y=20.000 Z=30.000");
+    });
+
+    it('Set FVector', function() {
+        testObj.VectorArray.Set(0, new UE.Vector(100, 200, 300));
+        assert.equal(testObj.VectorArray.Get(0).ToString(), "X=100.000 Y=200.000 Z=300.000");
+    });
+});
+
+//测试 TArray<UObject>
+describe('Test TArray<UObject>', function() {
+    it('Add UObject', function() {
+        testObj.ObjectArray.Empty();
+        let obj1 = new UE.Object();
+        let obj2 = new UE.Object();
+        testObj.ObjectArray.Add(obj1);
+        testObj.ObjectArray.Add(obj2);
+        assert.equal(testObj.ObjectArray.Num(), 2);
+        assert.equal(testObj.ObjectArray.Get(0) instanceof UE.Object, true);
+        assert.equal(testObj.ObjectArray.Get(1) instanceof UE.Object, true);
+    });
+});
+
+//测试 TArray<UClass>
+describe('Test TArray<UClass>', function() {
+    it('Add UClass', function() {
+        testObj.ClassArray.Empty();
+
+        // 添加几个 UObject 派生类
+        testObj.ClassArray.Add(UE.Actor.StaticClass());
+        testObj.ClassArray.Add(UE.Object.StaticClass());
+        testObj.ClassArray.Add(UE.ContainersTest.StaticClass());
+
+        assert.equal(testObj.ClassArray.Num(), 3, 'ClassArray should have 3 elements');
+
+        // 验证存进去的类名
+        assert.equal(testObj.ClassArray.Get(0).GetName(), "Actor");
+        assert.equal(testObj.ClassArray.Get(1).GetName(), "Object");
+        assert.equal(testObj.ClassArray.Get(2).GetName(), "ContainersTest");
+    });
+});
+
+
 // 其他容器
 
 describe('Test fix size array int32[]', function() {

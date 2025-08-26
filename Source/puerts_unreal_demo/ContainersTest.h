@@ -103,4 +103,15 @@ public:
     
     UPROPERTY()
         TMap<FString, FString> StrToStrMap;
+
+    //新增单元测试的容器
+    UPROPERTY()
+    TArray<FVector> VectorArray;
+
+    UPROPERTY()
+    TArray<UObject*> ObjectArray;
+
+    UPROPERTY()
+    TArray<UClass*> ClassArray;
+
 };
