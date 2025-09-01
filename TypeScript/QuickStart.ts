@@ -113,7 +113,7 @@ for (var i = 0; i < u8a1.length; i++) {
 }
 obj.ArrayBufferTest(ab);
 obj.ArrayBufferTest(new Uint8Array(ab).buffer);
-let ab2 = obj.ArrayBufferTest(new Uint8Array(ab, 5).buffer);
+let ab2 = obj.ArrayBufferTest(ab.slice(5));
 let u8a2 = new Uint8Array(ab2);
 console.log(u8a2.length);
 for (var i = 0; i < u8a2.length; i++) {
