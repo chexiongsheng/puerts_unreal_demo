@@ -46,27 +46,15 @@ public:
     }
 };
 
-UsingCppType(TestParameter111);
-
 UsingCppType(A);
 UsingCppType(D);
 UsingCppType(std::vector<int>);
 
-UsingCppType(float3);
-UsingCppType(float3test);
-
-
-
-float GetTen()
-{
-    return TestClass::Ten;
-}
 
 struct AutoRegisterForTestClass
 {
     AutoRegisterForTestClass()
     {
-        puerts::DefineClass<TestParameter111>().Register();
         puerts::DefineClass<A>()
             .Method("Print", MakeFunction(&A::Print))
             .Property("a", MakeProperty(&A::a))
@@ -88,10 +76,6 @@ struct AutoRegisterForTestClass
             .Method("Foo", MakeFunction(&BaseClass::Foo))
             .Register();
 
-        auto a = []()->int
-        {
-            return TestClass::Ten;
-        };
         puerts::DefineClass<TestClass>()
             .Extends<BaseClass>()
             //.Constructor<int32_t, int32_t>() //if only one Constructor
@@ -101,10 +85,8 @@ struct AutoRegisterForTestClass
                 ))
             .Property("X", MakeProperty(&TestClass::X))
             .Property("Y", MakeProperty(&TestClass::Y))
-            .Property("XG", MakePropertyByGetterSetter(&TestClass::XGetter, nullptr))
             .Variable("StaticInt", MakeVariable(&TestClass::StaticInt))
             .Variable("Ten", MakeReadonlyVariable(&TestClass::Ten))
-            .Variable("TenG", MakePropertyByGetterSetter(&GetTen, nullptr))
             .Function("Add", MakeFunction(&TestClass::Add))
             .Function("PrintInfo", MakeFunction(&TestClass::PrintInfo))
             .Method("GetSelf", MakeFunction(&TestClass::GetSelf))
@@ -117,10 +99,6 @@ struct AutoRegisterForTestClass
             .Method("ConstRef", MakeFunction(&TestClass::ConstRef))
             .Method("ThrowInCpp", MakeFunction(&TestClass::ThrowInCpp))
             .Method("CallBase", MakeCheckFunction(&TestClass::CallBase))
-        .Method("Push", MakeCheckFunction(&TestClass::Push))
-        .Method("Get", MakeCheckFunction(&TestClass::Get))
-        .Method("Num", MakeCheckFunction(&TestClass::Num))
-        .Method("Remove", MakeCheckFunction(&TestClass::Remove))
         //.Method("TV", MakeFunction(&TestClass::TV))
             .Function("Overload", CombineOverloads(
                 MakeOverload(void(*)(), &TestClass::Overload),
@@ -142,35 +120,6 @@ struct AutoRegisterForTestClass
             .Method("CallJsObjectTest", MakeFunction(&AdvanceTestClass::CallJsObjectTest))
             .Method("StdFunctionTest", MakeFunction(&AdvanceTestClass::StdFunctionTest))
             .Register();
-
-        PUERTS_NAMESPACE::DefineClass<float3>().
-        Constructor<>()
-        .Property("x", MakeProperty(&float3::x))
-        .Property("y", MakeProperty(&float3::y))
-        .Property("z", MakeProperty(&float3::z))
-        .Register();
-
-        PUERTS_NAMESPACE::DefineClass<float3test>()
-        .Constructor<>()   // make destructor available
-        .Function("printFloatPoint", MakeFunction(&float3test::printFloatPoint))
-        .Function("printFloatConstPoint", MakeFunction(&float3test::printFloatConstPoint))
-        .Function("printStringConstPoint", MakeFunction(&float3test::printStringConstPoint))
-        .Function("printFloat3Point", MakeFunction(&float3test::printFloat3Point))
-        .Function("printFloat3ConstPoint", MakeFunction(&float3test::printFloat3ConstPoint))
-        .Function("retStringRef", MakeFunction(&float3test::retStringRef))
-        .Function("retConstStringPtr", MakeFunction(&float3test::retConstStringPtr))
-        .Function("retConstFloatPtr", MakeFunction(&float3test::retConstFloatPtr))
-        .Function("retFloat3", MakeFunction(&float3test::retFloat3))
-        .Function("retFloat", MakeFunction(&float3test::retFloat))
-        .Register();
-
-        typedef int32_t(TestClass::*OverloadMethodFuc)(int32_t) ;
-        OverloadMethodFuc f = &TestClass::OverloadMethod;
-
-        typedef double& (FVector::*ComponentFunc)(int32);
-        //typedef double& (UE::Math::TVector<double>::*ComponentFunc)(int32);
-        ComponentFunc f2 = &FVector::Component;
-        
     }
 };
 
