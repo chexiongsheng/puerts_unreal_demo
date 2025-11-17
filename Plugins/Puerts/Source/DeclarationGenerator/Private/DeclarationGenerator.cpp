@@ -60,7 +60,7 @@ bool bSearchAllPluginBP = true;
 static FAutoConsoleVariableRef CVarSearchAllPluginBP(TEXT("bSearchAllPluginBP"), bSearchAllPluginBP, TEXT(".\n"), ECVF_Default);
 
 #if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 5
-#define GET_VERSION_ID(PD) LexToString(PD->CookedHash)
+#define GET_VERSION_ID(PD) LexToString(PD->GetPackageSavedHash())
 #else
 #define GET_VERSION_ID(PD) PD->PackageGuid.ToString()
 #endif
@@ -1615,16 +1615,7 @@ private:
     void GenUeDts(bool InGenFull, FName InSearchPath)
     {
         GenTypeScriptDeclaration(InGenFull, InSearchPath);
-
-        TArray<UObject*> SortedClasses(GetSortedClasses());
-        for (int i = 0; i < SortedClasses.Num(); ++i)
-        {
-            UClass* Class = Cast<UClass>(SortedClasses[i]);
-            if (Class && Class->ImplementsInterface(UCodeGenerator::StaticClass()))
-            {
-                ICodeGenerator::Execute_Gen(Class->GetDefaultObject());
-            }
-        }
+        GenTypeScriptCppDeclaration();
 
         FName PackagePath = (InSearchPath == NAME_None) ? FName(TEXT("/Game")) : InSearchPath;
 
@@ -1712,6 +1703,19 @@ public:
         TypeScriptDeclarationGenerator.RestoreBlueprintTypeDeclInfos(InGenFull);
         TypeScriptDeclarationGenerator.LoadAllWidgetBlueprint(InSearchPath, InGenFull);
         TypeScriptDeclarationGenerator.GenTypeScriptDeclaration(true, true);
+    }
+
+    virtual void GenTypeScriptCppDeclaration() override
+    {
+        TArray<UObject*> SortedClasses(GetSortedClasses());
+        for (int i = 0; i < SortedClasses.Num(); ++i)
+        {
+            UClass* Class = Cast<UClass>(SortedClasses[i]);
+            if (Class && Class->ImplementsInterface(UCodeGenerator::StaticClass()))
+            {
+                ICodeGenerator::Execute_Gen(Class->GetDefaultObject());
+            }
+        }
     }
 
     void GenReactDeclaration() override
