@@ -8,10 +8,13 @@ public class puerts_unreal_demoTarget : TargetRules
 	public puerts_unreal_demoTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-#if UE_5_4_OR_LATER
+#if UE_5_7_OR_LATER
+        DefaultBuildSettings = BuildSettingsVersion.V6;
+        IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_7;
+#elif UE_5_4_OR_LATER
 		DefaultBuildSettings = BuildSettingsVersion.V5;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_4;
 #endif
-		ExtraModuleNames.Add("puerts_unreal_demo");
+        ExtraModuleNames.Add("puerts_unreal_demo");
 	}
 }
