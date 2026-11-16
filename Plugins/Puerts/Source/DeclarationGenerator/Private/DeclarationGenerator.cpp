@@ -43,10 +43,9 @@
 #include "ToolMenus.h"
 #endif
 #include "Internationalization/Regex.h"
-#include "PuertsModule.h"
-#ifdef PUERTS_WITH_SOURCE_CONTROL
-#include "FileSystemOperation.h"
-#endif
+#include "DeclarationGeneratorSetting.h"
+#include "DeclarationGeneratorUtils.h"
+#include "ISettingsModule.h"
 #include "PathEscape.h"
 
 #define STRINGIZE(x) #x
@@ -64,6 +63,27 @@ static FAutoConsoleVariableRef CVarSearchAllPluginBP(TEXT("bSearchAllPluginBP"),
 #else
 #define GET_VERSION_ID(PD) PD->PackageGuid.ToString()
 #endif
+
+static bool ShouldSkipBlueprintDeclarationAsset(const FString& PackageNameOrPath)
+{
+    return PackageNameOrPath.StartsWith(TEXT("/Engine/TedsDynamicColumns"));
+}
+
+static bool ShouldSkipBlueprintDeclarationAsset(const FName& PackageNameOrPath)
+{
+    return ShouldSkipBlueprintDeclarationAsset(PackageNameOrPath.ToString());
+}
+
+static FString RestoreEscapedPackageNameFromNamespace(const FString& Namespace)
+{
+    TArray<FString> NamespaceFrags;
+    Namespace.ParseIntoArray(NamespaceFrags, TEXT("."));
+    for (FString& NamespaceFrag : NamespaceFrags)
+    {
+        NamespaceFrag = PUERTS_NAMESPACE::TypeScriptVariableNameToFilename(NamespaceFrag);
+    }
+    return FString(TEXT("/")) + FString::Join(NamespaceFrags, TEXT("/"));
+}
 
 bool IsTypeScriptKeyword(const FString& InputString)
 {
@@ -366,7 +386,7 @@ void FTypeScriptDeclarationGenerator::GenTypeScriptDeclaration(bool InGenStruct,
     {
         UObject* Class = SortedClasses[i];
         checkfSlow(Class != nullptr, TEXT("Class name corruption!"));
-        const TArray<FString>& IgnoreClassListOnDTS = IPuertsModule::Get().GetIgnoreClassListOnDTS();
+        const TArray<FString>& IgnoreClassListOnDTS = GetDefault<UDeclarationGeneratorSetting>()->IgnoreClassListOnDTS;
         if (IgnoreClassListOnDTS.Contains(Class->GetName()))
         {
             continue;
@@ -427,15 +447,17 @@ void FTypeScriptDeclarationGenerator::GenTypeScriptDeclaration(bool InGenStruct,
 
     const FString UEDeclarationFilePath = FPaths::ProjectDir() / TEXT("Typing/ue/ue.d.ts");
 
-#ifdef PUERTS_WITH_SOURCE_CONTROL
-    PuertsSourceControlUtils::MakeSourceControlFileWritable(UEDeclarationFilePath);
-#endif
+    PuertsDeclarationGenerator::MakeFileWritable(UEDeclarationFilePath);
 
     FFileHelper::SaveStringToFile(ToString(), *UEDeclarationFilePath, FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM);
 
     Begin();
     for (auto& KV : BlueprintTypeDeclInfoCache)
     {
+        if (ShouldSkipBlueprintDeclarationAsset(KV.Key))
+        {
+            continue;
+        }
         if (KV.Value.IsExist)
         {
             for (auto& NameToDecl : KV.Value.NameToDecl)
@@ -450,9 +472,7 @@ void FTypeScriptDeclarationGenerator::GenTypeScriptDeclaration(bool InGenStruct,
 
     const FString BPDeclarationFilePath = FPaths::ProjectDir() / TEXT("Typing/ue/ue_bp.d.ts");
 
-#ifdef PUERTS_WITH_SOURCE_CONTROL
-    PuertsSourceControlUtils::MakeSourceControlFileWritable(BPDeclarationFilePath);
-#endif
+    PuertsDeclarationGenerator::MakeFileWritable(BPDeclarationFilePath);
 
     FFileHelper::SaveStringToFile(ToString(), *BPDeclarationFilePath, FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM);
 }
@@ -532,6 +552,11 @@ void FTypeScriptDeclarationGenerator::WriteOutput(UObject* Obj, const FStringBuf
     const UPackage* Pkg = GetPackage(Obj);
     if (Pkg && !Obj->IsNative())
     {
+        if (ShouldSkipBlueprintDeclarationAsset(Pkg->GetFName()))
+        {
+            return;
+        }
+
         FStringBuffer Temp;
         Temp.Prefix = Output.Prefix;
         NamespaceBegin(Obj, Temp);
@@ -592,27 +617,29 @@ void FTypeScriptDeclarationGenerator::RestoreBlueprintTypeDeclInfos(const FStrin
                     FString Namespace =
                         TypeDecl.Mid(NamespaceStart + NS_Keyword.Len(), NamespaceEnd - NamespaceStart - NS_Keyword.Len())
                             .TrimStartAndEnd();
-                    FString PackageName = FString(TEXT("/")) + Namespace.Replace(TEXT("."), TEXT("/"));
-
-                    FRegexPattern Pattern(TEXT("\\{\\s+(?:(?:class)|(?:enum))\\s+([\\u4e00-\\u9fa5a-zA-Z0-9_]+)"));
-                    FRegexMatcher Matcher(Pattern, TypeDecl.Mid(NamespaceEnd));
-
-                    if (Matcher.FindNext())
+                    FString PackageName = RestoreEscapedPackageNameFromNamespace(Namespace);
+                    if (!ShouldSkipBlueprintDeclarationAsset(PackageName))
                     {
-                        FName TypeName = *Matcher.GetCaptureGroup(1);
-                        auto BlueprintTypeDeclInfoPtr = BlueprintTypeDeclInfoCache.Find(*PackageName);
+                        FRegexPattern Pattern(TEXT("\\{\\s+(?:(?:class)|(?:enum))\\s+([\\u4e00-\\u9fa5a-zA-Z0-9_$]+)"));
+                        FRegexMatcher Matcher(Pattern, TypeDecl.Mid(NamespaceEnd));
 
-                        if (BlueprintTypeDeclInfoPtr)
+                        if (Matcher.FindNext())
                         {
-                            BlueprintTypeDeclInfoPtr->NameToDecl.Add(TypeName, TypeDecl);
-                        }
-                        else
-                        {
-                            TMap<FName, FString> NameToDecl;
-                            NameToDecl.Add(TypeName, TypeDecl);
-                            bool bIsExist = InGenFull ? false : bIsAssociation;
-                            BlueprintTypeDeclInfoCache.Add(
-                                FName(*PackageName), {NameToDecl, FileVersionString, bIsExist, true, bIsAssociation});
+                            FName TypeName = *PUERTS_NAMESPACE::TypeScriptVariableNameToFilename(Matcher.GetCaptureGroup(1));
+                            auto BlueprintTypeDeclInfoPtr = BlueprintTypeDeclInfoCache.Find(*PackageName);
+
+                            if (BlueprintTypeDeclInfoPtr)
+                            {
+                                BlueprintTypeDeclInfoPtr->NameToDecl.Add(TypeName, TypeDecl);
+                            }
+                            else
+                            {
+                                TMap<FName, FString> NameToDecl;
+                                NameToDecl.Add(TypeName, TypeDecl);
+                                bool bIsExist = InGenFull ? false : bIsAssociation;
+                                BlueprintTypeDeclInfoCache.Add(
+                                    FName(*PackageName), {NameToDecl, FileVersionString, bIsExist, true, bIsAssociation});
+                            }
                         }
                     }
                 }
@@ -661,6 +688,12 @@ void FTypeScriptDeclarationGenerator::LoadAllWidgetBlueprint(FName InSearchPath,
     AssetRegistry.GetAssets(BPFilter, AssetList);
     for (FAssetData const& AssetData : AssetList)
     {
+        if (ShouldSkipBlueprintDeclarationAsset(AssetData.PackageName) ||
+            ShouldSkipBlueprintDeclarationAsset(AssetData.PackagePath))
+        {
+            continue;
+        }
+
 #if ENGINE_MAJOR_VERSION >= 5
         const FAssetPackageData* PackageData = nullptr;
         auto OptionalPackageData = AssetRegistry.GetAssetPackageDataCopy(AssetData.PackageName);
@@ -803,7 +836,7 @@ bool FTypeScriptDeclarationGenerator::GenTypeDecl(FStringBuffer& StringBuffer, P
             StructProperty->Struct->GetName() != TEXT("ArrayBufferValue") && StructProperty->Struct->GetName() != TEXT("JsObject"))
         {
             const FString& Name = GetNameWithNamespace(StructProperty->Struct);
-            const TArray<FString>& IgnoreStructListOnDTS = IPuertsModule::Get().GetIgnoreStructListOnDTS();
+            const TArray<FString>& IgnoreStructListOnDTS = GetDefault<UDeclarationGeneratorSetting>()->IgnoreStructListOnDTS;
             if (IgnoreStructListOnDTS.Contains(Name))
             {
                 return false;
@@ -858,7 +891,7 @@ bool FTypeScriptDeclarationGenerator::GenTypeDecl(FStringBuffer& StringBuffer, P
     else if (auto ObjectProperty = CastFieldMacro<ObjectPropertyMacro>(Property))
     {
         const FString& Name = GetNameWithNamespace(ObjectProperty->PropertyClass);
-        const TArray<FString>& IgnoreClassListOnDTS = IPuertsModule::Get().GetIgnoreClassListOnDTS();
+        const TArray<FString>& IgnoreClassListOnDTS = GetDefault<UDeclarationGeneratorSetting>()->IgnoreClassListOnDTS;
         if (IgnoreClassListOnDTS.Contains(Name))
         {
             return false;
@@ -1640,6 +1673,13 @@ public:
     void StartupModule() override
     {
         // IModularFeatures::Get().RegisterModularFeature(TEXT("ScriptGenerator"), this);
+        if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
+        {
+            SettingsModule->RegisterSettings("Project", "Plugins", "Puerts", LOCTEXT("PuertsSettingsName", "Puerts Settings"),
+                LOCTEXT("PuertsSettingsDescription", "Configure the d.ts generator of Puerts plugin."),
+                GetMutableDefault<UDeclarationGeneratorSetting>());
+        }
+
         FGenDTSStyle::Initialize();
         FGenDTSStyle::ReloadTextures();
 
@@ -1690,6 +1730,10 @@ public:
     void ShutdownModule() override
     {
         // IModularFeatures::Get().UnregisterModularFeature(TEXT("ScriptGenerator"), this);
+        if (ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>("Settings"))
+        {
+            SettingsModule->UnregisterSettings("Project", "Plugins", "Puerts");
+        }
 #if (ENGINE_MAJOR_VERSION >= 5)
         UToolMenus::UnRegisterStartupCallback(this);
 #endif
@@ -1736,7 +1780,7 @@ public:
     virtual bool ShouldExportClassesForModule(const FString& ModuleName, EBuildModuleType::Type ModuleType, const FString&
 ModuleGeneratedIncludeDirectory) const override
     {
-        return ModuleName != TEXT("JsEnv");
+        return ModuleName != TEXT("ScriptEnv") && ModuleName != TEXT("JsEnv");
     }
 
     virtual void Initialize(const FString& RootLocalPath, const FString& RootBuildPath, const FString& OutputDirectory, const

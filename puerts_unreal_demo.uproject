@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.24",
+	"EngineAssociation": "5.8",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -14,12 +14,6 @@
 				"JsEnv",
 				"Engine"
 			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "Puerts",
-			"Enabled": true
 		}
 	]
 }
